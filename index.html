@@ -526,7 +526,7 @@ img { max-width:100%; display:block; }
 #page-2 .life-content { flex:1; min-height:0; display:flex; flex-direction:column; overflow-y:auto; }
 #page-2 .life-content.photo-active { overflow:hidden; }
 #page-2 .photo-grid { flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden; margin-top:0; }
-#page-2 .photo-pager { flex-shrink:0; }
+#page-2 .photo-pager { flex-shrink:0; margin-top:12px; }
 /* Recipe/match grid don't need flex stretch */
 #page-2 .recipe-grid, #page-2 .match-grid { flex:none; overflow:visible; }
 
@@ -1769,79 +1769,199 @@ img { max-width:100%; display:block; }
   recipeModalClose.addEventListener('click', closeRecipeModal);
   recipeModal.addEventListener('click', function (e) { if (e.target === recipeModal) closeRecipeModal(); });
 
-  /* ===== Photo pagination ===== */
-  var photoPage = 0;
-  var photoItems = Array.from(document.querySelectorAll('.photo-item'));
-  var photoDateLabels = Array.from(document.querySelectorAll('.photo-date-label'));
-  var photoRows = Array.from(document.querySelectorAll('.photo-row'));
+  /* ===== Photo pagination (exact height budget & zero overflow) ===== */
   var photoPager = document.getElementById('photoPager');
+  var photoGrid = document.getElementById('photoGrid');
+  var photoPage = 0;
+  var currentComputedPages = [];
 
-  function photoPerPage() {
-    if (window.innerWidth <= 960) {
-      // Mobile: simple viewport-height based fallback
-      var h = window.innerHeight;
-      if (h <= 650) return 6;
-      if (h <= 750) return 9;
-      return 12;
+  // 1. Extract photo data structure once from initial DOM
+  var photoDataGroups = [];
+  var initialLabels = Array.from(document.querySelectorAll('#photoGrid .photo-date-label'));
+  var initialRows = Array.from(document.querySelectorAll('#photoGrid .photo-row'));
+  initialLabels.forEach(function (lbl, i) {
+    var row = initialRows[i];
+    if (!row) return;
+    var date = lbl.getAttribute('data-date') || lbl.textContent.trim();
+    var items = Array.from(row.querySelectorAll('.photo-item')).map(function (item) {
+      var img = item.querySelector('img');
+      return {
+        date: date,
+        idx: item.getAttribute('data-idx') || '',
+        src: img.getAttribute('src') || '',
+        full: img.getAttribute('data-full') || '',
+        alt: img.getAttribute('alt') || ''
+      };
+    });
+    if (items.length > 0) {
+      photoDataGroups.push({ date: date, items: items });
     }
+  });
 
-    // Desktop: compute available grid height from known layout constants
-    // Viewport minus: header(61px) + page vertical padding(28+50=78px) + page-card padding-top+bottom(26+20=46px)
-    //               + sec-header (~52px) + note-cats/lifeCats tabs (~46px) + pager (48px) + gap buffer (10px)
-    var HEADER       = 61;
-    var PAGE_PAD     = 78;   // .page padding top+bottom (28+50)
-    var CARD_PAD     = 46;   // .page-card padding top+bottom (26+20)
-    var SEC_HEADER   = 52;   // .sec-header with margin
-    var TABS         = 46;   // .note-cats (lifeCats) bar with margin
-    var PAGER        = 48;   // .photo-pager height
-    var BUFFER       = 16;   // safety buffer
-
-    var available = window.innerHeight - HEADER - PAGE_PAD - CARD_PAD - SEC_HEADER - TABS - PAGER - BUFFER;
-    if (available < 100) available = 100;
-
-    // Compute column count: page-card is 92% of viewport width, max 1300px; padding 42px each side
-    var cardW = Math.min(window.innerWidth * 0.92, 1300) - 84; // 84 = 42*2 padding
-    var minCell = 130, gap = 10;
-    var cols = Math.max(1, Math.floor((cardW + gap) / (minCell + gap)));
-    // Square cells: cell-size = (cardW - gap*(cols-1)) / cols
-    var cellSize = (cardW - gap * (cols - 1)) / cols;
-    var rowH = cellSize + gap;
-
-    // How many photo rows fit? Each date-group has a ~34px label. Estimate label overhead as ~34px amortized per ~cols photos.
-    // Effective row cost = rowH + 34/cols (amortized label)
-    var effectiveRowH = rowH + 34 / cols;
-    var rows = Math.max(1, Math.floor(available / effectiveRowH));
-    var per = rows * cols;
-    if (per < 4) per = 4;
-    if (per > 80) per = 80;
-    return per;
+  function getAvailableGridHeight() {
+    var card = document.querySelector('#page-2 .page-card');
+    if (!card) return 400;
+    var cardH = card.clientHeight;
+    if (!cardH || cardH < 200) {
+      cardH = window.innerHeight - 61 - 78;
+    }
+    var secH = (card.querySelector('.sec-header') || {}).offsetHeight || 52;
+    var tabsH = (document.getElementById('lifeCats') || {}).offsetHeight || 46;
+    var pagerH = (photoPager && photoPager.offsetHeight) ? photoPager.offsetHeight + 16 : 48;
+    var cardPad = 46; // padding-top 26 + padding-bottom 20
+    var avail = cardH - cardPad - secH - tabsH - pagerH;
+    return Math.max(120, avail);
   }
 
-  function renderPhotoPage() {
-    var per = photoPerPage();
-    var total = photoItems.length;
-    var totalPages = Math.max(1, Math.ceil(total / per));
+  function getGridMetrics() {
+    var card = document.querySelector('#page-2 .page-card');
+    var cardW = card ? card.clientWidth : (Math.min(window.innerWidth * 0.92, 1300) - 84);
+    var gridW = cardW - 84; // page-card padding 42px each side
+    if (gridW <= 0) gridW = 800;
+    var minCell = 130, gap = 10;
+    var cols = Math.max(1, Math.floor((gridW + gap) / (minCell + gap)));
+    var cellW = Math.floor((gridW - gap * (cols - 1)) / cols);
+    return { cols: cols, itemH: cellW, gap: gap, gridW: gridW };
+  }
+
+  function computePhotoPages(maxH) {
+    if (window.innerWidth <= 960) {
+      // Mobile: flat pagination (10 photos per page)
+      var flat = [];
+      photoDataGroups.forEach(function (g) {
+        g.items.forEach(function (it) { flat.push(it); });
+      });
+      var perMobile = 10;
+      var mobPages = [];
+      for (var mi = 0; mi < flat.length; mi += perMobile) {
+        var slice = flat.slice(mi, mi + perMobile);
+        // Group by date
+        var byDate = {};
+        slice.forEach(function (it) {
+          if (!byDate[it.date]) byDate[it.date] = [];
+          byDate[it.date].push(it);
+        });
+        var pageGroups = Object.keys(byDate).map(function (d) {
+          return { date: d, items: byDate[d] };
+        });
+        mobPages.push(pageGroups);
+      }
+      return mobPages.length > 0 ? mobPages : [[]];
+    }
+
+    var m = getGridMetrics();
+    var cols = m.cols;
+    var itemH = m.itemH;
+    var gap = m.gap;
+
+    var labelH_first = 34; // font 12px + padding 6 + border 1 + margin-bottom 8
+    var labelH_sub = 50;   // margin-top 16 + 34
+
+    var pages = [];
+    var curPage = [];
+    var curH = 0;
+
+    for (var gi = 0; gi < photoDataGroups.length; gi++) {
+      var grp = photoDataGroups[gi];
+      var remaining = grp.items.slice();
+
+      while (remaining.length > 0) {
+        var isFirstInPage = (curPage.length === 0);
+        var labelH = isFirstInPage ? labelH_first : labelH_sub;
+        var avail = maxH - curH;
+
+        // Need at least label + 1 row of photos to start this group on current page
+        var needH = labelH + itemH;
+
+        if (!isFirstInPage && avail < needH) {
+          // Cannot fit this group's start on current page -> finish page
+          pages.push(curPage);
+          curPage = [];
+          curH = 0;
+          isFirstInPage = true;
+          labelH = labelH_first;
+          avail = maxH;
+        }
+
+        var availForPhotos = maxH - curH - labelH;
+        var maxRows = 0;
+        if (availForPhotos >= itemH) {
+          maxRows = 1 + Math.floor((availForPhotos - itemH) / (itemH + gap));
+        }
+        if (isFirstInPage && maxRows < 1) {
+          maxRows = 1;
+        }
+
+        var maxPhotos = maxRows * cols;
+        var count = Math.min(remaining.length, maxPhotos);
+        var actualRows = Math.ceil(count / cols);
+        var actualPhotoH = actualRows === 0 ? 0 : (itemH + (actualRows - 1) * (itemH + gap));
+        var groupTotalH = labelH + actualPhotoH;
+
+        var taken = remaining.splice(0, count);
+        curPage.push({
+          date: grp.date,
+          items: taken
+        });
+        curH += groupTotalH;
+
+        if (remaining.length > 0) {
+          pages.push(curPage);
+          curPage = [];
+          curH = 0;
+        }
+      }
+    }
+
+    if (curPage.length > 0) {
+      pages.push(curPage);
+    }
+    return pages.length > 0 ? pages : [[]];
+  }
+
+  function renderPhotoPage(safetyMargin) {
+    if (typeof safetyMargin !== 'number') safetyMargin = 14;
+    var maxH = getAvailableGridHeight() - safetyMargin;
+    currentComputedPages = computePhotoPages(maxH);
+
+    var totalPages = currentComputedPages.length;
     if (photoPage > totalPages - 1) photoPage = totalPages - 1;
     if (photoPage < 0) photoPage = 0;
-    var start = photoPage * per;
-    var end = start + per;
 
-    // Show/hide photo items
-    photoItems.forEach(function (item, i) {
-      item.style.display = (i >= start && i < end) ? '' : 'none';
-    });
+    var pageGroups = currentComputedPages[photoPage] || [];
+    photoGrid.innerHTML = '';
 
-    // Show date label only if at least one photo in that row is visible
-    photoRows.forEach(function (row, ri) {
-      var label = photoDateLabels[ri];
-      var hasVisible = false;
-      var items = row.querySelectorAll('.photo-item');
-      items.forEach(function (item) {
-        if (item.style.display !== 'none') hasVisible = true;
+    pageGroups.forEach(function (group) {
+      var label = document.createElement('div');
+      label.className = 'photo-date-label';
+      label.setAttribute('data-date', group.date);
+      label.textContent = group.date;
+      photoGrid.appendChild(label);
+
+      var row = document.createElement('div');
+      row.className = 'photo-row';
+      group.items.forEach(function (item) {
+        var itemEl = document.createElement('div');
+        itemEl.className = 'photo-item';
+        itemEl.setAttribute('data-date', item.date);
+        itemEl.setAttribute('data-idx', item.idx);
+        var img = document.createElement('img');
+        img.src = item.src;
+        img.setAttribute('data-full', item.full);
+        img.alt = item.alt;
+        img.loading = 'lazy';
+        itemEl.appendChild(img);
+        row.appendChild(itemEl);
       });
-      if (label) label.style.display = hasVisible ? '' : 'none';
-      row.style.display = hasVisible ? '' : 'none';
+      photoGrid.appendChild(row);
     });
+
+    // Zero-overflow safeguard: check if content exceeds container height
+    if (window.innerWidth > 960 && photoGrid.scrollHeight > photoGrid.clientHeight + 2 && safetyMargin < 120) {
+      // Content still overflowed slightly due to browser font/spacing quirks, recalculate with more safety margin
+      renderPhotoPage(safetyMargin + 24);
+      return;
+    }
 
     // Render pager
     if (!photoPager) return;
@@ -1849,6 +1969,7 @@ img { max-width:100%; display:block; }
     if (totalPages <= 1) return;
 
     var prev = document.createElement('button');
+    prev.className = 'pager-arrow';
     prev.innerHTML = '<i class="fa fa-chevron-left"></i>';
     prev.disabled = (photoPage === 0);
     prev.addEventListener('click', function () { photoPage--; renderPhotoPage(); });
@@ -1865,35 +1986,41 @@ img { max-width:100%; display:block; }
     }
 
     var next = document.createElement('button');
+    next.className = 'pager-arrow';
     next.innerHTML = '<i class="fa fa-chevron-right"></i>';
     next.disabled = (photoPage === totalPages - 1);
     next.addEventListener('click', function () { photoPage++; renderPhotoPage(); });
     photoPager.appendChild(next);
   }
+
   // Defer initial render so flex layout has settled before we measure
-  setTimeout(renderPhotoPage, 50);
+  setTimeout(function () { renderPhotoPage(); }, 50);
   var photoResizeTimer;
   window.addEventListener('resize', function () {
     clearTimeout(photoResizeTimer);
-    photoResizeTimer = setTimeout(renderPhotoPage, 180);
+    photoResizeTimer = setTimeout(function () { renderPhotoPage(); }, 180);
   });
 
-  /* ===== Photo lightbox ===== */
+  /* ===== Photo lightbox (event delegation) ===== */
   var lightbox = document.getElementById('photoLightbox');
   var lightboxImg = document.getElementById('lightboxImg');
   var lightboxDate = document.getElementById('lightboxDate');
   var lightboxClose = document.getElementById('lightboxClose');
 
-  document.querySelectorAll('.photo-item img').forEach(function (img) {
-    img.addEventListener('click', function () {
-      var full = this.getAttribute('data-full');
-      var date = this.parentElement.getAttribute('data-date');
+  if (photoGrid) {
+    photoGrid.addEventListener('click', function (e) {
+      var item = e.target.closest('.photo-item');
+      if (!item) return;
+      var img = item.querySelector('img');
+      if (!img) return;
+      var full = img.getAttribute('data-full') || img.src;
+      var date = item.getAttribute('data-date') || '';
       lightboxImg.src = full;
-      lightboxImg.alt = this.alt;
-      lightboxDate.textContent = date || '';
+      lightboxImg.alt = img.alt || '';
+      lightboxDate.textContent = date;
       lightbox.classList.add('active');
     });
-  });
+  }
 
   function closeLightbox() { lightbox.classList.remove('active'); lightboxImg.src = ''; }
   lightboxClose.addEventListener('click', closeLightbox);
