@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>泛函分析7-11章背诵条目 · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1] }
+  },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root {
+  --bg:#F3EFFF; --card-solid:#FDFCFF; --accent:#7139DA; --accent-deep:#5921C2;
+  --accent-soft:rgba(113,57,218,0.09); --text:#141414; --text-soft:#4a4060;
+  --muted:#8a7da8; --border:rgba(113,57,218,0.35); --border-soft:rgba(113,57,218,0.15);
+  --font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;
+  --font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --radius:16px; --radius-sm:8px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-sans); color:var(--text); font-size:15px; line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+  background:var(--bg) url('background.jpg') center center / cover fixed;
+}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+
+/* Top nav */
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{
+  position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border-soft);z-index:100;
+}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+
+/* Layout */
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+
+/* Sidebar TOC */
+.toc-sidebar{
+  width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;
+  max-height:calc(100vh - 100px);overflow-y:auto;
+  padding-right:16px;
+}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{
+  display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);
+  border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;
+}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+
+/* Article body */
+.article-body{
+  flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);
+  border:1px solid var(--border-soft);padding:40px 48px 56px;
+  box-shadow:0 8px 40px rgba(113,57,218,0.08);
+}
+.article-cover{width:100%;height:220px;object-fit:cover;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:14px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{
+  font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);
+  margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);
+  scroll-margin-top:80px;
+}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{
+  margin:14px 0;padding:10px 18px;background:var(--accent-soft);
+  border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  font-size:13.5px;color:var(--text-soft);font-style:italic;
+}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content span[style*="background"]{padding:1px 3px;border-radius:2px;}
+
+@media (max-width:900px){
+  .toc-sidebar{display:none;}
+  .article-body{padding:28px 22px 40px;}
+  .article-title{font-size:21px;}
+  .article-cover{height:160px;}
+  .layout{padding:72px 16px 40px;}
+  .header-inner{padding:0 16px;}
+}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回主页</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">数学</span>
+      <span><i class="far fa-calendar"></i> 2025-12-28</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li><a href="#sec-7" class="active">7. 拓扑向量空间</a></li>
+      <li><a href="#sec-8">8. Hahn-Banach定理、弱拓扑</a></li>
+      <li><a href="#sec-9">9. Banach空间对偶</a></li>
+      <li><a href="#sec-10">10. 正则Borel测度和Riesz表示定理</a></li>
+      <li><a href="#sec-11">11. 紧算子</a></li>
+    </ul>
+  </aside>
+
+  <article class="article-body">
+    <img class="article-cover" src="assets/fhfx.jpg" alt="泛函分析封面">
+    <h1 class="article-title">（自用）泛函分析7-11章背诵条目</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2025-12-28</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">数学</span>
+      <a href="https://zhuanlan.zhihu.com/p/1988760001112732276" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
+    </div>
+    <div class="article-content">
+
+<p>赠送</p>
+<p>定理：Banach-Steinhauss：E是<span style="background:rgba(173, 239, 239, 0.55)">Banach</span>空间，F是<span style="background:rgba(173, 239, 239, 0.55)">赋范</span>空间，其中映射的范数$||u||=\sup_{x\in B_E}||u(x)||$。令$(u_i)_{i\in I}\subseteq B(E,F)$，若$\forall x\in E,\quad M(x)=\sup_{i\in I}||u_i(x)||&lt;\infty$，则$\sup_{i\in I}||u_i||&lt;\infty$</p>
+
+<h3 id="sec-7">7.拓扑向量空间</h3>
+<p>定义：拓扑向量空间：E是K上的向量空间，$\tau$是E上的拓扑，若该拓扑使得加法和数乘连续，则称E为<span style="background:rgba(173, 239, 239, 0.55)">拓扑向量空间</span></p>
+<p>定义：平衡：若对任意的$|\lambda|\le1$，任意的$x\in A$，有$\lambda x\in A$则称A是<span style="background:rgba(173, 239, 239, 0.55)">平衡</span>的</p>
+<p>定义：吸收：若对任意的$x\in E$，存在常数$\alpha&gt;0$，当取$|\lambda|\le\alpha$时有$\lambda x\in A$那么称A是<span style="background:rgba(173, 239, 239, 0.55)">吸收</span>的</p>
+<p>定理：A是凸集或平衡集则$\bar{A}$是凸集或平衡集</p>
+<p>定理：A凸集则$\mathring A$凸</p>
+<p>定理：A平衡集且0在A的内部，则$\mathring A$平衡集</p>
+<p>定理：拓扑向量空间原点的任意领域是吸收的，且原点有<span style="background:rgba(173, 239, 239, 0.55)">平衡</span>的开或闭领域基</p>
+<p>定理：u是两个拓扑向量空间E到F的线性映射，则以下命题等价</p>
+<ol>
+<li>u连续</li>
+<li>u在原点连续</li>
+<li>若F是赋范空间，则u在原点的某领域内有界</li>
+</ol>
+<p>定义：E是K上的向量空间，若E到R的泛函满足非负性、绝对值齐次性($p(\lambda x)=|\lambda|p(x)$)、三角不等式，则称p为E上的<span style="background:rgba(173, 239, 239, 0.55)">半范数</span>。p诱导的拓扑是豪斯多夫的当且仅当p是范数</p>
+<p>定理：半赋范空间的原点有一组由<span style="background:rgba(173, 239, 239, 0.55)">凸集</span>组成的邻域基</p>
+<hr>
+<p>定义：一个拓扑向量空间E的原点有一组<u>由凸集组成的邻域基</u>则称其为<span style="background:rgba(173, 239, 239, 0.55)">局部凸空间</span></p>
+<p>定理：局部凸空间原点有<span style="background:rgba(173, 239, 239, 0.55)">凸、平衡</span>的开或闭邻域基</p>
+<p>定义：闵可夫斯基泛函：E拓扑向量空间，Ω是原点处<span style="background:rgba(173, 239, 239, 0.55)">凸平衡</span>开邻域，$p_\Omega(x)=\inf\{\lambda&gt;0|\frac{x}{\lambda}\in\Omega\}$</p>
+<p>定理：闵可夫斯基泛函是半范数</p>
+<p>定理：在局部凸空间中取遍原点<span style="background:rgba(173, 239, 239, 0.55)">凸平衡开邻域基</span>给出的闵可夫斯基泛函构成的半范数族可以诱导出原拓扑</p>
+<p>例子：$C^\infty[0,1]$配备半范数$p_i(f)=\sup|f^{(i)}(t)|$、$C^\infty[0,1]^d$配备半范数$p_\alpha(f)=\sup|D^\alpha f(t)|$</p>
+<p>X局部紧豪斯多夫空间，其上的连续函数空间$C(X)$配备紧子集一致范数$p_K(f)=\sup|f(x)|$</p>
+<p>$\mathbb{C}$中开子集Ω上的全纯函数空间配备上述拓扑、速降空间</p>
+
+<h3 id="sec-8">8.Hahn-Banach定理、弱拓扑</h3>
+<p>定义：次线性泛函：E是R上的向量空间，E到R上的泛函满足1.非负齐性($t\ge0,p(tx)=tp(x)$)2.次可加性($p(x+y)\le p(x)+p(y)$)</p>
+<p>定理：简单延拓引理：E是<span style="background:rgba(173, 239, 239, 0.55)">实向量空间</span>，F是E的codimention 1向量子空间，p是E到R的<span style="background:rgba(173, 239, 239, 0.55)">次线性泛函</span>，f是F到R的<span style="background:rgba(173, 239, 239, 0.55)">线性泛函</span>，如果<span style="background:rgba(173, 239, 239, 0.55)">在F上f被p控制</span>($f\le p$)，那么存在E到R的线性泛函$\tilde{f}$使得$\tilde{f}|_F=f,\tilde{f}(x)\le p(x)$</p>
+<p>定理：实Hanh-Banach延拓：E<span style="background:rgba(173, 239, 239, 0.55)">实</span>向量空间，F是E的向量子空间，p是E到R的<span style="background:rgba(173, 239, 239, 0.55)">次线性泛函</span>，f是F到R的<span style="background:rgba(173, 239, 239, 0.55)">线性泛函</span>且在F上被p控制($f\le p$)，那么存在从E到R的线性延拓$\tilde{f}$使得$\tilde{f}|_F=f,\tilde{f}(x)\le p(x)$</p>
+<p>定理：一般Hanh-Banach延拓：E是K上的向量空间，F是向量子空间，p是E上的<span style="background:rgba(173, 239, 239, 0.55)">半范数</span>，f是F到K的<span style="background:rgba(173, 239, 239, 0.55)">线性映射</span>且在F上<span style="background:rgba(173, 239, 239, 0.55)">模长受p控制</span>($|f|\le p$)，那么存在从E到K的线性延拓$\tilde{f}$使得$\tilde{f}|_F=f,|\tilde{f}(x)|\le p(x)$</p>
+<p>推论：带拓扑版本的延拓：E是<span style="background:rgba(173, 239, 239, 0.55)">拓扑向量空间</span>，F是向量子空间，p是E上<span style="background:rgba(173, 239, 239, 0.55)">连续半范数</span>，f是F到K的<span style="background:rgba(173, 239, 239, 0.55)">(连续)线性泛函</span>且在F上模长受p控制，那么存在f的<span style="background:rgba(173, 239, 239, 0.55)">连续线性延拓</span>，其模长仍受p控制</p>
+<blockquote>注：半赋范空间上的连续等价于被一族范数控制，这个控制进而充当了前面定理的p角色</blockquote>
+<p>推论：局部凸空间的延拓：E是局部凸空间，F是向量子空间，f是F到K的连续线性泛函，那么存在f的连续线性延拓</p>
+<p>推论：单点延拓：E是<span style="background:rgba(173, 239, 239, 0.55)">拓扑向量空间</span>，p是E上<span style="background:rgba(173, 239, 239, 0.55)">连续半范数</span>，$x_0\in E$，那么存在$f\in E^*$使得$f(x_0)=p(x_0)$且f模长被p控制</p>
+<p>推论：豪斯多夫局部凸空间的对偶空间可分点</p>
+<p>推论：赋范空间上的保范延拓：E是K上的<span style="background:rgba(173, 239, 239, 0.55)">赋范空间</span>，F是向量子空间且f是F到K的<span style="background:rgba(173, 239, 239, 0.55)">连续线性</span>泛函，那么存在<span style="background:rgba(173, 239, 239, 0.55)">连续且保范</span>的线性延拓</p>
+<blockquote>注：赋范空间上f自控制，且有保范的结论</blockquote>
+<hr>
+<p>定理：Hahn-Banach分离：E是<span style="background:rgba(173, 239, 239, 0.55)">拓扑向量空间</span>，A、B是E中不相交的非空<span style="background:rgba(173, 239, 239, 0.55)">凸</span>子集，若<span style="background:rgba(173, 239, 239, 0.55)">A开</span>，则存在$f\in E^*$及常数$\alpha\in\mathbb{R}$使得$Ref(A)&lt;\alpha\le Ref(B)$</p>
+<p>定理：Hahn-Banach严格分离：E<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，A、B是E中不交<span style="background:rgba(173, 239, 239, 0.55)">凸</span>子集，若<span style="background:rgba(173, 239, 239, 0.55)">A紧B闭</span>，则存在$f\in E^*$，常数$\alpha,\beta\in\mathbb{R}$使得$\sup Ref(A)&lt;\alpha&lt;\beta&lt;\inf Ref(B)$</p>
+<p>推论：闭集-点分离：E是<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，B是<span style="background:rgba(173, 239, 239, 0.55)">平衡闭凸</span>集，$x_0\in E- B$，那么存在$f\in E^*$使得$f(x_0)&gt;1$且$\sup_{x\in B}|f(x)|\le1$</p>
+<p>推论：对偶空间可区分闭包：E是<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，F是<span style="background:rgba(173, 239, 239, 0.55)">向量子空间</span>，$x_0\in E$，则$x_0\in\bar{F}$当且仅当对任意$f\in E^*$，若满足$f|_F=0$则必有$f(x_0)=0$</p>
+<p>推论：Mazur定理：$(E,\tau_1)$和$(E,\tau_2)$都是<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，如果他们的对偶空间相同，那么在两个拓扑下<span style="background:rgba(173, 239, 239, 0.55)">凸集</span>闭包相等</p>
+<hr>
+<p>$(E,\sigma(E,F))^*=F$</p>
+<p>$(E^*,\sigma(E^*,E))^*=E$</p>
+<p>定义：极集：E是<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，A是E的子集，则称$A^\circ=\{x^*\in E^*:|x^*(x)|\le1,\forall x\in A\}$为A的极集</p>
+<p>定理：双极定理：E是<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，则$A^{\circ\circ}=ccb(A)\quad(A\subset E~or~E^*)$</p>
+<blockquote>注：此处闭包取弱闭</blockquote>
+
+<h3 id="sec-9">9.Banach空间对偶</h3>
+<p>定理：共轭算子：E、F是<span style="background:rgba(173, 239, 239, 0.55)">赋范空间</span>，$u\in B(E,F)$，则存在唯一的$u^*\in B(F^*,E^*)$使得对任意$x\in E$和$f^*\in F^*$有$\braket{u^*(f^*),x}=\braket{f^*,u(x)}$且$||u^*||=||u||$</p>
+<p>定义：零化子空间：E赋范空间，F是<span style="background:rgba(173, 239, 239, 0.55)">向量子空间</span>，G是$E^*$<span style="background:rgba(173, 239, 239, 0.55)">向量子空间</span>。$F^\perp=\{x^*\in E^*:\braket{x^*,x}=0,\forall x\in F\},G_\perp=\{x\in E:\braket{x^*,x}=0,\forall x^*\in G\}$</p>
+<p>推论：双极定理的零化子空间形式：$(F^\perp)_\perp=\overline{F}^w,(G_\perp)^\perp=\overline{G}^{w^*}$</p>
+<blockquote>注：踩踩背里一个踩和一个背已经满足了，还剩另一个踩，就是闭包</blockquote>
+<p>定理：商空间的对偶空间：$(E/F)^*\simeq F^\perp$</p>
+<p>定理：对偶空间的商形式：$F^*\simeq E^*/F^\perp$</p>
+<blockquote>注：把上面那个式子移项即可</blockquote>
+<p>定理：算子单射与共轭算子像的关系：$u^*$单射当且仅当$u(E)$稠密</p>
+<blockquote>注：加* 也成立</blockquote>
+<p>定义：自反空间：$E^{**}=E$</p>
+<p>定理：自反赋范空间完备</p>
+<p>例子：几个非自反空间：$c_0,l_\infty,L_\infty(0,1),C[0,1]$</p>
+<p>定理：自反与对偶自反关系：<span style="background:rgba(173, 239, 239, 0.55)">Banach空间</span>自反当且仅当他的对偶自反</p>
+<p>定理：自反空间商闭集：E自反，F是<span style="background:rgba(173, 239, 239, 0.55)">闭</span>子空间，则$F$和$E/F$自反</p>
+<hr>
+<p>定义：弱* 拓扑开球：$V(x_1,...,x_n,\varepsilon)=\{x^*\in E^*:\max|x^*(x_i)|&lt;\varepsilon\}$</p>
+<p>定理：Banach-Alaoglu：E赋范空间，则$E^*$的闭单位球<span style="background:rgba(173, 239, 239, 0.55)">弱* 紧</span></p>
+<p>定理：Goldstine：E赋范空间，则$B_E$在$\bar{B}_{E^**}$中<span style="background:rgba(173, 239, 239, 0.55)">弱* 稠密</span></p>
+<p>推论：赋范空间自反充要条件：E赋范空间，E自反当且仅当闭单位球弱紧</p>
+<p>对偶空间闭单位球紧性：</p>
+<ol>
+<li>范数拓扑紧=有限维</li>
+<li>弱紧=自反</li>
+<li>弱* 紧=总是</li>
+</ol>
+<hr>
+<p>定理：Lp空间对偶：$1\le p&lt;\infty,\frac{1}{p}+\frac{1}{q}=1,L_p^*\simeq L_q$</p>
+<blockquote>后面那个大家都知道，记忆的重点是p的取值范围，可以取1不能取∞</blockquote>
+<p>注：$L_p(1&lt;p&lt;2)$一致凸，一致凸空间自反</p>
+<p>推论：Lp空间自反：$1&lt; p&lt;\infty$则Lp自反</p>
+
+<h3 id="sec-10">10.正则Borel测度和Riesz表示定理</h3>
+<p>本章X总是局部紧豪斯多夫空间</p>
+<p>引理：介于紧集与开集之间的函数：<span style="background:rgba(173, 239, 239, 0.55)">K紧O开</span>，则存在$f\in C_c(X)$使得$K\prec f\prec O$</p>
+<p>引理：单位分解：K紧$O_1,...,O_n$开，且$K\subset O_1\cup...\cup O_n$，则存在$f_1,...,f_n\in C_c(X)$，使得$f_k\prec O_k,1\le k\le n$且在K上$f_1+...+f_n=1$</p>
+<p>定义：局部有限测度：局部紧豪斯多夫空间上的Borel σ-代数上的正测度，对任何紧集K都有$\mu(K)&lt;\infty$</p>
+<blockquote>注：等价于任何点均有一个测度有限的邻域</blockquote>
+<p>定义：正线性泛函：$\varphi: C_c(X)\to\mathbb{C}$对任意$f\ge0$都有$\varphi(f)\ge0$</p>
+<p>定义：Riesz表示定理：$\varphi$是$C_c(X)$上的<span style="background:rgba(173, 239, 239, 0.55)">正线性泛函</span>，则存在X上的σ-代数A使得$B\subset A$且有A上唯一<span style="background:rgba(173, 239, 239, 0.55)">正测度</span>$\mu$使得</p>
+<ol>
+<li>$\mu$局部有限</li>
+<li>$\varphi(f)=\int_X fd\mu,\quad\forall f\in C_c(X)$</li>
+<li>$\mu(A)=\inf\{\mu(O):A\subset O,O~open\},\quad\forall A\in\mathcal{A}$</li>
+<li>$\mu(A)=\sup\{\mu(K):K\subset A,K~compact\}$对任意开集且测度有限集合$A\in\mathcal{A}$</li>
+<li>$(X,\mathcal{A},\mu)$完备</li>
+</ol>
+<p>上面定理的测度被称为相应于$\varphi$的<span style="background:rgba(173, 239, 239, 0.55)">Radon测度</span></p>
+<p>定义：外正则：$\mu$是B上正测度，对B中任意元素A有$\mu(A)=\inf\{\mu(O):A\subset O,O~open\}$</p>
+<p>定义：内正则：$\mu$是B上正测度，对B中任意元素A有$\mu(A)=\sup\{\mu(K):K\subset A,K~compact\}$</p>
+<p>定义：复正则：定义为$|\mu|$正则</p>
+<p>定理：X是局部紧豪斯多夫空间，$\mu$是X上局部有限正则Borel正测度，则对任意$0&lt;p&lt;\infty$，$C_c(X)$在$L_p(X,B,\mu)$中稠密，若$\mu$是σ-有限的，则$C_c(X)$在$L_\infty(X,B,\mu)$中弱* 稠密</p>
+<blockquote>注：σ-有限：这个测度空间可以表示为可数个有限测度集合的并</blockquote>
+<p>定义：σ-紧：拓扑空间X是其<span style="background:rgba(173, 239, 239, 0.55)">可数</span>多个<span style="background:rgba(173, 239, 239, 0.55)">紧</span>子集的并</p>
+<p>定理：Radon-Nikodym：$\mu,\nu$是两个σ-有限测度，如果$\nu&lt;&lt;\mu$，那么存在非负可测函数$f:X\to[0,\infty)$使得对于任意可测集$E\in\mathcal{A}$都有$\nu(E)=\int_E fd\mu$</p>
+<blockquote>注：对复测度，存在h满足$|h|=1$几乎处处成立且$d\mu=hd|\mu|$，也成为μ的极分解</blockquote>
+<p>定理：C0对偶空间为测度空间：对$C_0(X)$上每一个<span style="background:rgba(173, 239, 239, 0.55)">连续线性</span>泛函$\varphi$都存在X上唯一<span style="background:rgba(173, 239, 239, 0.55)">正则复</span>Borel测度$\mu$使得$\varphi=\varphi_\mu$且$||\varphi||=||\mu||$进而在等距同构意义下$C_0(X)^*\simeq M(X)$</p>
+
+<h3 id="sec-11">11.紧算子</h3>
+<p>定义：有限秩$\mathcal{F}_r$：E、F是Banach空间，T:E→F是连续的且$dimT(E)&lt;\infty$</p>
+<p>定义：紧算子$\mathcal{K}$：$T(B_E)$相对紧</p>
+<p>定理：紧算子的充要条件：$T\in B(E,F)$，T紧当且仅当T* 紧</p>
+<p>定理：希尔伯特空间有限秩算子与紧算子关系：H是希尔伯特空间则$\overline{\mathcal{F}_r(H)}=\mathcal{K}(H)$</p>
+<p>定义：谱集：$T\in B(E),\sigma(T)=\{\lambda\in\mathbb{K}:\lambda-T不可逆\}$</p>
+<p>定义：预解集：$\rho(T)=\mathbb{K}\backslash\sigma(T)$；预解式：$R(\lambda,T)=(\lambda I-T)^{-1},\lambda\in\rho(T)$</p>
+<p>定义：特征值、点谱集：使得λ-T非单的λ，所有特征值构成点谱集</p>
+<p>定理：紧算子谱集与特征值与0：紧算子非0的谱一定是特征值，无穷维空间上的紧算子一定有0特征，点谱集至多可数，谱集紧，特征值无穷多时必收敛至0</p>
+<p>推论：Fredholm选择定理：$T\in\mathcal{K}(E),\lambda\in\mathbb{K},\lambda\neq 0$则$\lambda-T$单射当且仅当满射</p>
+<p>定义：自伴算子：$T\in B(H),T^*=T$</p>
+<p>定义：正算子：自伴且$\braket{Tx,x}\ge0$对任意的$x\in H$成立</p>
+<p>自伴算子范数：$||T||=\sup\{|\braket{Tx,x}|:x\in H,||x||=1\}$</p>
+<p>定理：正算子充要、必要条件：自伴算子T是正算子当且仅当$\sigma(T)\subset[0,\infty)$；T正算子$\Rightarrow||T||\in\sigma(T)$</p>
+<p>定理：自伴紧算子范数：自伴紧算子存在特征值λ使得λ=||T||</p>
+<hr>
+<p>附赠</p>
+<p>测度弱收敛：对C0函数积分收敛；淡收敛：对Cc函数积分收敛。有界+淡收敛等价于弱收敛</p>
+
+    </div>
+  </article>
+</div>
+
+<script>
+(function(){
+  var tocLinks = document.querySelectorAll('.toc-list a');
+  var sections = [];
+  tocLinks.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if(el) sections.push({id:id, el:el, link:a});
+  });
+  function onScroll(){
+    var scrollY = window.scrollY + 100;
+    var current = sections[0];
+    for(var i=0;i<sections.length;i++){
+      if(sections[i].el.offsetTop <= scrollY) current = sections[i];
+    }
+    tocLinks.forEach(function(a){a.classList.remove('active');});
+    if(current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
