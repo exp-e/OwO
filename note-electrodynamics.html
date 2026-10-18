@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>电动力学复习册 · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<style>
+:root{--bg:#F3EFFF;--accent:#7139DA;--accent-deep:#5921C2;--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border-soft:rgba(113,57,218,0.15);--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:var(--font-sans);color:var(--text);background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:100%;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;text-decoration:none;transition:color .2s;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.cat-tag{padding:2px 10px;border-radius:10px;background:rgba(113,57,218,0.09);color:var(--accent);font-weight:500;font-size:11.5px;}
+.pdf-container{position:fixed;top:55px;left:0;right:0;bottom:0;z-index:1;}
+.pdf-container iframe{width:100%;height:100%;border:none;background:#fff;}
+@media (max-width:640px){.header-inner{padding:0 14px;}.article-header-meta .date-text{display:none;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">物理</span>
+      <span class="date-text"><i class="far fa-calendar"></i> 2024-06-25</span>
+    </div>
+  </div>
+</header>
+<div class="pdf-container">
+  <iframe src="Electrodynamics.pdf" title="电动力学复习册"></iframe>
+</div>
+</body>
+</html>
