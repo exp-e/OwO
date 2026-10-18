@@ -727,28 +727,13 @@ img { max-width:100%; display:block; }
   color:var(--muted);
 }
 .match-teams {
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-top:8px;
+  margin-top:12px;
 }
-.match-team-row {
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.match-team-label {
-  flex-shrink:0;
-  width:50px;
-  font-size:12px;
+.match-info-text {
+  font-size:15px;
   font-weight:600;
   color:var(--accent);
-  text-align:right;
-}
-.match-team-name {
-  font-size:14px;
-  color:var(--text);
-  font-weight:500;
+  line-height:1.7;
 }
 
 /* ===== Modal (recipe detail) ===== */
@@ -1218,7 +1203,7 @@ img { max-width:100%; display:block; }
         <button class="note-cat active" data-cat="recipe">菜谱<span class="count">4</span></button>
         <button class="note-cat" data-cat="art">绘画<span class="count">0</span></button>
         <button class="note-cat" data-cat="photo">摄影<span class="count">48</span></button>
-        <button class="note-cat" data-cat="match">比赛<span class="count">0</span></button>
+        <button class="note-cat" data-cat="match">比赛<span class="count">2</span></button>
       </div>
       <div class="life-content" id="lifeContent">
         <!-- Recipe cards -->
@@ -1344,6 +1329,7 @@ img { max-width:100%; display:block; }
             </div>
           </div>
         </div>
+        </div><!-- /life-content -->
       <div class="section-empty" id="lifeEmpty">
         <i class="fa fa-seedling"></i>
         <p>生活随记陆续整理中，敬请期待。</p>
@@ -1859,18 +1845,12 @@ img { max-width:100%; display:block; }
     cs2: {
       title: 'Counter-Strike 2 Pro',
       img: 'assets/cs2-preview.jpg',
-      teams: [
-        { label: '主队', name: 'Team Spirit' },
-        { label: '副队', name: 'Betboom Team' },
-        { label: '副队', name: 'Falcons' }
-      ]
+      text: '主队 Team Spirit，副队 Betboom Team 和 Falcons'
     },
     f1: {
       title: 'Formula 1',
       img: 'assets/f1-cover.png',
-      teams: [
-        { label: '备注', name: '杂事，暂无主队' }
-      ]
+      text: '杂食，暂无主队'
     }
   };
 
@@ -1882,9 +1862,7 @@ img { max-width:100%; display:block; }
       matchModalImg.src = m.img;
       matchModalImg.alt = m.title;
       matchModalTitle.textContent = m.title;
-      matchModalTeams.innerHTML = m.teams.map(function (t) {
-        return '<div class="match-team-row"><span class="match-team-label">' + t.label + '</span><span class="match-team-name">' + t.name + '</span></div>';
-      }).join('');
+      matchModalTeams.innerHTML = '<div class="match-info-text">' + m.text + '</div>';
       matchModal.classList.add('active');
     });
   });
