@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#F3EFFF">
 <title>王凌云 · Lingyun Wang</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%237139DA'/%3E%3Ctext x='32' y='45' font-size='28' font-family='Georgia,serif' text-anchor='middle' fill='white'%3E%CF%88%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%237139DA'/%3E%3Cpath d='M32 18c-3-8-12-12-18-9-5 3-4 11 2 14 5 2 11 0 16-5zm0 0c3-8 12-12 18-9 5 3 4 11-2 14-5 2-11 0-16-5zm0 14c-3 6-10 10-15 8-4-1-4-7 1-9 4-1 9 0 14 1zm0 0c3 6 10 10 15 8 4-1 4-7-1-9-4-1-9 0-14 1z' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
@@ -14,7 +14,7 @@
 /* ===== Tokens ===== */
 :root {
   --bg:          #F3EFFF;
-  --card:        rgba(255,255,255,0.82);
+  --card:        rgba(255,255,255,0.50);
   --card-solid:  #FDFCFF;
   --grad-purple: #D4B8FF;
   --grad-blue:   #E1E8FF;
@@ -29,49 +29,47 @@
   --text:        #141414;
   --text-soft:   #4a4060;
   --muted:       #8a7da8;
-  --border:      rgba(113,57,218,0.15);
-  --border-soft: rgba(113,57,218,0.08);
+  --border:      rgba(113,57,218,0.35);
+  --border-soft: rgba(113,57,218,0.15);
+  --silver:      #c0c0c8;
   --font-serif:  "Noto Serif SC", Georgia, "Songti SC", serif;
   --font-sans:   "Inter","Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --radius:      14px;
-  --radius-sm:   7px;
+  --radius:      16px;
+  --radius-sm:   8px;
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
 
-/* ===== Full-page background ===== */
 body {
   font-family: var(--font-sans);
   color: var(--text);
   font-size: 15px;
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
-  overflow: hidden;          /* hide scrollbar on desktop – sections handle scrolling */
+  overflow: hidden;
   background: var(--bg) url('background.jpg') center center / cover fixed;
 }
-
-/* bg overlay tinted purple */
 body::before {
-  content:"";
-  position:fixed; inset:0;
-  background: rgba(243,239,255,0.70);
+  content:""; position:fixed; inset:0;
+  background: rgba(243,239,255,0.65);
   z-index:0; pointer-events:none;
 }
-/* gradient mesh on top of overlay */
 body::after {
-  content:"";
-  position:fixed; inset:0;
+  content:""; position:fixed; inset:0;
   background:
-    radial-gradient(ellipse 55% 45% at 15% 10%, rgba(212,184,255,0.32) 0%, transparent 70%),
-    radial-gradient(ellipse 45% 40% at 82% 80%, rgba(225,232,255,0.38) 0%, transparent 65%),
-    radial-gradient(ellipse 35% 30% at 58% 35%, rgba(237,190,255,0.18) 0%, transparent 55%);
+    radial-gradient(ellipse 55% 45% at 15% 10%, rgba(212,184,255,0.30) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 40% at 82% 80%, rgba(225,232,255,0.35) 0%, transparent 65%);
   z-index:0; pointer-events:none;
 }
 
 a { color:var(--accent); text-decoration:none; transition:color .2s; }
 a:hover { color:var(--accent-deep); }
 img { max-width:100%; display:block; }
+
+/* ===== Butterfly SVG icon ===== */
+.butterfly { display:inline-block; width:1em; height:1em; vertical-align:middle; }
+.butterfly svg { width:100%; height:100%; }
 
 /* ===== Top stripe ===== */
 .headband {
@@ -84,22 +82,30 @@ img { max-width:100%; display:block; }
 /* ===== Header ===== */
 .header {
   position:fixed; top:3px; left:0; right:0;
-  background:rgba(243,239,255,0.80);
+  background:rgba(243,239,255,0.75);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid var(--border-soft);
   z-index:100;
 }
 .header-inner {
-  max-width:1160px; margin:0 auto;
+  max-width:1200px; margin:0 auto;
   padding:0 36px;
   display:flex; align-items:center; justify-content:space-between;
-  height:60px;
+  height:58px;
 }
-.brand { display:flex; align-items:baseline; gap:9px; }
-.brand-symbol { font-size:20px; color:var(--accent); font-weight:700; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.brand-butterfly {
+  width:26px; height:26px; color:var(--accent);
+  display:inline-flex; align-items:center; justify-content:center;
+}
 .brand-name { font-family:var(--font-serif); font-size:17px; font-weight:700; color:var(--text); letter-spacing:1px; }
 .brand-tag  { font-size:11px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; }
+.brand-id {
+  font-size:11px; color:var(--accent); font-weight:600;
+  background:var(--accent-soft); border:1px solid var(--border-soft);
+  padding:2px 8px; border-radius:10px; margin-left:2px;
+}
 
 .main-menu { list-style:none; display:flex; gap:2px; }
 .main-menu a {
@@ -114,192 +120,203 @@ img { max-width:100%; display:block; }
 .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:8px; }
 .nav-toggle span { display:block; width:20px; height:1.5px; background:var(--text); margin:5px 0; transition:.3s; }
 
-/* ===== Dot nav (right side) ===== */
+/* ===== Dot nav ===== */
 .dot-nav {
-  position:fixed; right:24px; top:50%; transform:translateY(-50%);
-  display:flex; flex-direction:column; gap:10px;
-  z-index:150;
+  position:fixed; right:22px; top:50%; transform:translateY(-50%);
+  display:flex; flex-direction:column; gap:10px; z-index:150;
 }
 .dot-nav button {
-  width:8px; height:8px;
-  background:rgba(113,57,218,0.25);
-  border:none; border-radius:50%; cursor:pointer;
-  transition:all .3s; padding:0;
+  width:8px; height:8px; background:rgba(113,57,218,0.25);
+  border:none; border-radius:50%; cursor:pointer; transition:all .3s; padding:0;
 }
-.dot-nav button.active {
-  background:var(--accent);
-  transform:scale(1.4);
-  box-shadow:0 0 0 3px rgba(113,57,218,0.2);
-}
+.dot-nav button.active { background:var(--accent); transform:scale(1.4); box-shadow:0 0 0 3px rgba(113,57,218,0.2); }
 .dot-nav button:hover { background:var(--accent); }
 
-/* ===== Full-page sections container ===== */
+/* ===== Pages container ===== */
 .pages-wrap {
-  position:fixed; top:63px; left:0; right:0; bottom:0;
-  overflow-y:scroll;
-  scroll-snap-type:y mandatory;
-  scroll-behavior:smooth;
-  overscroll-behavior:none;
-  z-index:1;
-  /* hide scrollbar */
+  position:fixed; top:61px; left:0; right:0; bottom:0;
+  overflow-y:scroll; scroll-snap-type:y mandatory;
+  scroll-behavior:smooth; overscroll-behavior:none; z-index:1;
   scrollbar-width:none;
 }
 .pages-wrap::-webkit-scrollbar { display:none; }
 
-/* Each page = 100% viewport height */
 .page {
-  min-height:calc(100vh - 63px);
+  min-height:calc(100vh - 61px);
   scroll-snap-align:start;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:48px 36px;
-  position:relative;
+  display:flex; align-items:center; justify-content:center;
+  padding:40px 36px 60px; position:relative;
 }
 
-/* ===== Page inner card ===== */
+/* ===== Page card — 80% width, 50% opacity, border ===== */
 .page-card {
   background:var(--card);
-  border:1px solid var(--border);
+  border:1.5px solid var(--border);
   border-radius:var(--radius);
-  box-shadow:0 4px 40px rgba(113,57,218,0.08);
-  width:100%;
-  max-width:900px;
-  padding:52px 60px;
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  box-shadow:0 4px 40px rgba(113,57,218,0.10);
+  width:80%; max-width:1100px;
+  padding:44px 52px;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
   transition:box-shadow .3s, border-color .3s;
-  /* slide-in animation */
-  opacity:0;
-  transform:translateY(28px);
+  opacity:0; transform:translateY(24px);
   transition:opacity .6s ease, transform .6s ease, box-shadow .3s, border-color .3s;
+  position:relative;
 }
 .page-card.visible { opacity:1; transform:translateY(0); }
-.page-card:hover {
-  box-shadow:0 8px 48px rgba(113,57,218,0.13);
-  border-color:rgba(113,57,218,0.24);
+.page-card:hover { box-shadow:0 8px 48px rgba(113,57,218,0.16); border-color:rgba(113,57,218,0.5); }
+
+/* Corner butterfly decorations */
+.card-butterfly {
+  position:absolute; color:var(--silver); opacity:0.35; pointer-events:none;
+}
+.card-butterfly.tl { top:14px; left:16px; width:22px; height:22px; transform:rotate(-15deg); }
+.card-butterfly.br { bottom:14px; right:16px; width:18px; height:18px; transform:rotate(165deg); }
+
+/* ===== Scroll-down arrow ===== */
+.scroll-hint {
+  position:absolute; bottom:18px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+  color:var(--muted); font-size:10.5px; letter-spacing:2px; text-transform:uppercase;
+  cursor:pointer; z-index:10; transition:color .2s;
+  animation:floatArrow 2s ease-in-out infinite;
+}
+.scroll-hint:hover { color:var(--accent); }
+.scroll-hint i { font-size:16px; }
+@keyframes floatArrow {
+  0%,100% { transform:translateX(-50%) translateY(0); }
+  50% { transform:translateX(-50%) translateY(6px); }
 }
 
-/* ===== Hero page ===== */
-#page-hero { background:transparent; }
-#page-hero .page-card {
-  background:linear-gradient(135deg,rgba(237,230,255,0.92) 0%,rgba(243,239,255,0.90) 45%,rgba(232,237,255,0.92) 100%);
+/* ===== Page 1: merged layout (left profile + right about/pubs) ===== */
+.merged-layout {
+  display:grid; grid-template-columns: 0.85fr 1.15fr; gap:32px;
+  align-items:stretch;
 }
-
-.hero-eyebrow {
-  display:inline-flex; align-items:center; gap:7px;
-  font-size:12px; color:var(--accent);
-  background:var(--accent-soft); border:1px solid var(--border);
-  border-radius:20px; padding:4px 14px; margin-bottom:22px;
-  font-weight:500; letter-spacing:.5px;
+/* Left column — profile */
+.profile-col {
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  padding:8px 6px;
 }
-.hero-layout {
-  display:flex; align-items:center; gap:40px;
-}
-.hero-avatar {
-  flex-shrink:0;
-  width:110px; height:110px;
-  border-radius:50%;
-  object-fit:cover;
+.profile-avatar {
+  width:120px; height:120px; border-radius:50%; object-fit:cover;
   border:3px solid var(--highlight);
-  box-shadow:0 0 0 5px var(--accent-soft);
+  box-shadow:0 0 0 5px var(--accent-soft), 0 6px 24px rgba(113,57,218,0.18);
+  margin-bottom:18px;
 }
-.hero-text-wrap {}
-.hero-title {
-  font-family:var(--font-serif);
-  font-size:40px; font-weight:700;
-  color:var(--text); line-height:1.25;
-  margin-bottom:10px;
+.profile-name {
+  font-family:var(--font-serif); font-size:30px; font-weight:700;
+  color:var(--text); line-height:1.2; margin-bottom:4px;
+  display:flex; align-items:center; gap:8px; justify-content:center;
 }
-.hero-title em {
-  font-style:normal;
-  background:linear-gradient(135deg,var(--accent),var(--pink));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.hero-sub {
-  font-size:14.5px; color:var(--text-soft); margin-bottom:22px; line-height:1.7;
-}
-.hero-cta { display:flex; gap:10px; flex-wrap:wrap; }
-
-.btn-primary {
-  display:inline-flex; align-items:center; gap:7px;
-  padding:10px 20px; background:var(--accent); color:#fff;
-  border-radius:var(--radius-sm); font-size:13.5px; font-weight:500;
-  transition:all .2s;
-}
-.btn-primary:hover { background:var(--accent-deep); color:#fff; transform:translateY(-2px); box-shadow:0 8px 20px rgba(113,57,218,0.30); }
-.btn-secondary {
-  display:inline-flex; align-items:center; gap:7px;
-  padding:10px 18px; background:rgba(255,255,255,0.65);
-  color:var(--text-soft); border:1px solid var(--border);
-  border-radius:var(--radius-sm); font-size:13.5px;
-  transition:all .2s; backdrop-filter:blur(6px);
-}
-.btn-secondary:hover { color:var(--accent); border-color:var(--accent); background:var(--accent-soft); }
-
-/* ===== Section header ===== */
-.sec-header { margin-bottom:28px; padding-bottom:18px; border-bottom:1px solid var(--border-soft); }
-.sec-title {
-  font-family:var(--font-serif); font-size:22px; font-weight:700;
-  color:var(--text); display:flex; align-items:center; gap:10px;
-}
-.sec-num {
-  font-size:11px; color:var(--accent); font-family:var(--font-sans);
-  font-weight:600; letter-spacing:1.5px;
+.profile-name .name-butterfly { width:24px; height:24px; color:var(--accent); }
+.profile-en { font-size:15px; color:var(--accent); font-weight:500; letter-spacing:0.5px; margin-bottom:6px; }
+.profile-id {
+  display:inline-flex; align-items:center; gap:5px;
+  font-size:12px; color:var(--accent-deep); font-weight:600;
   background:var(--accent-soft); border:1px solid var(--border);
-  padding:2px 8px; border-radius:4px;
+  padding:3px 12px; border-radius:12px; margin-bottom:14px;
 }
-.sec-sub { font-size:11.5px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-top:5px; }
+.profile-id i { font-size:10px; }
+.profile-role {
+  font-size:13px; color:var(--text-soft); line-height:1.7; margin-bottom:6px;
+}
+.profile-bio {
+  font-size:13px; color:var(--text-soft); line-height:1.8; margin-bottom:4px;
+}
+.profile-bio-en {
+  font-size:11.5px; color:var(--muted); line-height:1.7; font-style:italic;
+  margin-bottom:18px; padding-top:6px; border-top:1px dashed var(--border-soft);
+}
+.profile-social { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+.social-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:7px 14px; font-size:12.5px; border-radius:20px;
+  background:rgba(255,255,255,0.55); border:1px solid var(--border-soft);
+  color:var(--text-soft); transition:all .2s; text-decoration:none;
+  backdrop-filter:blur(6px);
+}
+.social-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); transform:translateY(-2px); }
+.social-btn svg { width:13px; height:13px; }
+.social-btn i { font-size:12px; }
 
-/* ===== About ===== */
-.about-text p { margin-bottom:14px; color:var(--text-soft); font-size:14.5px; line-height:1.95; }
+/* Right column — stacked about + publications */
+.right-col { display:flex; flex-direction:column; gap:24px; min-width:0; }
+.sub-card {
+  background:rgba(255,255,255,0.40);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius-sm);
+  padding:24px 26px;
+  backdrop-filter:blur(8px);
+}
+.sub-card-header {
+  display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  padding-bottom:10px; border-bottom:1px solid var(--border-soft);
+}
+.sub-card-title {
+  font-family:var(--font-serif); font-size:18px; font-weight:700; color:var(--text);
+}
+.sub-card-title .title-butterfly { width:18px; height:18px; color:var(--silver); margin-right:4px; vertical-align:-2px; }
+.sub-card-en { font-size:11px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; }
+
+.about-text p { margin-bottom:10px; color:var(--text-soft); font-size:13.5px; line-height:1.9; }
 .about-text p:last-child { margin-bottom:0; }
 .about-text strong { color:var(--text); font-weight:600; }
+.about-en {
+  margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-soft);
+  font-size:11.5px; color:var(--muted); line-height:1.75; font-style:italic;
+}
 .about-quote {
-  margin-top:22px; padding:16px 22px;
-  background:linear-gradient(135deg,rgba(212,184,255,0.16),rgba(225,232,255,0.16));
-  border-left:3px solid var(--grad-purple);
-  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
-  font-family:var(--font-serif); font-size:14px;
-  color:var(--text-soft); font-style:italic; line-height:1.85;
+  margin-top:12px; font-family:var(--font-serif); font-size:13px;
+  color:var(--accent-deep); font-style:italic;
 }
 
-/* ===== Publications ===== */
+/* Publications */
 .pub-item {
-  padding:22px 0; border-bottom:1px solid var(--border-soft);
-  display:flex; gap:18px; align-items:flex-start;
+  padding:14px 0; border-bottom:1px solid var(--border-soft);
+  display:flex; gap:14px; align-items:flex-start;
 }
 .pub-item:last-child { border-bottom:none; padding-bottom:0; }
 .pub-index {
-  flex-shrink:0; width:28px; height:28px;
+  flex-shrink:0; width:26px; height:26px;
   background:var(--accent-soft); border:1px solid var(--border);
   border-radius:50%; display:flex; align-items:center; justify-content:center;
   font-size:11px; color:var(--accent); font-weight:600; margin-top:2px;
 }
 .pub-body { flex:1; min-width:0; }
-.pub-title { font-size:15px; font-weight:600; color:var(--text); margin-bottom:6px; line-height:1.5; }
+.pub-title { font-size:14px; font-weight:600; color:var(--text); margin-bottom:5px; line-height:1.5; }
 .pub-title a { color:var(--text); } .pub-title a:hover { color:var(--accent); }
-.pub-meta { font-size:13px; color:var(--muted); margin-bottom:10px; line-height:1.6; }
+.pub-meta { font-size:12px; color:var(--muted); margin-bottom:8px; line-height:1.6; }
 .pub-tags { display:flex; flex-wrap:wrap; gap:6px; }
-.pub-tag { font-size:11.5px; padding:3px 10px; border-radius:20px; font-weight:500; }
+.pub-tag { font-size:11px; padding:2px 9px; border-radius:12px; font-weight:500; display:inline-flex; align-items:center; gap:4px; }
 .pub-tag.journal { background:rgba(215,134,185,0.12); color:#a03a7a; border:1px solid rgba(215,134,185,0.3); }
-.pub-tag.arxiv   { background:var(--accent-soft); color:var(--accent); border:1px solid var(--border); }
+.pub-tag.arxiv   { background:var(--accent-soft); color:var(--accent); border:1px solid var(--border); text-decoration:none; }
 .pub-tag.topic   { background:var(--gold-soft); color:#7a5a00; border:1px solid rgba(255,202,78,0.3); }
 
-/* ===== Notes / Thoughts empty ===== */
-.section-empty { padding:40px 0; text-align:center; color:var(--muted); }
-.section-empty i { font-size:32px; margin-bottom:14px; display:block; opacity:.3; color:var(--grad-purple); }
+/* ===== Other pages ===== */
+.sec-header { margin-bottom:24px; padding-bottom:14px; border-bottom:1px solid var(--border-soft); display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+.sec-title {
+  font-family:var(--font-serif); font-size:22px; font-weight:700;
+  color:var(--text); display:flex; align-items:center; gap:10px;
+}
+.sec-title .title-butterfly { width:22px; height:22px; color:var(--accent); }
+.sec-num {
+  font-size:11px; color:var(--accent); font-weight:600; letter-spacing:1.5px;
+  background:var(--accent-soft); border:1px solid var(--border);
+  padding:2px 8px; border-radius:4px;
+}
+.sec-sub { font-size:11.5px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; }
+
+.section-empty { padding:36px 0; text-align:center; color:var(--muted); }
+.section-empty i { font-size:30px; margin-bottom:12px; display:block; opacity:.35; color:var(--grad-purple); }
 .section-empty p { font-size:13.5px; }
 
-/* ===== Contact ===== */
-.contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+/* Contact */
+.contact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
 .contact-card {
-  background:rgba(255,255,255,0.55);
-  border:1px solid var(--border); border-radius:var(--radius-sm);
-  padding:18px; display:flex; align-items:center; gap:13px;
-  transition:all .2s; text-decoration:none; color:inherit;
-  backdrop-filter:blur(6px);
+  background:rgba(255,255,255,0.45); border:1px solid var(--border-soft);
+  border-radius:var(--radius-sm); padding:18px; display:flex; align-items:center; gap:13px;
+  transition:all .2s; text-decoration:none; color:inherit; backdrop-filter:blur(6px);
 }
 .contact-card:hover { border-color:var(--accent); background:var(--accent-soft); transform:translateY(-2px); box-shadow:0 6px 18px rgba(113,57,218,0.12); }
 .contact-icon {
@@ -307,43 +324,73 @@ img { max-width:100%; display:block; }
   border-radius:8px; display:flex; align-items:center; justify-content:center;
   font-size:15px; color:var(--accent); flex-shrink:0;
 }
+.contact-icon svg { width:17px; height:17px; }
 .contact-label { font-size:10.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:2px; }
 .contact-value { font-size:13px; color:var(--text); font-weight:500; }
 
-/* ===== Footer page ===== */
-.footer-text { text-align:center; font-size:12.5px; color:var(--muted); line-height:2; }
+.footer-text { text-align:center; font-size:12px; color:var(--muted); line-height:2; margin-top:28px; padding-top:18px; border-top:1px solid var(--border-soft); }
 .footer-text .sep { margin:0 8px; color:var(--border); }
 
+/* ===== Toast ===== */
+.toast {
+  position:fixed; bottom:28px; left:50%;
+  transform:translateX(-50%) translateY(16px);
+  background:var(--card-solid); color:var(--text);
+  border:1px solid var(--border); padding:10px 20px;
+  border-radius:8px; font-size:13px; opacity:0; pointer-events:none;
+  transition:all .3s; z-index:999; box-shadow:0 6px 24px rgba(113,57,218,0.15);
+}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
 /* ===== Mobile ===== */
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   body { overflow:auto; }
   .pages-wrap { position:static; overflow:visible; scroll-snap-type:none; }
-  .page { min-height:auto; padding:24px 16px; scroll-snap-align:none; }
-  .page-card { padding:32px 24px; }
+  .page { min-height:auto; padding:24px 16px 50px; scroll-snap-align:none; }
+  .page-card { width:95%; padding:28px 22px; }
+  .merged-layout { grid-template-columns:1fr; gap:24px; }
   .dot-nav { display:none; }
+  .scroll-hint { display:none; }
   .nav-toggle { display:block; }
   .main-menu {
-    display:none; position:absolute; top:63px; left:0; right:0;
+    display:none; position:absolute; top:61px; left:0; right:0;
     background:rgba(243,239,255,0.97); backdrop-filter:blur(12px);
     flex-direction:column; padding:10px 28px; border-bottom:1px solid var(--border); gap:0;
   }
   .main-menu.open { display:flex; }
   .main-menu a { padding:11px 0; border-bottom:1px solid var(--border-soft); }
   .main-menu a:last-child { border-bottom:none; }
-  .hero-layout { flex-direction:column; gap:22px; text-align:center; }
-  .hero-title { font-size:30px; }
-  .hero-cta { justify-content:center; }
   .header-inner { padding:0 20px; }
+  .brand-tag { display:none; }
 }
 @media (max-width: 540px) {
-  .brand-tag { display:none; }
-  .hero-title { font-size:26px; }
+  .page-card { width:100%; padding:24px 18px; }
+  .profile-name { font-size:24px; }
+  .sub-card { padding:18px 16px; }
   .contact-grid { grid-template-columns:1fr 1fr; }
-  .page-card { padding:28px 18px; }
 }
 </style>
 </head>
 <body>
+
+<!-- Reusable butterfly SVG symbol -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="butterfly-icon" viewBox="0 0 64 64">
+      <path d="M32 20 C27 10 15 6 9 10 C4 14 6 25 13 28 C19 31 26 28 32 20 Z" fill="currentColor"/>
+      <path d="M32 20 C37 10 49 6 55 10 C60 14 58 25 51 28 C45 31 38 28 32 20 Z" fill="currentColor"/>
+      <path d="M32 28 C28 36 18 41 13 39 C9 37 9 31 14 29 C19 27 27 28 32 28 Z" fill="currentColor" opacity="0.65"/>
+      <path d="M32 28 C36 36 46 41 51 39 C55 37 55 31 50 29 C45 27 37 28 32 28 Z" fill="currentColor" opacity="0.65"/>
+      <ellipse cx="32" cy="28" rx="2" ry="12" fill="currentColor"/>
+      <path d="M31 17 C29 12 27 10 25 9" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M33 17 C35 12 37 10 39 9" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="xhs-icon" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor" opacity="0.12"/>
+      <path d="M7 8h2.5l2.5 4 2.5-4H17l-3.5 5.5L17 19h-2.5l-2.5-4-2.5 4H7l3.5-5.5L7 8z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
 
 <div class="headband"></div>
 
@@ -351,9 +398,10 @@ img { max-width:100%; display:block; }
 <header class="header">
   <div class="header-inner">
     <a href="#" class="brand" id="brandLink">
-      <span class="brand-symbol">ψ</span>
+      <span class="brand-butterfly"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
       <span class="brand-name">王凌云</span>
       <span class="brand-tag">Lingyun Wang</span>
+      <span class="brand-id">@expe</span>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="切换导航">
       <span></span><span></span><span></span>
@@ -361,11 +409,9 @@ img { max-width:100%; display:block; }
     <nav>
       <ul class="main-menu" id="mainMenu">
         <li><a href="#" data-page="0" class="active"><i class="fa fa-home"></i>首页</a></li>
-        <li><a href="#" data-page="1"><i class="fa fa-user"></i>关于</a></li>
-        <li><a href="#" data-page="2"><i class="fa fa-book-open"></i>论文</a></li>
-        <li><a href="#" data-page="3"><i class="fa fa-pencil-alt"></i>笔记</a></li>
-        <li><a href="#" data-page="4"><i class="fa fa-lightbulb"></i>想法</a></li>
-        <li><a href="#" data-page="5"><i class="fa fa-envelope"></i>联系</a></li>
+        <li><a href="#" data-page="1"><i class="fa fa-pencil-alt"></i>笔记</a></li>
+        <li><a href="#" data-page="2"><i class="fa fa-lightbulb"></i>想法</a></li>
+        <li><a href="#" data-page="3"><i class="fa fa-envelope"></i>联系</a></li>
       </ul>
     </nav>
   </div>
@@ -374,158 +420,172 @@ img { max-width:100%; display:block; }
 <!-- Dot navigation -->
 <nav class="dot-nav" id="dotNav">
   <button data-page="0" class="active" title="首页"></button>
-  <button data-page="1" title="关于"></button>
-  <button data-page="2" title="论文"></button>
-  <button data-page="3" title="笔记"></button>
-  <button data-page="4" title="想法"></button>
-  <button data-page="5" title="联系"></button>
+  <button data-page="1" title="笔记"></button>
+  <button data-page="2" title="想法"></button>
+  <button data-page="3" title="联系"></button>
 </nav>
 
 <!-- Pages container -->
 <div class="pages-wrap" id="pagesWrap">
 
-  <!-- 0 · Hero -->
+  <!-- 0 · Merged: Profile + About + Publications -->
   <div class="page" id="page-0">
     <div class="page-card">
-      <div class="hero-eyebrow"><i class="fa fa-university"></i>武汉大学 · 前沿交叉学科研究院</div>
-      <div class="hero-layout">
-        <img src="profile.jpg" alt="王凌云" class="hero-avatar">
-        <div class="hero-text-wrap">
-          <h1 class="hero-title">王凌云<br><em>Lingyun Wang</em></h1>
-          <p class="hero-sub">武汉大学前沿交叉学科研究院科研助理，研究方向为量子计算。</p>
-          <div class="hero-cta">
-            <a href="#" data-page="2" class="btn-primary"><i class="fa fa-book"></i>论文</a>
-            <a href="mailto:exp.miku.e@gmail.com" class="btn-secondary"><i class="fa fa-envelope"></i>联系我</a>
-            <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" class="btn-secondary"><i class="fab fa-zhihu"></i>知乎</a>
+      <span class="card-butterfly tl"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
+      <span class="card-butterfly br"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
+
+      <div class="merged-layout">
+        <!-- Left: Profile -->
+        <div class="profile-col">
+          <img src="profile.jpg" alt="王凌云" class="profile-avatar">
+          <h1 class="profile-name">
+            <svg class="butterfly name-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>
+            王凌云
+          </h1>
+          <div class="profile-en">Lingyun Wang</div>
+          <div class="profile-id"><i class="fa fa-at"></i>expe</div>
+          <div class="profile-role">武汉大学 · 前沿交叉学科研究院<br>科研助理 · 量子计算方向</div>
+          <p class="profile-bio">爱喝无糖少冰轻咖啡因奶茶，喜欢看比赛和打游戏，偶尔涂鸦。白色三角梅爱好者。</p>
+          <p class="profile-bio-en">Research assistant at Wuhan University, working on quantum computing. Bubble tea enthusiast, casual gamer, and occasional doodler.</p>
+          <div class="profile-social">
+            <a href="mailto:exp.miku.e@gmail.com" class="social-btn"><i class="fa fa-envelope"></i>Email</a>
+            <a href="https://github.com/exp-e" target="_blank" rel="noopener" class="social-btn"><i class="fab fa-github"></i>GitHub</a>
+            <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" class="social-btn"><i class="fab fa-zhihu"></i>知乎</a>
+            <a href="https://www.xiaohongshu.com/user/profile/60a8c2900000000001004c34" target="_blank" rel="noopener" class="social-btn"><svg><use href="#xhs-icon" xlink:href="#xhs-icon"/></svg>小红书</a>
+          </div>
+        </div>
+
+        <!-- Right: About + Publications -->
+        <div class="right-col">
+          <!-- About -->
+          <div class="sub-card">
+            <div class="sub-card-header">
+              <span class="sub-card-title">
+                <svg class="butterfly title-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>关于
+              </span>
+              <span class="sub-card-en">About</span>
+            </div>
+            <div class="about-text">
+              <p>本科毕业于武汉大学，现任武汉大学前沿交叉学科研究院科研助理，研究方向为<strong>量子计算</strong>。</p>
+              <p>允许一切发生。</p>
+            </div>
+            <p class="about-en">B.Sc. from Wuhan University, currently a research assistant at the Research Institute of Frontier Interdisciplinary Studies, focusing on quantum computing. — "Let everything happen as it may."</p>
+          </div>
+
+          <!-- Publications -->
+          <div class="sub-card">
+            <div class="sub-card-header">
+              <span class="sub-card-title">
+                <svg class="butterfly title-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>发表
+              </span>
+              <span class="sub-card-en">Publications</span>
+            </div>
+            <div class="pub-item">
+              <div class="pub-index">1</div>
+              <div class="pub-body">
+                <div class="pub-title">
+                  <a href="https://www.sciencedirect.com/science/article/pii/S0370269326000316" target="_blank" rel="noopener">
+                    High Reheating Temperature without Axion Domain Walls
+                  </a>
+                </div>
+                <div class="pub-meta">Lingyun Wang 等 · 指导：Yuichiro Nakai（上海交通大学李政道研究所）· 2025年7月</div>
+                <div class="pub-tags">
+                  <span class="pub-tag journal"><i class="fa fa-check-circle"></i>&nbsp;Physics Letters B</span>
+                  <a href="https://arxiv.org/abs/2509.24812" target="_blank" rel="noopener" class="pub-tag arxiv"><i class="fa fa-external-link-alt"></i>&nbsp;arXiv:2509.24812</a>
+                  <span class="pub-tag topic">轴子宇宙学</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="scroll-hint" data-page="1">
+      <span>向下滚动</span>
+      <i class="fa fa-chevron-down"></i>
+    </div>
   </div>
 
-  <!-- 1 · About -->
+  <!-- 1 · Notes -->
   <div class="page" id="page-1">
     <div class="page-card">
+      <span class="card-butterfly tl"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
+      <span class="card-butterfly br"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
       <div class="sec-header">
-        <h2 class="sec-title"><span class="sec-num">01</span>关于</h2>
-        <div class="sec-sub">About Me</div>
-      </div>
-      <div class="about-text">
-        <p>本科毕业于武汉大学，现任武汉大学前沿交叉学科研究院科研助理，研究方向为量子计算。</p>
-        <p>爱喝无糖少冰轻咖啡因奶茶，喜欢看比赛和打游戏，偶尔涂鸦。白色三角梅爱好者。</p>
-        <div class="about-quote">允许一切发生。</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2 · Publications -->
-  <div class="page" id="page-2">
-    <div class="page-card">
-      <div class="sec-header">
-        <h2 class="sec-title"><span class="sec-num">02</span>论文</h2>
-        <div class="sec-sub">Publications</div>
-      </div>
-      <div class="pub-item">
-        <div class="pub-index">1</div>
-        <div class="pub-body">
-          <div class="pub-title">
-            <a href="https://www.sciencedirect.com/science/article/pii/S0370269326000316" target="_blank" rel="noopener">
-              High Reheating Temperature without Axion Domain Walls
-            </a>
-          </div>
-          <div class="pub-meta">Lingyun Wang 等 · 指导：Yuichiro Nakai，上海交通大学李政道研究所 · 2025年7月</div>
-          <div class="pub-tags">
-            <span class="pub-tag journal"><i class="fa fa-check-circle"></i>&nbsp;Physics Letters B</span>
-            <a href="https://arxiv.org/abs/2509.24812" target="_blank" rel="noopener" class="pub-tag arxiv"><i class="fa fa-external-link-alt"></i>&nbsp;arXiv:2509.24812</a>
-            <span class="pub-tag topic">轴子宇宙学</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3 · Notes -->
-  <div class="page" id="page-3">
-    <div class="page-card">
-      <div class="sec-header">
-        <h2 class="sec-title"><span class="sec-num">03</span>笔记</h2>
-        <div class="sec-sub">Reading Notes</div>
+        <h2 class="sec-title"><span class="sec-num">01</span><svg class="butterfly title-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>笔记</h2>
+        <span class="sec-sub">Reading Notes</span>
       </div>
       <div class="section-empty">
         <i class="fa fa-pencil-alt"></i>
         <p>笔记内容即将加入，敬请期待。</p>
       </div>
     </div>
+    <div class="scroll-hint" data-page="2">
+      <span>继续</span>
+      <i class="fa fa-chevron-down"></i>
+    </div>
   </div>
 
-  <!-- 4 · Thoughts -->
-  <div class="page" id="page-4">
+  <!-- 2 · Thoughts -->
+  <div class="page" id="page-2">
     <div class="page-card">
+      <span class="card-butterfly tl"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
+      <span class="card-butterfly br"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
       <div class="sec-header">
-        <h2 class="sec-title"><span class="sec-num">04</span>想法</h2>
-        <div class="sec-sub">Fragmentary Thoughts</div>
+        <h2 class="sec-title"><span class="sec-num">02</span><svg class="butterfly title-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>想法</h2>
+        <span class="sec-sub">Fragmentary Thoughts</span>
       </div>
       <div class="section-empty">
         <i class="fa fa-lightbulb"></i>
         <p>随想陆续整理中，敬请期待。</p>
       </div>
     </div>
+    <div class="scroll-hint" data-page="3">
+      <span>继续</span>
+      <i class="fa fa-chevron-down"></i>
+    </div>
   </div>
 
-  <!-- 5 · Contact -->
-  <div class="page" id="page-5">
+  <!-- 3 · Contact -->
+  <div class="page" id="page-3">
     <div class="page-card">
+      <span class="card-butterfly tl"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
+      <span class="card-butterfly br"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
       <div class="sec-header">
-        <h2 class="sec-title"><span class="sec-num">05</span>联系</h2>
-        <div class="sec-sub">Get in Touch</div>
+        <h2 class="sec-title"><span class="sec-num">03</span><svg class="butterfly title-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>联系</h2>
+        <span class="sec-sub">Get in Touch</span>
       </div>
       <div class="contact-grid">
         <a href="mailto:exp.miku.e@gmail.com" class="contact-card">
           <div class="contact-icon"><i class="fa fa-envelope"></i></div>
-          <div>
-            <div class="contact-label">Email</div>
-            <div class="contact-value">exp.miku.e@gmail.com</div>
-          </div>
+          <div><div class="contact-label">Email</div><div class="contact-value">exp.miku.e@gmail.com</div></div>
         </a>
         <a href="https://github.com/exp-e" target="_blank" rel="noopener" class="contact-card">
           <div class="contact-icon"><i class="fab fa-github"></i></div>
-          <div>
-            <div class="contact-label">GitHub</div>
-            <div class="contact-value">exp-e</div>
-          </div>
+          <div><div class="contact-label">GitHub</div><div class="contact-value">exp-e</div></div>
         </a>
         <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" class="contact-card">
           <div class="contact-icon" style="color:#2361e0;background:rgba(35,97,224,0.08);border-color:rgba(35,97,224,0.18);"><i class="fab fa-zhihu"></i></div>
-          <div>
-            <div class="contact-label">知乎</div>
-            <div class="contact-value">expe-94</div>
-          </div>
+          <div><div class="contact-label">知乎</div><div class="contact-value">expe-94</div></div>
+        </a>
+        <a href="https://www.xiaohongshu.com/user/profile/60a8c2900000000001004c34" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-icon" style="color:#ff2442;background:rgba(255,36,66,0.08);border-color:rgba(255,36,66,0.2);"><svg><use href="#xhs-icon" xlink:href="#xhs-icon"/></svg></div>
+          <div><div class="contact-label">小红书</div><div class="contact-value">@expe</div></div>
         </a>
         <a href="https://en.whu.edu.cn/" target="_blank" rel="noopener" class="contact-card">
           <div class="contact-icon" style="color:#7139DA;background:rgba(113,57,218,0.08);border-color:rgba(113,57,218,0.18);"><i class="fa fa-university"></i></div>
-          <div>
-            <div class="contact-label">单位</div>
-            <div class="contact-value">武汉大学</div>
-          </div>
+          <div><div class="contact-label">单位</div><div class="contact-value">武汉大学</div></div>
         </a>
       </div>
-      <div class="footer-text" style="margin-top:32px; padding-top:22px; border-top:1px solid var(--border-soft);">
-        &copy; 2025 王凌云 (Lingyun Wang)<span class="sep">|</span>武汉大学 · 前沿交叉学科研究院
+      <div class="footer-text">
+        &copy; 2025 王凌云 (Lingyun Wang) <span class="sep">|</span> @expe <span class="sep">|</span> 武汉大学 · 前沿交叉学科研究院
       </div>
     </div>
   </div>
 
 </div><!-- /pages-wrap -->
 
-<div class="toast" id="toast" style="
-  position:fixed; bottom:28px; left:50%;
-  transform:translateX(-50%) translateY(16px);
-  background:var(--card-solid); color:var(--text);
-  border:1px solid var(--border); padding:10px 20px;
-  border-radius:8px; font-size:13px; opacity:0; pointer-events:none;
-  transition:all .3s; z-index:999;
-  box-shadow:0 6px 24px rgba(113,57,218,0.15);
-"></div>
+<div class="toast" id="toast"></div>
 
 <script>
 (function () {
@@ -536,13 +596,13 @@ img { max-width:100%; display:block; }
   var cards     = Array.from(document.querySelectorAll('.page-card'));
   var menuLinks = Array.from(document.querySelectorAll('.main-menu a[data-page]'));
   var dotBtns   = Array.from(document.querySelectorAll('.dot-nav button'));
+  var scrollHints = Array.from(document.querySelectorAll('.scroll-hint'));
   var navToggle = document.getElementById('navToggle');
   var mainMenu  = document.getElementById('mainMenu');
   var N         = pages.length;
   var current   = 0;
   var scrolling = false;
 
-  /* ---- Scroll to a page ---- */
   function goTo(idx) {
     if (idx < 0 || idx >= N) return;
     current = idx;
@@ -551,7 +611,6 @@ img { max-width:100%; display:block; }
     updateNav(idx);
   }
 
-  /* ---- Sync nav highlights ---- */
   function updateNav(idx) {
     menuLinks.forEach(function (a) {
       a.classList.toggle('active', parseInt(a.dataset.page) === idx);
@@ -561,27 +620,21 @@ img { max-width:100%; display:block; }
     });
   }
 
-  /* ---- Reveal card when in view ---- */
   var cardObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) {
         e.target.querySelector('.page-card').classList.add('visible');
       }
     });
-  }, { root: wrap, threshold: 0.3 });
+  }, { root: wrap, threshold: 0.25 });
   pages.forEach(function (p) { cardObserver.observe(p); });
 
-  /* ---- Detect which page is visible on scroll ---- */
   wrap.addEventListener('scroll', function () {
     var pageH = wrap.clientHeight;
     var idx   = Math.round(wrap.scrollTop / pageH);
-    if (idx !== current) {
-      current = idx;
-      updateNav(idx);
-    }
+    if (idx !== current) { current = idx; updateNav(idx); }
   }, { passive: true });
 
-  /* ---- Mouse wheel: one tick = one page ---- */
   wrap.addEventListener('wheel', function (e) {
     if (scrolling) return;
     scrolling = true;
@@ -589,7 +642,6 @@ img { max-width:100%; display:block; }
     setTimeout(function () { scrolling = false; }, 800);
   }, { passive: true });
 
-  /* ---- Touch swipe ---- */
   var touchY = 0;
   wrap.addEventListener('touchstart', function (e) { touchY = e.touches[0].clientY; }, { passive: true });
   wrap.addEventListener('touchend', function (e) {
@@ -597,7 +649,6 @@ img { max-width:100%; display:block; }
     if (Math.abs(dy) > 40) goTo(dy > 0 ? current + 1 : current - 1);
   }, { passive: true });
 
-  /* ---- Nav link clicks ---- */
   menuLinks.forEach(function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
@@ -608,26 +659,25 @@ img { max-width:100%; display:block; }
   dotBtns.forEach(function (b) {
     b.addEventListener('click', function () { goTo(parseInt(this.dataset.page)); });
   });
+  scrollHints.forEach(function (h) {
+    h.addEventListener('click', function () { goTo(parseInt(this.dataset.page)); });
+  });
   document.getElementById('brandLink').addEventListener('click', function (e) {
     e.preventDefault(); goTo(0);
   });
 
-  /* ---- Btn-primary data-page links ---- */
-  document.querySelectorAll('[data-page]').forEach(function (el) {
-    if (el.tagName === 'A' && el.classList.contains('btn-primary')) {
-      el.addEventListener('click', function (e) {
-        e.preventDefault();
-        goTo(parseInt(this.dataset.page));
-      });
-    }
-  });
-
-  /* ---- Mobile nav toggle ---- */
   navToggle.addEventListener('click', function () { mainMenu.classList.toggle('open'); });
 
-  /* ---- Initial card reveal ---- */
   if (cards[0]) cards[0].classList.add('visible');
 
+  var toast = document.getElementById('toast');
+  var toastTimer;
+  window.showToast = function(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+  };
 }());
 </script>
 </body>
