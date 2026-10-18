@@ -53,12 +53,21 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-sans);
-  background: var(--bg);
+  background: var(--bg) url('background.jpg') center center / cover fixed;
   color: var(--text);
   line-height: 1.8;
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+}
+/* 在背景图上叠一层半透明雾紫蒙版，保证文字可读性并融合配色 */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(243,239,255,0.72);
+  pointer-events: none;
+  z-index: 0;
 }
 a { color: var(--accent); text-decoration: none; transition: color .2s; }
 a:hover { color: var(--accent-deep); }
@@ -701,7 +710,7 @@ body::before {
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-card">
-        <img src="assets/avatar.gif" alt="王凌云" class="author-avatar">
+        <img src="profile.jpg" alt="王凌云" class="author-avatar">
         <div class="author-name">王凌云</div>
         <div class="author-name-en">Lingyun Wang</div>
         <div class="sidebar-divider"></div>
@@ -714,7 +723,7 @@ body::before {
         </div>
         <div class="social-links">
           <a href="https://github.com/exp-e" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
-          <a href="mailto:lyunwang@whu.edu.cn" title="邮箱"><i class="fa fa-envelope"></i></a>
+          <a href="mailto:exp.miku.e@gmail.com" title="邮箱"><i class="fa fa-envelope"></i></a>
           <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" title="知乎"><i class="fab fa-zhihu"></i></a>
           <a href="https://arxiv.org/search/?searchtype=author&query=Lingyun+Wang" target="_blank" rel="noopener" title="arXiv"><i class="fa fa-flask"></i></a>
         </div>
@@ -733,7 +742,7 @@ body::before {
         </p>
         <div class="hero-cta">
           <a href="#publications" class="btn-primary"><i class="fa fa-book"></i>论文</a>
-          <a href="mailto:lyunwang@whu.edu.cn" class="btn-secondary"><i class="fa fa-envelope"></i>联系我</a>
+          <a href="mailto:exp.miku.e@gmail.com" class="btn-secondary"><i class="fa fa-envelope"></i>联系我</a>
           <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" class="btn-secondary"><i class="fab fa-zhihu"></i>知乎</a>
         </div>
       </section>
@@ -810,11 +819,11 @@ body::before {
           <div class="section-sub">Get in Touch</div>
         </div>
         <div class="contact-grid">
-          <a href="mailto:lyunwang@whu.edu.cn" class="contact-card">
+          <a href="mailto:exp.miku.e@gmail.com" class="contact-card">
             <div class="contact-icon"><i class="fa fa-envelope"></i></div>
             <div>
               <div class="contact-label">Email</div>
-              <div class="contact-value">lyunwang@whu.edu.cn</div>
+              <div class="contact-value">exp.miku.e@gmail.com</div>
             </div>
           </a>
           <a href="https://github.com/exp-e" target="_blank" rel="noopener" class="contact-card">
