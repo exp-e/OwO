@@ -43,6 +43,10 @@ img{max-width:100%;display:block;}
 .toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
 .toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
 .toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
 .article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
 .article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
 .article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
@@ -51,7 +55,7 @@ img{max-width:100%;display:block;}
 .article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
 .article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
 .article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
-.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
 .article-content p{margin-bottom:14px;}
 .article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
 .article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
@@ -79,16 +83,30 @@ img{max-width:100%;display:block;}
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
     <ul class="toc-list">
+      <li class="toc-main"><a href="#article-title">（读书笔记）信息论角度谈量子多体物理</a></li>
       <li><a href="#sec-0">基本概念</a></li>
       <li><a href="#sec-1">统计物理模型</a></li>
-      <li><a href="#sec-2">Tensor Networks</a></li>
-      <li><a href="#sec-3">1d MPS分类</a></li>
-      <li><a href="#sec-4">一些G指导备忘录</a></li>
+      <li class="sub"><a href="#sec-2">一维横场Ising模型(1D TFIM)</a></li>
+      <li class="sub"><a href="#sec-3">寻找序参数</a></li>
+      <li class="sub"><a href="#sec-4">模型的解</a></li>
+      <li><a href="#sec-5">Tensor Networks</a></li>
+      <li class="sub"><a href="#sec-6">最小割原则</a></li>
+      <li class="sub"><a href="#sec-7">矩阵乘积态（MPS）</a></li>
+      <li class="sub"><a href="#sec-8">参数个数</a></li>
+      <li class="sub"><a href="#sec-9">算法</a></li>
+      <li class="sub2"><a href="#sec-10">含时演化分块降采样</a></li>
+      <li class="sub2"><a href="#sec-11">密度矩阵重整化群</a></li>
+      <li class="sub"><a href="#sec-12">纠缠缩放法则</a></li>
+      <li><a href="#sec-13">1d MPS分类</a></li>
+      <li class="sub"><a href="#sec-14">单射MPS</a></li>
+      <li class="sub"><a href="#sec-15">一维无拓扑序</a></li>
+      <li class="sub"><a href="#sec-16">对称性保护拓扑相</a></li>
+      <li><a href="#sec-17">一些G指导备忘录</a></li>
     </ul>
   </aside>
   <article class="article-body">
     <img class="article-cover" src="assets/ggqq.jpg" alt="（读书笔记）信息论角度谈量子多体物理">
-    <h1 class="article-title">（读书笔记）信息论角度谈量子多体物理</h1>
+    <h1 class="article-title" id="article-title">（读书笔记）信息论角度谈量子多体物理</h1>
     <div class="article-meta">
       <span><i class="far fa-calendar"></i> 2026-08-16</span>
       <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">物理</span>
@@ -119,7 +137,7 @@ img{max-width:100%;display:block;}
 <p>进一步假设最少个数的非零参数，记$v_2=a(T-T_c)$，为了保持势下有界，再来个$v_4=b>0$，其他的参数均为零，得到</p>
 <p>$$V(M)=a(T-T_c)M^2+bM^4$$</p>
 <p>这个势表示当温度高于临界温度时，势能是一个向上的U形；当温度小于临界温度时，势能是一个墨西哥帽的截面，此时基态M二重简并，系统是有序相</p>
-<h4>一维横场Ising模型(1D TFIM)</h4>
+<h4 id="sec-2">一维横场Ising模型(1D TFIM)</h4>
 <p>$$H=-(J\sum_{i=1}^NZ_iZ_{i+1}+g\sum_{i=1}^NX_i)$$</p>
 <p>假设周期性边界条件，那么系统具有平移对称性和自旋翻转对称性。反转操作可以由X算符来表述</p>
 <p>$$G=\prod_{i=1}^NX_i$$</p>
@@ -162,7 +180,7 @@ img{max-width:100%;display:block;}
 <p>研究同样在无限体积情况下外场g大小对系统形为的改变：当$g<J$时，能隙是指数压低的，基态为二重简并；反之，能隙是指数爆炸的，基态是非简并的。这其中就有个临界点$g_c$，跨过这个点发生的变化被称为quantum phase transition。</p>
 <p>上述情况虽然是从$V=-g\sum_{i=1}^NX_i$出发的，但我们可以进一步把他推广到更一般的条件。对角元为0意味着V要满足G对称性，而指数压低体现在V必须作用很多次，也就是说V必须是local算符的和（例如$X_iX_{i+1}$）。一个反例是直接拿G做微扰，那么只需要作用一次G就可以达到全qubit翻转的作用，非对角元成分不再会随着系统体积增大而降低，上述讨论失效。这个例子说明了局域性在量子多体以及物质稳定性的重要性。考虑到自然界的作用大多是局域的，我们的例子是合理的</p>
 <p>对于不满足对称性G的微扰，能隙无法再被系统体积压低，这相当于是显式对称性破缺，类似于朗道函数中加上odd项$\epsilon_1 M$</p>
-<h4>寻找序参数</h4>
+<h4 id="sec-3">寻找序参数</h4>
 <p>对于上述的基态$\ket{\uparrow...}+\ket{\downarrow...}\quad\ket{\uparrow...}-\ket{\downarrow...}$，我们希望寻找一个序参数（order parameter）去描述是否发生基态简并或者说是相变现象。</p>
 <p>首先尝试使用磁化强度M。注意到$G^\dagger MG=-M$，可以算出M在G本征态下的平均值一定为0.由于这里两个基态都是G本征态，所以M的均值恒为0，无法探测对称性破缺现象</p>
 <p>如何选择正确的基态？如果我们很早就取了TDL，那么全上和全下的任意线性组合都可以是基态，并且他们会产生任意（不同）的M。正确的做法是先引入一个显式破坏对称性的项进入哈密顿量，找到TDL下本征态，最后再将对称破坏项趋于0.</p>
@@ -187,7 +205,7 @@ img{max-width:100%;display:block;}
 <p>|\braket{\downarrow|e^{-iHt}|\uparrow}|^2&=\sin^2(\frac{\Delta E t}{2})</p>
 <p>\end{align}$$</p>
 <p>跃迁概率首次达到1的时间$t_1=\pi/\Delta E$，而根据前面的讨论可以知道，两个态被劈裂的能隙是$e^{-cN}$数量级，反过来也就是说$t_1$随着系统体积的增长而指数爆炸。</p>
-<h4>模型的解</h4>
+<h4 id="sec-4">模型的解</h4>
 <p>现在建立1D TFIM与一套费米子产生湮灭算符之间的联系</p>
 <p>首先从单粒子系统开始，注意到</p>
 <p>$$\sigma^{\pm}=\frac{1}{2}(Z\pm iY)$$</p>
@@ -221,7 +239,7 @@ img{max-width:100%;display:block;}
 <p>习题：计算基态磁化强度，分类有限温度和零温，找到临界指数（1/8）</p>
 <p>这个在上世纪的一篇论文The One-Dimensional Ising M·odel with a Transverse Field (PIERRE PFEUTY)里有写</p>
 <img class="note-img" src="assets/7b54e7cb2d941f095f805363f65085d9.jpg" alt="7b54e7cb2d941f095f805363f65085d9.jpg">
-<h3 id="sec-2">Tensor Networks</h3>
+<h3 id="sec-5">Tensor Networks</h3>
 <p>这一章主要讲了张量图形表述，和费曼图的地位是类似的。图很多我就不抄了，大概记一下关键点。</p>
 <p>一个方块在下，棍子朝上，代表ket</p>
 <p>棍子朝下，方块在上，代表bra</p>
@@ -244,7 +262,7 @@ img{max-width:100%;display:block;}
 <p>对于单个自旋系统，$\rho$是2x2矩阵，最多两个特征值，特征值和为1，熵最大值是ln2</p>
 <p>对于$N_A$自旋与$N_B$自旋的张量积系统，他有两个不同维度$d_A=2^{N_A},d_B=2^{N_B}$,那么熵满足</p>
 <p>$$S\le\ln\min(d_A,d_B)$$</p>
-<h4>最小割原则</h4>
+<h4 id="sec-6">最小割原则</h4>
 <p>英文：minimal cut principal</p>
 <p>有归一化态的张量网络表示，用一条线将它割为两部分，而不把张量本身割开。如果最小割为C，那么熵满足</p>
 <p>$$S\le C\ln2$$</p>
@@ -256,7 +274,7 @@ img{max-width:100%;display:block;}
 <img class="note-img" src="assets/brick.png" alt="brick.png">
 <p>根据N的不同有两种最小割，当N较小时可以将左下角N/2个psi割出去。<mark style="background:rgba(5, 117, 197, 0.2)">我有个问题，那我能不能只把一个psi割出去呢，不照样分成两个不相交部分了吗</mark>N较大时就按图中所示割出2t-1条边</p>
 <p>这个定理可以被图示证明，关键在于张量的SVD分解，最大拥有的特征值数目是较小的那个规格，也就是最小割的数目。作为自旋上下的系统，冯诺依曼熵不超过$\ln 2^d$</p>
-<h4>矩阵乘积态（MPS）</h4>
+<h4 id="sec-7">矩阵乘积态（MPS）</h4>
 <img class="note-img" src="assets/MPS.png" alt="MPS.png">
 <p>bond space代表着在不同部分种携带着量子信息的线。这样的线越多，纠缠熵也就越大，在这个图中</p>
 <p>$$S\le \ln\chi $$</p>
@@ -266,7 +284,7 @@ img{max-width:100%;display:block;}
 <p>相同指标自动求和</p>
 <p>如果首尾相连成为一个环，那么（多加一个缩并）</p>
 <p>$$\ket{\Psi}=Tr(A^{\sigma_1}A^{\sigma_2}...A^{\sigma_N})\ket{\sigma_1\sigma_2...\sigma_N}$$</p>
-<h4>参数个数</h4>
+<h4 id="sec-8">参数个数</h4>
 <p>下面考虑描述一个MPS需要多少参数。假设bond dimension是$\chi$定值，那么总共需要$N\chi^2 d$个参数，空间复杂度为$O(N)$，比原先的$O(2^N)$要小很多</p>
 <p>正则形式</p>
 <p>MPS有规范自由度。在相邻的两个张量之间插入一对矩阵与逆矩阵，即可让MPS中的张量发生变化</p>
@@ -290,8 +308,8 @@ img{max-width:100%;display:block;}
 <p>$$\frac{1}{r^\alpha}\approx\sum e^{-c_ir}$$</p>
 <p>增大键维相当于增大求和数量</p>
 <p>对于一个很大但非无限大的系统，只要键维 $\chi$ 足够大，MPS 组合出的多项指数衰减就足以在系统尺寸 $N$ 的范围内精确逼近幂律衰减。因此，在实际的数值模拟中，高键维的 MPS 依然可以用来很好地研究临界系统。</p>
-<h4>算法</h4>
-<h5>含时演化分块降采样</h5>
+<h4 id="sec-9">算法</h4>
+<h5 id="sec-10">含时演化分块降采样</h5>
 <p>如果我有2-local的哈密顿量</p>
 <p>$$H=\sum H_{i,i+1}$$</p>
 <p>希望寻找到基态（最低能量本征态）$\ket{\Psi}$</p>
@@ -316,7 +334,7 @@ img{max-width:100%;display:block;}
 <p>这样重复很多次M（但不要太大，否则误差$(\delta\beta)^2M$会很大）投影误差与总演化时间相关，为$\delta \beta M$</p>
 <p>随着虚时 $\tau$ 的增加（离散化后对应步数 $M$），系统的高能激发态成分会以 $e^{-(E_n-E_0)\tau}$ 的形式指数衰减。你需要观察能量期望值 $\langle\Psi\vert{}H\vert{}\Psi\rangle$ 随 $M$ 的变化，直到它“平坦化”，说明演化已经把态投影到了当前的近似基态上。</p>
 <p>TEBD （时间演化块抽取）算法背后的关键原理是**纠缠截断（truncation of entanglement）**。具体来说，这是一种丢弃无关自由度的方法，这些自由度是由量子态中施密特值（Schmidt values）的相对权重决定的，算法只保留占主导地位的贡献。这是“粗粒化（coarse graining）”的一个实例。其次，我们观察到 TEBD 的性能和收敛速度与系统的能隙 $\Delta = E_1 - E_0$ 密切相关。在上一节中我们已经看到，$\Delta$ 在量子物相的稳定性中起着极其重要的作用，因此这向我们暗示，在更普遍和概念性的层面上，我们应该能够利用能隙的有限性或闭合状态，来作为**分类/区分**不同量子相的一种方法。</p>
-<h5>密度矩阵重整化群</h5>
+<h5 id="sec-11">密度矩阵重整化群</h5>
 <p>同样解决的是在MPS下寻找基态的问题</p>
 <p>在处理i到i+1个格点时，先将左侧1~i-1个格点化为左正则表示，再将右侧i+2~N个格点化为右正则表示，以便求内积时相互抵消。随后对i到i+1个格点寻找2-local的本征态。然后SVD，把小的本征值截断，把奇异值矩阵往右边丢，接下来就可以迭代处理i+1到i+2个格点了。</p>
 <p>正交中心从左移动到右，再从右移动到左称为一个sweep。</p>
@@ -326,7 +344,7 @@ img{max-width:100%;display:block;}
 <p>对角化 $\rho_{\text{sys}}$。它的本征值代表了每个本征态在构成整个超块基态时的**权重（概率）**。</p>
 <p>新的重整化规则： 截断时，不再按照能量的高低，而是保留 $\rho_{\text{sys}}$ 中本征值（权重）最大的前 $\chi$ 个态。</p>
 <p>这就是 **Density-Matrix Renormalization Group** 的由来：它依然是一个不断增大系统尺寸并进行截断的 RG 过程，只是**截断的依据从哈密顿量的能量本征值，变成了约化密度矩阵的本征值。**</p>
-<h4>纠缠缩放法则</h4>
+<h4 id="sec-12">纠缠缩放法则</h4>
 <p>对于TFIM模型，自旋全向上或全向下当然是直积MPS态，且全$\ket{+}$态也是MPS，看看是怎么构造的</p>
 <p>$$\Lambda^0 = \frac{1}{\sqrt{2}^{1/N}} \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, \qquad \Lambda^1 = \frac{1}{\sqrt{2}^{1/N}} \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}.$$</p>
 <p>$$</p>
@@ -360,16 +378,16 @@ img{max-width:100%;display:block;}
 <p>如果有一片参数空间基态满足面积定律，那么他们可以被归为同一个量子phase.能隙闭合时，穿过量子相变点。量子临界点出现的对数纠缠熵修正意味着长程关联。<mark style="background:rgba(74, 82, 199, 0.2)">事实上，人们发现这种对数标度的系数包含有关底层共形场论的普适信息——它与中心荷c成正比。</mark>（我想知道如何和共形场论中心荷关联）最后，还有具有体积定律（volume-law）纠缠熵的状态：</p>
 <p>$$S = O(\vert{}A\vert{}) = O(N^d), \quad \text{“体积定律”}$$</p>
 <p>这类状态表现于高度纠缠的状态中，例如随机量子态，或者量子多体哈密顿量的高度激发本征态，它们是我们以后研究量子热化时需要考虑的重要对象。</p>
-<h3 id="sec-3">1d MPS分类</h3>
+<h3 id="sec-13">1d MPS分类</h3>
 <p>我们将“容易转化”的两个态识别为同一类。具体来说就是局域酉算子作用非常短的时间。对称性将在后面的讨论中发挥作用。</p>
-<h4>单射MPS</h4>
+<h4 id="sec-14">单射MPS</h4>
 <p>假设所有MPS都具有平移不变性，现在将bond legs视作input，physical legs视作output</p>
 <p>量子Perron Frobenius定理告诉我们单射性等同于转移矩阵$T=\sum_{\sigma}A^{*\sigma}\otimes A^\sigma$具有唯一的1本征值，其他本征值模长不足1.假设我们在左正则形式情况下考虑，对于这个1特征值，左特征向量为Bell态，右特征向量是一个密度矩阵，我们做谱分解并把高阶特征忽略掉，可得</p>
 <img class="note-img" src="assets/decomposition.png" alt="decomposition.png">
-<h4>一维无拓扑序</h4>
+<h4 id="sec-15">一维无拓扑序</h4>
 <p>拓扑序：不能被任意有限深度local电路连接到不纠缠的乘积态。这一节我们展示所有不考虑对称性的MPS可以被有限深度酉群连接到乘积态。</p>
 <p>图形化证明就不抄了，想法是把密度矩阵中较小的谱全部丢掉，只留下主要的一个谱，这样k连后的误差大概是$|\lambda_2|^k$，所以只有一种拓扑相在1d有能隙量子系统中</p>
-<h4>对称性保护拓扑相</h4>
+<h4 id="sec-16">对称性保护拓扑相</h4>
 <p>引理 u是酉算子，A是单射张量，那么u变换后的矩阵$T_u=\sum u_{ij} A_j\otimes (A_i)^*$的所有特征值都在单位圆之内（包括边缘）</p>
 <p>等号可以被取到当且仅当存在酉算符v和角度θ使得（A上面插一个$u=e^{i\theta}vAv^\dagger$）</p>
 <p>酉表示$u_g$是局部对称的当且仅当A上面插一个$u_g=v_gAv_g^\dagger$</p>
@@ -406,7 +424,7 @@ img{max-width:100%;display:block;}
 <p>由此证明，$\vert{}\Psi_{\text{cluster}}\rangle$ 是所有 $K_i$ 共同的 $+1$ 本征态，因此它正是哈密顿量 $H$ 的**唯一基态**。</p>
 <p>一维团簇态（1D Cluster State）是凝聚态物理中对称保护拓扑相（SPT Phase，Symmetry-Protected Topological Phase）最经典的范例之一。团簇哈密顿量 $H = -J \sum_i Z_{i-1}X_iZ_{i+1}$ 具有一个内禀的离散对称性，即分别作用于奇数格点和偶数格点的自旋翻转群。可以验证这两个对称操作与哈密顿量是对易的（$[H, U_{\text{odd}}] = [H, U_{\text{even}}] = 0$）。这一 $\mathbb{Z}_2 \times \mathbb{Z}_2$ 对称性是保护该拓扑相的核心。只要外部微扰（例如杂质或外场）不破坏这一对称性，系统就无法在不闭合体能隙的情况下，发生绝热演化相变到平庸态。</p>
 <p>从量子信息的视角切入，如果对团簇态进行空间二分（Bipartition），并计算子系统的约化密度矩阵，会发现其纠缠谱（Entanglement Spectrum）的每一个本征值都是精确二重简并的。这种纠缠谱的简并性与边界处存在零能模在数学上是同源的，且同样受底层对称性的严格保护。（？）</p>
-<h3 id="sec-4">一些G指导备忘录</h3>
+<h3 id="sec-17">一些G指导备忘录</h3>
 <p>在大系统维数下，从中随机抽取的 Haar 随机态通常包含**极高的纠缠**。若将系统分为 $A$ 和 $B$ 两部分（假设 $d_A \le d_B$），其子系统 $A$ 的平均纠缠熵极度接近理论最大值（即著名的 **Page 曲线/Page 熵**）：</p>
 <p>$$S(A) \approx \ln d_A - \frac{d_A}{2 d_B}$$</p>
 <p>Haar 随机子空间或随机态构成的编码在理论上被证明能达到最优的纠错容忍极限（如达到量子 Singleton 界），常作为衡量一般纠错码性能的理论天花板。</p>

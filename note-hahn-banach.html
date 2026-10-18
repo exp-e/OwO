@@ -43,6 +43,10 @@ img{max-width:100%;display:block;}
 .toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
 .toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
 .toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
 .article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
 .article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
 .article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
@@ -51,7 +55,7 @@ img{max-width:100%;display:block;}
 .article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
 .article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
 .article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
-.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
 .article-content p{margin-bottom:14px;}
 .article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
 .article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
@@ -79,14 +83,20 @@ img{max-width:100%;display:block;}
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
     <ul class="toc-list">
+      <li class="toc-main"><a href="#article-title">Hahn-Banach定理(延拓、分离)</a></li>
       <li><a href="#sec-0">延拓</a></li>
-      <li><a href="#sec-1">分离</a></li>
-      <li><a href="#sec-2">注释</a></li>
+      <li class="sub"><a href="#sec-1">实</a></li>
+      <li class="sub"><a href="#sec-2">通用</a></li>
+      <li class="sub"><a href="#sec-3">煲饭</a></li>
+      <li><a href="#sec-4">分离</a></li>
+      <li class="sub"><a href="#sec-5">普通</a></li>
+      <li class="sub"><a href="#sec-6">严格</a></li>
+      <li><a href="#sec-7">注释</a></li>
     </ul>
   </aside>
   <article class="article-body">
     <img class="article-cover" src="assets/mugua.jpg" alt="Hahn-Banach定理(延拓、分离)">
-    <h1 class="article-title">Hahn-Banach定理(延拓、分离)</h1>
+    <h1 class="article-title" id="article-title">Hahn-Banach定理(延拓、分离)</h1>
     <div class="article-meta">
       <span><i class="far fa-calendar"></i> 2025-12-09</span>
       <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">数学</span>
@@ -98,29 +108,29 @@ img{max-width:100%;display:block;}
 <p>有点像那个控制收敛定理，不仅仅要先找一个子空间上的线性泛函，更要找一个能将它控制住的次线性或者半范数，然后可以保证这个控制的情况下将其延拓至全空间。</p>
 <p>他的起源是来自codim1的线性泛函可以被控制延拓至全空间</p>
 <p>次线性说的是$\forall t\ge0,p(tx)=tp(x),\quad\forall x,y\in E,p(x+y)\le p(x)+p(y)$</p>
-<h4>实</h4>
+<h4 id="sec-1">实</h4>
 <p>E实线性空间，F线性子空间</p>
 <p>$P:E\to\mathbb{R}$<span style="background:rgba(240, 200, 0, 0.2)">次线性</span>（用于控制），$f:F\to\mathbb{R}$线性(想要延拓的线性泛函)，满足$f\le p$</p>
 <p>那么存在$\tilde{f}:E\to\mathbb{R}$线性，满足$\tilde{f}|_F=f$以及在E上$\tilde{f}\le p$</p>
-<h4>通用</h4>
+<h4 id="sec-2">通用</h4>
 <p>E是$\mathbb{K}$上线性空间，F线性子空间</p>
 <p>P是E上的<span style="background:rgba(240, 200, 0, 0.2)">半范数</span>（用于控制），$f:F\to\mathbb{K}$线性泛函，满足$|f|\le p$</p>
 <p>那么存在$\tilde{f}:E\to\mathbb{K}$线性，满足$\tilde{f}|_F=f$以及在E上$|\tilde{f}|\le p$</p>
 <p>如果E是TVS，那么延拓的$\tilde{f}$自动连续</p>
-<h4>煲饭</h4>
+<h4 id="sec-3">煲饭</h4>
 <p>其实是保范延拓</p>
 <p>E<span style="background:rgba(240, 200, 0, 0.2)">赋范空间</span>，F子空间，那么对$f\in F^*$一定存在$\tilde{f}\in E^*$且$||\tilde{f}||=||f||$</p>
-<h3 id="sec-1">分离</h3>
-<h4>普通</h4>
+<h3 id="sec-4">分离</h3>
+<h4 id="sec-5">普通</h4>
 <p>E TVS  A,B$\subseteq$E凸子空间，<span style="background:rgba(240, 200, 0, 0.2)">A开</span>，$A\cap B=\emptyset$</p>
 <p>那么$\exists f\in E^*$以及$\alpha\in\mathbb{R}$使得$\forall a\in A,b\in B,\quad Ref(a)<a\le Ref(b)$</p>
 <blockquote>怎么记呢，首先两个都必须是凸集，要不然没法分离了，然后一边取等一边不取等，不取等的那一边要求是开集<br>TVS的条件是为了造出闵可夫斯基泛函，在证明过程中我们要把它延拓</blockquote>
-<h4>严格</h4>
+<h4 id="sec-6">严格</h4>
 <p>E<span style="background:rgba(240, 200, 0, 0.2)">豪斯多夫l.c.s.</span> $A,B\subseteq E$凸，<span style="background:rgba(240, 200, 0, 0.2)">A紧B闭</span>，$A\cap B=\emptyset$</p>
 <p>那么$\exists f\in E^*,\alpha,\beta\in\mathbb{R}$使得</p>
 <p>$$\sup Ref(A)<\alpha<\beta<\inf Ref(B)$$</p>
 <blockquote>怎么记呢，一个紧一个闭，紧的在小的那一侧<br>lcs的条件是为了在紧集上找一簇凸开覆盖</blockquote>
-<h3 id="sec-2">注释</h3>
+<h3 id="sec-7">注释</h3>
 <p>连续线性泛函能区分某个点是否在闭包中</p>
 <p>分离定理说的是连续线性泛函的最大区分能力，连续线性泛函又和弱拓扑有关，所以推论是弱闭等价于范数闭，并且有个很有名的</p>
 <p>$$(E,\sigma(E,F))^*=F$$</p>

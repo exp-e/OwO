@@ -43,6 +43,10 @@ img{max-width:100%;display:block;}
 .toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
 .toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
 .toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
 .article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
 .article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
 .article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
@@ -51,7 +55,7 @@ img{max-width:100%;display:block;}
 .article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
 .article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
 .article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
-.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
 .article-content p{margin-bottom:14px;}
 .article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
 .article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
@@ -79,22 +83,44 @@ img{max-width:100%;display:block;}
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
     <ul class="toc-list">
+      <li class="toc-main"><a href="#article-title">量子计算</a></li>
       <li><a href="#sec-0">态</a></li>
       <li><a href="#sec-1">量子门</a></li>
-      <li><a href="#sec-2">Deutsch-Jozsa算法</a></li>
-      <li><a href="#sec-3">大数分解</a></li>
-      <li><a href="#sec-4">隐子群问题</a></li>
-      <li><a href="#sec-5">Grover量子搜索算法</a></li>
-      <li><a href="#sec-6">量子模拟</a></li>
-      <li><a href="#sec-7">量子纠缠</a></li>
-      <li><a href="#sec-8">超密编码</a></li>
-      <li><a href="#sec-9">习题</a></li>
-      <li><a href="#sec-10">2023往年卷</a></li>
+      <li class="sub"><a href="#sec-2">XYZ</a></li>
+      <li class="sub"><a href="#sec-3">CNOT</a></li>
+      <li class="sub"><a href="#sec-4">Hadamard门</a></li>
+      <li class="sub"><a href="#sec-5">Toffoli门</a></li>
+      <li class="sub"><a href="#sec-6">SWAP门</a></li>
+      <li class="sub"><a href="#sec-7">量子电路演化</a></li>
+      <li class="sub"><a href="#sec-8">Oracle</a></li>
+      <li><a href="#sec-9">Deutsch-Jozsa算法</a></li>
+      <li><a href="#sec-10">大数分解</a></li>
+      <li class="sub"><a href="#sec-11">picture</a></li>
+      <li class="sub"><a href="#sec-12">Simon问题</a></li>
+      <li class="sub"><a href="#sec-13">量子DFT</a></li>
+      <li class="sub2"><a href="#sec-14">电路规模</a></li>
+      <li class="sub2"><a href="#sec-15">估计酉算子特征</a></li>
+      <li class="sub"><a href="#sec-16">Shor算法</a></li>
+      <li class="sub2"><a href="#sec-17">复杂度</a></li>
+      <li><a href="#sec-18">隐子群问题</a></li>
+      <li><a href="#sec-19">Grover量子搜索算法</a></li>
+      <li class="sub"><a href="#sec-20">近似计数</a></li>
+      <li class="sub"><a href="#sec-21">振幅放大</a></li>
+      <li class="sub"><a href="#sec-22">最优性</a></li>
+      <li><a href="#sec-23">量子模拟</a></li>
+      <li class="sub"><a href="#sec-24">Lie-Suzuki-Trotter方法</a></li>
+      <li class="sub"><a href="#sec-25">LCU</a></li>
+      <li class="sub"><a href="#sec-26">Block-Encoding</a></li>
+      <li class="sub"><a href="#sec-27">解线性方程组</a></li>
+      <li><a href="#sec-28">量子纠缠</a></li>
+      <li><a href="#sec-29">超密编码</a></li>
+      <li><a href="#sec-30">习题</a></li>
+      <li><a href="#sec-31">2023往年卷</a></li>
     </ul>
   </aside>
   <article class="article-body">
     <img class="article-cover" src="assets/5516.jpg" alt="量子计算">
-    <h1 class="article-title">量子计算</h1>
+    <h1 class="article-title" id="article-title">量子计算</h1>
     <div class="article-meta">
       <span><i class="far fa-calendar"></i> 2025-10-23</span>
       <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">物理</span>
@@ -114,7 +140,7 @@ img{max-width:100%;display:block;}
 <p>$$\frac{1}{\sqrt{2}}(\ket{00}\pm\ket{11})$$</p>
 <p>$$\frac{1}{\sqrt{2}}(\ket{01}\pm\ket{10})$$</p>
 <h3 id="sec-1">量子门</h3>
-<h4>XYZ</h4>
+<h4 id="sec-2">XYZ</h4>
 <p>泡利矩阵</p>
 <p>$$</p>
 <p>I=\begin{pmatrix}</p>
@@ -135,16 +161,16 @@ img{max-width:100%;display:block;}
 <p>\end{pmatrix}.</p>
 <p>$$</p>
 <p>X翻转01，Z给1加负号，Y=iXZ，i+翻转+符号</p>
-<h4>CNOT</h4>
+<h4 id="sec-3">CNOT</h4>
 <p>在第二个比特上$\oplus$第一个比特，也可以是当第一个比特为1时翻转第二个。矩阵表示</p>
 <p>$$CNOT = \begin{bmatrix} 1 & 0&0&0 \\ 0 & 1&0&0 \\0 & 0&0&1 \\0 & 0&1&0 \\ \end{bmatrix}$$</p>
-<h4>Hadamard门</h4>
+<h4 id="sec-4">Hadamard门</h4>
 <p>将z方向上自旋本征向量扭到x方向上本征向量。至于y方向？对不起，因为带了虚数，所以不认识你</p>
 <p>$$H = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}$$</p>
 <p>$$H\ket{0}=\frac{1}{\sqrt{2}}(\ket{0}+\ket{1})$$</p>
 <p>$$H\ket{1}=\frac{1}{\sqrt{2}}(\ket{0}-\ket{1})$$</p>
 <blockquote>[!tip] 性质<br>$$H^{\otimes n}\ket{i}=(H\ket{i_1})\otimes...\otimes(H\ket{i_n})=\frac{1}{\sqrt{2^n}}\sum_{j\in\{0,1\}^n}(-1)^{i·j}\ket{j}$$<br>证明：使用归纳法。n=1时由上面两个式子可以看出来成立。假设在n=N处成立，考虑N+1的情况<br>$$\begin{align*}<br>&H^{\otimes(N+1)}\ket{i_1...i_{N+1}}=(H^{\otimes N}\ket{i_1...i_{N}})\otimes(H\ket{i_{N+1}})<br>\\&= \left[ \frac{1}{\sqrt{2^k}} \sum_{j_1,\dots,j_k} (-1)^{\sum_{t=1}^k i_t j_t} |j_1 \dots j_k\rangle \right]<br>\otimes<br>\left[ \frac{1}{\sqrt{2}} \sum_{j_{k+1}=0}^1 (-1)^{i_{k+1} j_{k+1}} |j_{k+1}\rangle \right]<br>\\&= \frac{1}{\sqrt{2^{k+1}}} \sum_{j_1,\dots,j_{k+1}} (-1)^{\sum_{t=1}^{k+1} i_t j_t} |j_1 \dots j_{k+1}\rangle<br>\end{align*}$$<br>得证<br><br>看这个性质，把一个玩意变成另一个玩意的级数展开，原来的这个信息储存在系数上，这不就是离散傅里叶变换吗？事实确实如此，这就是二维的DFT矩阵</blockquote>
-<h4>Toffoli门</h4>
+<h4 id="sec-5">Toffoli门</h4>
 <p>作用在3个比特上，当前两个比特均为1时，第三个比特作用反转门，否则什么都不做。其矩阵表示为</p>
 <p>$$|0\rangle\langle 0| \otimes |0\rangle\langle 0| \otimes I_2</p>
 <p>+ |0\rangle\langle 0| \otimes |1\rangle\langle 1| \otimes I_2</p>
@@ -173,7 +199,7 @@ img{max-width:100%;display:block;}
 <li>在 $q_0$ 施加 **T** 门，在 $q_1$ 施加 **$T^\dagger$** 门。</li>
 <li>施加 **CNOT($q_0, q_1$)**。</li>
 </ol>
-<h4>SWAP门</h4>
+<h4 id="sec-6">SWAP门</h4>
 <p>交换两个量子比特的顺序</p>
 <ol>
 <li>SWAP 矩阵：</li>
@@ -187,17 +213,17 @@ img{max-width:100%;display:block;}
 <li>CNOT(q1, q0)</li>
 <li>CNOT(q0, q1)</li>
 </ul>
-<h4>量子电路演化</h4>
+<h4 id="sec-7">量子电路演化</h4>
 <p>$$U_f\ket{x}\ket{b}=\ket{x}\ket{b\oplus f(x)}$$</p>
 <p>其中$\ket{x}=\ket{x_1...x_n}$，$\oplus$表示比特加法</p>
-<h4>Oracle</h4>
+<h4 id="sec-8">Oracle</h4>
 <p>木瓜内斗的时候，一辆oracle开向远方。。。</p>
 <p>用于查询某个位置上的比特串数值。$\vec x\in\{0,1\}^N$</p>
 <p>$$O_{\vec{x}}(i,0)=(i,x_i)$$</p>
 <p>$$O_{\vec{x}}\ket{i}\ket{b}=\ket{i}\ket{b\oplus x_i}$$</p>
 <p>相位查询，此处i是二进制编码的位置信息</p>
 <p>$$O_{\vec{x}}(\ket{i}\ket{-})=\frac{1}{\sqrt{2}}(\ket{i}\ket{x_i}-\ket{i}\ket{1\oplus x_i})=(-1)^{x_i}\ket{i}\ket{-}$$</p>
-<h3 id="sec-2">Deutsch-Jozsa算法</h3>
+<h3 id="sec-9">Deutsch-Jozsa算法</h3>
 <p>给定一个比特串$\vec{x}\in\{0,1\}^N\quad(N=2^n)$</p>
 <p>已知x中每个位置值都相同，或者一半1一半0，用量子算法只需要查询一次即可知道是哪种情况。</p>
 <p>第一步：先对着n个0全部作用Hadamard门然后混在一起，造出全部可能位置的叠加</p>
@@ -210,9 +236,9 @@ img{max-width:100%;display:block;}
 <p>最后对$\ket{0}^{\otimes n}$进行投影测量即可一次得出x的属性</p>
 <p>此算法查询复杂度为1，时间复杂度为$O(n)$(来自2n个Hadamard门)</p>
 <blockquote>[!note] 推论<br>给定一个$N=2^n$比特的字符串x满足$x_i=i·a$。通过查询x来确定a的数值。<br>注意到当a=0时，得到x全0向量；当a非零时，得到的总是10对半开向量。当a非零时，回到DJ算法的最终状态<br>$$\frac{1}{2^n}\sum_{i\in\{0,1\}^n}(-1)^{x_i}\sum_{j\in\{0,1\}^n}(-1)^{i·j}\ket{j}=\frac{1}{2^n}\sum_{i,j\in\{0,1\}^n}(-1)^{i·(a+j)}\ket{j}$$<br>当j=a时，振幅总为1；当j≠a时，振幅为0，最后只余下了与a相等的向量<br>$$\frac{1}{2^n}\sum_{i,j\in\{0,1\}^n}(-1)^{i·(a+j)}\ket{j}=\ket{a}$$<br>所以得到了a的具体值。不过这两个问题都挺人造的</blockquote>
-<h3 id="sec-3">大数分解</h3>
+<h3 id="sec-10">大数分解</h3>
 <p>量子计算各大算法中当之无愧top1（该不是因为别的算法都没啥用吧.jpg）</p>
-<h4>picture</h4>
+<h4 id="sec-11">picture</h4>
 <p>偶数或者素数幂次是容易分解的，下面展示奇数且非素数幂次的N的分解方式</p>
 <ol>
 <li>选取正整数$a\le a<N$，利用辗转相除法求$\gcd(a,N)$</li>
@@ -222,7 +248,7 @@ img{max-width:100%;display:block;}
 </ol>
 <blockquote>[!tip] 辗转相除法时间复杂度<br>引理：假设使用辗转相除法计算a与b(a>b>0)的最大公约数需要N步，那么满足这一条件的a和b最小值为斐波那契数$F_{N+2}$和$F_{N+1}$<br>证明：使用数学归纳法，N=1意味着b整除a，此时最小值为$a=2,b=1$，恰为$F_3$和$F_2$。<br>现在假设对M-1步有效，则M步辗转相除的第一步是$a=q_0b+r_0$，第二步是$b=q_1r_0+r_1$，也就是说需要M-1步算出$\gcd(b,r_0)$，那么b和$r_0$的最小值是$F_{M+1}$和$F_M$。<br>当$q_0=1$时a取最小值$F_{M+1}+F_M=F_{M+2}$，得证。<br><br>斐波那契数列<br>$$F_n = \frac{1}{\sqrt{5}} \left( \left( \frac{1 + \sqrt{5}}{2} \right)^n - \left( \frac{1 - \sqrt{5}}{2} \right)^n \right)$$<br><br>那么对于这个算法的时间复杂度，假设需要N步，那么b至少是$F_{N+1}$，也就至少是$\phi^{N+1}/\sqrt{5}$，其中$\phi=(1+\sqrt{5})/2$是较大的那个黄金分割数，反解出<br>$$N\ge\log_\phi(\sqrt{5}b)-1\Rightarrow N=O(\log b)$$<br>当然这些常数都不重要，最后复杂度是对数复杂度。</blockquote>
 <p>那么最重要的就是改善第二步的时间复杂度了，第二步等价于求$f(x)= a^x\bmod N$的周期，shor算法主要就是在干这个。</p>
-<h4>Simon问题</h4>
+<h4 id="sec-12">Simon问题</h4>
 <p>已知长度为$N^N(N=2^n)$的字符串$\vec{x}\in\{0,...,N-1\}^N$满足：存在一个比特串$s\in\{0,1\}^n$使得$x_i=x_j$ iff $j=i\oplus s$。给定$O_{\vec{x}}$，求周期s</p>
 <p>方法：</p>
 <p>第一步和D-J一样，先对着n个0全部作用Hadamard门然后混在一起，造出全部可能位置的叠加，不过此时尾巴上附加了0，方便使用oracle查询</p>
@@ -242,7 +268,7 @@ img{max-width:100%;display:block;}
 <p>此处求和项只包含与s垂直的j。反之，只要知道n-1个线性无关的j，就可以通过解线性方程组的方法求出s。接下来对j进行采样，在采第m个j的时候，只要采到某个与前m-1个线性无关的j即可。</p>
 <p>由于在$\mathbb{F}_2$中，每个系数只有2种可能的取值$\pm1$，总共有n-1个线性无关的j，故采到与前m-1个线性无关的j的概率为$(2^{n-1}-2^{m-1})/2^{n-1}$。由于m最大为n-1，所以这个概率不低于1/2，每次采样采个两次就差不多可以满足要求了，时间复杂度为$O(n)$</p>
 <p>最后解线性方程组即可得到s</p>
-<h4>量子DFT</h4>
+<h4 id="sec-13">量子DFT</h4>
 <p>DFT太常见了，就是把N次单位根在行列上转圈圈，构成一个矩阵（还是酉的呢）</p>
 <p>$$(F_N)_{jk}=\frac{1}{\sqrt{N}}\omega_N^{jk},\quad j,k=0,...,N-1$$</p>
 <p>直接计算需要花费$O(N^2)$的时间，快速傅里叶算法需要花费$O(NlogN)$的时间，而<span style="background:rgba(240, 107, 5, 0.2)">量子计算机仅需花费$O(logN)$的时间</span>。</p>
@@ -283,9 +309,9 @@ img{max-width:100%;display:block;}
 <p>然后再对着图看，每一行从左往右依次是对该行进行的变换（反正这些H和R都是可交换的），控制旋转另外一只带点的手表示这个旋转受谁控制。因为每一行的操作都要读取下面所有行的值，而下面却不用读上面，所以我做变换的时候直接把这一位随便改写都没关系。</p>
 <p>$j_1$变完了之后生成的是变换后的第n位，然后一行一行往下面做。</p>
 <p>最后还要在做个SWAP顺序反转（有点像FFT蝶形运算）</p>
-<h5>电路规模</h5>
+<h5 id="sec-14">电路规模</h5>
 <p>一共需要n个H门和$n(n-1)/2$个控制旋转门，后者可以通过少量单量子比特门逼近，所以电路规模是poly(n)，还算少量</p>
-<h5>估计酉算子特征</h5>
+<h5 id="sec-15">估计酉算子特征</h5>
 <p>对NxN规模的酉算子U，其特征值在单位圆上。已知一个特征向量$\ket{\psi}$，估计其特征值$\lambda=e^{2\pi i\phi}$。</p>
 <p>$$U\ket{\psi}=e^{2\pi i\phi}\ket{\psi}$$</p>
 <p>步骤：</p>
@@ -300,7 +326,7 @@ img{max-width:100%;display:block;}
 <ol>
 <li>对前半部分使用IDFT，即可还原出$0.\phi_1...\phi_n$（$\phi$本身就是个小数，所以精确到二进制小数点后n位了）</li>
 </ol>
-<h4>Shor算法</h4>
+<h4 id="sec-16">Shor算法</h4>
 <p>假设已有查询f的oracle</p>
 <p>$$O_f(\ket{x}\ket{0^n})=\ket{x}\ket{f(x)}$$</p>
 <p>其中$f(x)$被记录在n个量子比特上，为了对其使用DFT，首先找到一个规格$q=2^l\in(N^2,2N^2]$，然后构造$F_q$，使得</p>
@@ -336,10 +362,10 @@ img{max-width:100%;display:block;}
 <blockquote>接下来证明渐近分数 $p_n/q_n$ 不可约，也即证明$p_n q_{n-1} - q_n p_{n-1} = (-1)^{n-1}$，还是使用数学归纳法，先直接验证n=1，然后由k推出k+1，用递推关系式带进式子里<br>$$p_{k+1} q_k - q_{k+1} p_k = (a_{k+1} p_k + p_{k-1}) q_k - (a_{k+1} q_k + q_{k-1}) p_k= -(p_k q_{k-1} - q_k p_{k-1})= (-1)^k$$<br>如果一个整数同时为pn和qn的因子，那么一定是他们线性组合结果(±1)的因数，只能是1<br>，故互素<br><br>连分数逼近定理：若$x=[a_0,a_1,...]$且$|x-c/r|\le1/2r^2$，则$c/r=p_k/q_k$对某个正整数k成立<br>注意到pn,qn都是单增的，存在唯一的n使得c/r处于n与n+1之间，换言之$q_n \le r < q_{n+1}$，我们把这个“处于两者之间”变成n与n-1线性叠加的方程，反正c/r原自由度是是两个，我给他叠加表示之后还是两个自由度，所以我想列就列<br>$$\begin{cases}u p_n + v p_{n-1} = c \\u q_n + v q_{n-1} = r\end{cases}$$<br>其系数行列式为 $p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}$。由于行列式值为 $\pm 1$，方程组必有整数解 $u, v$。如果uv中有一个为0，那么c/r恰好有连分数表示，就结束了，下面我们假设$uv\neq0$并想办法得出矛盾<br>第一种情况$uv<0$，定义 $\delta_k = q_k x - p_k$，注意到$\delta_n$ 与 $\delta_{n-1}$ 符号相反（渐近分数在 $x$ 左右交替），以及<br>$$r x - c = (u q_n + v q_{n-1})x - (u p_n + v p_{n-1}) = u(q_n x - p_n) + v(q_{n-1} x - p_{n-1}) = u \delta_n + v \delta_{n-1}$$<br>$u, v$ 异号，则 $u \delta_n$ 与 $v \delta_{n-1}$ 同号。此时<br>$$|r x - c| = |u||\delta_n| + |v||\delta_{n-1}| \ge |\delta_{n-1}|$$<br>pn/qn与pn+1/qn+1之间的距离为1/qnqn+1，由于pn/qn到x距离是单减的，所以上一项误差必须大于1/2的距离，也即$|\delta_{n-1}| > \frac{1}{2q_n}$。由题目条件 $|x - c/r| < \frac{1}{2r^2} \implies |rx - c| < \frac{1}{2r}$联立上述不等式：<br>$$\frac{1}{2r} > |rx - c| \ge |\delta_{n-1}| > \frac{1}{2q_n}$$<br>即 $\frac{1}{2r} > \frac{1}{2q_n} \implies r < q_n$，这与我们设定的 $r \ge q_n$ 矛盾。<br>第二种情况$uv>0$，不妨设$u, v \ge 1$。由于 $|c q_n-p_n r|\ge1$，<br>$$\left|\frac{c}{r}-\frac{p_n}{q_n}\right|\ge\frac{1}{r q_n}.$$<br>而收敛分数误差满足<br>$$\left|x-\frac{p_n}{q_n}\right|<\frac{1}{q_n q_{n+1}}\le\frac{1}{q_n(q_n+q_{n-1})}.$$<br>故<br>$$\left|x-\frac{c}{r}\right|>\frac{1}{r(q_n+q_{n-1})}>\frac{1}{r^2}$$<br>与题目中所给的逼近条件矛盾，证毕<br>另解：![[lianfenshu.png]]<br>练习三的证明n阶估算误差上界，上面算了，也就是计算两个连分数之间的距离；然后要证pn/qn是分母不超过qn时的最佳估计<br>我们考虑分子误差$|rx-c|=|u \delta_n + v \delta_{n-1}|$，由连分数逼近的性质可知$\delta_n$与$\delta_{n-1}$反号，又由于$r=uq_n+vq_{n-1}\le q_n$可以得出当$uv\neq0$时$uv<0$，故$|rx-c|=|u \delta_n| +| v \delta_{n-1}|\ge|\delta_n|$，故<br>$$|x-\frac{c}{r}|\ge\frac{1}{r}|q_nx-p_n|\ge\frac{1}{q_n}|q_nx-p_n|=|x-\frac{p_n}{1_n}|$$<br>其他边界情况$u=0~or~v=0$时恰为n阶估计（被条件排除）或n-1阶估计（不如n阶估计）</blockquote>
 <p>注意$q>N^2\ge r^2$，最后一个约束条件被满足(我们的量子傅里叶变换规模q取N方以上（而不是N）就是为了这个逼近精度)，连分数逼近能够取到$c/r$。也就是说我们把已知的$b/q$用连分数依次写开直到误差不超过$1/2q$，此时把这个连分数通分后分母计算出来就得到了r</p>
 <p>至此完成了shor算法</p>
-<h5>复杂度</h5>
+<h5 id="sec-17">复杂度</h5>
 <p>时间复杂度$O((\log n)^2·\log\log n·\log\log\log n)$，其中量子DFT时间、经典后处理时间均为$O((\log n)^2)$，模指数运算时间接近$O((\log n)^3)$</p>
 <p>使用量子门数为$O(\log n)$</p>
-<h3 id="sec-4">隐子群问题</h3>
+<h3 id="sec-18">隐子群问题</h3>
 <p>试图将上面的问题一般化</p>
 <p>傅里叶分析对寻找周期函数的周期而言是行之有效的方法，而量子力学的测量坍缩放大了我们测出想要的周期的概率。推广至阿贝尔群上，我们只需将傅里叶变换的单位根推广至特征标。</p>
 <p>给定一个群G和一个函数$f:G\to S$其中S是某个有限集合。假设这个函数满足存在G的子群H满足f在H的每个陪集上都是常数函数，但是在不同陪集上取不同的值，$f(g)=f(g')\Leftrightarrow gH=g'H$，试图找到子群H的生成元</p>
@@ -366,7 +392,7 @@ img{max-width:100%;display:block;}
 <p>上述算法可以高效的在$H^\perp$中采样，每个采样给了H一个约束（回忆simon算法的解线性方程组），这一采样被称为傅里叶采样</p>
 <p>对于周期搜索算法，隐子群为$\braket{r}$，此时</p>
 <p>$$H^\perp=\{\chi_b|br/\phi(N)\in\{0,...,r-1\}\}$$</p>
-<h3 id="sec-5">Grover量子搜索算法</h3>
+<h3 id="sec-19">Grover量子搜索算法</h3>
 <p>无结构搜索，通过多次反射快速逼近正确的向量</p>
 <p>令$N=\{0,1\}^n$，给定比特串$\vec{x}\in\{0,1\}^N$，找到$i\in\{0,1\}^n$满足$x_i=1$，若不存在则输出无解</p>
 <p>假设$\vec{x}$中有t个位置是1，定义两个正交态（Good state和Bad state）</p>
@@ -380,7 +406,7 @@ img{max-width:100%;display:block;}
 <p>可见作用一次$G=H^{\otimes n}RH^{\otimes n}O_{\vec{x},\pm}$之后，U会向Good State靠近$2\theta$角。当$(2k+1)\theta=\frac{\pi}{2}$时，就是纯Good State的理想状态，但是大多数情况k解出来不是整数，假设$\tilde{k}$是方程的解，我们用另外一个整数k去逼近，满足$|k-\tilde{k}|\le\frac{1}{2}$，再算一下出错概率</p>
 <p>$$cos^2((2k+1)\theta)=\cos^2(\frac{\pi}{2}+2(k-\tilde{k}))=\sin^2(2(k-\tilde{k})\theta)\le\sin^2\theta=t/N$$</p>
 <p>所以迭代次数应该是$k\le\frac{\pi}{4\theta}\le\frac{\pi}{4}\sqrt{\frac{N}{t}}$，也就是说这个算法是$O(\sqrt{N})$的</p>
-<h4>近似计数</h4>
+<h4 id="sec-20">近似计数</h4>
 <p>目的是估计有多少个解</p>
 <p>根据G作用在Good和Bad State的效果，我们不难发现G就是一个逆时针$2\theta$的旋转，特征值为$e^{\pm 2i\theta}$，特征向量是$\frac{1}{\sqrt{2}}\ket{G}\pm\frac{i}{\sqrt{2}}\ket{B}$，取$\alpha$是+号$\beta$是-号，我们的目的是估算$\theta$，也就是需要估算酉算符G特征值。</p>
 <p>在量子DFT那一章介绍过估计酉算符特征值的做法，大概就是弄一大堆控制酉门，随后进行逆傅里叶变换，将相位上的信息转换到基态信息。QFT规模为$2^n$时，估算可以精确到二进制小数点后n位置，我们设这里的规模是$2^l$，那么估算结果$\tilde{\theta}$和真实结果$\theta$之间满足$|\theta-\tilde{\theta}|=\delta\le 2^{-l}$</p>
@@ -389,11 +415,11 @@ img{max-width:100%;display:block;}
 <p>sin函数是个压缩映射，所以丢掉sin的时候可以给式子放大，而且将一个sin拆成两个sin的过程也可以放大</p>
 <p>$$|N\sin^2\theta-N\sin^2\tilde{\theta}|\le N(2\sin\theta+\delta)\delta=2\sqrt{Nt}\delta+N\delta^2$$</p>
 <p>取$l=\log(\frac{1}{\varepsilon}\sqrt{\frac{N}{t}})$，此算法给出了t的一个乘性近似，$(1-2\varepsilon-\varepsilon^2)t\le\tilde{t}\le(1+2\varepsilon+\varepsilon^2)t$（$\vec{x}$中有t个位置是1）</p>
-<h4>振幅放大</h4>
+<h4 id="sec-21">振幅放大</h4>
 <p>假设某个算法A作用在0上后的叠加态里面有概率p测得想要的解，并且我们有验证器可以验证答案是不是想要的解。一般情况下我们需要重复约1/p次以得到正解，但是使用放大算法后可以降低到$1/\sqrt{p}$次</p>
 <p>我们先输入$\ket{U}=A\ket{0}$，然后进行连续两次反射$ARA^{-1}O_\chi$(和Grove一样先沿Bad state反射再对U反射)，这样的双反射操作执行$O(1/\sqrt{p})$次最后检测结果是否正确</p>
 <p>还原到Grove的原情况时，我们将$H^{\otimes n}$视作某种算法A，他得到正解的概率是$t/N$</p>
-<h4>最优性</h4>
+<h4 id="sec-22">最优性</h4>
 <p>证明$O(\sqrt{N})$是最优速度，我们只需找到一个最坏情况，无法快于$O(\sqrt{N})$解决。假设字符串里只有一个1在i处，那么沿着Bad State翻转的Oracle就可以写作$I-2\ket{i}\bra{i}$</p>
 <p>假设这个任意的算法还是酉算子和O交替使用，我们定义带O的k次操作$\psi$和不带O的k次操作</p>
 <p>$$\ket{\psi_k^i}=U_kO_i...O_iU_0\ket{\psi}\quad\ket{\psi_k}=U_k...U_0\ket{\psi}$$</p>
@@ -426,14 +452,14 @@ img{max-width:100%;display:block;}
 <p>\\ &\ge E_k+F_k-2\sqrt{E_k}\sqrt{F_k}=(\sqrt{F_k}-\sqrt{E_k})^2=\Omega(N)</p>
 <p>\end{align*}$$</p>
 <p>从而证明了$O(\sqrt{N})$的最优性</p>
-<h3 id="sec-6">量子模拟</h3>
+<h3 id="sec-23">量子模拟</h3>
 <p>用量子计算去算量子系统，以其人之道还其人之身</p>
 <blockquote>指数灾难：输出是指数形式增长，太大了<br>NP完全：无法在多项式时间内解决，算法太慢了</blockquote>
 <p>量子模拟问题很多时候是输入有关规模是指数级别的，即使算法是输入的多项式级别，最后运行时间也很长，目的是用polylogN时间内去解决这样就无所谓输入是否为指数级别了。</p>
 <p>一维横场Ising模型，下标表示作用原子，可见这个哈密顿量是2-local的</p>
 <p>$$H=-\sum Z_iZ_{i+1}-g\sum X_i$$</p>
 <p>只需要制备出演化算符$e^{-iHt}$即可找到薛定谔方程的解</p>
-<h4>Lie-Suzuki-Trotter方法</h4>
+<h4 id="sec-24">Lie-Suzuki-Trotter方法</h4>
 <p>因为哈密顿是2-local的，所以仅需考虑exp上面油两个厄米求和项的形式，用很多个时间微元去逼近$e^{i(H_1+H_2)t}$</p>
 <p>Lie-Trotter product formula</p>
 <p>$$e^{i(H_1+H_2)t}=\lim_{L\to\infty}(e^{iH_1\frac{t}{L}}e^{iH_2\frac{t}{L}})^L$$</p>
@@ -449,7 +475,7 @@ img{max-width:100%;display:block;}
 <p>& \leq \cdots \leq O\left(\frac{t^{2}}{L}\right) \leq \varepsilon</p>
 <p>\end{align*}$$</p>
 <p>逼近$e^{i(H_1)\frac{t}{L}},e^{i(H_2)\frac{t}{L}}$需要polylog(1/ε)个量子门。哈密顿量中有m个求和项时重复m次，电路深度为$O(mt^2/\varepsilon)$</p>
-<h4>LCU</h4>
+<h4 id="sec-25">LCU</h4>
 <p>酉算子的线性组合</p>
 <p>考虑任意矩阵M，希望制备状态$M\ket{\psi}/||M\ket{\psi}||$。将M写成酉矩阵线性组合的形式</p>
 <p>$$M=\sum^m \alpha_j V_j,\quad\alpha_j>0,\quad||\alpha||_1=\sum\alpha_j$$</p>
@@ -500,13 +526,13 @@ img{max-width:100%;display:block;}
 <li>最后对前半部分使用$O_v^\dagger$以清除寄存器中的$v_i$，即$\ket{i}\ket{0^p}(v_i\ket{0}+\sqrt{1-v_i^2}\ket{1})$</li>
 </ol>
 <p>所以前文中的序列映射振幅的算子W可以用上述方法走一遍之后对最后一位进行测量，测量结果为0时即可得到。</p>
-<h4>Block-Encoding</h4>
+<h4 id="sec-26">Block-Encoding</h4>
 <p>LCU实现的映射</p>
 <p>$$U_M:\ket{0^l}\otimes\ket{\psi}\mapsto\frac{1}{||M\ket{\psi}||}\ket{0^l}\otimes M\ket{\psi}+\beta\ket{\perp}$$</p>
 <p>Block-encoding就是将原有的模长不超过1的算符A扩充右下，使得扩充后的矩阵的左上分块仍为A，那么扩充后的矩阵作用在$\ket{0\psi}$上就会产生$\ket{0}A\ket{\psi}$部分</p>
 <p>在处理非酉矩阵时，通常将它扩充至Block-encoding再进行需要的处理，在满足一些特殊条件时还可以用Block-encoding去实现非酉矩阵的多项式矩阵</p>
 <img class="note-img" src="assets/block.png" alt="block.png">
-<h4>解线性方程组</h4>
+<h4 id="sec-27">解线性方程组</h4>
 <p>Ax=b，直接设系数矩阵是可逆厄米的，否则令</p>
 <p>$$A' = \begin{pmatrix}</p>
 <p>0 & A \\</p>
@@ -527,7 +553,7 @@ img{max-width:100%;display:block;}
 <blockquote>[!note] 控制旋转<br>还是用二进制一项项凑的想法<br>$$U_{\theta} : |0\rangle |\theta\rangle \mapsto (\cos(\pi \theta) |0\rangle + \sin(\pi \theta) |1\rangle) |\theta\rangle$$<br>$$R_y(2\theta) = \begin{bmatrix}<br>\cos(\theta) & -\sin(\theta) \\<br>\sin(\theta) & \cos(\theta)<br>\end{bmatrix} = e^{-i\theta \sigma_Y},$$<br>那么在e指数上面就可以凑二进制了，最后弄出这样子普适的旋转酉门<br>$$U_{\theta} = \sum_{j \in \{0, 1\}^\ell} e^{-i\pi(j_1/2^2 + \dots + j_d/2^{-(d+1)})Y} \otimes |j\rangle \langle j|.$$<br>我们用经典电路计算$\frac{1}{\pi}\arccos(1/\kappa\tilde{\lambda_j})$再带入上式即可</blockquote>
 <p>记得β是b在系数矩阵表象下的坐标，所以测量出前半部分的概率至少为$\kappa^{-2}$，再用$O(\kappa)$次振幅放大即可保证概率足够大，坍缩后系统的后半部分为</p>
 <p>$$\sum_{j=0}^{N-1} \frac{\beta_j}{\tilde{\lambda}_j} |a_j\rangle$$</p>
-<h3 id="sec-7">量子纠缠</h3>
+<h3 id="sec-28">量子纠缠</h3>
 <p>定域实在论和量子力学的矛盾性，通过CHSH不等式可以证明</p>
 <p>某个人手握QR两个随机变量，另一个人拥有ST，这些随机变量的取值均为$\pm1$.考虑$QS+RS+QT-RT=(Q+R)S+(Q_R)T=\pm2$，所以实在论（完全随机相互独立）认为这个式子期望不超过2</p>
 <p>从量子力学的角度，构造EPR态$|\Psi\rangle = \frac{|0\rangle \otimes |0\rangle + |1\rangle \otimes |1\rangle}{\sqrt{2}}$，再令第一个人观测Z和X方向自旋，另一个人观测$\frac{1}{\sqrt{2}}(Z\pm X)$方向自旋，我们用量子力学<|×|>的方式计算期望，可以发现这个式子期望是$2\sqrt{2}$超过了2。22年物理诺奖给到了观测到了超过2的期望所以证明量子纠缠是没问题的</p>
@@ -548,7 +574,7 @@ img{max-width:100%;display:block;}
 <p>$$\mathbb{E}(RS) = \frac{1}{2} (0 + 0) = 0$$</p>
 <p>$$\mathbb{E}(RT) = \frac{1}{2} (0 + 0) = 0$$</p>
 <p>$$\mathbb{E}(\mathcal{O}) = 1 + 0 + 0 - (-1) = 1 + 1 = 2$$</p>
-<h3 id="sec-8">超密编码</h3>
+<h3 id="sec-29">超密编码</h3>
 <p>Alice只能读第一个比特，Bob只能读第二个，现在共享这个EPR态</p>
 <p>$$\ket\Phi=\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})$$</p>
 <p>给Bob传输这个</p>
@@ -566,7 +592,7 @@ img{max-width:100%;display:block;}
 <p>A态可以被LOCC转化到B态当且仅当A被B优超（也就是说LOCC是降低熵的），因此拥有最大熵的EPR态可以LOCC制备其他任何态</p>
 <p>蒸馏：高效制备大量便宜的高熵态去替代最大纠缠态的效率</p>
 <p>SLOCC：放松LOCC条件，仅需有概率制备出目标态，不是100%也可以。</p>
-<h3 id="sec-9">习题</h3>
+<h3 id="sec-30">习题</h3>
 <p>先把老版本题目都做一遍吧</p>
 <p>定理1.2 证明有限维内积空间是希尔伯特空间</p>
 <p>这也就是验证在2范数下完备。有限维内积空间存在一组正交归一基，任意一个元素都可以用基的线性组合表示。任取一个柯西列，每个坐标也是柯西列，根据数域的完备性得知每个坐标都是收敛的，再验证2范数收敛</p>
@@ -703,7 +729,7 @@ img{max-width:100%;display:block;}
 <p>W和GHZ态属于两个互不相交的SLOCC等价类，前者3-tangle为0后者为1，SLOCC无法将零的3-tangle转化为非零的3-tangle</p>
 <p>9.4能否刻画满足 $|\Psi\rangle \xrightarrow{SLOCC} |EPR\rangle_{AB} |0\rangle_C$ 的三方纠缠态？</p>
 <p>该类态完全由其在 $AB$ 边界上的二方纠缠以及 $C$ 边界上的可分离性所刻画。</p>
-<h3 id="sec-10">2023往年卷</h3>
+<h3 id="sec-31">2023往年卷</h3>
 <p>1.$\frac{1}{\sqrt{N}}\sum_{i=0}^{N-1} |i\rangle |x_i\rangle\to\frac{1}{\sqrt{N}}\sum_{i=0}^{N-1} (-1)^{x_i} |i\rangle |1\rangle$，概率1/2:</p>
 <p>在第二个位置作用Hadmard门并测量，取1，概率恰为1/2</p>
 <p>$$</p>

@@ -43,6 +43,10 @@ img{max-width:100%;display:block;}
 .toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
 .toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
 .toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
 .article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
 .article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
 .article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
@@ -51,7 +55,7 @@ img{max-width:100%;display:block;}
 .article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
 .article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
 .article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
-.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
 .article-content p{margin-bottom:14px;}
 .article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
 .article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
@@ -79,25 +83,36 @@ img{max-width:100%;display:block;}
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
     <ul class="toc-list">
+      <li class="toc-main"><a href="#article-title">备份：经典有噪信道（擦除/翻转）容量</a></li>
       <li><a href="#sec-0">Question 1</a></li>
       <li><a href="#sec-1">Average probability</a></li>
       <li><a href="#sec-2">Critical $\beta$ Under TDL</a></li>
       <li><a href="#sec-3">Relation with Entropy</a></li>
-      <li><a href="#sec-4">Physical Application</a></li>
-      <li><a href="#sec-5">Question 2</a></li>
-      <li><a href="#sec-6">Binary Symmetric Channel</a></li>
-      <li><a href="#sec-7">Fano Inequality</a></li>
-      <li><a href="#sec-8">Maximum Likelihood Decoding</a></li>
-      <li><a href="#sec-9">Critical Point</a></li>
-      <li><a href="#sec-10">Channel Capacity</a></li>
-      <li><a href="#sec-11">n-Copies</a></li>
-      <li><a href="#sec-12">Reversible Classical Cellular Automata</a></li>
-      <li><a href="#sec-13">Quantum Error Correction</a></li>
+      <li class="sub"><a href="#sec-4">Intuition</a></li>
+      <li class="sub"><a href="#sec-5">Conditional Shannon Entropy</a></li>
+      <li class="sub"><a href="#sec-6">Rényi-2 Entropy</a></li>
+      <li><a href="#sec-7">Physical Application</a></li>
+      <li><a href="#sec-8">Question 2</a></li>
+      <li><a href="#sec-9">Binary Symmetric Channel</a></li>
+      <li><a href="#sec-10">Fano Inequality</a></li>
+      <li><a href="#sec-11">Maximum Likelihood Decoding</a></li>
+      <li><a href="#sec-12">Critical Point</a></li>
+      <li><a href="#sec-13">Channel Capacity</a></li>
+      <li><a href="#sec-14">n-Copies</a></li>
+      <li class="sub"><a href="#sec-15">Majority Vote</a></li>
+      <li class="sub"><a href="#sec-16">Capacity</a></li>
+      <li class="sub"><a href="#sec-17">Distinguishability</a></li>
+      <li><a href="#sec-18">Reversible Classical Cellular Automata</a></li>
+      <li class="sub"><a href="#sec-19">Identity RCA</a></li>
+      <li class="sub"><a href="#sec-20">Property</a></li>
+      <li class="sub"><a href="#sec-21">Advantages</a></li>
+      <li class="sub"><a href="#sec-22">Disadvantages</a></li>
+      <li><a href="#sec-23">Quantum Error Correction</a></li>
     </ul>
   </aside>
   <article class="article-body">
 
-    <h1 class="article-title">备份：经典有噪信道（擦除/翻转）容量</h1>
+    <h1 class="article-title" id="article-title">备份：经典有噪信道（擦除/翻转）容量</h1>
     <div class="article-meta">
       <span><i class="far fa-calendar"></i> 2026-09-03</span>
       <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">物理</span>
@@ -160,11 +175,11 @@ img{max-width:100%;display:block;}
 <p>This means we have high probability to guess correctly.</p>
 <p>From the limit calculation, we can find that the critical $\beta$ is $\boxed{\beta_{cric}=1-\alpha}$. When $\beta>\beta_{cric}$, too many information been discarded, the success probability drops to 0 exponentially.</p>
 <h3 id="sec-3">Relation with Entropy</h3>
-<h4>Intuition</h4>
+<h4 id="sec-4">Intuition</h4>
 <p>If $\beta=0$ or $\alpha N=1$ (or $\alpha=0$ under TDL), we know the correct $x$ for sure. The smaller $\alpha$ and $\beta$ are, the more information we know.</p>
 <p>The information of this game contains two steps, one lies in $S$, and the other lies in the last $(1-\beta)N$ bits. So $\alpha$ describes the information loss in step one, and $\beta$ describes the information loss in step two.</p>
 <p>When the total information loss is small, that is $\alpha+\beta<1$, we can recover the original $x$. That's the meaning for $\beta_{cric}=1-\alpha$</p>
-<h4>Conditional Shannon Entropy</h4>
+<h4 id="sec-5">Conditional Shannon Entropy</h4>
 <p>The posterior possibility is uniform,</p>
 <p>$$P(x=X|y=Y)=\frac{1}{K_y}$$</p>
 <p>So the conditional Shannon entropy is</p>
@@ -205,7 +220,7 @@ img{max-width:100%;display:block;}
 </ol>
 <p>$$\bar{H}(X|Y)=0,\quad 2^{-\bar{H}(X|Y)}=1$$</p>
 <p>This agrees with $P_{suc}=1$.</p>
-<h4>Rényi-2 Entropy</h4>
+<h4 id="sec-6">Rényi-2 Entropy</h4>
 <p>Rényi-2 entropy is defined by</p>
 <p>$$H_2(X)=-\log_2\left(\sum_i p_i^2\right)$$</p>
 <p>It measures the collision probability, $2^{H_2(X)}$ means there's how many effective same probability state in one distribution.</p>
@@ -216,7 +231,7 @@ img{max-width:100%;display:block;}
 <p>because we guess the answer randomly. So</p>
 <p>$$\boxed{H_2(X|Y)=-\log_2\left(P_{suc}\right)}$$</p>
 <p>It means when we guess randomly, the successful probability is described by Rényi-2 entropy, which represents the collision pairs.</p>
-<h3 id="sec-4">Physical Application</h3>
+<h3 id="sec-7">Physical Application</h3>
 <p>In paper "Quantum resource localizability transitions in deep thermalization", I found the physical version of this pure informational question, that is theory of resource localization in deep thermalization for subspace-coherence QRTs.</p>
 <p>The informational transition question is an easier case of random subset intersection problem in QRT. We view one string in $A$ as a block, which has uniform distribution $p=2^{-N}$ (block probability), then</p>
 <p>$$H_2(p)=-\log_2(2^N2^{-2N})=N$$</p>
@@ -236,9 +251,9 @@ img{max-width:100%;display:block;}
 <p>$$\alpha+\beta=1$$</p>
 <p>where $\alpha\leftrightarrow\alpha_0,~\beta\leftrightarrow\alpha_m,~\sigma=1$</p>
 <blockquote>notion: In this note, H(p) ($1\ge p\ge 1$ is a probability) means entropy in B(1,p) model, i.e. $H(p)=-p\log_2 p-(1-p)\log_2(1-p)$</blockquote>
-<h3 id="sec-5">Question 2</h3>
+<h3 id="sec-8">Question 2</h3>
 <p>In measurement decoding noise, let's model $P(s|z) \propto$ $e^{-\beta(s\oplus~z)}$ (bit-string addition). $\beta$ is the strength of measurement ranging from 0 to infinity. This is called a weak measurement (why?). For $\beta = \infty$ this is a strong measurement. What is the critical $\beta$ now in this model? What is the channel capacity?</p>
-<h3 id="sec-6">Binary Symmetric Channel</h3>
+<h3 id="sec-9">Binary Symmetric Channel</h3>
 <p>Actually it's a product channel, each bit errors are independent:</p>
 <p>$$P(s|z)\propto\prod_{i=1}^Ne^{-\beta(s_i\oplus z_i)}$$</p>
 <p>where $s=s_1s_2...s_N,~s_i\in\{0,1\}$, same for $z$. So we can look at only one bit behavior to understand this channel:</p>
@@ -249,7 +264,7 @@ img{max-width:100%;display:block;}
 <p>$\beta$ controls the error rate, $\beta<\infty$ it is called weak measurement since the code word $s$ we got is not always the original code word $z$</p>
 <p>This is the binary symmetric channel, with bit flip probability</p>
 <p>$$p=\frac{e^{-\beta}}{1+e^{-\beta}}$$</p>
-<h3 id="sec-7">Fano Inequality</h3>
+<h3 id="sec-10">Fano Inequality</h3>
 <p>Message X, come from set $S$ randomly ($|S|=M$), passed through a BSC, and received $Y$</p>
 <p>Guessing $X'$ from Y, let decoding error probability is $P_{err}=P(X'\neq X)$. Then Fano inequality says,</p>
 <p>$$H(X|Y)\le H(P_{err})+P_{err}\log_2(M-1)$$</p>
@@ -263,7 +278,7 @@ img{max-width:100%;display:block;}
 <p>Successfully decoding means $P_{err}=0$, so</p>
 <p>$$\boxed{\frac{I(X;Y)}{N}\ge\alpha}$$</p>
 <p>$I(X;Y)/N$ means the information you get from Y (in order to infer X) per bit. It can not be smaller than total information (per bit) $\alpha$, if you want to decode successfully.</p>
-<h3 id="sec-8">Maximum Likelihood Decoding</h3>
+<h3 id="sec-11">Maximum Likelihood Decoding</h3>
 <p>Since flip probability $p\le\frac{1}{2}$, and</p>
 <p>$$P(Y=y|X=x)=p^{d(x,y)}(1-p)^{N-d(x,y)}$$</p>
 <p>where $d(·,·)$ represent for Hamming distance, our decoding rule is to find $x'\in S$ letting $d(x',y)$ to be the smallest.</p>
@@ -281,7 +296,7 @@ img{max-width:100%;display:block;}
 <p>Possibility that code word in S enter in this Hamming ball is</p>
 <p>$$P_{err}\le2^{\alpha N}P_1=2^{(\alpha+H(p)-1)N}$$</p>
 <p>When $1-H(p)>\alpha~\Rightarrow~P_{err}=0$, decode success.</p>
-<h3 id="sec-9">Critical Point</h3>
+<h3 id="sec-12">Critical Point</h3>
 <p>We know:</p>
 <p>$$\alpha<1-H(p),\quad success$$</p>
 <p>$$\alpha>\frac{1}{N}(H(Y)-H(Y|X)),\quad failure$$</p>
@@ -301,15 +316,15 @@ img{max-width:100%;display:block;}
 <p>$$p=\frac{e^{-\beta}}{1+e^{-\beta}},\quad 1-p=\frac{1}{1+e^{-\beta}}$$</p>
 <p>We can rewrite the critical point using $\beta_c$:</p>
 <p>$$\frac{e^{-\beta_c}}{1+e^{-\beta_c}}\log_2\frac{1+e^{-\beta_c}}{e^{-\beta_c}}+\frac{1}{1+e^{-\beta_c}}\log_2(1+e^{-\beta_c})=1-\alpha$$</p>
-<h3 id="sec-10">Channel Capacity</h3>
+<h3 id="sec-13">Channel Capacity</h3>
 <p>The meaning of channel capacity is $C=$ bits/channel used. In other word, using N times of this channel, CN bits can be decoded with success probability $P_{suc}\to1$ when $N\to\infty$</p>
 <p>As the discussion above, since information per bit we want to transmit is $\alpha$, the capacity should be $C=1-H(p)$. From Fano inequality to $C$, we have taken $\max H(Y)$. So generally,</p>
 <p>$$C=\max_{P(X)}\frac{I(X;Y)}{N}$$</p>
 <p>Meaning: when channel capacity > information density, we can decode it successfully.</p>
-<h3 id="sec-11">n-Copies</h3>
+<h3 id="sec-14">n-Copies</h3>
 <p>If we discard first $\beta N$ bits, then n-copies raise n times of exactly same $z$, it will not let the system distinguishable.</p>
 <p>But in BSC, it do have a better effect.</p>
-<h4>Majority Vote</h4>
+<h4 id="sec-15">Majority Vote</h4>
 <p>For flip probability $p<\frac{1}{2}$, if we receive 0,0,1,0,0,0 (n=6) in one bit, then we want to guess this bit to be 0 naturally. This method can let success probability higher.</p>
 <p>The information procedure in majority vote method is</p>
 <p>$$original~string~X\xrightarrow{BSC^n}Y_1,...,Y_n\xrightarrow{vote}\bar{Y}\xrightarrow{max~likelihood}X'$$</p>
@@ -317,7 +332,7 @@ img{max-width:100%;display:block;}
 <p>$$q_n=\sum_{i=n/2}^nC_n^ip^i(1-p)^{n-i}<p$$</p>
 <p>Using this decoding method, the critical point shift to</p>
 <p>$$\boxed{H(q_n)_{cric}+\alpha=1}$$</p>
-<h4>Capacity</h4>
+<h4 id="sec-16">Capacity</h4>
 <p>Majority vote is not the optimal decoding method, it can only gives lower bond of successful probability. By calculating capacity C, we will know the optimal transition point.</p>
 <p>By definition, $C=\max\frac{I(X;Y)}{N}$. Here the channel is symmetric again, so $I/N$ gets its maximum when $P(x_i=0)=P(x_i=1)=0.5,~H(Y)=1$, consider one bit:</p>
 <p>$$C=1-H(X|Y^n)$$$$H(X|Y^n)=\sum_{y^n}P(Y^n=y^n)H(P(X=0|Y^n=y^n))$$</p>
@@ -333,12 +348,12 @@ img{max-width:100%;display:block;}
 <p>The optimal critical point is</p>
 <p>$$\boxed{H(X|Y^n)_{cric}+\alpha=1}$$</p>
 <p>Intuitionally, when n gets bigger, critical $\beta_{cric}$ gets smaller, and $n\to\infty\Rightarrow\beta_{cric}\to0$</p>
-<h4>Distinguishability</h4>
+<h4 id="sec-17">Distinguishability</h4>
 <p>System will have higher distinguishability, because the posterior distribution become sharpener. (For quick verification, $P(y^n|X=0):P(y^n|X=1)=(\frac{1-p}{p})^{n-2k}$, hold $\frac{k}{n}$ unchanged, let $n\to\infty$, this ratio approaches to $\infty$) Specifically, the posterior probably of right answer approaches to 1.</p>
 <p>It makes $H(X|Y^n)$ smaller, and channel capacity $C=\frac{1}{N}I(X;Y)$ higher.</p>
-<h3 id="sec-12">Reversible Classical Cellular Automata</h3>
+<h3 id="sec-18">Reversible Classical Cellular Automata</h3>
 <blockquote>Typo:0001 --> 0101<br>0010 --> 0101<br>0011 --> 1001<br>0100 --> 1001<br>is not reversible</blockquote>
-<h4>Identity RCA</h4>
+<h4 id="sec-19">Identity RCA</h4>
 <p>We use this example to explicitly show some kind of "update rule" will make the code undistinguishable.</p>
 <p>Consider identity RCA, set $\alpha=\frac{1}{2}$ and $N=4$, then S contains:</p>
 <p>$$S=\{0000,0001,0010,0011\}$$</p>
@@ -354,16 +369,16 @@ img{max-width:100%;display:block;}
 <li>Bit flip noise channel:</li>
 </ol>
 <p>S only contains a small square of N-bit codes. The maximum Hamming distance is 2, less than maximum N-bit code distance 4. This RCA makes BSC efficiency lower.</p>
-<h4>Property</h4>
+<h4 id="sec-20">Property</h4>
 <p>RCA will let the difference between two original stings propagate to other position.</p>
 <p>For example, if two stings only have one bit difference, and unfortunately it located in first $\beta N$ bits, then they are undistinguishable through erase channel. However after RCA evolve, there's new difference in last $(1-\beta)N$ bits, they will become distinguishable.</p>
 <p>For BSC, a good RCA will make $\min_{x,y\in S}d(x,y)$ higher, in order to create more tolerance space.</p>
 <p>We can evaluate if one RCA can do better than random permutation for a certain channel. We can carefully pick the optimal RCA to create more tolerance space. But Shannon capacity condition $C\ge\alpha$ is always true.</p>
-<h4>Advantages</h4>
+<h4 id="sec-21">Advantages</h4>
 <p>RCA is local, we have a specific rule, not random, so we can save the RAM.</p>
-<h4>Disadvantages</h4>
+<h4 id="sec-22">Disadvantages</h4>
 <p>One step of RCA only affects $O(1)$ of bit position, but random permutation can affect O(N)</p>
-<h3 id="sec-13">Quantum Error Correction</h3>
+<h3 id="sec-23">Quantum Error Correction</h3>
 <p>How to encode quantum information, hide it, corrupt it, yet still recover it. This is quantum error correction ;)</p>
 <p>I learned something in part one of "Surviving as a Quantum Computer in a Classical World" wrote by Daniel Gottesman.</p>
 <p>For example, 9-qubits</p>

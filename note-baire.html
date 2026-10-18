@@ -43,6 +43,10 @@ img{max-width:100%;display:block;}
 .toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
 .toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
 .toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
 .article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
 .article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
 .article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
@@ -51,7 +55,7 @@ img{max-width:100%;display:block;}
 .article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
 .article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
 .article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
-.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
 .article-content p{margin-bottom:14px;}
 .article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
 .article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
@@ -79,16 +83,19 @@ img{max-width:100%;display:block;}
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
     <ul class="toc-list">
+      <li class="toc-main"><a href="#article-title">Baire空间、一致有界性原理</a></li>
       <li><a href="#sec-0">Baire定理(开集交)</a></li>
       <li><a href="#sec-1">Baire空间闭集并</a></li>
       <li><a href="#sec-2">贫与剩余</a></li>
       <li><a href="#sec-3">连续函数逐点极限</a></li>
       <li><a href="#sec-4">一致有界性原理</a></li>
+      <li class="sub"><a href="#sec-5">共鸣定理/奇性聚集原理</a></li>
+      <li class="sub"><a href="#sec-6">范数下半连续</a></li>
     </ul>
   </aside>
   <article class="article-body">
     <img class="article-cover" src="assets/liz.jpg" alt="Baire空间、一致有界性原理">
-    <h1 class="article-title">Baire空间、一致有界性原理</h1>
+    <h1 class="article-title" id="article-title">Baire空间、一致有界性原理</h1>
     <div class="article-meta">
       <span><i class="far fa-calendar"></i> 2025-10-24</span>
       <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">数学</span>
@@ -155,12 +162,12 @@ img{max-width:100%;display:block;}
 <p>$$\forall x\in B_E\quad||u_i(x)||\le\frac{1}{r}(M(x_0)+n_0)\Rightarrow\sup_{i\in I}\sup_{x\in B_E}||u_i(x)||<\infty$$</p>
 <p>用这个定理可以证明一些非常bt的结论</p>
 <img class="note-img" src="assets/bounded.jpg" alt="bounded.jpg">
-<h4>共鸣定理/奇性聚集原理</h4>
+<h4 id="sec-5">共鸣定理/奇性聚集原理</h4>
 <p>一致有界性原理的逆命题为共鸣定理，不过我们还可以将其进一步加强，称为**奇性聚集原理**</p>
 <p>E是Banach空间，F是赋范空间，$(u_i)_{i\in I}\subseteq B(E,F)$</p>
 <p>若$\sup_{i\in I}||u_i||=\infty$，那么$G=\{x\in E; M(x)=\infty\}$是E上的稠密$G_\delta$集</p>
 <p>证明：$F_n$定义如B-S定理所述，故$G=\bigcap_{n\ge1}F_n^c$，$G_\delta$易得。假设G不稠密，那么由于E是Baire的，$\exists n_0$使得$F_{n_0}^c$不稠密，也即$\exists O~open\quad B(x_0,r)\subseteq F_{n_0}$，此时重复B-S定理证明过程后半段，可得$\sup_{i\in I}||u_i||<\infty$，矛盾</p>
-<h4>范数下半连续</h4>
+<h4 id="sec-6">范数下半连续</h4>
 <p>一致有界性原理的实用推论</p>
 <p>$(u_i)_{i\in I}\subseteq B(E,F)$，E是Banach空间</p>
 <p>若$u_n$逐点收敛至$u$，则$u\in B(E,F)$且$||u||\le\liminf_{n\to\infty}||u_n||$</p>

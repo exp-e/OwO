@@ -43,6 +43,10 @@ img{max-width:100%;display:block;}
 .toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
 .toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
 .toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
 .article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
 .article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
 .article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
@@ -51,7 +55,7 @@ img{max-width:100%;display:block;}
 .article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
 .article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
 .article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
-.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
 .article-content p{margin-bottom:14px;}
 .article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
 .article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
@@ -79,16 +83,20 @@ img{max-width:100%;display:block;}
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
     <ul class="toc-list">
+      <li class="toc-main"><a href="#article-title">大学院入試ノート</a></li>
       <li><a href="#sec-0">古典力学</a></li>
-      <li><a href="#sec-1">电磁气学</a></li>
-      <li><a href="#sec-2">热力学</a></li>
-      <li><a href="#sec-3">量子力学</a></li>
-      <li><a href="#sec-4">统计力学</a></li>
+      <li class="sub"><a href="#sec-1">牛顿力学</a></li>
+      <li class="sub"><a href="#sec-2">解析力学</a></li>
+      <li class="sub"><a href="#sec-3">习题</a></li>
+      <li><a href="#sec-4">电磁气学</a></li>
+      <li><a href="#sec-5">热力学</a></li>
+      <li><a href="#sec-6">量子力学</a></li>
+      <li><a href="#sec-7">统计力学</a></li>
     </ul>
   </aside>
   <article class="article-body">
     <img class="article-cover" src="assets/ginkgo.JPG" alt="大学院入試ノート">
-    <h1 class="article-title">大学院入試ノート</h1>
+    <h1 class="article-title" id="article-title">大学院入試ノート</h1>
     <div class="article-meta">
       <span><i class="far fa-calendar"></i> 2025-12-02</span>
       <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">物理</span>
@@ -99,7 +107,7 @@ img{max-width:100%;display:block;}
 <p>教材：数理工学社《大学院入试问题 物理学》</p>
 <p>这是一篇抄书+记录想法+做题 记录文章</p>
 <h3 id="sec-0">古典力学</h3>
-<h4>牛顿力学</h4>
+<h4 id="sec-1">牛顿力学</h4>
 <p>牛一说的是惯性匀速直线运动，牛二是F=ma，牛三是反作用力</p>
 <p>关于旋转的非惯性系，这都比较经典了，通过求导能直接计算出四个加速度部分：径向、角向加速度，以及径向的向心力和角向的科氏力</p>
 <p>保存则=守恒定律=conservation rule</p>
@@ -137,14 +145,14 @@ img{max-width:100%;display:block;}
 <p>中心力=有心力：万有引力，有心力满足角动量守恒，面积速度恒定，$r^2\dot\theta$守恒，令其为h，那么径向运动方程式</p>
 <p>$$m(\ddot{r}-\frac{h^2}{r^3})=F(r)$$</p>
 <p>Kepler's rules:椭圆轨道、面积速度一定、公转周期的平方是椭圆轨道长半径的立方的比例($T^2/R^3$只与中心天体有关)，都是经验法则</p>
-<h4>解析力学</h4>
+<h4 id="sec-2">解析力学</h4>
 <p>$$L=T-U$$</p>
 <p>最小作用量原理，E-L方程就不写了</p>
 <p>哈密顿力学，广义动量</p>
 <p>$$p_r=\frac{\partial L}{\partial\dot{q_r}}$$</p>
 <blockquote>我的天，越写越困，从开头写到这里我已经困得不行了，这一定是我听爵士导致的</blockquote>
 <p>当势能不含速度，T仅与广义坐标的二次式有关时，$H=T+U$</p>
-<h4>习题</h4>
+<h4 id="sec-3">习题</h4>
 <p>例题1.1</p>
 <p>![[3.jpg]]![[4.png]]</p>
 <p>bane定数就是劲度系数</p>
@@ -154,7 +162,7 @@ img{max-width:100%;display:block;}
 <p>这题一堆带根号三角函数积分，主要用二倍角换掉</p>
 <p>这题反映出我的经典散射有多菜，首先在质心系里的散射只是双方改变角度仅此而已！然后全散射截面要积两个粒子</p>
 <p>这题还是比较简单的，我居然把$\vec{x}=r\hat{r}$都写错了，为我的莽撞自罚一杯</p>
-<h3 id="sec-1">电磁气学</h3>
+<h3 id="sec-4">电磁气学</h3>
 <p>库仑定律，静电势，静电场无旋，高斯定理</p>
 <p>安培定律也就是安培环路定律</p>
 <p>静电容量/电气容量C</p>
@@ -175,7 +183,7 @@ img{max-width:100%;display:block;}
 <p>这题真牛批了，让你算了下电偶极子，再让你自己算出来导体球在匀强电场中激发出来的也等价于电偶极子，再让你自己算环电流激发磁场也是电偶极子模式，最后再给你两个电偶极子让你画出对应的磁四极子[惊讶]我学电动的时候知道这么一件事，但我好像没自己推过，包括解匀强电场中导体球电场这种题换来换去做过很多，就是第一次觉得wdf这么有物理意义的嗷</p>
 <p>做完之后乳腺通畅了，停经二十年后做完这题立马见红了[呲牙]</p>
 <p>这题蛮简单，出题人可能希望你把B、E带z和相位全部写出来，F完整表达式也写出来，这样就字数多了</p>
-<h3 id="sec-2">热力学</h3>
+<h3 id="sec-5">热力学</h3>
 <p>我测热力学和统计力学是分开的</p>
 <p>$$dU=TdS-PdV+\mu dN$$</p>
 <p>这是一辈子都必须记下来的公式，要不还是纹个纹身放在左手手背上吧（不是）</p>
@@ -195,14 +203,14 @@ img{max-width:100%;display:block;}
 <p>在回家的火车上写的，热力学考的意外的简单？</p>
 <p>rbr你出这种题目那我GPHSUVFT不就白背了。。</p>
 <p>![[24.jpg]]![[25.jpg]]</p>
-<h3 id="sec-3">量子力学</h3>
+<h3 id="sec-6">量子力学</h3>
 <p>我感觉我都懒得在obs上更新了</p>
 <p>下面这题是考试演习题目</p>
 <p>晚上再看看格里菲斯，修考题目有很多是默写题</p>
 <p>又看了一下解氢原子，球坐标拉普拉斯</p>
 <p>$$\frac{1}{r^2}\frac{\partial}{\partial r}(r^2\frac{\partial}{\partial r})+\frac{1}{r^2sin\theta}\frac{\partial}{\partial\theta}(sin\theta\frac{\partial}{\partial\theta})+\frac{1}{r^2sin^2\theta}\frac{\partial^2}{\partial\phi^2}$$</p>
 <p>忘记了的话就用nabla点乘nabla对基矢求导就能推出来了</p>
-<h3 id="sec-4">统计力学</h3>
+<h3 id="sec-7">统计力学</h3>
 <p>求统计对我好一点</p>
     </div>
   </article>

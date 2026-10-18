@@ -43,6 +43,10 @@ img{max-width:100%;display:block;}
 .toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
 .toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
 .toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
 .article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
 .article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
 .article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
@@ -51,7 +55,7 @@ img{max-width:100%;display:block;}
 .article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
 .article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
 .article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
-.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
 .article-content p{margin-bottom:14px;}
 .article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
 .article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
@@ -79,17 +83,19 @@ img{max-width:100%;display:block;}
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
     <ul class="toc-list">
+      <li class="toc-main"><a href="#article-title">Stone-Weierstrass定理</a></li>
       <li><a href="#sec-0">符号和定义</a></li>
       <li><a href="#sec-1">引理1</a></li>
       <li><a href="#sec-2">引理2</a></li>
       <li><a href="#sec-3">Stone-Weierstrass定理(实)</a></li>
-      <li><a href="#sec-4">Stone-Weierstrass定理(复)</a></li>
-      <li><a href="#sec-5">用法</a></li>
+      <li class="sub"><a href="#sec-4">反例</a></li>
+      <li><a href="#sec-5">Stone-Weierstrass定理(复)</a></li>
+      <li><a href="#sec-6">用法</a></li>
     </ul>
   </aside>
   <article class="article-body">
     <img class="article-cover" src="assets/mcl.jpg" alt="Stone-Weierstrass定理">
-    <h1 class="article-title">Stone-Weierstrass定理</h1>
+    <h1 class="article-title" id="article-title">Stone-Weierstrass定理</h1>
     <div class="article-meta">
       <span><i class="far fa-calendar"></i> 2025-10-27</span>
       <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">数学</span>
@@ -160,13 +166,13 @@ img{max-width:100%;display:block;}
 <p>$$V_{x}=\{z\in E|h_{x}(z)>f(z)-\varepsilon\}$$</p>
 <p>遍历x可以开覆盖E，取有限子覆盖下标为$x_1,...,x_m\in E$</p>
 <p>令$h=\max\{h_{x_1},...,h_{x_m}\}\in\mathcal{A}$，那么在E上$f-\varepsilon<h<f+\varepsilon$，也即$||f-h||_\infty<\varepsilon$。由于$\varepsilon$是任意的，所以$f\in\bar{\mathcal{A}}=\mathcal{A}\Rightarrow \mathcal{A}=C(E,\mathbb{R})$</p>
-<h4>反例</h4>
+<h4 id="sec-4">反例</h4>
 <p>定理中的两个条件都是必须的。</p>
 <p>如果separating这个条件失效，那么首先紧豪斯多夫空间是T4可分（不交闭集有不交邻域）的，由Urysohn引理（必要性证明自己看尤承业p84，太长了，就是用等高线进行扩张）</p>
 <img class="note-img" src="assets/urysohn.jpg" alt="urysohn.jpg">
 <p>可以看到任意两个闭子集都是可以用连续函数区分的，但是此时子代数无法区分，也就无法逼近了</p>
 <p>如果$\mathcal{A}$中任意函数都$f(x)=0$那自然无法逼近非零常值映射了</p>
-<h3 id="sec-4">Stone-Weierstrass定理(复)</h3>
+<h3 id="sec-5">Stone-Weierstrass定理(复)</h3>
 <p>设E是紧豪斯多夫拓扑空间，$\mathcal{A}\subseteq C(E,\mathbb{C})$是子代数，满足</p>
 <ol>
 <li>$\mathcal{A}$ separating</li>
@@ -175,7 +181,7 @@ img{max-width:100%;display:block;}
 </ol>
 <p>那么$A\subseteq\left(C(E,\mathbb{C}),||·||_\infty\right)$稠密</p>
 <p>证明：令$Re\mathcal{A}=\{Ref|f\in\mathcal{A}\}$，则$\forall f\in\mathcal{A},Ref=\frac{f+\bar{f}}{2}\in Re\mathcal{A},Imf=\frac{f-\bar{f}}{2i}\in Re\mathcal{A}$，此时$f=Ref+iImf$，由于自伴随，$\mathcal{A}=Re\mathcal{A}+iRe\mathcal{A}$。注意到$Re\mathcal{A}\subseteq C(E,\mathbb{R})$满足S-W定理实情形，故稠密，故$\mathcal{A}=Re\mathcal{A}+iRe\mathcal{A}\subseteq C(E,\mathbb{C})$稠密。</p>
-<h3 id="sec-5">用法</h3>
+<h3 id="sec-6">用法</h3>
 <p>证明紧豪斯多夫空间上的子代数在连续函数中稠密基本上都能用</p>
 <img class="note-img" src="assets/S-W.png" alt="S-W.png">
 <img class="note-img" src="assets/S-W2.png" alt="S-W2.png">

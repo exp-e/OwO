@@ -43,6 +43,10 @@ img{max-width:100%;display:block;}
 .toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
 .toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
 .toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
 .article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
 .article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
 .article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
@@ -51,7 +55,7 @@ img{max-width:100%;display:block;}
 .article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
 .article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
 .article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
-.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
 .article-content p{margin-bottom:14px;}
 .article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
 .article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
@@ -79,19 +83,72 @@ img{max-width:100%;display:block;}
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
     <ul class="toc-list">
+      <li class="toc-main"><a href="#article-title">随机过程（二）</a></li>
       <li><a href="#sec-0">鞅</a></li>
-      <li><a href="#sec-1">布朗运动</a></li>
-      <li><a href="#sec-2">随机积分</a></li>
-      <li><a href="#sec-3">随机微分方程（SDE）</a></li>
-      <li><a href="#sec-4">Ornstein-Uhlenbeck 半群</a></li>
-      <li><a href="#sec-5">期权定价</a></li>
-      <li><a href="#sec-6">时空噪声</a></li>
-      <li><a href="#sec-7">习题</a></li>
+      <li class="sub"><a href="#sec-1">例子</a></li>
+      <li class="sub2"><a href="#sec-2">0均值的和</a></li>
+      <li class="sub2"><a href="#sec-3">平稳分布上的有界函数</a></li>
+      <li class="sub2"><a href="#sec-4">均匀分布上的调和函数</a></li>
+      <li class="sub2"><a href="#sec-5">分支过程</a></li>
+      <li class="sub2"><a href="#sec-6">Wald鞅</a></li>
+      <li class="sub2"><a href="#sec-7">Polya罐</a></li>
+      <li class="sub2"><a href="#sec-8">Radon-Nikodym导数</a></li>
+      <li class="sub"><a href="#sec-9">鞅差变换</a></li>
+      <li class="sub"><a href="#sec-10">可选停时定理</a></li>
+      <li class="sub2"><a href="#sec-11">停时</a></li>
+      <li class="sub2"><a href="#sec-12">定理</a></li>
+      <li class="sub2"><a href="#sec-13">例</a></li>
+      <li class="sub"><a href="#sec-14">截口定理</a></li>
+      <li class="sub"><a href="#sec-15">讨钱西格玛代数</a></li>
+      <li class="sub"><a href="#sec-16">鞅收敛定理</a></li>
+      <li class="sub2"><a href="#sec-17">上穿不等式</a></li>
+      <li class="sub"><a href="#sec-18">一致可积性</a></li>
+      <li class="sub"><a href="#sec-19">Doob-Meyer 分解</a></li>
+      <li><a href="#sec-20">布朗运动</a></li>
+      <li class="sub"><a href="#sec-21">定义</a></li>
+      <li class="sub"><a href="#sec-22">Kolmogorov 连续修正定理和布朗运动刻画</a></li>
+      <li class="sub"><a href="#sec-23">布朗运动强马氏性和反射</a></li>
+      <li class="sub2"><a href="#sec-24">一些莫名其妙的分析性质</a></li>
+      <li class="sub2"><a href="#sec-25">常返性</a></li>
+      <li class="sub"><a href="#sec-26">布朗桥</a></li>
+      <li><a href="#sec-27">随机积分</a></li>
+      <li class="sub"><a href="#sec-28">Ito公式</a></li>
+      <li class="sub"><a href="#sec-29">多维/多元Ito公式</a></li>
+      <li class="sub"><a href="#sec-30">应用举例</a></li>
+      <li class="sub2"><a href="#sec-31">布朗运动对自身的积分</a></li>
+      <li class="sub2"><a href="#sec-32">指数鞅</a></li>
+      <li class="sub2"><a href="#sec-33">几何 Brown 运动</a></li>
+      <li class="sub2"><a href="#sec-34">Hermite 鞅</a></li>
+      <li class="sub"><a href="#sec-35">半鞅</a></li>
+      <li class="sub2"><a href="#sec-36">半鞅Ito公式</a></li>
+      <li><a href="#sec-37">随机微分方程（SDE）</a></li>
+      <li class="sub"><a href="#sec-38">强解</a></li>
+      <li class="sub2"><a href="#sec-39">强解唯一性定理</a></li>
+      <li class="sub"><a href="#sec-40">弱解</a></li>
+      <li class="sub"><a href="#sec-41">Ito扩散过程</a></li>
+      <li class="sub"><a href="#sec-42">无穷小生成元</a></li>
+      <li class="sub2"><a href="#sec-43">布朗运动</a></li>
+      <li class="sub2"><a href="#sec-44">泊松过程</a></li>
+      <li class="sub2"><a href="#sec-45">扩散过程</a></li>
+      <li class="sub"><a href="#sec-46">SDE向前向后方程</a></li>
+      <li class="sub2"><a href="#sec-47">Kolmogorov向后方程</a></li>
+      <li class="sub2"><a href="#sec-48">Fokker-Planck向前方程</a></li>
+      <li class="sub2"><a href="#sec-49">扩散方程不变测度</a></li>
+      <li class="sub"><a href="#sec-50">Feynnman-Kac公式</a></li>
+      <li class="sub"><a href="#sec-51">Drichlet方程</a></li>
+      <li><a href="#sec-52">Ornstein-Uhlenbeck 半群</a></li>
+      <li><a href="#sec-53">期权定价</a></li>
+      <li class="sub"><a href="#sec-54">Black-Sholes-Merton 公式</a></li>
+      <li><a href="#sec-55">时空噪声</a></li>
+      <li class="sub"><a href="#sec-56">线性加法噪声热方程</a></li>
+      <li class="sub"><a href="#sec-57">交互粒子系统</a></li>
+      <li><a href="#sec-58">习题</a></li>
+      <li class="sub"><a href="#sec-59">期末考(大四专供)</a></li>
     </ul>
   </aside>
   <article class="article-body">
     <img class="article-cover" src="assets/EG.jpg" alt="随机过程（二）">
-    <h1 class="article-title">随机过程（二）</h1>
+    <h1 class="article-title" id="article-title">随机过程（二）</h1>
     <div class="article-meta">
       <span><i class="far fa-calendar"></i> 2026-04-24</span>
       <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">数学</span>
@@ -107,16 +164,16 @@ img{max-width:100%;display:block;}
 <p>第三条的等价定义：$\mathbb{E}(X_{n} | \mathcal{F}_m) = X_m\quad(\forall m<n)$</p>
 <p>$\mathbb{E}(X_{n+1} | \mathcal{F}_n) \le X_n$称为上鞅（期望不断减小）；$\mathbb{E}(X_{n+1} | \mathcal{F}_n) \ge X_n$称为下鞅（期望不断变大）</p>
 <p>那我们验证一个序列是否为鞅，主要就是验证第三条，也就是我们要算$\mathbb{E}(X_{n+1} | \mathcal{F}_n)$最后往Xn上靠</p>
-<h4>例子</h4>
+<h4 id="sec-1">例子</h4>
 <p>下面均假设自然$\sigma$代数流</p>
-<h5>0均值的和</h5>
+<h5 id="sec-2">0均值的和</h5>
 <p>设 $Y_0$ 为 $\mathcal{F}_0$ 可测, $\{Y_n\}_{1}^{\infty}$ 互相独立, $\mathbb{E}(|Y_n|) < \infty$, $\mathbb{E}(Y_n) = 0$。则</p>
 <p>$$</p>
 <p>S_n = \sum_{i=0}^n Y_i</p>
 <p>$$</p>
 <p>是 $\mathcal{F}_n$ 鞅。</p>
 <blockquote>验证：$E(S_n+Y_{n+1})=S_n+E(Y_{n+1})=S_n$</blockquote>
-<h5>平稳分布上的有界函数</h5>
+<h5 id="sec-3">平稳分布上的有界函数</h5>
 <p>$Y = (Y_n: n = 0,1,\dots)$ 为马链，$P$ 为转移矩阵。设 $f$ 为 $\mathcal{S}$ 上有界函数满足：</p>
 <p>$$(Pf)(i) = \sum_{j\in\mathcal{S}} P_{ij} f(j) = f(i).$$</p>
 <p>取 $X_n = f(Y_n)$。</p>
@@ -126,7 +183,7 @@ img{max-width:100%;display:block;}
 <p>(Pf)(i) = \sum_{j\in\mathcal{S}} P_{ij} f(j) = \lambda f(i).</p>
 <p>$$</p>
 <p>取$X_n = \lambda^{-n} f(Y_n).$</p>
-<h5>均匀分布上的调和函数</h5>
+<h5 id="sec-4">均匀分布上的调和函数</h5>
 <p>设 $f$ 是某个 $d$ 维区域 $\mathbb{R}$ 内的<u>上</u>调和函数，即对任意的 $x \in \mathbb{R}$ 及任意的闭球 $B(x, r) = \{y: |y-x| \le r\}$，有均值性质</p>
 <p>$$</p>
 <p>f(x) \ge \frac{1}{|B(x, r)|} \int_{B(x, r)} f(y) dy,</p>
@@ -145,13 +202,13 @@ img{max-width:100%;display:block;}
 <p>故 $X_n$ 为 $\mathcal{F}_n$ 上鞅。</p>
 <blockquote>注：这里的“上”调和函数和“上”鞅对应，如果条件是调和函数，那么所有不等号改为等号，Xn为鞅<br>调和函数有均值决定的性质，这恰好与均匀随机变量适配，从而变成鞅</blockquote>
 <p>如 $f$ 满足 $\Delta f = \left( \frac{\partial^2}{\partial x_1^2} + \dots + \frac{\partial^2}{\partial x_d^2} \right) f \le 0$，其它条件同上例，则 $X_n = f(S_n)$ 为上鞅。</p>
-<h5>分支过程</h5>
+<h5 id="sec-5">分支过程</h5>
 <p>分支过程设 $Y_n$ 为一分支过程，其后代分布均值 $\mu < \infty$，令</p>
 <p>$$</p>
 <p>X_n = \mu^{-n} Y_n</p>
 <p>$$</p>
 <p>则 $X_n$ 为鞅。</p>
-<h5>Wald鞅</h5>
+<h5 id="sec-6">Wald鞅</h5>
 <p>$Y_0=0$，$Y_n$ 独立同分布，对某个 $\lambda \ne 0$，矩母函数 $\phi(\lambda)=\mathbb{E}(\exp[\lambda Y_k])$ 有限。则</p>
 <p>$$</p>
 <p>X_n=\phi(\lambda)^{-n}\exp\left[\lambda(Y_1+\cdots+Y_n)\right]</p>
@@ -176,7 +233,7 @@ img{max-width:100%;display:block;}
 <p>\mathbb{E}\left(\phi(\lambda)^{-(n+1)}f(S_{n+1})\mid S_n\right)=\phi(\lambda)^{-n}f(S_n).</p>
 <p>$$</p>
 <p>所以 $X_n$ 为鞅。</p>
-<h5>Polya罐</h5>
+<h5 id="sec-7">Polya罐</h5>
 <p>设罐里有 $a$ 只红球，$b$ 只绿球。每次从罐中抽出一只球，然后把它和另外 $c$ 只相同颜色的一并放入罐中，试验重复进行下去。用 $X_n,Y_n$ 分别表示第 $n$ 步后红球所占比率和数目，则 $X_n$ 关于 $\mathcal{F}_n$ 是一个鞅。</p>
 <blockquote>也是只有两种情况的一个暴力的计算</blockquote>
 <p>如已知 $Y_n = k$，则</p>
@@ -196,7 +253,7 @@ img{max-width:100%;display:block;}
 <p>\end{aligned}</p>
 <p>$$</p>
 <p>所以，$\mathbb{E}(X_{n+1} \mid Y_n) = \dfrac{Y_n}{a+b+nc} = X_n$。</p>
-<h5>Radon-Nikodym导数</h5>
+<h5 id="sec-8">Radon-Nikodym导数</h5>
 <p>(i) 拉东导数（Radon-Nikodym derivatives）设 $Z \sim U[0,1]$，给定 $n \in \mathbb{N}$ 定义</p>
 <p>$$</p>
 <p>Y_n = \frac{k}{2^n}, \quad \text{如果 } \frac{k}{2^n} \le Z < \frac{k+1}{2^n}, \quad k=0,1,\dots,2^n-1.</p>
@@ -215,7 +272,7 @@ img{max-width:100%;display:block;}
 <p>&= X_n.</p>
 <p>\end{aligned}</p>
 <p>$$</p>
-<h4>鞅差变换</h4>
+<h4 id="sec-9">鞅差变换</h4>
 <p>设 $Y_0,Y_1,\dots,Y_n,\dots$ 为随机过程，$X_n$ 为关于 $Y_n$ 的鞅。有时，我们也把由 $Y_0,Y_1,\dots,Y_n$ 生成的信息流记为 $\mathcal{F}_n$，此时我们也说 $X_n$ 为关于信息流 $\mathcal{F}_n$ 的鞅，即 $\mathbb{E}(X_{n+1}|\mathcal{F}_n)=X_n$。另外，还有过程 $H=\{H_n:n=0,1,2,\dots\}$，$H_n$ 由 $Y_0,Y_1,\dots,Y_{n-1}$ 决定，换句话说，$H_n$ 是 $\mathcal{F}_{n-1}$ 可测的。定义</p>
 <p>$$</p>
 <p>Z_0=0;\quad Z_n=Z_{n-1}+H_n(X_n-X_{n-1})=\sum_{k=1}^n H_k(X_k-X_{k-1}).</p>
@@ -234,9 +291,9 @@ img{max-width:100%;display:block;}
 <blockquote>在可选停时定理中还会作为例子出现，这里的S不满足可选停时定理的期望归零条件</blockquote>
 <p>由于琴声不等式，鞅经过一个下凹函数后变为下鞅</p>
 <p>$$\mathbb{E}\big(\phi(X_{n+1}) \,\big|\, \mathcal{F}_n\big) \;\ge\; \phi\big(\mathbb{E}(X_{n+1} \,|\, \mathcal{F}_n)\big) \;=\; \phi(X_n).$$</p>
-<h4>可选停时定理</h4>
+<h4 id="sec-10">可选停时定理</h4>
 <p>对于鞅而言，给定n，则有$E(X_n)=E(X_0)$。在满足某些条件时可以将这条性质推广到停时上</p>
-<h5>停时</h5>
+<h5 id="sec-11">停时</h5>
 <p>随机时间 $\tau$ 是停时，如果对任意的 $n \in \mathbb{N}_0$，事件 $\{\tau = n\}$ 的发生与否由 $\mathcal{F}_n$ 来决定，换句话说，$\{\tau = n\} \in \mathcal{F}_n$（或者 $\{\tau \le n\} \in \mathcal{F}_n$）。</p>
 <p>由于 $\tau$ 可以取 $\infty$，我们探讨 $\mathbb{E}(X_0) = \mathbb{E}(X_{\tau \wedge n})$ 是否成立。</p>
 <p>设 $X$ 为 $\mathcal{F}_n$ 鞅（上鞅、下鞅），停止过程 $X^\tau = \{X_{\tau \wedge n}: n = 0,1,\dots\}$ 是鞅（上鞅、下鞅）。</p>
@@ -259,7 +316,7 @@ img{max-width:100%;display:block;}
 <p>所以 $X^\tau$ 是鞅，对上鞅、下鞅情形证明一样。</p>
 <blockquote>补充：测度的一致连续<br>$$\int|f(w)|\mu(dw)<\infty$$<br>令<br>$$\nu(A)=\int_Af(w)\mu(dw)$$<br>则($\varepsilon-\delta$语言)对$\forall\varepsilon>0,\exists\delta$使得当$\mu(A)<\delta$有$\nu(A)<\varepsilon$<br>这也就是这两个测度之间的绝对连续，记作$\nu<<\mu$</blockquote>
 <p>下面探讨无界停时是否还有期望不变的性质</p>
-<h5>定理</h5>
+<h5 id="sec-12">定理</h5>
 <p>（可选停止定理）设 $\tau$ 为有限停时，$X_n$ 为鞅，满足：</p>
 <p>(i) $\mathbb{E}|X_\tau| < \infty$；</p>
 <p>**(ii)** $\lim_{n\to\infty} \mathbb{E}(X_n 1_{\tau>n}) = 0$，</p>
@@ -276,7 +333,7 @@ img{max-width:100%;display:block;}
 <p>由前面的停止过程性质知 $II = \mathbb{E}(X_0)$；又因为 $\mathbb{P}(\tau<\infty)=1$，所以 $\lim_{n\to\infty}\mathbb{P}(\tau>n)=0$，结合条件 (i) 知 $\lim_{n\to\infty}\mathbb{E}(X_\tau 1_{\tau>n})=0$；利用条件 (ii) 即得所要结论。</p>
 <blockquote>注：主要就是验证条件2，一个反例就是前面提过的鞅差变换例子，或者说倍赌策略的赌博停止时间（最终手上持有1元）作为停时（单次赌博输赢概率皆为50%，下一期赌金翻倍：1,2,4,8,...）<br>下面计算在n之后读博停止时所持资金的期望。<br>前n局都不赢钱，概率$P(\tau>n)=2^{-n}$<br>前n局都输了钱，越输越大，资金$X_n=-1-2-4-8-...=1-2^{n+1}$<br>故要求的期望$E(X_n1_{\tau>n})=(1-2^{n+1})(2^{-n})=-2+2^{-n}$，不收敛到0<br>为什么呢，因为$E(X_\tau)=1$，如果从0元起家，$E(X_0)=0$，结论不成立<br>总的来说，如果τ前的过程无法控制，就像这里会指数增长下降一样，那么(ii)条件不好满足</blockquote>
 <blockquote>更好的定理条件：一致可积性</blockquote>
-<h5>例</h5>
+<h5 id="sec-13">例</h5>
 <p>设 $Y_0 = 0, Y_1, Y_2, \dots, i.i.d, \mathbb{E}(Y_k) = \mu, Var(Y_k) = \sigma^2 < \infty$。令 $X_n = S_n - n\mu = \sum_{k=1}^n Y_k - n\mu$。设 $\tau$ 为停时，且 $\mathbb{E}(\tau) < \infty$。则</p>
 <p>$$\mathbb{E}(|X_{\tau}|) < \infty, \quad \mathbb{E}(X_{\tau}) = \mathbb{E}(S_{\tau}) - \mu\mathbb{E}(\tau) = 0.$$</p>
 <p>令 $Y_k' = Y_k - \mu, X_n = \sum_{k=1}^n Y_k'$。则</p>
@@ -322,7 +379,7 @@ img{max-width:100%;display:block;}
 <p>思考：如何计算 $\tau$ 的更高阶矩？答：我们必须使用不同的随机变量和鞅，例如拉普拉斯变换后的随机变量$E(e^{\lambda\tau})$之类的</p>
 <p>(iii)对于不对称的随机游走p>q，也可以计算上一种情况所定义的超出ab范围的停时期望，过程略</p>
 <p>$$\mathbb{E}(\tau)=\frac{a q^{a+b}+b p^{a+b}-(a+b) q^{a} p^{b}}{\left(p^{a+b}-q^{a+b}\right)(p-q)}.$$</p>
-<h4>截口定理</h4>
+<h4 id="sec-14">截口定理</h4>
 <p>$X_m$是鞅等价于：如果两个停时$\tau$和$\sigma$可比较（有明确的先后关系）则$E(X_\tau)=E(X_\sigma)$</p>
 <p>严格表述</p>
 <p>设 $X=\{X_n:n\in\mathbb{N}\}$ 是 $\mathcal{F}_n$ 鞅（上鞅、下鞅），$\sigma$ 及 $\tau$ 是两个有界停时且满足 $\sigma\le\tau$。则</p>
@@ -331,7 +388,7 @@ img{max-width:100%;display:block;}
 <p>$$</p>
 <blockquote>只写了充分性，还有必要性<br>证明的过程中可以发现, 如果对任意的有界停时对 $\sigma \le \tau$, 对可积过程 $X$ 均有 $\mathbb{E}(X_\sigma) = \mathbb{E}(X_\tau)$, 则 $X$ 为鞅。</blockquote>
 <img class="note-img" src="assets/截口.png" alt="截口.png">
-<h4>讨钱西格玛代数</h4>
+<h4 id="sec-15">讨钱西格玛代数</h4>
 <p>其实是$\tau$前$\sigma$代数</p>
 <p>$$\mathcal{F}_\tau = \{A \in \mathcal{F} : \forall t \in [0,\infty),\, A \cap \{\tau \le t\} \in \mathcal{F}_t\}$$</p>
 <p>显然，$\mathcal{F}_\tau$ 是 $\mathcal{F}$ 的一个子 $\sigma$ 代数，且当 $\tau \equiv t$ 时，$\mathcal{F}_\tau = \mathcal{F}_t$。直观上，$\mathcal{F}_\tau$ 是由时刻 $\tau$ 之前的随机变量以及 $\tau$ 本身所产生的信息。$\tau$ 前 $\sigma$ 代数有以下基本性质。</p>
@@ -377,7 +434,7 @@ img{max-width:100%;display:block;}
 <p>$$</p>
 <p>两边同除以 $[\mathbb{E}(X_n^{*p})]^{1/q}$ 即得结论 (如果除式为 0, 结果显然成立)。第二个不等式自己证明。</p>
 <p>上述不等式对无穷情形也是成立的。</p>
-<h4>鞅收敛定理</h4>
+<h4 id="sec-16">鞅收敛定理</h4>
 <p>本节考虑鞅的收敛理论。设 $(X_n)_{0\le n\le N}$ 为非负下鞅（$N$ 固定有限）。我们估计 $X_n$ 在区间 $(a,b)$ 的上穿（下穿）次数。由于 $(X_n - a)^+$ 也为下鞅，故令 $a=0$，所以我们只考虑非负下鞅。为此</p>
 <p>$$</p>
 <p>\begin{aligned}</p>
@@ -401,7 +458,7 @@ img{max-width:100%;display:block;}
 <p>\mathbb{E}(X_N) - \mathbb{E}(X_0) \ge \mathbb{E}(U_0^b(X,N))b. \tag{7.13}</p>
 <p>$$</p>
 <p>式中的$U_0^b(X,N)$是指在0到N步之内的上穿b次数</p>
-<h5>上穿不等式</h5>
+<h5 id="sec-17">上穿不等式</h5>
 <p>设 $(X_n)_{0\le n\le N}$ 为下鞅, $U_a^b(X,N)$ 为上穿 $[a,b]$ 次数, 即 $(X_n - a)^+$ 上穿 $[0,b-a]$ 的次数。则</p>
 <p>$$</p>
 <p>\mathbb{E}(U_a^b(X,N)) \le \frac{1}{(b-a)}\left[\mathbb{E}(X_N - a)^+ - \mathbb{E}(X_0 - a)^+\right] \le \frac{1}{b-a}\left[\mathbb{E}X_N^+ + |a|\right].</p>
@@ -423,13 +480,13 @@ img{max-width:100%;display:block;}
 <p>$$</p>
 <p>此恰为参数分别为 $k+1$ 及 $n-k+1$ 的 Beta 分布。</p>
 <p>鞅收敛定理条件不能保证L1收敛</p>
-<h4>一致可积性</h4>
+<h4 id="sec-18">一致可积性</h4>
 <p>设随机变量族 $X_\gamma, \gamma \in \Gamma$ 称为满足一致可积性，如果</p>
 <p>$$</p>
 <p>\lim_{M\to\infty} \sup_{\gamma\in\Gamma} \mathbb{E}\left[ |X_\gamma| \mathbf{1}_{\{|X_\gamma|>M\}} \right]=0</p>
 <p>$$</p>
 <p>一致可积性有很多很好的性质但是因为太难所以略</p>
-<h4>Doob-Meyer 分解</h4>
+<h4 id="sec-19">Doob-Meyer 分解</h4>
 <p>鞅的要求是期望值稳定，但是如果期望值稳增或者稳减呢，那我们自然的想法是把随机变量分解为鞅（稳定部分）+增加/减少部分</p>
 <p>任何 $\mathcal{F}_n$ 下鞅 $X_n$ 可以唯一地表示成 $X_n = M_n + A_n, n \in \mathbb{N}_0$，其中 $M_n$ 为 $\mathcal{F}_n$ 鞅，$M_0 = X_0$，$A_n \in \mathcal{F}_{n-1}$ 为增过程（$A_n \le A_{n+1}$）且 $A_0 = 0$。在此意义下分解是唯一的。</p>
 <p>证明：因为是下鞅，在期望的意义下每一步均有增量，因此把每一步增量的条件期望累加即得增过程。故令</p>
@@ -493,8 +550,8 @@ img{max-width:100%;display:block;}
 <p>$$</p>
 <blockquote>随机游走的绝对值分解为带符号的每步和+0点局部时</blockquote>
 <p>此式即为 Brown 运动局部时公式的离散版本。</p>
-<h3 id="sec-1">布朗运动</h3>
-<h4>定义</h4>
+<h3 id="sec-20">布朗运动</h3>
+<h4 id="sec-21">定义</h4>
 <p>连续随机过程 $B = \{B(t), t \ge 0\}$ 称作 Weiner 过程或者 Brown 运动，如果满足：</p>
 <ol>
 <li>$B(0) = 0$;</li>
@@ -570,7 +627,7 @@ img{max-width:100%;display:block;}
 <p>\mathbb{P}(|B(1)| \le z) = \frac{1}{\sqrt{2\pi}} \int_{-z}^z e^{-\frac{x^2}{2}} \mathrm{d}x \le \frac{1}{\sqrt{2\pi}} 2z.</p>
 <p>$$</p>
 <p>故$P(D_k)=0$</p>
-<h4>Kolmogorov 连续修正定理和布朗运动刻画</h4>
+<h4 id="sec-22">Kolmogorov 连续修正定理和布朗运动刻画</h4>
 <p>设随机过程 $X = \{X(t), 0 \le t \le T\}$，如果存在正常数 $\alpha, \beta, K$ 使得对所有的 $0 < s, t \le T$ 有</p>
 <p>$$</p>
 <p>\mathbb{E}|X_t - X_s|^\alpha \le K|t - s|^{1+\beta},</p>
@@ -608,7 +665,7 @@ img{max-width:100%;display:block;}
 <p>证明要用到</p>
 <blockquote>Borel-Cantelli 引理<br>事件序列概率和收敛则（这个串依次）发生无穷多次概率为0<br>事件序列独立且概率和发散则a.s.发生无穷次（例如猴子打字机哈姆雷特）</blockquote>
 <p>完整证明太过复杂所以略过</p>
-<h4>布朗运动强马氏性和反射</h4>
+<h4 id="sec-23">布朗运动强马氏性和反射</h4>
 <p>设 $B$ 是一维标准 Brown 运动，$\tau$ 为有限停时，令</p>
 <p>$$</p>
 <p>\tilde{B}(t) = 2B(t \wedge \tau) - B(t).</p>
@@ -660,20 +717,20 @@ img{max-width:100%;display:block;}
 <p>$$</p>
 <p>\mathbb{P}_0(z_t \le s) = \frac{1}{\pi} \int_{t-s}^{\infty} \frac{1}{r+s} \sqrt{\frac{s}{r}} \mathrm{d}r \stackrel{sv=\frac{1}{r+s}}{=} \int_{0}^{\frac{s}{t}} \frac{1}{\sqrt{v}\sqrt{1-v}} \mathrm{d}v = \frac{2}{\pi} \arcsin\sqrt{\frac{s}{t}}.</p>
 <p>$$</p>
-<h5>一些莫名其妙的分析性质</h5>
+<h5 id="sec-24">一些莫名其妙的分析性质</h5>
 <p>我已经晕了</p>
 <p>(i) Lebesgue 测度为 0；</p>
 <p>(ii) 无界闭集；</p>
 <p>(iii) $t=0$ 是聚点；</p>
 <p>(iv) 在 $(0,\infty)$ 无孤立点；</p>
 <p>(v) 是稠密集。</p>
-<h5>常返性</h5>
+<h5 id="sec-25">常返性</h5>
 <p>假设布朗运动从环状区域开始，我们计算它跑出环和跑进原点的概率</p>
 <p>哥们没学过Ito公式啊</p>
 <p>$$X(t) = \phi(B_t) = \phi(a) + \int_0^t \nabla \phi(B_s) \, dB_s + \frac{1}{2} \int_0^t \Delta \phi(B_s) \, ds = \phi(a) + \int_0^t \nabla \phi(B_s) \, dB_s$$</p>
 <p>二维布朗运动以概率1进入原点任意小邻域</p>
 <p>三维布朗运动以概率1离开任意有限区域</p>
-<h4>布朗桥</h4>
+<h4 id="sec-26">布朗桥</h4>
 <p>设 $B$ 为一维标准布朗运动，$T>0$ 固定。定义布朗桥过程</p>
 <p>$$X(t) = B(t) - \frac{t}{T}B(T),\quad 0 \le t \le T$$</p>
 <p>注 1.8.24.</p>
@@ -694,7 +751,7 @@ img{max-width:100%;display:block;}
 <p>布朗桥$X^{a\to b}$的有限维联合分布</p>
 <p>实际上是布朗运动的条件分布，即有：</p>
 <p>$$f_{X^{a\to b}}(x_1,\dots,x_n) = f_{W(t_1),\dots,W(t_n) \mid W(T)=b}(x_1,x_2,\dots,x_n).$$</p>
-<h3 id="sec-2">随机积分</h3>
+<h3 id="sec-27">随机积分</h3>
 <p>一般我们的积分大概就是$\int f(x) d\mu(x)$，一小段x通过定义好的测度，与f相乘，然后很多这样的微元求和，现在我们的随机积分是用随机过程定义这个测度，x有一种时间参数的感觉，此时的测度就变成了随机过程发生的位移</p>
 <p>称过程 $h = \{h(t): 0 \le t \le T\}$ 为简单过程，如果它可表示成</p>
 <p>$$</p>
@@ -767,7 +824,7 @@ img{max-width:100%;display:block;}
 <p>随机积分作为随机变量</p>
 <p>对于任意的 $h \in L_T^2$，积分过程 $(h \cdot B) = \left\{ \int_0^t h(s,\omega) \, dB(s): t \in [0,T] \right\}$ 为 0 初值 $\mathscr{F}_t$ 鞅，所以(h·B)^2是下鞅，经过Doob-Meyer分解后过程 $\left( \int_0^t h(s) \, dB(s) \right)^2 - \int_0^t h^2(s,\omega) \, ds$ 为 0 初值 $\mathscr{F}_t$ 鞅。</p>
 <blockquote>随机积分是鞅，这一点是很重要的性质，在下面我们经常化简出来随机积分的形式就可以说他是鞅了</blockquote>
-<h4>Ito公式</h4>
+<h4 id="sec-28">Ito公式</h4>
 <blockquote>考完期末之后去上课触发rgl特殊语音了</blockquote>
 <p>Ito公式也即随机积分的分部积分公式或微分链式法则</p>
 <p><u>布朗运动情形</u></p>
@@ -831,7 +888,7 @@ img{max-width:100%;display:block;}
 <p>或写作</p>
 <p>$\langle X, Y\rangle_t = \lim_{\|\Pi\| \to 0} \sum_{k=0}^{\infty} (X(t_{i+1}) - X(t_i)(Y(t_{i+1}) - Y(t_i)),$</p>
 <p>其中 $\Pi$ 是 $[0,t]$ 的一个分割。$X,Y$ 中只要有一个是连续有限变差过程很容易发现上式右边极限为 0，所以在连续情形过程的平方（交互）变差实质上是鞅的平方（交互）变差（注意如果过程不连续，情况会发生很大的变化，如 Poisson 过程）。有了这些准备之后，接下来介绍一般的多维 Itô 公式。</p>
-<h4>多维/多元Ito公式</h4>
+<h4 id="sec-29">多维/多元Ito公式</h4>
 <p>设 $A=(A_1,\cdots,A_m)$ 为 $m$ 个连续<u>有限变差过程</u>, $M=(M_1,\cdots,M_n)$</p>
 <p>为 $n$ 个<u>连续鞅</u>, $n+m$ 元函数 $f(x_1,\cdots,x_m,y_1,\cdots,y_n)$ 有直到二阶连续导数。则</p>
 <p>对任意的 $t\in[0,\infty)$ 有</p>
@@ -849,11 +906,11 @@ img{max-width:100%;display:block;}
 <p>M(t)N(t) = M(0)N(0) + \int_0^t M(s)\mathrm{d}N(s) + \int_0^t N(s)\mathrm{d}M(s) + \langle M,N\rangle_t.</p>
 <p>$$</p>
 <p>如果M或N中有一个有限变差，那么交互变差为0，最后一项为0，上式还原到普通分部积分公式</p>
-<h4>应用举例</h4>
-<h5>布朗运动对自身的积分</h5>
+<h4 id="sec-30">应用举例</h4>
+<h5 id="sec-31">布朗运动对自身的积分</h5>
 <p>很好验证之前算的布朗运动对自身的积分</p>
 <p>$$B_t^2=0+2\int_0^tB_sdB_s+\frac{1}{2}\int_0^t2ds\Rightarrow\int_0^tB_sdB_s=\frac{B_t^2-t}{2}$$</p>
-<h5>指数鞅</h5>
+<h5 id="sec-32">指数鞅</h5>
 <p>设 $h \in L_T^2$ 且<u>有界</u>, 令 $M_t = \int_0^t h(s,\omega)\mathrm{d}B(s)$ 为 0 初值鞅, 其平方变差过程 $\langle M\rangle_t = \int_0^t h^2(s)\mathrm{d}s$ 是有限变差的。设 $a$ 为常数以及二元函数 $f(x,y)=\mathrm{e}^{ax-\frac{a^2}{2}y}$,</p>
 <p>则 $f_x(x,y)=af(x,y), f_{xx}(x,y)=a^2f(x,y)$ 以及 $f_y(x,y)=-\frac{a^2}{2}f(x,y)$。令</p>
 <p>$$</p>
@@ -871,7 +928,7 @@ img{max-width:100%;display:block;}
 <p>\end{aligned}</p>
 <p>$$</p>
 <p>（二阶部分恰好相互抵消）随机过程 $\mathscr{E}(M)_t$ 被表示成一个随机积分, 因而为鞅, 我们称之为指数鞅。</p>
-<h5>几何 Brown 运动</h5>
+<h5 id="sec-33">几何 Brown 运动</h5>
 <p>设 $\sigma>0,\mu>0$, 令 $X(t)=\mathrm{e}^{\sigma B(t)+(\mu-\frac{\sigma^2}{2})t}$。取 $f(x,t)=\mathrm{e}^{\sigma x+(\mu-\frac{\sigma^2}{2})t}$, 对 $X(t)=f(B(t),t)$ 使用 Itô 公式得</p>
 <p>$$</p>
 <p>\begin{aligned}</p>
@@ -888,7 +945,7 @@ img{max-width:100%;display:block;}
 <p>然后argue这个方程满足李普希兹条件+线性增长条件，所以解唯一</p>
 <blockquote>抄一下网上说的：全局利普希茨条件通过限制系数的变化率来防止不同路径的发散，而线性增长条件则通过限制漂移项和扩散项的量级来防止解在有限时间内趋于无穷大。 这些条件为金融和物理学中的随机过程建模奠定了基础，并为欧拉-马鲁亚马法等数值模拟方法提供了可靠性保障。 全局利普希茨条件通过限制系统动力学的变化速率来保证随机微分方程解的唯一性。 线性增长条件通过约束系统动力学的增长幅度来确保解不会在有限时间内“爆炸”至无穷。</blockquote>
 <blockquote>验证定义的一致性：对lnZ使用Ito公式<br>$$lnZ_t=lnZ_0+\int_0^t\frac{1}{Z_s}dZ_s+\frac{1}{2}\int_0^t-\frac{1}{Z_s^2}d\braket{Z}_s$$<br>如果Z满足上面关于X的方程（这里Z=X带入），我们就可以详细计算Z的一阶和阶变差。一阶变差对积分方程作微分可以得到两个部分；二阶变差只余布朗运动随机积分部分，也即$\sigma^2Z_s^2ds$，所以得到<br>$$lnZ_t=\int_0^t\frac{1}{Z_s}\mu Z_sds+\int_0^t\frac{1}{Z_s}\sigma Z_sdB_s-\frac{1}{2}\int_0^t\frac{1}{Z_s^2}\sigma^2Z_s^2ds=\mu t+\sigma B_t-\frac{\sigma^2}{2}t$$<br>与一开始的X表达式完全对上</blockquote>
-<h5>Hermite 鞅</h5>
+<h5 id="sec-34">Hermite 鞅</h5>
 <p>设 $u(t,x)$ 关于 $x,t$ 为多项式且满足</p>
 <p>$$</p>
 <p>\frac{\partial u}{\partial t} + \frac{1}{2}\frac{\partial^2 u}{\partial x^2} = 0.</p>
@@ -903,13 +960,13 @@ img{max-width:100%;display:block;}
 <p>B(t), B^2(t)-t, B^3(t)-3tB(t), B^4(t)-6tB^2(t)+3t^2,\dots.</p>
 <p>$$</p>
 <blockquote>期末考了证明$B^3-3tB$是鞅，当时还没学ito公式，我就直接把B拆成正态分布增量过程对他求期望，老师说也是对的</blockquote>
-<h4>半鞅</h4>
+<h4 id="sec-35">半鞅</h4>
 <p>连续随机过程 $X$ 为半鞅，如果它有分解 $X(t)=X(0)+M(t)+A(t),$</p>
 <p>其中 $M\in\mathscr{M}^{c,\text{loc}}$、$A$ 为<u>连续有限变差过程</u>以及 $X(0)\in\mathscr{F}_0$。</p>
 <p>$\mathscr{M}^{c,\text{loc}}$是连续局部鞅的意思，鞅是无限延伸的，局部鞅相当于需要引入一个任意的有限截止时间，无法无限延伸</p>
 <blockquote>称连续随机过程 $M=\{M(t):t\ge 0\}$ 为局部鞅，如果存在一个上升的停时列 $\{\tau_n:n\in\mathbb{N}_0\},\lim_{n\to\infty}\tau_n=\infty$，使得对任意的停止过程 $M^{\tau_n}=\{M(t\wedge\tau_n):t\ge 0\}$ 为鞅。我们用 $\mathscr{M}^{c,\text{loc}}$ 表示连续局部鞅全体。</blockquote>
 <p>其实就是鞅加上连续过程</p>
-<h5>半鞅Ito公式</h5>
+<h5 id="sec-36">半鞅Ito公式</h5>
 <p>设 $X=(X_1,\cdots,X_n)$ 为 $n$ 维连续半鞅, $f:\mathbb{R}^n\to\mathbb{R}$ 为 $n$ 元 $C^2$ 函数。则 $f(X)$ 仍为连续半鞅, 且</p>
 <p>$$</p>
 <p>\begin{aligned}</p>
@@ -925,7 +982,7 @@ img{max-width:100%;display:block;}
 <p>c_p \mathbb{E}\langle M,M\rangle_t^{\frac{p}{2}} \leqslant \mathbb{E}(M_t^*)^p \leqslant C_p \mathbb{E}\langle M,M\rangle_t^{\frac{p}{2}},</p>
 <p>$$</p>
 <p>其中 $c_p = (2p)^{-\frac{p}{2}}$ 及 $C_p = \left( \left(\frac{p}{p-1}\right)^p \frac{p(p-1)}{2} \right)^{\frac{p}{2}}.$</p>
-<h3 id="sec-3">随机微分方程（SDE）</h3>
+<h3 id="sec-37">随机微分方程（SDE）</h3>
 <p>SDE并不是薛定谔方程的简称噢</p>
 <p>引入：牛顿粒子在液体中同时受到阻力和布朗运动噪音作用：</p>
 <p>$$m\dot{v}(t) = -\beta v(t) + \dot{B}(t), \quad t \ge 0$$</p>
@@ -940,7 +997,7 @@ img{max-width:100%;display:block;}
 <p>它是一个 Gauss-Markov 过程，通常称之为 Langevin 方程或 OU 过程。</p>
 <p>高维SDE</p>
 <p>$$\mathrm{d}X^{(i)}(t) = b_i(t,X(t))\mathrm{d}t + \sum_{k=1}^{r} \sigma_{ik}(t,X(t))\mathrm{d}B^{(k)}(t),\quad 1 \le i \le d$$</p>
-<h4>强解</h4>
+<h4 id="sec-38">强解</h4>
 <p>定义 如果存在 $\mathscr{F}_t$ 适应过程 $\{X(t):t\ge 0\}$ 满足</p>
 <p>(i) $\mathbb{P}(X_0=\xi)=1$;</p>
 <p>(ii) 对任意的 $0\le t<\infty$ 及任意的 $1\le i\le d,1\le j\le r$, 有 $\mathbb{P}(\int_0^t(|b_i(s,X(s))|+\sigma_{ij}^2(s,X(s)))\mathrm{d}s<\infty)=1$; 及</p>
@@ -951,7 +1008,7 @@ img{max-width:100%;display:block;}
 <p>称 $X$ 为方程(9.17)的强解 (strong solution)。</p>
 <p>注 1.9.18. (i) 所谓强解就是初值 $\xi$ 及<u> Brown 运动轨道的泛函</u>；</p>
 <p>(ii) 通过取条件数学期望，我们可以把随机初值归结到从某个确定点 $\xi=x\in\mathbb{R}^d$。这时记相应的解为 $X^x(t)$。</p>
-<h5>强解唯一性定理</h5>
+<h5 id="sec-39">强解唯一性定理</h5>
 <p>定理 假设 $\sigma,b$ 满足全局 Lipschitz 条件和线性增长条件, 即存在常数 $K>0$, 对任意的 $t\ge 0,x,y\in\mathbb{R}^d$ 使得</p>
 <p>$$</p>
 <p>\|b(t,x)-b(t,y)\|+\|\sigma(t,x)-\sigma(t,y)\|\le K\|x-y\|;</p>
@@ -988,7 +1045,7 @@ img{max-width:100%;display:block;}
 <p>&= \left(1 - \frac{t}{T}\right)a + \frac{tb}{T} + (T - t)\int_0^t \frac{\mathrm{d}B_s}{T - s}.</p>
 <p>\end{aligned}</p>
 <p>$$</p>
-<h4>弱解</h4>
+<h4 id="sec-40">弱解</h4>
 <blockquote>金字塔的底，随机方程式的若解，无法成为闪光之枕头，永远被打一星之仓鼠（）</blockquote>
 <p>定义 假设 $(\Omega,\mathscr{F},\mathbb{P})$ 为概率空间, $\{\mathscr{F}_t:t\ge 0\}$ 为其上的一族 $\sigma$ 代数满足通常性条件。过程对 $(X,B)$ 是方程(9.17)的一个弱解, 如果它满足:</p>
 <p>(i) $X(t)$ 是 $\mathscr{F}_t$ 连续适应 $\mathbb{R}^d$ 值过程;</p>
@@ -996,11 +1053,11 @@ img{max-width:100%;display:block;}
 <p>(iii) 强解定义中 (ii) 及 (iii) 成立。</p>
 <p>与弱解有关的有两种唯一性: (i) 在同一概率空间 $(\Omega,\mathscr{F},\mathbb{P})$ 上任意两个弱解 $(X,B,\mathscr{F}_t)$、$(\tilde{X},B,\tilde{\mathscr{F}}_t)$ 满足 $\mathbb{P}(X_0=\tilde{X}_0)=1$, 均有 $X$ 与 $\tilde{X}$ 无区别, 即 $\mathbb{P}(X(t)=\tilde{X}(t);0\le t<\infty)=1$, 则称方程(9.17)具有轨道唯一性。(ii) 如果方程(9.17)任意两个弱解 $(\Omega,\mathscr{F},\mathbb{P}),(X,B,\mathscr{F}_t)$ 及 $(\tilde{\Omega},\tilde{\mathscr{F}},\tilde{\mathbb{P}}),(\tilde{X},\tilde{B},\tilde{\mathscr{F}}_t)$ 且满足相同的初始分布, 即 $\mathscr{L}(X(0))=\mathscr{L}(\tilde{X}(0))$, 则有 $X,\tilde{X}$ 分布相同, 我们称方程(9.17)具有分布唯一性。</p>
 <p>注意强解一定是弱解</p>
-<h4>Ito扩散过程</h4>
+<h4 id="sec-41">Ito扩散过程</h4>
 <p>$$dX(t) = b(X(t))dt + σ(X(t))dB(t), t ≥ s, X(s) = x$$</p>
 <p>$$X^x(h) = x + ∫_0^h b(X^x(v))dv + ∫₀^h σ(X^x(v))dB(v).$$</p>
 <p>是初值为x，初始时间s=0的解</p>
-<h4>无穷小生成元</h4>
+<h4 id="sec-42">无穷小生成元</h4>
 <p>现假设 $X$ 是马氏过程, $f$ 是状态空间 $\mathbb{R}^d$ 上的有界连续函数, 定义无穷小生成元算子 $\mathscr{A}$</p>
 <p>$$</p>
 <p>\mathscr{A} f(x)=\lim_{t \downarrow 0} \frac{\mathbb{E}(f(X(t))|X_0=x)-f(x)}{t},\quad x \in \mathbb{R}^d.</p>
@@ -1009,7 +1066,7 @@ img{max-width:100%;display:block;}
 <p>上述表达式也可以用转移算子Pt写作</p>
 <p>$$\mathscr{A} f(x)=\lim_{t \downarrow 0} \frac{P_tf(x)-f(x)}{t},\quad x \in \mathbb{R}^d$$</p>
 <p>下面我们来看看常见过程的无穷小生成元都是什么</p>
-<h5>布朗运动</h5>
+<h5 id="sec-43">布朗运动</h5>
 <p>Brown 运动的无穷小生成元在 $C^2$ 类上 $\mathscr{A} = \frac{1}{2}\Delta$ 重合。</p>
 <p>设 $X=B$ 为一维 Brown 运动, $f(x)\in C^2(\mathbb{R}^d)$。</p>
 <p>$$</p>
@@ -1028,7 +1085,7 @@ img{max-width:100%;display:block;}
 <p>R(t) = \int_{\mathbb{R}^d} \frac{1}{(2\pi)^{d/2}} e^{-\frac{u^2}{2}} \frac{1}{2} \sum_{i,j} \left| \frac{\partial^2 f(\theta_x)}{\partial u_i \partial u_j} - \frac{\partial^2 f(x)}{\partial u_i \partial u_j} \right| u_i u_j du.</p>
 <p>$$</p>
 <p>显然 $R(t)$ 一致地收敛到 0。因此 Brown 运动的无穷小生成元在 $C^2$ 类上 $\mathscr{A} = \frac{1}{2}\Delta$ 重合。</p>
-<h5>泊松过程</h5>
+<h5 id="sec-44">泊松过程</h5>
 <p>生成元是参数为 $\lambda$ 的离散差分算子</p>
 <p>再设 $X=N(t)$ 为参数为 $\lambda>0$ 的 Poisson 过程, $f$ 为 $\mathbb{N}_0$ 上的有界函数。此时有</p>
 <p>$$</p>
@@ -1041,7 +1098,7 @@ img{max-width:100%;display:block;}
 <p>\end{aligned}</p>
 <p>$$</p>
 <p>其中 $Q$ 为泊松过程对应的$Q$矩阵, 是参数为 $\lambda$ 的离散差分算子。</p>
-<h5>扩散过程</h5>
+<h5 id="sec-45">扩散过程</h5>
 <p>无穷小生成元是一个组合出来的微分算子A</p>
 <p>下面介绍由时齐随机微分方程</p>
 <p>$$</p>
@@ -1062,7 +1119,7 @@ img{max-width:100%;display:block;}
 <p>\lim_{t\to 0} \frac{\mathbb{E}_x[f(X(t))-f(x)]}{t} = \lim_{t\to 0} \mathbb{E}_x\left[ \frac{1}{t}\int_0^t (Af(X(s))) ds \right].</p>
 <p>$$</p>
 <p>这样, 在 $C_K^2$ 上, $\mathscr{A}f=Af$。</p>
-<h4>SDE向前向后方程</h4>
+<h4 id="sec-46">SDE向前向后方程</h4>
 <p>依旧是Ito扩散过程</p>
 <p>设 $f \in C_K^2$，定义二元函数</p>
 <p>$$</p>
@@ -1072,7 +1129,7 @@ img{max-width:100%;display:block;}
 <p>$$\frac{\partial u(t, x)}{\partial t} = \mathscr{A} u(t, x),\quad t>0, x \in \mathbb{R}^d $$</p>
 <p>$$u(0, x) = f(x),\quad x \in \mathbb{R}^d$$</p>
 <p>反之，如果有界函数 $w(t, x) \in C^{1,2}(\mathbb{R}^+ \times \mathbb{R}^d)$ 满足 (9.26) 及 (9.27)，则 $w(t, x) = u(t, x)$。</p>
-<h5>Kolmogorov向后方程</h5>
+<h5 id="sec-47">Kolmogorov向后方程</h5>
 <p>设扩散过程 $X$ 有转移密度函数 $p(t,x,y)$, 则 $u(t,x) = \mathbb{E}_x(f(X(t))) = \int_{\mathbb{R}^d} f(y)p(t,x,y)\mathrm{d}y$。由(9.26)得</p>
 <p>$$</p>
 <p>\begin{aligned}</p>
@@ -1083,7 +1140,7 @@ img{max-width:100%;display:block;}
 <p>由于 $f$ 的任意性, 所以有如下关于转移密度的 Kolmogorov 向后方程</p>
 <p>$$\frac{\partial p(t,x,y)}{\partial t} = \mathscr{A}p(t,x,y),\quad t\ge 0,\ x\in\mathbb{R}^d,\ y\in\mathbb{R}^d.$$</p>
 <p>这个方程合理的初始条件为 Dirac 函数 $p(0,x,y)=\delta(x-y)$, 我们称之为向后是因为方程右边算子 $\mathscr{A}$ 作用于起始位置变量 $x$。</p>
-<h5>Fokker-Planck向前方程</h5>
+<h5 id="sec-48">Fokker-Planck向前方程</h5>
 <p>另外一方面, 设 $f \in C_K^2$, 使用 Itô 公式有</p>
 <p>$$</p>
 <p>\begin{aligned}</p>
@@ -1102,7 +1159,7 @@ img{max-width:100%;display:block;}
 <p>$$</p>
 <p>其初始条件仍然为 Dirac 函数 $\delta(x - y)$, 称之为向前方程是因为算子 $\mathscr{A}^*$ 作用于将来变量 $y$。</p>
 <p>显然在 Brown 运动情形 $\mathscr{A} = \mathscr{A}^* = \frac{1}{2}\Delta$。</p>
-<h5>扩散方程不变测度</h5>
+<h5 id="sec-49">扩散方程不变测度</h5>
 <p>记扩散过程的初始分布为 $\mu$, 则过程任意时刻的分布密度</p>
 <p>$$</p>
 <p>P(t,y) = \int_{\mathbb{R}} p(t,x,y)\mu(\mathrm{d}x)</p>
@@ -1132,7 +1189,7 @@ img{max-width:100%;display:block;}
 <p>$$</p>
 <p>我们得到 Boltzmann 测度, 或者 Gibbs 测度。</p>
 <p>所以扩散过程的稳定分布就是Boltzmann测度。在统计物理正则系综中，各个能级之间视作相互扩散，最后稳定下来的分布就是这样正比于$e^{-E/k_BT}$的Boltzmann测度</p>
-<h4>Feynnman-Kac公式</h4>
+<h4 id="sec-50">Feynnman-Kac公式</h4>
 <p>描述了稍微一般的热方程的解</p>
 <p>首先考虑一个很常见的关于dt和dB的随机过程</p>
 <p>$$\mathrm{d}X(t) = b(t,X(t))\mathrm{d}t + \sigma(t,X(t))\mathrm{d}B(t)$$</p>
@@ -1164,7 +1221,7 @@ img{max-width:100%;display:block;}
 <p>$$</p>
 <blockquote>可以看出这个解就是根据$E(f(X(T)))$考虑了非齐次项魔改而成</blockquote>
 <p>证明略</p>
-<h4>Drichlet方程</h4>
+<h4 id="sec-51">Drichlet方程</h4>
 <p>现设 $D$ 是 $\mathbb{R}^d$ 的开集，$f:\partial D\to\mathbb{R}$ 是一个给定的连续函数，所谓 Dirichlet 问题 $(D,f)$，就是希望能找到一个连续函数 $u:\bar{D}\to\mathbb{R}$ 使得它在 $D$ 内调和且在边界上取值 $f$，即</p>
 <p>$$\Delta u(x)=0; \quad x\in $$</p>
 <p>$$u(x)=f(x); \quad x\in\partial D$$</p>
@@ -1172,7 +1229,7 @@ img{max-width:100%;display:block;}
 <p>在适当的条件下，解 $u$ 有一个概率表示：令 $\tau_D=\inf\{t\ge0:B(t)\notin D\}$，其中 $B$ 为 $d$ 维 Brown 运动。类似热方程，对 $x\in\bar{D}$，定义</p>
 <p>$$u(x)=\mathbb{E}_x[f(B(\tau_D))]$$</p>
 <p>当然，这里要假设 $\mathbb{E}_x|f(B(\tau_D))|<\infty$。</p>
-<h3 id="sec-4">Ornstein-Uhlenbeck 半群</h3>
+<h3 id="sec-52">Ornstein-Uhlenbeck 半群</h3>
 <p>Ornstein-Uhlenbeck 半群算子由下式给出</p>
 <p>$$</p>
 <p>T_t f(x) = \int_{\mathbb{R}^n} f\left(e^{-t}x + \sqrt{1 - e^{-2t}}y\right)\gamma(\mathrm{d}y), \quad \forall f \in b\mathscr{B}(\mathbb{R}^n), t \leq 0.</p>
@@ -1202,7 +1259,7 @@ img{max-width:100%;display:block;}
 <p>$$</p>
 <p>由庞加莱不等式可知OU随机过程的收敛速度是指数级别的</p>
 <p>$$||T_tf-\gamma_nf||^2\le e^{-2t}Var_\gamma(f)$$</p>
-<h3 id="sec-5">期权定价</h3>
+<h3 id="sec-53">期权定价</h3>
 <p>假设市场里有 $d$ 种风险资产（股票）$S=(S_1,\cdots,S_d)$ 以及一种无风险资产 $S_0$（比如说什么银行存款啊国债啊什么的，增长率是确定的r），它们在时刻 $t$，$(0\le t\le T,T$ 固定）的价格分别满足方程</p>
 <p>$$\mathrm{d}S_i(t)=b_i(t)S_i(t)\mathrm{d}t+S_i(t)\sum_{j=1}^d\sigma_{ij}(t)\mathrm{d}B^{(j)}(t),\quad 1\le i\le d$$</p>
 <p>以及</p>
@@ -1270,7 +1327,7 @@ img{max-width:100%;display:block;}
 <p>&=-rc(t,S(t))+c_t(t,S(t))+\alpha S(t)c_x(t,S(t))+\frac{1}{2}\sigma^2S^2(t)c_{xx}(t,S(t))</p>
 <p>\end{aligned}</p>
 <p>$$</p>
-<h4>Black-Sholes-Merton 公式</h4>
+<h4 id="sec-54">Black-Sholes-Merton 公式</h4>
 <p>因为上式对任意的 $S(t)$ 均成立，所以有如下的 Black-Sholes-Merton 公式</p>
 <p>$$</p>
 <p>c_t(t,x)=-rxc_x(t,x)-\frac{1}{2}\sigma^2x^2c_{xx}(t,x)+rc(t,x)</p>
@@ -1279,7 +1336,7 @@ img{max-width:100%;display:block;}
 <p>$$</p>
 <p>c(T,x)=(x-K)^+.</p>
 <p>$$</p>
-<h3 id="sec-6">时空噪声</h3>
+<h3 id="sec-55">时空噪声</h3>
 <p>在前面的布朗运动都是时间上的随机性，现在将时间随机性拓展到时空随机性，这个就叫做噪声</p>
 <p>两个不相交区域如果是互相独立的话那么就称作“白”噪声，否则为彩噪声</p>
 <p>等距高斯过程： 定义在概率空间 $(\Omega,\mathscr{F},\mathbb{P})$ 以 $\mathscr{H}$ 为参数的等距高斯过程 $W$ 是从 $\mathscr{H}$ 到 $L^2(\Omega)$ 的线性映射，满足对任意的 $h,g\in\mathscr{H}$ 有</p>
@@ -1338,7 +1395,7 @@ img{max-width:100%;display:block;}
 <p>是 $\mathcal{F}_t = \sigma\{\dot{W}(s,x), s \leq t, x \in \mathbb{R}^d\}$ 鞅，其平方变差为</p>
 <p>$$\langle W(f) \rangle_t = \int_0^s \int f^2(s,x) dx ds.$$</p>
 <p>取 $f = \mathbb{1}_{[0,t]} f_1(x)$，则$W(f) \sim N(0, |f_1|_0^2)$为一维布朗运动。</p>
-<h4>线性加法噪声热方程</h4>
+<h4 id="sec-56">线性加法噪声热方程</h4>
 <p>$$</p>
 <p>\begin{cases}</p>
 <p>v_t = v_{xx} - v + \dot{w}, & 0<x<\pi,t>0,\\</p>
@@ -1391,7 +1448,7 @@ img{max-width:100%;display:block;}
 <p>h(t,x) = v\log Z(t,x)</p>
 <p>$$</p>
 <p>建立二者之间的关系。</p>
-<h4>交互粒子系统</h4>
+<h4 id="sec-57">交互粒子系统</h4>
 <p>反对称排他过程（WAESP）(费米子)</p>
 <ul>
 <li>构型空间：</li>
@@ -1454,7 +1511,7 @@ img{max-width:100%;display:block;}
 <p>\end{cases}</p>
 <p>$$</p>
 <p>粒子的跳跃行为的反映：$\zeta_t(x)$ 在 $x$ 处的值由极大变为极小。</p>
-<h3 id="sec-7">习题</h3>
+<h3 id="sec-58">习题</h3>
 <p>证明二维随机向量 $\left(B(t), \max_{0 \leqslant s \leqslant t} B(s)\right)$ 的联合密度函数为</p>
 <p>$$f(x, y) = \left(\frac{2}{\pi t^3}\right)^{\frac{1}{2}} (2y - x) e^{-\frac{(2y - x)^2}{2t}}, \quad t>0,\, y>0,\, y \geqslant x.$$</p>
 <p>解：为方便起见记$M(x)=\max_{0 \leqslant s \leqslant t} B(s)$为布朗运动最高到达点</p>
@@ -1478,7 +1535,7 @@ img{max-width:100%;display:block;}
 <p>$$= \frac{2}{\sqrt{2\pi t}} \cdot \frac{2y-x}{t} \cdot \mathbf{e}^{-\frac{(2y-x)^2}{2t}}$$</p>
 <p>将系数合并，即可得到目标结论：</p>
 <p>$$f(x,y) = \left(\frac{2}{\pi t^3}\right)^{\frac{1}{2}} (2y - x)\mathbf{e}^{-\frac{(2y-x)^2}{2t}}, \quad t > 0, y > 0, y \ge x.$$</p>
-<h4>期末考(大四专供)</h4>
+<h4 id="sec-59">期末考(大四专供)</h4>
 <p>考察范围：三道判断常返性习题（在上一篇的末尾）+求布朗运动与最大值的联合分布（反射原理，就在上面）+离散马氏过程已知Q矩阵求P矩阵（给他exp上去就行了，物理系直接乱杀）+判断鞅（在上个信息流下取期望$\mathbb{E}(X_{n+1} | \mathcal{F}_n) = X_n$，本篇开头有很多例子）</p>
 <hr>
 <p>本科最后一门课程，已完结</p>

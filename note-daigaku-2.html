@@ -43,6 +43,10 @@ img{max-width:100%;display:block;}
 .toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
 .toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
 .toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
 .article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
 .article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
 .article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
@@ -51,7 +55,7 @@ img{max-width:100%;display:block;}
 .article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
 .article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
 .article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
-.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
 .article-content p{margin-bottom:14px;}
 .article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
 .article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
@@ -79,17 +83,42 @@ img{max-width:100%;display:block;}
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
     <ul class="toc-list">
+      <li class="toc-main"><a href="#article-title">（夏入）大学院入試ノート</a></li>
       <li><a href="#sec-0">力学</a></li>
-      <li><a href="#sec-1">電磁気学</a></li>
-      <li><a href="#sec-2">量子力学</a></li>
-      <li><a href="#sec-3">統計力学</a></li>
-      <li><a href="#sec-4">物理数学</a></li>
-      <li><a href="#sec-5">过去问</a></li>
+      <li class="sub"><a href="#sec-1">看书</a></li>
+      <li class="sub2"><a href="#sec-2">一 力学准备</a></li>
+      <li class="sub2"><a href="#sec-3">二变分</a></li>
+      <li class="sub2"><a href="#sec-4">三 假想仕事原理</a></li>
+      <li class="sub2"><a href="#sec-5">四 拉格朗日力学</a></li>
+      <li class="sub2"><a href="#sec-6">五 拉格朗日力学发展</a></li>
+      <li class="sub2"><a href="#sec-7">六 振动</a></li>
+      <li class="sub2"><a href="#sec-8">七 刚体 八 对称性</a></li>
+      <li class="sub2"><a href="#sec-9">九 哈密顿力学</a></li>
+      <li class="sub2"><a href="#sec-10">十 正则变换</a></li>
+      <li class="sub2"><a href="#sec-11">十一 哈密顿-雅可比方程</a></li>
+      <li class="sub"><a href="#sec-12">写题</a></li>
+      <li class="sub2"><a href="#sec-13">2026</a></li>
+      <li class="sub2"><a href="#sec-14">2025</a></li>
+      <li><a href="#sec-15">電磁気学</a></li>
+      <li class="sub"><a href="#sec-16">看书</a></li>
+      <li class="sub2"><a href="#sec-17">一二章 麦克斯韦方程组</a></li>
+      <li class="sub2"><a href="#sec-18">三 静止介质麦克斯韦</a></li>
+      <li class="sub2"><a href="#sec-19">四 解静电场</a></li>
+      <li class="sub2"><a href="#sec-20">五 稳恒电流</a></li>
+      <li class="sub2"><a href="#sec-21">六 静磁场</a></li>
+      <li class="sub2"><a href="#sec-22">七 交流电</a></li>
+      <li><a href="#sec-23">量子力学</a></li>
+      <li><a href="#sec-24">統計力学</a></li>
+      <li><a href="#sec-25">物理数学</a></li>
+      <li><a href="#sec-26">过去问</a></li>
+      <li class="sub"><a href="#sec-27">2024</a></li>
+      <li class="sub"><a href="#sec-28">2025</a></li>
+      <li class="sub"><a href="#sec-29">2020</a></li>
     </ul>
   </aside>
   <article class="article-body">
     <img class="article-cover" src="assets/sanya.jpg" alt="（夏入）大学院入試ノート">
-    <h1 class="article-title">（夏入）大学院入試ノート</h1>
+    <h1 class="article-title" id="article-title">（夏入）大学院入試ノート</h1>
     <div class="article-meta">
       <span><i class="far fa-calendar"></i> 2026-03-21</span>
       <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">物理</span>
@@ -106,8 +135,8 @@ img{max-width:100%;display:block;}
 <p>『解析力学』（畑浩之）是网上经验贴推荐的，据说“院試に直結する内容が多い”，我还有点想看，但是这本网上没有电子版资源，需要托人扫描，想看请务必联系我</p>
 <p>過去問では剛体の運動（転倒・転がり）、中心力問題、連成振動が頻出。これらの典型問題は自力で最後まで計算できるようにしておくのが重要です。</p>
 <p>力学其实是四大力学里最不受重视的一门了，如果是出三道题的话大概率不会出单独的力学，然后做真题看来修考更重视的是对实际问题的解，比如中心力、刚体转动、小振动等，风格很像高中物理（形式推导很少）</p>
-<h4>看书</h4>
-<h5>一 力学准备</h5>
+<h4 id="sec-1">看书</h4>
+<h5 id="sec-2">一 力学准备</h5>
 <p>球坐标基矢微分关系(画图，立体几何问题)</p>
 <p>$$\begin{aligned}</p>
 <p>\mathrm{d} \vec{\mathbf{e}}_r &= \mathrm{d} \theta \vec{\mathbf{e}}_\theta + \mathrm{d} \phi \sin \theta \vec{\mathbf{e}}_\phi \\</p>
@@ -121,68 +150,68 @@ img{max-width:100%;display:block;}
 <p>&\quad + \left( r\ddot{\phi} \sin\theta + 2\dot{r}\dot{\phi} \sin\theta + 2r\dot{\theta}\dot{\phi} \cos\theta \right) \vec{\mathbf{e}}_\phi \\</p>
 <p>\vec{a} &= \left( \ddot{\rho} - \rho(\dot{\phi})^2 \right) \vec{\mathbf{e}}_\rho + \left( \rho\ddot{\phi} + 2\dot{\rho}\dot{\phi} \right) \vec{\mathbf{e}}_\phi + \ddot{z} \vec{\mathbf{e}}_z</p>
 <p>\end{align}$$</p>
-<h5>二变分</h5>
-<h5>三 假想仕事原理</h5>
-<h5>四 拉格朗日力学</h5>
-<h5>五 拉格朗日力学发展</h5>
-<h5>六 振动</h5>
-<h5>七 刚体 八 对称性</h5>
-<h5>九 哈密顿力学</h5>
-<h5>十 正则变换</h5>
-<h5>十一 哈密顿-雅可比方程</h5>
-<h4>写题</h4>
-<h5>2026</h5>
+<h5 id="sec-3">二变分</h5>
+<h5 id="sec-4">三 假想仕事原理</h5>
+<h5 id="sec-5">四 拉格朗日力学</h5>
+<h5 id="sec-6">五 拉格朗日力学发展</h5>
+<h5 id="sec-7">六 振动</h5>
+<h5 id="sec-8">七 刚体 八 对称性</h5>
+<h5 id="sec-9">九 哈密顿力学</h5>
+<h5 id="sec-10">十 正则变换</h5>
+<h5 id="sec-11">十一 哈密顿-雅可比方程</h5>
+<h4 id="sec-12">写题</h4>
+<h5 id="sec-13">2026</h5>
 <p>这题是对称陀螺的简化版，自转远大于进动，所以有两个关键近似</p>
 <ol>
 <li>陀螺角动量完全由自转构成（进动只有改变自转轴方向的作用）</li>
 <li>陀螺每个点上收到的力矩一致</li>
 </ol>
 <p>顺便把一般陀螺/刚体也复习了一下，之前解陀螺是写动能->广义动量->哈密顿量->循环坐标动量与哈密顿量守恒 这样一步步化简模型</p>
-<h5>2025</h5>
+<h5 id="sec-14">2025</h5>
 <p>看着很吓人的，差点以为要自己解，其实就是把ansartz往里面酷酷带就好了，最后一问也很经典。题目里说的是与墙壁夹角，图里给的是与床夹角，我按图做的。</p>
-<h3 id="sec-1">電磁気学</h3>
+<h3 id="sec-15">電磁気学</h3>
 <p>参考书目：『理論電磁気学』（砂川重信） — 日本語でしっかり学びたいときのメイン教材。理論的な記述が厳密で院試向き</p>
 <p>東大の電磁気は鏡像法、多重極展開、電磁誘導、ポインティングベクトルあたりが定番。該当章を3回読めば、過去問の大半に対応できます。</p>
 <p>第四章静电场要好好练习一下</p>
 <p>另外注意辐射内容，我在初次学习时辐射部分不是重点，但是在冬入时出现了一题较有难度的辐射！</p>
-<h4>看书</h4>
-<h5>一二章 麦克斯韦方程组</h5>
+<h4 id="sec-16">看书</h4>
+<h5 id="sec-17">一二章 麦克斯韦方程组</h5>
 <p>不是这书怎么不喜欢写汉字阿，看累了</p>
-<h5>三 静止介质麦克斯韦</h5>
+<h5 id="sec-18">三 静止介质麦克斯韦</h5>
 <p>1z</p>
-<h5>四 解静电场</h5>
+<h5 id="sec-19">四 解静电场</h5>
 <p>格林相反定理是新的，然后解拉普拉斯方程也是锻炼了一把</p>
-<h5>五 稳恒电流</h5>
+<h5 id="sec-20">五 稳恒电流</h5>
 <p>这章比较放松。D和J的对偶性或者C和R的对偶性是新的。焦耳热最小定理和前面的差不多一样</p>
-<h5>六 静磁场</h5>
+<h5 id="sec-21">六 静磁场</h5>
 <p>更轻松了，不过不要忘记磁偶极子势$\phi=\frac{1}{4\pi}\frac{\vec{m}·\hat{r}}{r^2}$</p>
 <p>边界条件H切向连续对应φ连续，B法向连续对应$\mu_0H-M$法向连续</p>
-<h5>七 交流电</h5>
+<h5 id="sec-22">七 交流电</h5>
 <p>这章很初等，电感是$\frac{\mu_0}{4\pi}\oint\oint dx_1dx_2/|x_1-x_2|$，下面是一次方</p>
 <p>积不出来很正常，这个形式本来就很容易碰到椭圆积分</p>
-<h3 id="sec-2">量子力学</h3>
+<h3 id="sec-23">量子力学</h3>
 <p>参考书目：Sakurai《现代量子力学》</p>
 <p>上册：これ一冊を徹底的にやり込んだ。ブラケット記法と演算子形式に慣れることが最優先</p>
 <p>下册：摂動論・散乱理論・対称性。院試では上巻の範囲が中心だが、摂動論は下巻から頻出</p>
 <p>以及格里菲斯量子力学</p>
 <p>理物の量子力学は「シュレーディンガー方程式を解く」よりも「演算子の代数的な計算」が重視される傾向にあります。交換関係、昇降演算子、摂動論、角運動量の合成あたりは手が自動で動くレベルまでやりました。</p>
-<h3 id="sec-3">統計力学</h3>
+<h3 id="sec-24">統計力学</h3>
 <p>参考书目：『統計力学 I』（田崎晴明）</p>
 <p>上册：論理展開が非常に厳密で、院試の記述対策として最適</p>
 <p>下册：量子統計・相転移を扱う。特にフェルミ分布・ボース分布・黒体放射は必読</p>
 <p>热统作为四大力学中的最终boss，在修考中也是最有重量级的存在，它可以覆盖相当多知识点，所以应该分配较多的时间仔细查漏补缺，把自己学的也都看一遍</p>
 <p>理物では状態密度の導出からの低温展開が頻出。田崎本のIIを丁寧に読み込むことで、これらの問題に対する「記述の型」が身につきました。</p>
-<h3 id="sec-4">物理数学</h3>
+<h3 id="sec-25">物理数学</h3>
 <p>物理数学は独立した科目というより、他の科目を解くための道具です。ただし東大理物の第4問は物理数学が独立して出題されるので、対策は必須。</p>
 <p>顺便说一句广域科学里专门有一道数学可以选择性回答（还没研究过）</p>
 <p>『物理数学の直観的方法（普及版）』（長沼伸一郎） — フーリエ変換や複素積分のイメージを掴むのに最適。計算に入る前に「何をやっているか」を理解できる</p>
 <p>『詳解 物理応用数学演習』（後藤憲一ほか） — 演習量を積みたいときに。複素積分と特殊関数の章を重点的にやった</p>
 <p>留数定理、フーリエ変換、行列の指数関数、ガウス積分の変種あたりは頻出なので、解法パターンとして身体に叩き込むのが効率的です。</p>
-<h3 id="sec-5">过去问</h3>
+<h3 id="sec-26">过去问</h3>
 <p>广域科学</p>
-<h4>2024</h4>
-<h4>2025</h4>
-<h4>2020</h4>
+<h4 id="sec-27">2024</h4>
+<h4 id="sec-28">2025</h4>
+<h4 id="sec-29">2020</h4>
     </div>
   </article>
 </div>

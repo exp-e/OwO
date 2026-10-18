@@ -43,6 +43,10 @@ img{max-width:100%;display:block;}
 .toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
 .toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
 .toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
 .article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
 .article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
 .article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
@@ -51,7 +55,7 @@ img{max-width:100%;display:block;}
 .article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
 .article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
 .article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
-.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
 .article-content p{margin-bottom:14px;}
 .article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
 .article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
@@ -79,13 +83,46 @@ img{max-width:100%;display:block;}
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
     <ul class="toc-list">
+      <li class="toc-main"><a href="#article-title">随机过程</a></li>
       <li><a href="#sec-0">离散时间马氏链</a></li>
-      <li><a href="#sec-1">连续时间马尔科夫过程</a></li>
+      <li class="sub"><a href="#sec-1">强马氏性</a></li>
+      <li class="sub"><a href="#sec-2">平稳分布</a></li>
+      <li class="sub"><a href="#sec-3">Cesaro极限</a></li>
+      <li class="sub"><a href="#sec-4">平均到达时间</a></li>
+      <li class="sub"><a href="#sec-5">细致平衡条件</a></li>
+      <li class="sub"><a href="#sec-6">马氏链极限定律</a></li>
+      <li class="sub"><a href="#sec-7">马氏链周期</a></li>
+      <li><a href="#sec-8">连续时间马尔科夫过程</a></li>
+      <li class="sub"><a href="#sec-9">CK方程</a></li>
+      <li class="sub"><a href="#sec-10">停时</a></li>
+      <li class="sub"><a href="#sec-11">Levy过程</a></li>
+      <li class="sub"><a href="#sec-12">Poisson过程</a></li>
+      <li class="sub2"><a href="#sec-13">定义一</a></li>
+      <li class="sub2"><a href="#sec-14">定义二</a></li>
+      <li class="sub2"><a href="#sec-15">定义三</a></li>
+      <li class="sub2"><a href="#sec-16">性质</a></li>
+      <li class="sub"><a href="#sec-17">向前向后方程</a></li>
+      <li class="sub2"><a href="#sec-18">转移半群导数</a></li>
+      <li class="sub2"><a href="#sec-19">Kolmogorov向后方程</a></li>
+      <li class="sub2"><a href="#sec-20">Kolmogorov向前方程（Fokker-Planck方程）</a></li>
+      <li class="sub2"><a href="#sec-21">转移矩阵展开</a></li>
+      <li class="sub2"><a href="#sec-22">生灭过程Q矩阵</a></li>
+      <li class="sub2"><a href="#sec-23">纯生过程Q矩阵</a></li>
+      <li class="sub"><a href="#sec-24">Q矩阵概率意义</a></li>
+      <li class="sub2"><a href="#sec-25">向前向后方程积分意义</a></li>
+      <li class="sub"><a href="#sec-26">Kolmogorov全局微分性质</a></li>
+      <li class="sub"><a href="#sec-27">连续时间常返与暂留</a></li>
+      <li class="sub"><a href="#sec-28">连续时间不变测度</a></li>
+      <li class="sub"><a href="#sec-29">马氏链习题</a></li>
+      <li class="sub2"><a href="#sec-30">1 Poisson过程首跳</a></li>
+      <li class="sub2"><a href="#sec-31">2 判断离散时间随机游走常返性</a></li>
+      <li class="sub2"><a href="#sec-32">3 递推求解返回概率</a></li>
+      <li class="sub2"><a href="#sec-33">4 非对称随机游走反射原理</a></li>
     </ul>
   </aside>
   <article class="article-body">
     <img class="article-cover" src="assets/6312.jpg" alt="随机过程">
-    <h1 class="article-title">随机过程</h1>
+    <h1 class="article-title" id="article-title">随机过程</h1>
     <div class="article-meta">
       <span><i class="far fa-calendar"></i> 2026-03-17</span>
       <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">数学</span>
@@ -226,7 +263,7 @@ img{max-width:100%;display:block;}
 <p>使用上述定理来判断该马氏链是否常返，取$z_n=n$，计算转移矩阵作用后的期望（这就是泊松分布的次数期望）</p>
 <p>$$\sum P_{ik}z_k=\sum_{k=0}^\infty\frac{i^k}{k!}ke^{-i}=i=z_i$$</p>
 <p>（提一个i出来继续使用e^i的泰勒展开）满足定理条件，故马氏链常返</p>
-<h4>强马氏性</h4>
+<h4 id="sec-1">强马氏性</h4>
 <p>本节很多东西讲义里没写，所以参考《随机过程导论》 (陈木法)</p>
 <p>###### 停时</p>
 <p>前情提要：$\mathscr{F}$是概率空间中的事件域（σ代数），也就是样本空间所有可测的子集组成的集合</p>
@@ -287,7 +324,7 @@ img{max-width:100%;display:block;}
 <p>我们直接一个把φ满足的二次方程对s求微分，最后反解出$\frac{d\phi}{ds}|_{s=1}$，得到了</p>
 <p>$$E_1(H_0)=\frac{1}{q-p}$$</p>
 <p>检验一下：向左走概率q越大，平均到达步数越小，没问题</p>
-<h4>平稳分布</h4>
+<h4 id="sec-2">平稳分布</h4>
 <p>非负向量$\pi$满足$\pi=\pi P$（特征值为1的左特征向量），则称作马氏链P的不变测度；若$\pi$还是概率向量（归一），则称之为P的平稳分布</p>
 <blockquote>为什么P一定会有左特征向量呢，据说是因为P一定有右特征向量1，然后因为佩龙-Frobenius定理，所以P一定有左特征向量</blockquote>
 <p>这个也可以看作马氏链收敛的最终状态分布。</p>
@@ -323,7 +360,7 @@ img{max-width:100%;display:block;}
 <p>\end{pmatrix}$$</p>
 <p>这分为三部分，第一部分是只出不进的0，第二部分是123（独立），第三部分是45（独立），所以平稳分布即为第二部分和第三部分平稳分布的凸组合</p>
 <p>$$\{0, 2\alpha/5, \alpha/5, 2\alpha/5, 3\beta/7, 4\beta/7\}$$</p>
-<h4>Cesaro极限</h4>
+<h4 id="sec-3">Cesaro极限</h4>
 <p>你永远打不过Kscerato</p>
 <p>起因：不是所有马氏链都有极限$P^\infty$存在，例如两点之间以1的概率横跳，他就没有极限，所以我们引入了一种较弱的极限</p>
 <p>**马氏链弱遍历定理**：P是马氏链转移矩阵，令</p>
@@ -371,7 +408,7 @@ img{max-width:100%;display:block;}
 <p>3需要证明$\pi$是归一且唯一的</p>
 <p>归一：$1\pi=L=L^2=(1\pi)(1\pi)\Rightarrow\sum_i\pi_i=1$</p>
 <p>唯一：假设$\rho$也是P的不变分布，那么$\rho P=\rho$，继续有界收敛$\rho L=\rho\Rightarrow\rho=\rho 1\pi=\pi$，唯一</p>
-<h4>平均到达时间</h4>
+<h4 id="sec-4">平均到达时间</h4>
 <p>设从i首次到j的平均到达时间为</p>
 <p>$$m_{ij}=E_i(\tau_j)=\sum_{n=1}^\infty nf_{ij}$$</p>
 <p>不可约常返必要条件：$j\in S$固定则$m_{ij}$是下面方程最小非负解</p>
@@ -441,7 +478,7 @@ img{max-width:100%;display:block;}
 <p>k=i时</p>
 <p>$$(u P)_i = \sum_{n=0}^\infty \sum_j \bar{P}_n(i, j) P_{j i} = \sum_{n=0}^\infty P_i(\tau_i = n + 1) = 1 = \mathbf{e}_{i i} = u_i$$</p>
 <p>不可约常返马氏链在不计常数因子意义下不变测度唯一的证明省略，在新版讲义P42</p>
-<h4>细致平衡条件</h4>
+<h4 id="sec-5">细致平衡条件</h4>
 <p>$\pi_iP_{ij}=\pi_j P_{ji}$对任何状态ij成立，这也就是说从i出发到j的概率流恰好等于j出发到i的概率流</p>
 <p>例：之前的生灭链</p>
 <p>$$\pi_0=1\quad \pi_i=\frac{p_0p_1...p_{i-1}}{q_1q_2...q_i}$$</p>
@@ -496,7 +533,7 @@ img{max-width:100%;display:block;}
 <p>$$\sum_{k \in \mathscr{S}} P_{0 k} z_{k}<\infty .$$</p>
 <p>说明马氏链正常返</p>
 <p>进一步的，我们可以证明正常返的充要条件是$\mu<1$，在这里就不证了</p>
-<h4>马氏链极限定律</h4>
+<h4 id="sec-6">马氏链极限定律</h4>
 <blockquote>中心极限定律：多个iid变量的和<br>$$\frac{1}{\sqrt{n}\sigma}\sum(\xi_i-\mu)\sim N(0,1)$$</blockquote>
 <p>但是在马氏链乍一看没有独立随机变量，不过马氏链有“无记忆性”，把马氏链的过程分成一节一节的，每一节都像是独立同分布</p>
 <p>定义$\tau_i(n)$是第n次到位置i的步数，接下来可以定义两次回归的时间间隔</p>
@@ -608,7 +645,7 @@ img{max-width:100%;display:block;}
 <p>另一方面，到达次数均值可以写作各次到达概率的和，也即</p>
 <p>$$\frac{1}{n}\sum_{m=1}^n(P^m)_{ji}\to\frac{f_{ji}}{E_i(\tau_i)}$$</p>
 <p>完成了对弱遍历定理的证明，表明P的Cesaro极限收敛，但是由于周期性它本身可能不收敛。这个式子告诉我们Cesaro极限求和的意义也就是在计算回归次数均值，每次回归事件都是独立的，所以由大数定理可以给出极限。</p>
-<h4>马氏链周期</h4>
+<h4 id="sec-7">马氏链周期</h4>
 <p>令$D_i=\{n\ge1,(P^n)_{ii}>0\}$以及$d_i$是$D_i$的最大公约数，称$d_i$为状态i的周期，如果$d_i=1$则i为非周期</p>
 <blockquote>这个就是算的从i出发重返i的步数是“周期”的整数倍</blockquote>
 <p>互通的状态周期相同</p>
@@ -656,11 +693,11 @@ img{max-width:100%;display:block;}
 <blockquote>这个可能会有点反直觉，因为明明平均有一个后代，但是却100%会灭绝。举个例子比如说下面左图的1/4,1/2,1/4，他就是灭绝概率1的</blockquote>
 <p>如果均值大于1，这说明在1这一点斜率大于一，母函数从下往上交到对角线上，又因为$p_0>0$，所以综合凸性和单调性，母函数在0到1之间有唯一的一个不动点，灭绝概率小于1</p>
 <img class="note-img" src="assets/随机过程灭绝概率.png" alt="随机过程灭绝概率.png">
-<h3 id="sec-1">连续时间马尔科夫过程</h3>
+<h3 id="sec-8">连续时间马尔科夫过程</h3>
 <p>定义：$X=\{X_t;t\ge0\}$是马氏过程是指对任意的$A\in\mathscr{B}(R)$及任意的$s\le t$有</p>
 <p>$$P(X_t\in A|\mathscr{F}_s)=P(X_t\in A|X_s)$$</p>
 <p>上式记作$P(s,X_s,t,A)$：在s时刻从$X_s$到t时刻变到A里面的概率，可以看出固定前三个参数，这个式子变成对A的概率测度，可以写作$\int_A p(s,x,t,y)dy$</p>
-<h4>CK方程</h4>
+<h4 id="sec-9">CK方程</h4>
 <p>时齐马氏过程：</p>
 <p>$$P(s,x,t,A)=P(t-s,x,A)$$</p>
 <p>这里从0时刻开始就省略不写</p>
@@ -675,12 +712,12 @@ img{max-width:100%;display:block;}
 <p>写作</p>
 <p>$$P_t f(x) = \mathbb{E}(f(X_t) | X_0 = x) = \int_{\mathbb{R}} f(y) P(t, x, \mathrm{d}y),$$</p>
 <p>则$P_t$是$B_b(R)$上的一簇有界线性算子，满足压缩性质$|P_t f(x)| \leqslant \|P_t\| \|f\|_b = \|f\|_b$以及半群性质$P_{t+s}f=P_tP_sf$</p>
-<h4>停时</h4>
+<h4 id="sec-10">停时</h4>
 <p>有点抽象，应该就是强调仅依赖历史信息的意思</p>
 <p>非负随机变量$\tau$是$\mathscr{F}_t$停时，如果对任意的$t\ge0$有$\{\tau\le t\}\in\mathscr{F}_t$。给定停时$\tau$，称</p>
 <p>$$\mathscr{F}_\tau = \{ A \in \mathscr{F}_\infty : A \cap \{ \tau \leqslant t \} \in \mathscr{F}_t, \forall t \geqslant 0 \}.$$</p>
 <p>为停时σ代数</p>
-<h4>Levy过程</h4>
+<h4 id="sec-11">Levy过程</h4>
 <p>也称作平稳增量过程，满足下面几个条件：</p>
 <ol>
 <li>$X_0=0$</li>
@@ -710,19 +747,19 @@ img{max-width:100%;display:block;}
 <p>与 $\mathscr{F}_{a_k}$ 独立，所以 (6.7) 的左边等于上式的右边。</p>
 <p>注：因为 $Y^\tau$ 与 $\mathscr{F}_\tau$ 独立，所以</p>
 <p>$$\mathbb{E}(f(X_{t+\tau}) | \mathscr{F}_\tau) = \mathbb{E}(f(X_{t+\tau} - X_\tau + X_\tau) | \mathscr{F}_\tau) = \mathbb{E}(f(X_{t+x})) \big|_{x=X_\tau} = \mathbb{E}(f(X_{t+\tau}) | X_\tau).$$</p>
-<h4>Poisson过程</h4>
-<h5>定义一</h5>
+<h4 id="sec-12">Poisson过程</h4>
+<h5 id="sec-13">定义一</h5>
 <p>取值于空间 $\mathscr{S} = \{0, 1, \dots\}$ 的随机过程 $N = \{N(t) : t \geqslant 0\}$ 为参数为 $\lambda > 0$ 的 Poisson 过程，如果它满足：</p>
 <p>$(i) N(0) = 0$; $(ii)$ 在不相交的时间区间上的增量互相独立；$(iii)$ 对 $t \geqslant s, N(t) - N(s) \sim P(\lambda(t - s))$, 即</p>
 <p>$$\mathbb{P}(N(t) - N(s) = k) = \frac{e^{-\lambda(t-s)}(\lambda(t-s))^k}{k!}, k = 0, 1, \dots .$$</p>
 <p>转移概率可以写作</p>
 <p>$$P_{i j}(t)=\mathbb{P}(N(t+s)=j \mid N(s)=i)=\begin{cases}\frac{\mathbf{e}^{-\lambda t}(\lambda t)^{j-i}}{(j-i) !}, & j \geqslant i ; \\ 0, & \text { 否则, }\end{cases} \quad t \geqslant 0, s \geqslant 0.$$</p>
-<h5>定义二</h5>
+<h5 id="sec-14">定义二</h5>
 <p>令 $\{W_n : n = 0, 1, \dots\}$ 为取值于 $\mathbb{R}^+$ 上的 r.vs（意思是随机变量）使得 $T_n = W_n - W_{n-1}$ 为参数 $\lambda$ 的 i.i.d 的指数型分布。定义</p>
 <p>$$N_t(\omega) = n \text{ 当且仅当 } W_n(\omega) \le t < W_{n+1}(\omega)$$</p>
 <p>则 $N_t$ 为 Poisson 过程。</p>
 <p>证明过程见讲义P64~65，我力竭了</p>
-<h5>定义三</h5>
+<h5 id="sec-15">定义三</h5>
 <p>设随机过程 $N(t)$ 取非负整数值，满足</p>
 <p>(i) $N_0 = 0$;</p>
 <p>(ii) $N_t$ 为独立增量；</p>
@@ -752,7 +789,7 @@ img{max-width:100%;display:block;}
 <p>$$G(t, z) = C(z)e^{\lambda(z-1)t}$$</p>
 <p>由初始条件 $N_0 = 0$ 知 $G(0, z) = \mathbb{E}[z^0] = 1$，故 $C(z) = 1$。得：</p>
 <p>$$G(t, z) = e^{\lambda t(z-1)}$$</p>
-<h5>性质</h5>
+<h5 id="sec-16">性质</h5>
 <p>设 $n \ge 1$，则在 $N_t = n$ 的条件下，$W_1, \dots, W_n$ 的条件分布与 $[0, t]$ 区间上的均匀分布的顺序统计量同分布。</p>
 <p>证明过程重点在于计算均匀分布后再排序的随机变量分布，可以先求出每一种的概率，再乘上置换n!</p>
 <p>设 $Z_1, \dots, Z_n \sim U[0, t]$，按从小到大排序得 $V_1(\omega) \le \dots \le V_n(\omega)$。我们要证明在 $N_t = n$ 的条件下 $(W_1, W_2, \dots, W_n)$ 的分布与 $(V_1, V_2, \dots, V_n)$ 的分布一样，即证对任意 $t_1, \dots, t_n \in [0, t]$ 以及正数 $\delta_1, \delta_2, \dots, \delta_n$</p>
@@ -769,14 +806,14 @@ img{max-width:100%;display:block;}
 <p>$$e^{-\lambda t_1} e^{-\lambda \delta_1} \lambda \delta_1 e^{-\lambda(t_2-t_1-\delta_1)} \dots e^{-\lambda \delta_n} \lambda \delta_n e^{-\lambda(t-t_n-\delta_n)} n! / e^{-\lambda t} (\lambda t)^n$$</p>
 <p>$$= n! \prod_{i=1}^n \delta_i / t^n.$$</p>
 <p>由此即得两个随机向量的联合分布函数相同，得证。</p>
-<h4>向前向后方程</h4>
+<h4 id="sec-17">向前向后方程</h4>
 <p>定义：称齐次马氏半群（转移概率）是**标准**的，如果对任意的状态i，j</p>
 <p>$$\lim_{t\to0}P_{ij}(t)=\delta_{ij}$$</p>
 <p>即$t\to 0$时$P(t)\to I$</p>
 <p>引理 对任意的 $i,j \in \mathscr{S}$，及任意的 $t,h \geqslant 0$ 有不等式</p>
 <p>$$\left| P_{ij}(t+h) - P_{ij}(t) \right| \leqslant 1 - P_{ii}(h).$$</p>
 <p>进一步，如是标准的，则对每个 $i,j \in \mathscr{S}$，函数 $P_{ij}(t)$ 在 $[0,\infty)$ 上一致连续。</p>
-<h5>转移半群导数</h5>
+<h5 id="sec-18">转移半群导数</h5>
 <p>定理 对标准的转移半群 $P = \{P(t), t \geqslant 0\}$, 则存在右导数</p>
 <p>$$</p>
 <p>\left. \frac{d^+ P(t)}{dt} \right|_{t=0} = Q,</p>
@@ -814,7 +851,7 @@ img{max-width:100%;display:block;}
 <p>\end{pmatrix}</p>
 <p>$$</p>
 <p>对任意的$t\ge0,P(t)=e^{tQ}$</p>
-<h5>Kolmogorov向后方程</h5>
+<h5 id="sec-19">Kolmogorov向后方程</h5>
 <p>齐次马氏链是保守的，这时对所有的t>0，有</p>
 <p>$$P'(t)=QP(t)$$</p>
 <blockquote>为什么叫向后方程？在QP矩阵相乘的过程中，可以看作P的列固定（终点固定），对出发位置求和，也可以看作固定终点对起点求导，描述的是未来状态如何依赖初始条件，所以是“向后”（这中文两个词有点不好理解，换成Backward你就懂了）<br>相较于向前方程，这个方程几乎不需要什么成立的前提，而且人们的关注也较少，下面的方程才是重点</blockquote>
@@ -837,7 +874,7 @@ img{max-width:100%;display:block;}
 <p>\end{aligned}</p>
 <p>$$</p>
 <blockquote>再由保守性得<br>$$\limsup_{h\to 0+} L_{ij}(h,t) \leqslant \sum_{k\neq i} q_{ik}P_{kj}(t) + q_i - \sum_{k\neq i} q_{ik} = \sum_{k\neq i} q_{ik}P_{kj}(t)$$</blockquote>
-<h5>Kolmogorov向前方程（Fokker-Planck方程）</h5>
+<h5 id="sec-20">Kolmogorov向前方程（Fokker-Planck方程）</h5>
 <p>设齐次马氏链转移半群 $(P(t))_{t\geqslant 0}$ 存在无穷小 $Q$ 矩阵，且对所有的 $i\neq j$ 有</p>
 <p>$$</p>
 <p>P_{ij}(h) = q_{ij}h + \alpha_{ij}(h),</p>
@@ -857,7 +894,7 @@ img{max-width:100%;display:block;}
 <p>&= P_{ij}(t)\frac{P_{jj}(h)-1}{h} + \frac{1}{h}\sum_{k\neq j}P_{ik}(t)\left(q_{kj}h + \alpha_{kj}(h)\right)</p>
 <p>\end{aligned}$$</p>
 <p>取极限即可（第一项消失，最后一个α因为题目条件所以消失，剩下中间一项）</p>
-<h5>转移矩阵展开</h5>
+<h5 id="sec-21">转移矩阵展开</h5>
 <p>在研究无穷小时间变换时，转移矩阵有类似泰勒展开一样的表述</p>
 <p>$$P\left\{ X(t+h) = k \mid X(t) = j, (X(s), s \leqslant t) \right\} =</p>
 <p>\begin{cases}</p>
@@ -865,7 +902,7 @@ img{max-width:100%;display:block;}
 <p>1 + q_{jj}h + o(h) & \text{if } j = k</p>
 <p>\end{cases}$$</p>
 <p>（这个是很符合物理品味的）</p>
-<h5>生灭过程Q矩阵</h5>
+<h5 id="sec-22">生灭过程Q矩阵</h5>
 <p>多一个的概率为λt，死一个概率为μt</p>
 <p>$$</p>
 <p>\begin{aligned}</p>
@@ -885,7 +922,7 @@ img{max-width:100%;display:block;}
 <p>0 & 0 & 0 & \mu & -\lambda-\mu & \lambda & \cdots</p>
 <p>\end{pmatrix}</p>
 <p>$$</p>
-<h5>纯生过程Q矩阵</h5>
+<h5 id="sec-23">纯生过程Q矩阵</h5>
 <p>生一个的概率为λt，不会死</p>
 <p>那么当总人口不止一个时，都不生的概率是要幂次的，再给他展开就会得到总人口作为系数</p>
 <p>$$</p>
@@ -911,7 +948,7 @@ img{max-width:100%;display:block;}
 <p>0 & \cdots & 0 & \ddots & \ddots & \ddots</p>
 <p>\end{pmatrix}</p>
 <p>$$</p>
-<h4>Q矩阵概率意义</h4>
+<h4 id="sec-24">Q矩阵概率意义</h4>
 <p>(1) 停留在原处的概率</p>
 <p>$$P_i(X_s=i,0\le s\le t)=e^{-q_it}$$</p>
 <p>如果$q_i=0$则i为吸收态</p>
@@ -932,7 +969,7 @@ img{max-width:100%;display:block;}
 <p>并且Q矩阵的指数形式就是P</p>
 <p>$$P=e^{tQ}$$</p>
 <p>从这里也可以看出，Q矩阵没有正特征值（否则P发散）。Q最大特征值是0（因为每行和均为0，所以Q1=0）</p>
-<h5>向前向后方程积分意义</h5>
+<h5 id="sec-25">向前向后方程积分意义</h5>
 <p>由向后方程得</p>
 <p>$$</p>
 <p>\begin{aligned}</p>
@@ -955,7 +992,7 @@ img{max-width:100%;display:block;}
 <p>\end{aligned}</p>
 <p>$$</p>
 <p>这里$i\neq j$(因为没有δ那一项，也有可能是写漏了)。积分项内说的是i经过s跳到k，然后t-s无跳，最后一次跳跃是k跳j</p>
-<h4>Kolmogorov全局微分性质</h4>
+<h4 id="sec-26">Kolmogorov全局微分性质</h4>
 <p>这里我们引入当前状态含时矢量$\mu$</p>
 <p>令 $\mu_t$ 表示 $Q$ 过程 $X_t$ 在 $t$ 时刻的分布。如果</p>
 <p>$$</p>
@@ -984,7 +1021,7 @@ img{max-width:100%;display:block;}
 <p>$$</p>
 <p>$$\mu'(t)=\mu(t)Q$$</p>
 <p>当$\mu(t)$是不变测度时，导数$\mu Q=0$</p>
-<h4>连续时间常返与暂留</h4>
+<h4 id="sec-27">连续时间常返与暂留</h4>
 <p>下面我们只看每一次的跳跃，而不在意每一次跳跃之间的间隔时间，以此定义一个东西叫嵌入马氏链</p>
 <p>令 $\tau_0 = 0$, 如果 $\tau_{n-1} < \infty$, 令 $\tau_n = \inf\{t \ge \tau_{n-1} : X_t \ne X_{\tau_{n-1}}\}$. 再令</p>
 <p>$$</p>
@@ -1027,7 +1064,7 @@ img{max-width:100%;display:block;}
 <p>\int_0^\infty 1_{\{X(s)=i\}} ds = \sum_{k=1}^{N_i} Y_k,</p>
 <p>$$</p>
 <p>其中 $Y_1,Y_2,\dots$ 是参数为 $q_i$ 的独立指数分布随机变量且与嵌入马氏链访问 $i$ 的次数 $N_i$ 独立。如果 $i$ 暂留，则 $N_i$ 有限，因而积分有限。如果常返则积分无限，否则从某项起所有的 $Y_i$ 均小于 $1$, 这样的概率为 $\lim_{n} (1-e^{-q_i})^n = 0$.</p>
-<h4>连续时间不变测度</h4>
+<h4 id="sec-28">连续时间不变测度</h4>
 <p>设 $X$ 不可约常返，则 $X$ 有唯一（不计常数因子）不变测度 $\pi$. 进一步 $\pi_i = \eta_i/q_i, \forall i \in \mathscr{S}$，其中 $\eta$ 为嵌入马氏链的不变测度.</p>
 <blockquote>注：这里的$q_i=-q_{ii}=\sum_{j\neq i}q_{ij}$是从i点向外在无穷小时间内的流出概率，也代表着停留在此处的意向时间。嵌入马氏链丢弃了所有停留的信息，所以可以看见原马氏链的不变测度是嵌入马氏链的跳跃概率除掉停留意愿</blockquote>
 <p>**证明：** 设 $\bar{P}$ 为嵌入马氏链的转移矩阵，由不可约性知其不变测度 $\eta$ 存在。因为 $q_{jk}=q_j\bar{P}_{jk},j\neq k, q_{jj}=-q_j$. 故由 $\pi$ 的定义知</p>
@@ -1121,8 +1158,8 @@ img{max-width:100%;display:block;}
 <p>$$\lim_{N\to\infty}h(i)=\frac{p+2}{p-q}$$</p>
 <p>也就是说达到无穷远点所需要的平均步数是有限的，因此该链爆炸（在上述的极限时间前a.s.地穿过所有有限状态）</p>
 <p>也可以直观的想想这是为什么，首先p>q说明向右的速度更大（马氏链不常返），并且停留时间$1/q_i$是随着i增大而指数下降的，停留时间急速下降，使得链快速的向正无穷运动</p>
-<h4>马氏链习题</h4>
-<h5>1 Poisson过程首跳</h5>
+<h4 id="sec-29">马氏链习题</h4>
+<h5 id="sec-30">1 Poisson过程首跳</h5>
 <p>N个互相独立的Poisson过程，参数为$\lambda_1,...,\lambda_N$.令$\tau_1,...,\tau_N$分别为N个Poisson过程的首跳时间，求总首跳恰发生在第一个Poission过程的概率</p>
 <p>那这个就是要求$\tau_1<\tau_2,...\tau_1<\tau_N$的概率</p>
 <p>首先必须知道Poisson分布在t时刻的跳跃概率服从λ为参数的指数分布</p>
@@ -1133,7 +1170,7 @@ img{max-width:100%;display:block;}
 <p>$$F(t_1)=e^{-t_1\sum_{i=2}^N\lambda_i}$$</p>
 <p>$t_1$即为第一个Poisson过程首跳时间，它可以取任何值，所以全概率是对它积分</p>
 <p>$$P=\int_0^\infty\lambda_1e^{-\lambda_1t}F(t)dt=\frac{\lambda_1}{\sum_{i=1}^N\lambda_i}$$</p>
-<h5>2 判断离散时间随机游走常返性</h5>
+<h5 id="sec-31">2 判断离散时间随机游走常返性</h5>
 <ol>
 <li>$P_{i,0}=\frac{i+1}{i+2}\quad P_{i,i+1}=\frac{1}{i+2}$其他情况为0</li>
 </ol>
@@ -1167,7 +1204,7 @@ img{max-width:100%;display:block;}
 <p>$$f_{00}=\frac{2}{3}+\sum_{n=3}^\infty p_n=\frac{2+\pi^2}{12}<1$$</p>
 <p>这里我们用到$\zeta(2)=\pi^2/6$的结论。最后结果是暂留</p>
 <blockquote>其实这里挺紧的，自己用手证明的话你可以算个$3.15^2<10$</blockquote>
-<h5>3 递推求解返回概率</h5>
+<h5 id="sec-32">3 递推求解返回概率</h5>
 <p>设马氏链的转移阵为</p>
 <p>$$</p>
 <p>p_{01} = 1, \quad p_{i,i+1} + p_{i,i-1} = 1, \quad p_{i,i+1} = \left( \frac{i+1}{i} \right)^2 p_{i,i-1}, \quad i \ge 1</p>
@@ -1191,7 +1228,7 @@ img{max-width:100%;display:block;}
 <p>再用到直觉条件$f_{\infty}=0$解出从1出发回到0的概率</p>
 <p>$$f_1=1-\frac{6}{\pi^2}$$</p>
 <p>所以题目要求的不回去的概率是$6/\pi^2$</p>
-<h5>4 非对称随机游走反射原理</h5>
+<h5 id="sec-33">4 非对称随机游走反射原理</h5>
 <blockquote>前言：已知一个随机游走，在规定n步内到达k位置的概率，我们可以用组合数轻松求出概率<br>但如果规定是初到或者再也不越过呢？看下面这题</blockquote>
 <p>设 $X_n$ 为直线上的非对称随机游动，步长为 $+1$ 的概率为 $p$，步长为 $-1$ 的概率为 $q=1-p$，其中 $p>1/2$，且 $X_0=0$。</p>
 <p>(a) 令 $Y = \min\{X_0, X_1, \dots\}$，求 $Y$ 的分布。</p>
