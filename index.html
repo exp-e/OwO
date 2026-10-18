@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#F3EFFF">
-<title>王凌云 · Lingyun Wang</title>
+<title>expe的主页</title>
 <!-- 量子Qubit简洁轨道紫色icon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D786B9' stroke-width='1.5' transform='rotate(90 32 32)' opacity='0.6'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3Ccircle cx='48' cy='23' r='2.5' fill='%23FFCA4E'/%3E%3Ccircle cx='18' cy='40' r='2' fill='%237139DA'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -557,6 +557,201 @@ img { max-width:100%; display:block; }
   .note-card-body { padding:10px 14px; }
   .note-card-title { font-size:14px; }
 }
+
+/* ===== Life: Recipe grid ===== */
+.recipe-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+  gap:18px;
+  margin-top:8px;
+}
+.recipe-card {
+  background:var(--card);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius);
+  overflow:hidden;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+.recipe-card:hover {
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(113,57,218,0.15);
+  border-color:var(--border);
+}
+.recipe-img {
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  object-position:top left;
+  display:block;
+}
+.recipe-info {
+  padding:12px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.recipe-name {
+  font-family:var(--font-serif);
+  font-size:14.5px;
+  font-weight:600;
+  color:var(--text);
+}
+
+/* ===== Life: Photo grid ===== */
+.photo-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
+  gap:10px;
+  margin-top:8px;
+}
+.photo-item {
+  aspect-ratio:1/1;
+  overflow:hidden;
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  border:1px solid var(--border-soft);
+  transition:all .2s ease;
+}
+.photo-item:hover {
+  transform:scale(1.03);
+  box-shadow:0 6px 20px rgba(113,57,218,0.2);
+}
+.photo-item img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+
+/* ===== Modal (recipe detail) ===== */
+.modal-overlay {
+  position:fixed;
+  inset:0;
+  background:rgba(20,10,40,0.55);
+  backdrop-filter:blur(6px);
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal-overlay.active { display:flex; }
+.modal-box {
+  background:var(--card-solid);
+  border-radius:var(--radius);
+  max-width:520px;
+  width:100%;
+  max-height:85vh;
+  overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  animation:modalIn .25s ease;
+}
+@keyframes modalIn {
+  from { opacity:0; transform:translateY(20px) scale(.97); }
+  to { opacity:1; transform:translateY(0) scale(1); }
+}
+.modal-img {
+  width:100%;
+  aspect-ratio:16/10;
+  object-fit:cover;
+  object-position:top left;
+}
+.modal-body { padding:24px 28px 28px; }
+.modal-title {
+  font-family:var(--font-serif);
+  font-size:20px;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:6px;
+}
+.modal-tag {
+  display:inline-block;
+  padding:2px 10px;
+  border-radius:10px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-size:11.5px;
+  font-weight:500;
+  margin-bottom:16px;
+}
+.modal-steps {
+  font-size:14px;
+  color:var(--text-soft);
+  line-height:1.9;
+}
+.modal-steps p { margin-bottom:8px; }
+.modal-close {
+  position:absolute;
+  top:16px;
+  right:16px;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.9);
+  border:none;
+  cursor:pointer;
+  font-size:16px;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:501;
+  transition:background .2s;
+}
+.modal-close:hover { background:#fff; }
+
+/* ===== Lightbox (photo viewer) ===== */
+.lightbox-overlay {
+  position:fixed;
+  inset:0;
+  background:rgba(10,5,25,0.9);
+  z-index:600;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+}
+.lightbox-overlay.active { display:flex; }
+.lightbox-img {
+  max-width:100%;
+  max-height:90vh;
+  object-fit:contain;
+  border-radius:var(--radius-sm);
+}
+.lightbox-close {
+  position:absolute;
+  top:20px;
+  right:20px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  border:none;
+  cursor:pointer;
+  font-size:18px;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.lightbox-close:hover { background:rgba(255,255,255,0.3); }
+.lightbox-date {
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  color:rgba(255,255,255,0.7);
+  font-size:13px;
+}
+
+@media (max-width:640px) {
+  .recipe-grid { grid-template-columns:repeat(2, 1fr); gap:12px; }
+  .photo-grid { grid-template-columns:repeat(3, 1fr); gap:6px; }
+  .modal-body { padding:18px 20px 22px; }
+}
 </style>
 </head>
 <body>
@@ -895,13 +1090,95 @@ img { max-width:100%; display:block; }
         <span class="sec-sub">Life &amp; Hobbies</span>
       </div>
       <div class="note-cats" id="lifeCats">
-        <button class="note-cat active" data-cat="all">全部<span class="count">0</span></button>
-        <button class="note-cat" data-cat="recipe">菜谱<span class="count">0</span></button>
+        <button class="note-cat active" data-cat="recipe">菜谱<span class="count">4</span></button>
         <button class="note-cat" data-cat="art">绘画<span class="count">0</span></button>
-        <button class="note-cat" data-cat="photo">摄影<span class="count">0</span></button>
+        <button class="note-cat" data-cat="photo">摄影<span class="count">48</span></button>
         <button class="note-cat" data-cat="match">比赛<span class="count">0</span></button>
       </div>
-      <div class="note-list" id="lifeList"></div>
+      <div class="life-content" id="lifeContent">
+        <!-- Recipe cards -->
+        <div class="recipe-grid" id="recipeGrid">
+          <div class="recipe-card" data-cat="recipe" data-recipe="0">
+            <img class="recipe-img" src="assets/84cf7cfe90e54784ef961041804a60b4.jpg" alt="苹果烤奶茶">
+            <div class="recipe-info">
+              <div class="recipe-name">苹果烤奶茶</div>
+              <span class="cat-tag">饮品</span>
+            </div>
+          </div>
+          <div class="recipe-card" data-cat="recipe" data-recipe="1">
+            <img class="recipe-img" src="assets/e12e873611b144b170381f698334f5c6.jpg" alt="牛油果奶昔">
+            <div class="recipe-info">
+              <div class="recipe-name">牛油果奶昔</div>
+              <span class="cat-tag">饮品</span>
+            </div>
+          </div>
+          <div class="recipe-card" data-cat="recipe" data-recipe="2">
+            <img class="recipe-img" src="assets/0340044cba96b411c2018c5aa15ca7f8.jpg" alt="摩卡咖啡">
+            <div class="recipe-info">
+              <div class="recipe-name">摩卡咖啡</div>
+              <span class="cat-tag">饮品</span>
+            </div>
+          </div>
+          <div class="recipe-card" data-cat="recipe" data-recipe="3">
+            <img class="recipe-img" src="assets/1138030d64feb2381afcd9a4828b2a5c.jpg" alt="芝士流心蛋火鸡面">
+            <div class="recipe-info">
+              <div class="recipe-name">芝士流心蛋火鸡面</div>
+              <span class="cat-tag">主食</span>
+            </div>
+          </div>
+        </div>
+        <!-- Photo grid -->
+        <div class="photo-grid" id="photoGrid" data-cat="photo">
+          <div class="photo-item" data-date="2025-11-10"><img src="assets/photos/thumbs/IMG_3539.JPG" data-full="assets/photos/IMG_3539.JPG" alt="IMG_3539.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3625.JPG" data-full="assets/photos/IMG_3625.JPG" alt="IMG_3625.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3614.JPG" data-full="assets/photos/IMG_3614.JPG" alt="IMG_3614.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3607.JPG" data-full="assets/photos/IMG_3607.JPG" alt="IMG_3607.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3598.JPG" data-full="assets/photos/IMG_3598.JPG" alt="IMG_3598.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3523.JPG" data-full="assets/photos/IMG_3523.JPG" alt="IMG_3523.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3497.JPG" data-full="assets/photos/IMG_3497.JPG" alt="IMG_3497.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3495.JPG" data-full="assets/photos/IMG_3495.JPG" alt="IMG_3495.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3491.JPG" data-full="assets/photos/IMG_3491.JPG" alt="IMG_3491.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3330.JPG" data-full="assets/photos/IMG_3330.JPG" alt="IMG_3330.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3325.JPG" data-full="assets/photos/IMG_3325.JPG" alt="IMG_3325.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3324.JPG" data-full="assets/photos/IMG_3324.JPG" alt="IMG_3324.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3322.JPG" data-full="assets/photos/IMG_3322.JPG" alt="IMG_3322.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3308.JPG" data-full="assets/photos/IMG_3308.JPG" alt="IMG_3308.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3305.JPG" data-full="assets/photos/IMG_3305.JPG" alt="IMG_3305.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3289.JPG" data-full="assets/photos/IMG_3289.JPG" alt="IMG_3289.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3288.JPG" data-full="assets/photos/IMG_3288.JPG" alt="IMG_3288.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3268.JPG" data-full="assets/photos/IMG_3268.JPG" alt="IMG_3268.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2024-03-19"><img src="assets/photos/thumbs/IMG_3238.JPG" data-full="assets/photos/IMG_3238.JPG" alt="IMG_3238.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2024-03-19"><img src="assets/photos/thumbs/IMG_3230.JPG" data-full="assets/photos/IMG_3230.JPG" alt="IMG_3230.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2024-03-19"><img src="assets/photos/thumbs/IMG_3190.JPG" data-full="assets/photos/IMG_3190.JPG" alt="IMG_3190.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2024-03-19"><img src="assets/photos/thumbs/IMG_3188.JPG" data-full="assets/photos/IMG_3188.JPG" alt="IMG_3188.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2024-03-19"><img src="assets/photos/thumbs/IMG_3163.JPG" data-full="assets/photos/IMG_3163.JPG" alt="IMG_3163.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3000.png" data-full="assets/photos/IMG_3000.png" alt="IMG_3000.png" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3104_2.JPG" data-full="assets/photos/IMG_3104_2.JPG" alt="IMG_3104_2.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3147.JPG" data-full="assets/photos/IMG_3147.JPG" alt="IMG_3147.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3140.JPG" data-full="assets/photos/IMG_3140.JPG" alt="IMG_3140.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3137.JPG" data-full="assets/photos/IMG_3137.JPG" alt="IMG_3137.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3132.JPG" data-full="assets/photos/IMG_3132.JPG" alt="IMG_3132.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3130.JPG" data-full="assets/photos/IMG_3130.JPG" alt="IMG_3130.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3127.JPG" data-full="assets/photos/IMG_3127.JPG" alt="IMG_3127.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3110.JPG" data-full="assets/photos/IMG_3110.JPG" alt="IMG_3110.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3108.JPG" data-full="assets/photos/IMG_3108.JPG" alt="IMG_3108.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-03-13"><img src="assets/photos/thumbs/IMG_3000.jpg" data-full="assets/photos/IMG_3000.jpg" alt="IMG_3000.jpg" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-03-13"><img src="assets/photos/thumbs/IMG_2976.jpg" data-full="assets/photos/IMG_2976.jpg" alt="IMG_2976.jpg" loading="lazy"></div>
+          <div class="photo-item" data-date="2023-03-13"><img src="assets/photos/thumbs/IMG_2941.JPG" data-full="assets/photos/IMG_2941.JPG" alt="IMG_2941.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3053.JPG" data-full="assets/photos/IMG_3053.JPG" alt="IMG_3053.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3039.JPG" data-full="assets/photos/IMG_3039.JPG" alt="IMG_3039.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3033.JPG" data-full="assets/photos/IMG_3033.JPG" alt="IMG_3033.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3030.JPG" data-full="assets/photos/IMG_3030.JPG" alt="IMG_3030.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3022.JPG" data-full="assets/photos/IMG_3022.JPG" alt="IMG_3022.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3015.JPG" data-full="assets/photos/IMG_3015.JPG" alt="IMG_3015.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_2979.JPG" data-full="assets/photos/IMG_2979.JPG" alt="IMG_2979.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_2974.JPG" data-full="assets/photos/IMG_2974.JPG" alt="IMG_2974.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_2971.JPG" data-full="assets/photos/IMG_2971.JPG" alt="IMG_2971.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_2952.JPG" data-full="assets/photos/IMG_2952.JPG" alt="IMG_2952.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_2924.JPG" data-full="assets/photos/IMG_2924.JPG" alt="IMG_2924.JPG" loading="lazy"></div>
+          <div class="photo-item" data-date="2021-05-01"><img src="assets/photos/thumbs/IMG_2854.JPG" data-full="assets/photos/IMG_2854.JPG" alt="IMG_2854.JPG" loading="lazy"></div>
+        </div>
+      </div>
       <div class="section-empty" id="lifeEmpty">
         <i class="fa fa-seedling"></i>
         <p>生活随记陆续整理中，敬请期待。</p>
@@ -952,6 +1229,26 @@ img { max-width:100%; display:block; }
 </div><!-- /pages-wrap -->
 
 <div class="toast" id="toast"></div>
+
+<!-- Recipe detail modal -->
+<div class="modal-overlay" id="recipeModal">
+  <div class="modal-box" style="position:relative;">
+    <button class="modal-close" id="recipeModalClose"><i class="fa fa-times"></i></button>
+    <img class="modal-img" id="recipeModalImg" src="" alt="">
+    <div class="modal-body">
+      <div class="modal-title" id="recipeModalTitle"></div>
+      <span class="modal-tag" id="recipeModalTag"></span>
+      <div class="modal-steps" id="recipeModalSteps"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Photo lightbox -->
+<div class="lightbox-overlay" id="photoLightbox">
+  <button class="lightbox-close" id="lightboxClose"><i class="fa fa-times"></i></button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <div class="lightbox-date" id="lightboxDate"></div>
+</div>
 
 <script src="search-index.js"></script>
 <script>
@@ -1178,31 +1475,73 @@ img { max-width:100%; display:block; }
     revealTimer = setTimeout(renderNotes, 180);
   });
 
-  /* ===== Life: category tabs (全部 / 菜谱 / 绘画 / 摄影 / 比赛) ===== */
-  var lifeCards = Array.from(document.querySelectorAll('#lifeList .note-card'));
+  /* ===== Life: category tabs (菜谱 / 绘画 / 摄影 / 比赛) ===== */
   var lifeCats  = Array.prototype.slice.call(document.querySelectorAll('#lifeCats .note-cat'));
   var lifeEmpty = document.getElementById('lifeEmpty');
+  var recipeGrid = document.getElementById('recipeGrid');
+  var photoGrid = document.getElementById('photoGrid');
   var LIFE_EMPTY_TEXT = {
-    all:    '生活随记陆续整理中，敬请期待。',
     recipe: '菜谱整理中，敬请期待。',
     art:    '绘画作品整理中，敬请期待。',
     photo:  '摄影作品整理中，敬请期待。',
     match:  '比赛记录整理中，敬请期待。'
   };
 
+  // Recipe data
+  var RECIPES = [
+    {
+      name: '苹果烤奶茶', tag: '饮品', img: 'assets/84cf7cfe90e54784ef961041804a60b4.jpg',
+      steps: [
+        '一个不能太高的小杯子容器（可以放入空气炸锅）',
+        '红茶1勺',
+        '半勺糖',
+        '一小撮盐（千万不能太多）',
+        '用少许开水没过茶',
+        '空气炸锅 180° 10min',
+        '倒入八分满牛奶',
+        '空气炸锅 180° 10min',
+        '开炫，小心杯子烫手'
+      ]
+    },
+    {
+      name: '牛油果奶昔', tag: '饮品', img: 'assets/e12e873611b144b170381f698334f5c6.jpg',
+      steps: [
+        '小半个牛油果 + 四颗阳光玫瑰 + 一片去茎羽衣甘蓝 + 300ml牛奶',
+        '搅拌机打碎',
+        '倒出来，加四块冰块，开炫'
+      ]
+    },
+    {
+      name: '摩卡咖啡', tag: '饮品', img: 'assets/0340044cba96b411c2018c5aa15ca7f8.jpg',
+      steps: [
+        '准备一份意式浓缩（咖啡机或浓缩咖啡液）、2~3块黑巧、300ml牛奶',
+        '黑巧和牛奶搅拌机打碎，倒入杯中，注意保留奶泡',
+        '沿着杯壁倒一圈意式浓缩',
+        '开炫'
+      ]
+    },
+    {
+      name: '芝士流心蛋火鸡面', tag: '主食', img: 'assets/1138030d64feb2381afcd9a4828b2a5c.jpg',
+      steps: [
+        '先煎鸡蛋，如果是可生食鸡蛋就只煎半面，造流心煎蛋；其他蛋就煎熟',
+        '鸡蛋盛出，直接烧水，水开下面，煮面到八分熟',
+        '把水倒掉，面留着，加一层薄牛奶，恰好不浸过面，继续煮，面熟了后大火收汁',
+        '出锅，拌火鸡面酱，拌好后面上铺芝士片，撒芝麻，再铺煎蛋'
+      ]
+    }
+  ];
+
   function renderLife() {
     var active = document.querySelector('#lifeCats .note-cat.active');
-    var cat = active ? active.getAttribute('data-cat') : 'all';
-    var shown = 0;
-    lifeCards.forEach(function (c) {
-      var ok = (cat === 'all' || c.getAttribute('data-cat') === cat);
-      c.style.display = ok ? 'flex' : 'none';
-      if (ok) shown++;
-    });
+    var cat = active ? active.getAttribute('data-cat') : 'recipe';
+    if (recipeGrid) recipeGrid.style.display = (cat === 'recipe') ? 'grid' : 'none';
+    if (photoGrid) photoGrid.style.display = (cat === 'photo') ? 'grid' : 'none';
+    var hasContent = (cat === 'recipe' && recipeGrid && recipeGrid.children.length > 0) ||
+                     (cat === 'photo' && photoGrid && photoGrid.children.length > 0);
     if (lifeEmpty) {
-      lifeEmpty.style.display = shown ? 'none' : '';
+      lifeEmpty.style.display = hasContent ? 'none' : '';
       var p = lifeEmpty.querySelector('p');
-      if (p) p.textContent = LIFE_EMPTY_TEXT[cat] || LIFE_EMPTY_TEXT.all;
+      if (p) p.textContent = LIFE_EMPTY_TEXT[cat] || '整理中，敬请期待。';
     }
   }
 
@@ -1213,19 +1552,57 @@ img { max-width:100%; display:block; }
       renderLife();
     });
   });
-
-  (function fillLifeCounts() {
-    var counts = { all: lifeCards.length };
-    lifeCards.forEach(function (c) {
-      var k = c.getAttribute('data-cat');
-      counts[k] = (counts[k] || 0) + 1;
-    });
-    lifeCats.forEach(function (b) {
-      var span = b.querySelector('.count');
-      if (span) span.textContent = counts[b.getAttribute('data-cat')] || 0;
-    });
-  }());
   renderLife();
+
+  /* ===== Recipe modal ===== */
+  var recipeModal = document.getElementById('recipeModal');
+  var recipeModalImg = document.getElementById('recipeModalImg');
+  var recipeModalTitle = document.getElementById('recipeModalTitle');
+  var recipeModalTag = document.getElementById('recipeModalTag');
+  var recipeModalSteps = document.getElementById('recipeModalSteps');
+  var recipeModalClose = document.getElementById('recipeModalClose');
+
+  document.querySelectorAll('.recipe-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var idx = parseInt(this.getAttribute('data-recipe'), 10);
+      var r = RECIPES[idx];
+      if (!r) return;
+      recipeModalImg.src = r.img;
+      recipeModalImg.alt = r.name;
+      recipeModalTitle.textContent = r.name;
+      recipeModalTag.textContent = r.tag;
+      recipeModalSteps.innerHTML = r.steps.map(function (s) { return '<p>' + s + '</p>'; }).join('');
+      recipeModal.classList.add('active');
+    });
+  });
+
+  function closeRecipeModal() { recipeModal.classList.remove('active'); }
+  recipeModalClose.addEventListener('click', closeRecipeModal);
+  recipeModal.addEventListener('click', function (e) { if (e.target === recipeModal) closeRecipeModal(); });
+
+  /* ===== Photo lightbox ===== */
+  var lightbox = document.getElementById('photoLightbox');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxDate = document.getElementById('lightboxDate');
+  var lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.photo-item img').forEach(function (img) {
+    img.addEventListener('click', function () {
+      var full = this.getAttribute('data-full');
+      var date = this.parentElement.getAttribute('data-date');
+      lightboxImg.src = full;
+      lightboxImg.alt = this.alt;
+      lightboxDate.textContent = date || '';
+      lightbox.classList.add('active');
+    });
+  });
+
+  function closeLightbox() { lightbox.classList.remove('active'); lightboxImg.src = ''; }
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeRecipeModal(); closeLightbox(); }
+  });
 
   /* ===== Notes: full-text search (searches note bodies) ===== */
   var searchInput   = document.getElementById('searchInput');
@@ -1372,5 +1749,6 @@ img { max-width:100%; display:block; }
 
 }());
 </script>
+
 </body>
 </html>
