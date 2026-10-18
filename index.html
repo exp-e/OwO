@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#F3EFFF">
 <title>王凌云 · Lingyun Wang</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%237139DA'/%3E%3Cpath d='M32 18c-3-8-12-12-18-9-5 3-4 11 2 14 5 2 11 0 16-5zm0 0c3-8 12-12 18-9 5 3 4 11-2 14-5 2-11 0-16-5zm0 14c-3 6-10 10-15 8-4-1-4-7 1-9 4-1 9 0 14 1zm0 0c3 6 10 10 15 8 4-1 4-7-1-9-4-1-9 0-14 1z' fill='white'/%3E%3C/svg%3E">
+<!-- 量子Qubit简洁轨道紫色icon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D786B9' stroke-width='1.5' transform='rotate(90 32 32)' opacity='0.6'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3Ccircle cx='48' cy='23' r='2.5' fill='%23FFCA4E'/%3E%3Ccircle cx='18' cy='40' r='2' fill='%237139DA'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
@@ -31,7 +32,6 @@
   --muted:       #8a7da8;
   --border:      rgba(113,57,218,0.35);
   --border-soft: rgba(113,57,218,0.15);
-  --silver:      #c0c0c8;
   --font-serif:  "Noto Serif SC", Georgia, "Songti SC", serif;
   --font-sans:   "Inter","Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --radius:      16px;
@@ -67,9 +67,9 @@ a { color:var(--accent); text-decoration:none; transition:color .2s; }
 a:hover { color:var(--accent-deep); }
 img { max-width:100%; display:block; }
 
-/* ===== Butterfly SVG icon ===== */
-.butterfly { display:inline-block; width:1em; height:1em; vertical-align:middle; }
-.butterfly svg { width:100%; height:100%; }
+/* Qubit Orbit SVG */
+.qubit-icon { display:inline-block; width:1.15em; height:1.15em; vertical-align:middle; }
+.qubit-icon svg { width:100%; height:100%; }
 
 /* ===== Top stripe ===== */
 .headband {
@@ -89,22 +89,23 @@ img { max-width:100%; display:block; }
   z-index:100;
 }
 .header-inner {
-  max-width:1200px; margin:0 auto;
+  max-width:1300px; margin:0 auto;
   padding:0 36px;
   display:flex; align-items:center; justify-content:space-between;
   height:58px;
 }
 .brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
-.brand-butterfly {
-  width:26px; height:26px; color:var(--accent);
+.brand-qubit {
+  width:24px; height:24px; color:var(--accent);
   display:inline-flex; align-items:center; justify-content:center;
 }
 .brand-name { font-family:var(--font-serif); font-size:17px; font-weight:700; color:var(--text); letter-spacing:1px; }
 .brand-tag  { font-size:11px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; }
 .brand-id {
-  font-size:11px; color:var(--accent); font-weight:600;
-  background:var(--accent-soft); border:1px solid var(--border-soft);
-  padding:2px 8px; border-radius:10px; margin-left:2px;
+  font-size:14px; color:var(--accent); font-weight:700;
+  background:var(--accent-soft); border:1px solid var(--border);
+  padding:2px 10px; border-radius:12px; margin-left:4px;
+  letter-spacing:0.5px;
 }
 
 .main-menu { list-style:none; display:flex; gap:2px; }
@@ -122,7 +123,7 @@ img { max-width:100%; display:block; }
 
 /* ===== Dot nav ===== */
 .dot-nav {
-  position:fixed; right:22px; top:50%; transform:translateY(-50%);
+  position:fixed; right:20px; top:50%; transform:translateY(-50%);
   display:flex; flex-direction:column; gap:10px; z-index:150;
 }
 .dot-nav button {
@@ -145,44 +146,37 @@ img { max-width:100%; display:block; }
   min-height:calc(100vh - 61px);
   scroll-snap-align:start;
   display:flex; align-items:center; justify-content:center;
-  padding:40px 36px 60px; position:relative;
+  padding:28px 24px 50px; position:relative;
 }
 
-/* ===== Page card — 80% width, 50% opacity, border ===== */
+/* ===== Page card — 92% width, max 1300px, 50% opacity, border ===== */
 .page-card {
   background:var(--card);
   border:1.5px solid var(--border);
   border-radius:var(--radius);
-  box-shadow:0 4px 40px rgba(113,57,218,0.10);
-  width:80%; max-width:1100px;
-  padding:44px 52px;
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 6px 48px rgba(113,57,218,0.12);
+  width:92%; max-width:1300px;
+  padding:38px 46px;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
   transition:box-shadow .3s, border-color .3s;
-  opacity:0; transform:translateY(24px);
+  opacity:0; transform:translateY(20px);
   transition:opacity .6s ease, transform .6s ease, box-shadow .3s, border-color .3s;
   position:relative;
 }
 .page-card.visible { opacity:1; transform:translateY(0); }
-.page-card:hover { box-shadow:0 8px 48px rgba(113,57,218,0.16); border-color:rgba(113,57,218,0.5); }
-
-/* Corner butterfly decorations */
-.card-butterfly {
-  position:absolute; color:var(--silver); opacity:0.35; pointer-events:none;
-}
-.card-butterfly.tl { top:14px; left:16px; width:22px; height:22px; transform:rotate(-15deg); }
-.card-butterfly.br { bottom:14px; right:16px; width:18px; height:18px; transform:rotate(165deg); }
+.page-card:hover { box-shadow:0 10px 56px rgba(113,57,218,0.18); border-color:rgba(113,57,218,0.55); }
 
 /* ===== Scroll-down arrow ===== */
 .scroll-hint {
-  position:absolute; bottom:18px; left:50%; transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:4px;
-  color:var(--muted); font-size:10.5px; letter-spacing:2px; text-transform:uppercase;
+  position:absolute; bottom:14px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+  color:var(--muted); font-size:10px; letter-spacing:2px; text-transform:uppercase;
   cursor:pointer; z-index:10; transition:color .2s;
   animation:floatArrow 2s ease-in-out infinite;
 }
 .scroll-hint:hover { color:var(--accent); }
-.scroll-hint i { font-size:16px; }
+.scroll-hint i { font-size:15px; }
 @keyframes floatArrow {
   0%,100% { transform:translateX(-50%) translateY(0); }
   50% { transform:translateX(-50%) translateY(6px); }
@@ -190,116 +184,167 @@ img { max-width:100%; display:block; }
 
 /* ===== Page 1: merged layout (left profile + right about/pubs) ===== */
 .merged-layout {
-  display:grid; grid-template-columns: 0.85fr 1.15fr; gap:32px;
-  align-items:stretch;
+  display:grid; grid-template-columns: 340px 1fr; gap:34px;
+  align-items:start;
 }
 /* Left column — profile */
 .profile-col {
   display:flex; flex-direction:column; align-items:center; text-align:center;
-  padding:8px 6px;
+  padding:4px 6px;
 }
 .profile-avatar {
-  width:120px; height:120px; border-radius:50%; object-fit:cover;
+  width:124px; height:124px; border-radius:50%; object-fit:cover;
   border:3px solid var(--highlight);
   box-shadow:0 0 0 5px var(--accent-soft), 0 6px 24px rgba(113,57,218,0.18);
-  margin-bottom:18px;
+  margin-bottom:14px;
 }
 .profile-name {
-  font-family:var(--font-serif); font-size:30px; font-weight:700;
+  font-family:var(--font-serif); font-size:28px; font-weight:700;
   color:var(--text); line-height:1.2; margin-bottom:4px;
-  display:flex; align-items:center; gap:8px; justify-content:center;
 }
-.profile-name .name-butterfly { width:24px; height:24px; color:var(--accent); }
-.profile-en { font-size:15px; color:var(--accent); font-weight:500; letter-spacing:0.5px; margin-bottom:6px; }
+.profile-en { font-size:14.5px; color:var(--accent); font-weight:500; letter-spacing:0.5px; margin-bottom:8px; }
 .profile-id {
-  display:inline-flex; align-items:center; gap:5px;
-  font-size:12px; color:var(--accent-deep); font-weight:600;
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:15px; color:var(--accent); font-weight:700;
   background:var(--accent-soft); border:1px solid var(--border);
-  padding:3px 12px; border-radius:12px; margin-bottom:14px;
+  padding:3px 14px; border-radius:14px; margin-bottom:14px;
+  letter-spacing:0.5px;
 }
-.profile-id i { font-size:10px; }
+.profile-id i { font-size:12px; }
 .profile-role {
-  font-size:13px; color:var(--text-soft); line-height:1.7; margin-bottom:6px;
-}
-.profile-bio {
-  font-size:13px; color:var(--text-soft); line-height:1.8; margin-bottom:4px;
+  font-size:13.5px; color:var(--text-soft); line-height:1.7; margin-bottom:10px;
+  font-weight:400;
 }
 .profile-bio-en {
-  font-size:11.5px; color:var(--muted); line-height:1.7; font-style:italic;
-  margin-bottom:18px; padding-top:6px; border-top:1px dashed var(--border-soft);
+  font-size:11.5px; color:var(--muted); line-height:1.65;
+  margin-bottom:16px; padding-top:8px; border-top:1px dashed var(--border-soft);
+  font-weight:400;
 }
 .profile-social { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
 .social-btn {
   display:inline-flex; align-items:center; gap:6px;
-  padding:7px 14px; font-size:12.5px; border-radius:20px;
-  background:rgba(255,255,255,0.55); border:1px solid var(--border-soft);
+  padding:6px 13px; font-size:12px; border-radius:20px;
+  background:rgba(255,255,255,0.60); border:1px solid var(--border-soft);
   color:var(--text-soft); transition:all .2s; text-decoration:none;
-  backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px); font-weight:400;
 }
 .social-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); transform:translateY(-2px); }
-.social-btn svg { width:13px; height:13px; }
-.social-btn i { font-size:12px; }
+.social-btn svg { width:12px; height:12px; }
+.social-btn i { font-size:11.5px; }
 
 /* Right column — stacked about + publications */
-.right-col { display:flex; flex-direction:column; gap:24px; min-width:0; }
+.right-col { display:flex; flex-direction:column; gap:20px; min-width:0; }
 .sub-card {
-  background:rgba(255,255,255,0.40);
+  background:rgba(255,255,255,0.42);
   border:1px solid var(--border-soft);
   border-radius:var(--radius-sm);
-  padding:24px 26px;
+  padding:22px 26px;
   backdrop-filter:blur(8px);
 }
 .sub-card-header {
-  display:flex; align-items:center; gap:10px; margin-bottom:14px;
-  padding-bottom:10px; border-bottom:1px solid var(--border-soft);
+  display:flex; align-items:center; gap:8px; margin-bottom:12px;
+  padding-bottom:8px; border-bottom:1px solid var(--border-soft);
 }
 .sub-card-title {
-  font-family:var(--font-serif); font-size:18px; font-weight:700; color:var(--text);
+  font-family:var(--font-serif); font-size:17px; font-weight:600; color:var(--text);
+  display:flex; align-items:center; gap:6px;
 }
-.sub-card-title .title-butterfly { width:18px; height:18px; color:var(--silver); margin-right:4px; vertical-align:-2px; }
-.sub-card-en { font-size:11px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; }
+.sub-card-en { font-size:11px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-left:auto; }
 
-.about-text p { margin-bottom:10px; color:var(--text-soft); font-size:13.5px; line-height:1.9; }
+.about-text p {
+  margin-bottom:8px; color:var(--text); font-size:13.5px; line-height:1.85;
+  font-weight:400;
+}
 .about-text p:last-child { margin-bottom:0; }
-.about-text strong { color:var(--text); font-weight:600; }
-.about-en {
-  margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-soft);
-  font-size:11.5px; color:var(--muted); line-height:1.75; font-style:italic;
-}
+
+/* Blockquote for 允许一切发生 */
 .about-quote {
-  margin-top:12px; font-family:var(--font-serif); font-size:13px;
-  color:var(--accent-deep); font-style:italic;
+  margin-top:10px;
+  padding:10px 16px;
+  background:rgba(113,57,218,0.06);
+  border-left:3px solid var(--accent);
+  border-radius:0 6px 6px 0;
+  font-size:13.5px;
+  color:var(--text);
+  line-height:1.75;
+  font-weight:400;
+}
+.about-en {
+  margin-top:10px; padding-top:8px; border-top:1px dashed var(--border-soft);
+  font-size:11.5px; color:var(--muted); line-height:1.7;
+  font-weight:400;
 }
 
-/* Publications */
-.pub-item {
-  padding:14px 0; border-bottom:1px solid var(--border-soft);
-  display:flex; gap:14px; align-items:flex-start;
+/* Publications card with thumbnail preview */
+.pub-item-wrap {
+  display:flex; gap:18px; align-items:flex-start;
 }
-.pub-item:last-child { border-bottom:none; padding-bottom:0; }
-.pub-index {
-  flex-shrink:0; width:26px; height:26px;
-  background:var(--accent-soft); border:1px solid var(--border);
-  border-radius:50%; display:flex; align-items:center; justify-content:center;
-  font-size:11px; color:var(--accent); font-weight:600; margin-top:2px;
+.pub-preview {
+  width:140px; height:96px; flex-shrink:0;
+  border-radius:6px; overflow:hidden;
+  border:1px solid var(--border-soft);
+  box-shadow:0 2px 10px rgba(113,57,218,0.12);
+  background:var(--card-solid);
 }
-.pub-body { flex:1; min-width:0; }
-.pub-title { font-size:14px; font-weight:600; color:var(--text); margin-bottom:5px; line-height:1.5; }
-.pub-title a { color:var(--text); } .pub-title a:hover { color:var(--accent); }
-.pub-meta { font-size:12px; color:var(--muted); margin-bottom:8px; line-height:1.6; }
+.pub-preview img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .3s;
+}
+.pub-preview:hover img { transform:scale(1.05); }
+
+.pub-content { flex:1; min-width:0; }
+.pub-title {
+  font-size:14px; font-weight:600; color:var(--text); margin-bottom:5px; line-height:1.5;
+}
+.pub-title a { color:var(--text); }
+.pub-title a:hover { color:var(--accent); }
+.pub-authors {
+  font-size:12px; color:var(--text-soft); margin-bottom:5px; line-height:1.6;
+  font-weight:400;
+}
+.pub-advisor {
+  font-size:11.5px; color:var(--muted); margin-bottom:8px; line-height:1.5;
+}
 .pub-tags { display:flex; flex-wrap:wrap; gap:6px; }
-.pub-tag { font-size:11px; padding:2px 9px; border-radius:12px; font-weight:500; display:inline-flex; align-items:center; gap:4px; }
-.pub-tag.journal { background:rgba(215,134,185,0.12); color:#a03a7a; border:1px solid rgba(215,134,185,0.3); }
-.pub-tag.arxiv   { background:var(--accent-soft); color:var(--accent); border:1px solid var(--border); text-decoration:none; }
-.pub-tag.topic   { background:var(--gold-soft); color:#7a5a00; border:1px solid rgba(255,202,78,0.3); }
+.pub-tag {
+  font-size:11px; padding:2px 10px; border-radius:12px; font-weight:500;
+  display:inline-flex; align-items:center; gap:4px; text-decoration:none;
+}
+.pub-tag.journal {
+  background:rgba(215,134,185,0.14); color:#91286b;
+  border:1px solid rgba(215,134,185,0.35); transition:all .2s;
+}
+.pub-tag.journal:hover { background:var(--pink); color:#fff; }
+.pub-tag.arxiv {
+  background:var(--accent-soft); color:var(--accent);
+  border:1px solid var(--border); transition:all .2s;
+}
+.pub-tag.arxiv:hover { background:var(--accent); color:#fff; }
+.pub-tag.topic {
+  background:var(--gold-soft); color:#7a5a00; border:1px solid rgba(255,202,78,0.35);
+}
+
+/* Corner vibe coding badge on page 1 */
+.vibe-badge {
+  position:absolute; bottom:12px; right:18px;
+  font-size:10px; color:var(--muted); opacity:0.8;
+  letter-spacing:0.3px; font-weight:400;
+  background:rgba(255,255,255,0.35);
+  border:1px solid var(--border-soft);
+  padding:3px 9px; border-radius:10px;
+  backdrop-filter:blur(4px);
+}
 
 /* ===== Other pages ===== */
-.sec-header { margin-bottom:24px; padding-bottom:14px; border-bottom:1px solid var(--border-soft); display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; }
-.sec-title {
-  font-family:var(--font-serif); font-size:22px; font-weight:700;
-  color:var(--text); display:flex; align-items:center; gap:10px;
+.sec-header {
+  margin-bottom:20px; padding-bottom:12px;
+  border-bottom:1px solid var(--border-soft);
+  display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px;
 }
-.sec-title .title-butterfly { width:22px; height:22px; color:var(--accent); }
+.sec-title {
+  font-family:var(--font-serif); font-size:21px; font-weight:600;
+  color:var(--text); display:flex; align-items:center; gap:8px;
+}
 .sec-num {
   font-size:11px; color:var(--accent); font-weight:600; letter-spacing:1.5px;
   background:var(--accent-soft); border:1px solid var(--border);
@@ -308,14 +353,14 @@ img { max-width:100%; display:block; }
 .sec-sub { font-size:11.5px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; }
 
 .section-empty { padding:36px 0; text-align:center; color:var(--muted); }
-.section-empty i { font-size:30px; margin-bottom:12px; display:block; opacity:.35; color:var(--grad-purple); }
+.section-empty i { font-size:28px; margin-bottom:12px; display:block; opacity:.35; color:var(--grad-purple); }
 .section-empty p { font-size:13.5px; }
 
 /* Contact */
 .contact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
 .contact-card {
-  background:rgba(255,255,255,0.45); border:1px solid var(--border-soft);
-  border-radius:var(--radius-sm); padding:18px; display:flex; align-items:center; gap:13px;
+  background:rgba(255,255,255,0.50); border:1px solid var(--border-soft);
+  border-radius:var(--radius-sm); padding:16px; display:flex; align-items:center; gap:12px;
   transition:all .2s; text-decoration:none; color:inherit; backdrop-filter:blur(6px);
 }
 .contact-card:hover { border-color:var(--accent); background:var(--accent-soft); transform:translateY(-2px); box-shadow:0 6px 18px rgba(113,57,218,0.12); }
@@ -324,11 +369,14 @@ img { max-width:100%; display:block; }
   border-radius:8px; display:flex; align-items:center; justify-content:center;
   font-size:15px; color:var(--accent); flex-shrink:0;
 }
-.contact-icon svg { width:17px; height:17px; }
+.contact-icon svg { width:16px; height:16px; }
 .contact-label { font-size:10.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:2px; }
 .contact-value { font-size:13px; color:var(--text); font-weight:500; }
 
-.footer-text { text-align:center; font-size:12px; color:var(--muted); line-height:2; margin-top:28px; padding-top:18px; border-top:1px solid var(--border-soft); }
+.footer-text {
+  text-align:center; font-size:12px; color:var(--muted); line-height:2;
+  margin-top:24px; padding-top:16px; border-top:1px solid var(--border-soft);
+}
 .footer-text .sep { margin:0 8px; color:var(--border); }
 
 /* ===== Toast ===== */
@@ -343,14 +391,17 @@ img { max-width:100%; display:block; }
 .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
 /* ===== Mobile ===== */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   body { overflow:auto; }
   .pages-wrap { position:static; overflow:visible; scroll-snap-type:none; }
-  .page { min-height:auto; padding:24px 16px 50px; scroll-snap-align:none; }
-  .page-card { width:95%; padding:28px 22px; }
-  .merged-layout { grid-template-columns:1fr; gap:24px; }
+  .page { min-height:auto; padding:20px 14px 44px; scroll-snap-align:none; }
+  .page-card { width:96%; padding:26px 20px; }
+  .merged-layout { grid-template-columns:1fr; gap:22px; }
+  .pub-item-wrap { flex-direction:column; }
+  .pub-preview { width:100%; height:140px; }
   .dot-nav { display:none; }
   .scroll-hint { display:none; }
+  .vibe-badge { position:static; margin-top:16px; text-align:center; display:block; }
   .nav-toggle { display:block; }
   .main-menu {
     display:none; position:absolute; top:61px; left:0; right:0;
@@ -363,27 +414,26 @@ img { max-width:100%; display:block; }
   .header-inner { padding:0 20px; }
   .brand-tag { display:none; }
 }
-@media (max-width: 540px) {
-  .page-card { width:100%; padding:24px 18px; }
+@media (max-width: 580px) {
+  .page-card { width:100%; padding:22px 16px; }
   .profile-name { font-size:24px; }
-  .sub-card { padding:18px 16px; }
+  .sub-card { padding:16px 14px; }
   .contact-grid { grid-template-columns:1fr 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- Reusable butterfly SVG symbol -->
+<!-- SVG defs -->
 <svg width="0" height="0" style="position:absolute">
   <defs>
-    <symbol id="butterfly-icon" viewBox="0 0 64 64">
-      <path d="M32 20 C27 10 15 6 9 10 C4 14 6 25 13 28 C19 31 26 28 32 20 Z" fill="currentColor"/>
-      <path d="M32 20 C37 10 49 6 55 10 C60 14 58 25 51 28 C45 31 38 28 32 20 Z" fill="currentColor"/>
-      <path d="M32 28 C28 36 18 41 13 39 C9 37 9 31 14 29 C19 27 27 28 32 28 Z" fill="currentColor" opacity="0.65"/>
-      <path d="M32 28 C36 36 46 41 51 39 C55 37 55 31 50 29 C45 27 37 28 32 28 Z" fill="currentColor" opacity="0.65"/>
-      <ellipse cx="32" cy="28" rx="2" ry="12" fill="currentColor"/>
-      <path d="M31 17 C29 12 27 10 25 9" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M33 17 C35 12 37 10 39 9" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- Quantum qubit orbit icon -->
+    <symbol id="qubit-orbit" viewBox="0 0 64 64">
+      <ellipse cx="32" cy="32" rx="26" ry="10" fill="none" stroke="currentColor" stroke-width="2.5" transform="rotate(-30 32 32)" opacity="0.85"/>
+      <ellipse cx="32" cy="32" rx="26" ry="10" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(30 32 32)" opacity="0.6"/>
+      <ellipse cx="32" cy="32" rx="26" ry="10" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(90 32 32)" opacity="0.4"/>
+      <circle cx="32" cy="32" r="4" fill="currentColor"/>
+      <circle cx="48" cy="22" r="2.5" fill="currentColor"/>
     </symbol>
     <symbol id="xhs-icon" viewBox="0 0 24 24">
       <rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor" opacity="0.12"/>
@@ -398,7 +448,7 @@ img { max-width:100%; display:block; }
 <header class="header">
   <div class="header-inner">
     <a href="#" class="brand" id="brandLink">
-      <span class="brand-butterfly"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
+      <span class="brand-qubit"><svg class="qubit-icon"><use href="#qubit-orbit" xlink:href="#qubit-orbit"/></svg></span>
       <span class="brand-name">王凌云</span>
       <span class="brand-tag">Lingyun Wang</span>
       <span class="brand-id">@expe</span>
@@ -431,22 +481,15 @@ img { max-width:100%; display:block; }
   <!-- 0 · Merged: Profile + About + Publications -->
   <div class="page" id="page-0">
     <div class="page-card">
-      <span class="card-butterfly tl"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
-      <span class="card-butterfly br"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
-
       <div class="merged-layout">
         <!-- Left: Profile -->
         <div class="profile-col">
           <img src="profile.jpg" alt="王凌云" class="profile-avatar">
-          <h1 class="profile-name">
-            <svg class="butterfly name-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>
-            王凌云
-          </h1>
+          <h1 class="profile-name">王凌云</h1>
           <div class="profile-en">Lingyun Wang</div>
           <div class="profile-id"><i class="fa fa-at"></i>expe</div>
           <div class="profile-role">武汉大学 · 前沿交叉学科研究院<br>科研助理 · 量子计算方向</div>
-          <p class="profile-bio">爱喝无糖少冰轻咖啡因奶茶，喜欢看比赛和打游戏，偶尔涂鸦。白色三角梅爱好者。</p>
-          <p class="profile-bio-en">Research assistant at Wuhan University, working on quantum computing. Bubble tea enthusiast, casual gamer, and occasional doodler.</p>
+          <p class="profile-bio-en">B.Sc. from Wuhan University, currently a research assistant at the Research Institute of Frontier Interdisciplinary Studies, focusing on quantum computing.</p>
           <div class="profile-social">
             <a href="mailto:exp.miku.e@gmail.com" class="social-btn"><i class="fa fa-envelope"></i>Email</a>
             <a href="https://github.com/exp-e" target="_blank" rel="noopener" class="social-btn"><i class="fab fa-github"></i>GitHub</a>
@@ -461,43 +504,62 @@ img { max-width:100%; display:block; }
           <div class="sub-card">
             <div class="sub-card-header">
               <span class="sub-card-title">
-                <svg class="butterfly title-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>关于
+                <svg class="qubit-icon" style="color:var(--accent);"><use href="#qubit-orbit" xlink:href="#qubit-orbit"/></svg>关于
               </span>
               <span class="sub-card-en">About</span>
             </div>
             <div class="about-text">
-              <p>本科毕业于武汉大学，现任武汉大学前沿交叉学科研究院科研助理，研究方向为<strong>量子计算</strong>。</p>
-              <p>允许一切发生。</p>
+              <p>本科毕业于武汉大学，现任武汉大学前沿交叉学科研究院科研助理，研究方向为量子计算。</p>
+              <p>爱喝无糖少冰轻咖啡因奶茶，喜欢看比赛和打游戏，偶尔涂鸦。白色三角梅爱好者。</p>
+              <div class="about-quote">
+                &gt; “允许一切发生。”
+              </div>
             </div>
-            <p class="about-en">B.Sc. from Wuhan University, currently a research assistant at the Research Institute of Frontier Interdisciplinary Studies, focusing on quantum computing. — "Let everything happen as it may."</p>
+            <p class="about-en">Tea lover (no sugar, less ice, light caffeine), esports spectator, casual gamer, and occasional doodler. Bougainvillea spectabilis enthusiast. — &gt; "Allow everything to unfold."</p>
           </div>
 
-          <!-- Publications -->
+          <!-- Publications / 发表 -->
           <div class="sub-card">
             <div class="sub-card-header">
               <span class="sub-card-title">
-                <svg class="butterfly title-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>发表
+                <svg class="qubit-icon" style="color:var(--accent);"><use href="#qubit-orbit" xlink:href="#qubit-orbit"/></svg>发表
               </span>
               <span class="sub-card-en">Publications</span>
             </div>
-            <div class="pub-item">
-              <div class="pub-index">1</div>
-              <div class="pub-body">
+            <div class="pub-item-wrap">
+              <a href="https://www.sciencedirect.com/science/article/pii/S0370269326000316" target="_blank" rel="noopener" class="pub-preview" title="查看文章">
+                <img src="publishpreview.jpg" alt="Publication Preview">
+              </a>
+              <div class="pub-content">
                 <div class="pub-title">
                   <a href="https://www.sciencedirect.com/science/article/pii/S0370269326000316" target="_blank" rel="noopener">
                     High Reheating Temperature without Axion Domain Walls
                   </a>
                 </div>
-                <div class="pub-meta">Lingyun Wang 等 · 指导：Yuichiro Nakai（上海交通大学李政道研究所）· 2025年7月</div>
+                <div class="pub-authors">
+                  S. Nakagawa, Y. Nakai, Y.-C. Qiu, <strong>L. Wang</strong>, Y. Wang
+                </div>
+                <div class="pub-advisor">
+                  Supervised by Yuichiro Nakai (Tsung-Dao Lee Institute, SJTU) · July 2025
+                </div>
                 <div class="pub-tags">
-                  <span class="pub-tag journal"><i class="fa fa-check-circle"></i>&nbsp;Physics Letters B</span>
-                  <a href="https://arxiv.org/abs/2509.24812" target="_blank" rel="noopener" class="pub-tag arxiv"><i class="fa fa-external-link-alt"></i>&nbsp;arXiv:2509.24812</a>
+                  <a href="https://www.sciencedirect.com/science/article/pii/S0370269326000316" target="_blank" rel="noopener" class="pub-tag journal" title="在 ScienceDirect 查看 Physics Letters B 论文">
+                    <i class="fa fa-book-open"></i>&nbsp;Physics Letters B (ScienceDirect)
+                  </a>
+                  <a href="https://arxiv.org/abs/2509.24812" target="_blank" rel="noopener" class="pub-tag arxiv">
+                    <i class="fa fa-external-link-alt"></i>&nbsp;arXiv:2509.24812
+                  </a>
                   <span class="pub-tag topic">轴子宇宙学</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Vibe coding corner badge -->
+      <div class="vibe-badge">
+        本网站由 Claude Opus 4.6、Gemini 3.8 Flash、deepseek v4.1 Flash、豆包2.1 Turbo 模型 vibe coding 作成
       </div>
     </div>
     <div class="scroll-hint" data-page="1">
@@ -509,10 +571,12 @@ img { max-width:100%; display:block; }
   <!-- 1 · Notes -->
   <div class="page" id="page-1">
     <div class="page-card">
-      <span class="card-butterfly tl"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
-      <span class="card-butterfly br"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
       <div class="sec-header">
-        <h2 class="sec-title"><span class="sec-num">01</span><svg class="butterfly title-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>笔记</h2>
+        <h2 class="sec-title">
+          <span class="sec-num">01</span>
+          <svg class="qubit-icon" style="color:var(--accent);"><use href="#qubit-orbit" xlink:href="#qubit-orbit"/></svg>
+          笔记
+        </h2>
         <span class="sec-sub">Reading Notes</span>
       </div>
       <div class="section-empty">
@@ -529,10 +593,12 @@ img { max-width:100%; display:block; }
   <!-- 2 · Thoughts -->
   <div class="page" id="page-2">
     <div class="page-card">
-      <span class="card-butterfly tl"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
-      <span class="card-butterfly br"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
       <div class="sec-header">
-        <h2 class="sec-title"><span class="sec-num">02</span><svg class="butterfly title-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>想法</h2>
+        <h2 class="sec-title">
+          <span class="sec-num">02</span>
+          <svg class="qubit-icon" style="color:var(--accent);"><use href="#qubit-orbit" xlink:href="#qubit-orbit"/></svg>
+          想法
+        </h2>
         <span class="sec-sub">Fragmentary Thoughts</span>
       </div>
       <div class="section-empty">
@@ -549,10 +615,12 @@ img { max-width:100%; display:block; }
   <!-- 3 · Contact -->
   <div class="page" id="page-3">
     <div class="page-card">
-      <span class="card-butterfly tl"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
-      <span class="card-butterfly br"><svg class="butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg></span>
       <div class="sec-header">
-        <h2 class="sec-title"><span class="sec-num">03</span><svg class="butterfly title-butterfly"><use href="#butterfly-icon" xlink:href="#butterfly-icon"/></svg>联系</h2>
+        <h2 class="sec-title">
+          <span class="sec-num">03</span>
+          <svg class="qubit-icon" style="color:var(--accent);"><use href="#qubit-orbit" xlink:href="#qubit-orbit"/></svg>
+          联系
+        </h2>
         <span class="sec-sub">Get in Touch</span>
       </div>
       <div class="contact-grid">
