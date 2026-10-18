@@ -257,13 +257,12 @@ img { max-width:100%; display:block; }
 }
 .about-text p:last-child { margin-bottom:0; }
 
-/* Blockquote for 允许一切发生 */
+/* Quote for 允许一切发生 */
 .about-quote {
   margin-top:10px;
   padding:10px 16px;
   background:rgba(113,57,218,0.06);
-  border-left:3px solid var(--accent);
-  border-radius:0 6px 6px 0;
+  border-radius:6px;
   font-size:13.5px;
   color:var(--text);
   line-height:1.75;
@@ -442,8 +441,8 @@ img { max-width:100%; display:block; }
 }
 .note-card:hover { transform:translateX(4px); box-shadow:0 8px 28px rgba(113,57,218,0.15); border-color:var(--border); }
 .note-card-cover {
-  width:160px; flex-shrink:0; min-height:110px;
-  object-fit:cover; background:var(--accent-soft);
+  width:130px; height:130px; flex-shrink:0;
+  object-fit:cover; object-position:top left; background:var(--accent-soft);
 }
 .note-card-body { padding:16px 20px; flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center; }
 .note-card-title {
@@ -461,7 +460,7 @@ img { max-width:100%; display:block; }
 .note-empty i { font-size:28px; display:block; margin-bottom:10px; opacity:0.3; color:var(--grad-purple); }
 
 @media (max-width: 640px) {
-  .note-card-cover { width:110px; min-height:90px; }
+  .note-card-cover { width:96px; height:96px; }
   .note-card-body { padding:12px 14px; }
   .note-card-title { font-size:14px; }
 }
@@ -537,7 +536,6 @@ img { max-width:100%; display:block; }
           <p class="profile-bio-en">B.Sc. from Wuhan University, currently a research assistant at the Research Institute of Frontier Interdisciplinary Studies, focusing on quantum computing.</p>
           <div class="profile-social">
             <a href="mailto:exp.miku.e@gmail.com" class="social-btn"><i class="fa fa-envelope"></i>Email</a>
-            <a href="https://github.com/exp-e" target="_blank" rel="noopener" class="social-btn"><i class="fab fa-github"></i>GitHub</a>
             <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" class="social-btn"><i class="fab fa-zhihu"></i>知乎</a>
             <a href="https://www.xiaohongshu.com/user/profile/60a8c2900000000001004c34" target="_blank" rel="noopener" class="social-btn"><svg><use href="#xhs-icon" xlink:href="#xhs-icon"/></svg>小红书</a>
           </div>
@@ -557,10 +555,10 @@ img { max-width:100%; display:block; }
               <p>本科毕业于武汉大学，现任武汉大学前沿交叉学科研究院科研助理，研究方向为量子计算。</p>
               <p>爱喝无糖少冰轻咖啡因奶茶，喜欢看比赛和打游戏，偶尔涂鸦。白色三角梅爱好者。</p>
               <div class="about-quote">
-                &gt; “允许一切发生。”
+                “允许一切发生。”
               </div>
             </div>
-            <p class="about-en">Tea lover (no sugar, less ice, light caffeine), esports spectator, casual gamer, and occasional doodler. Bougainvillea spectabilis enthusiast. — &gt; "Allow everything to unfold."</p>
+            <p class="about-en">Tea lover (no sugar, less ice, light caffeine), esports spectator, casual gamer, and occasional doodler. Bougainvillea spectabilis enthusiast. — "Allow everything to unfold."</p>
           </div>
 
           <!-- Publications / 发表 -->
@@ -585,7 +583,7 @@ img { max-width:100%; display:block; }
                   S. Nakagawa, Y. Nakai, Y.-C. Qiu, <strong>L. Wang</strong>, Y. Wang
                 </div>
                 <div class="pub-advisor">
-                  Supervised by Yuichiro Nakai (Tsung-Dao Lee Institute, SJTU) · July 2025
+                  July 2025
                 </div>
                 <div class="pub-tags">
                   <a href="https://www.sciencedirect.com/science/article/pii/S0370269326000316" target="_blank" rel="noopener" class="pub-tag journal" title="在 ScienceDirect 查看 Physics Letters B 论文">
@@ -692,10 +690,6 @@ img { max-width:100%; display:block; }
         <a href="mailto:exp.miku.e@gmail.com" class="contact-card">
           <div class="contact-icon"><i class="fa fa-envelope"></i></div>
           <div><div class="contact-label">Email</div><div class="contact-value">exp.miku.e@gmail.com</div></div>
-        </a>
-        <a href="https://github.com/exp-e" target="_blank" rel="noopener" class="contact-card">
-          <div class="contact-icon"><i class="fab fa-github"></i></div>
-          <div><div class="contact-label">GitHub</div><div class="contact-value">exp-e</div></div>
         </a>
         <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" class="contact-card">
           <div class="contact-icon" style="color:#2361e0;background:rgba(35,97,224,0.08);border-color:rgba(35,97,224,0.18);"><i class="fab fa-zhihu"></i></div>
