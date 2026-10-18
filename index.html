@@ -3,664 +3,619 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#222">
-<title>个人主页 · 你的名字</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23222'/%3E%3Ctext x='32' y='45' font-size='34' font-family='Arial,sans-serif' font-weight='bold' text-anchor='middle' fill='white'%3EE%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#f4f1ec">
+<title>笔记与思考 · 物理研究者主页</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%236b7f8e'/%3E%3Ctext x='32' y='45' font-size='30' font-family='Georgia,serif' text-anchor='middle' fill='white'%3E%CF%86%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
 <style>
-/* ========== 设计 Token（沿用 Hexo Next Pisces 配色） ========== */
+/* ========== 莫兰迪配色 Token ========== */
 :root {
-  --body-bg: #eee;
-  --content-bg: #fff;
-  --card-bg: #f5f5f5;
-  --text-color: #555;
-  --heading-color: #222;
-  --link-color: #555;
-  --link-hover: #222;
-  --brand-color: #fff;
-  --border-color: #e6e6e6;
-  --accent: #222;
-  --muted: #999;
-  --sidebar-width: 260px;
-  --max-width: 1100px;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --bg: #f4f1ec;          /* 暖米白背景 */
+  --card: #ffffff;        /* 卡片纯白 */
+  --card-soft: #faf8f5;   /* 次级卡片 */
+  --text: #3d3d3d;        /* 主文字 */
+  --text-soft: #6b6b6b;   /* 次级文字 */
+  --muted: #9a958e;       /* 弱化文字 */
+  --accent: #6b7f8e;      /* 莫兰迪灰蓝 */
+  --accent-deep: #556877; /* 深灰蓝 */
+  --accent-soft: #e4e8ec; /* 灰蓝浅底 */
+  --sage: #8a9a8b;        /* 莫兰迪灰绿（点缀） */
+  --clay: #b8a0a0;        /* 莫兰迪灰粉（点缀） */
+  --sand: #c9bfa8;        /* 莫兰迪沙色（点缀） */
+  --border: #e6e2dc;      /* 边框 */
+  --border-soft: #eeebe5;
+  --font-serif: "Noto Serif SC", Georgia, "Songti SC", "SimSun", serif;
+  --font-sans: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --max-w: 980px;
+  --sidebar-w: 240px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
-
 body {
   font-family: var(--font-sans);
-  background: var(--body-bg);
-  color: var(--text-color);
-  line-height: 1.7;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
   font-size: 15px;
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
 }
-
-a { color: var(--link-color); text-decoration: none; transition: color .2s, border-color .2s; }
-a:hover { color: var(--link-hover); }
-
+a { color: var(--accent); text-decoration: none; transition: color .25s; }
+a:hover { color: var(--accent-deep); }
 img { max-width: 100%; display: block; }
 
-/* ========== 顶部深色头带 ========== */
+/* ========== 顶部细头带 ========== */
 .headband {
-  height: 3px;
-  background: var(--accent);
-}
-
-/* ========== 容器布局 ========== */
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 20px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--sage), var(--sand));
 }
 
 /* ========== Header ========== */
 .header {
-  background: var(--content-bg);
-  border-bottom: 1px solid var(--border-color);
+  background: rgba(244, 241, 236, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 .header-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 68px;
 }
-.site-meta { display: flex; align-items: center; gap: 12px; }
 .brand {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
-  color: var(--heading-color);
 }
-.brand .logo-line {
-  display: inline-block;
-  width: 24px;
-  height: 1px;
-  background: var(--heading-color);
+.brand-symbol {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--accent);
+  font-weight: 600;
 }
-.site-title {
-  font-size: 20px;
-  font-weight: 700;
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
   letter-spacing: 1px;
-  color: var(--heading-color);
 }
-.site-subtitle {
-  font-size: 12px;
+.brand-tag {
+  font-size: 11px;
   color: var(--muted);
-  margin-left: 4px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 /* 导航 */
 .main-menu {
   list-style: none;
   display: flex;
-  gap: 8px;
+  gap: 4px;
 }
 .main-menu a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 14px;
-  font-size: 14px;
+  padding: 8px 16px;
+  font-size: 13.5px;
+  color: var(--text-soft);
   border-radius: 2px;
-  transition: background .2s, color .2s;
+  transition: all .25s;
+  font-weight: 400;
 }
 .main-menu a:hover,
 .main-menu a.active {
-  background: var(--card-bg);
-  color: var(--heading-color);
+  color: var(--accent-deep);
+  background: var(--accent-soft);
 }
-.main-menu a i { font-size: 13px; }
+.main-menu a i { font-size: 12px; }
 
-/* 移动端菜单按钮 */
 .nav-toggle {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
   padding: 8px;
-  color: var(--heading-color);
 }
 .nav-toggle span {
   display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--heading-color);
+  width: 20px;
+  height: 1.5px;
+  background: var(--text);
   margin: 5px 0;
   transition: .3s;
 }
 
-/* ========== 主体：侧边栏 + 内容 ========== */
-.main { padding: 30px 0 50px; }
+/* ========== 主体布局 ========== */
+.main {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 40px 28px 60px;
+}
 .main-inner {
   display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr;
-  gap: 28px;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  gap: 36px;
   align-items: start;
 }
 
 /* ========== 侧边栏 ========== */
 .sidebar {
   position: sticky;
-  top: 94px;
-  background: var(--content-bg);
-  border-radius: 2px;
-  overflow: hidden;
+  top: 100px;
 }
-.sidebar-inner { padding: 28px 22px; }
-
-.site-author { text-align: center; margin-bottom: 22px; }
+.sidebar-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 30px 24px;
+  text-align: center;
+}
 .author-avatar {
-  width: 96px;
-  height: 96px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
-  margin: 0 auto 14px;
-  border: 2px solid var(--border-color);
+  margin: 0 auto 18px;
+  border: 3px solid var(--accent-soft);
   object-fit: cover;
-  background: var(--card-bg);
+  background: var(--card-soft);
 }
 .author-name {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--heading-color);
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
   margin-bottom: 4px;
 }
-.author-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.6;
+.author-role {
+  font-size: 12.5px;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 14px;
 }
-
-/* 社交链接 */
+.author-bio {
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.research-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+.research-tag {
+  font-size: 11.5px;
+  padding: 3px 10px;
+  background: var(--card-soft);
+  color: var(--text-soft);
+  border-radius: 2px;
+  border: 1px solid var(--border-soft);
+}
 .social-links {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 10px;
-  margin: 18px 0 22px;
-  padding: 16px 0;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
 }
 .social-links a {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--card-bg);
-  color: var(--text-color);
-  font-size: 15px;
-  transition: background .2s, color .2s, transform .2s;
+  background: var(--card-soft);
+  color: var(--text-soft);
+  font-size: 14px;
+  transition: all .25s;
+  border: 1px solid var(--border-soft);
 }
 .social-links a:hover {
   background: var(--accent);
   color: #fff;
+  border-color: var(--accent);
   transform: translateY(-2px);
 }
-
-/* 站点统计 */
-.site-state {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  text-align: center;
-}
-.site-state-item-count {
-  display: block;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--heading-color);
-}
-.site-state-item-name {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-/* 侧边栏导航（移动端用） */
-.sidebar-nav { display: none; }
 
 /* ========== 内容区 ========== */
 .content-wrap { min-width: 0; }
 
 .section {
-  background: var(--content-bg);
-  border-radius: 2px;
-  padding: 36px 38px;
-  margin-bottom: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 38px 40px;
+  margin-bottom: 28px;
 }
 .section:last-child { margin-bottom: 0; }
 
+.section-header {
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-soft);
+}
 .section-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--heading-color);
-  margin-bottom: 6px;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
-.section-title i { font-size: 18px; }
-.section-subtitle {
+.section-title .title-num {
   font-size: 13px;
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+.section-sub {
+  font-size: 12px;
   color: var(--muted);
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border-color);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 6px;
+  margin-left: 34px;
 }
 
 /* ========== Hero ========== */
 .hero {
-  background: var(--content-bg);
-  border-radius: 2px;
-  padding: 48px 42px;
-  margin-bottom: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 50px 44px;
+  margin-bottom: 28px;
   position: relative;
   overflow: hidden;
 }
-.hero::before {
+.hero::after {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--accent);
+  top: 0; right: 0;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle at top right, var(--accent-soft), transparent 70%);
+  pointer-events: none;
 }
-.hero-greeting {
-  font-size: 14px;
-  color: var(--muted);
-  letter-spacing: 2px;
+.hero-eyebrow {
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 3px;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  font-weight: 400;
 }
-.hero-name {
-  font-size: 36px;
-  font-weight: 800;
-  color: var(--heading-color);
-  line-height: 1.2;
-  margin-bottom: 14px;
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 18px;
 }
-.hero-name .accent { color: var(--accent); }
-.hero-tagline {
-  font-size: 16px;
-  color: var(--text-color);
-  margin-bottom: 24px;
+.hero-title em {
+  font-style: normal;
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent-soft);
+  padding-bottom: 2px;
+}
+.hero-text {
+  font-size: 15px;
+  color: var(--text-soft);
   max-width: 560px;
+  line-height: 1.9;
+  margin-bottom: 26px;
 }
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-
-/* 按钮 */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 22px;
-  font-size: 14px;
-  font-family: inherit;
-  border: 2px solid var(--text-color);
-  background: #fff;
-  color: var(--text-color);
-  border-radius: 2px;
-  cursor: pointer;
-  transition: background .2s, color .2s, border-color .2s;
-}
-.btn:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
-.btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
-.btn-primary:hover {
-  background: #000;
-  border-color: #000;
-}
-
-/* ========== 关于我 ========== */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-}
-.about-text p { margin-bottom: 14px; }
-.about-text p:last-child { margin-bottom: 0; }
-.about-info {
-  background: var(--card-bg);
-  padding: 22px;
-  border-radius: 2px;
-}
-.info-row {
+.hero-meta {
   display: flex;
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--border-color);
-  font-size: 14px;
+  gap: 28px;
+  flex-wrap: wrap;
 }
-.info-row:last-child { border-bottom: none; }
-.info-label {
-  width: 80px;
+.hero-meta-item {
+  font-size: 12.5px;
   color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hero-meta-item i { color: var(--accent); font-size: 12px; }
+
+/* ========== 关于 ========== */
+.about-text p {
+  margin-bottom: 16px;
+  color: var(--text-soft);
+  font-size: 14.5px;
+  line-height: 1.95;
+}
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong {
+  color: var(--text);
+  font-weight: 500;
+}
+.about-quote {
+  margin-top: 24px;
+  padding: 18px 22px;
+  background: var(--card-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--text-soft);
+  font-style: italic;
+  line-height: 1.8;
+}
+
+/* ========== 笔记列表 ========== */
+.note-list { display: flex; flex-direction: column; gap: 0; }
+.note-item {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border-soft);
+  transition: padding-left .25s;
+  cursor: pointer;
+}
+.note-item:last-child { border-bottom: none; }
+.note-item:hover { padding-left: 8px; }
+.note-item:hover .note-title { color: var(--accent-deep); }
+.note-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.note-date {
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.5px;
   flex-shrink: 0;
 }
-.info-value { color: var(--heading-color); font-weight: 500; }
-
-/* ========== 技能 ========== */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px 32px;
+.note-cat {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  letter-spacing: 0.5px;
 }
-.skill-item { }
-.skill-header {
+.note-title {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  transition: color .25s;
+}
+.note-excerpt {
+  font-size: 13.5px;
+  color: var(--text-soft);
+  line-height: 1.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.note-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  color: var(--accent);
+  margin-top: 10px;
+}
+.note-more i { font-size: 10px; transition: transform .25s; }
+.note-item:hover .note-more i { transform: translateX(3px); }
+
+/* ========== 想法（随感） ========== */
+.thoughts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.thought-card {
+  background: var(--card-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 24px 22px;
+  position: relative;
+  transition: transform .25s, box-shadow .25s;
+}
+.thought-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(107, 127, 142, 0.08);
+}
+.thought-card::before {
+  content: "\201C";
+  position: absolute;
+  top: 8px; left: 16px;
+  font-family: var(--font-serif);
+  font-size: 42px;
+  color: var(--accent-soft);
+  line-height: 1;
+}
+.thought-text {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--text-soft);
+  line-height: 1.85;
+  margin-bottom: 14px;
+  padding-top: 14px;
+  position: relative;
+  z-index: 1;
+}
+.thought-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
-  font-size: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
 }
-.skill-name { color: var(--heading-color); font-weight: 500; }
-.skill-percent { color: var(--muted); font-size: 13px; }
-.skill-bar {
-  height: 6px;
-  background: var(--card-bg);
-  border-radius: 3px;
-  overflow: hidden;
+.thought-date {
+  font-size: 11.5px;
+  color: var(--muted);
 }
-.skill-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 3px;
-  width: 0;
-  transition: width 1s ease;
+.thought-tag {
+  font-size: 11px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: 2px;
 }
 
-/* 技能标签 */
-.skill-tags {
+/* ========== 联系 ========== */
+.contact-simple {
   display: flex;
+  justify-content: center;
+  gap: 40px;
   flex-wrap: wrap;
+  text-align: center;
+}
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 8px;
-  margin-top: 24px;
 }
-.skill-tag {
-  padding: 5px 14px;
-  background: var(--card-bg);
-  border-radius: 2px;
-  font-size: 13px;
-  color: var(--text-color);
-  transition: background .2s, color .2s;
-}
-.skill-tag:hover {
-  background: var(--accent);
-  color: #fff;
-}
-
-/* ========== 项目作品 ========== */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-.project-card {
-  background: var(--card-bg);
-  border-radius: 2px;
-  padding: 24px;
-  transition: transform .2s, box-shadow .2s;
-  border: 1px solid transparent;
-}
-.project-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,.08);
-  border-color: var(--border-color);
-}
-.project-icon {
+.contact-item i {
+  font-size: 20px;
+  color: var(--accent);
   width: 44px;
   height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 2px;
-  font-size: 18px;
-  margin-bottom: 14px;
-}
-.project-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--heading-color);
-  margin-bottom: 8px;
-}
-.project-desc {
-  font-size: 13px;
-  color: var(--text-color);
-  line-height: 1.6;
-  margin-bottom: 14px;
-}
-.project-meta {
-  display: flex;
-  gap: 12px;
-  font-size: 12px;
-  color: var(--muted);
-}
-.project-meta a { display: inline-flex; align-items: center; gap: 4px; }
-.project-meta a:hover { color: var(--heading-color); }
-
-/* ========== 时间线（经历） ========== */
-.timeline { position: relative; padding-left: 28px; }
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 8px; top: 6px; bottom: 6px;
-  width: 2px;
-  background: var(--border-color);
-}
-.timeline-item { position: relative; padding-bottom: 24px; }
-.timeline-item:last-child { padding-bottom: 0; }
-.timeline-item::before {
-  content: "";
-  position: absolute;
-  left: -27px; top: 6px;
-  width: 12px; height: 12px;
+  background: var(--accent-soft);
   border-radius: 50%;
-  background: #fff;
-  border: 2px solid var(--accent);
 }
-.timeline-date {
-  font-size: 12px;
+.contact-label {
+  font-size: 11px;
   color: var(--muted);
-  margin-bottom: 4px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
-.timeline-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--heading-color);
-  margin-bottom: 4px;
+.contact-value {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 400;
 }
-.timeline-org { font-size: 13px; color: var(--text-color); margin-bottom: 4px; }
-.timeline-desc { font-size: 13px; color: var(--muted); }
-
-/* ========== 联系 ========== */
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 28px;
-}
-.contact-item {
+.contact-note {
   text-align: center;
-  padding: 22px 16px;
-  background: var(--card-bg);
-  border-radius: 2px;
-  transition: background .2s;
-}
-.contact-item:hover { background: #ebebeb; }
-.contact-item i {
-  font-size: 22px;
-  color: var(--heading-color);
-  margin-bottom: 10px;
-}
-.contact-item-label {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 4px;
-}
-.contact-item-value {
-  font-size: 14px;
-  color: var(--heading-color);
-  font-weight: 500;
-  word-break: break-all;
-}
-
-/* 联系表单 */
-.contact-form { display: grid; gap: 14px; }
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-.form-group label {
-  display: block;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-soft);
   font-size: 13px;
-  color: var(--heading-color);
-  margin-bottom: 6px;
-  font-weight: 500;
-}
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 10px 14px;
-  border: 1px solid var(--border-color);
-  border-radius: 2px;
-  font-size: 16px;
-  font-family: inherit;
-  background: #fff;
-  color: var(--text-color);
-  transition: border-color .2s;
-}
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-.form-group textarea { resize: vertical; min-height: 100px; }
-
-/* Toast */
-.toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: var(--accent);
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 2px;
-  font-size: 14px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s, transform .3s;
-  z-index: 999;
-}
-.toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  color: var(--muted);
+  font-family: var(--font-serif);
+  font-style: italic;
 }
 
 /* ========== 页脚 ========== */
 .footer {
-  background: var(--content-bg);
-  border-top: 1px solid var(--border-color);
-  padding: 24px 0;
   text-align: center;
-  font-size: 13px;
+  padding: 32px 20px;
+  font-size: 12.5px;
   color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
 }
-.footer .heart { color: #cc4444; margin: 0 4px; }
-.footer a { color: var(--text-color); }
-.footer a:hover { color: var(--heading-color); }
+.footer .sep { margin: 0 10px; color: var(--border); }
 
 /* ========== 回到顶部 ========== */
 .back-to-top {
   position: fixed;
-  right: 24px;
-  bottom: 30px;
-  width: 40px;
-  height: 40px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 2px;
+  right: 28px;
+  bottom: 32px;
+  width: 38px;
+  height: 38px;
+  background: var(--card);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity .3s, visibility .3s, background .2s;
+  transition: all .3s;
   z-index: 90;
+  box-shadow: 0 2px 12px rgba(0,0,0,.05);
 }
 .back-to-top.visible { opacity: 1; visibility: visible; }
-.back-to-top:hover { background: #000; }
-.back-to-top .percent {
-  position: absolute;
-  font-size: 9px;
-  bottom: 3px;
-}
+.back-to-top:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 
-/* ========== 滚动揭示动画 ========== */
+/* ========== Toast ========== */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--accent-deep);
+  color: #fff;
+  padding: 11px 22px;
+  border-radius: 4px;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .3s;
+  z-index: 999;
+  font-family: var(--font-sans);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ========== 滚动揭示 ========== */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity .6s ease, transform .6s ease;
+  transform: translateY(16px);
+  transition: opacity .7s ease, transform .7s ease;
 }
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ========== 响应式 ========== */
-@media (max-width: 900px) {
-  .main-inner {
-    grid-template-columns: 1fr;
-  }
-  .sidebar {
-    position: static;
-  }
+@media (max-width: 860px) {
+  .main-inner { grid-template-columns: 1fr; gap: 24px; }
+  .sidebar { position: static; }
   .nav-toggle { display: block; }
   .main-menu {
     display: none;
     position: absolute;
-    top: 64px;
-    left: 0; right: 0;
-    background: var(--content-bg);
+    top: 68px; left: 0; right: 0;
+    background: var(--bg);
     flex-direction: column;
-    padding: 10px 20px;
-    border-bottom: 1px solid var(--border-color);
+    padding: 12px 28px;
+    border-bottom: 1px solid var(--border);
     gap: 0;
   }
   .main-menu.open { display: flex; }
-  .main-menu a { padding: 12px 10px; border-bottom: 1px solid var(--border-color); }
+  .main-menu a { padding: 12px 0; border-bottom: 1px solid var(--border-soft); }
   .main-menu a:last-child { border-bottom: none; }
-  .about-grid, .skills-grid, .projects-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .hero { padding: 32px 24px; }
-  .hero-name { font-size: 28px; }
-  .section { padding: 28px 22px; }
+  .thoughts-grid { grid-template-columns: 1fr; }
+  .hero { padding: 36px 26px; }
+  .hero-title { font-size: 26px; }
+  .section { padding: 28px 24px; }
+  .header-inner { padding: 0 20px; }
+  .main { padding: 28px 20px 48px; }
 }
-
 @media (max-width: 480px) {
-  .hero-name { font-size: 24px; }
-  .site-subtitle { display: none; }
-  .container { padding: 0 14px; }
+  .brand-tag { display: none; }
+  .hero-title { font-size: 22px; }
+  .hero-meta { gap: 16px; }
+  .contact-simple { gap: 24px; }
 }
 </style>
 </head>
@@ -670,25 +625,21 @@ img { max-width: 100%; display: block; }
 
 <!-- ========== Header ========== -->
 <header class="header">
-  <div class="container header-inner">
-    <div class="site-meta">
-      <a href="#top" class="brand">
-        <span class="logo-line"></span>
-        <h1 class="site-title">你的名字</h1>
-        <span class="logo-line"></span>
-      </a>
-      <span class="site-subtitle">· 个人主页</span>
-    </div>
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <span class="brand-symbol">&phi;</span>
+      <span class="brand-name">观物笔记</span>
+      <span class="brand-tag">Physics &middot; Notes</span>
+    </a>
     <button class="nav-toggle" id="navToggle" aria-label="切换导航">
       <span></span><span></span><span></span>
     </button>
     <nav>
       <ul class="main-menu" id="mainMenu">
-        <li><a href="#hero" class="active"><i class="fa fa-home"></i>首页</a></li>
+        <li><a href="#hero" class="active"><i class="fa fa-feather"></i>首页</a></li>
         <li><a href="#about"><i class="fa fa-user"></i>关于</a></li>
-        <li><a href="#skills"><i class="fa fa-code"></i>技能</a></li>
-        <li><a href="#projects"><i class="fa fa-folder"></i>作品</a></li>
-        <li><a href="#experience"><i class="fa fa-briefcase"></i>经历</a></li>
+        <li><a href="#notes"><i class="fa fa-book-open"></i>笔记</a></li>
+        <li><a href="#thoughts"><i class="fa fa-lightbulb"></i>想法</a></li>
         <li><a href="#contact"><i class="fa fa-envelope"></i>联系</a></li>
       </ul>
     </nav>
@@ -697,249 +648,217 @@ img { max-width: 100%; display: block; }
 
 <!-- ========== 主体 ========== -->
 <main class="main" id="top">
-  <div class="container main-inner">
+  <div class="main-inner">
 
-    <!-- ===== 侧边栏 ===== -->
+    <!-- 侧边栏 -->
     <aside class="sidebar">
-      <div class="sidebar-inner">
-        <div class="site-author">
-          <img src="assets/avatar.gif" alt="头像" class="author-avatar">
-          <div class="author-name">你的名字</div>
-          <div class="author-desc">一句话介绍自己，比如：全栈开发者 / 设计爱好者 / 终身学习者</div>
+      <div class="sidebar-card">
+        <img src="assets/avatar.gif" alt="头像" class="author-avatar">
+        <div class="author-name">你的名字</div>
+        <div class="author-role">物理学研究者</div>
+        <p class="author-bio">在量子与经典之间徘徊，记录推演过程中的困惑与顿悟。</p>
+        <div class="research-tags">
+          <span class="research-tag">凝聚态物理</span>
+          <span class="research-tag">量子力学</span>
+          <span class="research-tag">统计物理</span>
+          <span class="research-tag">科学哲学</span>
         </div>
-
         <div class="social-links">
           <a href="https://github.com/exp-e" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
           <a href="mailto:your@email.com" title="邮箱"><i class="fa fa-envelope"></i></a>
-          <a href="#" target="_blank" rel="noopener" title="微博"><i class="fab fa-weibo"></i></a>
-          <a href="#" target="_blank" rel="noopener" title="知乎"><i class="fab fa-zhihu"></i></a>
-          <a href="#" target="_blank" rel="noopener" title="Bilibili"><i class="fab fa-bilibili"></i></a>
-          <a href="#" target="_blank" rel="noopener" title="RSS"><i class="fa fa-rss"></i></a>
-        </div>
-
-        <div class="site-state">
-          <div class="site-state-item">
-            <span class="site-state-item-count">12</span>
-            <span class="site-state-item-name">项目</span>
-          </div>
-          <div class="site-state-item">
-            <span class="site-state-item-count">8</span>
-            <span class="site-state-item-name">技能</span>
-          </div>
-          <div class="site-state-item">
-            <span class="site-state-item-count">3</span>
-            <span class="site-state-item-name">年经验</span>
-          </div>
+          <a href="#" title="知乎"><i class="fab fa-zhihu"></i></a>
+          <a href="#" title="RSS"><i class="fa fa-rss"></i></a>
         </div>
       </div>
     </aside>
 
-    <!-- ===== 内容区 ===== -->
+    <!-- 内容区 -->
     <div class="content-wrap">
 
       <!-- Hero -->
       <section class="hero reveal" id="hero">
-        <div class="hero-greeting">Hello, World</div>
-        <h2 class="hero-name">我是 <span class="accent">你的名字</span></h2>
-        <p class="hero-tagline">欢迎来到我的个人主页。这里记录我的项目、技能与思考。热爱技术，专注创造，相信好的产品来自对细节的执着。</p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary"><i class="fa fa-folder-open"></i>查看作品</a>
-          <a href="#contact" class="btn"><i class="fa fa-paper-plane"></i>联系我</a>
+        <div class="hero-eyebrow">Notes &amp; Reflections</div>
+        <h1 class="hero-title">在公式与现象之间，<br>记录那些<em>尚未成形</em>的思考。</h1>
+        <p class="hero-text">这里是一位物理研究者的私人角落。不追求完整的论证，只忠实于思考的痕迹——有时是一段推导笔记，有时是深夜读完论文后的随感，有时只是对某个概念的重新理解。</p>
+        <div class="hero-meta">
+          <span class="hero-meta-item"><i class="fa fa-book"></i> 24 篇笔记</span>
+          <span class="hero-meta-item"><i class="fa fa-lightbulb"></i> 36 条想法</span>
+          <span class="hero-meta-item"><i class="fa fa-clock"></i> 更新于 2025.10</span>
         </div>
       </section>
 
-      <!-- 关于我 -->
+      <!-- 关于 -->
       <section class="section reveal" id="about">
-        <h2 class="section-title"><i class="fa fa-user"></i>关于我</h2>
-        <p class="section-subtitle">Who Am I</p>
-        <div class="about-grid">
-          <div class="about-text">
-            <p>你好！我是一名充满热情的开发者，专注于 Web 开发与用户体验设计。我喜欢将复杂的问题拆解为简洁优雅的解决方案，并在代码中追求可读性与可维护性。</p>
-            <p>在过去的几年里，我参与了多个从 0 到 1 的项目，涵盖前端架构、后端服务和 DevOps 流程。我相信技术的价值在于解决真实问题，而不是炫技。</p>
-            <p>工作之外，我喜欢写博客记录学习心得、探索开源项目，也热衷于摄影和旅行。如果你对我的工作感兴趣，欢迎随时联系我。</p>
-          </div>
-          <div class="about-info">
-            <div class="info-row"><span class="info-label">姓名</span><span class="info-value">你的名字</span></div>
-            <div class="info-row"><span class="info-label">职位</span><span class="info-value">全栈开发工程师</span></div>
-            <div class="info-row"><span class="info-label">所在地</span><span class="info-value">中国 · 武汉</span></div>
-            <div class="info-row"><span class="info-label">邮箱</span><span class="info-value">your@email.com</span></div>
-            <div class="info-row"><span class="info-label">学历</span><span class="info-value">计算机科学 · 本科</span></div>
-            <div class="info-row"><span class="info-label">状态</span><span class="info-value">开放合作机会</span></div>
-          </div>
+        <div class="section-header">
+          <h2 class="section-title"><span class="title-num">01</span>关于</h2>
+          <div class="section-sub">About Me</div>
+        </div>
+        <div class="about-text">
+          <p>我是一名<strong>物理学研究者</strong>，主要兴趣在凝聚态理论与量子多体问题。日常工作是在哈密顿量与配分函数之间寻找秩序，偶尔也会被科学哲学问题吸引注意力。</p>
+          <p>建立这个页面的初衷很简单：把散落在笔记本、草稿纸和脑海里的想法整理出来。有些是研读论文时的批注，有些是教学相长后的重新理解，有些则只是对"为什么世界是这样的"这一问题的持续追问。</p>
+          <p>我相信<strong>写作是思考的延伸</strong>。很多模糊的直觉只有落在纸上才会暴露其漏洞，而很多看似无关的问题，在记录的过程中会悄然连缀成线。</p>
+          <div class="about-quote">"物理学不告诉我们世界是什么，而是告诉我们关于世界我们能谈论什么。" —— 尼尔斯·玻尔</div>
         </div>
       </section>
 
-      <!-- 技能 -->
-      <section class="section reveal" id="skills">
-        <h2 class="section-title"><i class="fa fa-code"></i>技能</h2>
-        <p class="section-subtitle">My Skills</p>
-        <div class="skills-grid">
-          <div class="skill-item">
-            <div class="skill-header"><span class="skill-name">JavaScript / TypeScript</span><span class="skill-percent">90%</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header"><span class="skill-name">HTML / CSS</span><span class="skill-percent">92%</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header"><span class="skill-name">Vue / React</span><span class="skill-percent">85%</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header"><span class="skill-name">Node.js</span><span class="skill-percent">80%</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header"><span class="skill-name">Python</span><span class="skill-percent">75%</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header"><span class="skill-name">Git / DevOps</span><span class="skill-percent">78%</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="78%"></div></div>
-          </div>
+      <!-- 笔记 -->
+      <section class="section reveal" id="notes">
+        <div class="section-header">
+          <h2 class="section-title"><span class="title-num">02</span>笔记</h2>
+          <div class="section-sub">Reading Notes</div>
         </div>
-        <div class="skill-tags">
-          <span class="skill-tag">Webpack</span>
-          <span class="skill-tag">Vite</span>
-          <span class="skill-tag">MySQL</span>
-          <span class="skill-tag">MongoDB</span>
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">Linux</span>
-          <span class="skill-tag">Figma</span>
-          <span class="skill-tag">RESTful API</span>
-          <span class="skill-tag">GraphQL</span>
-          <span class="skill-tag">CI/CD</span>
+        <div class="note-list">
+
+          <div class="note-item" onclick="showToast('笔记详情页开发中，敬请期待')">
+            <div class="note-top">
+              <span class="note-date">2025-10-12</span>
+              <span class="note-cat">凝聚态</span>
+            </div>
+            <h3 class="note-title">BCS 理论中能隙方程的另一种推导思路</h3>
+            <p class="note-excerpt">传统教材中从平均场近似出发推导能隙方程，本文尝试从配分函数的路径积分表示入手，通过引入 Hubbard-Stratonovich 变换，自然地得到序参量与能隙的关系，并讨论这种方法在处理非传统配对时的优势。</p>
+            <span class="note-more">继续阅读 <i class="fa fa-arrow-right"></i></span>
+          </div>
+
+          <div class="note-item" onclick="showToast('笔记详情页开发中，敬请期待')">
+            <div class="note-top">
+              <span class="note-date">2025-09-28</span>
+              <span class="note-cat">量子力学</span>
+            </div>
+            <h3 class="note-title">重新理解密度矩阵：从纯态到混合态的几何图像</h3>
+            <p class="note-excerpt">密度矩阵常常被当作处理统计混合的工具，但它的几何内涵远不止于此。本文从 Bloch 球的推广出发，讨论密度矩阵在状态空间中的凸集结构，以及熵与纯度的几何意义。</p>
+            <span class="note-more">继续阅读 <i class="fa fa-arrow-right"></i></span>
+          </div>
+
+          <div class="note-item" onclick="showToast('笔记详情页开发中，敬请期待')">
+            <div class="note-top">
+              <span class="note-date">2025-09-15</span>
+              <span class="note-cat">统计物理</span>
+            </div>
+            <h3 class="note-title">重整化群的物理直觉：为什么粗粒化不会丢失信息</h3>
+            <p class="note-excerpt">重整化群的核心操作是尺度变换，但"积分掉短程自由度"为何反而能揭示长程物理？本文从关联函数的标度行为入手，尝试给出一个不依赖具体模型的直观解释。</p>
+            <span class="note-more">继续阅读 <i class="fa fa-arrow-right"></i></span>
+          </div>
+
+          <div class="note-item" onclick="showToast('笔记详情页开发中，敬请期待')">
+            <div class="note-top">
+              <span class="note-date">2025-08-30</span>
+              <span class="note-cat">科学哲学</span>
+            </div>
+            <h3 class="note-title">有效场论视角下的"基本定律"：层级与自主性</h3>
+            <p class="note-excerpt">Anderson 的 "More is different" 常被引用，但有效场论的框架为这一观点提供了更精确的表述。本文讨论不同能标下物理定律的自主性，以及"还原"与"涌现"之间的辩证关系。</p>
+            <span class="note-more">继续阅读 <i class="fa fa-arrow-right"></i></span>
+          </div>
+
+          <div class="note-item" onclick="showToast('笔记详情页开发中，敬请期待')">
+            <div class="note-top">
+              <span class="note-date">2025-08-14</span>
+              <span class="note-cat">教学札记</span>
+            </div>
+            <h3 class="note-title">讲了三遍热力学第二定律后，我对"熵"的理解变了</h3>
+            <p class="note-excerpt">从克劳修斯不等式到玻尔兹曼公式，再到信息论中的香农熵，学生们总是在不同定义间迷失。这篇札记记录我在教学中摸索出的一条线索：从"不可逆性"出发，而非从"混乱度"出发。</p>
+            <span class="note-more">继续阅读 <i class="fa fa-arrow-right"></i></span>
+          </div>
+
         </div>
       </section>
 
-      <!-- 项目作品 -->
-      <section class="section reveal" id="projects">
-        <h2 class="section-title"><i class="fa fa-folder"></i>项目作品</h2>
-        <p class="section-subtitle">My Projects</p>
-        <div class="projects-grid">
-          <div class="project-card">
-            <div class="project-icon"><i class="fa fa-blog"></i></div>
-            <h3 class="project-title">个人博客系统</h3>
-            <p class="project-desc">基于 Hexo 搭建的个人博客，支持 Markdown 写作、标签分类、全文搜索和主题定制，已稳定运行多年。</p>
-            <div class="project-meta">
-              <a href="#" target="_blank" rel="noopener"><i class="fab fa-github"></i>源码</a>
-              <a href="#" target="_blank" rel="noopener"><i class="fa fa-external-link-alt"></i>演示</a>
-            </div>
-          </div>
-          <div class="project-card">
-            <div class="project-icon"><i class="fa fa-shopping-cart"></i></div>
-            <h3 class="project-title">电商管理后台</h3>
-            <p class="project-desc">基于 Vue3 + Element Plus 的中后台管理系统，包含商品管理、订单处理、数据可视化等完整模块。</p>
-            <div class="project-meta">
-              <a href="#" target="_blank" rel="noopener"><i class="fab fa-github"></i>源码</a>
-              <a href="#" target="_blank" rel="noopener"><i class="fa fa-external-link-alt"></i>演示</a>
-            </div>
-          </div>
-          <div class="project-card">
-            <div class="project-icon"><i class="fa fa-robot"></i></div>
-            <h3 class="project-title">AI 对话助手</h3>
-            <p class="project-desc">集成大语言模型的智能对话应用，支持多轮对话、上下文记忆、流式输出和自定义提示词模板。</p>
-            <div class="project-meta">
-              <a href="#" target="_blank" rel="noopener"><i class="fab fa-github"></i>源码</a>
-              <a href="#" target="_blank" rel="noopener"><i class="fa fa-external-link-alt"></i>演示</a>
-            </div>
-          </div>
-          <div class="project-card">
-            <div class="project-icon"><i class="fa fa-chart-line"></i></div>
-            <h3 class="project-title">数据可视化看板</h3>
-            <p class="project-desc">基于 ECharts 的实时数据监控看板，支持多维度数据筛选、图表联动和自定义布局拖拽。</p>
-            <div class="project-meta">
-              <a href="#" target="_blank" rel="noopener"><i class="fab fa-github"></i>源码</a>
-              <a href="#" target="_blank" rel="noopener"><i class="fa fa-external-link-alt"></i>演示</a>
-            </div>
-          </div>
+      <!-- 想法 -->
+      <section class="section reveal" id="thoughts">
+        <div class="section-header">
+          <h2 class="section-title"><span class="title-num">03</span>想法</h2>
+          <div class="section-sub">Fragmentary Thoughts</div>
         </div>
-      </section>
+        <div class="thoughts-grid">
 
-      <!-- 经历 -->
-      <section class="section reveal" id="experience">
-        <h2 class="section-title"><i class="fa fa-briefcase"></i>经历</h2>
-        <p class="section-subtitle">Experience & Education</p>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-date">2023 — 至今</div>
-            <div class="timeline-title">高级前端工程师</div>
-            <div class="timeline-org">某科技有限公司</div>
-            <div class="timeline-desc">负责核心产品前端架构设计与性能优化，主导组件库建设，团队技术分享。</div>
+          <div class="thought-card">
+            <p class="thought-text">对称性之所以重要，不是因为它让方程变简单，而是因为它告诉我们哪些量是可以被定义的。没有对称性，连"电荷"这个概念本身都成问题。</p>
+            <div class="thought-footer">
+              <span class="thought-date">2025-10-08</span>
+              <span class="thought-tag">对称性</span>
+            </div>
           </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2021 — 2023</div>
-            <div class="timeline-title">全栈开发工程师</div>
-            <div class="timeline-org">某互联网创业公司</div>
-            <div class="timeline-desc">从 0 到 1 搭建公司产品，涵盖前端、后端及部署运维全流程。</div>
+
+          <div class="thought-card">
+            <p class="thought-text">学生时代总觉得近似是"不精确"的代名词，做研究后才明白：好的近似恰恰是对物理本质最深刻的洞察——知道什么可以忽略，比知道什么要计算更难。</p>
+            <div class="thought-footer">
+              <span class="thought-date">2025-10-02</span>
+              <span class="thought-tag">方法论</span>
+            </div>
           </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2017 — 2021</div>
-            <div class="timeline-title">计算机科学与技术 · 本科</div>
-            <div class="timeline-org">某大学</div>
-            <div class="timeline-desc">主修数据结构、算法、操作系统、计算机网络等核心课程，多次获得奖学金。</div>
+
+          <div class="thought-card">
+            <p class="thought-text">量子力学的测量问题讨论了一百年，也许问题本身就问错了。也许"测量"不是一个需要解释的过程，而是我们描述世界的语言中不可还原的基本要素。</p>
+            <div class="thought-footer">
+              <span class="thought-date">2025-09-20</span>
+              <span class="thought-tag">量子基础</span>
+            </div>
           </div>
+
+          <div class="thought-card">
+            <p class="thought-text">读论文时最兴奋的时刻，不是看到结论，而是看到某个中间步骤时突然意识到："原来这两个我以为无关的东西，其实是同一件事。"</p>
+            <div class="thought-footer">
+              <span class="thought-date">2025-09-05</span>
+              <span class="thought-tag">阅读</span>
+            </div>
+          </div>
+
+          <div class="thought-card">
+            <p class="thought-text">统计力学的美妙之处在于：它从对微观细节的"无知"出发，却得到了关于宏观世界最可靠的知识。无知有时比全知更有生产力。</p>
+            <div class="thought-footer">
+              <span class="thought-date">2025-08-22</span>
+              <span class="thought-tag">统计物理</span>
+            </div>
+          </div>
+
+          <div class="thought-card">
+            <p class="thought-text">做计算就像走夜路：你只能看到手电筒照亮的那一小片，但只要方向大致正确，一步步走下去，总能到达想去的地方。怕的是站在原地不敢迈步。</p>
+            <div class="thought-footer">
+              <span class="thought-date">2025-08-10</span>
+              <span class="thought-tag">研究日常</span>
+            </div>
+          </div>
+
         </div>
       </section>
 
       <!-- 联系 -->
       <section class="section reveal" id="contact">
-        <h2 class="section-title"><i class="fa fa-envelope"></i>联系我</h2>
-        <p class="section-subtitle">Get In Touch</p>
-        <div class="contact-grid">
+        <div class="section-header">
+          <h2 class="section-title"><span class="title-num">04</span>联系</h2>
+          <div class="section-sub">Get in Touch</div>
+        </div>
+        <div class="contact-simple">
           <div class="contact-item">
             <i class="fa fa-envelope"></i>
-            <div class="contact-item-label">邮箱</div>
-            <div class="contact-item-value">your@email.com</div>
+            <span class="contact-label">Email</span>
+            <span class="contact-value">your@email.com</span>
           </div>
           <div class="contact-item">
             <i class="fab fa-github"></i>
-            <div class="contact-item-label">GitHub</div>
-            <div class="contact-item-value">@exp-e</div>
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">@exp-e</span>
           </div>
           <div class="contact-item">
             <i class="fa fa-map-marker-alt"></i>
-            <div class="contact-item-label">所在地</div>
-            <div class="contact-item-value">中国 · 武汉</div>
+            <span class="contact-label">Location</span>
+            <span class="contact-value">中国 · 武汉</span>
           </div>
         </div>
-        <form class="contact-form" id="contactForm">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">姓名</label>
-              <input type="text" id="name" placeholder="请输入您的姓名" required>
-            </div>
-            <div class="form-group">
-              <label for="email">邮箱</label>
-              <input type="email" id="email" placeholder="请输入您的邮箱" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="message">留言</label>
-            <textarea id="message" placeholder="请输入您想说的话..." required></textarea>
-          </div>
-          <div>
-            <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i>发送消息</button>
-          </div>
-        </form>
+        <p class="contact-note">欢迎讨论物理、数学，或任何有趣的问题。回复可能不及时，但每封邮件都会读。</p>
       </section>
 
     </div>
   </div>
 </main>
 
-<!-- ========== 页脚 ========== -->
+<!-- 页脚 -->
 <footer class="footer">
-  <div class="container">
-    &copy; 2025 <span class="with-love"><i class="fa fa-heart heart"></i></span> 你的名字 · 基于 Hexo Next 风格设计
-  </div>
+  &copy; 2025 你的名字 <span class="sep">|</span> 观物笔记 <span class="sep">|</span> 记录思考的痕迹
 </footer>
 
 <!-- 回到顶部 -->
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">
   <i class="fa fa-arrow-up"></i>
-  <span class="percent" id="scrollPercent">0%</span>
 </button>
 
 <!-- Toast -->
@@ -949,28 +868,20 @@ img { max-width: 100%; display: block; }
 (function() {
   'use strict';
 
-  /* ===== 移动端导航切换 ===== */
+  /* 移动端导航 */
   var navToggle = document.getElementById('navToggle');
   var mainMenu = document.getElementById('mainMenu');
   navToggle.addEventListener('click', function() {
     mainMenu.classList.toggle('open');
   });
-  // 点击导航项后关闭菜单
   mainMenu.querySelectorAll('a').forEach(function(a) {
-    a.addEventListener('click', function() {
-      mainMenu.classList.remove('open');
-    });
+    a.addEventListener('click', function() { mainMenu.classList.remove('open'); });
   });
 
-  /* ===== 回到顶部 + 滚动百分比 ===== */
+  /* 回到顶部 */
   var backToTop = document.getElementById('backToTop');
-  var scrollPercent = document.getElementById('scrollPercent');
   window.addEventListener('scroll', function() {
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    var percent = docHeight > 0 ? Math.round(scrollTop / docHeight * 100) : 0;
-    scrollPercent.textContent = percent + '%';
-    if (scrollTop > 300) {
+    if (window.pageYOffset > 400) {
       backToTop.classList.add('visible');
     } else {
       backToTop.classList.remove('visible');
@@ -980,29 +891,25 @@ img { max-width: 100%; display: block; }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ===== 滚动揭示动画 ===== */
+  /* 滚动揭示 */
   var reveals = document.querySelectorAll('.reveal');
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        // 触发技能条动画
-        entry.target.querySelectorAll('.skill-fill').forEach(function(fill) {
-          fill.style.width = fill.getAttribute('data-width');
-        });
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
   reveals.forEach(function(el) { observer.observe(el); });
 
-  /* ===== 导航高亮当前区块 ===== */
+  /* 导航高亮 */
   var sections = document.querySelectorAll('section[id]');
   var navLinks = document.querySelectorAll('.main-menu a');
   window.addEventListener('scroll', function() {
     var scrollY = window.pageYOffset;
     sections.forEach(function(sec) {
-      var top = sec.offsetTop - 100;
+      var top = sec.offsetTop - 120;
       var height = sec.offsetHeight;
       var id = sec.getAttribute('id');
       var link = document.querySelector('.main-menu a[href="#' + id + '"]');
@@ -1014,50 +921,22 @@ img { max-width: 100%; display: block; }
     });
   });
 
-  /* ===== Toast 提示 ===== */
+  /* Toast */
   var toast = document.getElementById('toast');
   var toastTimer;
-  function showToast(msg) {
+  window.showToast = function(msg) {
     toast.textContent = msg;
     toast.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function() {
-      toast.classList.remove('show');
-    }, 2500);
-  }
+    toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 2200);
+  };
 
-  /* ===== 联系表单（前端演示） ===== */
-  var form = document.getElementById('contactForm');
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var name = document.getElementById('name').value.trim();
-    var email = document.getElementById('email').value.trim();
-    var message = document.getElementById('message').value.trim();
-    if (!name || !email || !message) {
-      showToast('请填写完整信息');
-      return;
-    }
-    // 演示环境：仅提示，实际部署可对接后端或 Formspree 等服务
-    showToast('消息已发送（演示模式），感谢您的留言！');
-    form.reset();
-  });
-
-  /* ===== 社交链接占位提示 ===== */
+  /* 社交链接占位提示 */
   document.querySelectorAll('.social-links a').forEach(function(a) {
     if (a.getAttribute('href') === '#') {
       a.addEventListener('click', function(e) {
         e.preventDefault();
         showToast('请在模板中替换为您的真实链接');
-      });
-    }
-  });
-
-  /* ===== 项目卡片占位链接提示 ===== */
-  document.querySelectorAll('.project-meta a').forEach(function(a) {
-    if (a.getAttribute('href') === '#') {
-      a.addEventListener('click', function(e) {
-        e.preventDefault();
-        showToast('请在模板中替换为真实项目链接');
       });
     }
   });
