@@ -582,11 +582,11 @@ img { max-width:100%; display:block; }
   width:100%;
   aspect-ratio:1/1;
   object-fit:cover;
-  object-position:top left;
+  object-position:center;
   display:block;
 }
 .recipe-info {
-  padding:12px 14px;
+  padding:10px 12px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -594,17 +594,38 @@ img { max-width:100%; display:block; }
 }
 .recipe-name {
   font-family:var(--font-serif);
-  font-size:14.5px;
+  font-size:13.5px;
   font-weight:600;
   color:var(--text);
+}
+.recipe-info .cat-tag {
+  padding:1px 9px;
+  border-radius:10px;
+  font-size:10.5px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-weight:500;
+  flex-shrink:0;
 }
 
 /* ===== Life: Photo grid ===== */
 .photo-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
-  gap:10px;
   margin-top:8px;
+}
+.photo-date-label {
+  font-size:12px;
+  color:var(--muted);
+  font-weight:500;
+  letter-spacing:1px;
+  margin:16px 0 8px;
+  padding-bottom:6px;
+  border-bottom:1px dashed var(--border-soft);
+}
+.photo-date-label:first-child { margin-top:0; }
+.photo-row {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(130px, 1fr));
+  gap:10px;
 }
 .photo-item {
   aspect-ratio:1/1;
@@ -624,6 +645,110 @@ img { max-width:100%; display:block; }
   object-fit:cover;
   object-position:center;
   display:block;
+}
+.photo-pager {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:20px;
+}
+.photo-pager button {
+  min-width:32px;
+  height:32px;
+  padding:0 10px;
+  border-radius:8px;
+  border:1px solid var(--border-soft);
+  background:var(--card);
+  color:var(--text-soft);
+  font-size:13px;
+  cursor:pointer;
+  transition:all .2s;
+}
+.photo-pager button:hover:not(:disabled) {
+  border-color:var(--border);
+  color:var(--accent);
+}
+.photo-pager button.active {
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+.photo-pager button:disabled {
+  opacity:0.4;
+  cursor:not-allowed;
+}
+
+/* ===== Life: Match cards ===== */
+.match-grid {
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-top:8px;
+}
+.match-card {
+  display:flex;
+  align-items:stretch;
+  background:var(--card);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius);
+  overflow:hidden;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+.match-card:hover {
+  transform:translateX(4px);
+  box-shadow:0 8px 24px rgba(113,57,218,0.15);
+  border-color:var(--border);
+}
+.match-cover {
+  width:160px;
+  min-width:160px;
+  height:90px;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+.match-body {
+  padding:14px 18px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+}
+.match-title {
+  font-family:var(--font-serif);
+  font-size:16px;
+  font-weight:700;
+  color:var(--text);
+}
+.match-desc {
+  font-size:13px;
+  color:var(--muted);
+}
+.match-teams {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:8px;
+}
+.match-team-row {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.match-team-label {
+  flex-shrink:0;
+  width:50px;
+  font-size:12px;
+  font-weight:600;
+  color:var(--accent);
+  text-align:right;
+}
+.match-team-name {
+  font-size:14px;
+  color:var(--text);
+  font-weight:500;
 }
 
 /* ===== Modal (recipe detail) ===== */
@@ -1129,56 +1254,96 @@ img { max-width:100%; display:block; }
         </div>
         <!-- Photo grid -->
         <div class="photo-grid" id="photoGrid" data-cat="photo">
-          <div class="photo-item" data-date="2025-11-10"><img src="assets/photos/thumbs/IMG_3539.JPG" data-full="assets/photos/IMG_3539.JPG" alt="IMG_3539.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3625.JPG" data-full="assets/photos/IMG_3625.JPG" alt="IMG_3625.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3614.JPG" data-full="assets/photos/IMG_3614.JPG" alt="IMG_3614.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3607.JPG" data-full="assets/photos/IMG_3607.JPG" alt="IMG_3607.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3598.JPG" data-full="assets/photos/IMG_3598.JPG" alt="IMG_3598.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3523.JPG" data-full="assets/photos/IMG_3523.JPG" alt="IMG_3523.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3497.JPG" data-full="assets/photos/IMG_3497.JPG" alt="IMG_3497.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3495.JPG" data-full="assets/photos/IMG_3495.JPG" alt="IMG_3495.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-09-07"><img src="assets/photos/thumbs/IMG_3491.JPG" data-full="assets/photos/IMG_3491.JPG" alt="IMG_3491.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3330.JPG" data-full="assets/photos/IMG_3330.JPG" alt="IMG_3330.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3325.JPG" data-full="assets/photos/IMG_3325.JPG" alt="IMG_3325.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3324.JPG" data-full="assets/photos/IMG_3324.JPG" alt="IMG_3324.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3322.JPG" data-full="assets/photos/IMG_3322.JPG" alt="IMG_3322.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3308.JPG" data-full="assets/photos/IMG_3308.JPG" alt="IMG_3308.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3305.JPG" data-full="assets/photos/IMG_3305.JPG" alt="IMG_3305.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3289.JPG" data-full="assets/photos/IMG_3289.JPG" alt="IMG_3289.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3288.JPG" data-full="assets/photos/IMG_3288.JPG" alt="IMG_3288.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2025-03-25"><img src="assets/photos/thumbs/IMG_3268.JPG" data-full="assets/photos/IMG_3268.JPG" alt="IMG_3268.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2024-03-19"><img src="assets/photos/thumbs/IMG_3238.JPG" data-full="assets/photos/IMG_3238.JPG" alt="IMG_3238.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2024-03-19"><img src="assets/photos/thumbs/IMG_3230.JPG" data-full="assets/photos/IMG_3230.JPG" alt="IMG_3230.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2024-03-19"><img src="assets/photos/thumbs/IMG_3190.JPG" data-full="assets/photos/IMG_3190.JPG" alt="IMG_3190.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2024-03-19"><img src="assets/photos/thumbs/IMG_3188.JPG" data-full="assets/photos/IMG_3188.JPG" alt="IMG_3188.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2024-03-19"><img src="assets/photos/thumbs/IMG_3163.JPG" data-full="assets/photos/IMG_3163.JPG" alt="IMG_3163.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3000.png" data-full="assets/photos/IMG_3000.png" alt="IMG_3000.png" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3104_2.JPG" data-full="assets/photos/IMG_3104_2.JPG" alt="IMG_3104_2.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3147.JPG" data-full="assets/photos/IMG_3147.JPG" alt="IMG_3147.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3140.JPG" data-full="assets/photos/IMG_3140.JPG" alt="IMG_3140.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3137.JPG" data-full="assets/photos/IMG_3137.JPG" alt="IMG_3137.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3132.JPG" data-full="assets/photos/IMG_3132.JPG" alt="IMG_3132.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3130.JPG" data-full="assets/photos/IMG_3130.JPG" alt="IMG_3130.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3127.JPG" data-full="assets/photos/IMG_3127.JPG" alt="IMG_3127.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3110.JPG" data-full="assets/photos/IMG_3110.JPG" alt="IMG_3110.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-11-28"><img src="assets/photos/thumbs/IMG_3108.JPG" data-full="assets/photos/IMG_3108.JPG" alt="IMG_3108.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-03-13"><img src="assets/photos/thumbs/IMG_3000.jpg" data-full="assets/photos/IMG_3000.jpg" alt="IMG_3000.jpg" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-03-13"><img src="assets/photos/thumbs/IMG_2976.jpg" data-full="assets/photos/IMG_2976.jpg" alt="IMG_2976.jpg" loading="lazy"></div>
-          <div class="photo-item" data-date="2023-03-13"><img src="assets/photos/thumbs/IMG_2941.JPG" data-full="assets/photos/IMG_2941.JPG" alt="IMG_2941.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3053.JPG" data-full="assets/photos/IMG_3053.JPG" alt="IMG_3053.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3039.JPG" data-full="assets/photos/IMG_3039.JPG" alt="IMG_3039.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3033.JPG" data-full="assets/photos/IMG_3033.JPG" alt="IMG_3033.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3030.JPG" data-full="assets/photos/IMG_3030.JPG" alt="IMG_3030.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3022.JPG" data-full="assets/photos/IMG_3022.JPG" alt="IMG_3022.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_3015.JPG" data-full="assets/photos/IMG_3015.JPG" alt="IMG_3015.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_2979.JPG" data-full="assets/photos/IMG_2979.JPG" alt="IMG_2979.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_2974.JPG" data-full="assets/photos/IMG_2974.JPG" alt="IMG_2974.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_2971.JPG" data-full="assets/photos/IMG_2971.JPG" alt="IMG_2971.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_2952.JPG" data-full="assets/photos/IMG_2952.JPG" alt="IMG_2952.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2022-09-27"><img src="assets/photos/thumbs/IMG_2924.JPG" data-full="assets/photos/IMG_2924.JPG" alt="IMG_2924.JPG" loading="lazy"></div>
-          <div class="photo-item" data-date="2021-05-01"><img src="assets/photos/thumbs/IMG_2854.JPG" data-full="assets/photos/IMG_2854.JPG" alt="IMG_2854.JPG" loading="lazy"></div>
+          <div class="photo-date-label" data-date="2025-11-10">2025-11-10</div>
+          <div class="photo-row">
+            <div class="photo-item" data-date="2025-11-10" data-idx="0"><img src="assets/photos/thumbs/IMG_3539.JPG" data-full="assets/photos/IMG_3539.JPG" alt="IMG_3539.JPG" loading="lazy"></div>
+          </div>
+          <div class="photo-date-label" data-date="2025-09-07">2025-09-07</div>
+          <div class="photo-row">
+            <div class="photo-item" data-date="2025-09-07" data-idx="1"><img src="assets/photos/thumbs/IMG_3625.JPG" data-full="assets/photos/IMG_3625.JPG" alt="IMG_3625.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-09-07" data-idx="2"><img src="assets/photos/thumbs/IMG_3614.JPG" data-full="assets/photos/IMG_3614.JPG" alt="IMG_3614.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-09-07" data-idx="3"><img src="assets/photos/thumbs/IMG_3607.JPG" data-full="assets/photos/IMG_3607.JPG" alt="IMG_3607.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-09-07" data-idx="4"><img src="assets/photos/thumbs/IMG_3598.JPG" data-full="assets/photos/IMG_3598.JPG" alt="IMG_3598.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-09-07" data-idx="5"><img src="assets/photos/thumbs/IMG_3523.JPG" data-full="assets/photos/IMG_3523.JPG" alt="IMG_3523.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-09-07" data-idx="6"><img src="assets/photos/thumbs/IMG_3497.JPG" data-full="assets/photos/IMG_3497.JPG" alt="IMG_3497.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-09-07" data-idx="7"><img src="assets/photos/thumbs/IMG_3495.JPG" data-full="assets/photos/IMG_3495.JPG" alt="IMG_3495.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-09-07" data-idx="8"><img src="assets/photos/thumbs/IMG_3491.JPG" data-full="assets/photos/IMG_3491.JPG" alt="IMG_3491.JPG" loading="lazy"></div>
+          </div>
+          <div class="photo-date-label" data-date="2025-03-25">2025-03-25</div>
+          <div class="photo-row">
+            <div class="photo-item" data-date="2025-03-25" data-idx="9"><img src="assets/photos/thumbs/IMG_3330.JPG" data-full="assets/photos/IMG_3330.JPG" alt="IMG_3330.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-03-25" data-idx="10"><img src="assets/photos/thumbs/IMG_3325.JPG" data-full="assets/photos/IMG_3325.JPG" alt="IMG_3325.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-03-25" data-idx="11"><img src="assets/photos/thumbs/IMG_3324.JPG" data-full="assets/photos/IMG_3324.JPG" alt="IMG_3324.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-03-25" data-idx="12"><img src="assets/photos/thumbs/IMG_3322.JPG" data-full="assets/photos/IMG_3322.JPG" alt="IMG_3322.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-03-25" data-idx="13"><img src="assets/photos/thumbs/IMG_3308.JPG" data-full="assets/photos/IMG_3308.JPG" alt="IMG_3308.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-03-25" data-idx="14"><img src="assets/photos/thumbs/IMG_3305.JPG" data-full="assets/photos/IMG_3305.JPG" alt="IMG_3305.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-03-25" data-idx="15"><img src="assets/photos/thumbs/IMG_3289.JPG" data-full="assets/photos/IMG_3289.JPG" alt="IMG_3289.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-03-25" data-idx="16"><img src="assets/photos/thumbs/IMG_3288.JPG" data-full="assets/photos/IMG_3288.JPG" alt="IMG_3288.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2025-03-25" data-idx="17"><img src="assets/photos/thumbs/IMG_3268.JPG" data-full="assets/photos/IMG_3268.JPG" alt="IMG_3268.JPG" loading="lazy"></div>
+          </div>
+          <div class="photo-date-label" data-date="2024-03-19">2024-03-19</div>
+          <div class="photo-row">
+            <div class="photo-item" data-date="2024-03-19" data-idx="18"><img src="assets/photos/thumbs/IMG_3238.JPG" data-full="assets/photos/IMG_3238.JPG" alt="IMG_3238.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2024-03-19" data-idx="19"><img src="assets/photos/thumbs/IMG_3230.JPG" data-full="assets/photos/IMG_3230.JPG" alt="IMG_3230.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2024-03-19" data-idx="20"><img src="assets/photos/thumbs/IMG_3190.JPG" data-full="assets/photos/IMG_3190.JPG" alt="IMG_3190.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2024-03-19" data-idx="21"><img src="assets/photos/thumbs/IMG_3188.JPG" data-full="assets/photos/IMG_3188.JPG" alt="IMG_3188.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2024-03-19" data-idx="22"><img src="assets/photos/thumbs/IMG_3163.JPG" data-full="assets/photos/IMG_3163.JPG" alt="IMG_3163.JPG" loading="lazy"></div>
+          </div>
+          <div class="photo-date-label" data-date="2023-11-28">2023-11-28</div>
+          <div class="photo-row">
+            <div class="photo-item" data-date="2023-11-28" data-idx="23"><img src="assets/photos/thumbs/IMG_3000.png" data-full="assets/photos/IMG_3000.png" alt="IMG_3000.png" loading="lazy"></div>
+            <div class="photo-item" data-date="2023-11-28" data-idx="24"><img src="assets/photos/thumbs/IMG_3104_2.JPG" data-full="assets/photos/IMG_3104_2.JPG" alt="IMG_3104_2.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2023-11-28" data-idx="25"><img src="assets/photos/thumbs/IMG_3147.JPG" data-full="assets/photos/IMG_3147.JPG" alt="IMG_3147.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2023-11-28" data-idx="26"><img src="assets/photos/thumbs/IMG_3140.JPG" data-full="assets/photos/IMG_3140.JPG" alt="IMG_3140.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2023-11-28" data-idx="27"><img src="assets/photos/thumbs/IMG_3137.JPG" data-full="assets/photos/IMG_3137.JPG" alt="IMG_3137.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2023-11-28" data-idx="28"><img src="assets/photos/thumbs/IMG_3132.JPG" data-full="assets/photos/IMG_3132.JPG" alt="IMG_3132.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2023-11-28" data-idx="29"><img src="assets/photos/thumbs/IMG_3130.JPG" data-full="assets/photos/IMG_3130.JPG" alt="IMG_3130.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2023-11-28" data-idx="30"><img src="assets/photos/thumbs/IMG_3127.JPG" data-full="assets/photos/IMG_3127.JPG" alt="IMG_3127.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2023-11-28" data-idx="31"><img src="assets/photos/thumbs/IMG_3110.JPG" data-full="assets/photos/IMG_3110.JPG" alt="IMG_3110.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2023-11-28" data-idx="32"><img src="assets/photos/thumbs/IMG_3108.JPG" data-full="assets/photos/IMG_3108.JPG" alt="IMG_3108.JPG" loading="lazy"></div>
+          </div>
+          <div class="photo-date-label" data-date="2023-03-13">2023-03-13</div>
+          <div class="photo-row">
+            <div class="photo-item" data-date="2023-03-13" data-idx="33"><img src="assets/photos/thumbs/IMG_3000.jpg" data-full="assets/photos/IMG_3000.jpg" alt="IMG_3000.jpg" loading="lazy"></div>
+            <div class="photo-item" data-date="2023-03-13" data-idx="34"><img src="assets/photos/thumbs/IMG_2976.jpg" data-full="assets/photos/IMG_2976.jpg" alt="IMG_2976.jpg" loading="lazy"></div>
+            <div class="photo-item" data-date="2023-03-13" data-idx="35"><img src="assets/photos/thumbs/IMG_2941.JPG" data-full="assets/photos/IMG_2941.JPG" alt="IMG_2941.JPG" loading="lazy"></div>
+          </div>
+          <div class="photo-date-label" data-date="2022-09-27">2022-09-27</div>
+          <div class="photo-row">
+            <div class="photo-item" data-date="2022-09-27" data-idx="36"><img src="assets/photos/thumbs/IMG_3053.JPG" data-full="assets/photos/IMG_3053.JPG" alt="IMG_3053.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2022-09-27" data-idx="37"><img src="assets/photos/thumbs/IMG_3039.JPG" data-full="assets/photos/IMG_3039.JPG" alt="IMG_3039.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2022-09-27" data-idx="38"><img src="assets/photos/thumbs/IMG_3033.JPG" data-full="assets/photos/IMG_3033.JPG" alt="IMG_3033.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2022-09-27" data-idx="39"><img src="assets/photos/thumbs/IMG_3030.JPG" data-full="assets/photos/IMG_3030.JPG" alt="IMG_3030.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2022-09-27" data-idx="40"><img src="assets/photos/thumbs/IMG_3022.JPG" data-full="assets/photos/IMG_3022.JPG" alt="IMG_3022.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2022-09-27" data-idx="41"><img src="assets/photos/thumbs/IMG_3015.JPG" data-full="assets/photos/IMG_3015.JPG" alt="IMG_3015.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2022-09-27" data-idx="42"><img src="assets/photos/thumbs/IMG_2979.JPG" data-full="assets/photos/IMG_2979.JPG" alt="IMG_2979.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2022-09-27" data-idx="43"><img src="assets/photos/thumbs/IMG_2974.JPG" data-full="assets/photos/IMG_2974.JPG" alt="IMG_2974.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2022-09-27" data-idx="44"><img src="assets/photos/thumbs/IMG_2971.JPG" data-full="assets/photos/IMG_2971.JPG" alt="IMG_2971.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2022-09-27" data-idx="45"><img src="assets/photos/thumbs/IMG_2952.JPG" data-full="assets/photos/IMG_2952.JPG" alt="IMG_2952.JPG" loading="lazy"></div>
+            <div class="photo-item" data-date="2022-09-27" data-idx="46"><img src="assets/photos/thumbs/IMG_2924.JPG" data-full="assets/photos/IMG_2924.JPG" alt="IMG_2924.JPG" loading="lazy"></div>
+          </div>
+          <div class="photo-date-label" data-date="2021-05-01">2021-05-01</div>
+          <div class="photo-row">
+            <div class="photo-item" data-date="2021-05-01" data-idx="47"><img src="assets/photos/thumbs/IMG_2854.JPG" data-full="assets/photos/IMG_2854.JPG" alt="IMG_2854.JPG" loading="lazy"></div>
+          </div>
         </div>
-      </div>
+        <div class="photo-pager" id="photoPager"></div>
+        <div class="match-grid" id="matchGrid" data-cat="match" style="display:none;">
+          <div class="match-card" data-match="cs2">
+            <img class="match-cover" src="assets/cs2-preview.jpg" alt="Counter-Strike 2 Pro">
+            <div class="match-body">
+              <div class="match-title">Counter-Strike 2 Pro</div>
+              <div class="match-desc">主队 Team Spirit，副队 Betboom Team、Falcons</div>
+            </div>
+          </div>
+          <div class="match-card" data-match="f1">
+            <img class="match-cover" src="assets/f1-cover.png" alt="Formula 1">
+            <div class="match-body">
+              <div class="match-title">Formula 1</div>
+              <div class="match-desc">杂事，暂无主队</div>
+            </div>
+          </div>
+        </div>
       <div class="section-empty" id="lifeEmpty">
         <i class="fa fa-seedling"></i>
         <p>生活随记陆续整理中，敬请期待。</p>
@@ -1248,6 +1413,18 @@ img { max-width:100%; display:block; }
   <button class="lightbox-close" id="lightboxClose"><i class="fa fa-times"></i></button>
   <img class="lightbox-img" id="lightboxImg" src="" alt="">
   <div class="lightbox-date" id="lightboxDate"></div>
+</div>
+
+<!-- Match detail modal -->
+<div class="modal-overlay" id="matchModal">
+  <div class="modal-box" style="position:relative;">
+    <button class="modal-close" id="matchModalClose"><i class="fa fa-times"></i></button>
+    <img class="modal-img" id="matchModalImg" src="" alt="" style="aspect-ratio:16/7;">
+    <div class="modal-body">
+      <div class="modal-title" id="matchModalTitle"></div>
+      <div class="match-teams" id="matchModalTeams"></div>
+    </div>
+  </div>
 </div>
 
 <script src="search-index.js"></script>
@@ -1480,6 +1657,8 @@ img { max-width:100%; display:block; }
   var lifeEmpty = document.getElementById('lifeEmpty');
   var recipeGrid = document.getElementById('recipeGrid');
   var photoGrid = document.getElementById('photoGrid');
+  var matchGrid = document.getElementById('matchGrid');
+  var photoPager = document.getElementById('photoPager');
   var LIFE_EMPTY_TEXT = {
     recipe: '菜谱整理中，敬请期待。',
     art:    '绘画作品整理中，敬请期待。',
@@ -1535,9 +1714,12 @@ img { max-width:100%; display:block; }
     var active = document.querySelector('#lifeCats .note-cat.active');
     var cat = active ? active.getAttribute('data-cat') : 'recipe';
     if (recipeGrid) recipeGrid.style.display = (cat === 'recipe') ? 'grid' : 'none';
-    if (photoGrid) photoGrid.style.display = (cat === 'photo') ? 'grid' : 'none';
+    if (photoGrid) photoGrid.style.display = (cat === 'photo') ? '' : 'none';
+    if (photoPager) photoPager.style.display = (cat === 'photo') ? '' : 'none';
+    if (matchGrid) matchGrid.style.display = (cat === 'match') ? 'flex' : 'none';
     var hasContent = (cat === 'recipe' && recipeGrid && recipeGrid.children.length > 0) ||
-                     (cat === 'photo' && photoGrid && photoGrid.children.length > 0);
+                     (cat === 'photo' && photoGrid && photoGrid.children.length > 0) ||
+                     (cat === 'match' && matchGrid && matchGrid.children.length > 0);
     if (lifeEmpty) {
       lifeEmpty.style.display = hasContent ? 'none' : '';
       var p = lifeEmpty.querySelector('p');
@@ -1580,6 +1762,68 @@ img { max-width:100%; display:block; }
   recipeModalClose.addEventListener('click', closeRecipeModal);
   recipeModal.addEventListener('click', function (e) { if (e.target === recipeModal) closeRecipeModal(); });
 
+  /* ===== Photo pagination ===== */
+  var PHOTO_PER_PAGE = 12;
+  var photoPage = 0;
+  var photoItems = Array.from(document.querySelectorAll('.photo-item'));
+  var photoDateLabels = Array.from(document.querySelectorAll('.photo-date-label'));
+  var photoRows = Array.from(document.querySelectorAll('.photo-row'));
+  var photoPager = document.getElementById('photoPager');
+
+  function renderPhotoPage() {
+    var total = photoItems.length;
+    var totalPages = Math.max(1, Math.ceil(total / PHOTO_PER_PAGE));
+    if (photoPage > totalPages - 1) photoPage = totalPages - 1;
+    if (photoPage < 0) photoPage = 0;
+    var start = photoPage * PHOTO_PER_PAGE;
+    var end = start + PHOTO_PER_PAGE;
+
+    // Show/hide photo items
+    photoItems.forEach(function (item, i) {
+      item.style.display = (i >= start && i < end) ? '' : 'none';
+    });
+
+    // Show date label only if at least one photo in that row is visible
+    photoRows.forEach(function (row, ri) {
+      var label = photoDateLabels[ri];
+      var hasVisible = false;
+      var items = row.querySelectorAll('.photo-item');
+      items.forEach(function (item) {
+        if (item.style.display !== 'none') hasVisible = true;
+      });
+      if (label) label.style.display = hasVisible ? '' : 'none';
+      row.style.display = hasVisible ? '' : 'none';
+    });
+
+    // Render pager
+    if (!photoPager) return;
+    photoPager.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    var prev = document.createElement('button');
+    prev.innerHTML = '<i class="fa fa-chevron-left"></i>';
+    prev.disabled = (photoPage === 0);
+    prev.addEventListener('click', function () { photoPage--; renderPhotoPage(); });
+    photoPager.appendChild(prev);
+
+    for (var p = 0; p < totalPages; p++) {
+      var btn = document.createElement('button');
+      btn.textContent = p + 1;
+      if (p === photoPage) btn.classList.add('active');
+      (function (page) {
+        btn.addEventListener('click', function () { photoPage = page; renderPhotoPage(); });
+      })(p);
+      photoPager.appendChild(btn);
+    }
+
+    var next = document.createElement('button');
+    next.innerHTML = '<i class="fa fa-chevron-right"></i>';
+    next.disabled = (photoPage === totalPages - 1);
+    next.addEventListener('click', function () { photoPage++; renderPhotoPage(); });
+    photoPager.appendChild(next);
+  }
+  renderPhotoPage();
+
   /* ===== Photo lightbox ===== */
   var lightbox = document.getElementById('photoLightbox');
   var lightboxImg = document.getElementById('lightboxImg');
@@ -1601,8 +1845,53 @@ img { max-width:100%; display:block; }
   lightboxClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { closeRecipeModal(); closeLightbox(); }
+    if (e.key === 'Escape') { closeRecipeModal(); closeLightbox(); closeMatchModal(); }
   });
+
+  /* ===== Match modal ===== */
+  var matchModal = document.getElementById('matchModal');
+  var matchModalImg = document.getElementById('matchModalImg');
+  var matchModalTitle = document.getElementById('matchModalTitle');
+  var matchModalTeams = document.getElementById('matchModalTeams');
+  var matchModalClose = document.getElementById('matchModalClose');
+
+  var MATCH_DATA = {
+    cs2: {
+      title: 'Counter-Strike 2 Pro',
+      img: 'assets/cs2-preview.jpg',
+      teams: [
+        { label: '主队', name: 'Team Spirit' },
+        { label: '副队', name: 'Betboom Team' },
+        { label: '副队', name: 'Falcons' }
+      ]
+    },
+    f1: {
+      title: 'Formula 1',
+      img: 'assets/f1-cover.png',
+      teams: [
+        { label: '备注', name: '杂事，暂无主队' }
+      ]
+    }
+  };
+
+  document.querySelectorAll('.match-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var key = this.getAttribute('data-match');
+      var m = MATCH_DATA[key];
+      if (!m) return;
+      matchModalImg.src = m.img;
+      matchModalImg.alt = m.title;
+      matchModalTitle.textContent = m.title;
+      matchModalTeams.innerHTML = m.teams.map(function (t) {
+        return '<div class="match-team-row"><span class="match-team-label">' + t.label + '</span><span class="match-team-name">' + t.name + '</span></div>';
+      }).join('');
+      matchModal.classList.add('active');
+    });
+  });
+
+  function closeMatchModal() { matchModal.classList.remove('active'); }
+  matchModalClose.addEventListener('click', closeMatchModal);
+  matchModal.addEventListener('click', function (e) { if (e.target === matchModal) closeMatchModal(); });
 
   /* ===== Notes: full-text search (searches note bodies) ===== */
   var searchInput   = document.getElementById('searchInput');
