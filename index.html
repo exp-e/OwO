@@ -520,6 +520,16 @@ img { max-width:100%; display:block; }
 #page-1 { align-items:stretch; height:calc(100vh - 61px); }
 #page-1 .page-card { display:flex; flex-direction:column; padding:26px 42px 20px; }
 
+/* Life page: fill exactly one screen */
+#page-2 { align-items:stretch; height:calc(100vh - 61px); }
+#page-2 .page-card { display:flex; flex-direction:column; padding:26px 42px 20px; }
+#page-2 .life-content { flex:1; min-height:0; display:flex; flex-direction:column; overflow-y:auto; }
+#page-2 .life-content.photo-active { overflow:hidden; }
+#page-2 .photo-grid { flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden; margin-top:0; }
+#page-2 .photo-pager { flex-shrink:0; }
+/* Recipe/match grid don't need flex stretch */
+#page-2 .recipe-grid, #page-2 .match-grid { flex:none; overflow:visible; }
+
 /* Notes: pagination */
 .note-pager {
   display:flex; align-items:center; justify-content:center; gap:6px;
@@ -550,6 +560,10 @@ img { max-width:100%; display:block; }
   .note-list { display:flex; flex-direction:column; flex:none; overflow:visible; }
   .note-card { flex:none; height:auto; min-height:96px; container-type:normal; }
   .note-card-cover { width:96px; height:96px; aspect-ratio:1/1; align-self:center; }
+  #page-2 { align-items:center; height:auto; }
+  #page-2 .page-card { padding:26px 20px; height:auto; }
+  #page-2 .life-content { flex:none; overflow:visible; }
+  #page-2 .photo-grid { flex:none; overflow:visible; }
 }
 
 @media (max-width: 640px) {
@@ -1700,6 +1714,8 @@ img { max-width:100%; display:block; }
   function renderLife() {
     var active = document.querySelector('#lifeCats .note-cat.active');
     var cat = active ? active.getAttribute('data-cat') : 'recipe';
+    var lifeContent = document.getElementById('lifeContent');
+    if (lifeContent) lifeContent.classList.toggle('photo-active', cat === 'photo');
     if (recipeGrid) recipeGrid.style.display = (cat === 'recipe') ? 'grid' : 'none';
     if (photoGrid) photoGrid.style.display = (cat === 'photo') ? '' : 'none';
     if (photoPager) photoPager.style.display = (cat === 'photo') ? '' : 'none';
@@ -1711,6 +1727,10 @@ img { max-width:100%; display:block; }
       lifeEmpty.style.display = hasContent ? 'none' : '';
       var p = lifeEmpty.querySelector('p');
       if (p) p.textContent = LIFE_EMPTY_TEXT[cat] || '整理中，敬请期待。';
+    }
+    // When switching to photo tab, re-render pagination so it can measure the actual grid size
+    if (cat === 'photo') {
+      setTimeout(function () { if (typeof renderPhotoPage === 'function') renderPhotoPage(); }, 0);
     }
   }
 
@@ -1757,13 +1777,44 @@ img { max-width:100%; display:block; }
   var photoPager = document.getElementById('photoPager');
 
   function photoPerPage() {
-    var h = window.innerHeight;
-    if (h <= 650) return 6;
-    if (h <= 750) return 8;
-    if (h <= 850) return 10;
-    if (h <= 950) return 12;
-    if (h <= 1100) return 15;
-    return 18;
+    if (window.innerWidth <= 960) {
+      // Mobile: simple viewport-height based fallback
+      var h = window.innerHeight;
+      if (h <= 650) return 6;
+      if (h <= 750) return 9;
+      return 12;
+    }
+
+    // Desktop: compute available grid height from known layout constants
+    // Viewport minus: header(61px) + page vertical padding(28+50=78px) + page-card padding-top+bottom(26+20=46px)
+    //               + sec-header (~52px) + note-cats/lifeCats tabs (~46px) + pager (48px) + gap buffer (10px)
+    var HEADER       = 61;
+    var PAGE_PAD     = 78;   // .page padding top+bottom (28+50)
+    var CARD_PAD     = 46;   // .page-card padding top+bottom (26+20)
+    var SEC_HEADER   = 52;   // .sec-header with margin
+    var TABS         = 46;   // .note-cats (lifeCats) bar with margin
+    var PAGER        = 48;   // .photo-pager height
+    var BUFFER       = 16;   // safety buffer
+
+    var available = window.innerHeight - HEADER - PAGE_PAD - CARD_PAD - SEC_HEADER - TABS - PAGER - BUFFER;
+    if (available < 100) available = 100;
+
+    // Compute column count: page-card is 92% of viewport width, max 1300px; padding 42px each side
+    var cardW = Math.min(window.innerWidth * 0.92, 1300) - 84; // 84 = 42*2 padding
+    var minCell = 130, gap = 10;
+    var cols = Math.max(1, Math.floor((cardW + gap) / (minCell + gap)));
+    // Square cells: cell-size = (cardW - gap*(cols-1)) / cols
+    var cellSize = (cardW - gap * (cols - 1)) / cols;
+    var rowH = cellSize + gap;
+
+    // How many photo rows fit? Each date-group has a ~34px label. Estimate label overhead as ~34px amortized per ~cols photos.
+    // Effective row cost = rowH + 34/cols (amortized label)
+    var effectiveRowH = rowH + 34 / cols;
+    var rows = Math.max(1, Math.floor(available / effectiveRowH));
+    var per = rows * cols;
+    if (per < 4) per = 4;
+    if (per > 80) per = 80;
+    return per;
   }
 
   function renderPhotoPage() {
@@ -1819,8 +1870,13 @@ img { max-width:100%; display:block; }
     next.addEventListener('click', function () { photoPage++; renderPhotoPage(); });
     photoPager.appendChild(next);
   }
-  renderPhotoPage();
-  window.addEventListener('resize', function () { renderPhotoPage(); });
+  // Defer initial render so flex layout has settled before we measure
+  setTimeout(renderPhotoPage, 50);
+  var photoResizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(photoResizeTimer);
+    photoResizeTimer = setTimeout(renderPhotoPage, 180);
+  });
 
   /* ===== Photo lightbox ===== */
   var lightbox = document.getElementById('photoLightbox');
