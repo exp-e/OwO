@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>Cauchy-Schwartz Inequality · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] } },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">数学</span>
+      <span><i class="far fa-calendar"></i> 2025-10-28</span>
+    </div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+
+    </ul>
+  </aside>
+  <article class="article-body">
+    <img class="article-cover" src="assets/anon.jpg" alt="Cauchy-Schwartz Inequality">
+    <h1 class="article-title">Cauchy-Schwartz Inequality</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2025-10-28</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">数学</span>
+      <a href="https://zhuanlan.zhihu.com/p/1966467953592624230" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
+    </div>
+    <div class="article-content">
+<p>这是一篇库存，也没啥内容，就证了个柯西洗袜子，写都写了传一个备份吧</p>
+<img class="note-img" src="assets/cauchy.png" alt="cauchy.png">
+<p>$(H,\braket{·,·})$ is a vector space over $\mathbb{K}\in\{\mathbb{R},\mathbb{C}\}$ with inner product. Then $\forall x,y\in H$, we have:</p>
+<p>$$|\braket{x,y}|^2\le\braket{x,x}·\braket{y,y}$$</p>
+<p>Pf: Let $t\in\mathbb{R}$, then</p>
+<p>$$\braket{x+ty,x+ty}=\braket{x,x}-t\braket{x,y}-t\braket{y,x}+t^2\braket{y,y}</p>
+<p>\newline =\braket{x,x}-2t Re\braket{x,y}+t^2\braket{y,y}\ge0$$</p>
+<p>When we take t as variant, this is a quadratic polynomial inequality. Consider the relevant discriminant constrain:</p>
+<p>$$\begin{equation}</p>
+<p>|2Re\langle x,y\rangle |^2\le4\langle x,x\rangle\langle y,y\rangle\Rightarrow |Re\langle x,y\rangle |^2\le\langle x,x\rangle\langle y,y\rangle</p>
+<p>\end{equation}~~~~~~~~~~~~(1)$$</p>
+<p>Now we define function $\overline{sgn}:\mathbb{C}\to\mathbb{C},~~\rho e^{i\theta}\mapsto e^{-i\theta}$, take $\tilde{y}=\overline{sgn(\braket{x,y})}y$, then we have</p>
+<p>$$|\braket{x,\tilde{y}}|^2=|\overline{sgn(\braket{x,y})}\braket{x,y}|^2$$</p>
+<p>Notice that $\overline{sgn(\rho e^{i\theta})}\rho e^{i\theta}=\rho\in\mathbb{R}$, which is the modular of the variable, so it is consistent with $|·|^2$:</p>
+<p>$$|\braket{x,\tilde{y}}|^2=|\overline{sgn(\braket{x,y})}\braket{x,y}|^2=|\braket{x,y}|^2~~~~~~~~~~~(2)$$</p>
+<p>On the other hand, $\braket{x,\tilde{y}}\in\mathbb{R}$, so</p>
+<p>$$|\braket{x,\tilde{y}}|^2=|Re\braket{x,\tilde{y}}|^2$$</p>
+<p>Use eq. (1), we have</p>
+<p>$$|\braket{x,\tilde{y}}|^2=|Re\braket{x,\tilde{y}}|^2\le\braket{x,x}\braket{\tilde y,\tilde y}=\braket{x,x}\overline{sgn(\braket{x,y})}sgn(\braket{x,y})\braket{y,y}=\braket{x,x}\braket{y,y}$$</p>
+<p>Combine this with eq. (2), we obtain:</p>
+<p>$$|\braket{x,y}|^2\le\braket{x,x}\braket{y,y}$$ $\boxed{}$</p>
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>量子信息讨论班预制菜 · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] } },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">物理</span>
+      <span><i class="far fa-calendar"></i> 2025-10-19</span>
+    </div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li><a href="#sec-0">1.构建量子力学</a></li>
+    </ul>
+  </aside>
+  <article class="article-body">
+    <img class="article-cover" src="assets/donk.jpg" alt="量子信息讨论班预制菜">
+    <h1 class="article-title">量子信息讨论班预制菜</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2025-10-19</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">物理</span>
+      <a href="https://zhuanlan.zhihu.com/p/1960106027774083827" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
+    </div>
+    <div class="article-content">
+<p>$$\rm 抄书的expe \quad 2025.10$$</p>
+<blockquote>本文pdf格式已上传：链接: https://pan.baidu.com/s/1TPr79FUswj1zsriDfC60_Q?pwd=6312 提取码: 6312<br>封面图：我自己乱画的，随便拿</blockquote>
+<p>```table-of-contents</p>
+<p>```</p>
+<h3 id="sec-0">1.构建量子力学</h3>
+<p>在参考资料中[^1]，为了方便起见设定$\hbar=1$。</p>
+<h4>1.1 态和观测者</h4>
+<p>观测是物理实验的一个过程，在经典力学中，我们使用一组参数的观测值来描述这个系统的状态——原则上这些数值可以通过测量以任意精度确定，且不会显著干扰系统。但是在量子力学实验中，根据不确定性原理，一些物理量的取值是无法被同时确定的（这取决于对应的算符是否对易，最广为人知的是位置和动量具有关系$\Delta x\Delta p\ge \frac{\hbar}{2}$，平面波函数恰好可以取到等号，也是我们理解不确定性原理的一个最主要的直观例子）；量子力学的态对应的是概率分布，是一个统计性的结果而不是精确值。</p>
+<p>观测意味着概率分布向某个特定值的转化。观测问题（measurement problem）是指：</p>
+<ol>
+<li>转化在何时发生了？</li>
+<li>转化是一个不可逆的过程，但量子力学的理论很多时候依赖可逆性。</li>
+</ol>
+<blockquote>Supplementary1 狄拉克括号[^2]：<br><br>形如$\ket{\psi}$的向量构成右矢空间(C上的向量空间)，形如$\bra{\psi}$的向量构成左矢空间(C上的向量空间)，左矢空间和右矢空间互为对偶空间<br><br>规定：一个左矢和一个右矢的内积$\braket{\psi|\phi}$对应单一空间中$\psi$与$\phi$的内积，用分量形式写作<br>$$\braket{\psi|\phi}=\sum_i\bar{\psi}_i\phi_i\in\mathbb{C}$$<br>矢量模长写作<br>$$|\psi|=\sqrt{\braket{\psi|\psi}}$$<br>在右矢空间中，可以定义作用在矢量上的算符A，记作$A\ket{\psi}:=\ket{A\psi}$。而右矢空间中的算符与左矢空间中的一一对应，记作$A^\dagger$，称为伴算符，$\bra{\psi}A=\bra{A^\dagger\psi}$。<br><br>将右矢写成分量的形式，对应列向量，相应的左矢是每个分量加上共轭的行向量。<br>此时算符对应方矩阵，此时伴算符$A^\dagger$对应着算符A的共轭转置。</blockquote>
+<h5>作为密度矩阵的态</h5>
+<p>物理实验分为制备态与观测两部分，这两部分也体现在量子力学的数学结构上。</p>
+<p>记代数$\mathcal{A}$为可观测代数（observable algebra）（乘法加法和数乘封闭，除了这三条代数的基本要求以外我们还要求每个元素有伴随，也即添加了厄米共轭操作）。这些代数通常用希尔伯特空间$\mathcal{H}$上的**有界线性**算符$\mathcal{B}(\mathcal{H})$来描述。如果原空间与像空间不同，记作$\mathcal{B}(\mathcal{H_1},\mathcal{H_2})$</p>
+<p>**可观测量**是$\mathcal{A}$中的自伴算符。**态**对应着将可观测量中的元素A映射至实数上的线性泛函，记作$\braket{·}\in\mathcal{A}^*$。态需要满足以下条件</p>
+<ol>
+<li>归一化：$\braket{\mathbb{1}}=1$，换言之$\mathcal{A}$中含有幺元</li>
+<li>正定：$\forall A\in\mathcal{A}:~\braket{A^\dagger A}\ge 0$，其中$\dagger$是伴随算符</li>
+</ol>
+<p>下面为了简化，我们考虑有限维d的系统，此时$A\in M_d\simeq B(\mathbb{C}^d)$是一个$d\times d$矩阵。在有限维中，可以忽略算子A与其矩阵表示之间的差异。</p>
+<p>我们可以通过希尔伯特-施密特内积$\braket{B,A}_{HS}:=tr[B^\dagger A]$将复矩阵空间$\mathcal{M}_d$升级为相应的希尔伯特空间，因此上面介绍的态也可以由一个复矩阵来表示，记作$\rho\in\mathcal {M}_d$，满足归一化$tr\rho=1$和正定性$\rho\ge0$，我们将可观测量的期望值写作</p>
+<p>$$\braket{A}=tr[\rho A]\tag{1}$$</p>
+<p>密度矩阵具有凸性，也即知道了一系列概率为$\lambda_i$的密度矩阵$\rho_i$，那么他们的线性组合</p>
+<p>$$\rho=\sum_i\lambda_i\rho_i$$</p>
+<p>也是密度矩阵</p>
+<blockquote>增补：从量子力学角度思考纯态与混合态[^3]<br>在初等量子力学中，我们最开始接触到的是纯态，例如<br>$$\ket{\psi}=c_1\ket{\psi_1}+c_2\ket{\psi_2}$$<br>其中$\ket{\psi_{1,2}}$可以是本征态也可以不是。能用希尔伯特空间中的一个矢量描写的状态都是纯态。如果$\ket{\psi_{1,2}}$是本征态，在知道系数$c_{1,2}$之后，我们也**确定**了测量坍缩的概率分布。纯态的平均值写作<br>$$\braket{A}=\braket{\psi|A|\psi}$$<br>插入一组完备性关系$\sum\ket{n}\bra{n}=1$后<br>$$\braket{A}=\sum_n\braket{\psi|n}\braket{n|A|\psi}=\sum_n\braket{n|A|\psi}\braket{\psi|n}$$<br>记$\rho=\ket{\psi}\bra{\psi}$后，可以写作<br>$$\braket{A}=tr[A\rho]$$<br>与表达式(1)一致<br>**混合态**指的是系统不处在一个确定的态中，而是以概率$p_1,p_2,...$处于各个态上，无法用某个态矢量表示。<br>密度矩阵的意义在于它可以更好地表示混合态的期望值<br>$$\braket{A}=\sum_{n,i}p_i\braket{\psi_i|n}\braket{n|A|\psi_i}=\sum_n\bra{n}A\left(\sum_i\ket{\psi_i}p_i\bra{\psi_i}\right)\ket{n}=tr[A\rho]$$<br>其中<br>$$\rho=\sum_i\ket{\psi_i}p_i\bra{\psi_i}\tag{2}$$<br>与表达式(1)一致<br>两个态形成纯态是相干叠加，而混合态代表了不相干叠加（具体请看[^3]）<br>从表达式(1)出发，还可以将零温量子场论推广至有限温的情形（具体请看[^4]）</blockquote>
+<p>我们可以通过$tr(\rho^2)$来判断是否纯态。最大混合态$\rho=\mathbb{1}/d$能够取到最小值$tr(\rho^2)=1/d$，而只有纯态能够取到最大值$tr(\rho^2)=1$。</p>
+<p>每个混合态都可以通过凸分解写成(2)的形式，最简单的方法是在正交特征向量上的谱分解。但是每个混合态都有无限种分解方式，反映了通过多个不同纯态来制备它的无限多种可能性。</p>
+<blockquote>例：Bloch sphere<br>在两阶量子系统中，任意一个2x2的复厄米矩阵M有四个自由度，可以被分解到这四个基上（后三个称作泡利矩阵），其分解的系数为实数；而非厄米的M一般情况下也可以分解，只不过系数是复数<br>$$\sigma_0=\mathbb{1},\quad</blockquote>
+<p>\sigma_1=</p>
+<p>\begin{pmatrix}</p>
+<p>0 & 1 \\</p>
+<p>1 & 0</p>
+<p>\end{pmatrix},\quad\sigma_2=</p>
+<p>\begin{pmatrix}</p>
+<p>0 & -i \\</p>
+<p>i & 0</p>
+<p>\end{pmatrix},\quad\sigma_3=</p>
+<p>\begin{pmatrix}</p>
+<p>1 & 0 \\</p>
+<p>0 & -1</p>
+<p>\end{pmatrix}$$</p>
+<blockquote>$$M=\frac{1}{2}(x_0\mathbb{1}+\vec{x}·\vec{\sigma})$$<br>若$||\vec x||_2\le x_0$，则M正定。（也可以说，四矢量$x^\mu$类时）特别的，密度矩阵写作<br>$$\rho=\frac{1}{2}(\mathbb{1}+\vec{x}·\vec{\sigma})$$<br>（因为有且仅有$\sigma_0$提供迹）它生活在球$||\vec x||_2\le 1$中，称为布洛赫球（Bloch sphere）<br>通过计算$tr\rho^2=\frac{1}{2}(1+||\vec x||^2)$可以发现，越靠近球心混合程度越大，在原点处可以取到最大混合态。<br>对布洛赫球的绕$\vec n$旋转$\theta$角对应着对密度矩阵作幺正变换<br>$$\rho\mapsto U_{\vec{n},\theta}\rho U_{\vec{n},\theta}^\dagger,\quad with\quad U_{\vec{n},\theta}=e^{-i\theta\frac{\vec{n}\cdot\vec{\sigma}}{2}}=1\cos\frac{\theta}{2}-i\vec{n}\cdot\vec{\sigma}\sin\frac{\theta}{2}$$<br>这意味着<br>$$SO(3)\simeq SU(2)/\{-\mathbb{1},\mathbb{1}\}$$<br>与布洛赫球相近的是庞加莱球，用于描述光的偏振。[^5]构成他们的参数称为Stokes参数。<br>![[PoincareSphereIntro_A1-780.gif|庞加莱球两个坐标的意义]]<br>其中，绿色的圈代表着光的椭圆程度，北极和南极代表着圆偏振，赤道面代表着线偏振。蓝色的圈代表着两个轴上的振幅比<br>![[PoincareLinCirc_A1-780.gif|庞加莱球特殊的点]]</blockquote>
+<h5>观测</h5>
+<p>用下标$\alpha$标记可观测量A的不同观测结果，并用$a_\alpha$和$p_\alpha$表示他们的值和概率，故期望值可写作</p>
+<p>$$\braket{A}=\sum_\alpha a_\alpha p_\alpha\tag{3}$$</p>
+<p>而概率$p_\alpha$可以通过正算符，**有效算符**$0\le P_\alpha\le 1$来计算，既</p>
+<p>$$p_\alpha=tr[\rho P_\alpha]$$</p>
+<p>有效算符还必须满足归一化条件$\sum_\alpha P_\alpha=1$.满足该归一条件的一组正算符集合被称为正算符值测度（Positive Operator-Valued Measure, POVM）</p>
+<p>谱分解$A=\sum_\alpha a_\alpha P_\alpha$中的正交投影算符$P_\alpha$将A投影到$a_\alpha$对应的特征子空间上，这样的谱投影算符构成了一个POVM。</p>
+<p>若将特征值视作观测结果，which量子力学基本上就是这么做的，那么谱分解构成的POVM和(3)式的均值计算公式是一致的。</p>
+<p>谱投影算符构成的观测称为冯诺依曼观测，其他算符给出的观测称为广义观测。</p>
+<p>**联合可测**：两个分别具有POVMs$\{P_\alpha\},\{Q_\beta\}$的算符被称为联合可测的当且仅当存在一个更精细的POVM$\{R_{\alpha\beta}\}$，可以将其恢复为边缘分布；一组冯诺依曼测量是联合可测的，当且仅当对应的厄米算符两两对易（因此可以同时被对角化）。</p>
+<blockquote>思考题：试给出联合可测存在唯一的充分或必要或充分必要条件</blockquote>
+<h4>1.2 复合系统与纠缠</h4>
+<p>复合系统(比如说氦原子的两个电子)的可观测量代数由他们各自的可观测量代数A和B的张量积$A\otimes B$给出，希尔伯特空间也因此成为一个张量积$\mathcal{H}=\mathcal{H}_A\otimes\mathcal{H}_B$，其离散DoF(Degree of Freedom)为$\dim\mathcal{H}=\dim\mathcal{H}_A\times\dim\mathcal{H}_B$</p>
+<p>如果$\mathcal{H}=\mathcal{H}_a\otimes\mathcal{H}_b\oplus\mathcal{H}_c$，那么称$\mathcal{H}_a$为$\mathcal{H}$的一个子系统。</p>
+<p>复合系统或二分系统总是指张量积，复合系统的最简单情况是乘积态，也即各个态的张量积。</p>
+<p>不能被分解的态表现出关联，因为对于一些可观测量$\braket{A\otimes B}\neq\braket{A\otimes\mathbb{1}}\braket{\mathbb{1}\otimes B}$.引入约化密度算符$tr[\rho_A A]=tr[\rho(A\otimes\mathbb{1})](\forall~A\in\mathcal{A})$</p>
+<p>偏迹$tr_B:\rho\mapsto\sum_b\braket{b|\rho|b}=\rho_A$，其中$\{\ket{b}\}$是$\mathcal{H}_B$中的一组正交基，由此得到的$\rho_A$被称为$\rho$的边缘。这一步相当于先对其中一个子系统取迹，在高等量子力学[^3] 中亦有记载。</p>
+<p>**经典关联态**：有一些态可以由乘积态的凸组合给出</p>
+<p>$$\rho=\sum_x p_x~\rho_x^{(A)}\otimes\rho_x^{(B)}\tag{4}$$</p>
+<p>那么制备$\rho$的一种方法是从概率分布$p_x$中抽取一个经典随机变量$x$并根据$x$的条件制备一个乘积态$\rho_x^{(A)}\otimes\rho_x^{(B)}$，因此称满足上式的态为经典关联，或可分离或非纠缠。</p>
+<p>经典关联态的等效操作定义为可以通过**任意局域操作和经典通信**产生的关联。</p>
+<blockquote>[!info] 纯态是可分离的，当且仅当他们是乘积态。<br>这意味着任何形式的关联都是由纠缠产生的，因此是非经典的。纠缠态的性质与选取的局域基无关，因此我们可以将纯态写作更简单的正规形式。</blockquote>
+<h5>Prop1.1 施密特分解</h5>
+<p>对任意的向量$\ket{\psi}\in\mathcal{H}_A\otimes\mathcal{H}_B$，记$d=\min\{\dim(\mathcal{H}_A),\dim(\mathcal{H}_B)\}$，存在两组正交基$\{e_j\in\mathcal{H}_A\},\{f_j\in\mathcal{H}_B\}$，满足</p>
+<p>$$\ket{\psi}=\sum_{j=1}^d\sqrt{\lambda_j}\ket{e_j}\otimes\ket{f_j},\quad with~\lambda_j\ge0,\quad\sum_i\lambda_i=||\psi||^2$$</p>
+<p>系数$\{\sqrt{\lambda_j}\}$被称作**施密特系数**(下面还要用到)，非零$\lambda_j$的数量被称为$\psi$的施密特秩。</p>
+<p>简要证明：一般分解形式$\ket{\psi}=\sum_{a,b}C_{ab}\ket{a}\otimes\ket{b}$，对矩阵$C_{ab}$作奇异值分解$C_{ab}=U\Sigma V^\dagger$，将左右两个酉矩阵UV操作到基$\ket{a},\ket{b}$上，可以得到施密特系数即为矩阵C的奇异值</p>
+<p>还有另外一种证明方法[^6]，要求B(较低维)的约化密度算符$\rho_B$的本征方程为$\rho_B\ket{b_j}=\lambda_j\ket{b_j}$(也就是说b已经接受上文的V酉处理过了)；记$\ket{e_j'}=\sum_a C_{aj}\ket{a},\ket{\psi}=\sum_j\ket{e_j'}\ket{b_j}$，注意到$C_{ab}=\bra{a}\braket{b|\psi}$，故可以计算$$\begin{align*}</p>
+<p>\braket{e_i'|e_j'}&=\sum_{a,b}C_{ai}^*C_{bj}\braket{a|b}=\sum_a C_{ai}^*C_{aj}=\sum_a \braket{\psi|a}\ket{i}\bra{a}\braket{j|\psi}\\</p>
+<p>&=\bra{j}(\sum_a\braket{a|\psi}\braket{\psi|a})\ket{i}=\bra{j}(tr_A(\rho_{AB}))\ket{i}=\bra{j}(\rho_B)\ket{i}=\lambda_i\delta_{ij}\end{align*}$$</p>
+<p>最后我们想要的是正交归一基，上面说明了正交性，直接除掉$\sqrt{\lambda_i}$归一就好了</p>
+<p>$$\ket{e_i}=\frac{1}{\sqrt{\lambda_i}}\ket{e_i'},\quad\ket{\psi}=\sum_j\sqrt{\lambda_j}\ket{e_j}\ket{b_j}$$</p>
+<p>从施密特分解中，我们可以看出</p>
+<ul>
+<li>约化与纯化：给定任意具有谱分解$\rho_A=\sum_j\lambda_j\ket{e_j}\bra{e_j}$的密度矩阵$\rho_A$，施密特分解提供了一个纯化方案，使得$\rho_A=tr_B[\ket{\psi}\bra{\psi}]$。最小伸缩空间$\mathcal{H}_B^{min}$的维度是$rank(\rho_A)$。如果$\ket{\psi}\in\mathcal{H}_A\otimes\mathcal{H}_B^{min}$是$\rho_A$的一个纯化，那么$\rho_A$的所有其他纯化形式均为$\ket{\psi'}=(1\otimes V)\ket{\psi}$，其中$V\in\mathcal{B(H}^{min}_B,\mathcal{H}_B)$是一个等距算符。</li>
+<li>专一性：施密特分解告诉我们纯态不能与其他任何系统关联。一个作为约化密度算符的纯态，意味着任何可能的更大的复合系统在乘积态，因此纯态中的关联是专一的且不能与其他系统共享（毕竟更大的系统是直积出来的），这与(4)式的密度算符表达式不同。</li>
+<li>混合态：对于密度算符$\rho\in\mathcal{B}(\mathcal{H}_A\otimes\mathcal{H}_B)$，我们也可以找到相似的分解</li>
+</ul>
+<p>$$\rho=\sum_j\sqrt{\mu_j}E_j\otimes F_j,\quad\mu_j\ge0$$</p>
+<p>其中$\{E_j\}$和$\{F_j\}$是两组希尔伯特-施密特内积下的正交算符，由此$tr[\rho^2]=\sum_j\mu_j$，(4)式所示的经典关联对应着$\sum_j\sqrt{\mu_j}\le1$</p>
+<blockquote>例：最大纠缠熵trick<br>如果一个纯态$\phi$的所有施密特系数均为$\lambda_j=1/d$，则称$\phi$为维度d的最大纠缠态。每个最大纠缠态都可以写作$\phi=(\mathbb{1}\otimes U)\ket{\Omega}$，其中U是任意酉矩阵，且[^7]<br>$$\boxed{\ket{\Omega}=\frac{1}{\sqrt{d}}\sum^{d}_{j=1}\ket{jj}}$$<br>注意，通过使用一组希尔伯特-施密特正交的酉矩阵基$\{U_j\}_{j=1,...,d^2}$，可以构造出一组最大纠缠态在$\mathbb{C}^d\otimes\mathbb{C}^d$的正交基$\{(U_j\otimes\mathbb{1})\ket{\Omega}\}$。<br>$\Omega$有一系列常用的性质，比如对$\forall A,B\in\mathcal{B}(\mathbb{C}^d)$，有<br>$$\bra{\Omega}A\otimes B\ket{\Omega}=\frac{1}{d}tr[A^TB],\quad(A\otimes\mathbb{1})\ket{\Omega}=(\mathbb{1}\otimes A^T)\ket{\Omega}\tag{5}$$<br>> 证明：先从后面那个式子开始<br>> 注意到矩阵在基$\ket{i}$上的乘法写作$A\ket{i}=\sum_j A_{ji}\ket{j}$<br>> $$\begin{align*}\sqrt{d}(A\otimes\mathbb{1})\ket{\Omega}&=\sum_j(\sum_i A_{ij}\ket{i})\otimes\ket{j}=\sum_i\ket{i}\otimes(\sum_j A_{ij}\ket{j})\\&=\sum_i\ket{i}\otimes(A^T\ket{j})=\sqrt{d}(\mathbb{1}\otimes A^T)\ket{\Omega}\end{align*}$$<br>> 再证前面那个式子<br>> $$\bra{\Omega}A\otimes B\ket{\Omega}=tr[\ket{\Omega}\bra{\Omega}A\otimes B]=tr[\ket{\Omega}\bra{\Omega}\mathbb{1}\otimes BA^T]$$<br>> 先对第一个系统作部分trace，再对第二个系统作部分trace<br>> $$\begin{align*}\bra{\Omega}A\otimes B\ket{\Omega}&=tr_2[tr_1[\ket{\Omega}\bra{\Omega}] BA^T]=tr_2[\frac{1}{d}tr_1[\sum_{jl}\ket{j}\bra{l}\otimes\ket{j}\bra{l}]BA^T]\\&=tr_2[\frac{1}{d}\sum_{njl}\braket{n|j}\braket{l|n}\otimes\ket{j}\bra{l}BA^T]=tr_2[\frac{1}{d}\sum_{j}\ket{j}\bra{j}BA^T]\\&=\frac{1}{d}tr[A^TB]\end{align*}$$<br><br>> 下面我们来证明每个最大纠缠态都具有$\phi=(\mathbb{1}\otimes U)\ket{\Omega}$的形式。先验证这个含任意酉矩阵的形式是最大纠缠态，也即所有施密特系数均为$\lambda_j=1/d$。先将φ展开<br>> $$\ket{\phi}=\frac{1}{\sqrt{d}}\sum_{ik} U_{ik}\ket{k}\otimes\ket{i}$$<br>> 也就是说，$U^T/\sqrt{d}$是在naive张量基下的系数矩阵，为了获得施密特系数，我们需要将$U^T/\sqrt{d}$进行奇异值分解。但是$U^T/\sqrt{d}$已经是酉矩阵，他的分解为<br>> $$\frac{1}{\sqrt{d}}U^T=U^T·\frac{\mathbb{1}}{\sqrt{d}}·\mathbb{1}$$<br>> 因此，所有的施密特系数均为$\lambda_j=1/d$。<br>> 另一方面，再来验证所有最大纠缠态都可以写成$\phi=(\mathbb{1}\otimes U)\ket{\Omega}$的形式。先将最大纠缠态写作<br>> $$\ket{\phi}=\sum_{j=1}^d\frac{1}{\sqrt{d}}\ket{e_j}\otimes\ket{f_j}$$<br>> 而$\ket{e_j}\otimes\ket{f_j}$与$\ket{jj}$都是张量积空间上的正交归一基，他们之间可以由两个酉矩阵U,V相互联系，也即<br>> $$\ket{\phi}=\sum_{j=1}^d\frac{1}{\sqrt{d}}(U\otimes V)\ket{jj}$$<br>> 由(5)式后半部分，可以将U挪到V上<br>> $$\ket{\phi}=\sum_{j=1}^d\frac{1}{\sqrt{d}}(\mathbb{1}\otimes VU^T)\ket{jj}$$<br>> 而可以验证$U^TV$也是酉矩阵，命题成立<br><br>其中转置操作需要在$\Omega$的施密特基下完成，这意味着</blockquote>
+<ul>
+<li>$(U\otimes\bar{U})\ket{\Omega}=(\mathbb{1}\otimes(U^\dagger U)^T)\ket{\Omega}=\ket{\Omega}$（$\bar{U}$指的是将矩阵U的每个位置取复共轭）对于所有的酉矩阵U成立</li>
+<li>每个具有约化密度算符$\rho_B$的纯态$\psi$可以被写作</li>
+</ul>
+<blockquote>$$\boxed{\ket{\psi}=(\mathbb{1}\otimes R)\ket{\Omega}}\tag{7}$$<br>其中$R=\sqrt{d\rho_B}V$，d是纠缠维度，等距算符V负责调节不同的施密特基<br>> 证明：先将纯态$\psi$写作<br>> $$\ket{\psi}=\sum_k\sqrt{\lambda_k}\ket{u_k}\otimes\ket{v_k}$$<br>> 计算$\rho_B$：<br>> $$\rho_B=tr_1[\ket{\psi}\bra{\psi}]=\sum_k\lambda_k\ket{v_k}\bra{v_k}$$<br>> 也就是说，$\ket{v_k}$是$\rho_B$的一组本征矢。设$\ket{u_k}=U\ket{k}_1,\ket{v_k}=V\ket{k}_2$，其中U是酉矩阵，$\ket{k}_1\otimes\ket{k}_2$是构成$\ket{\Omega}$的求和项$\ket{kk}$。改写$\ket{\psi}$第二个分量(含系数)，插入一组完备性关系<br>> $$\sqrt{\lambda_k}\ket{v_k}=\sum_j\sqrt{\lambda_k}\ket{v_j}\braket{v_j|v_k}=\sum_j\sqrt{\lambda_j}\ket{v_j}\braket{v_j|v_k}$$<br>> 再将末位的$v_k$写为$V\ket{k}_2$的形式<br>> $$\sqrt{\lambda_k}\ket{v_k}=\sum_j\sqrt{\lambda_j}\ket{v_j}\braket{v_j|V|k}_2$$<br>> 注意到前半段恰好是$\sqrt \rho_B$的表达式，故<br>> $$\sqrt{\lambda_k}\ket{v_k}=\sqrt{\rho_B }V\ket{k}_2$$<br>> 代回$\ket{\psi}$，同时将第一个部分的基也换掉<br>> $$\ket{\psi}=(U\otimes\sqrt{\rho_B }V)\sum_j\ket{jj}$$<br>> 将U挪到第二个位置，调整一下系数，即可得到<br>> $$\ket{\psi}=(\mathbb{1}\otimes\sqrt{d\rho_B }VU^T)\ket{\Omega}$$<br>> 且$VU^T$确为酉矩阵，满足(7)式条件<br><br>定义翻转算符$\mathbb{F}\ket{ij}=\ket{ji}$，也可以被部分转置表示$\mathbb{F}=d\ket{\Omega}\bra{\Omega}^{T_A}$[^8]，则性质(5)可以被写作<br>$$tr[(A\otimes B)\mathbb{F}]=tr[AB],\quad (A\otimes\mathbb{1})\mathbb{F}=\mathbb{F}(\mathbb{1}\otimes A)$$<br>F还可以用任何算符正交基$\{G_i\}_{i=1..d^2}$来表示<br>$$\mathbb{F}=\sum^{d^2}_{i=1}G_i\otimes G_i^\dagger$$</blockquote>
+<h4>1.3 演化</h4>
+<p>时间在量子力学中由一个参数来描述（而并非算符）。封闭系统（与开放系统相对）的演化指的是演化在物理上可逆的系统。</p>
+<p>我们可以将演化视为制备的一部分，或是测量的一部分，或是将其分摊到两者之中，因此产生了三种不同的“绘景”：薛定谔绘景、海森堡绘景或者相互作用绘景。这三种绘景最终等价。</p>
+<h5>封闭演化和可逆系统</h5>
+<p>在海森堡绘景中时间演化体现在算符的改变上$\mathcal{A}\ni A\mapsto u(A)$，在薛定谔绘景中体现在态的改变上$\rho\mapsto u^*(\rho)$，而这两个绘景在物理上等价意味着</p>
+<p>$$tr[\rho u(A)]=tr[u^*(\rho)A]\tag{6}$$</p>
+<p>$u$与$u^*$彼此之间互为对偶或伴随关系。</p>
+<p>物理上的可逆也应当由数学上的可逆变换表示（反之不成立）。演化应该是可结合的，且保持代数$\mathcal{A}$的结构，以及</p>
+<p>$$u(AB)=u(A)u(B),\quad u(A^\dagger)=u(A)^\dagger,\quad||u(A)||=||A||$$</p>
+<p>也就是说可逆演化的集合等同于$\mathcal{A}$的线性自同构群$aut(\mathcal{A})$</p>
+<p>自同构群$aut(\mathcal{A})$的一个子群，**内自同构**，由酉元素$U\in \mathcal{A}$通过$\rho\mapsto U\rho U^\dagger$形成。</p>
+<p>如果$\mathcal{A}$中的两个酉元素仅相差一个相位因子，则他们产生相同的自同构。（这个条件可以被推广至两个酉元素相差一个中心中的元素）</p>
+<p>下文中我们关注$\mathcal{A}=M_d$，其中所有自同构都是内的。[^9]</p>
+<p>我们称一个可逆演化是**齐次**的，如果n步之后的演化由单步演化U的n次方描述。在连续时间间隔情形下由一组含参酉群$U_tU_r=U_{t+r}$描述，其中t与r是实数，并且满足$(U_t-U_0)\ket{\psi}\to0(t\to0)$对于任意的$\psi\in\mathcal{H}$均成立。</p>
+<p>Stone定理：存在唯一的自伴随算符H（在物理上对应着哈密顿量或无穷小生成元），满足</p>
+<p>$$U_t=exp(iHt)$$</p>
+<blockquote>关于“可逆演化与酉算符相关联”的另一种论证：<br>考虑从归一化纯态集合$S:=\{\psi:=\ket{\psi}\bra{\psi}\subset B(H)\}$到其自身的可逆映射。<br>这种映射有两种类型，一是$\psi\mapsto U\psi U^\dagger$，其中U是酉算符；二是在某个基下的转置$\psi\mapsto\psi^T$<br>而下面的定理说明，这些其实是仅有的保证内积范数的形式</blockquote>
+<h5>Thm1.1 Wigner定理</h5>
+<blockquote>$S:\mathcal{S}\to\mathcal{S}$是满足$tr[S(\psi)S(\phi)]=tr[\psi\phi](\forall\psi,\phi\in S)$的双射，那么S在下面两类之一<br>1.酉：存在酉算符U使得$S(\psi)=U\psi U^\dagger$对任意的$\psi\in\mathcal{S}$均成立<br>2.反酉：存在酉算符U使得$S(\psi)=U\psi^T U^\dagger$对任意的$\psi\in\mathcal{S}$均成立</blockquote>
+<p>(这个定理在参考资料中并未给出证明)</p>
+<p>推论：(保谱算符)</p>
+<p>令$T:\mathcal{M}_d(\mathbb{C})\to\mathcal{M}_d(\mathbb{C})$是厄米线性算符($T(X)^\dagger=T(X^\dagger),\forall X$)且保厄米矩阵的谱。</p>
+<p>那么存在酉算符U使得T要么满足$T(X)=UXU^\dagger$要么满足$T(X)=UX^TU^\dagger$。</p>
+<p>证明：条件中的保谱只保证了所有的本征值在映射前后都出现，但是出现的次数不一定一致。下面我们来说明由连续性可以得到：本征值和本征值的重数在映射前后均保持一致（一一对应）</p>
+<p>假设酉矩阵A有如下的谱</p>
+<p>$$spec(A)=\{\lambda_1,...,\lambda_d\},\quad A=\sum_i\lambda_i\ket{i}\bra{i}$$</p>
+<p>这里我们将所有的d个本征值都写出来了，可能会有两两相等的本征值，这没有关系。现在我们对每个本征值进行不同的扰动，使得扰动后的特征值两两不同</p>
+<p>$$spec(A+\sum_i\varepsilon_i\ket{i}\bra{i})=\{\lambda_1+\varepsilon_1,...,\lambda_d+\varepsilon_d\},\quad\lambda_i+\varepsilon_i\neq\lambda_j+\varepsilon_j ,\forall i\neq j$$</p>
+<p>对于这个两两不同的谱集合，映射T可以保证映射前后**一一对应**，此时再令所有的$\epsilon\to0$，利用连续性，即可得到A在映射前后的谱一一对应。</p>
+<p>$$spec(A)=spec(T(A))=\{\lambda_1,...,\lambda_d\}$$</p>
+<p>考虑两个厄米秩为1的投影算符$\phi,\psi\in M_d(\mathbb{C})$，设矩阵$M:=\phi+\psi$</p>
+<p>下面计算M的谱。由于$\phi,\psi$都是秩1的投影算符，所以M的像空间至多为二维，我们就在这个二维的子空间上计算。</p>
+<p>设</p>
+<p>$$\phi=\begin{pmatrix}</p>
+<p>1 & 0 \\</p>
+<p>0 & 0</p>
+<p>\end{pmatrix},\quad\psi=\begin{pmatrix}</p>
+<p>a \\</p>
+<p>b</p>
+<p>\end{pmatrix}\begin{pmatrix}</p>
+<p>\bar{a} & \bar{b}</p>
+<p>\end{pmatrix}=\begin{pmatrix}</p>
+<p>|a|^2 & a\bar b \\</p>
+<p>\bar ab & |b|^2</p>
+<p>\end{pmatrix},\quad(|a|^2+|b|^2=1)$$</p>
+<p>$$\phi+\psi=\begin{pmatrix}</p>
+<p>1+|a|^2 & a\bar b \\</p>
+<p>\bar ab & |b|^2</p>
+<p>\end{pmatrix}$$</p>
+<p>直接硬解本征值方程</p>
+<p>$$\left|</p>
+<p>\begin{array}{cc}</p>
+<p>1+|a|^2-\lambda & a\bar b \\</p>
+<p>\bar ab & |b|^2-\lambda</p>
+<p>\end{array}</p>
+<p>\right|=(1+|a|^2)|b|^2-2\lambda+\lambda^2-|a|^2|b|^2=0$$</p>
+<p>$$\lambda^2-2\lambda+|b|^2=0$$</p>
+<p>$$\lambda=1\pm\sqrt{1-|b|^2}=1\pm\sqrt{|a|^2}$$</p>
+<p>另一方面</p>
+<p>$$tr[\phi\psi]=tr\begin{pmatrix}</p>
+<p>|a|^2 & a\bar b \\</p>
+<p>0 & 0</p>
+<p>\end{pmatrix}=|a|^2$$</p>
+<p>故</p>
+<p>$$spec(M)=1\pm\sqrt{tr[\phi\psi]}$$</p>
+<p>由于T是线性厄米保谱的，将T作用到M上可得</p>
+<p>$$spec(T(M))=spec(M)=1\pm\sqrt{tr[\phi\psi]}$$</p>
+<p>另一方面，由于T保持谱及谱的重数，所以$T(\phi),T(\psi)$均只有一个非零特征，也即1，他们还是秩1投影算符，那么还可以再次应用秩1投影算符和的谱公式</p>
+<p>$$spec(T(\phi)+T(\psi))=1\pm\sqrt{tr[T(\phi)T(\psi)]}$$</p>
+<p>以上两个谱完全相等，只能是$tr[T(\phi)T(\psi)]=tr[\phi\psi]$，应用Wigner定理即可得证。</p>
+<h5>开放系统和不可逆动力学</h5>
+<p>考虑在薛定谔绘景中由映射$T:\mathcal{B}(\mathcal{H})\to\mathcal{B}(\mathcal{H}')$描述的演化。为了使其具有物理意义，T应满足以下三个条件</p>
+<ol>
+<li>线性。这是量子力学的基本要求，在1.4节中可以看到与局域性相关</li>
+</ol>
+<p>$$\forall A,B\in B(\mathcal{H}),~~c\in\mathbb{C}:T(cA+B)=cT(A)+T(B)$$</p>
+<ol>
+<li>保迹。T将密度算符映射到密度算符，为了保证归一性在映射前后均成立，需要</li>
+</ol>
+<p>$$\forall A\in\mathcal{B}(\mathcal{H}):\quad tr[T(A)]=tr[A]$$</p>
+<ol>
+<li>完全正定性。正映射说的是对所有的$A\in\mathcal{B(H)}$都有$T(A^\dagger A)\ge0$</li>
+</ol>
+<p>但是仍然需要更强的约束，因为H并不是整个系统，整个系统的演化由$T\otimes id$描述，我们要求这个更大的演化始终是正定的。</p>
+<p>$$\forall n\in\mathbb{N},\quad T\otimes id_n\ge0$$</p>
+<p>通过式(6)可以将薛定谔绘景的演化对应至海森堡绘景的演化，以上三个条件仅有保迹条件改为</p>
+<p>$$T^*(\mathbb{1})=\mathbb{1}$$</p>
+<p>满足以上三个条件的映射被称为量子信道。量子信道是量子力学中描述一般输入-输出关系的通用框架。如果输入和输出和处理框架相关联，那么上述描述不再适用，需要考虑一个更大的系统（包括环境）。</p>
+<p>下文中讨论无记忆的情况，或称为马尔可夫性。</p>
+<h5>Prop1.2 完全正定性检验</h5>
+<p>线性映射$T:\mathcal{B}(\mathcal{H})\to\mathcal{B}(\mathcal{H}')$完全正定当且仅当$(T\otimes id_d)(\ket{\Omega}\bra{\Omega})\ge0$，其中$\Omega$是维度$d=\dim\mathcal{H}$的最大纠缠态</p>
+<p>证明：($\Rightarrow$)由完全正定的定义给出.</p>
+<p>($\Leftarrow$)将$\mathbb{C}^d\otimes\mathbb{C}^d$上的任意态$\ket{\psi}$写作基展开的形式</p>
+<p>$$\ket{\psi}=\sum_{i,j}\psi_{ij}\ket{i}\otimes\ket{j}$$</p>
+<p>并将系数写成矩阵</p>
+<p>$$R=\sqrt{d}[\psi_{ij}]_{i,j}=\sum_{i,j}\sqrt{d}\psi_{ij}\ket{i}\bra{j}$$</p>
+<p>故</p>
+<p>$$R^T=\sum_{i,j}\sqrt{d}\psi_{ij}\ket{j}\bra{i}$$</p>
+<p>下面证明</p>
+<p>$$I\otimes R^T\ket{\Omega}=R\otimes I\ket{\Omega}=\ket{\psi}$$</p>
+<p>其中最大纠缠态</p>
+<p>$$\ket{\Omega}=\frac{1}{\sqrt{d}}\sum_j\ket{jj}$$</p>
+<p>$$\begin{align*}</p>
+<p>I\otimes R^T\ket{\Omega}&=\sum_{ijk}\ket{k}\otimes(\psi_{ij}\ket{j}\braket{i|k})=\sum_{ijk}\ket{k}\otimes(\psi_{ij}\ket{j}\delta_{ik})</p>
+<p>\\&=\sum_{ij}\psi_{ij}\ket{i}\otimes\ket{j}=\ket{\psi}</p>
+<p>\end{align*}$$</p>
+<p>而我们知道，一个算子半正定意味着他的酉相似变换也半正定，故可以添上关于第二个系统的R酉变换</p>
+<p>$$(I\otimes R^T)(T\otimes id)(\ket{\Omega}\bra{\Omega})(I\otimes\bar{R})\ge0$$</p>
+<p>且对两个不同系统之间的操作是可以交换的，所以</p>
+<p>$$(T\otimes id)[(I\otimes R^T)(\ket{\Omega}\bra{\Omega})(I\otimes\bar{R})]\ge0$$</p>
+<p>$$(T\otimes id)(\ket{\psi}\bra{\psi})\ge0$$</p>
+<p>这样就证明了在任意态上的半正定性。</p>
+<blockquote>[!note] 更多<br>算符$d(id_d\otimes T)(\ket{\Omega}\bra{\Omega})$称为Choi态$C_T$，包含了关于T的全部信息($T\Leftrightarrow C_T$)。<br>我们来证明T作用在任意一个算符X上的结果可以由$C_T$来刻画：<br>$$\begin{align*}<br>&tr\otimes id[(X^T\otimes I)C_T]=d(tr\otimes id)(X^T\otimes I)(id\otimes T)\ket{\Omega}\bra{\Omega}<br>\\&=d(tr\otimes id)(id\otimes T)(X^T\otimes I)\ket{\Omega}\bra{\Omega}<br>=d(tr\otimes id)(id\otimes T)(I\otimes X)\ket{\Omega}\bra{\Omega}<br>\\&=T(X)<br>\end{align*}$$<br>这就类似泛函分析作业中的<br>$$T:L_\infty(\Omega)\to L_2(\Omega),\quad Tf(x)=\int_\Omega k(x,y)f(y) du(y)$$<br>$$T(X)=tr\otimes id(C_T(X^T\otimes I))$$<br>其中，$k(x,y)$和$C_T$被称作kernel function</blockquote>
+<h5>概率算符和仪器(存疑)</h5>
+<p>保迹性反映了概率的归一化，但是涉及测量时可以放宽该条件，只考虑非增迹条件</p>
+<p>$$tr[T(A)]\le tr[A]\quad or\quad T^*(\mathbb{1})\le\mathbb{1}$$</p>
+<p>他的意思是对于输入态ρ仅以$tr[T(\rho)]$概率成功。这类映射被称为概率性或随机性映射或滤波算符，给出了仪器的概念。</p>
+<p>在薛定谔绘景中，一个**仪器**是指一组完全正定的线性映射$\{T_i\}$，其和**保迹**。</p>
+<p>下标i可以解释为一次测量的结果，该结果以$p_i=tr[T_i(\rho)]$概率出现，密度矩阵变为$T_i(\rho)/p_i$</p>
+<p><span style="color: #888; font-size: 0.9em; font-style: italic;">仪器的概念包含了量子信道（考虑和算符）和POVM（考虑输入为单位阵的有效算符集）的概念</span></p>
+<p><span style="color: #888; font-size: 0.9em; font-style: italic;">POVM对应着仪器等价类，而不能决定单一的仪器，这意味着POVM不能确定测量后状态。</span></p>
+<p>实现任意有效算符$\{P_i\}$的POVM的一种简单仪器类型是Lüders仪器：</p>
+<p>$$T_i(\rho)=\sqrt{P_i}\rho\sqrt{P_i}$$</p>
+<p>但是对其进行酉相似变换$U\sqrt{P_i}\rho\sqrt{P_i}U^\dagger$或$T_i(\rho)=tr[\rho P_i]$等也对应着同一个POVM</p>
+<p>下面展示如何用仪器描述算符版本的(7)式</p>
+<h5>Prop1.3 量子steering(存疑)</h5>
+<p>设$\rho\in\mathcal{B}(\mathcal{H}_A)$是具有纯化$\ket{\psi}\in\mathcal{H}_A\otimes\mathcal{H}_B$的密度算符</p>
+<p>对于每个凸分解$\rho=\sum_i\lambda_i\rho_i$，存在一个作用于Bob 系统的仪器 $\{T_i : B(\mathcal{H}_B) \to B(\mathcal{H}_B)\}$，使得</p>
+<p>$$\lambda_i \rho_i = \text{tr}_B [(id \otimes T_i)(|\psi\rangle \langle \psi|)]\tag{8}$$</p>
+<p>证明：不失一般性，我们可以假设$\psi$是一个最小纯化（$\dim \mathcal{H}_B = \text{rank}[\rho] =: d$），并将 $|\psi\rangle$ 写为 $|\psi\rangle = (\sqrt{d \rho} \otimes \mathbb{1})|\Omega\rangle$，其中$\Omega$是一个维度为d的最大纠缠态，且与$\psi$具有相同的 Schmidt 基。此外，对于每个线性映射$T_i$：</p>
+<p>$$(id\otimes T_i)(\ket{\Omega}\bra{\Omega})=(\theta T_i^*\theta\otimes id)(\ket{\Omega}\bra{\Omega})$$</p>
+<p>其中θ是B空间上的对施密特基的矩阵转置。将$\psi$代入上式，对任意的线性$T_i$</p>
+<p>$$tr_B[(id \otimes T_i)(|\psi\rangle \langle \psi|)]=\sqrt{\rho}(T_i^*(\mathbb{1}))^T\sqrt{\rho}$$</p>
+<p>因此如果一个仪器对应的POVM$\{T_i^*(\mathbb{1})\}$在ρ的值域上满足$T_i^*(\mathbb{1})=\lambda_i\rho^{-1/2}\rho_i^T\rho^{-1/2}$（直接带回检验），那么该仪器会满足(8)式</p>
+<blockquote>[!info] 存疑叙述<br>对这个定理的解释是，假设Alice和Bob共享态ψ，那么Bob不仅可以在Alice端生成局域密度算子支集中的任意态，还可以构造出与其约化密度矩阵相容的任何系综$\{\lambda_i\rho_i\}$。<br>为了在Alice端引导出态$\rho_i$，Bob可以应用命题中描述的仪器。<br>对于每一个独立事件，他必须向Alice报告他的操作是否成功（成功概率为$\lambda_i$）<br>如果Alice随后仅使用Bob报告成功的事件进行任何统计实验，她的态将是$\rho_i$，以下是成功概率的最大值</blockquote>
+<h5>Prop1.4 凸分解的最大权重</h5>
+<p>设ρ和ρ1是两个作用在同一空间上的密度算符。</p>
+<p>存在凸分解$\rho=\sum_i\lambda_i\rho_i(\lambda_1>0)$当且仅当$supp(\rho_1)\subset supp(\rho)$，以及</p>
+<p>$$\lambda_1\le||\rho^{-1/2}\rho_1\rho^{-1/2}||_\infty^{-1}$$</p>
+<p>在ρ的值域上取逆</p>
+<p>**证明**：关于支集条件的必要性是显然的，因为添加正定算子绝不会减小支集。分解的存在性等价于$\rho - \lambda_i \rho_i \geq 0$，这可以改写为$1 \geq \lambda_i \rho^{-1/2} \rho_i \rho^{-1/2}$，由此即得结论。</p>
+<h4>1.4 线性性和定域性</h4>
+<p>定域性（Locality），也称作Einstein locality或no-signaling condition或Bell telephone不存在性，意思是一个确定位置发生的动作不会马上地影响遥远的部分。定域性在量子力学的构造中可以体现，例如两体系统$\rho\in\mathcal{B}(\mathcal{H}_A\otimes\mathcal{H}_B)$的偏迹</p>
+<p>$$\rho_A=tr_B[(id\otimes T)(\rho)]=tr_B[\rho]$$</p>
+<p>对后一个系统作用T之后将后一个系统求迹，由此得出第一个系统的态，由于量子信道T要求保迹，所以这个态是不受第二个系统的操作T影响的，体现了定域性。</p>
+<p>事实上量子力学展现出一种更强的定域性，称作Schlieder property:不仅第二个系统无法通过T给第一个系统传递任何信息，第一个系统也无法获得关于第二个系统的任何信息。这是因为每个约化密度矩阵$\rho_A$和$\rho_B$都相容。</p>
+<p>定域性与量子力学的线性性密切相关</p>
+<ul>
+<li>利用量子力学体系可以证明，任何**非线性**都会导致定域性破坏。</li>
+<li>量子力学预测某些可观测关联的存在，使得特定的**非线性装置**被排除</li>
+</ul>
+<h5>非线性演化和混合态分析仪(存疑)</h5>
+<blockquote>[!info] 存疑叙述<br>假设一种物理装置的特性由密度算子的**非线性映射**N所描述，即存在密度算子$\rho=\sum_i\lambda_i\rho_i$的一个凸分解，使得<br>$$\sum_i\lambda_i N(\rho_i)\neq N(\sum_i\lambda_i\rho_i)$$<br>这类装置可用于破坏无信号条件，结合先前量子steering的结果(?)，第二个系统应用一个专门设计的仪器$\{T_i\}$，以概率$\lambda_i$在第一个系统制备出$\rho_i$，那么第一个系统的态是$\sum_i\lambda_i N(\rho_i)$<br><br>由于这个态不同于$N(\rho)$，因此能以严格大于1/2的概率区分仪器$\{T_i\}$是否被作用，从而获取了另一个系统的信息，这与无信号条件相矛盾。</blockquote>
+<p><span style="background:rgba(74, 82, 199, 0.2)">↑引入此类过程会与定域性产生冲突。</span></p>
+<p>Classical teleportation:将未知系统转化为经典信息，随后在制备过程重新构造该系统，使得任何统计测试都**无法区分原始系统与再制备系统**。他由测量装置与再制备装置构成。</p>
+<blockquote>[!example] 量子克隆和线性性无法共存<br>假设有克隆算符V，使得<br>$$V\ket{0}=\ket{00},\quad V\ket{1}=\ket{11}$$<br>则<br>$$V\ket{+}=V(\frac{\ket{0}+\ket{1}}{\sqrt{2}})=\frac{\ket{00}+\ket{11}}{\sqrt{2}}\neq\ket{+}\otimes\ket{+}$$</blockquote>
+<p>如果第一个系统具有两个可观测量，$A_1,A_2$，以概率$p(a_1,a_2)$给出结果。如果远处的第二个系统的可观测量$B_1$给出结果$b_1$，那么会有概率等式</p>
+<p>$$p(a_1,a_2)=\sum_{b_1}p(a_1,a_2,b_1|B_1)$$</p>
+<p>并且第二个系统任何可观测量都需要有相同的边缘概率分布$p(a_1,a_2)$，下面这个联合分布的形式可以满足相同边缘概率分布这个条件</p>
+<p>$$p(a_1,a_2,b_1,b_2):=\frac{p(a_1,a_2,b_1|B_1)p(a_1,a_2,b_2|B_2)}{p(a_1,a_2)}$$</p>
+<p>并非所有的双重分布$p(a_i,b_j|A_i,B_j)$都满足这个条件，满足这个分布所需的条件称为<span style="background:rgba(136, 49, 204, 0.2)">贝尔不等式</span>。只要不违反无信号条件，联合测量装置就不可能存在。</p>
+<p>量子玻尔兹曼映射是一种非线性映射的特例，其定义为$T:\mathcal{B}(\mathcal{H}_A\otimes\mathcal{H}_B)\to\mathcal{B}(\mathcal{H}_A\otimes\mathcal{H}_B)$</p>
+<p>$$T_{QB}(C)=tr_B[C]\otimes tr_A[C]$$</p>
+<p>有时也被称作Zwanig投影。对于密度算符可以得到$T_{QB}(\rho)=\rho_A\otimes\rho_B$，也就是说，$T_{QB}$打破了两个子系统间的所有关联的同时保持了定域态。在统计力学里这个映射能在保持局域限制的情况下最大化全局熵。</p>
+<p><span style="color: #888; font-size: 0.9em; font-style: italic;"></p>
+<p>(1.1~1.4节end，第一章还剩下1.5“需要复数吗”和1.6“代数框架”，不计划在讨论班中讲。)</p>
+<p></span></p>
+<p class="footnote">[^1]: Michael M. Wolf, Quantum Channels & Operations Guided Tour, July 5, 2012</p>
+<p class="footnote">[^2]: 喀兴林，高等量子力学，第2小节（算符）</p>
+<p class="footnote">[^3]: 喀兴林，高等量子力学，第14小节（密度矩阵）</p>
+<p class="footnote">[^4]: Mariano Quiros, Finite Temperature Field Theory and Phase Transitions, [arXiv:hep-ph/9901312v1](http://arxiv.org/abs/hep-ph/9901312v1)</p>
+<p class="footnote">[^5]: [Thorlabs-偏振、偏振椭圆](https://www.thorlabs.de/newgrouppage9.cfm?objectgroup_id=12211&tabname=%E5%81%8F%E6%8C%AF#%E5%81%8F%E6%8C%AF%E6%A4%AD%E5%9C%86)</p>
+<p class="footnote">[^6]: [如何理解施密特(Schmidt)分解定理](https://zhuanlan.zhihu.com/p/86137107)</p>
+<p class="footnote">[^7]: $\ket{jj}=\ket{j}\otimes\ket{j}$</p>
+<p class="footnote">[^8]: $\bra{ij}C^{T_A}\ket{kl}:=\bra{kj}C\ket{il}$</p>
+<p class="footnote">[^9]: 一般情况下这通常不再成立，例如对角矩阵代数唯一的内自同构是恒等映射id。</p>
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

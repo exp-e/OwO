@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>Stone-Weierstrass定理 · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] } },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">数学</span>
+      <span><i class="far fa-calendar"></i> 2025-10-27</span>
+    </div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li><a href="#sec-0">符号和定义</a></li>
+      <li><a href="#sec-1">引理1</a></li>
+      <li><a href="#sec-2">引理2</a></li>
+      <li><a href="#sec-3">Stone-Weierstrass定理(实)</a></li>
+      <li><a href="#sec-4">Stone-Weierstrass定理(复)</a></li>
+      <li><a href="#sec-5">用法</a></li>
+    </ul>
+  </aside>
+  <article class="article-body">
+    <img class="article-cover" src="assets/mcl.jpg" alt="Stone-Weierstrass定理">
+    <h1 class="article-title">Stone-Weierstrass定理</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2025-10-27</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">数学</span>
+      <a href="https://zhuanlan.zhihu.com/p/1966217390758007200" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
+    </div>
+    <div class="article-content">
+<p>整理自泛函分析(gl)笔记</p>
+<p>足够强大的定理，用最少的条件推出最好用的稠密条件</p>
+<blockquote>封面图：X：@McLarenF1</blockquote>
+<h3 id="sec-0">符号和定义</h3>
+<p>代数$\mathcal{A}$，是指向量空间配备上乘积，$A\times A\to A\quad (a,b)\mapsto ab$，满足</p>
+<p>$$a(bc)=(ab)c\quad a(b+c)=ab+ac\quad (b+c)a=ba+ca\quad \lambda(ab)=(\lambda a)b=a(\lambda b)$$</p>
+<p>$\mathcal{A}$ separating，是指$\forall x,y\in E,\exists f\in\mathcal{A},\quad f(x)\neq f(y)$</p>
+<p>$\mathcal{A}$是lattice，是指$\forall f,g\in \mathcal{A}\Rightarrow \max\{f,g\},\min\{f,g\}\in\mathcal{A}$</p>
+<blockquote>其实我不知道这和格这个命名有啥联系？</blockquote>
+<h3 id="sec-1">引理1</h3>
+<p>设$\mathcal{A}$是$C(E,\mathbb{R})$的闭子代数，那么$\mathcal{A}$是lattice。</p>
+<blockquote>思路：利用$[-1,1]$上多项式在连续函数空间中的稠密性逼近绝对值函数，再由闭性，极限也在子代数$\mathcal{A}$内</blockquote>
+<p>证明：注意到</p>
+<p>$$\max\{f,g\}=\frac{f+g+|f-g|}{2},\quad\min\{f,g\}=\frac{f+g-|f-g|}{2}$$</p>
+<p>所以仅需证$f\in\mathcal{A}\Rightarrow|f|\in\mathcal{A}$</p>
+<p>由于$\mathcal{A}$是子代数，如果$f\in\mathcal{A},\quad p(x)=\sum_{k=1}^{n}a_kx^k$，那么$p(f)=\sum_{k=1}^{n}a_kf^k\in\mathcal{A}$</p>
+<p>不妨设$||f||_\infty\le1$，取一个收敛到绝对值函数的多项式序列$(P_n)\subseteq P[-1,1],\quad P_n\to |·|$一致收敛。</p>
+<p>那么</p>
+<p>$$||P_n(f)-|f|~||_\infty=\sup_{x\in E}|P_n(f(x))-|f(x)|~|\le\sup_{t\in[-1,1]}|P_n(t)-|t|~|=||P_n-|·|~||_\infty\to 0$$</p>
+<p>记$\tilde{P_n}=P_n-P_n(0)=\sum_{l=1}^n a_kx^k$，则</p>
+<p>$$||\tilde{P_n}(f)-|f|~||_\infty\le||\tilde{P_n}-|·|~||_\infty\le||P_n-|·|~||_\infty+||P_n(0)||_\infty\to0$$</p>
+<p>由于$\mathcal{A}$是闭的，$|f|\in\mathcal{A}$。</p>
+<h3 id="sec-2">引理2</h3>
+<p>设$\mathcal{A}$是$C(E,\mathbb{R})$的子代数，满足</p>
+<ol>
+<li>$\mathcal{A}$ separating</li>
+<li>$\forall x\in E,\quad\exists f\in \mathcal{A},\quad f(x)\neq0$</li>
+</ol>
+<p>则</p>
+<ol>
+<li>$\forall\alpha\in\mathbb{R},x\in E,\quad\exists f\in l\quad s.t. f(x)=\alpha$</li>
+<li>$\forall\alpha,\beta\in\mathbb{R},x\neq y\in E\quad\exists h\in\mathcal{A},\quad s.t.h(x)=\alpha~\&~ h(y)=\beta$</li>
+</ol>
+<p>这说的就是可以根据两个点的要求找到$\mathcal{A}$中的某个函数</p>
+<p>证明：对第一条，找出$g(x)\neq0$那么$f=\alpha g/g(x)$满足条件</p>
+<p>对第二条，先取出$f(x)\neq f(y)$，然后分情况讨论</p>
+<p>若$f(x)= 0,f(y)\neq0$，那么取$g\in\mathcal{A}$使得$g(x)\neq0$，解方程</p>
+<p>$$\begin{cases}</p>
+<p>\lambda f(x)+\mu g(x) = \alpha \\</p>
+<p>\lambda f(y)+\mu g(y) = \beta</p>
+<p>\end{cases}$$</p>
+<p>解得的$\mu,\lambda$使得$\lambda f+\mu g$满足要求</p>
+<p>若$f(x)\neq 0,f(y)\neq0$，那么解方程</p>
+<p>$$\begin{cases}</p>
+<p>\lambda f(x)+\mu f^2(x) = \alpha \\</p>
+<p>\lambda f(y)+\mu f^2(y) = \beta</p>
+<p>\end{cases}$$</p>
+<p>系数行列式=$f(x)f(y)(f(x)-f(y))\neq0$，解出$\mu,\lambda$使得$\lambda f+\mu f^2$满足要求</p>
+<h3 id="sec-3">Stone-Weierstrass定理(实)</h3>
+<p>设E是紧豪斯多夫拓扑空间，$\mathcal{A}\subseteq C(E,\mathbb{R})$是子代数，满足</p>
+<ol>
+<li>$\mathcal{A}$ separating</li>
+<li>$\forall x\in E,\quad\exists f\in \mathcal{A},\quad f(x)\neq0$</li>
+</ol>
+<p>那么$A\subseteq\left(C(E,\mathbb{R}),||·||_\infty\right)$稠密</p>
+<p>证明：假设$\mathcal{A}$闭（不闭的话就令$\mathcal{A}$为闭包），证明$\mathcal{A}=C(E,\mathbb{R})$</p>
+<p>令$f\in C(E,\mathbb{R})$，由引理2可知$\forall x,y\in E,\exists h_{x,y}\in\mathcal{A}$使得$h_{x,y}(x)=f(x),h_{x,y}(y)=f(y)$。由连续性，给定$\varepsilon>0$，可以定义</p>
+<p>$$U_{x,y}=\{z\in E|h_{x,y}(z)<f(z)+\varepsilon\}$$</p>
+<p>是开的，并且$x,y\in U_{x,y}$。造一族开覆盖$E\subseteq\bigcup_{y\in E}U_{x,y}$，由于E是紧的，取出有限子覆盖$y_{n(x)}$使得$E\subseteq\bigcup_{i=1}^n(x) y_i$。</p>
+<p>考虑$h_x=\min\{h_{x,y_1},...,h_{x,y_{n(x)}}\}$，由于$\mathcal{A}$是lattice，故$h_x\in\mathcal{A}$且$h_x<f+\varepsilon,f(x)=h_x(x)$</p>
+<p>我们再用这个流程把上界控制一遍，定义</p>
+<p>$$V_{x}=\{z\in E|h_{x}(z)>f(z)-\varepsilon\}$$</p>
+<p>遍历x可以开覆盖E，取有限子覆盖下标为$x_1,...,x_m\in E$</p>
+<p>令$h=\max\{h_{x_1},...,h_{x_m}\}\in\mathcal{A}$，那么在E上$f-\varepsilon<h<f+\varepsilon$，也即$||f-h||_\infty<\varepsilon$。由于$\varepsilon$是任意的，所以$f\in\bar{\mathcal{A}}=\mathcal{A}\Rightarrow \mathcal{A}=C(E,\mathbb{R})$</p>
+<h4>反例</h4>
+<p>定理中的两个条件都是必须的。</p>
+<p>如果separating这个条件失效，那么首先紧豪斯多夫空间是T4可分（不交闭集有不交邻域）的，由Urysohn引理（必要性证明自己看尤承业p84，太长了，就是用等高线进行扩张）</p>
+<img class="note-img" src="assets/urysohn.jpg" alt="urysohn.jpg">
+<p>可以看到任意两个闭子集都是可以用连续函数区分的，但是此时子代数无法区分，也就无法逼近了</p>
+<p>如果$\mathcal{A}$中任意函数都$f(x)=0$那自然无法逼近非零常值映射了</p>
+<h3 id="sec-4">Stone-Weierstrass定理(复)</h3>
+<p>设E是紧豪斯多夫拓扑空间，$\mathcal{A}\subseteq C(E,\mathbb{C})$是子代数，满足</p>
+<ol>
+<li>$\mathcal{A}$ separating</li>
+<li>$\forall x\in E,\quad\exists f\in \mathcal{A},\quad f(x)\neq0$</li>
+<li>$\mathcal{A}$自伴随（在复共轭下封闭）</li>
+</ol>
+<p>那么$A\subseteq\left(C(E,\mathbb{C}),||·||_\infty\right)$稠密</p>
+<p>证明：令$Re\mathcal{A}=\{Ref|f\in\mathcal{A}\}$，则$\forall f\in\mathcal{A},Ref=\frac{f+\bar{f}}{2}\in Re\mathcal{A},Imf=\frac{f-\bar{f}}{2i}\in Re\mathcal{A}$，此时$f=Ref+iImf$，由于自伴随，$\mathcal{A}=Re\mathcal{A}+iRe\mathcal{A}$。注意到$Re\mathcal{A}\subseteq C(E,\mathbb{R})$满足S-W定理实情形，故稠密，故$\mathcal{A}=Re\mathcal{A}+iRe\mathcal{A}\subseteq C(E,\mathbb{C})$稠密。</p>
+<h3 id="sec-5">用法</h3>
+<p>证明紧豪斯多夫空间上的子代数在连续函数中稠密基本上都能用</p>
+<img class="note-img" src="assets/S-W.png" alt="S-W.png">
+<img class="note-img" src="assets/S-W2.png" alt="S-W2.png">
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

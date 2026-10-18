@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>Notes to the basic of Financial Mathematics · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] } },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">其他</span>
+      <span><i class="far fa-calendar"></i> 2025-09-17</span>
+    </div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li><a href="#sec-0">Concepts</a></li>
+      <li><a href="#sec-1">Calculations</a></li>
+      <li><a href="#sec-2">Simple Annuities</a></li>
+      <li><a href="#sec-3">Amortization Table</a></li>
+      <li><a href="#sec-4">Sinking Fund Method</a></li>
+      <li><a href="#sec-5">Bonds</a></li>
+      <li><a href="#sec-6">Rates of Return</a></li>
+      <li><a href="#sec-7">Yield Curves</a></li>
+      <li><a href="#sec-8">Duration and Convexity</a></li>
+    </ul>
+  </aside>
+  <article class="article-body">
+    <img class="article-cover" src="assets/f1.jpg" alt="Notes to the basic of Financial Mathematics">
+    <h1 class="article-title">Notes to the basic of Financial Mathematics</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2025-09-17</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">其他</span>
+      <a href="https://zhuanlan.zhihu.com/p/1949167301678072245" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
+    </div>
+    <div class="article-content">
+<blockquote>The cover is from X: @sog_goog</blockquote>
+<p>```table-of-contents</p>
+<p>```</p>
+<p>Mainly include the time value of money, and my teacher said they were the most basic part. This note is written to strengthen my memories, and I think it's a good chance to practice my shit-like academic English.</p>
+<p>Some interesting test you can take after this class:</p>
+<ul>
+<li>IFoA-CM1</li>
+<li>SOA-FM</li>
+</ul>
+<h3 id="sec-0">Concepts</h3>
+<h4>Basic notation</h4>
+<p>P = principal = original amount borrowed/invested</p>
+<p>I = interest = fee or service charge paid to the lender for the use of money</p>
+<p>S = future value of P</p>
+<p>So we can easily obtain,</p>
+<p>$$S-P=I$$</p>
+<h4>Accumulation/Amount function</h4>
+<p>Accumulation function $a(t)$ can be regarded as the normalization of amount function $A(t)$.</p>
+<ul>
+<li>$a(t)$ = accumulated value at time $t\ge 0$ of an original investment of **one dollar**</li>
+<li>$a(0)=1$, while $a(t)$ is an increasing and continuous function</li>
+</ul>
+<ul>
+<li>$A(t)$ = accumulated value at time $t\ge 0$ of an original investment of original principles **P**.</li>
+<li>$A(t)=P·a(t)$, where $a(t)$ holds the features above.</li>
+</ul>
+<h4>Interest</h4>
+<p>$I_n$ = amount of interest earned in period n</p>
+<p>$$I_n=A(n)-A(n-1)$$</p>
+<p>$i =$ effective rate of interest, earn during the period.</p>
+<blockquote>This "effective" reminds me about "effective potential" in EFT, all of them mean packed some complex contributor in one simplified factor as a midterm procedure.</blockquote>
+<p>$i_n =$ effective rate of interest in the $n$th year</p>
+<p>$$i_n=\frac{a(n)-a(n-1)}{a(n-1)}$$</p>
+<blockquote>Notes: divided by the previous year $a(n-1)$</blockquote>
+<h5>Simple Interest</h5>
+<p>no interest earned on any interest that is paid</p>
+<p>$$S=P(1+it)$$</p>
+<blockquote>This "$it$" seems like an imaginal part...but it isn't, i represents interest and t represents time. $t=1$ represents a whole year.</blockquote>
+<ul>
+<li>The $i_n$ of simple interest $i$:</li>
+</ul>
+<p>$$i_n=\frac{i}{1+i(n-1)}$$</p>
+<h5>Compound Internet</h5>
+<p>The interest earned at the end of any given period of time is added to the principal and it thereafter earns interest</p>
+<p>$$A(t)=P(1+i)^t$$</p>
+<ul>
+<li>The $i_n$ of compound interest $i$ is exactly i.</li>
+</ul>
+<h5>Discount factor/rate</h5>
+<p>If you wanted S in t-years, then you would invest P = discount factor × S, today.</p>
+<ul>
+<li>compound interest</li>
+</ul>
+<p>$$(1+i)^{-t}$$</p>
+<ul>
+<li>simple interest</li>
+</ul>
+<p>$$(1+it)^{-1}$$</p>
+<p>Effective rate of discount</p>
+<p>$$d_n=\frac{A(n)-A(n-1)}{A(n)}$$</p>
+<p>divided by the later year $A(n)$</p>
+<ul>
+<li>compound discount</li>
+</ul>
+<p>$$a(t)=(1-d)^{-t}$$</p>
+<ul>
+<li>simple discount</li>
+</ul>
+<p>$$a(t)=(1-dt)^{-1}$$</p>
+<blockquote>This is just like, if we say, using the intrest to calculate accumulation is similar to walking from now to future, then using discount is similar to walking backward from now to future.</blockquote>
+<p>Relation between d and i:</p>
+<p>$$d=\frac{i}{1+i}$$</p>
+<blockquote>If you want to lend $100 from banks for 1 year, then banks may offer two ways for you to return the additional money.<br>- 8% interest: You got 100 today, and you will return 108 after one year. This means  you return the additional money one year later.<br>- 8% discount: You got 92 today, and you will return 100 after one year. This means you return the additional money at the beginning.<br>The first way is better to the customer, which is used by China and US.</blockquote>
+<h5>Nominal rates of interest</h5>
+<p>So far, all of the "period" equals to one year. "Nomimal rates", $i^{(m)}$ will change the period to m-times per year.</p>
+<p>$$a(t)=\left (1+\frac{i^{(m)}}{m}\right)^{mt}$$</p>
+<blockquote>Will it remind you the limit defination of $e$?<br>$$e=\lim_{n\to\infty}(1+\frac{1}{n})^n$$<br>Take t = 1 year, then when $m\to\infty$, $a(1)\to e^{i^{(\infty)}}$, $a(t)\to e^{i^{(\infty)}t}$(1). We'll see how it works later.</blockquote>
+<ul>
+<li>discount factor</li>
+</ul>
+<p>$$v^n=\left(1+\frac{i^{(m)}}{m}\right)^{-mt}$$</p>
+<p>where $n=mt$.</p>
+<ul>
+<li>discount rate</li>
+</ul>
+<p>$$a(t)=\left(1-\frac{d^{(m)}}{m}\right)^{-mt}$$</p>
+<blockquote>E.g. An insurance company says you can pay for your life insurance by paying $100 at the beginning of each year or $51.5 at the beginning of each half-year. What is the value of $i^{(2)}$?<br>Answer: We chose the money we pay at the beginning of the year to write down equation. We use "discount factor" to determin the value of $51.5 we pay at the beginning of odd half year, the equation is<br>$$100=51.5+51.5\left(1+\frac{i^{(2)}}{2}\right)^{-2\times\frac{1}{2}}$$<br>The solution is<br>$$i^{(2)}=12.4\%$$</blockquote>
+<h5>Force of interest (Effective Nominal Rates)</h5>
+<p>Calculation of effective m-nominal rates in 1/m time:</p>
+<p>$$\frac{i^{(m)}}{m}=\frac{a(t+\frac{1}{m})-a(t)}{a(t)}$$</p>
+<p>Take $m\to\infty$, then we can write down</p>
+<p>$$i^{(\infty)}=\lim_{m\to\infty}\frac{a(t+\frac{1}{m})-a(t)}{\frac{1}{m}}\frac{1}{a(t)}$$</p>
+<p>The first part corresponds to the defination of derivative $a'(t)$, so</p>
+<p>$$i^{(\infty)}=\frac{a'(t)}{a(t)}$$(2)</p>
+<blockquote>This is very similar to Hubble constant<br>$$H:=\frac{\dot{a}(t)}{a(t)}$$<br>The famous Friedmann equation<br>$$H^2=\frac{8\pi G}{3}\rho-\frac{kc^2}{a^2}+\frac{\Lambda}{3}$$</blockquote>
+<p>Define "force of interest" $\delta_t=i^{(\infty)}$, we have a alternative way to express this variable</p>
+<p>$$\delta_t=\frac{d}{dt}\ln a(t)$$</p>
+<p>which could help us calculate compound easily.</p>
+<ul>
+<li>For Simple Interest</li>
+</ul>
+<p>$$\delta_t=\frac{\frac{d}{dt}(1+it)}{1+it}=\frac{i}{1+it}$$</p>
+<p>which is decreasing over time.</p>
+<ul>
+<li>For Compound Interest</li>
+</ul>
+<p>$$\delta_t=\frac{d}{dt}\ln (1+i)^t=\ln (1+i)$$</p>
+<p>which is a constant.</p>
+<p>By solving the differential equation (2), or apply the fact we disscussed in (1), we can express $a(t)$ as follows</p>
+<p>$$a(t)=e^{\delta t}$$</p>
+<p>where we omitted lower index t.</p>
+<h3 id="sec-1">Calculations</h3>
+<h4>Equation of Value</h4>
+<p>I like this name because it is similar to EoM (Equation of Motion).</p>
+<p>Solving this kind of problem is like using Kirchhoff Circuit Laws to solve electric problems. Here are few steps.</p>
+<ul>
+<li>Draw a timeline with income and outcome (=draw the electric circuit with current I)</li>
+<li>Select one focal date and move all dated value to this date (=calculate each voltage changes)</li>
+<li>Set up an equation of value at the focal date (=Kirchhoff's junction rule)</li>
+<li>Solve equation</li>
+</ul>
+<img class="note-img" src="assets/Pasted image 20250917165730.png" alt="Pasted image 20250917165730.png">
+<p>The number in the axis represents the periods of time for $i^{(4)}=5\%$. For simplicity, we don't want to move X, so we set the position of X as a focal date and move other incomes and outcomes to dated value.</p>
+<p>$$3000(1+\frac{5\%}{4})^6+X=8000(1+\frac{8\%}{2})^{2\times 3}(1+\frac{5\%}{4})^{-3}$$</p>
+<p>Only the calculation of the value of 8000 3 years later will use $i^{(2)}$, other time we use $i^{(4)}=5\%$ instead.</p>
+<p>$$X=6520.1$$</p>
+<h4>Inflation</h4>
+<p>Let i = effective annual rate of interest, r = annual rate of inflation. After you earn 1+i rate one year later, the value of this amount of money also drops to $\frac{1}{1+r}$ due to inflation, so your real interest $i_{real}$ would be</p>
+<p>$$(1+i_{real})=\frac{1+i}{1+r}$$Treasury bills(国债) are popular short-term and low-risk securities issued by governments as a way to meet short-term financing needs. In calculation of daily coupon, we divide it by 360 (in China and USA).</p>
+<h4>Duration</h4>
+<p>In [finance](https://en.wikipedia.org/wiki/Finance "Finance"), the **duration** of a financial [asset](https://en.wikipedia.org/wiki/Asset "Asset") that consists of fixed [cash flows](https://en.wikipedia.org/wiki/Cash_flows "Cash flows"), such as a [bond](https://en.wikipedia.org/wiki/Bond_\(finance\) "Bond (finance)"), is the [weighted average](https://en.wikipedia.org/wiki/Weighted_average "Weighted average") of the times until those fixed cash flows are received.</p>
+<h5>Macaulay Duration (time center)</h5>
+<p>The [weighted average](https://en.wikipedia.org/wiki/Weighted_average "Weighted average") maturity of [cash flows](https://en.wikipedia.org/wiki/Cash_flows "Cash flows"), in which the time of receipt of each payment is weighted by the present value of that payment.</p>
+<p>$${\rm MacD} =\frac{\sum_{i=1}^n t_iPV_i}{\sum_{i=1}^nPV_i}$$</p>
+<p>where $PV_i$ is the present value of the $i$th cash payment from an asset. It reflects the "time center", just as "center of mass".</p>
+<img class="note-img" src="assets/Macaulay.jpeg" alt="Macaulay.jpeg">
+<h5>Modified Duration (sensitivity)</h5>
+<p>In contrast to Macaulay duration, modified duration (sometimes abbreviated MD) is a price sensitivity measure, defined as the percentage derivative of price with respect to yield (the logarithmic derivative of bond price with respect to yield).</p>
+<p>$$Mod D(y)=-\frac{1}{V}·\frac{\partial V}{\partial y}=-\frac{\partial\ln (V)}{\partial y}$$</p>
+<p>In calculation, y (yield) is "i" (interest) we defined above. Just think: while interest increases, the present value $B_p=\sum C_i/(1+i)^t$ decreases, so the derivative is negative, that's why we take an extra minus in front of it; the $1/V$ just reflects the "relative" changes.</p>
+<p>When the yield is expressed **continuously** compounded,</p>
+<p>$$V=\sum_{i=1}^n CF_i·e^{-yt_i}$$</p>
+<p>where $CF_i$ means the [cash flow](https://en.wikipedia.org/wiki/Cash_flow "Cash flow") of the $i$th payment from an asset. We take the derivative of price with respect to yield and calculate the Modified Duration.</p>
+<p>$$Mod D(y)=\frac{\sum_{i=1}^n t_iCF_i·e^{-yt_i}}{\sum_{i=1}^n CF_i·e^{-yt_i}}=MacD$$</p>
+<p>which means Macaulay duration and modified duration are numerically equal.</p>
+<blockquote>This is similar to the partition function in statistic physics.<br>$$Z=\sum e^{-\beta E}$$<br>$$\braket{E}=-\frac{\partial\ln Z}{\partial\beta}$$</blockquote>
+<p>When the yield is expressed **discrete** compounded,</p>
+<p>$$PV=\sum_{j=1}^n\frac{c_j}{(1+y)^j}+\frac{FV}{(1+y)^n}$$</p>
+<p>$$\frac{dPV}{PVdy}=-\frac{1}{1+y}[\sum_{j=1}^n\frac{jc_j}{(1+y)^j}+\frac{nFV}{(1+y)^n}]\frac{1}{PV}$$</p>
+<p>where the last two terms are the definition of Macaulay Duration. So in this case we can write</p>
+<p>$$Mod(y)=MacD/(1+y)$$</p>
+<p>Sometimes we write the compound interest $1+y$ as $1+YTM/m$, which is similar to nominal rate, $1+i^{(m)}/m$, however YTM represents the market price, or effective $i^{(m)}$</p>
+<p>$${\rm Modified~Duration}={\rm Macaulay~duration}/(1+YTM/m)$$</p>
+<p>where m is coupon frequency, YTM = Yield to Maturity. Notice that when we take $m\to 0$ limit, the discrete can be reduced to continuous case where $Mod D(y)=MacD$</p>
+<h5>Effective Duration</h5>
+<ul>
+<li>Just copied the wiki</li>
+</ul>
+<p>For bonds that have embedded options, such as putable and callable bonds, modified duration will not correctly approximate the price move for a change in [yield to maturity](https://en.wikipedia.org/wiki/Yield_to_maturity "Yield to maturity").</p>
+<p>Consider a bond with an embedded put option. As an example, a 1,000 bond that can be redeemed(赎回) by the holder at par at any time before the bond's maturity (i.e. an American put option). No matter how high interest rates become, the price of the bond will never go below 1,000 (ignoring [counterparty risk](https://en.wikipedia.org/wiki/Counterparty_credit_risk "Counterparty credit risk")). This bond's price sensitivity to interest rate changes is different from a non-puttable bond with otherwise identical cash flows.</p>
+<p>To price such bonds, one must use [option pricing](https://en.wikipedia.org/wiki/Option_pricing "Option pricing") to determine the value of the bond, and then one can compute its [delta](https://en.wikipedia.org/wiki/Greeks_\(finance\) "Greeks (finance)") (and hence its lambda), which is the duration. The **effective duration** is a **discrete approximation** to this latter, and will require an [option pricing model](https://en.wikipedia.org/wiki/Valuation_of_options#Pricing_models "Valuation of options").</p>
+<p>$${\rm Effective~Duration}=\frac{V_{-\Delta y}-V_{+\Delta y}}{2(V_0)\Delta y}$$</p>
+<p>where $V_{\pm\Delta y}$ represents the price of the bonds after increasing/decreasing $\Delta y$. $V_0$ is the current price. This is just a discrete version of modified duration.</p>
+<p>Bonds that have embedded options are often cheaper for buyer, because the seller would have to pay extra money to the embedded options. The duration for bonds that have embedded options are lower, because the redeem of the bond prevents the $V_{-\Delta y}$ to be too large.</p>
+<h5>Yield curve risks</h5>
+<img class="note-img" src="assets/Pasted image 20250917182550.png" alt="Pasted image 20250917182550.png">
+<p>The vertical axis represents the change rate of yield $y$. The figure above describes three different types of yield curve risks. The level changes is called parallel shift, others are called non-parallel shift.</p>
+<h3 id="sec-2">Simple Annuities</h3>
+<p>People involved:</p>
+<ul>
+<li>Insurer: the entity that is licensed to sell the annuity.</li>
+<li>Annuitant: the individual who receives the benefits.</li>
+<li>Contract owner: the individual who purchases the annuity.</li>
+<li>Beneficiary: the individual that will receive any proceeds upon the death of the annuitant.</li>
+</ul>
+<p>Classification:</p>
+<ul>
+<li>Deferred/Immediate $\times$ variable/fixed</li>
+</ul>
+<blockquote>"Deferred" means you pay the annuities in several times and get benefits when you are old; "Immediate" means you pay it only once and get benefits right after the payment.<br>"variable" means the interest will change according to the market; "fixed" means the interest holds a small number and never changes.<br>Usually, insurer will benefit more in "fixed" annuities, so they would like to let you pay more in "variable" annuities.<br>You can cancel the payment on a Deferred annuity, however a big amount of fine will be given to insurer.</blockquote>
+<p>eg."平安养老保险" is a kind of Deferred variable annuity</p>
+<p>Payout methods:</p>
+<ul>
+<li>Life annuity: made for entire life of the annuitant and cease at his/her death.</li>
+<li>Life annuity with period certain: made for the entire life of the annuitant but are guaranteed for a minimum number of years even if the annuitant dies.</li>
+<li>Life annuity with refund: annuitant will receive payments equal to the total amount paid into the contract (initial investment less fees).</li>
+<li>Joint life annuity: annuity on two or more individuals; payments continue until both members are no longer living.</li>
+</ul>
+<p>The Three Pillars of the Pension System:</p>
+<ul>
+<li>Basic Old-Age Insurance</li>
+<li>Enterprise Annuities</li>
+<li>Individual Savings Pension Plans</li>
+</ul>
+<p>lump sum payment = Immediate</p>
+<p>PMT = payment</p>
+<h4>Calculations of annuities</h4>
+<p>Income yield = payment/present value = the benefit you get at one time/total money you spent</p>
+<p>Payouts(=income yields) are higher when expected remaining longevity is shorter.</p>
+<p>This is because the times the insurer should pay you become less, then they may pay you more per time.</p>
+<p>Annuities with a period certain feature will reduce the payout, but to varying degrees.</p>
+<p>Period certain feature: guarantee for a minimum number of years even if the annuitant dies.</p>
+<p>Varying degrees means the amount of payout reduced depends on the minimum number of years.</p>
+<p>An ordinary simple annuity consisting of n-payment of ￥1, then the accumulated value at the time of the nth payment is (sum of a geometric series)</p>
+<p>$$s_{n\urcorner i}=\frac{(1+i)^n-1}{i}$$</p>
+<p>If the periodic payment of an annuity is ￥R instead of ￥1, then the accumulated value of an annuity is</p>
+<p>$$S=Rs_{n\urcorner i}$$</p>
+<p>In order to determine the present value A, denote</p>
+<p>$$a_{n\urcorner i}=(1+i)^{-1}+(1+i)^{-2}+...+(1+i)^{-n}=\frac{1-(1+i)^{-n}}{i}$$</p>
+<p>then, the discounted or present value is</p>
+<p>$$A=Ra_{n\urcorner i}=R\frac{1-(1+i)^{-n}}{i}$$</p>
+<p>The relationship between A and S is</p>
+<p>$$A=S(1+i)^{-n}$$</p>
+<blockquote>[!tip] Discount factor with growing interest rate<br>if the interest rate is $i$, and periodic payment R grows with rate $g$, then the discount factor writes:<br>$$a_{n\overset{g}{\urcorner} i}=\frac{1}{1+i}+\frac{1+g}{(1+i)^2}+...+\frac{(1+g)^{n-1}}{(1+i)^n}=\frac{1-(\frac{1+g}{1+i})^n}{i-g}$$<br>$$PV=Ra_{n\overset{g}{\urcorner} i}$$</blockquote>
+<h4>Annuity Due</h4>
+<p>==An annuity-due is an annuity where the periodic payments are due at the beginning of each payment interval.==</p>
+<blockquote>If you see "due", you should use $\ddot{a}$ instead of $a$, I forgot this in a test...</blockquote>
+<p>$S^*$, or $\ddot{S}$, means the accumulated value of an annuity-due evaluated <span style="background:rgba(74, 82, 199, 0.2)">one period after</span> the nth payment, so we have the relationship</p>
+<p>$$S^*=(1+i)S$$</p>
+<p>$A^*$ or $\ddot{A}$ means the present value evaluated at the time of the first payment, hence</p>
+<p>$$A^*=(1+i)A$$</p>
+<blockquote>You can consider s* or a* as s or a deferred one period, which means<br>$$s^*=(1+i)s,\quad a^*=(1+i)a$$<br>Or, you can consider $s_{n\urcorner i}^*$ as $s_{n+1\urcorner i}^*$ without the last payment,<br>$$s_{n\urcorner i}^*=s_{n+1\urcorner i}^*-1$$</blockquote>
+<h4>Deferred Annuity</h4>
+<p>A deferred annuity is an annuity-immediate where the 1st payment is due two or more periods later.</p>
+<p>Present value of a deferred annuity</p>
+<p>$$A=Ra_{n\urcorner i}(1+i)^{-k}$$</p>
+<blockquote>[!question] Example<br>An asset, valued at ￥350 000, is sold for ￥150 000 down. The buyer agrees to pay the balance with interest at $i^{(12)}=9\%$ by paying ￥5000 monthly as long as necessary, the first payment due 2 years from now.<br>a) Determine the number of full payments needed and the size of the concluding payment one month after the last ￥5000 payment.<br>b) Determine the monthly payment needed to pay off the balance by 36 equal payments, if the first payment is 1 year from now and interest is at $i^{(12)}=12%$.<br><br>Sol.(a) The buyer has ￥200 000 to pay, which has the present value of $200~000(1+0.09/12)^{24}$ 2 years later.<br>$$200~000(1+0.09/12)^{24}=5000 a_{n\urcorner 0.09/12}=5000\frac{1-(1+0.09/12)^{-n}}{0.09/12}$$<br>$$\Rightarrow n\approx59.5$$<br>So he need to pay 59 times of ￥5000, then the payment after the 59th is<br>$$\delta=\left(200~000(1+0.09/12)^{24}-5000 a_{59\urcorner 0.09/12}\right)(1+0.09/12)^{60}=2519.7$$<br><br>(b) Suppose the monthly payment is R, then<br>$$200~000(1+0.12/12)^{12}=R a_{36\urcorner 0.12/12}=R\frac{1-(1+0.01)^{-36}}{0.01}$$<br>$$\Rightarrow R=7485$$</blockquote>
+<h4>Approximating interest rate</h4>
+<p>First, we determine a starting point for i:</p>
+<p>$$a_{n\urcorner i}=k\Rightarrow i'\approx\frac{1-(k/n)^2}{k}\tag{1}$$</p>
+<p>$$s_{n\urcorner i}=k\Rightarrow i'\approx\frac{(k/n)^2-1}{k}\tag{2}$$</p>
+<blockquote>[!info] Explanation<br>If we expand $(1+i)^n$ to 2nd order term, then<br>$$k=s_{n\urcorner i}=\frac{(1+i)^n-1}{i}\approx n+\frac{n(n-1)}{2}i$$<br>Solve $i$ and multiply the fraction by $(k+n)$,<br>$$i=\frac{2(k^2-n^2)}{n(n-1)(k+n)}\tag{1}$$<br>On the other hand, we expand $(1+i)^n$ to 1st order term, then<br>$$k\approx\frac{1+ni-1}{i}=n$$<br>So we can take $n-1\approx n$, $k\approx n$ in the denominator of (1) and obtain<br>$$i'\approx\frac{k^2-n^2}{kn^2}=\frac{(k/n)^2-1}{k}$$</blockquote>
+<p>Take case (2) as an example, we treat $s(i)$ as a <span style="background:rgba(163, 67, 31, 0.2)">linear</span> function to approximate i, so we take</p>
+<p>$$i_0=\lfloor i'\rfloor\quad \%$$</p>
+<p>$$i_1=(i_0+1)\quad\%$$</p>
+<p>Then we can obtain</p>
+<p>$$s_{n\urcorner i_0}\quad and\quad s_{n\urcorner i_1}$$</p>
+<p>If $s_{n\urcorner i_0}\le k\le s_{n\urcorner i_1}$, then we can do linear approximation; if not, adjust the integer part of $i_0$ and $i_1$, to satisfy $s_{n\urcorner i_0+m}\le k\le s_{n\urcorner i_1+m}$.</p>
+<p>Since we treat $s(i)$ as a linear function, so there's ratio relationship between s and i:</p>
+<p>$$\frac{k-s_{n\urcorner i_0}}{s_{n\urcorner i_1}-s_{n\urcorner i_0}}=\frac{{\color{blue}i}-i_0}{i_1-i_0}$$</p>
+<p>Then we can obtain the linear approximation of interest, ${\color{blue}i}$.</p>
+<h4>General Annuities</h4>
+<p>Sometimes the interest doesn't show straightly in problem, we need to calculate the equivalent interest or change the interest.</p>
+<blockquote>[!question] Example 1<br>Deposits of ￥100 are made at the end of each quarter to a bank account for 5 years. Determine the accumulated value of these payments if $i^{(12)}=6\%$<br><br>Sol. First we calculate $i^{(4)}$,<br>$$(1+i)^4=(1+\frac{6\%}{12})^{12}$$<br>Then we use $i$,<br>$$S=100 s_{20\urcorner i}$$</blockquote>
+<blockquote>[!question] Example 2<br>Payments of ￥200 are made at the end of each month in an account paying $i^{(4)}=8\%$. How much will be accumulated in the account at the end of 5 years if <span style="background:rgba(240, 200, 0, 0.2)">simple interest</span> is paid for the fractional part of a period?<br><br>Sol.<br>$$200(1+(1+\frac{8\%}{12})+(1+2\frac{8\%}{12}))=R$$<br>$$Rs_{20\urcorner 2\%}=S$$</blockquote>
+<h4>Mortgages</h4>
+<p>The institution lending the money normally requires the borrower to deliver the title of the property as security for the loan.</p>
+<blockquote>[!info] The US House Market Bubble (Movie: The Big Short)<br>Caused by relaxing lending standards and growing amount of house, which made lots of contracts been breached.<br>Subprime mortgages->ABSs(Asset-Backed Security资产支持证券)->ABS CDO(Collateralized Debt Obligation债务抵押债券) || CDS(Credit Default Swap)</blockquote>
+<h4>Perpetuities</h4>
+<p>Annuity whose payments begin on a fixed date and continue forever.</p>
+<p>$$A=\frac{R}{i}$$</p>
+<p>$$\ddot{A}=\frac{R}{i}+R$$</p>
+<p>Annuities where the payments change every period. Two Standard Types:</p>
+<ul>
+<li>Vary in terms of a constant ratio</li>
+</ul>
+<p>Use the sum of a geometric series to solve it.</p>
+<ul>
+<li>Vary in terms of a constant arithmetic difference</li>
+</ul>
+<p>$$A=\sum_{k=1}^n(P+(k-1)Q)·(1+i)^{-k}$$</p>
+<p>Calculate $(1+i)A-A$, use the sum of a geometric series. Or $\partial_q$ on $(1-q^n)/(1-q)$.</p>
+<p>$$A=Pa_{n\urcorner i}+Q\frac{a_{n\urcorner i}-n(1+i)^{-n}}{i}\tag{1}$$</p>
+<p>$$S=A(1+i)^n$$</p>
+<p>$$\boxed{S=Ps_{n\urcorner i}+Q\frac{s_{n\urcorner i}-n}{i}}$$</p>
+<blockquote>How to memorize this? Normally we use $((1+i)^n-1)/i$ to represent some accumulated value. However this Q has a higher accumulated "rank"(?) than P, so we level up $(1+i)^n$ and 1 in the denominator, to $s_{n\urcorner i}$ and n, so finally $Q\frac{s_{n\urcorner i}-n}{i}$</blockquote>
+<p>Since calculate this needs not small time, This formula should be memorized.</p>
+<p>When P=Q=1,</p>
+<p>$$(Is)_{n\urcorner i}=\frac{\ddot{s}_{n\urcorner i}-n}{i}$$</p>
+<p>When P=n, Q=-1 (Decreasing Annuity)</p>
+<p>$$(Da)_{n\urcorner i}=\frac{n-a_{n\urcorner i}}{i}$$</p>
+<p>Take the $n=\infty$ limit to (1)</p>
+<p>$$A=\frac{P}{i}+\frac{Q}{i^2}$$</p>
+<h3 id="sec-3">Amortization Table</h3>
+<p>Each loan payments goes towards paying the interest, repaying the loan. We made an amortization table to clarify the amount of above.</p>
+<img class="note-img" src="assets/table.png" alt="table.png">
+<p>R represents periodic payment, includes interest paid $I_k$ and principal repaid $P_k$.</p>
+<p>$B_k$ represents outstanding balance (Principles you need to repay in the future).</p>
+<p>Equity(权益): Down payment + Principal you have paid</p>
+<p>We can use Mathematical Induction to obtain these general fomulas:</p>
+<p>the $k$th principal repaid, describes by ratio declining</p>
+<p>$$P_k=R(1+i)^{-(n-k+1)}$$</p>
+<p>Hence the $k$th interest paid is</p>
+<p>$$I_k=R(1-(1+i)^{-(n-k+1)})$$</p>
+<p>Since the future unpaid number keeps declining, the outstanding balance declines in the same way (prospective method)</p>
+<p>$$B_k=R a_{n-k\urcorner i}$$</p>
+<p>Equivalently, we can calculate the principal paid to obtain the outstanding balance. (retrospective method)</p>
+<p>Unpaid=Total-Paid</p>
+<p>$$B_k=A(1+i)^k-R s_{k\urcorner i}$$</p>
+<blockquote>We know they are equivalent by multiply them with $(1+i)^{n-k}$<br>$$A(1+i)^n=R s_{k\urcorner i}(1+i)^{n-k}+R s_{n-k\urcorner i}=Rs_{n\urcorner i}=S$$</blockquote>
+<h4>Refinance</h4>
+<p>If you are locked in at an interest rate for 5-years. Two years later, the interest rates have fallen.</p>
+<p>If you want to refinance your loan, you may have to pay a penalty. This penalty will need to be factored into your calculations to determine whether you should refinance.</p>
+<img class="note-img" src="assets/refinance.png" alt="refinance.png">
+<h3 id="sec-4">Sinking Fund Method</h3>
+<p>periodic = interest + sinking fund expense payment deposits. Usually, the interest rate $r$ for the principal is higher than the interest rate $i$ in sinking fund.</p>
+<p>$$R=Ar+\frac{A}{s_{n\urcorner i}}$$</p>
+<p>When r=i=interest rate in AM (Amortization method), periodic payment in SFM equals to periodic payment in AM.</p>
+<p>book value = original principal - accumulated of debt principal value of SF</p>
+<p>net amount of interest paid = interest - interest earned of interest payment on SF in kth period</p>
+<h3 id="sec-5">Bonds</h3>
+<p>When a corporation or government needs a large sum of money for a long period of time, they can issue bonds.</p>
+<p>F=Face Value of the bond</p>
+<p>r = Bond Rate</p>
+<p>C=Redemption Value</p>
+<p>"Redeemed at Par": F=C</p>
+<p>i = Yield Rate (Control the discount rate then control the present value)</p>
+<p>Price formula</p>
+<p>$$P=Fr a_{n\urcorner i}+C(1+i)^{-n}$$</p>
+<p>Or</p>
+<p>$$P=C+(Fr-Ci)a_{n\urcorner i}$$</p>
+<p>When yield rate falls, the present value of the bond gets higher, then you can sold it at a higher price.</p>
+<img class="note-img" src="assets/Pasted image 20251106184626.png" alt="Pasted image 20251106184626.png">
+<p>$$(1+j)^2=(1+7\%/4)^4$$</p>
+<p>$$P=1000\times 3.25\% a_{40\urcorner j}+1000(1+7\%/4)^{-80}$$</p>
+<p>After 5 years</p>
+<p>$$(1+k)^2=(1+5\%)$$</p>
+<p>$$P'=1000\times 3.25\% a_{30\urcorner k}+1000(1+5\%)^{-15}$$</p>
+<h4>Bonds purchased at a premium</h4>
+<p>P>C, this occurs when Fr>Ci, which says that each bond coupon payment Fr exceeds the bond coupon that investor actually would be happy with. In other words the period money yield from bonds (Fr) is higher than the money yield directly form C in bank (Ci).</p>
+<p>The value of the bond will be reduced from P down to C by the redemption date.</p>
+<img class="note-img" src="assets/Pasted image 20251112191013.png" alt="Pasted image 20251112191013.png">
+<p>Here book value adjustment means the extra money the buyer earned. Every time the book value $B_t$ reduces the extra, so it will  finally back to C=1000</p>
+<h4>Bond purchased at a discount</h4>
+<p>Fr<Ci, since a boud coupon is considered taxable income, this means that the investor is paying less income tax each period that he would be willing to pay.</p>
+<h4>Callable bonds</h4>
+<p>Bonds issuer will pay back before the redemption rate if interest rates fall. They will replace the old bond issue with a new series of bonds which pay a lower bond interest rate.</p>
+<img class="note-img" src="assets/Pasted image 20251112203311.png" alt="Pasted image 20251112203311.png">
+<p>When calculate purchase price, we need to consider the worst situation. For example, if the yield rate is decreasing, which means you can make money from bond, then the issuer will call it back as soon as possible.</p>
+<p>However if the bonds are callable at a premium, we must calculate the various prices and pay the lowest one.</p>
+<h4>Price of a Bond Between Bond Intrest Dates</h4>
+<p>We need to determine how much the next coupon "belongs" to the seller or the buyer.</p>
+<p>Dirty price = Clean price + k-Fractional Coupon</p>
+<p>$$P=Q+I$$</p>
+<p>$$P=P_0(1+i)^k=Q+kFr$$</p>
+<p>Normally we calculate Purchase price $P_0$ and obtain Q from above.</p>
+<img class="note-img" src="assets/Pasted image 20251112210547.png" alt="Pasted image 20251112210547.png">
+<p>The solid line represents P, which grows $\propto(1+i)^t$ in one period, and drops Fr because n in $a_{n\urcorner i}$ drops. Actually they should not be straight lines.</p>
+<h4>Estimate Yield Rate</h4>
+<p>Average method: The amount of money you earned / you invested = yield rate.</p>
+<p>$$i\approx(\frac{nFr+C-P}{n})/(\frac{C+P}{2})$$</p>
+<p>Then, use this $i$ as a starting value, we can do linear interpolation.</p>
+<h3 id="sec-6">Rates of Return</h3>
+<p>Deciding whether an investment or business venture should be undertaken.</p>
+<h4>Net Present Value (NPV)</h4>
+<p>Discount the future cash flow at some interest rate and subtract off the initial investment.</p>
+<p>$$NPV=F_0+F_1(1+i)^{-1}+...+F_n(1+i)^{-n}$$</p>
+<p>Here $F_0<0$ means initial investment, $F_t$ means estimated net cash flow at the end of period t, i is called cost of capital</p>
+<p>$NPV>0$ means the project should be undertaken, otherwise it shouldn't.</p>
+<h4>Internal Rate of Return (IRR)</h4>
+<p>Suppose i in NPV fomula is unknown, and solve the equation $NPV(i)=0$, the solution $i^*$ can let NPV reaches the threshold 0. IRR do not depend on preset i, so it shows the internal attribute of this investment.</p>
+<p>If $IRR>$ cost of capital, then the project should be undertaken.</p>
+<h4>Dollar-Weighted Rates of interest</h4>
+<p>We wish to determine the yield rate earned by an investment fund over a period of time.</p>
+<p>A = initial fund balance. B = fund balance at the end of the period.</p>
+<p>I = interest earned.</p>
+<p>$n_t$ = deposit at time t. $w_t$ = withdrawal at time t.</p>
+<p>Balanced relationships:</p>
+<p>$$B=A+n-w+I$$</p>
+<p>Assuming simple interst, we get estimation of dollar-weighted rate of return:</p>
+<p>$$i\approx\frac{I}{A+\sum n_t(1-t)-\sum w_t(1-t)}$$</p>
+<p>The origin behind this estimation is similar to average yield rate in coupon.</p>
+<p>Simplification:</p>
+<p>If we consider cash flows distribute uniformly through a year, then</p>
+<p>$$i=\frac{I}{A+\frac{n}{2}-\frac{w}{2}}=\frac{I}{\frac{A+B-I}{2}}$$</p>
+<p>It's a naive average method for simplification.</p>
+<p>Similarly, we can consider all withdraws and deposits occur at one time, then</p>
+<p>$$i=\frac{I}{A+n(1-k)-w(1-m)}$$</p>
+<h4>Time-Weighted Rates of Interest</h4>
+<blockquote>Intuition: dollar-weighted interest rate reflects not only the internal efficient of a project, but also the individual abilities of the operator.<br>But time-weighted only tells you about the project itself.</blockquote>
+<p>$C_t$ = net cash flow at time t</p>
+<p>$B_t$ = fund balance at time t, just before the net cash flow is made.</p>
+<p>Then money in $k^-$ devides money in $(k-1)^+$, we obtain the rate of return during this period</p>
+<p>$$1+i_k=\frac{B_k}{B_{k-1}+C_{k-1}}$$</p>
+<p>The entire year can be calculated as</p>
+<p>$$(1+i)=(1+i_1)(1+i_2)...(1+i_m)$$</p>
+<blockquote>[!note] Quick Example<br>Suppose a fund has a value of ￥1 at the beginning of the year, and you own 1000, which worth ￥1000.<br>In June 1th, the fund drops to ￥0.5, now you have 1000 of them and worth ￥500. However, you believe the fund will rebound, so you buy another 1000 and cost ￥500.<br>Now you have 2000 of them. In the end of the year, the fund rebounds to ￥1, now what you owned worth ￥2000.<br><br>Dollar-weighted:<br>$$i_{dol}=\frac{500}{1000+\frac{500}{2}}=40\%$$<br>Time-weighted:<br>$$1+i_{time}=\frac{500}{1000}·\frac{2000}{1000}=1\Rightarrow i_{time}=0\%$$<br>From this example we can see, $i_{time}$ reflects ￥1→￥0.5→￥1, no gain. But operator can still earn money from the fluctuation, so $i_{dol}>0$</blockquote>
+<h4>Dividend Discount Model (DDM)</h4>
+<p>Company shares the profits by paying out a dividend forever, hence it can be seen as perpentuity.</p>
+<p>The price per share can be wirtten as (if dividend is constant)</p>
+<p>$$P=\frac{D}{i}$$</p>
+<p>If dividends are expected to grow over time at a rate of g per period</p>
+<p>$$P=\frac{D}{i-g}$$</p>
+<p>Here D represents the first dividend paid.</p>
+<p>"Buy Long Sell Short"</p>
+<p>If you believe the stock market will rise, then you buy it to raise your 持仓量. Buy is just temporary, but "long" will last a period of time, which could make 经济价值 for you. Eventually you sell them and earn the difference.</p>
+<p>If you believe the stock market will fall, you sell them instead. Maybe some time after you will buy them back. This period is called "short".</p>
+<h3 id="sec-7">Yield Curves</h3>
+<img class="note-img" src="assets/Pasted image 20251126200315.png" alt="Pasted image 20251126200315.png">
+<p>Yield curves show how the yield rate r depends on maturity (time).</p>
+<p>The red line, upward sloping, is the most common one. It shows the longer the maturity time, the higher risk the investor will take, the yield rate will be higher accordingly.</p>
+<p>The blue line, downward sloping, sometimes called 倒挂,is the abnormal one. It is a sign of economic recessions, often with the expectation of interest rate cut in the future.</p>
+<p>The green line, flat, means some people expect economic recession while some people don't, then it reaches equilibrium in market. In China (conservative), this is seen as same as "inverted"(倒挂).</p>
+<p>Forward rates : unbiased predictors of the future spot rates.</p>
+<blockquote>In liquidity preference theory, forwaed rates are upward biased estimates.</blockquote>
+<p>Market Segmentation theory</p>
+<p>Different loan term market are independent of each other, hence the equilibrium interest rates will differ.</p>
+<p>Preferred Habitat Theory is the modification of MS theory. Given sufficient incentive to do so, market participants are willing to move to a term that is different from their preferred one.</p>
+<h4>Zero-Coupon bond</h4>
+<p>Use the definition of zero-coupon bond, we can easily analize future yield rate and corresponding strategies. Indeed, any coupon bond can be seen as package of some zero-coupon bond, just as cash flow.</p>
+<p>$S_t$ = current spot rate on a t-year zero-coupon bond</p>
+<p>$P(t)=(1+S_t)^{-t}$</p>
+<p>$_ki_t=f(k,t)$ = forward nominal interest rate on a t-year zero coupon bond, k years from now.</p>
+<p>无套现原则 provides an equation</p>
+<p>$$(1+\frac{S_{t+k}^{(m)}}{m})^{m(t+k)}=(1+\frac{S_k^{(m)}}{m})^{mk}(1+\frac{_ki_t}{m})^{mt}$$</p>
+<h4>Fixed Income Returns</h4>
+<p>$E(R)$ = total income rate, it contains coupon income rate and</p>
+<ol>
+<li>Rolldown return rate: increment of purchase price after purching date.</li>
+<li>Benchmark yield rate: Taylor expansion $(-MoDur\Delta Yield)+\frac{1}{2}Convexity(\Delta Yield)^2$</li>
+<li>Yield spreads: similar as above, Yield→Spread</li>
+<li>Currency changes: $R_{DomesticCurrency}=\sum weight(1+R_{ForwardCurrency})(1+R_{exchange})-1$</li>
+</ol>
+<h4>Yield Curve Dynamics</h4>
+<ol>
+<li>change in level (parallel shift)</li>
+</ol>
+<blockquote>long-term loan is sensitive to this change</blockquote>
+<ol>
+<li>change in slope (flattening or steepening)</li>
+</ol>
+<blockquote>short and mid term is sensitive to this change<br>(bear,bull)×(flattening,steepending)<br>bear=lower price= higer yield rate; bull= higher price<br>flattening = slope(spread) smaller</blockquote>
+<ol>
+<li>change in shape or curvature</li>
+</ol>
+<p>When the change is small, we can use first-order taylor expansion. If bigger, we start to use second-order, and so on.</p>
+<p>Butterfly spread (negative second-order difference)</p>
+<p>$$BS=-\Delta^2yield=2Mid-Short-Long$$</p>
+<p>$BS>0$, the most common case, means concave shape of the yield curve</p>
+<p>$BS<0$, saucer or convex shape</p>
+<p>BS also has dynamics:</p>
+<p>Negative butterfly: decrease in the butterfly spread, means yield curve from n to u</p>
+<p>Positive butterfly: increase in the butterfly spread, means yield curve from u to n</p>
+<img class="note-img" src="assets/yield curve.png" alt="yield curve.png">
+<p>Bullet = focus on mid term loans</p>
+<p>Barbell = distributed on short and long term loans</p>
+<p>Take negative butterfly strategy as an example, we can see mid term yield rate increasing, means mid term price decreasing, so we should ==short bullet and long barbell==.</p>
+<h4>Portfolio Duration and Convexity</h4>
+<p>Just Taylor expansion</p>
+<p>$$\%\Delta PV^{Full}\approx-ModDur\times\Delta Yield+\frac{1}{2}\times Convexity\times(\Delta Yield)^2$$</p>
+<p>Small change: $\pm50bps$, we can use first order. Large change: $\pm200bps$, we can use second order.</p>
+<p>ModDur = first order derivative = first order moment (矩) = average period</p>
+<p>Convexity = second order derivative = second order moment = variance</p>
+<p>So it's not hard to understand barbell has larger convexity than bullet.</p>
+<p>Convexity is a quality that makes the coupon rise more and down less (涨多跌少), so higher convexity will have higer price.</p>
+<p>In a portfolio, we use money weighted average to calculate convexity and duration</p>
+<p>$$Avg(Mod/Conv)=\sum(Mod/Conv)_j\times\frac{MV_j}{MV}$$</p>
+<p>Buy-and-hold: Constant without active trading, earn from period coupon.</p>
+<p>Rolling down the yield curve: earn from rolldown return.</p>
+<p>Repo carry trade (回购利差交易): lend short period money from small i market in nation (not oversea, no currency different), just like leverage. Advantage: small fund occupancy rate. Disadvantage: OTC risk.</p>
+<h4>Embedd Option and Strategy</h4>
+<img class="note-img" src="assets/embedd.png" alt="embedd.png">
+<p>Callable bond gives price an upper bound, while Putable bond gives price a lower bound.</p>
+<p>Embedd option has its extra value. When volatility rises, the price of embedd option will be higher. Hence callable bond will be cheaper and putable will be more expensive, we should long putable bond.</p>
+<p>If yield curve will have a parrallel downward shift, that means coupon price will be higher while volatility remains the same. So firstly we can long an option-free bond, secondly long a putable bond since putable embedd should cost more. Note that callable bond would't change largely since the price is upper-bounded.</p>
+<p>OTM: out of the money, 行权价格大于标第价格, so no one would use right in short term.</p>
+<p>deep OTM (深度价外期权): the difference become larger.</p>
+<img class="note-img" src="assets/Pasted image 20251210182307.png" alt="Pasted image 20251210182307.png">
+<h3 id="sec-8">Duration and Convexity</h3>
+<p>Original</p>
+<p>$$P(i)=\sum C_t(1+\frac{i^{(m)}}{m})^{-t}$$</p>
+<h4>Macaulay Duration (period)</h4>
+<p>As introduced above, Macaulay Duration is the first-order moment of period (money weighted)</p>
+<p>$$\bar{d}=\frac{\sum tC_t(1+i)^{-t}}{\sum C_t(1+i)^{-t}}$$</p>
+<ul>
+<li>As for coupon bond, we should multiply every period coupon with its order number</li>
+</ul>
+<p>Remember in increased annuities,</p>
+<p>$$A=Pa_{n\urcorner i}+Q\frac{a_{n\urcorner i}-n(1+i)^{-n}}{i}$$</p>
+<p>Q means the extra part, since we are counting money weighted number, take $P=Q=Fr$, then define $(Ia)_{n\urcorner i}$ as normal $a_{n\urcorner i}$ mutiply period number.</p>
+<p>$$\boxed{(Ia)_{n\urcorner i}=\frac{a_{n\urcorner i}(1+i)-n(1+i)^{-n}}{i}}$$</p>
+<p>money weighted numerator =</p>
+<p>$$Fr(Ia)_{n\urcorner i}+nC(1+i)^{-n}$$</p>
+<p>While price denominator =</p>
+<p>$$Fra_{n\urcorner i}+C(1+i)^{-n}$$</p>
+<ul>
+<li>For loans (No final maturity), independent of total money.</li>
+</ul>
+<p>$$\bar{d}=\frac{\sum t(1+i)^{-t}}{\sum (1+i)^{-t}}=\frac{(Ia)_{n\urcorner i}}{a_{n\urcorner i}}$$</p>
+<h4>Modified Duration (year)</h4>
+<p>Like first order derivative, use in taylor expansion.</p>
+<p>$$ModDur=\bar{v}=-\frac{P'(i)}{P(i)}=\frac{\bar{d}/m}{1+i^{(m)}/m}$$</p>
+<p>And we have</p>
+<p>$$\frac{P(i+\Delta i^{(m)})}{P(i)}=1-\bar{v}\Delta i^{(m)}$$</p>
+<p>It is also called volatility</p>
+<h4>Duration in Asset Portfolio</h4>
+<p>We have two methods</p>
+<ol>
+<li>Cash flow defination</li>
+<li>Callable each duration, and price weighted average (simple, more useful)</li>
+</ol>
+<h4>Convexity</h4>
+<p>$$\bar{c}=\frac{P''(i^{(m)})}{P(i^{(m)})}=\frac{\sum t(t+1)C_t(1+\frac{i^{(m)}}{m})^{-t}}{m^2(1+\frac{i^{(m)}}{m})^2P(i)}$$</p>
+<p>All in all,</p>
+<p>$$P(i+\Delta i^{(m)})=P(i)[1-\bar{v}\Delta i^{(m)}+\frac{1}{2}\bar{c}(\Delta i^{(m)})^2]$$</p>
+<h4>Asset-Liability Management (ALM)</h4>
+<p>Try to match in (asset) and out (liability) in a potentially variant interest, immune to the risk of interest rate changes.</p>
+<p>**Reddington Immunization:**</p>
+<ol>
+<li>$PV_A(i_0)=PV_L(i_0)$ (0-order equivalent)</li>
+<li>$PV'_A(i_0)=PV_L'(i_0)$ (1-order equivalent)</li>
+<li>$PV''_A(i_0)>PV_L''(i_0)$ (2-order supress)</li>
+</ol>
+<p>**Fully Immunization:**</p>
+<ol>
+<li>Asset cash flows occur both before and after the liability cash flow.</li>
+</ol>
+<blockquote>When all the four cases are satisfied, no matter how big or small i are, it can be ensured that $PV_A\ge PV_L$ (I wanted to prove it but I failed, and no relavent pdf can be searched)<br>But we live in an ideal model, where the yield curve is fairly flat and any change in interest rates is the same for all maturities. So pratically, all portfolios need to be re-balanced periodically to keep the duration matched.</blockquote>
+<p>End.</p>
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

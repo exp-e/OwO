@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>Hahn-Banach定理(延拓、分离) · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] } },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">数学</span>
+      <span><i class="far fa-calendar"></i> 2025-12-09</span>
+    </div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li><a href="#sec-0">延拓</a></li>
+      <li><a href="#sec-1">分离</a></li>
+      <li><a href="#sec-2">注释</a></li>
+    </ul>
+  </aside>
+  <article class="article-body">
+    <img class="article-cover" src="assets/mugua.jpg" alt="Hahn-Banach定理(延拓、分离)">
+    <h1 class="article-title">Hahn-Banach定理(延拓、分离)</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2025-12-09</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">数学</span>
+      <a href="https://zhuanlan.zhihu.com/p/1981815635987157220" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
+    </div>
+    <div class="article-content">
+<p>背书了</p>
+<h3 id="sec-0">延拓</h3>
+<p>有点像那个控制收敛定理，不仅仅要先找一个子空间上的线性泛函，更要找一个能将它控制住的次线性或者半范数，然后可以保证这个控制的情况下将其延拓至全空间。</p>
+<p>他的起源是来自codim1的线性泛函可以被控制延拓至全空间</p>
+<p>次线性说的是$\forall t\ge0,p(tx)=tp(x),\quad\forall x,y\in E,p(x+y)\le p(x)+p(y)$</p>
+<h4>实</h4>
+<p>E实线性空间，F线性子空间</p>
+<p>$P:E\to\mathbb{R}$<span style="background:rgba(240, 200, 0, 0.2)">次线性</span>（用于控制），$f:F\to\mathbb{R}$线性(想要延拓的线性泛函)，满足$f\le p$</p>
+<p>那么存在$\tilde{f}:E\to\mathbb{R}$线性，满足$\tilde{f}|_F=f$以及在E上$\tilde{f}\le p$</p>
+<h4>通用</h4>
+<p>E是$\mathbb{K}$上线性空间，F线性子空间</p>
+<p>P是E上的<span style="background:rgba(240, 200, 0, 0.2)">半范数</span>（用于控制），$f:F\to\mathbb{K}$线性泛函，满足$|f|\le p$</p>
+<p>那么存在$\tilde{f}:E\to\mathbb{K}$线性，满足$\tilde{f}|_F=f$以及在E上$|\tilde{f}|\le p$</p>
+<p>如果E是TVS，那么延拓的$\tilde{f}$自动连续</p>
+<h4>煲饭</h4>
+<p>其实是保范延拓</p>
+<p>E<span style="background:rgba(240, 200, 0, 0.2)">赋范空间</span>，F子空间，那么对$f\in F^*$一定存在$\tilde{f}\in E^*$且$||\tilde{f}||=||f||$</p>
+<h3 id="sec-1">分离</h3>
+<h4>普通</h4>
+<p>E TVS  A,B$\subseteq$E凸子空间，<span style="background:rgba(240, 200, 0, 0.2)">A开</span>，$A\cap B=\emptyset$</p>
+<p>那么$\exists f\in E^*$以及$\alpha\in\mathbb{R}$使得$\forall a\in A,b\in B,\quad Ref(a)<a\le Ref(b)$</p>
+<blockquote>怎么记呢，首先两个都必须是凸集，要不然没法分离了，然后一边取等一边不取等，不取等的那一边要求是开集<br>TVS的条件是为了造出闵可夫斯基泛函，在证明过程中我们要把它延拓</blockquote>
+<h4>严格</h4>
+<p>E<span style="background:rgba(240, 200, 0, 0.2)">豪斯多夫l.c.s.</span> $A,B\subseteq E$凸，<span style="background:rgba(240, 200, 0, 0.2)">A紧B闭</span>，$A\cap B=\emptyset$</p>
+<p>那么$\exists f\in E^*,\alpha,\beta\in\mathbb{R}$使得</p>
+<p>$$\sup Ref(A)<\alpha<\beta<\inf Ref(B)$$</p>
+<blockquote>怎么记呢，一个紧一个闭，紧的在小的那一侧<br>lcs的条件是为了在紧集上找一簇凸开覆盖</blockquote>
+<h3 id="sec-2">注释</h3>
+<p>连续线性泛函能区分某个点是否在闭包中</p>
+<p>分离定理说的是连续线性泛函的最大区分能力，连续线性泛函又和弱拓扑有关，所以推论是弱闭等价于范数闭，并且有个很有名的</p>
+<p>$$(E,\sigma(E,F))^*=F$$</p>
+<p>$$(E,\sigma(E,E^*))^*=(E,\tau)^*$$</p>
+<blockquote>OK老铁们一看到弱拓扑我的蠢猪脑袋就有点昏了，我来以一个更好的例子去说明这是什么<br><br>本来考拉是男的，阿诺也是男的，这是他俩原有的拓扑，此时我们考虑弱拓扑σ(考拉，阿诺)，在这个拓扑下（考拉，σ(考拉，阿诺)）就是女alpha，而（阿诺，σ(阿诺，考拉)）是男omega<br><br>我们给（考拉，σ(考拉，阿诺)）取个对偶，根据F1分离定律（考拉只在阿诺面前变成女alpha，其他情况下比如在妈妈面前就退相干变成男0了），那么(考拉，σ(考拉，阿诺))$^*$=阿诺，我们把它抽象出来就是<br>$$(E,\sigma(E,F))^*=F$$<br>它描述的是在对象面前表现出一个怎样的position，家人们懂了吗<br><br>下一条讲的就是水仙，比如Franz Hermann是男up，维斯塔潘是只能做bottom的直男，我们记Hermann是$E^*$，维斯塔潘是$E$，那么$(E,\sigma(E,E^*))$是被Hermann压到床下的汽车人，那么取对偶之后就是Hermann，$E^*$<br>$$(E,\sigma(E,E^*))^*=(E,\tau)^*$$<br>我们可以注意到原空间是原设定，每取一个star相当于多了些二创，也就是说$E^{**}$是不小于原设E的，原设可以自然嵌入至ao3空间<br>分离定理说的是对偶空间的区分能力，就是对象对你了解多少，答案是了解到闭包<br><br>顺便再来谈谈Banach-Alaoglu定理，说的是$E^*$的闭单位球$\bar{B}_{E^*}$是$w^*-$紧的。在无穷维时他不是范数紧但是他是弱$^*$紧，这是因为闭单位球已经做到$E^*$能做到的一切去尽可能保证紧了，虽然他可能并不能达到真正的范数紧，但是他的对象会相信并理解他，认为他就是紧的。这就像是陈欣欣在第一章钓男主的时候，她给不了男主任何实质性的让步，但是男主已经被她hook了，觉得她就是值得一辈子，所以干脆认为$\bar{B}_{E^*}$是$w^*-$紧的。</blockquote>
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>
