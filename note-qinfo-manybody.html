@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>（读书笔记）信息论角度谈量子多体物理 · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] }
+  },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">物理</span>
+      <span><i class="far fa-calendar"></i> 2026-08-16</span>
+    </div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li><a href="#sec-0">基本概念</a></li>
+      <li><a href="#sec-1">统计物理模型</a></li>
+      <li><a href="#sec-2">Tensor Networks</a></li>
+      <li><a href="#sec-3">1d MPS分类</a></li>
+      <li><a href="#sec-4">一些G指导备忘录</a></li>
+    </ul>
+  </aside>
+  <article class="article-body">
+    <img class="article-cover" src="assets/ggqq.jpg" alt="（读书笔记）信息论角度谈量子多体物理">
+    <h1 class="article-title">（读书笔记）信息论角度谈量子多体物理</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2026-08-16</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">物理</span>
+      <a href="https://zhuanlan.zhihu.com/p/2072256416631543546" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
+    </div>
+    <div class="article-content">
+<p>原课程为NUS PC5221，只能在家阴暗的读讲义</p>
+<p>很多地方没有抄全讲义，想看原讲义可以联系我</p>
+<h3 id="sec-0">基本概念</h3>
+<p>TDL：thermadynamic limit，系统规格无穷大的极限，无限体积极限</p>
+<p>这个在田崎的统计力学II第436页也有提及。为什么要有这个极限，是因为有限体积下，以Ising模型为例，有个定理说明平均自由能$f_L(\beta,H)$可以对$\beta$和H进行任意次的微分，也即平均磁化m是H的连续函数，任意温度下$m_L(\beta,0)=0$恒成立，也就是不会出现相转移的现象</p>
+<p>通常要先取TDL，再取其他任何极限：</p>
+<p>考虑两个无相互作用的自旋1/2系统，其中一个外加z方向的磁场，另一个外加$\cos\phi \hat{z}+\sin\phi\hat{x}$的磁场，其中$\phi$是较小的角度，哈密顿量写作</p>
+<p>$$H=-J\sum_{i=1}^NZ_i$$</p>
+<p>$$H'=-J\sum_{i=1}^N(\cos\phi Z_i+\sin\phi X_i)$$</p>
+<p>通过计算哈密顿量本征矢量可以得出这两个系统的基态分别为</p>
+<p>$$\ket{\Psi_0}=\ket{\uparrow\uparrow...}\quad\ket{\Psi_0'}=\ket{\uparrow'\uparrow'...}$$</p>
+<p>其中$\ket{\uparrow'}=\cos(\phi/2)\ket{\uparrow}+\sin(\phi/2)\ket{\downarrow}$</p>
+<p>计算overlap</p>
+<p>$$|\braket{\Psi_0|\Psi_0'}|=\cos^N(\phi/2)$$</p>
+<p>固定任意小的φ，取TDL后上式为0，所以不能用态的内积去衡量两个系统的相似程度</p>
+<p>SSB：基态是简并的，执行一个对称操作之后，从一个基态转为另一个基态（但持有相同的能量）</p>
+<h3 id="sec-1">统计物理模型</h3>
+<p>自旋1/2系统</p>
+<p>定义磁化强度$M=\frac{1}{N}\sum s_i,\quad\braket{M}=\sum P(s) M(s)$，下面为了方便起见只使用后者（平均值），并且不写尖括号</p>
+<p>假设系统满足全自旋翻转的Z2对称性，并且假设V(M)光滑解析，那么可以写成偶展开式</p>
+<p>$$V(M)=v_0+v_2M^2+v_4M^4+...$$</p>
+<p>进一步假设最少个数的非零参数，记$v_2=a(T-T_c)$，为了保持势下有界，再来个$v_4=b>0$，其他的参数均为零，得到</p>
+<p>$$V(M)=a(T-T_c)M^2+bM^4$$</p>
+<p>这个势表示当温度高于临界温度时，势能是一个向上的U形；当温度小于临界温度时，势能是一个墨西哥帽的截面，此时基态M二重简并，系统是有序相</p>
+<h4>一维横场Ising模型(1D TFIM)</h4>
+<p>$$H=-(J\sum_{i=1}^NZ_iZ_{i+1}+g\sum_{i=1}^NX_i)$$</p>
+<p>假设周期性边界条件，那么系统具有平移对称性和自旋翻转对称性。反转操作可以由X算符来表述</p>
+<p>$$G=\prod_{i=1}^NX_i$$</p>
+<p>平移操作更复杂，由多个局部两两swap构成。单个swap算符是这样</p>
+<p>$$P_{i,i+1}=\frac{1}{2}(I+X_iX_{i+1}+Y_iY_{i+1}+Z_iZ_{i+1})$$</p>
+<p>我们可以具体写出矩阵形式来看出这是SWAP</p>
+<p>$I = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$</p>
+<p>$\sigma^z \otimes \sigma^z = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$</p>
+<p>$\sigma^x \otimes \sigma^x = \begin{pmatrix} 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 \end{pmatrix}$</p>
+<p>$\sigma^y \otimes \sigma^y = \begin{pmatrix} 0 & 0 & 0 & -1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ -1 & 0 & 0 & 0 \end{pmatrix}$</p>
+<p>$$P_{1,2} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$$</p>
+<p>对角线上的元素是代表着两个自旋相同时维持原状，中间交错的1表示自旋不同时发生互换。</p>
+<p>最后，平移算符由这些SWAP乘积得到</p>
+<p>$$T=\prod_{i=1}^{N-1}P_{i,i+1}$$</p>
+<p>由于H,G,T这三个算符两两对易,组成CSCO,我们可以用这三个算符的本征矢来描述态$\ket{E,g,k}$。特别的，</p>
+<p>$$T\ket{E,g,k}=e^{i2\pi k/N}\ket{E,g,k}$$</p>
+<p>这个叫做quasi-momentum准动量（物性理论还经常考这个）</p>
+<p>quasi-momentum在第一布里渊区取值，也即$2\pi\frac{k}{N}\in(-\frac{\pi}{2},\frac{\pi}{2}]$中的整数k点</p>
+<p>由于$G^2=1$，所以G的特征值一定是$\pm1$；由于$TrG=0$，所以$\pm1$的特征子空间维度相同，均为$2^{N-1}$（系统总维度为$2^N$）</p>
+<p>遗留的问题：<mark style="background:rgba(5, 117, 197, 0.2)">对第一布里渊区中整数k所对应的$e^{i2\pi k/N}$特征子空间维度是多少？</mark>显式写出这些basis</p>
+<p>思考：$g=1$的本征矢可以写作$\ket{s}+\ket{-s}$，$g=-1$的本征矢可以写作$\ket{s}-\ket{-s}$，相当于把s和-s两种自旋进行无损变换得到了上面两种基。而平移算符的本征矢形如$\ket{s}+e^{i2\pi k/N}\ket{Ts}+...+e^{i2\pi (N-1)k/N}\ket{T^{N-1}s}$.将这个傅里叶后的态变为对称形式，也即$\ket{s}+e^{i2\pi k/N}\ket{Ts}+...+e^{i2\pi (N-1)k/N}\ket{T^{N-1}s}\pm(s\leftrightarrow -s)$即可同时成为G的本征矢</p>
+<p>考虑自旋相互作用为主要成分，X上的外场为微扰</p>
+<p>先考虑零级微扰，g=0，那么基态为自旋全部向上或向下，具有-JN能量；第一激发态是具有一对domain wall，单侧的wall能量从-J到J，所以第一激发态能量是-JN+4J（不随反转区域大小改变）</p>
+<p>下面考虑高阶扰动，我们知道二阶扰动能量变化是</p>
+<p>$$E_n^{(2)}=\sum_{m\neq n}\frac{\braket{\psi_n^0|H'|\psi_m^0}\braket{\psi_m^0|H'|\psi_n^0}}{E_n^0-E_m^0}$$</p>
+<p>这里由于涉及到二重简并，所以要用2x2矩阵来描述（有点像含时微扰那里的东西）</p>
+<p>$$I = \begin{pmatrix} a_{\uparrow\uparrow} & a_{\uparrow\downarrow} \\ a_{\downarrow\uparrow} & a_{\downarrow\downarrow} \end{pmatrix}$$</p>
+<p>不考虑组合系数时</p>
+<p>$$a_{\uparrow\uparrow}\sim\sum_{path}\frac{\braket{\uparrow...|V|e_l}...\braket{e_i|V|\uparrow...}}{(E_0-E_l)...(E_i=E_0)}$$</p>
+<p>代表着全上的状态经过V扰动跃迁多次后回到全上的终态。n阶扰动的贡献大致是$g^n$</p>
+<p>由于X方向上的外场与Z方向上的翻转可交换，也即</p>
+<p>$$G^\dagger VG=V$$</p>
+<p>用$G^\dagger VG$替换矩阵元中的V，夹层矢量不变，最外层发生翻转，因此$a_{\uparrow\uparrow}=a_{\downarrow\downarrow}$</p>
+<p>再考虑交叉项非对角元。V是由各个局域的X相加而成，也就是说m阶扰动最大包含了m个qubit翻转，所以最小非零阶为n阶。为了展现出指数下降的特征，我们记贡献$(g/J)^N=e^{-cN},c=\ln(J/g)>0$</p>
+<p>忽略对角元上能量平移后，微扰矩阵写作</p>
+<p>$$\sim\begin{pmatrix} 0 & e^{-cN} \\ e^{-cN} & 0 \end{pmatrix}$$</p>
+<p>得到good state也就是G的本征态</p>
+<p>$$\ket{\uparrow...}+\ket{\downarrow...}\quad\ket{\uparrow...}-\ket{\downarrow...}$$</p>
+<p>两个态被劈裂的能隙是$e^{-cN}$数量级，只要外场与自相互作用相比不大，在系统体积增长时完全可以比4J小，并且在TDL下回归到0，是一个自洽的理论</p>
+<p>研究同样在无限体积情况下外场g大小对系统形为的改变：当$g<J$时，能隙是指数压低的，基态为二重简并；反之，能隙是指数爆炸的，基态是非简并的。这其中就有个临界点$g_c$，跨过这个点发生的变化被称为quantum phase transition。</p>
+<p>上述情况虽然是从$V=-g\sum_{i=1}^NX_i$出发的，但我们可以进一步把他推广到更一般的条件。对角元为0意味着V要满足G对称性，而指数压低体现在V必须作用很多次，也就是说V必须是local算符的和（例如$X_iX_{i+1}$）。一个反例是直接拿G做微扰，那么只需要作用一次G就可以达到全qubit翻转的作用，非对角元成分不再会随着系统体积增大而降低，上述讨论失效。这个例子说明了局域性在量子多体以及物质稳定性的重要性。考虑到自然界的作用大多是局域的，我们的例子是合理的</p>
+<p>对于不满足对称性G的微扰，能隙无法再被系统体积压低，这相当于是显式对称性破缺，类似于朗道函数中加上odd项$\epsilon_1 M$</p>
+<h4>寻找序参数</h4>
+<p>对于上述的基态$\ket{\uparrow...}+\ket{\downarrow...}\quad\ket{\uparrow...}-\ket{\downarrow...}$，我们希望寻找一个序参数（order parameter）去描述是否发生基态简并或者说是相变现象。</p>
+<p>首先尝试使用磁化强度M。注意到$G^\dagger MG=-M$，可以算出M在G本征态下的平均值一定为0.由于这里两个基态都是G本征态，所以M的均值恒为0，无法探测对称性破缺现象</p>
+<p>如何选择正确的基态？如果我们很早就取了TDL，那么全上和全下的任意线性组合都可以是基态，并且他们会产生任意（不同）的M。正确的做法是先引入一个显式破坏对称性的项进入哈密顿量，找到TDL下本征态，最后再将对称破坏项趋于0.</p>
+<p>$$\braket{M}(g,\epsilon)=\braket{\Psi_0(g,\epsilon)|M|\Psi_0(g,\epsilon))}$$</p>
+<p>$$\bar{M}(g):=\lim_{\epsilon\to 0}\lim_{N\to\infty}\braket{M}(g,\epsilon)$$</p>
+<p>如果这个>0，那么称作铁磁性（Ferromagnetism）；如果=0，那么称作顺磁性（Paramagnetism）。区别这两个相的是临界外场$g_c$</p>
+<p>注：如果交换极限顺序，极限会恒为0.</p>
+<p>隧穿现象</p>
+<p>在考虑微扰的情况下，全向上自旋和全向下自旋在时间演化的过程中可能发生隧穿，但是时间是随着体积而指数爆炸的，下面来计算</p>
+<p>施加外场后，第一激发态和基态变为</p>
+<p>$$\ket{+}:=\frac{1}{\sqrt{2}}(\ket{\uparrow}+\ket{\downarrow}),\quad\ket{-}:=\frac{1}{\sqrt{2}}(\ket{\uparrow}-\ket{\downarrow})$$</p>
+<p>其中，每个符号代表着N个同样的自旋体，就不重复写了。那么向上和向下的演化分别是</p>
+<p>$$e^{-iHt}\ket{\uparrow}=\frac{1}{\sqrt{2}}(e^{-iE_+t}\ket{+}+e^{-iE_-t}\ket{-})=\frac{1}{\sqrt{2}}e^{-iE_+t}(\ket{+}+e^{i\Delta Et}\ket{-})$$</p>
+<p>$$\ket{\downarrow}=\frac{1}{\sqrt{2}}(e^{-iE_+t}\ket{+}-e^{-iE_-t}\ket{-})=\frac{1}{\sqrt{2}}e^{-iE_+t}(\ket{+}-e^{i\Delta Et}\ket{-})$$</p>
+<p>则</p>
+<p>$$\begin{align}</p>
+<p>\braket{\downarrow|e^{-iHt}|\uparrow}&=\frac{1}{2}e^{-iE_+t}(\bra{+}-\bra{-})(\ket{+}+e^{i\Delta Et}\ket{-})\\</p>
+<p>&=\frac{1}{2}e^{-iE_+t}(1-e^{i\Delta Et})</p>
+<p>\end{align}</p>
+<p>$$</p>
+<p>$$\begin{align}</p>
+<p>|\braket{\downarrow|e^{-iHt}|\uparrow}|^2&=\sin^2(\frac{\Delta E t}{2})</p>
+<p>\end{align}$$</p>
+<p>跃迁概率首次达到1的时间$t_1=\pi/\Delta E$，而根据前面的讨论可以知道，两个态被劈裂的能隙是$e^{-cN}$数量级，反过来也就是说$t_1$随着系统体积的增长而指数爆炸。</p>
+<h4>模型的解</h4>
+<p>现在建立1D TFIM与一套费米子产生湮灭算符之间的联系</p>
+<p>首先从单粒子系统开始，注意到</p>
+<p>$$\sigma^{\pm}=\frac{1}{2}(Z\pm iY)$$</p>
+<p>是X自旋表象$\ket{\pm}$上的升降算符。注意+是基态，-是激发态。我们还有充当数目算符的投影算符</p>
+<p>$$\frac{1}{2}(I-X)$$</p>
+<p>他作用在-上的特征值为1，作用在+上的特征为0</p>
+<p>这一套的交换关系正好也满足费米正则反对易关系（CAR），所以拥有完全相同的矩阵表示(算一个就知道了)</p>
+<p>但是如果贸然推广到多粒子系统，会出现费米反对易关系与玻色对易关系不兼容的问题，也即升降算符要求不同粒子之间反对易，而不同泡利算符满足的是对易关系，所以魔改一下加个小尾巴，称作JW变换，Jordan-Wigner transformation</p>
+<p>$$c_i^\dagger\leftrightarrow(\prod_{j=1}^{i-1}X_j)\sigma_i^+$$$$c_i\leftrightarrow(\prod_{j=1}^{i-1}X_j)\sigma_i^-$$</p>
+<p>这样定义的c就满足多费米子系统正则反对易关系了</p>
+<p>下面阐述一下$\prod(I-2c_j^\dagger c_j)=e^{i\pi\sum c_j^\dagger c_j}=(-1)^{\sum c_j^\dagger c_j}$，首先可以从单粒子开始证，将第二项的exp写成泰勒展开的形式，注意到费米系统的数算符本征值只能是0或1，也就是$N^2=N$，展开式后半部分提出N后变为$e^{i\pi}$的展开，凑一下就得到$I-2c_j^\dagger c_j$了，此时再连乘，指数上连乘变求和。</p>
+<p>通过上述关系，可以将泡利算符用升降算符表示出来。注意到</p>
+<p>$$G=\prod X_i\leftrightarrow\prod(1-2c_j^\dagger c_j)$$</p>
+<p>不仅是Z方向上的反转算符，更是计算费米子数目是奇数还是偶数的算符</p>
+<p>哈密顿量也可以用$c,c^\dagger$表示，我就不抄了</p>
+<p>为了简化问题，用G的本征值（数）去代替G。首先考虑+1本征值，带来的效果是反周期边界条件($c_{N+1}=-c_1$)，反之亦然。基态是这两种情况中的最小能量态。</p>
+<p>接下来要将平移算符对角化，也就是要对c做傅里叶变换，最后可以将哈密顿量写成关于$b_k$与$b_{-k}$的二次型，奇费米半区我们就单独对k=0求和，偶费米半区我们就单独对$k=N/2$求和（这两种情况的区别是求和范围不同）</p>
+<p>二次型矩阵的特征值，也就是能隙，可以解得</p>
+<p>$$\epsilon_k=2\lambda_k=2J\sqrt{(\frac{g}{J}-\cos(\frac{2\pi k}{N}))^2+(\sin(\frac{2\pi k}{N}))^2}$$</p>
+<p>当$g/J$较小的时候，能隙近似为常数；当g/J较大时，能隙近似为线性增长；能隙为0时只能是$g=J,k=0$这一种情况。我们成功将哈密顿量对角化。</p>
+<p>Bogoliubov变换，也就是将哈密顿量二次型对角化。</p>
+<p>$$H_{APBC}=\sum_{k\neq N/2}\epsilon_k(\gamma_k^\dagger\gamma_k-\frac{1}{2})+2(g+J)b_{N/2}^\dagger b_{N/2}-(g+J)$$</p>
+<p>$$H_{PBC}=\sum_{k\neq 0}\epsilon_k(\gamma_k^\dagger\gamma_k-\frac{1}{2})+2(g-J)b_{N/2}^\dagger b_{N/2}-(g-J)$$</p>
+<p>接下来分偶费米子和奇费米子寻找最低能量。此时哈密顿量中只包含Bogoliubov与b费米子数目算符，他们可以取0或1.</p>
+<p>对于偶费米子半区，最低能量在无Bogoliubov费米子且无$N/2$处b费米子处取得</p>
+<p>$$E_{0,APBC}=-\frac{1}{2}\sum_{k\neq N/2}\epsilon_k-(g+J)$$</p>
+<p>对于奇半区，k=0处有1个费米子时取得能量最小值</p>
+<p>$$E_{0,PBC}=-\frac{1}{2}\sum_{k\neq 0}\epsilon_k+(g-J)$$</p>
+<p>计算可得APBC基态是更小的能量。当$g<J$时，两者差很小，当$g>J$时，能隙一直增长无上界。$g/J=1$是转折点</p>
+<p>接下来研究TDL下不同g/J的极限能隙。g/J=0.5时，能隙快速接近0；g/J=1时，能隙正比于1/L（相变特征）；g/J=1.5时，能隙极限不为0.</p>
+<p>习题：计算基态磁化强度，分类有限温度和零温，找到临界指数（1/8）</p>
+<p>这个在上世纪的一篇论文The One-Dimensional Ising M·odel with a Transverse Field (PIERRE PFEUTY)里有写</p>
+<img class="note-img" src="assets/7b54e7cb2d941f095f805363f65085d9.jpg" alt="7b54e7cb2d941f095f805363f65085d9.jpg">
+<h3 id="sec-2">Tensor Networks</h3>
+<p>这一章主要讲了张量图形表述，和费曼图的地位是类似的。图很多我就不抄了，大概记一下关键点。</p>
+<p>一个方块在下，棍子朝上，代表ket</p>
+<p>棍子朝下，方块在上，代表bra</p>
+<p>一根棍子连两个方块代表braket</p>
+<p>棍子连接相当于缩并</p>
+<p>没标态默认为$\ket{i}$基底</p>
+<p>棍子上可能标ij，代表分量形式</p>
+<p>中间一个方块，上下两根棍子代表算符</p>
+<p>棍子掉头相当于转置</p>
+<p>算符自己首尾相连相当于求迹</p>
+<p>一根棍子代表恒等算符</p>
+<p>作为张量图形表示的一个重要应用，我们可以画图看出矩阵的SVD分解与张量空间矢量的施密特分解之间的关系</p>
+<img class="note-img" src="assets/SVD.png" alt="SVD.png">
+<p>由此可以看出</p>
+<p>$$\ket{\Psi}=\sum_{i}\sigma_i U\ket{i}\otimes V^\dagger\ket{i}=\sum_i\sigma_i\ket{\phi_i}\otimes\ket{\varphi_i}$$</p>
+<p>由于U和V是酉矩阵，故$\phi_i$和$\varphi_i$是两组ONB</p>
+<p>当$\ket{\Psi}$已归一时，$\sum_i\sigma_i^2=1$</p>
+<p>冯诺依曼熵</p>
+<p>$$S=-Tr(\rho\ln\rho)$$</p>
+<p>对于单个自旋系统，$\rho$是2x2矩阵，最多两个特征值，特征值和为1，熵最大值是ln2</p>
+<p>对于$N_A$自旋与$N_B$自旋的张量积系统，他有两个不同维度$d_A=2^{N_A},d_B=2^{N_B}$,那么熵满足</p>
+<p>$$S\le\ln\min(d_A,d_B)$$</p>
+<h4>最小割原则</h4>
+<p>英文：minimal cut principal</p>
+<p>有归一化态的张量网络表示，用一条线将它割为两部分，而不把张量本身割开。如果最小割为C，那么熵满足</p>
+<p>$$S\le C\ln2$$</p>
+<p>如果每条线维度不一样，那么最小割要加权维度</p>
+<p>拿上一章的最后一个例子为例，最小割条数是$N_A$，套用新学的原理，熵满足$S\le N_A\ln 2$与之前算的一致</p>
+<p>对于乘积态，已经是相互独立的，所以最小割是0，熵不超过0，并且熵大于0，所以乘积态的熵是0</p>
+<blockquote>这是因为乘积态的约化密度矩阵是纯态，纯态的密度矩阵的特征值是1，0，0.。。冯诺依曼熵是0</blockquote>
+<p>再来看这个图</p>
+<img class="note-img" src="assets/brick.png" alt="brick.png">
+<p>根据N的不同有两种最小割，当N较小时可以将左下角N/2个psi割出去。<mark style="background:rgba(5, 117, 197, 0.2)">我有个问题，那我能不能只把一个psi割出去呢，不照样分成两个不相交部分了吗</mark>N较大时就按图中所示割出2t-1条边</p>
+<p>这个定理可以被图示证明，关键在于张量的SVD分解，最大拥有的特征值数目是较小的那个规格，也就是最小割的数目。作为自旋上下的系统，冯诺依曼熵不超过$\ln 2^d$</p>
+<h4>矩阵乘积态（MPS）</h4>
+<img class="note-img" src="assets/MPS.png" alt="MPS.png">
+<p>bond space代表着在不同部分种携带着量子信息的线。这样的线越多，纠缠熵也就越大，在这个图中</p>
+<p>$$S\le \ln\chi $$</p>
+<p>与规格N无关</p>
+<p>如果所有A相同时，MPS可以写作</p>
+<p>$$\ket{\Psi}=A^{\sigma_1}A^{\sigma_2}...A^{\sigma_N}\ket{\sigma_1\sigma_2...\sigma_N}$$</p>
+<p>相同指标自动求和</p>
+<p>如果首尾相连成为一个环，那么（多加一个缩并）</p>
+<p>$$\ket{\Psi}=Tr(A^{\sigma_1}A^{\sigma_2}...A^{\sigma_N})\ket{\sigma_1\sigma_2...\sigma_N}$$</p>
+<h4>参数个数</h4>
+<p>下面考虑描述一个MPS需要多少参数。假设bond dimension是$\chi$定值，那么总共需要$N\chi^2 d$个参数，空间复杂度为$O(N)$，比原先的$O(2^N)$要小很多</p>
+<p>正则形式</p>
+<p>MPS有规范自由度。在相邻的两个张量之间插入一对矩阵与逆矩阵，即可让MPS中的张量发生变化</p>
+<p>左正则形式：从左到右的所有矩阵都符合等距，除了最右边的一个矩阵以外。构造过程就是挨个SVD把SVD出来的ΣV往右边丢</p>
+<p>右正则形式：倒过来，最左边的不需要是等距</p>
+<p>混合正则形式：两边向内倒SVD，到中间相遇形成一个包含奇异值的对角阵Σ</p>
+<p>当一个态拥有上述正则形式时，模方是一对非等距矩阵的缩并</p>
+<p>计算期望值：在两行计算模长的正则形式中间插入某个算符</p>
+<p>对于周期性边界条件的模长计算，有</p>
+<p>$$\braket{\Psi|\Psi}=Tr(T^N)=\sum\lambda^N$$</p>
+<p>这就好比用转移矩阵计算Ising模型的配分函数</p>
+<p>将$A,A^*$的缩并对角化分解为$\sum_{i=1}^{\le\chi^2}\lambda_i\ket{R_i}\bra{L_i}$，在TDL下只有本征值模长为1的项发挥作用，其他都退化到0</p>
+<p>有了上述讨论，计算算符O的平均值被简化为，O上一个A*，O下一个A，左右两侧被L1和R1夹住，最后成为的标量就是O的平均值</p>
+<p>如果一个 MPS 满足单射性，意味着在局部尺寸足够大时，边界指标（Virtual Bond）的信息可以被物理指标（Physical Index）完全唯一地确定。</p>
+<img class="note-img" src="assets/MPS2.jpg" alt="MPS2.jpg">
+<p>对有限键系统两点关联函数，根据图中我的手写，最后得出</p>
+<p>$$\braket{O_iO_{i+l}}-\braket{O_i}\braket{O_{i+l}}\sim e^{-cl}$$</p>
+<p>随着距离指数衰减</p>
+<p>而对于临界系统，关联长度发散，关联函数表现为幂衰减。为了用MPS来研究这样的临界系统，我们通过采取足够大的键维$\chi$来近似这样的衰减</p>
+<p>由</p>
+<p>$$\frac{1}{r^\alpha}\approx\sum e^{-c_ir}$$</p>
+<p>增大键维相当于增大求和数量</p>
+<p>对于一个很大但非无限大的系统，只要键维 $\chi$ 足够大，MPS 组合出的多项指数衰减就足以在系统尺寸 $N$ 的范围内精确逼近幂律衰减。因此，在实际的数值模拟中，高键维的 MPS 依然可以用来很好地研究临界系统。</p>
+<h4>算法</h4>
+<h5>含时演化分块降采样</h5>
+<p>如果我有2-local的哈密顿量</p>
+<p>$$H=\sum H_{i,i+1}$$</p>
+<p>希望寻找到基态（最低能量本征态）$\ket{\Psi}$</p>
+<p>一种方法是将哈密顿量进行平移，使得基态能量具有最大的绝对值，然后将哈密顿量多次作用在随机态上，会发生：</p>
+<p>$$\ket{\Psi_{random}}=\sum c_i\ket{E_i}$$</p>
+<p>$$(H+dI)^n\ket{\Psi_{random}}=c_0(E_0+d)^n\ket{E_0}+c_1(E_1+d)^n\ket{E_1}+...$$</p>
+<p>由于基态被平移到离原点最远，所以随着作用次数的变多，作用后的态会越来越靠近基态。这被称作幂方法（power method）</p>
+<p>有个与上者同理的办法，就是使用$e^{-\beta H}$，在0温极限下会凝聚到基态上，也就是</p>
+<p>$$\lim_{\beta\to\infty}(\frac{e^{-\beta H}}{e^{-\beta E_0}})\ket{\Psi_{random}}\propto\ket{E_0}$$</p>
+<p>本节主要用上面的观察，尝试解决问题：如果从MPS开始，要如何作用$e^{-\beta H}$，才能使得结果仍然是MPS？</p>
+<p>回忆Suzuki-Trotter decomposition：</p>
+<p>$$e^{\epsilon(A+B)}=e^{\epsilon A}e^{\epsilon B}+O(\epsilon^2)$$</p>
+<p>这是来自BCH公式</p>
+<p>$$e^Ae^B=e^{A+B+\frac{1}{2}[A,B]+\frac{1}{12}[A,[A,B]]+\frac{1}{12}[[A,B]B]+...}$$</p>
+<p>可以看出对易子部分在该语境下全部为高阶小量</p>
+<p>接下来将2-local的哈密顿量拆成两部分</p>
+<p>$$H=H_{odd}+H_{even}=\sum_{odd~bonds}H_{i,i+1}+\sum_{even~bonds}H_{i,i+1}$$</p>
+<p>且$H_{odd}$与$H_{even}$的求和项之间两两不相交（对易），故有</p>
+<p>$$e^{-\delta\beta H}=(\prod_{even~bonds}e^{-\delta\beta H_{i,i+1}})(\prod_{even~bonds}e^{-\delta\beta H_{i,i+1}})+O(\delta\beta^2)$$</p>
+<p>其中所有乘积项都是2-local分块的。我们成功干出虚时演化单步分块门。</p>
+<p>对于MPS，我们将2-local的单个算符作用在相邻的两个张量上，合成一个大张量，接下来对他再做SVD分解成为两个张量，但是这会增加键维数。所以我们只保留$\chi$个奇异值，就不会让键维爆炸。</p>
+<p>这样重复很多次M（但不要太大，否则误差$(\delta\beta)^2M$会很大）投影误差与总演化时间相关，为$\delta \beta M$</p>
+<p>随着虚时 $\tau$ 的增加（离散化后对应步数 $M$），系统的高能激发态成分会以 $e^{-(E_n-E_0)\tau}$ 的形式指数衰减。你需要观察能量期望值 $\langle\Psi\vert{}H\vert{}\Psi\rangle$ 随 $M$ 的变化，直到它“平坦化”，说明演化已经把态投影到了当前的近似基态上。</p>
+<p>TEBD （时间演化块抽取）算法背后的关键原理是**纠缠截断（truncation of entanglement）**。具体来说，这是一种丢弃无关自由度的方法，这些自由度是由量子态中施密特值（Schmidt values）的相对权重决定的，算法只保留占主导地位的贡献。这是“粗粒化（coarse graining）”的一个实例。其次，我们观察到 TEBD 的性能和收敛速度与系统的能隙 $\Delta = E_1 - E_0$ 密切相关。在上一节中我们已经看到，$\Delta$ 在量子物相的稳定性中起着极其重要的作用，因此这向我们暗示，在更普遍和概念性的层面上，我们应该能够利用能隙的有限性或闭合状态，来作为**分类/区分**不同量子相的一种方法。</p>
+<h5>密度矩阵重整化群</h5>
+<p>同样解决的是在MPS下寻找基态的问题</p>
+<p>在处理i到i+1个格点时，先将左侧1~i-1个格点化为左正则表示，再将右侧i+2~N个格点化为右正则表示，以便求内积时相互抵消。随后对i到i+1个格点寻找2-local的本征态。然后SVD，把小的本征值截断，把奇异值矩阵往右边丢，接下来就可以迭代处理i+1到i+2个格点了。</p>
+<p>正交中心从左移动到右，再从右移动到左称为一个sweep。</p>
+<p>每次 Sweep 都会使整个系统的能量单调下降（或不变）。当相邻两次 Sweep 的基态能量差值 $\Delta E$ 或张量元素的改变小于设定的收敛精度时，算法结束。此时留下的 MPS 就是该 1D Spin Model 极其精确的基态近似。</p>
+<p>把环境块的自由度积掉 (Trace out)，得到系统块的**约化密度矩阵 (Reduced Density Matrix)**：</p>
+<p>$$\rho_{\text{sys}} = \text{Tr}_{\text{env}} (\vert{}\Psi_{\text{super}}\rangle \langle \Psi_{\text{super}}\vert{})$$</p>
+<p>对角化 $\rho_{\text{sys}}$。它的本征值代表了每个本征态在构成整个超块基态时的**权重（概率）**。</p>
+<p>新的重整化规则： 截断时，不再按照能量的高低，而是保留 $\rho_{\text{sys}}$ 中本征值（权重）最大的前 $\chi$ 个态。</p>
+<p>这就是 **Density-Matrix Renormalization Group** 的由来：它依然是一个不断增大系统尺寸并进行截断的 RG 过程，只是**截断的依据从哈密顿量的能量本征值，变成了约化密度矩阵的本征值。**</p>
+<h4>纠缠缩放法则</h4>
+<p>对于TFIM模型，自旋全向上或全向下当然是直积MPS态，且全$\ket{+}$态也是MPS，看看是怎么构造的</p>
+<p>$$\Lambda^0 = \frac{1}{\sqrt{2}^{1/N}} \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, \qquad \Lambda^1 = \frac{1}{\sqrt{2}^{1/N}} \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}.$$</p>
+<p>$$</p>
+<p>\begin{aligned}</p>
+<p>|\Psi\rangle &= \sum_{\sigma_1\sigma_2\cdots\sigma_N} \text{Tr}(\Lambda^{\sigma_1}\Lambda^{\sigma_2}\cdots\Lambda^{\sigma_N}) |\sigma_1\sigma_2\cdots\sigma_N\rangle \\</p>
+<p>&= \sum_{\sigma_1\sigma_2\cdots\sigma_N} \sum_{z=0,1} \langle z|\Lambda^{\sigma_1}\Lambda^{\sigma_2}\cdots\Lambda^{\sigma_N}|z\rangle |\sigma_1\sigma_2\cdots\sigma_N\rangle \\</p>
+<p>&= \langle 0|\Lambda^0\Lambda^0\cdots\Lambda^0|0\rangle |000\cdots\rangle + \langle 1|\Lambda^1\Lambda^1\cdots\Lambda^1|1\rangle |111\cdots\rangle \\</p>
+<p>&= (\frac{1}{\sqrt{2}^{1/N}})^N |000\cdots\rangle + (\frac{1}{\sqrt{2}^{1/N}})^N |111\cdots\rangle \\</p>
+<p>&= \frac{1}{\sqrt{2}} (|\uparrow\uparrow\uparrow\cdots\rangle + |\downarrow\downarrow\downarrow\cdots\rangle).</p>
+<p>\end{aligned}$$</p>
+<p>转移矩阵是</p>
+<p>$$T=\frac{1}{2^{1/N}}diag(1,0,0,1)$$</p>
+<p>且$\chi=2$，故$S\le\ln2$.实际上它的（二分后非空子系统的纠缠）熵就是ln2</p>
+<p>二分后：上上+下下</p>
+<p>密度矩阵：上上 上上+上下 上下+下上 下上+下下 下下</p>
+<p>取第二个系统的偏迹后，交叉项消失：上上+下下</p>
+<p>已经是对角化矩阵且有两个1/2的特征值，故纠缠熵为ln2</p>
+<blockquote>设平移不变 MPS 的局部张量为 $\{A^s\}_{s=1}^d$（物理维数 $d$，虚拟维数 $D$）。定义由长为 $L$ 的物理阻块到 $D \times D$ 虚拟矩阵空间的映射：<br>$$\Gamma_L : X \in \mathbb{C}^{D \times D} \longmapsto \sum_{s_1, \dots, s_L} \text{Tr}(X A^{s_1} \dots A^{s_L}) \vert{}s_1 \dots s_L\rangle$$<br>定义上，若存在有限长 $L_0$，对任意 $L \ge L_0$，映射 $\Gamma_L$ 均是单射（Injective）的，则该 MPS 为 **Injective MPS**。</blockquote>
+<p>单射性要求不同的虚拟矩阵 $X$ 必须映射到不同的物理态，这等价于：长为 $L$ 的张量乘积矩阵能够张满整个 $D \times D$ 算符空间。</p>
+<p>$$\text{dim}\left( \text{span}\{ A^{s_1} A^{s_2} \dots A^{s_L} \mid s_i \in \{1, \dots, d\} \} \right) = D^2 \quad (\text{对某个 } L \ge L_0)$$</p>
+<p>实例验证（GHZ 态）：对于前面 $g=0$ 的 GHZ 态，$A^0 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, A^1 = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$。</p>
+<p>对任意长度 $L$，乘积 $A^{s_1}\dots A^{s_L}$ 只能产生 $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$ 或 $\begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$，张成的子空间维度始终为 $2 < D^2 = 4$。因此它**不是** Injective MPS。</p>
+<p>习题：寻找$\alpha\ket{\uparrow...}+\beta\ket{\downarrow...}$的MPS local tensor</p>
+<p>答：依葫芦画瓢，就是把上面的矩阵系数替换一下</p>
+<p>$$\Lambda^0 = \alpha^{1/N} \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, \qquad \Lambda^1 = \beta^{1/N} \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}.$$</p>
+<p>纠缠标度面积定律：二分纠缠熵和最小割息息相关，如果再模糊一些推广到多维系统，可以想到纠缠熵大致有这个被划分出的系统A的边界的两级，也即</p>
+<p>$$S = O(\vert{}\partial A\vert{}), \quad \text{“面积定律”}$$</p>
+<p>我们可以感受到能隙Δ在目前为止的学习中有很重要的作用，逆能隙代表着特征长度尺度，代表着关联的衰减，也和bond dimension有关</p>
+<p>我们可以得到以下论断：<mark style="background:rgba(74, 82, 199, 0.2)">一维有能隙基态被面积定律纠缠定义。</mark>这被Hastings严格证明。高维只是猜想，但有很多数据支撑。</p>
+<blockquote>我没太get，意思是说一维gapped基态的纠缠熵都满足面积定律式子？</blockquote>
+<p>如果有一片参数空间基态满足面积定律，那么他们可以被归为同一个量子phase.能隙闭合时，穿过量子相变点。量子临界点出现的对数纠缠熵修正意味着长程关联。<mark style="background:rgba(74, 82, 199, 0.2)">事实上，人们发现这种对数标度的系数包含有关底层共形场论的普适信息——它与中心荷c成正比。</mark>（我想知道如何和共形场论中心荷关联）最后，还有具有体积定律（volume-law）纠缠熵的状态：</p>
+<p>$$S = O(\vert{}A\vert{}) = O(N^d), \quad \text{“体积定律”}$$</p>
+<p>这类状态表现于高度纠缠的状态中，例如随机量子态，或者量子多体哈密顿量的高度激发本征态，它们是我们以后研究量子热化时需要考虑的重要对象。</p>
+<h3 id="sec-3">1d MPS分类</h3>
+<p>我们将“容易转化”的两个态识别为同一类。具体来说就是局域酉算子作用非常短的时间。对称性将在后面的讨论中发挥作用。</p>
+<h4>单射MPS</h4>
+<p>假设所有MPS都具有平移不变性，现在将bond legs视作input，physical legs视作output</p>
+<p>量子Perron Frobenius定理告诉我们单射性等同于转移矩阵$T=\sum_{\sigma}A^{*\sigma}\otimes A^\sigma$具有唯一的1本征值，其他本征值模长不足1.假设我们在左正则形式情况下考虑，对于这个1特征值，左特征向量为Bell态，右特征向量是一个密度矩阵，我们做谱分解并把高阶特征忽略掉，可得</p>
+<img class="note-img" src="assets/decomposition.png" alt="decomposition.png">
+<h4>一维无拓扑序</h4>
+<p>拓扑序：不能被任意有限深度local电路连接到不纠缠的乘积态。这一节我们展示所有不考虑对称性的MPS可以被有限深度酉群连接到乘积态。</p>
+<p>图形化证明就不抄了，想法是把密度矩阵中较小的谱全部丢掉，只留下主要的一个谱，这样k连后的误差大概是$|\lambda_2|^k$，所以只有一种拓扑相在1d有能隙量子系统中</p>
+<h4>对称性保护拓扑相</h4>
+<p>引理 u是酉算子，A是单射张量，那么u变换后的矩阵$T_u=\sum u_{ij} A_j\otimes (A_i)^*$的所有特征值都在单位圆之内（包括边缘）</p>
+<p>等号可以被取到当且仅当存在酉算符v和角度θ使得（A上面插一个$u=e^{i\theta}vAv^\dagger$）</p>
+<p>酉表示$u_g$是局部对称的当且仅当A上面插一个$u_g=v_gAv_g^\dagger$</p>
+<p>键空间上的on-site对称性行为是相的性质。</p>
+<p>投影表示</p>
+<p>$$v_gv_h=e^{i\phi(g,h)}$$</p>
+<p>相因子独立依赖g和h。投影表示与线性表示等价当相因子可以由表示的phase shift重定义移除。</p>
+<p>$$w[g,h]=\frac{\beta[g]\beta[h]}{\beta[gh]}$$</p>
+<p>所以w其实在群G的第二同调类上（$H^2(G,U(1))$）</p>
+<p>例：$Z_2\times Z_2$集团态</p>
+<p>$$H=-J\sum_i Z_{i-1}X_iZ_{i+1}$$</p>
+<p>假设周期性边界条件，该系统有$Z_2\times Z_2$对称性，写作{e,g1,g2,g1g2}，均交换且逆为自己。在自旋链层次上，群员可以被表示为</p>
+<p>$$U_e=\prod I_i,U_{g_1}=\prod_{odd}X_i,U_{g_2}=\prod_{even}X_i,U_{g_1g_2}=\prod_i X_i$$</p>
+<p>他的基态是</p>
+<p>$$\vert{}\Psi_{\text{cluster}}\rangle = \prod_i \text{CZ}_{i, i+1} \vert{}{+}+{}\cdots+\rangle$$</p>
+<p>即：先将每个量子比特初始化为 $X$ 的 $+1$ 本征态 $\vert{}+\rangle = \frac{\vert{}0\rangle + \vert{}1\rangle}{\sqrt{2}}$，再对所有相邻格点 $(i, i+1)$ 作用控制-Z 门 $\text{CZ} = \text{diag}(1, 1, 1, -1)$。</p>
+<p>我们通过CZ在X之间的共轭关系（类似于分析对易关系）来说明它是基态。首先令K为原哈密顿量中的local operator，那么可以看出K的逆是自己，于是K只有±1两个特征值，我们希望这个基态对应着+1特征</p>
+<p>利用 Pauli 算符与 $\text{CZ}$ 门的共轭关系：</p>
+<ul>
+<li>$\text{CZ}_{a,b} (X_a \otimes I_b) \text{CZ}_{a,b} = X_a \otimes Z_b$</li>
+<li>$\text{CZ}_{a,b} (I_a \otimes X_b) \text{CZ}_{a,b} = Z_a \otimes X_b$</li>
+</ul>
+<p>对算符 $X_i$ 作用穿过所有 $\text{CZ}$ 门进行共轭变换（只需关心包含格点 $i$ 的两项 $\text{CZ}_{i-1, i}$ 和 $\text{CZ}_{i, i+1}$）：</p>
+<p>$$U^\dagger X_i U = \text{CZ}_{i, i+1} \text{CZ}_{i-1, i} X_i \text{CZ}_{i-1, i} \text{CZ}_{i, i+1}$$</p>
+<ul>
+<li>穿过第一个 $\text{CZ}_{i-1, i}$ 后：变为 $Z_{i-1} X_i$；</li>
+<li>再穿过第二个 $\text{CZ}_{i, i+1}$ 后：变为 $Z_{i-1} X_i Z_{i+1} = K_i$。</li>
+</ul>
+<p>这个就像是在共轭关系下，左边的X给我加了个Z，右边的X也给我加了个Z，就变成ZXZ也就是K了</p>
+<p>因此得到恒等式：</p>
+<p>$$U^\dagger X_i U = K_i \implies K_i U = U X_i$$</p>
+<p>将此关系带入作用到 $\vert{}{+}\rangle^{\otimes N}$ 上：</p>
+<p>$$K_i \vert{}\Psi_{\text{cluster}}\rangle = K_i U \vert{}{+}\rangle^{\otimes N} = U X_i \vert{}{+}\rangle^{\otimes N} = U \vert{}{+}\rangle^{\otimes N} = \vert{}\Psi_{\text{cluster}}\rangle$$</p>
+<p>由此证明，$\vert{}\Psi_{\text{cluster}}\rangle$ 是所有 $K_i$ 共同的 $+1$ 本征态，因此它正是哈密顿量 $H$ 的**唯一基态**。</p>
+<p>一维团簇态（1D Cluster State）是凝聚态物理中对称保护拓扑相（SPT Phase，Symmetry-Protected Topological Phase）最经典的范例之一。团簇哈密顿量 $H = -J \sum_i Z_{i-1}X_iZ_{i+1}$ 具有一个内禀的离散对称性，即分别作用于奇数格点和偶数格点的自旋翻转群。可以验证这两个对称操作与哈密顿量是对易的（$[H, U_{\text{odd}}] = [H, U_{\text{even}}] = 0$）。这一 $\mathbb{Z}_2 \times \mathbb{Z}_2$ 对称性是保护该拓扑相的核心。只要外部微扰（例如杂质或外场）不破坏这一对称性，系统就无法在不闭合体能隙的情况下，发生绝热演化相变到平庸态。</p>
+<p>从量子信息的视角切入，如果对团簇态进行空间二分（Bipartition），并计算子系统的约化密度矩阵，会发现其纠缠谱（Entanglement Spectrum）的每一个本征值都是精确二重简并的。这种纠缠谱的简并性与边界处存在零能模在数学上是同源的，且同样受底层对称性的严格保护。（？）</p>
+<h3 id="sec-4">一些G指导备忘录</h3>
+<p>在大系统维数下，从中随机抽取的 Haar 随机态通常包含**极高的纠缠**。若将系统分为 $A$ 和 $B$ 两部分（假设 $d_A \le d_B$），其子系统 $A$ 的平均纠缠熵极度接近理论最大值（即著名的 **Page 曲线/Page 熵**）：</p>
+<p>$$S(A) \approx \ln d_A - \frac{d_A}{2 d_B}$$</p>
+<p>Haar 随机子空间或随机态构成的编码在理论上被证明能达到最优的纠错容忍极限（如达到量子 Singleton 界），常作为衡量一般纠错码性能的理论天花板。</p>
+<p>随着量子比特数 $N$ 的增加，精确生成一个完整的 Haar 随机态所需的量子门线路复杂度呈指数级增长（$O(2^{2N})$）。</p>
+<p>对于一个将 $k$ 个逻辑量子比特编码到 $n$ 个物理量子比特、且码距（能够被检测或纠正的最小算符权重）为 $d$ 的量子纠错码 $[[n, k, d]]$，量子 Singleton 界满足：</p>
+<p>$$k \le n - 2d + 2$$</p>
+<p>经典纠错码的 Singleton 界为 $k \le n - d + 1$。量子版本中多出的系数 $2$ 源于量子信息的**不可克隆定理（No-Cloning Theorem）**。</p>
+<p>**饱和码（量子 MDS 码）**</p>
+<ul>
+<li>**量子 MDS 码**：严格达到量子 Singleton 界等式（$k = n - 2d + 2$）的纠错码被称为量子最大距离可分码（Maximum Distance Separable Code）。</li>
+<li>**典型实例**：完美的 $[[5, 1, 3]]$ 码（能够纠正任意单量子比特错误的最小量子码），满足 $1 = 5 - 2(3) + 2$。</li>
+<li>**Haar 随机码**：在大系统极限（$n \to \infty$）下，从希尔伯特空间均匀采样的 Haar 随机子空间也能够饱和该界限。</li>
+</ul>
+<p>如果对于几乎所有的谱权重，都位于特征值 $\lambda_i$ 满足 $-\log \lambda_i = S(\rho) + o(N)$ 的特征向量上，我们就说 $\rho$ 具有**熵集中谱**（entropy-concentrated spectrum）。</p>
+<p>除了那些概率极小、可以忽略不计的“尾巴”状态外，所有可能出现的特征态实际上都具有几乎完全相同的概率：</p>
+<p>$$\lambda_i \approx e^{-S(\rho)}$$</p>
+<p>此时，系统不再是一个包含各种不同概率层级的复杂混合态，而是**等效于在一个有效维度为 $e^{S(\rho)}$ 的典型子空间内做“绝对均匀的随机分布”**。</p>
+<p>有限温度下的热化态 $g_\beta$ 各个能级的概率并不相同。但只要它具备“熵集中谱”，作者就可以把它当作一个**扁平的、均匀的概率分布**来处理。系统就如同在无穷大温度下一样，只是所在的希尔伯特空间维度被热熵密度 $s < 1$ “等比例压缩”了</p>
+<p>设任意混合态 $\rho_A$ 的谱分解为</p>
+<p>$$</p>
+<p>\rho_A=\sum_i p_i|i\rangle_A\langle i|,</p>
+<p>\qquad p_i\ge 0,\quad \sum_i p_i=1.</p>
+<p>$$</p>
+<p>引入一个辅助系统 $B$，取一组正交归一基 $\{|i\rangle_B\}$，构造复合系统的纯态</p>
+<p>$$</p>
+<p>|\phi\rangle_{AB}</p>
+<p>=</p>
+<p>\sum_i\sqrt{p_i}\,</p>
+<p>|i\rangle_A|i\rangle_B.</p>
+<p>$$</p>
+<p>显然</p>
+<p>$$</p>
+<p>\langle\phi|\phi\rangle</p>
+<p>=</p>
+<p>\sum_i p_i=1,</p>
+<p>$$</p>
+<p>因此 $|\phi\rangle_{AB}$ 是纯态。</p>
+<p>对辅助系统 $B$ 做偏迹：</p>
+<p>$$</p>
+<p>\begin{aligned}</p>
+<p>\operatorname{Tr}_B</p>
+<p>\left(|\phi\rangle_{AB}\langle\phi|\right)</p>
+<p>&=</p>
+<p>\sum_{i,j}\sqrt{p_i p_j}\,</p>
+<p>|i\rangle_A\langle j|</p>
+<p>\operatorname{Tr}\left(|i\rangle_B\langle j|\right)\\</p>
+<p>&=</p>
+<p>\sum_{i,j}\sqrt{p_i p_j}\,</p>
+<p>|i\rangle_A\langle j|\,\delta_{ij}\\</p>
+<p>&=</p>
+<p>\sum_i p_i|i\rangle_A\langle i|\\</p>
+<p>&=\rho_A.</p>
+<p>\end{aligned}</p>
+<p>$$</p>
+<p>因此，任意混合态都可以表示为更大复合系统纯态的局部约化态：</p>
+<p>$$</p>
+<p>\boxed{</p>
+<p>\rho_A</p>
+<p>=</p>
+<p>\operatorname{Tr}_B</p>
+<p>\left(|\phi\rangle_{AB}\langle\phi|\right)</p>
+<p>}</p>
+<p>$$</p>
+<p>**（熵量子 Singleton 界（改编自 [13]））**。_设 $\mathcal{C}$ 为投影算符为 $P_{\mathcal{C}}$ 的 $[[N, k, d]]$ 量子纠错码，并设 $\bar{\rho}_S = \frac{1}{K} P_{\mathcal{C}}$ 为码上的最大混合态。设 $\vert{}\Omega_{RS}\rangle$ 为 $\bar{\rho}_S$ 的纯化，使得 $S(\Omega_R) = \log_2 K = k$。对于任意子系统 $A$，记 $S(A) := S(\Omega_A)$。假设 $\mathcal{C}$ 精确纠正每一个 $d - 1 < N/2$ 量子比特的擦除。则_</p>
+<p>$$\log_2 K \le \frac{N - 2(d - 1)}{d - 1} \bar{S}_{d-1}, \quad \bar{S}_{d-1} := \mathbb{E}_{\vert{}A\vert{}=d-1} S(A)$$</p>
+<p>其中平均是对所有大小为 $d - 1$ 的区域 $A$ 进行的。</p>
+<blockquote>这些代码是通过从编码约束的密度矩阵 $\rho$ 的 Scrooge 系综中随机抽取码字，然后将这些态正交化以形成有效的编码等距算符来构建的。Scrooge 系综是这种码构造的自然选择，因为在第一阶矩为 $\rho$ 的所有态系综中，它具有最小的可达信息（accessible information）。此外，对于最大混合的 $\rho$，Scrooge 系综就是 Haar 系综，众所周知，后者在无约束设定下给出了渐近最优的码构造<br>这是不是和random集合S可解码是对应的？random规则一定具有average最优的性质吗？</blockquote>
+<p>**定义 S4（熵集中谱）**。设 $\tau = \sum_j \lambda_j \vert{}j\rangle\langle j\vert{}$ 为 $m$ 个量子比特上的一个态。对于 $w \ge 0$，定义</p>
+<p>$$\Pi_\tau(w) = \sum_{j : \, \vert{}-\log_2 \lambda_j - S(\tau)\vert{} \le mw} \vert{}j\rangle\langle j\vert{}. \tag{S112}$$</p>
+<p>若满足下式，我们就说 $\tau$ 具有 $(w, \epsilon)$-**熵集中谱**：</p>
+<p>$$\text{tr}(\Pi_\tau(w) \tau) \ge 1 - \epsilon. \tag{S113}$$</p>
+<p>我们注意到熵集中投影算符 $\Pi_\tau(w)$ 满足</p>
+<p>$$\text{rank}\,\Pi_\tau(w) \le 2^{S(\tau) + mw}, \quad \Pi_\tau(w) \tau \Pi_\tau(w) \le 2^{-S(\tau) + mw} \Pi_\tau(w). \tag{S114}$$</p>
+<p>$$\max_{\vert{}E\vert{} \le \lfloor pN \rfloor} \left\Vert{} \Omega_{RE}(V_N) - \frac{\mathbb{I}_R}{K_N} \otimes \Omega_E(V_N) \right\Vert{}_1 \to 0. \tag{S176}$$</p>
+<p>迹范数（$\Vert{} \cdot \Vert{}_1$）趋于零，意味着系统 $R$ 和 $E$ 的联合密度矩阵 $\Omega_{RE}$ 在热力学极限下，完全退化为直积态 $\frac{\mathbb{I}_R}{K_N} \otimes \Omega_E$。</p>
+<p>这意味着环境 $E$ 处于完全混合状态，且与逻辑信息 $R$ **没有任何关联**。从物理直觉上讲，这意味着无论环境截获了哪 $pN$ 个量子比特，它都只能看到纯粹的热噪声，无法提取出哪怕 1 比特的逻辑信息。</p>
+<p>热过滤映射（Thermal Filtering Map）：</p>
+<p>$$\vert{}\psi\rangle \mapsto \frac{\sqrt{g_\beta}\vert{}\psi\rangle}{\sqrt{\langle\psi\vert{}g_\beta\vert{}\psi\rangle}} \quad (\text{S215})$$</p>
+<p>但 cTPQ 态将 initial 态 $\vert{}\psi\rangle$ 选为 Haar 随机态，而 Scrooge 系综则在此基础上额外使用因子 $d\langle\psi\vert{}g_\beta\vert{}\psi\rangle$ 对 Haar 测度进行了重新加权。</p>
+<p>DPI 的数学表达为：</p>
+<p>$$I(X; Z) \le I(X; Y)$$</p>
+<p>**局域能量退相干信道（Local Energy Dephasing Channel）** 是一种作用于特定局域子系统（如环境 $E$）的量子信道。它的物理效果是**抹去该子系统在局域能量基底下的量子叠加性（相干性），同时完全保留各能级上的概率分布**。</p>
+<p>若子系统 $E$ 的局域哈密顿量为 $H_E = \sum_e e \vert{}e\rangle\langle e\vert{}$（其中 $\vert{}e\rangle$ 为能量本征态，$\Pi_e = \vert{}e\rangle\langle e\vert{}$ 为投影算符），该信道 $\mathcal{D}_E$ 的数学表达为：</p>
+<p>$$\mathcal{D}_E(\rho_E) = \sum_e \Pi_e \rho_E \Pi_e = \sum_e \langle e\vert{}\rho_E\vert{}e\rangle \vert{}e\rangle\langle e\vert{}$$</p>
+<ul>
+<li>**本质是非选择性测量**：它在物理上等价于“对子系统 $E$ 的局域能量进行了投影测量，但测量者并没有记录或查看具体的测量结果”。这种测量过程会导致系统状态发生坍缩。</li>
+<li>**只销毁相干性，不改变能级分布**：</li>
+<li>**对角项（概率）**：$\langle e\vert{} \mathcal{D}_E(\rho_E) \vert{}e\rangle = \langle e\vert{} \rho_E \vert{}e\rangle$，系统处于各个能量本征态上的概率保持不变，不发生能级跃迁或能量交换。</li>
+<li>**非对角项（相干性）**：当 $e \neq e'$ 时，$\langle e\vert{} \mathcal{D}_E(\rho_E) \vert{}e'\rangle = 0$，不同能量本征态之间的相位关联与量子叠加被彻底破坏。</li>
+</ul>
+<p>将原本包含量子相干性的量子态 $\rho_E$ 转化为关于能量本征态的经典概率分布，从而将复杂的量子相关性简化为可被经典测量提取的信息泄露。</p>
+<p>**Holevo 信息 $\chi(\mathcal{E})$** 的定义紧紧依赖于冯·诺依曼熵（von Neumann Entropy）$S(\rho) = -\text{Tr}(\rho \log_2 \rho)$，其公式为：</p>
+<p>$$\chi(\mathcal{E}) = S(\rho) - \sum_x p_x S(\rho_x)$$</p>
+<p>Holevo 信息可以被理解为**量子互信息**的一种形式。Holevo 定理指出，无论 Bob 使用多么巧妙的测量方法，他能提取的经典可及信息永远不会超过 Holevo 信息。**非正交量子态是无法被完美区分的**。即便 Bob 知道 Alice 要么发了 $\vert{}0\rangle$ 要么发了 $\vert{}+\rangle$，他也绝对不可能通过任何单次测量手段 100% 猜对。</p>
+<p>环境所获得的观察信息受子系统能量分布的经典可区分性所支配。</p>
+<p>（假设环境仅仅通过**局域能量退相干信道 $\mathcal{D}_E$**（即环境“窥探”了子系统 $E$ 的能量）来影响系统。）码字之间的“能量差（或荷差）与热涨落的比值”越大，可区分度越好。</p>
+<ul>
+<li>**信号（Signal）**：两个码字之间的能量差（或荷差）在子系统上的投影量 $\delta \mu_N \propto \Delta E_N$。</li>
+<li>**噪声（Noise）**：子系统内部由高温热化引发的热涨落宽度 $\sqrt{\alpha_p N} \propto \sqrt{N}$。</li>
+</ul>
+<p>信噪比即为两者的比值：$\lambda_N \propto \frac{\Delta E_N}{\sqrt{N}}$。可区分度（JSD）完全由这个信噪比决定</p>
+<p>如果由环境实现的信道——即噪声信道的补信道（complementary channel）——对守恒量不敏感，那么环境将无法从中了解任何信息，此时无论码字荷差的大小如何，该码都将保持纠错能力。</p>
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

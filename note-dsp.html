@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>数字信号处理 · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] }
+  },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">其他</span>
+      <span><i class="far fa-calendar"></i> 2025-11-02</span>
+    </div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li><a href="#sec-0">概念</a></li>
+      <li><a href="#sec-1">各种变换</a></li>
+      <li><a href="#sec-2">时域频域关系</a></li>
+      <li><a href="#sec-3">DFT处理</a></li>
+      <li><a href="#sec-4">FFT</a></li>
+      <li><a href="#sec-5">数字滤波器</a></li>
+    </ul>
+  </aside>
+  <article class="article-body">
+    <img class="article-cover" src="assets/xiaohai.jpg" alt="数字信号处理">
+    <h1 class="article-title">数字信号处理</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2025-11-02</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">其他</span>
+      <a href="https://zhuanlan.zhihu.com/p/1968346256469387185" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
+    </div>
+    <div class="article-content">
+<p>学不进去</p>
+<blockquote>封面图：X：@komtang</blockquote>
+<h3 id="sec-0">概念</h3>
+<p>前向差分$\Delta x=x(n+1)-x(n)$，后向差分$\Delta x=x(n)-x(n-1)$</p>
+<p>分贝是一个比值，没有单位，对于功率是$10lgW$对于电压是$20lgV$，本门课程取后面20那个</p>
+<p>数字频率：就是x(n)的角速度，记作$w_o$</p>
+<p>模拟频率：真实世界的频率$f_o$</p>
+<p>抽样频率：$f_s$</p>
+<p>关系：$w_o=2\pi f_o/f_s$</p>
+<p>稳定系统：有界输入得到有界输出，LSI中等价于单位抽样相应有l1范数</p>
+<p>自由响应：齐次通解；强迫响应：非齐次特解</p>
+<p>理想抽样频谱是原频谱的抽样频率-周期延拓，所以奈奎斯特采样定理要求抽样频率大于最高频率两倍，抽样频率的一半称为折叠频率，理想抽样的恢复直接乘上矩形低通滤波器就行了，也就是时域卷积sinc</p>
+<p>实际抽样的δ函数有厚度，会导致频谱延拓越往外幅度越低，此时只需取最中间一项，采样定理仍然成立</p>
+<p>频率相差2pi整数倍的三角函数序列是一样的。使用同一个抽样频率$f_s$对两个不同的三角函数抽样时，如果两个三角函数频率恰好相差了抽样频率的整数倍，那么抽出来的序列也是一样的</p>
+<p>DFT第k个点对应的模拟频率为$f_k=k·f_s/N$</p>
+<p>频谱分辨率为</p>
+<p>$$\boxed{\Delta f=f_s/N}$$</p>
+<p>（或者记频率分辨率乘点数等于总频率，分辨率的倒数也是记录长度）</p>
+<p>如果信号频率不是正好落在某个$k\Delta f$上，就会发生栅栏效应，导致峰值出现在最近的一个 DFT 频率点上</p>
+<p>互相关函数</p>
+<p>$$r_{xy}(m)=\sum_{n=-\infty}^\infty x(n)y(n-m)$$‘</p>
+<p>两信号频谱重叠时才有相关性</p>
+<p>$$R_{xy}(k)=X(k)Y(N-k)=X(k)Y^*(k)$$</p>
+<p>两个模拟正弦信号频率差为抽样频率的整数倍时，所得的序列相同</p>
+<p>同一个正弦模拟信号用两种不同抽样频率抽样，当满足下述关系式时所得抽样序列相同</p>
+<p>$$|\frac{f_o}{f_{s2}}-\frac{f_o}{f_{s1}}|=k$$</p>
+<h3 id="sec-1">各种变换</h3>
+<h4>Z变换</h4>
+<p>就是弄个关于1/z的级数</p>
+<p>$$\mathcal{Z}[x(n)]=X(z)=\sum_{n=-\infty}^\infty x(n)z^{-n}$$</p>
+<p>做题的时候大多数时候都是在弄等比数列求和，求反变换基本上也是在求一个式子他的级数展开形式，这个时候注意一下收敛域，然后根据等比级数求和公式反向展开就行了。</p>
+<p>表</p>
+<p>|              时域              |               拉普拉斯               |                                Z变换                                |</p>
+<p>| :--------------------------: | :------------------------------: | :---------------------------------------------------------------: |</p>
+<p>|    $$f\left( t \right) $$    |      $$F\left( s \right) $$      |                      $$F\left( z \right) $$                       |</p>
+<p>| $$\delta \left( t \right) $$ |              $$1$$               |                               $$1$$                               |</p>
+<p>|    $$1\left( t \right) $$    |         $$\frac{1}{s}$$          |                         $$\frac{z}{z-1}$$                         |</p>
+<p>|            $$t$$             |        $$\frac{1}{s^2}$$         |               $$\frac{Tz}{\left( z-1 \right) ^2}$$                |</p>
+<p>|      $$\frac{t^2}{2}$$       |        $$\frac{1}{s^3}$$         |     $$\frac{T^2z\left( z+1 \right)}{2\left( z-1 \right) ^3}$$     |</p>
+<p>|         $$e^{-at}$$          |        $$\frac{1}{s+a}$$         |                      $$\frac{z}{z-e^{-aT}}$$                      |</p>
+<p>|      $$\sin \omega t$$       | $$\frac{\omega}{s^2+\omega ^2}$$ |         $$\frac{z\sin \omega T}{z^2-2z\cos \omega T+1}$$          |</p>
+<p>|      $$\cos \omega t$$       |   $$\frac{s}{s^2+\omega ^2}$$    | $$\frac{z\left( z-\cos \omega T \right)}{z^2-2z\cos \omega T+1}$$ |</p>
+<p>z域复卷积定理</p>
+<p>$$y(n)=x(n)·h(n)$$</p>
+<p>$$Y(z)=\frac{1}{2\pi j}\oint X(\frac{z}{v})H(v) v^{-1}dv$$</p>
+<p>其实是从傅里叶变换卷积来的，令$z=exp(2\pi jw),v=exp(2\pi jv)$</p>
+<p>$$Y(e^{2\pi jw})=\int_0^1X(e^{2\pi j(w-v)})H(e^{2\pi jv})dv$$</p>
+<h4>DFT=离散傅里叶变换</h4>
+<p>作用区间是有限长，通常为周期。频率是离散的，只取周期内有限个单位根</p>
+<p>$$DFT[x(n)]=X(k)=\sum_{n=0}^lx(n)e^{-2\pi jnk/l}$$</p>
+<p>这玩意就是那个，由单位根构成的DFT矩阵（注意e指数上有负号），乘到有限长度上</p>
+<p>$$F =</p>
+<p>\begin{bmatrix}</p>
+<p>1 & 1 & 1 & \cdots & 1 \\</p>
+<p>1 & \omega_N & \omega_N^2 & \cdots & \omega_N^{N-1} \\</p>
+<p>1 & \omega_N^2 & \omega_N^4 & \cdots & \omega_N^{2(N-1)} \\</p>
+<p>\vdots & \vdots & \vdots & \ddots & \vdots \\</p>
+<p>1 & \omega_N^{N-1} & \omega_N^{2(N-1)} & \cdots & \omega_N^{(N-1)(N-1)}</p>
+<p>\end{bmatrix}$$</p>
+<p>其中 $\omega_N = e^{-2\pi j / N}$，$j$是虚数单位。</p>
+<img class="note-img" src="assets/dfttable1.jpg" alt="dfttable1.jpg">
+<img class="note-img" src="assets/dfttable2.jpg" alt="dfttable2.jpg">
+<img class="note-img" src="assets/dft3.jpg" alt="dft3.jpg">
+<h4>DFS=离散傅里叶级数</h4>
+<p>对无限长周期序列，只对一个周期作变换</p>
+<p>$$DFS[\tilde{x}(n)]=\tilde{X}(k)=\sum_{n=0}^{N-1}\tilde{x}(n)e^{-2\pi jnk/N}$$</p>
+<p>跟DFT的区别仅在于DFS是无限长序列到无限长序列的变换</p>
+<p>如果T是周期，那nT也可以当周期，这样DFS会变为</p>
+<img class="note-img" src="assets/dfs.png" alt="dfs.png">
+<h4>DTFT=离散时间傅里叶变换</h4>
+<p>就是把Z变换里的Z换成$e^{-jw}$，所以变换后的自变量w是连续的</p>
+<p>$$DTFT[x(n)]=X(e^{-jw})=\sum_{n=-\infty}^\infty x(n)e^{-jwn}$$</p>
+<h4>IDFT=逆离散傅里叶变换</h4>
+<p>DFT那个矩阵，不是酉（就差个归一化系数）而且对称的吗，那逆矩阵就直接取个共轭就行了，然后乘在序列上</p>
+<p>在这本书上正变换不带系数，所以逆变换记得还要带上系数$1/N$</p>
+<h3 id="sec-2">时域频域关系</h3>
+<img class="note-img" src="assets/4ft.jpg" alt="4ft.jpg">
+<p>| 时域    | 频域    | 何变换  |</p>
+<p>| ----- | ----- | ---- |</p>
+<p>| 连续非周期 | 连续非周期 | FT   |</p>
+<p>| 离散周期  | 离散周期  | DFS  |</p>
+<p>| 连续周期  | 离散非周期 | FS   |</p>
+<p>| 离散非周期 | 连续周期  | DTFT |</p>
+<img class="note-img" src="assets/dft.jpg" alt="dft.jpg">
+<h3 id="sec-3">DFT处理</h3>
+<img class="note-img" src="assets/fc8bbccaee34019ad599acea1fdb4c91.png" alt="fc8bbccaee34019ad599acea1fdb4c91.png">
+<ol>
+<li>时域抽样：抽样频率必须大于两倍信号频率以免产生频谱混叠</li>
+<li>时域截断：为了获得有限长序列</li>
+<li>拿矩形直接截断会把频域变成几个中指（食指无名指小拇指是旁瓣），也就是谱线展宽，这叫频谱泄漏</li>
+<li>旁瓣之间的相互干扰叫谱间串扰</li>
+<li>可以通过缓变窗函数或者加宽窗宽来避免</li>
+<li>频域抽样：将连续的频率抽样为离散，抽样间隔必须小于频谱分辨率</li>
+<li>这个时候先不考虑频率上的抽样的话，我们考虑频域连续的DTFT($X(e^{jw})$)，由于求和项由$e^{-jwn}$构成，n为整数，故$w+2k\pi$不影响求和结果。如果模拟频率相对于抽样频过高（超过采样定理），那么要考虑数字频率以周期$2\pi$的延拓之后再做低通运算才是合理的</li>
+<li>两个相邻频率点之间的原始频率是不知道的，这叫栅栏效应，可以通过增加时域抽样点数进而增加DFT点数解决，或者通过补0增加DFT点数也可以</li>
+<li>频率抽样定理：频率抽样点数必须不小于原序列点数，否则不能恢复原序列（从DFT角度思考是直接的，几点抽样就会发生几点延拓，而且几点就有几个信息，少抽点不就漏信息了）</li>
+</ol>
+<h3 id="sec-4">FFT</h3>
+<h4>DIT</h4>
+<p>(按时间抽样)</p>
+<p>按奇偶，最终结果分前后半</p>
+<p>前半</p>
+<p>$$X(k)=X_1(k)+W^k_N X_2(k)$$</p>
+<p>级数那个部分恰好偏移了一点所以用$W^k_N$给他补上</p>
+<p>后半</p>
+<p>$$X(k+\frac{N}{2})=X_1(k)-W^k_NX_2(k)$$</p>
+<p>因为后半的奇数部分叠了个半周期所以多了个负号</p>
+<h4>DIF</h4>
+<p>(按频率抽样)</p>
+<p>序列前后半互相配对，输出分奇偶</p>
+<p>偶</p>
+<p>$$X(2r)=DFT_{N/2}[x(n)+x(n+\frac{N}{2})]$$</p>
+<p>为什么是加呢因为半周期被偶数k冲掉变成全周期了</p>
+<p>奇</p>
+<p>$$X(2r+1)=DFT_{N/2}[[x(n)-x(n+\frac{N}{2})]W^n_N]$$</p>
+<p>2r+1的那个1就补到$W^n_N$里面了</p>
+<h4>IFFT</h4>
+<p>最naive的想法就是把FFT里的W全部取个共轭，然后每一级多乘1/2，这样总共就会集成$1/2^l$系数</p>
+<p>或者先照常做FFT，然后将结果的自变量倒置成为N-n，前面加个系数1/N</p>
+<h4>快速卷积</h4>
+<p>把这个过程想成一个小蛋白质在边移动边复制长链DNA。。。注意了，为了使用FFT，下述单个卷积过程全部为圆周卷积</p>
+<p>重叠相加法：将长序列切成数个长为L的短段，分别与长为M的另一个短段做圆周卷积。我们希望拿圆周卷积去模拟线性卷积，所以每个L段末尾需要补M-1个0作为缓冲！圆周卷积头尾分离的时候，也即只计算了卷积的半边的时候。这些部分需要与前后的半边部分相加才能得到最终结果</p>
+<p>重叠保留法：每个卷积采用圆周卷积，然后前M-1个点由于无法代表线性卷积所以舍弃(要把线段完全推进去)。核心思想是只取圆周卷积的线性部分，并将这些部分相接最后拼出完整的卷积，所以我们还需要额外处理长序列换块的部分。对第一个长序列，我们给前M-1个数据的位置补0，今后每一段数据的前M-1个点必须沿用前段数据的后M-1个点，以完成连接处的自然卷积</p>
+<p>圆周卷积可以用FFT做</p>
+<h3 id="sec-5">数字滤波器</h3>
+<p>模拟滤波器：就是让模拟信号通过一堆电阻电容等电路的组合</p>
+<p>数字滤波器：一定涉及到关于数字信号的计算</p>
+<img class="note-img" src="assets/zhijiexing.png" alt="zhijiexing.png">
+<p>Mason公式告诉了我们系统函数，从系统函数的系数又可以很容易画出这两种直接型结构</p>
+<p>$$H(z)=\frac{\sum_{k=0}^Mb_kz^{-k}}{1+\sum_{k=1}^Na_kz^{-k}}$$</p>
+<p>串联系统函数相乘</p>
+<p>并联系统函数相加</p>
+<p>FIR滤波器分母是1</p>
+<h4>频率抽样系统</h4>
+<p>我知道了H(z)在单位圆上等间距的数个点上的取值，我想通过某种延拓将H(z)还原出来，最直接的想法就是构造这些极点，在每个极点上还原到采样值</p>
+<p>$$H(z)=\frac{1-z^{-N}}{N}\sum_{k=0}^{N-1}\frac{H_r(k)}{1-W^{-k}_Nz^{-1}}$$</p>
+<p>对于这个式子改进两点，第一点是把极点挪至半径略小于1的圆上避免发散，第二点是根据h是实数，H(k)有圆周共轭对称性的性质，将求和项pair一下最后留下实数运算</p>
+<p>pair出来了一个很丑的式子。。</p>
+<p>$$H_k(z)=\frac{\cos\theta(k)-r\cos(\theta(k)-2\pi k/N)z^{-1}}{1-2r\cos(2\pi k/N)z^{-1}+r^2z^{-2}},\quad\theta(k)=argH(k)$$</p>
+<p>偶数采样点时0和半周期是实数，最终公式</p>
+<p>$$\frac{1-r^Nz^{-N}}{N}[\frac{H(0)}{1-rz^{-1}}+\frac{H(N/2)}{1+rz^{-1}}+\sum_{k=1}^{N/2-1}2|H(k)|H_k(z)]$$</p>
+<p>奇数采样点时只有0是实数，其他全部pairing，也就是说上式去掉H(N/2)就好了</p>
+<h4>线性相位</h4>
+<p>FIR的h是实数，且满足偶对称或奇对称时，系统的频率响应相位是严格线性的。有了对称性就可以在信号图给配对了</p>
+<img class="note-img" src="assets/fir.png" alt="fir.png">
+<p>这有点像两个方向的地铁，每一站有两个方向下车的乘客，最后乘客从最下面出站</p>
+<h4>格型结构</h4>
+<img class="note-img" src="assets/klattice.png" alt="klattice.png">
+<img class="note-img" src="assets/bk.png" alt="bk.png">
+<p>格型转标准型，简单的话直接给mason一下得了</p>
+<p>标准型或已知H(z)，要一层一层解b，最后take $b^{(m)}_m$</p>
+<h4>全通滤波器</h4>
+<p>零极点成单位圆对、成共轭对出现。极点在单位圆内零点在单位圆外。</p>
+<p>$$H_{ap}(z)=K\frac{z^{-1}-a}{1-az^{-1}}$$</p>
+<p>$$H_{ap}(z)=\prod_{i=1}^N\frac{z-\frac{1}{a_i^*}}{z-a_i}·\frac{z-\frac{1}{a_i}}{z-a_i^*},\quad|a_i|<1$$</p>
+<h4>最大相位系统</h4>
+<p>全部极点在单位圆内，全部零点在单位圆外</p>
+<h4>最小相位系统</h4>
+<p>零极点全部在单位圆内</p>
+<p>并且能量集中在n=0附近，所以被称为最小延迟系统</p>
+<h4>巴特沃斯低通滤波器</h4>
+<p>$$|H_a(j\Omega)|^2=\frac{1}{1+(\Omega/\Omega_c)^{2N}}$$</p>
+<p>$\Omega_c$代表幅度下降至$1/\sqrt{2}$时频率</p>
+<p>做题步骤</p>
+<ol>
+<li>求N(分子较大，两侧均衡(正比))</li>
+</ol>
+<p>$$\frac{10^{0.1A_s}-1}{10^{0.1R_p}-1}\le(\frac{\Omega_{st}}{\Omega_p})^{2N}$$</p>
+<ol>
+<li>求$\Omega_c$</li>
+</ol>
+<p>$$\frac{\Omega_p}{^{2N}\sqrt{10^{0.1R_p}-1}}\le\Omega_c\le\frac{\Omega_c}{^{2N}\sqrt{10^{0.1A_s}-1}}$$</p>
+<ol>
+<li>根据N去查那个鬼表H(s)，然后把s换成$s/\Omega_c$</li>
+</ol>
+<h4>切比雪夫I型低通滤波器</h4>
+<p>$$|H_a(j\Omega)|^2=\frac{1}{1+\varepsilon^2 C_N^2(\Omega/\Omega_c)}$$</p>
+<p>$$C_N(x)=\cos(N\arccos x),\quad(x\le1);\quad ch(Narcchx),\quad(x>1)$$</p>
+<h4>切比雪夫II型低通滤波器</h4>
+<p>$$|H_a(j\Omega)|^2=\frac{1}{1+(\varepsilon^2 C_N^2(\Omega_{st}/\Omega))^{-1}}$$</p>
+<h4>第一类线性相位（相位正比）</h4>
+<p>$$H(w)e^{-j\tau w}$$</p>
+<p>充分条件为h序列以中点为轴对称</p>
+<p>N奇数时，H(w)对0，pi，2pi偶对称，什么滤波器都能做</p>
+<p>N偶数，H对pi奇对称，其他偶对称，也就是说在pi为0，只能用来设计低通和带通</p>
+<p>理想低通$e^{-jw\tau}$的时域：</p>
+<p>$$\frac{\sin(w_c(n-\tau))}{\pi(n-\tau)},~~(n\neq\tau)\quad w_c/\pi,~~(n=\tau)\quad\tau=(N-1)/2$$</p>
+<h4>第二类线性相位</h4>
+<p>$$H(w)e^{-j(\tau w+\beta)}$$</p>
+<p>充分条件中的序列对称轴会根据β而平移，当β取90°时，条件是沿着中点奇对称</p>
+<p>N奇数时，H在kpi处为0，只能设计带通</p>
+<p>N偶数时，H在2kpi为0，只能设计带通和高通</p>
+<p>群延时$\tau=\frac{N-1}{2}$，与抽样间隔正相关</p>
+<img class="note-img" src="assets/fir2.png" alt="fir2.png">
+<p>零点共轭且倒数成对存在</p>
+<h4>(时域)窗函数设计法</h4>
+<p>给定理想的$H(e^{jw})$让你设计这个数字滤波器。首先IDTFT到时域h，这时候就要加个窗函数截断成有限长。再得到加窗后的$H(e^{jw})$，直接将理想响应和窗函数Z域卷积即可</p>
+<p>以矩形窗的sinc为例，左右两个绝对值最小的零点的外侧那个往下跌的瓣就叫第一旁瓣</p>
+<p>矩形窗最大尖峰一直为8.95%而不会随着N增大而变化，是由于突变产生，所以我们可以选取缓变的窗（但是会加宽过渡带）。先由阻带最小衰减确定窗函数形状再由过渡带宽确定窗长点数N</p>
+<img class="note-img" src="assets/window.png" alt="window.png">
+<p>做题的时候直接对着这个表就是一顿查，先查后面的dB条件确定窗类型（往下取），再根据过渡带宽确定抽样点数</p>
+<ul>
+<li>三角形窗（巴特列特）</li>
+<li>升余弦窗（汉宁）</li>
+<li>改进升余弦窗（海明）</li>
+<li>二阶升余弦窗（布莱克曼）</li>
+<li>凯泽窗（巨复杂，还有贝塞尔函数）</li>
+</ul>
+<h4>dB和δ关系</h4>
+<img class="note-img" src="assets/df.png" alt="df.png">
+<p>通带最大衰减</p>
+<p>$$R_p=-20\lg\frac{1-\delta}{1+\delta}$$</p>
+<p>阻带最小衰减</p>
+<p>$$A_s=-20\lg\frac{\delta}{1+\delta}$$</p>
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

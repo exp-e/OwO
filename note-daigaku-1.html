@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>大学院入試ノート · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] }
+  },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">物理</span>
+      <span><i class="far fa-calendar"></i> 2025-12-02</span>
+    </div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li><a href="#sec-0">古典力学</a></li>
+      <li><a href="#sec-1">电磁气学</a></li>
+      <li><a href="#sec-2">热力学</a></li>
+      <li><a href="#sec-3">量子力学</a></li>
+      <li><a href="#sec-4">统计力学</a></li>
+    </ul>
+  </aside>
+  <article class="article-body">
+    <img class="article-cover" src="assets/ginkgo.JPG" alt="大学院入試ノート">
+    <h1 class="article-title">大学院入試ノート</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2025-12-02</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">物理</span>
+      <a href="https://zhuanlan.zhihu.com/p/1979274730981826562" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
+    </div>
+    <div class="article-content">
+<blockquote>Тьма стихла в преддверии -<br>завтра судьба поднимет<br>меч моей удачи.<br>--Jame</blockquote>
+<p>教材：数理工学社《大学院入试问题 物理学》</p>
+<p>这是一篇抄书+记录想法+做题 记录文章</p>
+<h3 id="sec-0">古典力学</h3>
+<h4>牛顿力学</h4>
+<p>牛一说的是惯性匀速直线运动，牛二是F=ma，牛三是反作用力</p>
+<p>关于旋转的非惯性系，这都比较经典了，通过求导能直接计算出四个加速度部分：径向、角向加速度，以及径向的向心力和角向的科氏力</p>
+<p>保存则=守恒定律=conservation rule</p>
+<p>运动量保存则=动量守恒=momentum conservation rule</p>
+<p>$$p=mv$$</p>
+<p>$$F=-\nabla U$$</p>
+<p>Kinetic energy</p>
+<p>$$T=\frac{1}{2}mv^2$$</p>
+<p>力矩torque</p>
+<p>$$\vec{N}=\vec{r}\times\vec{F}$$</p>
+<p>角动量Angular momentum</p>
+<p>$$\vec{l}=\vec{r}\times\vec{p}$$</p>
+<p>$$\frac{d\vec{l}}{dt}=\vec{N}$$</p>
+<p>这个也可以对着l的定义式自己求导就有了，日语称作回転の運動方程式</p>
+<p>质点系</p>
+<p>合外力会使质心运动</p>
+<p>全角运动量也即各个质点角动量的矢量和</p>
+<p>质点相对于质心的动量和总是为0</p>
+<p>质点系动能=质心动能+各部分相对于质心运动的动能和</p>
+<p>$$T=\frac{1}{2}M\dot{\vec{R}}^2+\sum(\frac{1}{2}m_j\dot{\vec{r}}_j^2)$$</p>
+<p>这是因为根据定义将完全平方展开后，交叉项为0，仅余二次项。同理，角动量也由质心角动量和相对质心角动量和两部分构成。</p>
+<p>刚体</p>
+<p>$$T=\frac{1}{2}\vec{w}^TI\vec{w}$$</p>
+<p>$$ I =\begin{pmatrix}</p>
+<p>m(y^2+z^2)&-mxy&-mxz\\</p>
+<p>-myx&m(x^2+z^2)&-myz\\</p>
+<p>-mzx&-mzy&m(x^2+y^2)</p>
+<p>\end{pmatrix}$$</p>
+<p>$$\frac{dL}{dt}=I_z\frac{dw}{dt}$$</p>
+<p>这玩意就是角牛二</p>
+<p>平行轴定理：一定是相对质心轴的移动！这样交叉项才能被消掉(从单调性也可以看出，直觉上来看确实是质心转动惯量最小)</p>
+<p>$$I_z=Mh^2+I_c$$</p>
+<p>垂直轴定理：设物体仅在xoy平面内，那么</p>
+<p>$$I_z=I_x+I_y$$</p>
+<p>中心力=有心力：万有引力，有心力满足角动量守恒，面积速度恒定，$r^2\dot\theta$守恒，令其为h，那么径向运动方程式</p>
+<p>$$m(\ddot{r}-\frac{h^2}{r^3})=F(r)$$</p>
+<p>Kepler's rules:椭圆轨道、面积速度一定、公转周期的平方是椭圆轨道长半径的立方的比例($T^2/R^3$只与中心天体有关)，都是经验法则</p>
+<h4>解析力学</h4>
+<p>$$L=T-U$$</p>
+<p>最小作用量原理，E-L方程就不写了</p>
+<p>哈密顿力学，广义动量</p>
+<p>$$p_r=\frac{\partial L}{\partial\dot{q_r}}$$</p>
+<blockquote>我的天，越写越困，从开头写到这里我已经困得不行了，这一定是我听爵士导致的</blockquote>
+<p>当势能不含速度，T仅与广义坐标的二次式有关时，$H=T+U$</p>
+<h4>习题</h4>
+<p>例题1.1</p>
+<p>![[3.jpg]]![[4.png]]</p>
+<p>bane定数就是劲度系数</p>
+<p>今天真不得劲，感觉眼前的东西像隔了一层（心理上），没法好好思考，有点累但是睡不着。我讨厌下午两点上课，我讨厌明天满课，真希望这一切赶紧走到尽头。So gloomy</p>
+<p>我服了好不容易考完了然后我今天和朋友在外面玩了一下午，晚上也没啥精力，希望明天多做点。这题倒数第二问直接使用动量守恒和能量守恒我真没想到。</p>
+<p>这题坡上摩擦力向上有点意思</p>
+<p>这题一堆带根号三角函数积分，主要用二倍角换掉</p>
+<p>这题反映出我的经典散射有多菜，首先在质心系里的散射只是双方改变角度仅此而已！然后全散射截面要积两个粒子</p>
+<p>这题还是比较简单的，我居然把$\vec{x}=r\hat{r}$都写错了，为我的莽撞自罚一杯</p>
+<h3 id="sec-1">电磁气学</h3>
+<p>库仑定律，静电势，静电场无旋，高斯定理</p>
+<p>安培定律也就是安培环路定律</p>
+<p>静电容量/电气容量C</p>
+<p>平行板电容器$C=\frac{\varepsilon S}{d}$</p>
+<p>电容器电能$E=\frac{1}{2}QV$</p>
+<p>D法向连续，E切向连续</p>
+<p>电荷守恒、欧姆定律</p>
+<p>磁场无散</p>
+<p>毕奥萨凡尔定律</p>
+<p>$$dB=\mu_0\frac{I ds\times r}{4\pi r^3}$$</p>
+<p>电磁感应</p>
+<p>洛伦兹力$F=q(E+v\times B)$</p>
+<p>麦克斯韦方程组</p>
+<p>电磁波能量，电磁波折射</p>
+<p>延迟势</p>
+<p>这题有点新鲜感，把E和B三个分量全部通过麦克斯韦方程组求出来了，非常肌肉</p>
+<p>这题用矢势的积分方法验证了安培环路定律。A的积分一是不好积，二是积出来取极限之后没意义了，看到这里我突然想到应该先导再积，懂你意思！</p>
+<p>这题真牛批了，让你算了下电偶极子，再让你自己算出来导体球在匀强电场中激发出来的也等价于电偶极子，再让你自己算环电流激发磁场也是电偶极子模式，最后再给你两个电偶极子让你画出对应的磁四极子[惊讶]我学电动的时候知道这么一件事，但我好像没自己推过，包括解匀强电场中导体球电场这种题换来换去做过很多，就是第一次觉得wdf这么有物理意义的嗷</p>
+<p>做完之后乳腺通畅了，停经二十年后做完这题立马见红了[呲牙]</p>
+<p>这题蛮简单，出题人可能希望你把B、E带z和相位全部写出来，F完整表达式也写出来，这样就字数多了</p>
+<h3 id="sec-2">热力学</h3>
+<p>我测热力学和统计力学是分开的</p>
+<p>$$dU=TdS-PdV+\mu dN$$</p>
+<p>这是一辈子都必须记下来的公式，要不还是纹个纹身放在左手手背上吧（不是）</p>
+<p>Good Physicist Have Studied Under Very Fine Teacher</p>
+<p>好物批曾经跟非常好的老师学习（别漏词换词了）</p>
+<img class="note-img" src="assets/retong.png" alt="retong.png">
+<p>$$dU=\delta Q-pdV$$</p>
+<p>气体内能增加=吸热+外界做工</p>
+<p>等温过程音速</p>
+<p>$$v=\sqrt{\frac{RT}{\hat{M}}}$$</p>
+<p>$\hat{M}$是摩尔质量，单位kg每mol</p>
+<p>绝热过程音速</p>
+<p>$$v=\sqrt{\gamma\frac{RT}{\hat{M}}}$$</p>
+<p>$$dS=\frac{\delta Q}{T}$$</p>
+<p>潜热</p>
+<p>$$\delta q=TdS$$</p>
+<p>在回家的火车上写的，热力学考的意外的简单？</p>
+<p>rbr你出这种题目那我GPHSUVFT不就白背了。。</p>
+<p>![[24.jpg]]![[25.jpg]]</p>
+<h3 id="sec-3">量子力学</h3>
+<p>我感觉我都懒得在obs上更新了</p>
+<p>下面这题是考试演习题目</p>
+<p>晚上再看看格里菲斯，修考题目有很多是默写题</p>
+<p>又看了一下解氢原子，球坐标拉普拉斯</p>
+<p>$$\frac{1}{r^2}\frac{\partial}{\partial r}(r^2\frac{\partial}{\partial r})+\frac{1}{r^2sin\theta}\frac{\partial}{\partial\theta}(sin\theta\frac{\partial}{\partial\theta})+\frac{1}{r^2sin^2\theta}\frac{\partial^2}{\partial\phi^2}$$</p>
+<p>忘记了的话就用nabla点乘nabla对基矢求导就能推出来了</p>
+<h3 id="sec-4">统计力学</h3>
+<p>求统计对我好一点</p>
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

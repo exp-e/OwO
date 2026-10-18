@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>（夏入）大学院入試ノート · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] }
+  },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">物理</span>
+      <span><i class="far fa-calendar"></i> 2026-03-21</span>
+    </div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li><a href="#sec-0">力学</a></li>
+      <li><a href="#sec-1">電磁気学</a></li>
+      <li><a href="#sec-2">量子力学</a></li>
+      <li><a href="#sec-3">統計力学</a></li>
+      <li><a href="#sec-4">物理数学</a></li>
+      <li><a href="#sec-5">过去问</a></li>
+    </ul>
+  </aside>
+  <article class="article-body">
+    <img class="article-cover" src="assets/sanya.jpg" alt="（夏入）大学院入試ノート">
+    <h1 class="article-title">（夏入）大学院入試ノート</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2026-03-21</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">物理</span>
+      <a href="https://zhuanlan.zhihu.com/p/2018485220681229442" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
+    </div>
+    <div class="article-content">
+<blockquote>Только я<br>Буду царапаться и биться,<br>А иней пусть себе искрится,<br>И пусть летят по небу птицы,<br>И светит бледная заря.<br>——Z.A.T.O.// I Love the World and Everything in It</blockquote>
+<p>来打复活赛了，先庆祝一下可以解锁日语解题，看着日语题和书强写英语太别扭了</p>
+<p>上一篇『大学院入試ノート』（https://zhuanlan.zhihu.com/p/1979274730981826562 ）图片太多，一直加下去会拖慢速度，再开一篇</p>
+<p>四大力学大致的做法也学过很多遍了，冬入时仍然发现还有考察点不太熟悉，关键在于针对修考那边偏向考察的知识点进行查漏补缺，主要参考帖子：https://note.com/todai_inshi/n/n4009f58e7d8c</p>
+<p>「量子力学は演算子計算が中心」「統計力学は状態密度の導出から始まることが多い」「電磁気は鏡像法と多重極展開が頻出」</p>
+<h3 id="sec-0">力学</h3>
+<p>参考书目：朗道力学、よくわかる解析力学 (前野 昌弘)</p>
+<p>『解析力学』（畑浩之）是网上经验贴推荐的，据说“院試に直結する内容が多い”，我还有点想看，但是这本网上没有电子版资源，需要托人扫描，想看请务必联系我</p>
+<p>過去問では剛体の運動（転倒・転がり）、中心力問題、連成振動が頻出。これらの典型問題は自力で最後まで計算できるようにしておくのが重要です。</p>
+<p>力学其实是四大力学里最不受重视的一门了，如果是出三道题的话大概率不会出单独的力学，然后做真题看来修考更重视的是对实际问题的解，比如中心力、刚体转动、小振动等，风格很像高中物理（形式推导很少）</p>
+<h4>看书</h4>
+<h5>一 力学准备</h5>
+<p>球坐标基矢微分关系(画图，立体几何问题)</p>
+<p>$$\begin{aligned}</p>
+<p>\mathrm{d} \vec{\mathbf{e}}_r &= \mathrm{d} \theta \vec{\mathbf{e}}_\theta + \mathrm{d} \phi \sin \theta \vec{\mathbf{e}}_\phi \\</p>
+<p>\mathrm{d} \vec{\mathbf{e}}_\theta &= -\mathrm{d} \theta \vec{\mathbf{e}}_r + \mathrm{d} \phi \cos \theta \vec{\mathbf{e}}_\phi \\</p>
+<p>\mathrm{d} \vec{\mathbf{e}}_\phi &= -\mathrm{d} \phi \left( \sin \theta \vec{\mathbf{e}}_r + \cos \theta \vec{\mathbf{e}}_\theta \right)</p>
+<p>\end{aligned}$$</p>
+<p>由此，将$r\vec{e}_r$对时间求导两次后得到</p>
+<p>$$\begin{align}</p>
+<p>\vec{a} &= \ddot{x} \vec{\mathbf{e}}_x + \ddot{y} \vec{\mathbf{e}}_y + \ddot{z} \vec{\mathbf{e}}_z \\</p>
+<p>\vec{a} &= \left( \ddot{r} - r(\dot{\theta})^2 - r(\dot{\phi})^2 \sin^2\theta \right) \vec{\mathbf{e}}_r + \left( r\ddot{\theta} + 2\dot{r}\dot{\theta} - r \sin\theta \cos\theta (\dot{\phi})^2 \right) \vec{\mathbf{e}}_\theta \nonumber \\</p>
+<p>&\quad + \left( r\ddot{\phi} \sin\theta + 2\dot{r}\dot{\phi} \sin\theta + 2r\dot{\theta}\dot{\phi} \cos\theta \right) \vec{\mathbf{e}}_\phi \\</p>
+<p>\vec{a} &= \left( \ddot{\rho} - \rho(\dot{\phi})^2 \right) \vec{\mathbf{e}}_\rho + \left( \rho\ddot{\phi} + 2\dot{\rho}\dot{\phi} \right) \vec{\mathbf{e}}_\phi + \ddot{z} \vec{\mathbf{e}}_z</p>
+<p>\end{align}$$</p>
+<h5>二变分</h5>
+<h5>三 假想仕事原理</h5>
+<h5>四 拉格朗日力学</h5>
+<h5>五 拉格朗日力学发展</h5>
+<h5>六 振动</h5>
+<h5>七 刚体 八 对称性</h5>
+<h5>九 哈密顿力学</h5>
+<h5>十 正则变换</h5>
+<h5>十一 哈密顿-雅可比方程</h5>
+<h4>写题</h4>
+<h5>2026</h5>
+<p>这题是对称陀螺的简化版，自转远大于进动，所以有两个关键近似</p>
+<ol>
+<li>陀螺角动量完全由自转构成（进动只有改变自转轴方向的作用）</li>
+<li>陀螺每个点上收到的力矩一致</li>
+</ol>
+<p>顺便把一般陀螺/刚体也复习了一下，之前解陀螺是写动能->广义动量->哈密顿量->循环坐标动量与哈密顿量守恒 这样一步步化简模型</p>
+<h5>2025</h5>
+<p>看着很吓人的，差点以为要自己解，其实就是把ansartz往里面酷酷带就好了，最后一问也很经典。题目里说的是与墙壁夹角，图里给的是与床夹角，我按图做的。</p>
+<h3 id="sec-1">電磁気学</h3>
+<p>参考书目：『理論電磁気学』（砂川重信） — 日本語でしっかり学びたいときのメイン教材。理論的な記述が厳密で院試向き</p>
+<p>東大の電磁気は鏡像法、多重極展開、電磁誘導、ポインティングベクトルあたりが定番。該当章を3回読めば、過去問の大半に対応できます。</p>
+<p>第四章静电场要好好练习一下</p>
+<p>另外注意辐射内容，我在初次学习时辐射部分不是重点，但是在冬入时出现了一题较有难度的辐射！</p>
+<h4>看书</h4>
+<h5>一二章 麦克斯韦方程组</h5>
+<p>不是这书怎么不喜欢写汉字阿，看累了</p>
+<h5>三 静止介质麦克斯韦</h5>
+<p>1z</p>
+<h5>四 解静电场</h5>
+<p>格林相反定理是新的，然后解拉普拉斯方程也是锻炼了一把</p>
+<h5>五 稳恒电流</h5>
+<p>这章比较放松。D和J的对偶性或者C和R的对偶性是新的。焦耳热最小定理和前面的差不多一样</p>
+<h5>六 静磁场</h5>
+<p>更轻松了，不过不要忘记磁偶极子势$\phi=\frac{1}{4\pi}\frac{\vec{m}·\hat{r}}{r^2}$</p>
+<p>边界条件H切向连续对应φ连续，B法向连续对应$\mu_0H-M$法向连续</p>
+<h5>七 交流电</h5>
+<p>这章很初等，电感是$\frac{\mu_0}{4\pi}\oint\oint dx_1dx_2/|x_1-x_2|$，下面是一次方</p>
+<p>积不出来很正常，这个形式本来就很容易碰到椭圆积分</p>
+<h3 id="sec-2">量子力学</h3>
+<p>参考书目：Sakurai《现代量子力学》</p>
+<p>上册：これ一冊を徹底的にやり込んだ。ブラケット記法と演算子形式に慣れることが最優先</p>
+<p>下册：摂動論・散乱理論・対称性。院試では上巻の範囲が中心だが、摂動論は下巻から頻出</p>
+<p>以及格里菲斯量子力学</p>
+<p>理物の量子力学は「シュレーディンガー方程式を解く」よりも「演算子の代数的な計算」が重視される傾向にあります。交換関係、昇降演算子、摂動論、角運動量の合成あたりは手が自動で動くレベルまでやりました。</p>
+<h3 id="sec-3">統計力学</h3>
+<p>参考书目：『統計力学 I』（田崎晴明）</p>
+<p>上册：論理展開が非常に厳密で、院試の記述対策として最適</p>
+<p>下册：量子統計・相転移を扱う。特にフェルミ分布・ボース分布・黒体放射は必読</p>
+<p>热统作为四大力学中的最终boss，在修考中也是最有重量级的存在，它可以覆盖相当多知识点，所以应该分配较多的时间仔细查漏补缺，把自己学的也都看一遍</p>
+<p>理物では状態密度の導出からの低温展開が頻出。田崎本のIIを丁寧に読み込むことで、これらの問題に対する「記述の型」が身につきました。</p>
+<h3 id="sec-4">物理数学</h3>
+<p>物理数学は独立した科目というより、他の科目を解くための道具です。ただし東大理物の第4問は物理数学が独立して出題されるので、対策は必須。</p>
+<p>顺便说一句广域科学里专门有一道数学可以选择性回答（还没研究过）</p>
+<p>『物理数学の直観的方法（普及版）』（長沼伸一郎） — フーリエ変換や複素積分のイメージを掴むのに最適。計算に入る前に「何をやっているか」を理解できる</p>
+<p>『詳解 物理応用数学演習』（後藤憲一ほか） — 演習量を積みたいときに。複素積分と特殊関数の章を重点的にやった</p>
+<p>留数定理、フーリエ変換、行列の指数関数、ガウス積分の変種あたりは頻出なので、解法パターンとして身体に叩き込むのが効率的です。</p>
+<h3 id="sec-5">过去问</h3>
+<p>广域科学</p>
+<h4>2024</h4>
+<h4>2025</h4>
+<h4>2020</h4>
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

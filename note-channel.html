@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>备份：经典有噪信道（擦除/翻转）容量 · 王凌云</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] }
+  },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">物理</span>
+      <span><i class="far fa-calendar"></i> 2026-09-03</span>
+    </div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li><a href="#sec-0">Question 1</a></li>
+      <li><a href="#sec-1">Average probability</a></li>
+      <li><a href="#sec-2">Critical $\beta$ Under TDL</a></li>
+      <li><a href="#sec-3">Relation with Entropy</a></li>
+      <li><a href="#sec-4">Physical Application</a></li>
+      <li><a href="#sec-5">Question 2</a></li>
+      <li><a href="#sec-6">Binary Symmetric Channel</a></li>
+      <li><a href="#sec-7">Fano Inequality</a></li>
+      <li><a href="#sec-8">Maximum Likelihood Decoding</a></li>
+      <li><a href="#sec-9">Critical Point</a></li>
+      <li><a href="#sec-10">Channel Capacity</a></li>
+      <li><a href="#sec-11">n-Copies</a></li>
+      <li><a href="#sec-12">Reversible Classical Cellular Automata</a></li>
+      <li><a href="#sec-13">Quantum Error Correction</a></li>
+    </ul>
+  </aside>
+  <article class="article-body">
+
+    <h1 class="article-title">备份：经典有噪信道（擦除/翻转）容量</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2026-09-03</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">物理</span>
+      <a href="https://zhuanlan.zhihu.com/p/2078952077485724408" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
+    </div>
+    <div class="article-content">
+<p>来自做的几个思考题，我是纯纯新手</p>
+<h3 id="sec-0">Question 1</h3>
+<p>We have $2^N$ types of N-bit strings form a total set called $A$. Then we randomly chose $2^{\alpha N}$ of them to form a subset of A,</p>
+<p>$$S\subset A,\quad|S|=2^{\alpha N},\quad0\le\alpha\le 1$$</p>
+<p>We randomly chose one element $x$ from S, for example,</p>
+<p>$$x=0111011001...$$</p>
+<p>Erase the first $\beta N$ bits of $x$ and we get $x'$ string, for example $\beta N=4$,</p>
+<p>$$x'=????011001...$$</p>
+<p>If one only know $x'$ and $S$, what's the success probability of guessing $x$?</p>
+<h3 id="sec-1">Average probability</h3>
+<p>Define $y$ as the last $(1-\beta)N$ bits of $x'$. (As in the example, $y=011001...$)</p>
+<p>For a certain $S$ and $x'$, define all the possible number of $x$,</p>
+<p>$$M_{y}=\#\{x\in S:last~(1-\beta)N~bits~of~x=y\}$$</p>
+<p>This gives us the number of correct answer. (If $M_y=1$, then fortunately we have 100% success probability.) If we guess randomly, then obviously the success probability is,</p>
+<p>$$P(X|Y=y)=\frac{1}{M_y}$$</p>
+<p>Now we average $P(X|Y=y)$ of $y$,</p>
+<p>$$P_{suc}=\sum_{y}P(Y=y)\frac{1}{M_y}$$</p>
+<p>where $P(Y=y)$ is equal to the number of strings that last bits are y, devides the number of $S$,</p>
+<p>$$P(Y=y)=\frac{M_y}{2^{\alpha N}}$$</p>
+<p>Hence,</p>
+<p>$$P_{suc}=\frac{number~of~different~y}{2^{\alpha N}}:=\frac{B}{2^{\alpha N}}$$</p>
+<p>We also want to talk about $B$ in a average meaning. Since we chose $S$ from $A$ randomly, there's no preference on what $y$ should be. Total number that a $(1-\beta)N$ bits string, $y$, should be $2^{(1-\beta)N}$. $2^{\alpha N}$ strings will choose them randomly.</p>
+<p>It's something like **geometric distribution**. Each of the strings in $S$ chose one types of "last $(1-\beta)N$ bits" in a probability of $1/2^{(1-\beta)N}$, so after all strings chosen their last bits, the possibility of one types of "last $(1-\beta)N$ bits" that doesn't appear in $S$ is</p>
+<p>$$P(doesn't~ ~appear)=(1-\frac{1}{2^{(1-\beta)N}})^{2^{\alpha N}}$$</p>
+<p>Conversely, one type appear in $S$,</p>
+<p>$$P(appear)=1-(1-\frac{1}{2^{(1-\beta)N}})^{2^{\alpha N}}$$</p>
+<p>Now we have total $2^{(1-\beta)N}$ independent numbers of them, so the average number of different y is,</p>
+<p>$$B=2^{(1-\beta)N}P(appear)=2^{(1-\beta)N}\left(1-(1-\frac{1}{2^{(1-\beta)N}})^{2^{\alpha N}}\right)$$</p>
+<p>Substitute this $B$ into $P_{suc}$, then we have the <u>average guessing success probability</u>:</p>
+<p>$$\boxed{P_{suc}=\frac{2^{(1-\beta)N}}{2^{\alpha N}}\left(1-(1-\frac{1}{2^{(1-\beta)N}})^{2^{\alpha N}}\right)}$$</p>
+<h3 id="sec-2">Critical $\beta$ Under TDL</h3>
+<blockquote>This is pure calculation or mathematics.</blockquote>
+<p>What we need to do now is to take $N\to\infty$ limit on $P_{suc}$:</p>
+<p>$$\lim_{N\to\infty}2^{(1-(\beta+\alpha))N}\left(1-(1-2^{(\beta-1)N})^{2^{\alpha N}}\right)$$</p>
+<p>Notice that</p>
+<p>$$(1-2^{(\beta-1)N})^{2^{\alpha N}}=1-2^{\alpha N}2^{(\beta-1)N}+O((2^{\alpha N}2^{(\beta-1)N})^2)$$</p>
+<ol>
+<li>$\alpha+\beta-1>0$</li>
+</ol>
+<p>Then $2^{(\alpha+\beta-1)N}\to\infty$, take ln:</p>
+<p>$$\lim_{N\to\infty}(1-2^{(\beta-1)N})^{2^{\alpha N}}=\exp(\lim_{N\to\infty}2^{\alpha N}\ln(1-2^{(\beta-1)N}))=\exp(-\lim_{N\to\infty}2^{(\alpha+\beta-1)N})=e^{-\infty}=0$$</p>
+<p>So</p>
+<p>$$\lim_{N\to\infty}2^{(1-(\beta+\alpha))N}\left(1-(1-2^{(\beta-1)N})^{2^{\alpha N}}\right)=\lim_{N\to\infty}2^{(1-(\beta+\alpha))N}=0$$</p>
+<p>$$\lim_{N\to\infty}P_{suc}=0$$</p>
+<p>We almost can't guess the right answer.</p>
+<ol>
+<li>$\alpha+\beta-1=0$</li>
+</ol>
+<p>$$\lim_{N\to\infty}2^{(1-(\beta+\alpha))N}\left(1-(1-2^{(\beta-1)N})^{2^{\alpha N}}\right)=1-(1-\frac{1}{2^{\alpha N}})^{2^{\alpha N}}=1-\frac{1}{e}$$</p>
+<ol>
+<li>$\alpha+\beta-1<0$</li>
+</ol>
+<p>$$\lim_{N\to\infty}2^{(1-(\beta+\alpha))N}\left(1-(1-2^{(\beta-1)N})^{2^{\alpha N}}\right)=\lim_{N\to\infty}2^{(1-(\beta+\alpha))N}2^{\alpha N}2^{(\beta-1)N}=1$$</p>
+<p>This means we have high probability to guess correctly.</p>
+<p>From the limit calculation, we can find that the critical $\beta$ is $\boxed{\beta_{cric}=1-\alpha}$. When $\beta>\beta_{cric}$, too many information been discarded, the success probability drops to 0 exponentially.</p>
+<h3 id="sec-3">Relation with Entropy</h3>
+<h4>Intuition</h4>
+<p>If $\beta=0$ or $\alpha N=1$ (or $\alpha=0$ under TDL), we know the correct $x$ for sure. The smaller $\alpha$ and $\beta$ are, the more information we know.</p>
+<p>The information of this game contains two steps, one lies in $S$, and the other lies in the last $(1-\beta)N$ bits. So $\alpha$ describes the information loss in step one, and $\beta$ describes the information loss in step two.</p>
+<p>When the total information loss is small, that is $\alpha+\beta<1$, we can recover the original $x$. That's the meaning for $\beta_{cric}=1-\alpha$</p>
+<h4>Conditional Shannon Entropy</h4>
+<p>The posterior possibility is uniform,</p>
+<p>$$P(x=X|y=Y)=\frac{1}{K_y}$$</p>
+<p>So the conditional Shannon entropy is</p>
+<p>$$H(X|Y=y)=\log_2M_y$$</p>
+<p>Average on y:</p>
+<p>$$H(X|Y)=\sum_{y}P(Y=y)\log_2M_y$$</p>
+<p>While</p>
+<p>$$P_{suc}=\sum_{y}P(Y=y)\frac{1}{M_y}$$</p>
+<p>By Jensen inequality,</p>
+<p>$$E[2^{-z}]\ge2^{-E[z]}$$</p>
+<p>So we have</p>
+<p>$$P_{suc}\ge 2^{-H(X|Y)}$$</p>
+<p>Gives the lower bond of $P_{suc}$.</p>
+<p>Moreover, under TDL, $2^{-H(X|Y)}$ is approximately $P_{suc}$.</p>
+<p>For a certain $S$,</p>
+<p>$$H(X|Y,S)=\sum_y P(Y=y|S)H(X|Y=y)=\log_2M_y=\frac{1}{2^{\alpha N}}\sum_y M_y\log_2M_y$$</p>
+<p>Now we take average on $M_y$. Before it, we need to know what's the possibility that subset $S$ contains $m$ strings which share the same last $(1-\beta)N$ bits. Except the certain answer, others obey the Hypergeometric distribution, that is,</p>
+<p>$$P(M_y=m)=\frac{C_{2^{\beta N}-1}^{m-1}C_{2^N-2^{\beta N}}^{2^{\alpha N}-m}}{C_{2^N-1}^{2^{\alpha N}-1}}$$</p>
+<p>So</p>
+<p>$$\bar{H}(X|Y)=\sum_{m=1}^{2^{\alpha N}}P(M_y=m)H(X|Y=y)=\sum_{m=1}^{2^{\alpha N}}\frac{C_{2^{\beta N}-1}^{m-1}C_{2^N-2^{\beta N}}^{2^{\alpha N}-m}}{C_{2^N-1}^{2^{\alpha N}-1}}\log_2M_y$$</p>
+<p>We know that when $N\to\infty$, Hypergeometric distribution approximate to Poisson distribution, which has $\lambda=(2^{\alpha N}-1)\frac{2^{\beta N}-1}{2^N-1}\approx 2^{(\alpha+\beta-1)N}$</p>
+<p>So when $N\to\infty$,</p>
+<p>$$\bar{H}(X|Y)=\sum_{m=0}^\infty e^{-\lambda}\frac{\lambda^m}{m!}\log_2(m+1)$$</p>
+<p>Classical on $\lambda=2^{(\alpha+\beta-1)N}$</p>
+<ol>
+<li>$\alpha+\beta-1>0\Rightarrow\lambda\to\infty$</li>
+</ol>
+<p>$$\bar{H}(X|Y)=\log_2(2^{(\alpha+\beta-1)N})+O(\frac{1}{\lambda})\to\infty$$</p>
+<p>So</p>
+<p>$$2^{-\bar{H}(X|Y)}\to 0=P_{suc}$$</p>
+<ol>
+<li>$\alpha+\beta-1=0\Rightarrow\lambda=1$</li>
+</ol>
+<p>$$\bar{H}(X|Y)=\sum_{m=0}^\infty e^{-1}\frac{\log_2(m+1)}{m!}$$</p>
+<p>Since $\frac{\log_2(m+1)}{m!}\le\frac{m}{m!}$, the series converge.</p>
+<ol>
+<li>$\alpha+\beta-1<0\Rightarrow\lambda\to0$</li>
+</ol>
+<p>$$\bar{H}(X|Y)=0,\quad 2^{-\bar{H}(X|Y)}=1$$</p>
+<p>This agrees with $P_{suc}=1$.</p>
+<h4>Rényi-2 Entropy</h4>
+<p>Rényi-2 entropy is defined by</p>
+<p>$$H_2(X)=-\log_2\left(\sum_i p_i^2\right)$$</p>
+<p>It measures the collision probability, $2^{H_2(X)}$ means there's how many effective same probability state in one distribution.</p>
+<p>Relative Rényi-2 entropy is</p>
+<p>$$H_2(X|Y)=-\log_2\left(\sum_yP(y)\sum_x P^2(x|y)\right)$$</p>
+<p>In our model,</p>
+<p>$$\sum_x P^2(x|y)=P(X|Y=y)=\frac{1}{M_y}$$</p>
+<p>because we guess the answer randomly. So</p>
+<p>$$\boxed{H_2(X|Y)=-\log_2\left(P_{suc}\right)}$$</p>
+<p>It means when we guess randomly, the successful probability is described by Rényi-2 entropy, which represents the collision pairs.</p>
+<h3 id="sec-4">Physical Application</h3>
+<p>In paper "Quantum resource localizability transitions in deep thermalization", I found the physical version of this pure informational question, that is theory of resource localization in deep thermalization for subspace-coherence QRTs.</p>
+<p>The informational transition question is an easier case of random subset intersection problem in QRT. We view one string in $A$ as a block, which has uniform distribution $p=2^{-N}$ (block probability), then</p>
+<p>$$H_2(p)=-\log_2(2^N2^{-2N})=N$$</p>
+<p>By definition,</p>
+<p>$$\sigma=\frac{H_2(p)}{N}=1$$</p>
+<p>$\alpha_0 N$-qubits are put in resourceful basis, this is correspond to subset $S$, which $|S|=2^{\alpha N}$.</p>
+<p>Then $\alpha_m N$-qubits are put in resourceful measurement basis, corresponds to $\beta N$. $2^{\beta N}$ is the number of all possible answer of string $x$.</p>
+<p>This paper talks about whether the intersection of these two sets $I∩F$ is small enough to infer the original block.</p>
+<p>Total number of collision can be approximate as below:</p>
+<p>$$|I||F|\sim 2^{(\alpha_0+\alpha_m)N}$$</p>
+<p>By Rényi-2 entropy, the number of effective collision pairs is</p>
+<p>$$2^{H_2}=2^{\sigma N}$$</p>
+<p>Now we compare $2^{(\alpha_0+\alpha_m)N}$ and $2^{\sigma N}$ , if the possible pairs of collision is restricted, that is $2^{(\alpha_0+\alpha_m)N}<2^{\sigma N}$, or $\alpha_0+\alpha_m<\sigma$, we can recover the original block, otherwise we can't do it under TDL.</p>
+<p>The critical point is</p>
+<p>$$\alpha_0+\alpha_m=\sigma$$</p>
+<p>This is similar to the critical point in the informational guessing game:</p>
+<p>$$\alpha+\beta=1$$</p>
+<p>where $\alpha\leftrightarrow\alpha_0,~\beta\leftrightarrow\alpha_m,~\sigma=1$</p>
+<blockquote>notion: In this note, H(p) ($1\ge p\ge 1$ is a probability) means entropy in B(1,p) model, i.e. $H(p)=-p\log_2 p-(1-p)\log_2(1-p)$</blockquote>
+<h3 id="sec-5">Question 2</h3>
+<p>In measurement decoding noise, let's model $P(s|z) \propto$ $e^{-\beta(s\oplus~z)}$ (bit-string addition). $\beta$ is the strength of measurement ranging from 0 to infinity. This is called a weak measurement (why?). For $\beta = \infty$ this is a strong measurement. What is the critical $\beta$ now in this model? What is the channel capacity?</p>
+<h3 id="sec-6">Binary Symmetric Channel</h3>
+<p>Actually it's a product channel, each bit errors are independent:</p>
+<p>$$P(s|z)\propto\prod_{i=1}^Ne^{-\beta(s_i\oplus z_i)}$$</p>
+<p>where $s=s_1s_2...s_N,~s_i\in\{0,1\}$, same for $z$. So we can look at only one bit behavior to understand this channel:</p>
+<p>$$P(s_i\neq z_i)\propto e^{-\beta},\quad P(s_i= z_i)\propto 1$$</p>
+<p>This is like 2-energy system, where $E_0=0$ and $E_1=1$. We can also regard this bit flip error as original bit $\oplus$ random error bit:</p>
+<p>$$z_i=s_i\oplus r_i,\quad P(r_i=0)=\frac{1}{1+e^{-\beta}},\quad P(r_i=1)=\frac{e^{-\beta}}{1+e^{-\beta}}$$</p>
+<p>$r_i$ obeys Boltzmann distribution under reversed temperature $\beta$. In zero temperature, $P(r_i=0)=1$, the channel is accurate (strong measurement); In infinite temperature, $P(r_i=0)=P(r_i=1)=\frac{1}{2}$, the channel is totally random, code word $z$ carries no information, we can't decide the answer unless $2^{\alpha N}=1$ (or $\alpha=0$)</p>
+<p>$\beta$ controls the error rate, $\beta<\infty$ it is called weak measurement since the code word $s$ we got is not always the original code word $z$</p>
+<p>This is the binary symmetric channel, with bit flip probability</p>
+<p>$$p=\frac{e^{-\beta}}{1+e^{-\beta}}$$</p>
+<h3 id="sec-7">Fano Inequality</h3>
+<p>Message X, come from set $S$ randomly ($|S|=M$), passed through a BSC, and received $Y$</p>
+<p>Guessing $X'$ from Y, let decoding error probability is $P_{err}=P(X'\neq X)$. Then Fano inequality says,</p>
+<p>$$H(X|Y)\le H(P_{err})+P_{err}\log_2(M-1)$$</p>
+<p>In this model, information X are uniformly taken from S, which means $H(X)=\log_2 M$, so</p>
+<p>$$H(X)-H(X|Y)\ge -H(P_{err})+(1-P_{err})\log_2M$$</p>
+<p>Substitute $\log_2 M=\alpha N,~I(X;Y)=H(X)-H(X|Y)$ into it:</p>
+<p>$$I(X;Y)\ge -H(P_{err})+(1-P_{err})\alpha N$$</p>
+<p>$$\frac{I(X;Y)}{N}\ge -\frac{H(P_{err})}{N}+(1-P_{err})\alpha$$</p>
+<p>Under large N limit, $H(P_{err})/N\to0$, so</p>
+<p>$$P_{err}\ge 1-\frac{I(X;Y)}{\alpha N}$$</p>
+<p>Successfully decoding means $P_{err}=0$, so</p>
+<p>$$\boxed{\frac{I(X;Y)}{N}\ge\alpha}$$</p>
+<p>$I(X;Y)/N$ means the information you get from Y (in order to infer X) per bit. It can not be smaller than total information (per bit) $\alpha$, if you want to decode successfully.</p>
+<h3 id="sec-8">Maximum Likelihood Decoding</h3>
+<p>Since flip probability $p\le\frac{1}{2}$, and</p>
+<p>$$P(Y=y|X=x)=p^{d(x,y)}(1-p)^{N-d(x,y)}$$</p>
+<p>where $d(·,·)$ represent for Hamming distance, our decoding rule is to find $x'\in S$ letting $d(x',y)$ to be the smallest.</p>
+<p>$$\min_{x\in S}d(x,y)=d(x',y)$$</p>
+<p>For N-bit code word $s$, after passing through BSC, how many distance will the BSC make? Recall $z=s\oplus r$, $d(z,s)=d(r)$, and</p>
+<p>$$d(r)\sim B(N,p)$$</p>
+<p>Big number theory tells us for arbitrary $\delta>0$, we have</p>
+<p>$$\lim_{N\to\infty}P\left(d(r)>(1+\delta)Np\right)=0$$</p>
+<p>So if we can show that no other code word in radius $Np$ Hamming ball $B_H(Np)$, our maximum likelihood decoder is success.</p>
+<p>$$|B_H(Np)|=\sum_{i=1}^{Np}C_N^i$$</p>
+<blockquote>Need to get the upper bond of $|B_H(Np)|$, this process is pure calculation.<br>Binomial expansion gets its maximum in the 1-p side, so<br>$$p^i(1-p)^{N-i}\ge p^{Np}(1-p)^{N-Np},\quad1\le i\le Np\le N/2$$<br>So<br>$$1=\sum_{i=1}^N C_N^i p^i(1-p)^{N-i}\ge\sum_{i=1}^{Np} C_N^i p^i(1-p)^{N-i}\ge\sum_{i=1}^{Np} C_N^i p^{Np}(1-p)^{N-Np}$$<br>$$1\ge|B_H(Np)|p^{Np}(1-p)^{N-Np}$$<br>$$|B_H(Np)|\le[p^{-p}(1-p)^{-(1-p)}]^N=2^{NH(p)}$$</blockquote>
+<p>Obtained this upper bond</p>
+<p>$$|B_H(Np)|\le 2^{NH(p)}$$</p>
+<p>Total code word $2^N$, one code word enters into this Hamming ball with probability $P_1=2^{(H(p)-1)N}$</p>
+<p>Possibility that code word in S enter in this Hamming ball is</p>
+<p>$$P_{err}\le2^{\alpha N}P_1=2^{(\alpha+H(p)-1)N}$$</p>
+<p>When $1-H(p)>\alpha~\Rightarrow~P_{err}=0$, decode success.</p>
+<h3 id="sec-9">Critical Point</h3>
+<p>We know:</p>
+<p>$$\alpha<1-H(p),\quad success$$</p>
+<p>$$\alpha>\frac{1}{N}(H(Y)-H(Y|X)),\quad failure$$</p>
+<p>Are there any connection between these two bond? Answer is: they can be set to equal, and the value is capacity.</p>
+<p>For one bit,</p>
+<p>$$P(x_i\neq y_i)=p,\quad P(x_i= y_i)=1-p$$</p>
+<p>So</p>
+<p>$$H(Y|X)=\sum_{i=1}^N P(x_i=1)H(y_i|x_i=1)+P(x_i=0)H(y_i|x_i=0)=NH(p)$$</p>
+<p>For one bit, $H(y_i)\le1$. This can be taken by setting $P(x_i=1)=P(x_i=0)=\frac{1}{2}$:</p>
+<p>$$H(y_i)_{P(x_i=0)=0.5}=H(\frac{1}{2}p+\frac{1}{2}(1-p))=H(\frac{1}{2})=1$$</p>
+<p>This step means we modify the original information probability when using this BSC to make higher efficiency. Since the channel is symmetric, the optimal probability is $P(x_i=1)=P(x_i=0)=\frac{1}{2}$.</p>
+<p>Then the failure condition becomes:</p>
+<p>$$\alpha>1-H(p),\quad failure$$</p>
+<p>There's no gap between successful bond and failure bond, so we can ensure the transition happens in</p>
+<p>$$\boxed{H(p)_{cric}+\alpha=1}$$</p>
+<p>Substitute</p>
+<p>$$p=\frac{e^{-\beta}}{1+e^{-\beta}},\quad 1-p=\frac{1}{1+e^{-\beta}}$$</p>
+<p>We can rewrite the critical point using $\beta_c$:</p>
+<p>$$\frac{e^{-\beta_c}}{1+e^{-\beta_c}}\log_2\frac{1+e^{-\beta_c}}{e^{-\beta_c}}+\frac{1}{1+e^{-\beta_c}}\log_2(1+e^{-\beta_c})=1-\alpha$$</p>
+<h3 id="sec-10">Channel Capacity</h3>
+<p>The meaning of channel capacity is $C=$ bits/channel used. In other word, using N times of this channel, CN bits can be decoded with success probability $P_{suc}\to1$ when $N\to\infty$</p>
+<p>As the discussion above, since information per bit we want to transmit is $\alpha$, the capacity should be $C=1-H(p)$. From Fano inequality to $C$, we have taken $\max H(Y)$. So generally,</p>
+<p>$$C=\max_{P(X)}\frac{I(X;Y)}{N}$$</p>
+<p>Meaning: when channel capacity > information density, we can decode it successfully.</p>
+<h3 id="sec-11">n-Copies</h3>
+<p>If we discard first $\beta N$ bits, then n-copies raise n times of exactly same $z$, it will not let the system distinguishable.</p>
+<p>But in BSC, it do have a better effect.</p>
+<h4>Majority Vote</h4>
+<p>For flip probability $p<\frac{1}{2}$, if we receive 0,0,1,0,0,0 (n=6) in one bit, then we want to guess this bit to be 0 naturally. This method can let success probability higher.</p>
+<p>The information procedure in majority vote method is</p>
+<p>$$original~string~X\xrightarrow{BSC^n}Y_1,...,Y_n\xrightarrow{vote}\bar{Y}\xrightarrow{max~likelihood}X'$$</p>
+<p>From X to Y forms a new BSC, now we calculate the new flip probability $q_n$. Majority vote is wrong means there's more than $\frac{n}{2}$ bit flip happens in original BSC(p):</p>
+<p>$$q_n=\sum_{i=n/2}^nC_n^ip^i(1-p)^{n-i}<p$$</p>
+<p>Using this decoding method, the critical point shift to</p>
+<p>$$\boxed{H(q_n)_{cric}+\alpha=1}$$</p>
+<h4>Capacity</h4>
+<p>Majority vote is not the optimal decoding method, it can only gives lower bond of successful probability. By calculating capacity C, we will know the optimal transition point.</p>
+<p>By definition, $C=\max\frac{I(X;Y)}{N}$. Here the channel is symmetric again, so $I/N$ gets its maximum when $P(x_i=0)=P(x_i=1)=0.5,~H(Y)=1$, consider one bit:</p>
+<p>$$C=1-H(X|Y^n)$$$$H(X|Y^n)=\sum_{y^n}P(Y^n=y^n)H(P(X=0|Y^n=y^n))$$</p>
+<p>Let us consider $y^n=1,1,...,0,0..,0$, which first k times we receive 1, and last n-k times we receive 0. Then</p>
+<p>$$P(y^n|X=0)=p^k(1-p)^{n-k}$$</p>
+<p>$$P(y^n|X=1)=p^{n-k}(1-p)^k$$</p>
+<p>$$P(X=0|y^n)=\frac{P(X=0,y^n)}{P(y^n)}=\frac{p^k(1-p)^{n-k}}{p^k(1-p)^{n-k}+p^{n-k}(1-p)^k}$$</p>
+<p>For symmetric information, if there are k times of 0 appear in $y^n$, then the probability is</p>
+<p>$$P(Y^n=y^n)=\frac{1}{2}P(y^n|X=0)+\frac{1}{2}P(y^n|X=1)=\frac{p^k(1-p)^{n-k}+p^{n-k}(1-p)^k}{2}$$</p>
+<p>$$H(X|Y^n)=\sum_{y^n\in 2^n}\frac{p^k(1-p)^{n-k}+p^{n-k}(1-p)^k}{2}H\left(\frac{p^k(1-p)^{n-k}}{p^k(1-p)^{n-k}+p^{n-k}(1-p)^k}\right)$$</p>
+<p>Summation over k instead of $y^n$, which yields a $C_n^k$ factor:</p>
+<p>$$H(X|Y^n)=\sum_{k=0}^nC_n^k\frac{p^k(1-p)^{n-k}+p^{n-k}(1-p)^k}{2}H\left(\frac{p^k(1-p)^{n-k}}{p^k(1-p)^{n-k}+p^{n-k}(1-p)^k}\right)$$</p>
+<p>The optimal critical point is</p>
+<p>$$\boxed{H(X|Y^n)_{cric}+\alpha=1}$$</p>
+<p>Intuitionally, when n gets bigger, critical $\beta_{cric}$ gets smaller, and $n\to\infty\Rightarrow\beta_{cric}\to0$</p>
+<h4>Distinguishability</h4>
+<p>System will have higher distinguishability, because the posterior distribution become sharpener. (For quick verification, $P(y^n|X=0):P(y^n|X=1)=(\frac{1-p}{p})^{n-2k}$, hold $\frac{k}{n}$ unchanged, let $n\to\infty$, this ratio approaches to $\infty$) Specifically, the posterior probably of right answer approaches to 1.</p>
+<p>It makes $H(X|Y^n)$ smaller, and channel capacity $C=\frac{1}{N}I(X;Y)$ higher.</p>
+<h3 id="sec-12">Reversible Classical Cellular Automata</h3>
+<blockquote>Typo:0001 --> 0101<br>0010 --> 0101<br>0011 --> 1001<br>0100 --> 1001<br>is not reversible</blockquote>
+<h4>Identity RCA</h4>
+<p>We use this example to explicitly show some kind of "update rule" will make the code undistinguishable.</p>
+<p>Consider identity RCA, set $\alpha=\frac{1}{2}$ and $N=4$, then S contains:</p>
+<p>$$S=\{0000,0001,0010,0011\}$$</p>
+<ol>
+<li>Erase last 2 bits channel:</li>
+</ol>
+<p>This will let any information become "00" —— totally undistinguishable.</p>
+<ol>
+<li>Erase first 2 bits channel:</li>
+</ol>
+<p>This is the best channel we can use, making decode success. Here $\beta=\frac{1}{2}$, $\beta+\alpha=1$ —— still restricted under capacity condition.</p>
+<ol>
+<li>Bit flip noise channel:</li>
+</ol>
+<p>S only contains a small square of N-bit codes. The maximum Hamming distance is 2, less than maximum N-bit code distance 4. This RCA makes BSC efficiency lower.</p>
+<h4>Property</h4>
+<p>RCA will let the difference between two original stings propagate to other position.</p>
+<p>For example, if two stings only have one bit difference, and unfortunately it located in first $\beta N$ bits, then they are undistinguishable through erase channel. However after RCA evolve, there's new difference in last $(1-\beta)N$ bits, they will become distinguishable.</p>
+<p>For BSC, a good RCA will make $\min_{x,y\in S}d(x,y)$ higher, in order to create more tolerance space.</p>
+<p>We can evaluate if one RCA can do better than random permutation for a certain channel. We can carefully pick the optimal RCA to create more tolerance space. But Shannon capacity condition $C\ge\alpha$ is always true.</p>
+<h4>Advantages</h4>
+<p>RCA is local, we have a specific rule, not random, so we can save the RAM.</p>
+<h4>Disadvantages</h4>
+<p>One step of RCA only affects $O(1)$ of bit position, but random permutation can affect O(N)</p>
+<h3 id="sec-13">Quantum Error Correction</h3>
+<p>How to encode quantum information, hide it, corrupt it, yet still recover it. This is quantum error correction ;)</p>
+<p>I learned something in part one of "Surviving as a Quantum Computer in a Classical World" wrote by Daniel Gottesman.</p>
+<p>For example, 9-qubits</p>
+<p>$$\begin{aligned} |0\rangle \mapsto |\overline{0}\rangle &= \frac{1}{2\sqrt{2}}(|000\rangle + |111\rangle)(|000\rangle + |111\rangle)(|000\rangle + |111\rangle) \\ |1\rangle \mapsto |\overline{1}\rangle &= \frac{1}{2\sqrt{2}}(|000\rangle - |111\rangle)(|000\rangle - |111\rangle)(|000\rangle - |111\rangle). \end{aligned}$$</p>
+<p>It can solve bit flip and phase flip errors.</p>
+<p>Stabilizer of nine-qubit code:</p>
+<p>$$\begin{equation*}</p>
+<p>\begin{array}{ccccccccc}</p>
+<p>Z & Z &   &   &   &   &   &   &   \\</p>
+<p>& Z & Z &   &   &   &   &   &   \\</p>
+<p>&   &   & Z & Z &   &   &   &   \\</p>
+<p>&   &   &   & Z & Z &   &   &   \\</p>
+<p>&   &   &   &   &   & Z & Z &   \\</p>
+<p>&   &   &   &   &   &   & Z & Z \\</p>
+<p>X & X & X & X & X & X &   &   &   \\</p>
+<p>&   &   & X & X & X & X & X & X</p>
+<p>\end{array}</p>
+<p>\end{equation*}$$</p>
+<p>Stabilizer of five-qubit code:</p>
+<p>$$\begin{matrix} X & Z & Z & X & I \\ I & X & Z & Z & X \\ X & I & X & Z & Z \\ Z & X & I & X & Z \end{matrix}$$</p>
+<p>We can use projector to obtain $\ket{\bar{0}}$ and $\ket{\bar{1}}$, they are long.</p>
+<p>Both 9-qubit code and 5-qubit code have one logical qubit. Define $N(S)$ as below:</p>
+<p>$$N(S)=\{N\in P_N|NM=MN\quad\forall M\in S\}$$</p>
+<p>Then stabilizer can't distinguish errors in $\hat{\mathsf{N}}(\mathsf{S}) \setminus \hat{\mathsf{S}}$ (hat means omit phase).</p>
+<p>Stabilizer has two dimension symmetric representation, which could let us consider stabilizer questions under liner algebra schemes.</p>
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

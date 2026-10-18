@@ -12,10 +12,7 @@
 window.MathJax = {
   tex: {
     inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
-    macros: {
-      braket: ['\\langle #1\\rangle', 1],
-      ket: ['\\lvert #1\\rangle', 1]
-    }
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] }
   },
   svg: { fontCache: 'global' },
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
@@ -23,122 +20,81 @@ window.MathJax = {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 <style>
-:root {
-  --bg:#F3EFFF; --card-solid:#FDFCFF; --accent:#7139DA; --accent-deep:#5921C2;
-  --accent-soft:rgba(113,57,218,0.09); --text:#141414; --text-soft:#4a4060;
-  --muted:#8a7da8; --border:rgba(113,57,218,0.35); --border-soft:rgba(113,57,218,0.15);
-  --font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;
-  --font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --radius:16px; --radius-sm:8px;
-}
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{
-  font-family:var(--font-sans); color:var(--text); font-size:15px; line-height:1.8;
-  -webkit-font-smoothing:antialiased;
-  background:var(--bg) url('background.jpg') center center / cover fixed;
-}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
 body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
 a{color:var(--accent);text-decoration:none;transition:color .2s;}
 a:hover{color:var(--accent-deep);}
 img{max-width:100%;display:block;}
 .headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
-.header{
-  position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border-soft);z-index:100;
-}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
 .header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
 .back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
 .back-link:hover{color:var(--accent);}
 .article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
 .article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
 .layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
-.toc-sidebar{
-  width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;
-  max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;
-}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
 .toc-sidebar::-webkit-scrollbar{width:3px;}
 .toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 .toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
 .toc-list{list-style:none;}
 .toc-list li{margin-bottom:2px;}
-.toc-list a{
-  display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);
-  border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;
-}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
 .toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
 .toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
-.article-body{
-  flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);
-  border:1px solid var(--border-soft);padding:40px 48px 56px;
-  box-shadow:0 8px 40px rgba(113,57,218,0.08);
-}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
 .article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
-.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:14px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
 .article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
 .article-meta a{display:inline-flex;align-items:center;gap:5px;}
 .article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
-.article-content h3{
-  font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);
-  margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);
-  scroll-margin-top:80px;
-}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
 .article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;}
 .article-content p{margin-bottom:14px;}
-.article-content blockquote{
-  margin:14px 0;padding:10px 18px;background:var(--accent-soft);
-  border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
-  font-size:13.5px;color:var(--text-soft);font-style:italic;
-}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
 .article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
 .article-content ol,.article-content ul{margin:12px 0 12px 24px;}
 .article-content li{margin-bottom:6px;}
 .article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
-.article-content mark{padding:1px 3px;border-radius:2px;}
 .article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
 .article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
-@media (max-width:900px){
-  .toc-sidebar{display:none;}
-  .article-body{padding:28px 22px 40px;}
-  .article-title{font-size:21px;}
-  .article-cover{max-height:320px;}
-  .layout{padding:72px 16px 40px;}
-  .header-inner{padding:0 16px;}
-}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
 </style>
 </head>
 <body>
 <div class="headband"></div>
 <header class="header">
   <div class="header-inner">
-    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回主页</a>
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
     <div class="article-header-meta">
       <span class="cat-tag">数学</span>
       <span><i class="far fa-calendar"></i> 2026-04-15</span>
     </div>
   </div>
 </header>
-
 <div class="layout">
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
     <ul class="toc-list">
-      <li><a href="#sec-9qubit" class="active">9-Qubit</a></li>
-      <li><a href="#sec-pauli">泡利群</a></li>
-      <li><a href="#sec-stabilizer">Stabilizer Codes</a></li>
-      <li><a href="#sec-5qubit">5-Qubit</a></li>
-      <li><a href="#sec-distance">Stabilizer Code的距离与大小</a></li>
-      <li><a href="#sec-degeneracy">Degeneracy与Stabilizer Codes</a></li>
-      <li><a href="#sec-syndrome">陪集和错误Syndromes</a></li>
-      <li><a href="#sec-mle">最大似然解码</a></li>
-      <li><a href="#sec-symplectic">二元辛表示</a></li>
-      <li><a href="#sec-appendix">补充证明</a></li>
+      <li><a href="#sec-0">9-Qubit</a></li>
+      <li><a href="#sec-1">泡利群</a></li>
+      <li><a href="#sec-2">Stabilizer Codes</a></li>
+      <li><a href="#sec-3">5-Qubit</a></li>
+      <li><a href="#sec-4">Stabilizer Code的距离与大小</a></li>
+      <li><a href="#sec-5">Degeneracy与Stabilizer Codes</a></li>
+      <li><a href="#sec-6">陪集和错误Syndromes</a></li>
+      <li><a href="#sec-7">最大似然解码</a></li>
+      <li><a href="#sec-8">二元辛表示</a></li>
+      <li><a href="#sec-9">补充证明</a></li>
     </ul>
   </aside>
-
   <article class="article-body">
-    <img class="article-cover" src="assets/nikomonesy.jpg" alt="QECC封面">
+    <img class="article-cover" src="assets/nikomonesy.jpg" alt="QECC讨论班：Stabilizer Codes">
     <h1 class="article-title">QECC讨论班：Stabilizer Codes</h1>
     <div class="article-meta">
       <span><i class="far fa-calendar"></i> 2026-04-15</span>
@@ -146,35 +102,30 @@ img{max-width:100%;display:block;}
       <a href="https://zhuanlan.zhihu.com/p/2027846633082070380" target="_blank" rel="noopener"><i class="fab fa-zhihu"></i> 知乎原文</a>
     </div>
     <div class="article-content">
-
 <p>教材：《Surviving as a Quantum Computer in a Classical World》Daniel Gottesman 第三章</p>
-<p>pdf下载：<a href="https://pan.baidu.com/s/1AVoIezjcrJfcwfovxBQ0bQ?pwd=3316" target="_blank" rel="noopener">https://pan.baidu.com/s/1AVoIezjcrJfcwfovxBQ0bQ</a> 提取码: 3316</p>
+<p>pdf下载： https://pan.baidu.com/s/1AVoIezjcrJfcwfovxBQ0bQ?pwd=3316 提取码: 3316</p>
 <p>这一张主要围绕对称群构造了另一种纠错方式，叫stabilizer codes</p>
-
-<h3 id="sec-9qubit">9-Qubit</h3>
-<p>$$\begin{aligned} |0\rangle \mapsto |\overline{0}\rangle &amp;= \frac{1}{2\sqrt{2}}(|000\rangle + |111\rangle)(|000\rangle + |111\rangle)(|000\rangle + |111\rangle) \\ |1\rangle \mapsto |\overline{1}\rangle &amp;= \frac{1}{2\sqrt{2}}(|000\rangle - |111\rangle)(|000\rangle - |111\rangle)(|000\rangle - |111\rangle). \end{aligned}$$</p>
+<h3 id="sec-0">9-Qubit</h3>
+<p>$$\begin{aligned} |0\rangle \mapsto |\overline{0}\rangle &= \frac{1}{2\sqrt{2}}(|000\rangle + |111\rangle)(|000\rangle + |111\rangle)(|000\rangle + |111\rangle) \\ |1\rangle \mapsto |\overline{1}\rangle &= \frac{1}{2\sqrt{2}}(|000\rangle - |111\rangle)(|000\rangle - |111\rangle)(|000\rangle - |111\rangle). \end{aligned}$$</p>
 <p>9-Qubit可以解决比特翻转错误和相位翻转错误同时发生的问题，<mark style="background:rgba(74, 82, 199, 0.2)">首先在3qubit中找出是否发生比特翻转错误，然后我们将这组3qubit在另外两组3qubit中对比以查看是否有相位翻转错误</mark>($\ket{0}+\ket{1}$与$\ket{0}-\ket{1}$)</p>
-
 <h4>比特翻转</h4>
 <p>用Z矩阵(diag(1,-1))去测量</p>
 <p>在第一步检查比特翻转时，我们先检查前两个qubit是否一致，再检查后两个qubit是否一致，这一步可以视作在两个qubit上测量$Z\otimes Z$的特征值</p>
-<p>$$Z \otimes Z = \begin{pmatrix} +1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; -1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; +1 \end{pmatrix} \begin{matrix} 00 \text{ (even)} \\ 01 \text{ (odd)} \\ 10 \text{ (odd)} \\ 11 \text{ (even)} \end{matrix}$$</p>
+<p>$$Z \otimes Z = \begin{pmatrix} +1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & +1 \end{pmatrix} \begin{matrix} 00 \text{ (even)} \\ 01 \text{ (odd)} \\ 10 \text{ (odd)} \\ 11 \text{ (even)} \end{matrix}$$</p>
 <p>+1意味着偶宇称(parity)，-1意味着奇宇称，在三个qubit上我们总共测量的是$Z\otimes Z\otimes I$和$Z\otimes I\otimes Z$</p>
-
 <h4>相位翻转</h4>
 <p>用X矩阵(0 1; 1 0)测量，这个矩阵可以翻转0与1</p>
 <p>作用在3qubit的情况时也差不多</p>
 <p>$$X\otimes X\otimes X |\psi_{\pm}\rangle = \frac{1}{\sqrt{2}}(|111\rangle \pm |000\rangle) = \pm \frac{1}{\sqrt{2}}(|000\rangle \pm |111\rangle)$$</p>
 <p>每组使用三个X，如果需要判断两组相位是否相同，我们总共要用到6个X。我们的目标是了解相位是相同还是不同，而不需要知道每个相位的具体值。</p>
-<img class="note-img" src="assets/QECC3X.png" alt="QECC3X">
+<img class="note-img" src="assets/QECC3X.png" alt="QECC3X.png">
 <p>这种测量方式是无容错的（non-fault-tolerant）</p>
 <p>上面介绍了用Z算符去测比特翻转错误以及用X去测相位翻转错误，把这些合写在一起得到生成表</p>
-<img class="note-img" src="assets/XXXZZZ.png" alt="XXXZZZ">
+<img class="note-img" src="assets/XXXZZZ.png" alt="XXXZZZ.png">
 <p>空格代表不做操作，也即I单位算符。第一行代表着仅对前两个bit做Z操作，可以测出前两个比特是否一致；如果需要比对第一和第三个qubit，仅需将第一行和第二行组合起来操作</p>
 <p>我们把为了测量9-qubit错误信息而使用的这些算符称作stabilizer of nine-qubit code（稳定子之类的），那么上表就是stabilizer的生成元</p>
 <p>不同的error syndrome对应着不同stabilizer生成元集合</p>
-
-<h3 id="sec-pauli">泡利群</h3>
+<h3 id="sec-1">泡利群</h3>
 <p>定义：泡利群$P_n$是由I，X，Y，Z在n qubit上张量积组成的群，并带有overall相位$\pm1$或$\pm i$</p>
 <p>在下文中被简称为泡利算符、泡利错误或泡利</p>
 <p>我们可以很容易的验证泡利群的封闭性，因为X，Y，Z中任意两个的乘积等于第三个乘$\pm i$的整体因子，任何泡利算符的平方都等于I（如果带有$\pm i$相位那么平方是-I），而且不同泡利矩阵之间是反对易的</p>
@@ -186,8 +137,7 @@ img{max-width:100%;display:block;}
 <p>作者说带不带帽子影响的只是细微技术细节，并且建议读者在感到困惑之前忽略帽子的区别</p>
 <p>所有泡利矩阵都有$\pm 1$的特征值，并且特征子空间恰好是全希尔伯特空间的一半，也就是说+1和-1都具有维度$2^{n-1}$的特征子空间。</p>
 <p>$P_n$张成了所有 n-qubit算符的空间，权重为t的泡利算符（非I算符的数量为t）张成了t-qubit错误的集合。如第二章所说，要拥有一个能纠正 t 个错误的量子纠错码（QECC），只需纠正所有权重为 t 的保利算符即可。</p>
-
-<h3 id="sec-stabilizer">Stabilizer Codes</h3>
+<h3 id="sec-2">Stabilizer Codes</h3>
 <p>给定一个通用的QECC，我们可以像定义9-qubit码一样定义它的stabilizer</p>
 <p>定义：给定一个QECC $T\subset\mathcal{H}_{2^n}$，其stabilizer S(T)为</p>
 <p>$$S(T)=\{M\in P_n:M\ket{\psi}=\psi,\forall\ket{\psi}\in T\}$$</p>
@@ -199,9 +149,7 @@ img{max-width:100%;display:block;}
 <li>S(T)是一个阿贝尔群</li>
 </ol>
 <p>只证第二条，由于$MN\ket{\psi}=NM\ket{\psi}$，所以$[M,N]$湮灭codewords。$P_n$中的元素要么对易要么反对易，反对易的情况是无法湮灭codewords的所以只可能是对易的情况，也即S(T)是阿贝尔群</p>
-<blockquote>拓展：在线性空间V下有厄米矩阵A、B，则AB可交换 等价于 A、B拥有同一套特征向量</blockquote>
-<blockquote>证明请看[^1]</blockquote>
-<blockquote>泡利矩阵当然是厄米的，并且在这里特征向量相同，所以可以推出可交换性</blockquote>
+<blockquote>拓展：在线性空间V下有厄米矩阵A、B，则AB可交换 等价于 A、B拥有同一套特征向量<br>证明请看[^1]<br>泡利矩阵当然是厄米的，并且在这里特征向量相同，所以可以推出可交换性</blockquote>
 <p>反过来的，我们也可以根据算符找不变子空间的形式去定义code space</p>
 <p>定义：令$S\subset P_n$是阿贝尔群，并且-I不在群中，如下定义S对应的code space：</p>
 <p>$$\mathcal{T}(S)=\{\ket{\psi}:M\ket{\psi}=\psi,\forall M\in S\}$$</p>
@@ -217,10 +165,9 @@ img{max-width:100%;display:block;}
 <p>$$M_{i_1,...,i_r}=\prod_j M_j^{i_j}$$</p>
 <p>其中$i_j$取0或1，这意味着稳定器的大小为$2^r$</p>
 <p>由stabilizer code定义code space时，当然可以用+1特征空间来定义，也可以用-1特征空间来定义，只需将$M_i$替换成$-M_i$即可，它仍在$P_n$内</p>
-
-<h3 id="sec-5qubit">5-Qubit</h3>
+<h3 id="sec-3">5-Qubit</h3>
 <p>这是5qubit的stabilizer生成元</p>
-<p>$$\begin{matrix} X &amp; Z &amp; Z &amp; X &amp; I \\ I &amp; X &amp; Z &amp; Z &amp; X \\ X &amp; I &amp; X &amp; Z &amp; Z \\ Z &amp; X &amp; I &amp; X &amp; Z \end{matrix}$$</p>
+<p>$$\begin{matrix} X & Z & Z & X & I \\ I & X & Z & Z & X \\ X & I & X & Z & Z \\ Z & X & I & X & Z \end{matrix}$$</p>
 <p>可以看出他是循环对称的，并且最后一个循环的结果ZZXIX不在表中但他仍然是个stabilizer，因为它可以通过上述四个生成元相乘得到。事实上这四个生成元可以从五种循环样式中任选四个来得到</p>
 <p>我们知道code words是stabilizer的不变子空间，现在希望找到这个子空间所对应的投影算符</p>
 <p>生成元$M_i$的+1本征空间投影算符是$(I+M_i)/2$，所以当有r个生成元时，S的投影算符为</p>
@@ -228,23 +175,18 @@ img{max-width:100%;display:block;}
 <p>这个式子把乘积写开之后有种母函数的感觉，每一项都是生成元的积，也就是S中的元素M（总共16个）</p>
 <p>$$\Pi_{\mathsf{S}} = \frac{1}{2^r} \sum_{M \in \mathsf{S}} M$$</p>
 <p>使用投影算符，我们可以从任意的5-qubit出发来得到我们想要的code space中元素。例如，我们将投影算符作用在$\ket{00000}$和$\ket{11111}$之后得到了code space的两个正交基</p>
+<img class="note-img" src="assets/01010.png" alt="01010.png">
 <p>这就是将16个S中的元素作用上去的结果</p>
-
-<h3 id="sec-distance">Stabilizer Code的距离与大小</h3>
+<h3 id="sec-4">Stabilizer Code的距离与大小</h3>
 <p>虽然物理qubit的个数很容易看出，但是逻辑qubit（例如9qubit实际上承载着可纠错的单qubit信息，那么他的逻辑qubit就是1个）和距离d不太显然，但是可以从stabilizer中推出来</p>
 <p>命题：如果n个物理比特上的stabilizer S大小为$2^r$(有r个生成元)，那么$\mathcal{T}(S)$有$2^{n-r}$个维度，也就是说有$k=n-r$个逻辑比特</p>
-<blockquote>思路：n个物理比特总共有$2^n$个元素，每多增加一个生成元，我们只取其特征为+1的子空间，所以可选择的区域减少了一半，总共r个生成元就是对半了r次，所以最后剩下的维度是$2^{n-r}$</blockquote>
-<blockquote>证明可能会稍微有些不同：</blockquote>
-<blockquote>$\mathcal{T}(S)$的维度等于投影算符$\Pi_S$的迹</blockquote>
-<blockquote>$$tr\Pi_S=\frac{1}{2^r}\sum_{M\in S}trM$$</blockquote>
-<blockquote>然而除单位矩阵I以外，所有泡利矩阵均迹0，因此</blockquote>
-<blockquote>$$tr\Pi_S=\frac{tr I}{2^r}=2^{n-r}$$</blockquote>
+<blockquote>[!info]<br>思路：n个物理比特总共有$2^n$个元素，每多增加一个生成元，我们只取其特征为+1的子空间，所以可选择的区域减少了一半，总共r个生成元就是对半了r次，所以最后剩下的维度是$2^{n-r}$<br>证明可能会稍微有些不同：<br>$\mathcal{T}(S)$的维度等于投影算符$\Pi_S$的迹<br>$$tr\Pi_S=\frac{1}{2^r}\sum_{M\in S}trM$$<br>然而除单位矩阵I以外，所有泡利矩阵均迹0，因此<br>$$tr\Pi_S=\frac{tr I}{2^r}=2^{n-r}$$</blockquote>
 <p>根据这个公式可以验证9qubit码-8stabilizer生成元得到1个编码比特；5qubit码-4生成元得到1编码比特</p>
 <p>当nqubit上有n生成元时按理来说得到0个编码比特，也即在归一化意义下单一的量子态</p>
 <p>定义：Stabilizer state是n个stabilizer生成元作用在n qubits上得到的态</p>
 <p>有时stabilizer state可以是QECC构造的起点或终点。这个态在量子信息中也是很常见的，例如GHZ态$\ket{000}+\ket{111}$以及Bell态$\ket{00}\pm\ket{11},\ket{01}\pm\ket{10}$都是稳定器态</p>
 <p>为了推导code的距离，回顾9qubit码是如何处理错误的。通过辅助比特和全套生成元的作用，我们最终能识别所有的单比特错误</p>
-<p>一个生成元是否能检测到由E引发的错误关键在于<strong>反对易性</strong>：</p>
+<p>一个生成元是否能检测到由E引发的错误关键在于**反对易性**：</p>
 <p>$$M(E\ket{\psi})=-EM\ket{\psi}=-E\ket{\psi}$$</p>
 <p>可以看出出错的码$E\ket{\psi}$位于-1所对应的特征子空间内，这便是出错的信号。反之如果M和E对易的话出错后的码仍然在+1对应的特征空间内，就没有识别能力了</p>
 <p>使用泡利群的优势是只有上面两种选择，要么M与E对易要么反对易；要么维持+1特征值，要么变为-1特征值发出错误的信号</p>
@@ -272,25 +214,23 @@ img{max-width:100%;display:block;}
 <p>所以除非$|\braket{\phi|\psi}|=1$，换言之E是在所有比特上平等的相位错误，要不然这种错误均非可探测的。但是如果在所有比特上平等产生相位错误那不就在$\hat{S}$中了吗，所以是不可能的。这里的E都无法探测</p>
 <p>核心点在于，codeword中的态都无法被stabilizer检测出来，而$\hat{\mathsf{N}}(\mathsf{S}) \setminus \hat{\mathsf{S}}$中的错误恰好将某个codeword变为了另一个codeword，使得无法检测</p>
 <p><mark style="background:rgba(3, 135, 102, 0.2)">定理</mark>：Stabilizer code S能纠错集合$\mathcal{E}\subset P_n$当且仅当$\hat{E}^\dagger\hat{F}\notin\hat{N}(S)\setminus\hat{S},\forall E,F\in\mathcal{E}$</p>
-<p>这是由上述"不可检测错误描述"以及QECC条件得出的：对任意$\ket{\psi},\ket{\phi}\in Q$，任意错误$E_a,E_b$，有$\braket{\psi|E_a^\dagger E_b|\phi}=C_{ab}\braket{\psi|\phi}$并且系数不依赖于码。如果我们对纠正t比特错误感兴趣，关注泡利错误就足够了</p>
+<p>这是由上述“不可探测错误描述”以及QECC条件得出的：对任意$\ket{\psi},\ket{\phi}\in Q$，任意错误$E_a,E_b$，有$\braket{\psi|E_a^\dagger E_b|\phi}=C_{ab}\braket{\psi|\phi}$并且系数不依赖于码。如果我们对纠正t比特错误感兴趣，关注泡利错误就足够了</p>
 <p>QECC通用记法是$((n,K,d))$，其中K是2的逻辑比特次幂$2^k$；对于Stabilizer code，我们使用不同的表示方法</p>
 <p>n物理比特，k逻辑比特，距离为d的stabilizer code我们记作$[[n,k,d]]$code。如果距离未知或不重要，可以记作$[[n,k]]$code</p>
 <p>已知的stabilizer例子：9比特码可以纠正单比特错误，其距离至少为3。在不可检测错误集中恰好存在3比特泡利算符$X_1X_2X_3$所以其距离恰好为三，记作$[[9,1,3]]$码。5比特码的距离也恰好为3，所以记作$[[5,1,3]]$码（5比特码是距离为3的最小量子码）；上述的这两种码用圆括号记作((9,2,3))和((5,2,3))码</p>
 <p>对于距离为2的码：可以检测一个错误或纠正一个擦除错误，最小的码是$[[4,2,2]]$码，他的生成元是XXXX和ZZZZ。任何单泡利算符都会与其中至少一个反对易，但是二泡利算符例如XXII与两者都对易，所以距离为2</p>
-
-<h3 id="sec-degeneracy">Degeneracy与Stabilizer Codes</h3>
+<h3 id="sec-5">Degeneracy与Stabilizer Codes</h3>
 <p>什么时候stabilizer code会简并（degenerate）？在证明不可检测类型中，我们其实算过了矩阵元$C_{ab}$：当$E^\dagger F\notin N(S)$时$C_{ab}=0$，当$E^\dagger F\in S$时$C_{ab}=1$，我们仅需检查$C_{ab}$是否满秩</p>
 <p>如果$E_1^\dagger E_2\in S$，则$E_1^\dagger F\in S\Leftrightarrow E_2^\dagger F\in S$，在这种情况下$C_{ab}$中对应$E_1$和$E_2$的行或列相同（这就是不想要的简并情况）</p>
 <p>如果$E_1^\dagger E_2\notin S$，对于$E_1^\dagger F$和$E_2^\dagger F$只有其中一个或都不在S中，也就是说如果把$E_1$，$E_2$所在的看作两行，这两行的同一列不能同时为1，因此得到下面命题</p>
 <p>命题：Stabilizer code S对于错误集$\mathcal{E}$是简并的当且仅当$\exists E_1,E_2\in\mathcal{E}$使得$E_1^\dagger E_2\in S$</p>
 <p>我们可以考虑距离来定义简并性，作为码空间属性，而不指代特定的错误集</p>
 <p>如果码用来检测错误而不是纠正错误，我们可以更明智的定义简并</p>
-<p>定义：Stabilizer code S具有距离d，是简并的当$\exists M\in S, M\neq I,~wt~M&lt;d$</p>
+<p>定义：Stabilizer code S具有距离d，是简并的当$\exists M\in S, M\neq I,~wt~M<d$</p>
 <p>这比一般的概念要略宽泛一些，一个距离为$2t+2$的stabilizer code，如果包含权重为2t+1的元素，就算作简并，但是在一般的non-stabilizer QECC中偶数距离没有定义简并性</p>
 <p>再回顾9比特码stabilizer，可以发现他也是简并的，因为它有许多权重为2的生成元但是码距为3.有的时候你不能单通过生成元来判定稳定器非退化，因为有可能乘积后的权重变小</p>
 <p>5比特码是非退化的，但是需要额外的证明</p>
-
-<h3 id="sec-syndrome">陪集和错误Syndromes</h3>
+<h3 id="sec-6">陪集和错误Syndromes</h3>
 <p>对于我们熟悉的9比特码而言，确定stabilizer的方法是通过思考我们想从error syndromes中测出什么（例如，我们想比对前两个比特是否一致，所以用XX，后面全是I），每个生成元对应着error syndrome的一部分。这也是很普遍的方法</p>
 <p>定义：S是一个具有生成元$\{M_1,...,M_r\}$的稳定器码，且$\ket{\psi}$是所有$N\in S$的本征向量（不一定本征值均为+1）$\ket{\psi}$的error syndrome是一个r比特长度的字符串。如果$\ket{\psi}$是$M_i$的+1本征向量则第i为为0，如果是-1本征向量则i位为1</p>
 <p>将任意codeword$\ket{\phi}$受泡利错误作用后得到的态$E\ket{\phi}$的error syndrome记作$\sigma(E): P_n\to\mathbb{Z}_2^r$</p>
@@ -316,7 +256,6 @@ img{max-width:100%;display:block;}
 <p>证明：$\Rightarrow$:如果E和F在同一个陪集中，那么存在$N\in N(S)$使得$F=EN$。令$M\in S$，则$c(F,M)=c(E,M)+c(N,M)$。由于N在N(S)中，所以c(N,M)=0，于是E和F的error syndrome一致</p>
 <p>$\Leftarrow$：令$N=E^\dagger F$，E与F的error syndrome一致说明c(N,M)=0，说明E与F在N(S)的同一陪集中。</p>
 <p>定理：S有n个物理比特和k个逻辑比特时$|N(S)|=4·2^{n+k}$</p>
-
 <h4>正规化子中的陪集</h4>
 <p>分析N(S)中S的陪集</p>
 <p>定理：令$N_1,N_2\in N(S)$，那么$N_1$和$N_2$在S的同一陪集中当且仅当$N_1\ket{\psi}=N_2\ket{\psi}$对所有的codewords$\ket{\psi}$均成立</p>
@@ -325,7 +264,7 @@ img{max-width:100%;display:block;}
 <p>定理：S是一个具有n个物理比特和k个逻辑比特的stabilizer，那么$N(S)/S\simeq P_k$</p>
 <p>商群N(S)/S可以看作逻辑泡利群，在编码后的比特上执行泡利操作</p>
 <p>观察S在$P_n$中的陪集，陪集的解释是逻辑操作$\bar{P}$与错误E的集合。E、F、G作为01，10，11对应的正则错误</p>
-<img class="note-img" src="assets/Pauli.png" alt="Pauli">
+<img class="note-img" src="assets/Pauli.png" alt="Pauli.png">
 <p>当我们对stabilizer解码时，做的就是这个表。对于每个error syndrome，指定一个特定的错误$E_s$满足$\sigma(E_s)=s$，假设实际发生错误$E_s$并进行更正。如果实际发生了错误$E'$，希望$E'$与$E_s$在S的同一个陪集中。如果不是则说明发生了逻辑错误（图中$\bar{X}\bar{Y}\bar{Z}$，也就是无法查清的错误）</p>
 <p>定理：如果S是非简并的stabilizer code，那么所有可更改错误的error syndrome是各异的</p>
 <p>如果S是简并码，那么E与F具有相同error syndrome当且仅当$\hat{E}^\dagger\hat{F}\in\hat{S}$</p>
@@ -333,16 +272,15 @@ img{max-width:100%;display:block;}
 <p>所以E和F拥有相同的syndrome当且仅当$\hat{E}^\dagger\hat{F}\in\hat{S}$，如果这件事发生了那么码是简并的</p>
 <p>通过这个定理，我们可以看出5比特码的距离为3且非退化。每个量子位上可以有三种泡利错误，所以5比特码可能发生的单比特错误有15种，再加上单位算符总共有16种情况。</p>
 <p>该码有4个生成元因此存在$2^4=16$个error syndrome，列出后可以发现这16对16是一一对应的，没有多余，所以5比特码被称为完美码</p>
-<p>在正规化子中选择S的陪集代表元非常有帮助，他对纠错本身没有直接解释，但是为逻辑泡利群提供了具体实现方式，在<strong>容错计算</strong>中非常有用。</p>
+<p>在正规化子中选择S的陪集代表元非常有帮助，他对纠错本身没有直接解释，但是为逻辑泡利群提供了具体实现方式，在**容错计算**中非常有用。</p>
 <p>我们可以为$\bar{X}_i$和$\bar{Z}_i$选取代表元，这里下表i是逻辑比特，从1取到k</p>
-<img class="note-img" src="assets/XXXZZ.png" alt="XXXZZ">
+<img class="note-img" src="assets/XXXZZ.png" alt="XXXZZ.png">
 <p>这是5比特码对应的代表元，相应的$\bar{Y}=i\overline{XZ}=YYYYY$</p>
-<img class="note-img" src="assets/IIZZ.png" alt="IIZZ">
+<img class="note-img" src="assets/IIZZ.png" alt="IIZZ.png">
 <p>这是4比特码，4逻辑泡利</p>
 <p>注意N(S)/S$\simeq P_k$所以我们选的代表元必须运算规则和Pk一致，例如$[\bar{X}_i,\bar{Z}_j]=\delta_{ij}\bar{X}_i\bar{Z}_i$、$[\bar{X}_i,\bar{X}_j]=\delta_{ij}\bar{X}_i\bar{X}_i$</p>
 <p>我们在做的是选择N(S)每个陪集中权重最低的错误作为代表元，以免低权重错误无法被正确修复</p>
-
-<h3 id="sec-mle">最大似然解码</h3>
+<h3 id="sec-7">最大似然解码</h3>
 <p>之前说的错误和纠正都是确定的，但是这一节我们加上概率</p>
 <p>假设n qubit的泡利信道中泡利算符P发生的概率为$p_P$</p>
 <p>给定一个stabilizer S，希望找到解码程序使得代码经过泡利信道时发生错误概率最小</p>
@@ -355,18 +293,17 @@ img{max-width:100%;display:block;}
 <p>不同的s之间没有相互作用。为了提高成功概率，我们需要明智的选择$Q_s$使得$p_{s,OK}$最大化。如果需要做到最精确我们必须严格计算概率和并选取最大的那个，但是这样计算量很大，所以我们在精确与性能之间找到平衡，降低计算成本时选择一个良好的近似解码器尽可能接近最优值</p>
 <p>这种最大似然解码器应与优化距离解码器对比，后者会选择包含最低权重泡利算符的陪集</p>
 <p>当每个量子比特错误概率很小时，特定低权重错误发生的概率通常会高于高权重错误（因为高权重相当于发生错误的概率p要乘更多个，所以变得更小）</p>
-
-<h3 id="sec-symplectic">二元辛表示</h3>
+<h3 id="sec-8">二元辛表示</h3>
 <p>$\hat{P}_n$的结构非常简单，它有$4^n$个元素，且是阿贝尔的，因此$\hat{P}_n\simeq \mathbb{Z}^{2n}_n$，后者的群运算通常写成加法。我们选择将$\hat{P}_n$的元素表示为两个n比特01向量，一个代表X分量一个代表Z分量</p>
 <p>定义：$\hat{P}_n$的二元辛表示是$\hat{P}_n$与$\mathbb{Z}_2^n\times\mathbb{Z}_2^n$之间的同构：$P\leftrightarrow v_P=(x_P|z_P)$，如果P作用在第i个qubit上是I或Z则对应的$x_P$为0，X或Y则为1；I或X $z_P$ 0，Y或Z $z_P$ 1，也就是</p>
-<p>$$
-\begin{aligned}
-I &amp;\longleftrightarrow (0|0) \\
-X &amp;\longleftrightarrow (1|0) \\
-Y &amp;\longleftrightarrow (1|1) \\
-Z &amp;\longleftrightarrow (0|1)
-\end{aligned}
-$$</p>
+<p>$$</p>
+<p>\begin{aligned}</p>
+<p>I &\longleftrightarrow (0|0) \\</p>
+<p>X &\longleftrightarrow (1|0) \\</p>
+<p>Y &\longleftrightarrow (1|1) \\</p>
+<p>Z &\longleftrightarrow (0|1)</p>
+<p>\end{aligned}</p>
+<p>$$</p>
 <p>$$X\otimes I\otimes Y\leftrightarrow (101|001)$$</p>
 <p>辛指的是对易性或反对易性</p>
 <p>定义：$\mathbb{Z}_2^n\times\mathbb{Z}_2^n$上的辛形式（或辛内积）定义为</p>
@@ -376,9 +313,10 @@ $$</p>
 <p>命题：对于$P,Q\in P_n$，有$v_P\odot v_Q=c(P,Q)$</p>
 <p>证明：对于单量子比特的情况，可以通过穷举法验证。对于多个量子比特，注意到 ⊙ 和 c(⋅,⋅) 都等于其单比特结果的奇偶校验和。因此，既然它们在单比特上相等，那么在n个比特上也就相等。</p>
 <p>结合辛形式与二元辛表示，可以恢复泡利的主要结构。我们可以根据当前最方便的需求，在两种表示法之间来回切换。在转换过程中唯一丢失的信息是算符的相位，因此在处理任何依赖相位的问题时必须保持谨慎。</p>
-<img class="note-img" src="assets/辛表示.png" alt="辛表示">
+<img class="note-img" src="assets/辛表示.png" alt="辛表示.png">
 <p>S是Pn的阿贝尔子群说明S中的所有向量构成一个辛内积为0的线性子空间</p>
 <p>对偶空间在下面有介绍</p>
+<img class="note-img" src="assets/10101.png" alt="10101.png">
 <p>5qubit的二元辛表示</p>
 <p>定义：V为$\mathbb{Z}_2^n\times\mathbb{Z}_2^n$的一个线性子空间，V关于⊙的对偶空间为$V^\perp=\{w\in\mathbb{Z}_2^n\times\mathbb{Z}_2^n|w\odot v=0,\forall v\in V\}$</p>
 <p>如果$V^\perp=V$那么称该子空间自对偶</p>
@@ -389,8 +327,7 @@ $$</p>
 <p>这个定理告诉我们全空间如何分为不同error syndrome的子空间</p>
 <p>命题：令 $\mathsf{S}$ 为一个生成元为 $\{M_i\}$ 的稳定子。那么对于任何错误伴随式 $s$，都存在一个泡利算符 $P \in \mathsf{P}_n$ 满足 $\sigma(P) = s$。</p>
 <p>也就是说，不仅正规化子 $\mathsf{N}(\mathsf{S})$ 之外的每个泡利算符都与一个错误伴随式相关联，而且每一个可能的错误伴随式都至少与某个泡利算符相关联。</p>
-
-<h3 id="sec-appendix">补充证明</h3>
+<h3 id="sec-9">补充证明</h3>
 <p>命题 3.2： $\mathsf{S} = \mathsf{S}(\mathcal{T}(\mathsf{S}))$</p>
 <p>定理 3.11： $\mathsf{N}(\mathsf{S})/\mathsf{S} \cong \mathsf{P}_k$</p>
 <p>关于 $\mathsf{N}(\mathsf{S})/\mathsf{S} \cong \mathsf{P}_k$ 的证明：</p>
@@ -411,37 +348,22 @@ $$</p>
 <p>如果 $M \in \mathsf{S}$，那么对于任何 $|\psi\rangle \in \mathcal{T}(\mathsf{S})$，显然有 $M|\psi\rangle = |\psi\rangle$，因此 $\mathsf{S} \subseteq \mathsf{S}(\mathcal{T}(\mathsf{S}))$。</p>
 <p>我们需要证明的是，如果 $N \notin \mathsf{S}$，那么 $N \notin \mathsf{S}(\mathcal{T}(\mathsf{S}))$。如果 $N \notin \mathsf{N}(\mathsf{S})$，那么$N|\psi\rangle$和某个 $M \in \mathsf{S}$具有不同的特征值，因此与码空间正交，这反过来意味着 $N \notin \mathsf{S}(\mathcal{T}(\mathsf{S}))$。</p>
 <p>如果 $\mathsf{S}$ 有 $n$ 个生成元，那么证明到此为止。</p>
-<p>否则，如果 $r &lt; n$，我们仍需证明：若 $N \in \mathsf{N}(\mathsf{S}) \setminus \mathsf{S}$，则存在某个 $|\psi\rangle \in \mathcal{T}(\mathsf{S})$ 使得 $N|\psi\rangle \neq |\psi\rangle$。根据引理 3.15，我们可以选择一个 $M \in \mathsf{N}(\mathsf{S}) \setminus \mathsf{S}$ 使得 $\{M, N\} = 0$。</p>
+<p>否则，如果 $r < n$，我们仍需证明：若 $N \in \mathsf{N}(\mathsf{S}) \setminus \mathsf{S}$，则存在某个 $|\psi\rangle \in \mathcal{T}(\mathsf{S})$ 使得 $N|\psi\rangle \neq |\psi\rangle$。根据引理 3.15，我们可以选择一个 $M \in \mathsf{N}(\mathsf{S}) \setminus \mathsf{S}$ 使得 $\{M, N\} = 0$。</p>
 <p>考虑由 $\mathsf{S}$ 加上 $M$ 作为新生成元所形成的修正稳定子 $\mathsf{S}'$。$\mathsf{S}'$ 拥有 $r + 1$ 个生成元，因此其码空间维数为 $2^{k-1}$。由于 $k \ge 1$，在 $\mathsf{S}'$ 中至少存在一个状态 $|\psi\rangle$（不考虑归一化）。$|\psi\rangle$ 被 $\mathsf{S}'$ 的所有元素固定，特别地，也被$\mathsf{S}\subset\mathsf{S}'$固定</p>
 <p>因此$|\psi\rangle \in \mathcal{T}(\mathsf{S})$，但是N与稳定子M反对称，说明$N\ket\psi$对M有-1特征值，垂直于$\ket{\psi}$，所以$N \notin \mathsf{S}(\mathcal{T}(\mathsf{S}))$，证毕。</p>
-
 <hr>
-<p class="footnote">[^1]: 量力/群论笔记-特例撒谎代数与群-so(3)的不可约表示-引理1.1：<a href="https://zhuanlan.zhihu.com/p/692020167" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/692020167</a></p>
-
+<p class="footnote">[^1]: 量力/群论笔记-特例撒谎代数与群-so(3)的不可约表示-引理1.1：https://zhuanlan.zhihu.com/p/692020167</p>
     </div>
   </article>
 </div>
-
 <script>
 (function(){
-  var tocLinks = document.querySelectorAll('.toc-list a');
-  var sections = [];
-  tocLinks.forEach(function(a){
-    var id = a.getAttribute('href').slice(1);
-    var el = document.getElementById(id);
-    if(el) sections.push({id:id, el:el, link:a});
-  });
-  function onScroll(){
-    var scrollY = window.scrollY + 100;
-    var current = sections[0];
-    for(var i=0;i<sections.length;i++){
-      if(sections[i].el.offsetTop <= scrollY) current = sections[i];
-    }
-    tocLinks.forEach(function(a){a.classList.remove('active');});
-    if(current) current.link.classList.add('active');
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 })();
 </script>
 </body>
