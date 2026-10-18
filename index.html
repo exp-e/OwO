@@ -484,13 +484,14 @@ img { max-width:100%; display:block; }
 .note-cat .count { font-size:11px; opacity:0.7; margin-left:4px; }
 
 /* ===== Notes: paginated horizontal card list ===== */
-.note-list { display:flex; flex-direction:column; gap:12px; flex:1; min-height:0; overflow:hidden; }
+/* 行数固定为「每页篇数」，最后一页只有一两篇时卡片大小不变，多余空间留白 */
+.note-list { display:grid; grid-auto-rows:minmax(0, 1fr); gap:12px; flex:1; min-height:0; overflow:hidden; }
 .note-card {
   display:flex; align-items:stretch; gap:0;
   background:rgba(255,255,255,0.55); border:1px solid var(--border-soft);
   border-radius:var(--radius-sm); overflow:hidden; cursor:pointer;
   transition:all .25s; backdrop-filter:blur(6px); text-decoration:none; color:inherit;
-  flex:1 1 0; min-height:0; container-type:size;
+  min-height:0; container-type:size;
 }
 .note-card:hover { transform:translateX(4px); box-shadow:0 8px 28px rgba(113,57,218,0.15); border-color:var(--border); }
 /* 预览封面统一为正方形（边长 = 卡片高度）；非正方形图片取上/左正方形区域 */
@@ -516,13 +517,13 @@ img { max-width:100%; display:block; }
 .note-empty i { font-size:28px; display:block; margin-bottom:10px; opacity:0.3; color:var(--grad-purple); }
 
 /* Notes page: fill exactly one screen, compact cards */
-#page-1 { align-items:stretch; }
+#page-1 { align-items:stretch; height:calc(100vh - 61px); }
 #page-1 .page-card { display:flex; flex-direction:column; padding:26px 42px 20px; }
 
 /* Notes: pagination */
 .note-pager {
   display:flex; align-items:center; justify-content:center; gap:6px;
-  margin-top:16px; flex-wrap:wrap;
+  margin-top:16px; flex-wrap:wrap; min-height:32px;
 }
 .note-pager button {
   min-width:32px; height:32px; padding:0 9px; border-radius:8px;
@@ -544,10 +545,10 @@ img { max-width:100%; display:block; }
   .note-card-body { padding:6px 18px; }
 }
 @media (max-width: 960px) {
-  #page-1 { align-items:center; }
+  #page-1 { align-items:center; height:auto; }
   #page-1 .page-card { padding:26px 20px; height:auto; }
-  .note-list { flex:none; overflow:visible; }
-  .note-card { flex:none; min-height:96px; container-type:normal; }
+  .note-list { display:flex; flex-direction:column; flex:none; overflow:visible; }
+  .note-card { flex:none; height:auto; min-height:96px; container-type:normal; }
   .note-card-cover { width:96px; height:96px; aspect-ratio:1/1; align-self:center; }
 }
 
@@ -594,7 +595,7 @@ img { max-width:100%; display:block; }
         <ul class="main-menu" id="mainMenu">
           <li><a href="#" data-page="0" class="active"><i class="fa fa-home"></i>首页</a></li>
           <li><a href="#" data-page="1"><i class="fa fa-pencil-alt"></i>笔记</a></li>
-          <li><a href="#" data-page="2"><i class="fa fa-lightbulb"></i>想法</a></li>
+          <li><a href="#" data-page="2"><i class="fa fa-mug-hot"></i>生活</a></li>
           <li><a href="#" data-page="3"><i class="fa fa-envelope"></i>联系</a></li>
         </ul>
       </nav>
@@ -615,7 +616,7 @@ img { max-width:100%; display:block; }
 <nav class="dot-nav" id="dotNav">
   <button data-page="0" class="active" title="首页"></button>
   <button data-page="1" title="笔记"></button>
-  <button data-page="2" title="想法"></button>
+  <button data-page="2" title="生活"></button>
   <button data-page="3" title="联系"></button>
 </nav>
 
@@ -882,20 +883,28 @@ img { max-width:100%; display:block; }
     </div>
   </div>
 
-  <!-- 2 · Thoughts -->
+  <!-- 2 · Life -->
   <div class="page" id="page-2">
     <div class="page-card">
       <div class="sec-header">
         <h2 class="sec-title">
           <span class="sec-num">02</span>
           <svg class="qubit-icon" style="color:var(--accent);"><use href="#qubit-orbit" xlink:href="#qubit-orbit"/></svg>
-          想法
+          生活
         </h2>
-        <span class="sec-sub">Fragmentary Thoughts</span>
+        <span class="sec-sub">Life &amp; Hobbies</span>
       </div>
-      <div class="section-empty">
-        <i class="fa fa-lightbulb"></i>
-        <p>随想陆续整理中，敬请期待。</p>
+      <div class="note-cats" id="lifeCats">
+        <button class="note-cat active" data-cat="all">全部<span class="count">0</span></button>
+        <button class="note-cat" data-cat="recipe">菜谱<span class="count">0</span></button>
+        <button class="note-cat" data-cat="art">绘画<span class="count">0</span></button>
+        <button class="note-cat" data-cat="photo">摄影<span class="count">0</span></button>
+        <button class="note-cat" data-cat="match">比赛<span class="count">0</span></button>
+      </div>
+      <div class="note-list" id="lifeList"></div>
+      <div class="section-empty" id="lifeEmpty">
+        <i class="fa fa-seedling"></i>
+        <p>生活随记陆续整理中，敬请期待。</p>
       </div>
     </div>
     <div class="scroll-hint" data-page="3">
@@ -996,7 +1005,7 @@ img { max-width:100%; display:block; }
   function applyHash(instant) {
     var h = (location.hash || '').slice(1);
     if (h === 'notes')         goTo(1, instant);
-    else if (h === 'thoughts') goTo(2, instant);
+    else if (h === 'life')     goTo(2, instant);
     else if (h === 'contact')  goTo(3, instant);
     else if (h === 'home')     goTo(0, instant);
   }
@@ -1079,7 +1088,7 @@ img { max-width:100%; display:block; }
   /* ===== Notes: category filter + pagination (one page = one screen) ===== */
   var PER_PAGE_MIN = 3;
   var PER_PAGE_MAX = 8;
-  var noteCards = Array.from(document.querySelectorAll('.note-card'));
+  var noteCards = Array.from(document.querySelectorAll('#noteList .note-card'));
   var notePager = document.getElementById('notePager');
   var noteListEl = document.getElementById('noteList');
   var curCat = 'all';
@@ -1111,6 +1120,13 @@ img { max-width:100%; display:block; }
     if (curPage < 0) curPage = 0;
     var start = curPage * per;
     var end   = start + per;
+
+    // 每页行数固定：最后一页即使只有一两篇，卡片大小也与前面一致，多余空间留白
+    if (noteListEl && !isMobileLayout()) {
+      noteListEl.style.gridTemplateRows = 'repeat(' + per + ', minmax(0, 1fr))';
+    } else if (noteListEl) {
+      noteListEl.style.removeProperty('grid-template-rows');
+    }
 
     noteCards.forEach(function (c) { c.style.display = 'none'; });
     list.forEach(function (c, i) {
@@ -1146,9 +1162,9 @@ img { max-width:100%; display:block; }
     notePager.appendChild(next);
   }
 
-  document.querySelectorAll('.note-cat').forEach(function (btn) {
+  document.querySelectorAll('#noteCats .note-cat').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      document.querySelectorAll('.note-cat').forEach(function (b) { b.classList.remove('active'); });
+      document.querySelectorAll('#noteCats .note-cat').forEach(function (b) { b.classList.remove('active'); });
       this.classList.add('active');
       curCat  = this.getAttribute('data-cat');
       curPage = 0;
@@ -1162,15 +1178,74 @@ img { max-width:100%; display:block; }
     revealTimer = setTimeout(renderNotes, 180);
   });
 
+  /* ===== Life: category tabs (全部 / 菜谱 / 绘画 / 摄影 / 比赛) ===== */
+  var lifeCards = Array.from(document.querySelectorAll('#lifeList .note-card'));
+  var lifeCats  = Array.prototype.slice.call(document.querySelectorAll('#lifeCats .note-cat'));
+  var lifeEmpty = document.getElementById('lifeEmpty');
+  var LIFE_EMPTY_TEXT = {
+    all:    '生活随记陆续整理中，敬请期待。',
+    recipe: '菜谱整理中，敬请期待。',
+    art:    '绘画作品整理中，敬请期待。',
+    photo:  '摄影作品整理中，敬请期待。',
+    match:  '比赛记录整理中，敬请期待。'
+  };
+
+  function renderLife() {
+    var active = document.querySelector('#lifeCats .note-cat.active');
+    var cat = active ? active.getAttribute('data-cat') : 'all';
+    var shown = 0;
+    lifeCards.forEach(function (c) {
+      var ok = (cat === 'all' || c.getAttribute('data-cat') === cat);
+      c.style.display = ok ? 'flex' : 'none';
+      if (ok) shown++;
+    });
+    if (lifeEmpty) {
+      lifeEmpty.style.display = shown ? 'none' : '';
+      var p = lifeEmpty.querySelector('p');
+      if (p) p.textContent = LIFE_EMPTY_TEXT[cat] || LIFE_EMPTY_TEXT.all;
+    }
+  }
+
+  lifeCats.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      lifeCats.forEach(function (b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      renderLife();
+    });
+  });
+
+  (function fillLifeCounts() {
+    var counts = { all: lifeCards.length };
+    lifeCards.forEach(function (c) {
+      var k = c.getAttribute('data-cat');
+      counts[k] = (counts[k] || 0) + 1;
+    });
+    lifeCats.forEach(function (b) {
+      var span = b.querySelector('.count');
+      if (span) span.textContent = counts[b.getAttribute('data-cat')] || 0;
+    });
+  }());
+  renderLife();
+
   /* ===== Notes: full-text search (searches note bodies) ===== */
   var searchInput   = document.getElementById('searchInput');
   var searchResults = document.getElementById('searchResults');
   var searchBox     = document.getElementById('searchBox');
   var searchClear   = document.getElementById('searchClear');
   var searchIndex   = (window.NOTE_INDEX || []).map(function (n) {
-    return { raw: n, hay: (n.t + ' ' + (n.x || '') + ' ' + (n.b || '')).toLowerCase() };
+    var title = normText(n.t);
+    return {
+      raw: n,
+      title: title,
+      hay: title + ' ' + normText(n.x || '') + ' ' + normText(n.b || '') + ' ' + normText(n.k || '')
+    };
   });
   var searchActive = -1;
+
+  // 归一化：忽略大小写、连字符/下划线/斜杠差异，便于按标题（含英文）搜索
+  function normText(s) {
+    return String(s).toLowerCase().replace(/[-_/\\.·]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
 
   function escHtml(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
@@ -1207,17 +1282,20 @@ img { max-width:100%; display:block; }
   function runSearch() {
     if (!searchInput) return;
     var raw = searchInput.value;
-    var q = raw.trim().toLowerCase();
+    var q = normText(raw);
     searchBox.classList.toggle('has-value', raw.length > 0);
     if (!q) { searchResults.innerHTML = ''; closeSearch(); return; }
 
     var hits = [];
     for (var i = 0; i < searchIndex.length; i++) {
       if (searchIndex[i].hay.indexOf(q) >= 0) {
-        hits.push({ n: searchIndex[i].raw, title: searchIndex[i].raw.t.toLowerCase().indexOf(q) >= 0 });
+        var t = searchIndex[i].title;
+        // 标题命中优先：完全相等 > 开头 > 包含
+        var score = t === q ? 3 : (t.indexOf(q) === 0 ? 2 : (t.indexOf(q) >= 0 ? 1 : 0));
+        hits.push({ n: searchIndex[i].raw, score: score });
       }
     }
-    hits.sort(function (a, b) { return (b.title ? 1 : 0) - (a.title ? 1 : 0); });
+    hits.sort(function (a, b) { return b.score - a.score; });
 
     searchResults.innerHTML = '';
     if (!hits.length) {
@@ -1233,13 +1311,14 @@ img { max-width:100%; display:block; }
     hint.textContent = '共 ' + hits.length + ' 篇笔记 · 回车打开第一篇';
     searchResults.appendChild(hint);
 
+    var qHi = raw.trim().toLowerCase();
     hits.slice(0, 12).forEach(function (h) {
       var a = document.createElement('a');
       a.className = 'search-item';
       a.href = h.n.u;
       a.innerHTML = '<div class="search-item-title"><span class="search-name">' +
-        searchTitle(h.n, q) + '</span><span class="search-cat">' + escHtml(h.n.c) + '</span></div>' +
-        '<div class="search-item-snippet">' + searchSnippet(h.n, q) + '</div>';
+        searchTitle(h.n, qHi) + '</span><span class="search-cat">' + escHtml(h.n.c) + '</span></div>' +
+        '<div class="search-item-snippet">' + searchSnippet(h.n, qHi) + '</div>';
       searchResults.appendChild(a);
     });
     searchResults.classList.add('open');
