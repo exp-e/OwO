@@ -3,33 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f4f1ec">
-<title>笔记与思考 · 物理研究者主页</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%236b7f8e'/%3E%3Ctext x='32' y='45' font-size='30' font-family='Georgia,serif' text-anchor='middle' fill='white'%3E%CF%86%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#0f1117">
+<title>王凌云 · 物理学研究者</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232563eb'/%3E%3Ctext x='32' y='45' font-size='30' font-family='Georgia,serif' text-anchor='middle' fill='white'%3E%CF%86%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
 <style>
-/* ========== 莫兰迪配色 Token ========== */
+/* ========== Design Tokens ========== */
 :root {
-  --bg: #f4f1ec;          /* 暖米白背景 */
-  --card: #ffffff;        /* 卡片纯白 */
-  --card-soft: #faf8f5;   /* 次级卡片 */
-  --text: #3d3d3d;        /* 主文字 */
-  --text-soft: #6b6b6b;   /* 次级文字 */
-  --muted: #9a958e;       /* 弱化文字 */
-  --accent: #6b7f8e;      /* 莫兰迪灰蓝 */
-  --accent-deep: #556877; /* 深灰蓝 */
-  --accent-soft: #e4e8ec; /* 灰蓝浅底 */
-  --sage: #8a9a8b;        /* 莫兰迪灰绿（点缀） */
-  --clay: #b8a0a0;        /* 莫兰迪灰粉（点缀） */
-  --sand: #c9bfa8;        /* 莫兰迪沙色（点缀） */
-  --border: #e6e2dc;      /* 边框 */
-  --border-soft: #eeebe5;
-  --font-serif: "Noto Serif SC", Georgia, "Songti SC", "SimSun", serif;
-  --font-sans: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --max-w: 980px;
-  --sidebar-w: 240px;
+  --bg: #0f1117;
+  --bg2: #161b27;
+  --card: #1a2033;
+  --card-hover: #1f2740;
+  --border: rgba(99,117,168,0.18);
+  --border-soft: rgba(99,117,168,0.10);
+  --text: #e8eaf6;
+  --text-soft: #9aa3c2;
+  --muted: #5a6490;
+  --accent: #4f80ff;
+  --accent-deep: #3366ee;
+  --accent-glow: rgba(79,128,255,0.15);
+  --accent-soft: rgba(79,128,255,0.08);
+  --green: #34d399;
+  --green-soft: rgba(52,211,153,0.10);
+  --font-serif: "Noto Serif SC", Georgia, "Songti SC", serif;
+  --font-sans: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --max-w: 1160px;
+  --sidebar-w: 280px;
+  --radius: 12px;
+  --radius-sm: 6px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,25 +42,37 @@ body {
   font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
-  line-height: 1.8;
+  line-height: 1.75;
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
-a { color: var(--accent); text-decoration: none; transition: color .25s; }
-a:hover { color: var(--accent-deep); }
+a { color: var(--accent); text-decoration: none; transition: color .2s; }
+a:hover { color: #7da0ff; }
 img { max-width: 100%; display: block; }
 
-/* ========== 顶部细头带 ========== */
+/* ========== Background Decoration ========== */
+body::before {
+  content: "";
+  position: fixed;
+  top: -200px; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 600px;
+  background: radial-gradient(ellipse at center, rgba(79,128,255,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========== Top stripe ========== */
 .headband {
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--sage), var(--sand));
+  height: 3px;
+  background: linear-gradient(90deg, #4f80ff, #34d399, #a78bfa);
 }
 
 /* ========== Header ========== */
 .header {
-  background: rgba(244, 241, 236, 0.92);
-  backdrop-filter: blur(8px);
+  background: rgba(15,17,23,0.88);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -65,11 +81,11 @@ img { max-width: 100%; display: block; }
 .header-inner {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 28px;
+  padding: 0 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 68px;
+  height: 64px;
 }
 .brand {
   display: flex;
@@ -77,14 +93,14 @@ img { max-width: 100%; display: block; }
   gap: 10px;
 }
 .brand-symbol {
-  font-family: var(--font-serif);
-  font-size: 22px;
+  font-size: 20px;
   color: var(--accent);
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -1px;
 }
 .brand-name {
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--text);
   letter-spacing: 1px;
@@ -96,26 +112,25 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
 }
 
-/* 导航 */
 .main-menu {
   list-style: none;
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
 .main-menu a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
+  padding: 7px 14px;
   font-size: 13.5px;
   color: var(--text-soft);
-  border-radius: 2px;
-  transition: all .25s;
+  border-radius: var(--radius-sm);
+  transition: all .2s;
   font-weight: 400;
 }
 .main-menu a:hover,
 .main-menu a.active {
-  color: var(--accent-deep);
+  color: var(--accent);
   background: var(--accent-soft);
 }
 .main-menu a i { font-size: 12px; }
@@ -136,206 +151,289 @@ img { max-width: 100%; display: block; }
   transition: .3s;
 }
 
-/* ========== 主体布局 ========== */
+/* ========== Main Layout ========== */
 .main {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 40px 28px 60px;
+  padding: 44px 36px 72px;
+  position: relative;
+  z-index: 1;
 }
 .main-inner {
   display: grid;
   grid-template-columns: var(--sidebar-w) 1fr;
-  gap: 36px;
+  gap: 40px;
   align-items: start;
 }
 
-/* ========== 侧边栏 ========== */
+/* ========== Sidebar ========== */
 .sidebar {
   position: sticky;
-  top: 100px;
+  top: 88px;
 }
 .sidebar-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 30px 24px;
+  border-radius: var(--radius);
+  padding: 32px 26px;
   text-align: center;
 }
 .author-avatar {
-  width: 88px;
-  height: 88px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
-  margin: 0 auto 18px;
-  border: 3px solid var(--accent-soft);
+  margin: 0 auto 20px;
+  border: 2px solid var(--border);
   object-fit: cover;
-  background: var(--card-soft);
+  background: var(--card-hover);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 .author-name {
   font-family: var(--font-serif);
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 21px;
+  font-weight: 700;
   color: var(--text);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
+  letter-spacing: 0.5px;
+}
+.author-name-en {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 }
 .author-role {
-  font-size: 12.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
   color: var(--accent);
-  letter-spacing: 1px;
-  margin-bottom: 14px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(79,128,255,0.2);
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
 }
 .author-bio {
   font-size: 13px;
   color: var(--text-soft);
-  line-height: 1.7;
-  margin-bottom: 20px;
+  line-height: 1.75;
+  margin-bottom: 22px;
+  text-align: left;
+}
+.sidebar-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 18px 0;
 }
 .research-tags {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 6px;
-  margin-bottom: 20px;
-  padding: 16px 0;
-  border-top: 1px solid var(--border-soft);
-  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 22px;
 }
 .research-tag {
   font-size: 11.5px;
   padding: 3px 10px;
-  background: var(--card-soft);
+  background: var(--bg2);
   color: var(--text-soft);
-  border-radius: 2px;
-  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  border: 1px solid var(--border);
 }
 .social-links {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 }
 .social-links a {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background: var(--card-soft);
+  border-radius: 8px;
+  background: var(--bg2);
   color: var(--text-soft);
-  font-size: 14px;
-  transition: all .25s;
-  border: 1px solid var(--border-soft);
+  font-size: 15px;
+  transition: all .2s;
+  border: 1px solid var(--border);
 }
 .social-links a:hover {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79,128,255,0.3);
 }
 
-/* ========== 内容区 ========== */
+/* ========== Content Area ========== */
 .content-wrap { min-width: 0; }
 
 .section {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 38px 40px;
+  border-radius: var(--radius);
+  padding: 40px 44px;
   margin-bottom: 28px;
+  transition: border-color .3s;
 }
 .section:last-child { margin-bottom: 0; }
+.section:hover { border-color: rgba(79,128,255,0.25); }
 
 .section-header {
-  margin-bottom: 28px;
-  padding-bottom: 18px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
 }
+.section-title-wrap {}
 .section-title {
   font-family: var(--font-serif);
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 700;
   color: var(--text);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 .section-title .title-num {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--accent);
   font-family: var(--font-sans);
-  font-weight: 400;
-  letter-spacing: 1px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(79,128,255,0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
 }
 .section-sub {
   font-size: 12px;
   color: var(--muted);
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-top: 6px;
-  margin-left: 34px;
+  margin-top: 5px;
 }
 
 /* ========== Hero ========== */
 .hero {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 50px 44px;
+  border-radius: var(--radius);
+  padding: 56px 52px;
   margin-bottom: 28px;
   position: relative;
   overflow: hidden;
 }
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(79,128,255,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
 .hero::after {
   content: "";
   position: absolute;
-  top: 0; right: 0;
-  width: 180px; height: 180px;
-  background: radial-gradient(circle at top right, var(--accent-soft), transparent 70%);
+  bottom: -40px; left: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(52,211,153,0.08) 0%, transparent 70%);
   pointer-events: none;
 }
-.hero-eyebrow {
-  font-size: 12px;
-  color: var(--accent);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  font-weight: 400;
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--green);
+  background: var(--green-soft);
+  border: 1px solid rgba(52,211,153,0.2);
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 22px;
+  letter-spacing: 0.5px;
+}
+.hero-badge::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
 }
 .hero-title {
   font-family: var(--font-serif);
-  font-size: 34px;
-  font-weight: 600;
+  font-size: 38px;
+  font-weight: 700;
   color: var(--text);
-  line-height: 1.4;
-  margin-bottom: 18px;
+  line-height: 1.35;
+  margin-bottom: 20px;
+  position: relative;
 }
 .hero-title em {
   font-style: normal;
-  color: var(--accent);
-  border-bottom: 2px solid var(--accent-soft);
-  padding-bottom: 2px;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .hero-text {
-  font-size: 15px;
+  font-size: 15.5px;
   color: var(--text-soft);
-  max-width: 560px;
+  max-width: 580px;
   line-height: 1.9;
-  margin-bottom: 26px;
+  margin-bottom: 30px;
+  position: relative;
 }
-.hero-meta {
+.hero-cta {
   display: flex;
-  gap: 28px;
+  gap: 14px;
   flex-wrap: wrap;
+  position: relative;
 }
-.hero-meta-item {
-  font-size: 12.5px;
-  color: var(--muted);
-  display: flex;
+.btn-primary {
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  padding: 11px 22px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: all .2s;
+  letter-spacing: 0.3px;
 }
-.hero-meta-item i { color: var(--accent); font-size: 12px; }
+.btn-primary:hover {
+  background: var(--accent-deep);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(79,128,255,0.35);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  background: transparent;
+  color: var(--text-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 400;
+  transition: all .2s;
+}
+.btn-secondary:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
 
-/* ========== 关于 ========== */
+/* ========== About ========== */
 .about-text p {
   margin-bottom: 16px;
   color: var(--text-soft);
@@ -350,180 +448,140 @@ img { max-width: 100%; display: block; }
 .about-quote {
   margin-top: 24px;
   padding: 18px 22px;
-  background: var(--card-soft);
+  background: var(--bg2);
   border-left: 3px solid var(--accent);
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-family: var(--font-serif);
   font-size: 14px;
   color: var(--text-soft);
   font-style: italic;
-  line-height: 1.8;
-}
-
-/* ========== 笔记列表 ========== */
-.note-list { display: flex; flex-direction: column; gap: 0; }
-.note-item {
-  padding: 22px 0;
-  border-bottom: 1px solid var(--border-soft);
-  transition: padding-left .25s;
-  cursor: pointer;
-}
-.note-item:last-child { border-bottom: none; }
-.note-item:hover { padding-left: 8px; }
-.note-item:hover .note-title { color: var(--accent-deep); }
-.note-top {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-.note-date {
-  font-size: 12px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.5px;
-  flex-shrink: 0;
-}
-.note-cat {
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 2px;
-  background: var(--accent-soft);
-  color: var(--accent-deep);
-  letter-spacing: 0.5px;
-}
-.note-title {
-  font-family: var(--font-serif);
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 8px;
-  transition: color .25s;
-}
-.note-excerpt {
-  font-size: 13.5px;
-  color: var(--text-soft);
-  line-height: 1.8;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.note-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12.5px;
-  color: var(--accent);
-  margin-top: 10px;
-}
-.note-more i { font-size: 10px; transition: transform .25s; }
-.note-item:hover .note-more i { transform: translateX(3px); }
-
-/* ========== 想法（随感） ========== */
-.thoughts-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-}
-.thought-card {
-  background: var(--card-soft);
-  border: 1px solid var(--border-soft);
-  border-radius: 4px;
-  padding: 24px 22px;
-  position: relative;
-  transition: transform .25s, box-shadow .25s;
-}
-.thought-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(107, 127, 142, 0.08);
-}
-.thought-card::before {
-  content: "\201C";
-  position: absolute;
-  top: 8px; left: 16px;
-  font-family: var(--font-serif);
-  font-size: 42px;
-  color: var(--accent-soft);
-  line-height: 1;
-}
-.thought-text {
-  font-family: var(--font-serif);
-  font-size: 14px;
-  color: var(--text-soft);
   line-height: 1.85;
-  margin-bottom: 14px;
-  padding-top: 14px;
-  position: relative;
-  z-index: 1;
-}
-.thought-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 12px;
-  border-top: 1px dashed var(--border);
-}
-.thought-date {
-  font-size: 11.5px;
-  color: var(--muted);
-}
-.thought-tag {
-  font-size: 11px;
-  color: var(--accent);
-  background: var(--accent-soft);
-  padding: 2px 8px;
-  border-radius: 2px;
 }
 
-/* ========== 联系 ========== */
-.contact-simple {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  text-align: center;
-}
-.contact-item {
+/* ========== Publications ========== */
+.pub-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  gap: 0;
 }
-.contact-item i {
-  font-size: 20px;
-  color: var(--accent);
-  width: 44px;
-  height: 44px;
-  display: inline-flex;
+.pub-item {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  transition: all .2s;
+}
+.pub-item:last-child { border-bottom: none; padding-bottom: 0; }
+.pub-index {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(79,128,255,0.2);
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--accent-soft);
-  border-radius: 50%;
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 2px;
 }
+.pub-body { flex: 1; min-width: 0; }
+.pub-title {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.pub-meta {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+.pub-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pub-tag {
+  font-size: 11.5px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.pub-tag.journal {
+  background: rgba(52,211,153,0.12);
+  color: var(--green);
+  border: 1px solid rgba(52,211,153,0.2);
+}
+.pub-tag.arxiv {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid rgba(79,128,255,0.2);
+}
+.pub-tag.supervised {
+  background: rgba(167,139,250,0.10);
+  color: #a78bfa;
+  border: 1px solid rgba(167,139,250,0.2);
+}
+
+/* ========== Contact ========== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+.contact-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all .2s;
+  text-decoration: none;
+  color: inherit;
+}
+.contact-card:hover {
+  border-color: var(--accent);
+  background: var(--card-hover);
+  color: inherit;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(79,128,255,0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.contact-info {}
 .contact-label {
   font-size: 11px;
   color: var(--muted);
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  margin-bottom: 2px;
 }
 .contact-value {
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--text);
   font-weight: 400;
 }
-.contact-note {
-  text-align: center;
-  margin-top: 28px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border-soft);
-  font-size: 13px;
-  color: var(--muted);
-  font-family: var(--font-serif);
-  font-style: italic;
-}
 
-/* ========== 页脚 ========== */
+/* ========== Footer ========== */
 .footer {
   text-align: center;
   padding: 32px 20px;
@@ -531,22 +589,24 @@ img { max-width: 100%; display: block; }
   color: var(--muted);
   border-top: 1px solid var(--border);
   margin-top: 20px;
+  position: relative;
+  z-index: 1;
 }
 .footer .sep { margin: 0 10px; color: var(--border); }
 
-/* ========== 回到顶部 ========== */
+/* ========== Back to top ========== */
 .back-to-top {
   position: fixed;
   right: 28px;
   bottom: 32px;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   background: var(--card);
   color: var(--accent);
   border: 1px solid var(--border);
   border-radius: 50%;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -554,10 +614,16 @@ img { max-width: 100%; display: block; }
   visibility: hidden;
   transition: all .3s;
   z-index: 90;
-  box-shadow: 0 2px 12px rgba(0,0,0,.05);
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
 }
 .back-to-top.visible { opacity: 1; visibility: visible; }
-.back-to-top:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.back-to-top:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(79,128,255,0.4);
+}
 
 /* ========== Toast ========== */
 .toast {
@@ -565,36 +631,37 @@ img { max-width: 100%; display: block; }
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: var(--accent-deep);
-  color: #fff;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
   padding: 11px 22px;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 13px;
   opacity: 0;
   pointer-events: none;
   transition: all .3s;
   z-index: 999;
-  font-family: var(--font-sans);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ========== 滚动揭示 ========== */
+/* ========== Scroll Reveal ========== */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(20px);
   transition: opacity .7s ease, transform .7s ease;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ========== 响应式 ========== */
-@media (max-width: 860px) {
-  .main-inner { grid-template-columns: 1fr; gap: 24px; }
+/* ========== Responsive ========== */
+@media (max-width: 920px) {
+  .main-inner { grid-template-columns: 1fr; gap: 28px; }
   .sidebar { position: static; }
   .nav-toggle { display: block; }
   .main-menu {
     display: none;
     position: absolute;
-    top: 68px; left: 0; right: 0;
+    top: 64px; left: 0; right: 0;
     background: var(--bg);
     flex-direction: column;
     padding: 12px 28px;
@@ -604,18 +671,17 @@ img { max-width: 100%; display: block; }
   .main-menu.open { display: flex; }
   .main-menu a { padding: 12px 0; border-bottom: 1px solid var(--border-soft); }
   .main-menu a:last-child { border-bottom: none; }
-  .thoughts-grid { grid-template-columns: 1fr; }
-  .hero { padding: 36px 26px; }
-  .hero-title { font-size: 26px; }
-  .section { padding: 28px 24px; }
+  .hero { padding: 40px 32px; }
+  .hero-title { font-size: 28px; }
+  .section { padding: 30px 26px; }
   .header-inner { padding: 0 20px; }
-  .main { padding: 28px 20px 48px; }
+  .main { padding: 28px 20px 56px; }
 }
-@media (max-width: 480px) {
+@media (max-width: 540px) {
   .brand-tag { display: none; }
-  .hero-title { font-size: 22px; }
-  .hero-meta { gap: 16px; }
-  .contact-simple { gap: 24px; }
+  .hero-title { font-size: 24px; }
+  .hero { padding: 32px 22px; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
@@ -627,18 +693,19 @@ img { max-width: 100%; display: block; }
 <header class="header">
   <div class="header-inner">
     <a href="#top" class="brand">
-      <span class="brand-symbol">&phi;</span>
-      <span class="brand-name">观物笔记</span>
-      <span class="brand-tag">Physics &middot; Notes</span>
+      <span class="brand-symbol">φ</span>
+      <span class="brand-name">王凌云</span>
+      <span class="brand-tag">Physics &middot; Research</span>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="切换导航">
       <span></span><span></span><span></span>
     </button>
     <nav>
       <ul class="main-menu" id="mainMenu">
-        <li><a href="#hero" class="active"><i class="fa fa-feather"></i>首页</a></li>
+        <li><a href="#hero" class="active"><i class="fa fa-home"></i>首页</a></li>
         <li><a href="#about"><i class="fa fa-user"></i>关于</a></li>
-        <li><a href="#notes"><i class="fa fa-book-open"></i>笔记</a></li>
+        <li><a href="#publications"><i class="fa fa-book-open"></i>论文</a></li>
+        <li><a href="#notes"><i class="fa fa-pencil-alt"></i>笔记</a></li>
         <li><a href="#thoughts"><i class="fa fa-lightbulb"></i>想法</a></li>
         <li><a href="#contact"><i class="fa fa-envelope"></i>联系</a></li>
       </ul>
@@ -646,217 +713,193 @@ img { max-width: 100%; display: block; }
   </div>
 </header>
 
-<!-- ========== 主体 ========== -->
+<!-- ========== Main ========== -->
 <main class="main" id="top">
   <div class="main-inner">
 
-    <!-- 侧边栏 -->
+    <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-card">
-        <img src="assets/avatar.gif" alt="头像" class="author-avatar">
-        <div class="author-name">你的名字</div>
-        <div class="author-role">物理学研究者</div>
-        <p class="author-bio">在量子与经典之间徘徊，记录推演过程中的困惑与顿悟。</p>
+        <img src="assets/avatar.gif" alt="王凌云" class="author-avatar">
+        <div class="author-name">王凌云</div>
+        <div class="author-name-en">Lingyun Wang</div>
+        <div class="author-role"><i class="fa fa-atom"></i>物理学研究者</div>
+        <p class="author-bio">本科就读于武汉大学物理科学与技术学院，研究兴趣涵盖量子场论、轴子宇宙学与振幅方法。</p>
+        <div class="sidebar-divider"></div>
         <div class="research-tags">
-          <span class="research-tag">凝聚态物理</span>
-          <span class="research-tag">量子力学</span>
-          <span class="research-tag">统计物理</span>
-          <span class="research-tag">科学哲学</span>
+          <span class="research-tag">量子场论</span>
+          <span class="research-tag">轴子宇宙学</span>
+          <span class="research-tag">振幅方法</span>
+          <span class="research-tag">高能理论</span>
         </div>
         <div class="social-links">
           <a href="https://github.com/exp-e" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
-          <a href="mailto:your@email.com" title="邮箱"><i class="fa fa-envelope"></i></a>
-          <a href="#" title="知乎"><i class="fab fa-zhihu"></i></a>
-          <a href="#" title="RSS"><i class="fa fa-rss"></i></a>
+          <a href="mailto:lyunwang@whu.edu.cn" title="邮箱"><i class="fa fa-envelope"></i></a>
+          <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" title="知乎"><i class="fab fa-zhihu"></i></a>
+          <a href="https://arxiv.org/search/?searchtype=author&query=Lingyun+Wang" target="_blank" rel="noopener" title="arXiv"><i class="fa fa-flask"></i></a>
         </div>
       </div>
     </aside>
 
-    <!-- 内容区 -->
+    <!-- Content -->
     <div class="content-wrap">
 
       <!-- Hero -->
       <section class="hero reveal" id="hero">
-        <div class="hero-eyebrow">Notes &amp; Reflections</div>
-        <h1 class="hero-title">在公式与现象之间，<br>记录那些<em>尚未成形</em>的思考。</h1>
-        <p class="hero-text">这里是一位物理研究者的私人角落。不追求完整的论证，只忠实于思考的痕迹——有时是一段推导笔记，有时是深夜读完论文后的随感，有时只是对某个概念的重新理解。</p>
-        <div class="hero-meta">
-          <span class="hero-meta-item"><i class="fa fa-book"></i> 24 篇笔记</span>
-          <span class="hero-meta-item"><i class="fa fa-lightbulb"></i> 36 条想法</span>
-          <span class="hero-meta-item"><i class="fa fa-clock"></i> 更新于 2025.10</span>
+        <div class="hero-badge">武汉大学 · 物理科学与技术学院</div>
+        <h1 class="hero-title">王凌云<br><em>物理学研究者</em></h1>
+        <p class="hero-text">
+          本科就读于武汉大学，专注于高能理论物理，研究方向包括轴子宇宙学的热场论机制以及量子场论中的振幅方法。在《物理快报 B》（Physics Letters B）发表研究论文，目前正参与多个前沿课题。
+        </p>
+        <div class="hero-cta">
+          <a href="#publications" class="btn-primary"><i class="fa fa-book"></i>查看论文</a>
+          <a href="mailto:lyunwang@whu.edu.cn" class="btn-secondary"><i class="fa fa-envelope"></i>发送邮件</a>
+          <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" class="btn-secondary"><i class="fab fa-zhihu"></i>知乎主页</a>
         </div>
       </section>
 
-      <!-- 关于 -->
+      <!-- About -->
       <section class="section reveal" id="about">
         <div class="section-header">
-          <h2 class="section-title"><span class="title-num">01</span>关于</h2>
-          <div class="section-sub">About Me</div>
+          <div class="section-title-wrap">
+            <h2 class="section-title"><span class="title-num">01</span>关于我</h2>
+            <div class="section-sub">About Me</div>
+          </div>
         </div>
         <div class="about-text">
-          <p>我是一名<strong>物理学研究者</strong>，主要兴趣在凝聚态理论与量子多体问题。日常工作是在哈密顿量与配分函数之间寻找秩序，偶尔也会被科学哲学问题吸引注意力。</p>
-          <p>建立这个页面的初衷很简单：把散落在笔记本、草稿纸和脑海里的想法整理出来。有些是研读论文时的批注，有些是教学相长后的重新理解，有些则只是对"为什么世界是这样的"这一问题的持续追问。</p>
-          <p>我相信<strong>写作是思考的延伸</strong>。很多模糊的直觉只有落在纸上才会暴露其漏洞，而很多看似无关的问题，在记录的过程中会悄然连缀成线。</p>
-          <div class="about-quote">"物理学不告诉我们世界是什么，而是告诉我们关于世界我们能谈论什么。" —— 尼尔斯·玻尔</div>
+          <p>我是<strong>王凌云</strong>，2022 年入学于<strong>武汉大学物理科学与技术学院</strong>，攻读物理学本科学位（预计 2026 年毕业）。</p>
+          <p>研究方向以<strong>高能理论物理</strong>为核心，涉及量子场论的振幅计算方法与轴子宇宙学。2025 年，在<strong>上海交通大学李政道研究所</strong> Yuichiro Nakai 教授的指导下，完成了关于 Peccei-Quinn 对称性破缺与轴子宇宙学的研究，成果发表于《<strong>物理快报 B</strong>》（Physics Letters B）。</p>
+          <p>同时，我在武汉大学杜一剑教授课题组参与圈级离壳振幅积分被的递推方法研究，致力于发展量子场论振幅计算的新框架。</p>
+          <div class="about-quote">"自然界中存在着相互对应、相互关联的奇妙结构，而物理学家的工作，就是在公式与现象之间寻找这些联系。"</div>
         </div>
       </section>
 
-      <!-- 笔记 -->
+      <!-- Publications -->
+      <section class="section reveal" id="publications">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title"><span class="title-num">02</span>论文发表</h2>
+            <div class="section-sub">Publications</div>
+          </div>
+        </div>
+        <div class="pub-list">
+
+          <div class="pub-item">
+            <div class="pub-index">1</div>
+            <div class="pub-body">
+              <div class="pub-title">
+                <a href="https://www.sciencedirect.com/science/article/pii/S0370269326000316" target="_blank" rel="noopener">
+                  High Reheating Temperature without Axion Domain Walls
+                </a>
+              </div>
+              <div class="pub-meta">
+                <strong style="color:var(--text)">王凌云（Lingyun Wang）</strong> 等 · 指导教授：Yuichiro Nakai（上海交通大学李政道研究所）· 2025年7月
+              </div>
+              <div class="pub-tags">
+                <span class="pub-tag journal"><i class="fa fa-check-circle"></i>&nbsp;Physics Letters B</span>
+                <a href="https://arxiv.org/abs/2509.24812" target="_blank" rel="noopener" class="pub-tag arxiv"><i class="fa fa-external-link-alt"></i>&nbsp;arXiv:2509.24812</a>
+                <span class="pub-tag supervised">轴子宇宙学 · 热场论</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-index">2</div>
+            <div class="pub-body">
+              <div class="pub-title">
+                BG Current for One-loop Off-shell Amplitudes Integrand Recursion
+              </div>
+              <div class="pub-meta">
+                指导教授：杜一剑（武汉大学）· 2024年9月至今（进行中）
+              </div>
+              <div class="pub-tags">
+                <span class="pub-tag supervised">量子场论 · 振幅方法</span>
+                <span class="pub-tag arxiv" style="background:rgba(167,139,250,0.10);color:#a78bfa;border-color:rgba(167,139,250,0.2);">进行中</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Notes -->
       <section class="section reveal" id="notes">
         <div class="section-header">
-          <h2 class="section-title"><span class="title-num">02</span>笔记</h2>
-          <div class="section-sub">Reading Notes</div>
+          <div class="section-title-wrap">
+            <h2 class="section-title"><span class="title-num">03</span>笔记</h2>
+            <div class="section-sub">Reading Notes</div>
+          </div>
         </div>
-        <div class="note-list">
-
-          <div class="note-item" onclick="showToast('笔记详情页开发中，敬请期待')">
-            <div class="note-top">
-              <span class="note-date">2025-10-12</span>
-              <span class="note-cat">凝聚态</span>
-            </div>
-            <h3 class="note-title">BCS 理论中能隙方程的另一种推导思路</h3>
-            <p class="note-excerpt">传统教材中从平均场近似出发推导能隙方程，本文尝试从配分函数的路径积分表示入手，通过引入 Hubbard-Stratonovich 变换，自然地得到序参量与能隙的关系，并讨论这种方法在处理非传统配对时的优势。</p>
-            <span class="note-more">继续阅读 <i class="fa fa-arrow-right"></i></span>
-          </div>
-
-          <div class="note-item" onclick="showToast('笔记详情页开发中，敬请期待')">
-            <div class="note-top">
-              <span class="note-date">2025-09-28</span>
-              <span class="note-cat">量子力学</span>
-            </div>
-            <h3 class="note-title">重新理解密度矩阵：从纯态到混合态的几何图像</h3>
-            <p class="note-excerpt">密度矩阵常常被当作处理统计混合的工具，但它的几何内涵远不止于此。本文从 Bloch 球的推广出发，讨论密度矩阵在状态空间中的凸集结构，以及熵与纯度的几何意义。</p>
-            <span class="note-more">继续阅读 <i class="fa fa-arrow-right"></i></span>
-          </div>
-
-          <div class="note-item" onclick="showToast('笔记详情页开发中，敬请期待')">
-            <div class="note-top">
-              <span class="note-date">2025-09-15</span>
-              <span class="note-cat">统计物理</span>
-            </div>
-            <h3 class="note-title">重整化群的物理直觉：为什么粗粒化不会丢失信息</h3>
-            <p class="note-excerpt">重整化群的核心操作是尺度变换，但"积分掉短程自由度"为何反而能揭示长程物理？本文从关联函数的标度行为入手，尝试给出一个不依赖具体模型的直观解释。</p>
-            <span class="note-more">继续阅读 <i class="fa fa-arrow-right"></i></span>
-          </div>
-
-          <div class="note-item" onclick="showToast('笔记详情页开发中，敬请期待')">
-            <div class="note-top">
-              <span class="note-date">2025-08-30</span>
-              <span class="note-cat">科学哲学</span>
-            </div>
-            <h3 class="note-title">有效场论视角下的"基本定律"：层级与自主性</h3>
-            <p class="note-excerpt">Anderson 的 "More is different" 常被引用，但有效场论的框架为这一观点提供了更精确的表述。本文讨论不同能标下物理定律的自主性，以及"还原"与"涌现"之间的辩证关系。</p>
-            <span class="note-more">继续阅读 <i class="fa fa-arrow-right"></i></span>
-          </div>
-
-          <div class="note-item" onclick="showToast('笔记详情页开发中，敬请期待')">
-            <div class="note-top">
-              <span class="note-date">2025-08-14</span>
-              <span class="note-cat">教学札记</span>
-            </div>
-            <h3 class="note-title">讲了三遍热力学第二定律后，我对"熵"的理解变了</h3>
-            <p class="note-excerpt">从克劳修斯不等式到玻尔兹曼公式，再到信息论中的香农熵，学生们总是在不同定义间迷失。这篇札记记录我在教学中摸索出的一条线索：从"不可逆性"出发，而非从"混乱度"出发。</p>
-            <span class="note-more">继续阅读 <i class="fa fa-arrow-right"></i></span>
-          </div>
-
+        <div style="padding: 32px 0; text-align: center; color: var(--muted);">
+          <i class="fa fa-pencil-alt" style="font-size:28px; margin-bottom:12px; display:block; opacity:0.4;"></i>
+          <p style="font-size:14px;">笔记内容即将加入，敬请期待。</p>
         </div>
       </section>
 
-      <!-- 想法 -->
+      <!-- Thoughts -->
       <section class="section reveal" id="thoughts">
         <div class="section-header">
-          <h2 class="section-title"><span class="title-num">03</span>想法</h2>
-          <div class="section-sub">Fragmentary Thoughts</div>
+          <div class="section-title-wrap">
+            <h2 class="section-title"><span class="title-num">04</span>想法</h2>
+            <div class="section-sub">Fragmentary Thoughts</div>
+          </div>
         </div>
-        <div class="thoughts-grid">
-
-          <div class="thought-card">
-            <p class="thought-text">对称性之所以重要，不是因为它让方程变简单，而是因为它告诉我们哪些量是可以被定义的。没有对称性，连"电荷"这个概念本身都成问题。</p>
-            <div class="thought-footer">
-              <span class="thought-date">2025-10-08</span>
-              <span class="thought-tag">对称性</span>
-            </div>
-          </div>
-
-          <div class="thought-card">
-            <p class="thought-text">学生时代总觉得近似是"不精确"的代名词，做研究后才明白：好的近似恰恰是对物理本质最深刻的洞察——知道什么可以忽略，比知道什么要计算更难。</p>
-            <div class="thought-footer">
-              <span class="thought-date">2025-10-02</span>
-              <span class="thought-tag">方法论</span>
-            </div>
-          </div>
-
-          <div class="thought-card">
-            <p class="thought-text">量子力学的测量问题讨论了一百年，也许问题本身就问错了。也许"测量"不是一个需要解释的过程，而是我们描述世界的语言中不可还原的基本要素。</p>
-            <div class="thought-footer">
-              <span class="thought-date">2025-09-20</span>
-              <span class="thought-tag">量子基础</span>
-            </div>
-          </div>
-
-          <div class="thought-card">
-            <p class="thought-text">读论文时最兴奋的时刻，不是看到结论，而是看到某个中间步骤时突然意识到："原来这两个我以为无关的东西，其实是同一件事。"</p>
-            <div class="thought-footer">
-              <span class="thought-date">2025-09-05</span>
-              <span class="thought-tag">阅读</span>
-            </div>
-          </div>
-
-          <div class="thought-card">
-            <p class="thought-text">统计力学的美妙之处在于：它从对微观细节的"无知"出发，却得到了关于宏观世界最可靠的知识。无知有时比全知更有生产力。</p>
-            <div class="thought-footer">
-              <span class="thought-date">2025-08-22</span>
-              <span class="thought-tag">统计物理</span>
-            </div>
-          </div>
-
-          <div class="thought-card">
-            <p class="thought-text">做计算就像走夜路：你只能看到手电筒照亮的那一小片，但只要方向大致正确，一步步走下去，总能到达想去的地方。怕的是站在原地不敢迈步。</p>
-            <div class="thought-footer">
-              <span class="thought-date">2025-08-10</span>
-              <span class="thought-tag">研究日常</span>
-            </div>
-          </div>
-
+        <div style="padding: 32px 0; text-align: center; color: var(--muted);">
+          <i class="fa fa-lightbulb" style="font-size:28px; margin-bottom:12px; display:block; opacity:0.4;"></i>
+          <p style="font-size:14px;">随想陆续整理中，敬请期待。</p>
         </div>
       </section>
 
-      <!-- 联系 -->
+      <!-- Contact -->
       <section class="section reveal" id="contact">
         <div class="section-header">
-          <h2 class="section-title"><span class="title-num">04</span>联系</h2>
-          <div class="section-sub">Get in Touch</div>
-        </div>
-        <div class="contact-simple">
-          <div class="contact-item">
-            <i class="fa fa-envelope"></i>
-            <span class="contact-label">Email</span>
-            <span class="contact-value">your@email.com</span>
-          </div>
-          <div class="contact-item">
-            <i class="fab fa-github"></i>
-            <span class="contact-label">GitHub</span>
-            <span class="contact-value">@exp-e</span>
-          </div>
-          <div class="contact-item">
-            <i class="fa fa-map-marker-alt"></i>
-            <span class="contact-label">Location</span>
-            <span class="contact-value">中国 · 武汉</span>
+          <div class="section-title-wrap">
+            <h2 class="section-title"><span class="title-num">05</span>联系方式</h2>
+            <div class="section-sub">Get in Touch</div>
           </div>
         </div>
-        <p class="contact-note">欢迎讨论物理、数学，或任何有趣的问题。回复可能不及时，但每封邮件都会读。</p>
+        <div class="contact-grid">
+          <a href="mailto:lyunwang@whu.edu.cn" class="contact-card">
+            <div class="contact-icon"><i class="fa fa-envelope"></i></div>
+            <div class="contact-info">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">lyunwang@whu.edu.cn</div>
+            </div>
+          </a>
+          <a href="https://github.com/exp-e" target="_blank" rel="noopener" class="contact-card">
+            <div class="contact-icon"><i class="fab fa-github"></i></div>
+            <div class="contact-info">
+              <div class="contact-label">GitHub</div>
+              <div class="contact-value">exp-e</div>
+            </div>
+          </a>
+          <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" class="contact-card">
+            <div class="contact-icon" style="background:rgba(0,101,255,0.12);border-color:rgba(0,101,255,0.2);color:#3385ff;"><i class="fab fa-zhihu"></i></div>
+            <div class="contact-info">
+              <div class="contact-label">知乎</div>
+              <div class="contact-value">@expe-94</div>
+            </div>
+          </a>
+          <a href="https://en.whu.edu.cn/" target="_blank" rel="noopener" class="contact-card">
+            <div class="contact-icon" style="background:rgba(52,211,153,0.10);border-color:rgba(52,211,153,0.2);color:var(--green);"><i class="fa fa-university"></i></div>
+            <div class="contact-info">
+              <div class="contact-label">单位</div>
+              <div class="contact-value">武汉大学</div>
+            </div>
+          </a>
+        </div>
       </section>
 
     </div>
   </div>
 </main>
 
-<!-- 页脚 -->
+<!-- Footer -->
 <footer class="footer">
-  &copy; 2025 你的名字 <span class="sep">|</span> 观物笔记 <span class="sep">|</span> 记录思考的痕迹
+  &copy; 2025 王凌云 (Lingyun Wang) <span class="sep">|</span> 武汉大学 · 物理科学与技术学院
 </footer>
 
-<!-- 回到顶部 -->
+<!-- Back to top -->
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">
   <i class="fa fa-arrow-up"></i>
 </button>
@@ -868,7 +911,7 @@ img { max-width: 100%; display: block; }
 (function() {
   'use strict';
 
-  /* 移动端导航 */
+  /* Mobile nav */
   var navToggle = document.getElementById('navToggle');
   var mainMenu = document.getElementById('mainMenu');
   navToggle.addEventListener('click', function() {
@@ -878,7 +921,7 @@ img { max-width: 100%; display: block; }
     a.addEventListener('click', function() { mainMenu.classList.remove('open'); });
   });
 
-  /* 回到顶部 */
+  /* Back to top */
   var backToTop = document.getElementById('backToTop');
   window.addEventListener('scroll', function() {
     if (window.pageYOffset > 400) {
@@ -891,7 +934,7 @@ img { max-width: 100%; display: block; }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* 滚动揭示 */
+  /* Scroll reveal */
   var reveals = document.querySelectorAll('.reveal');
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
@@ -903,7 +946,7 @@ img { max-width: 100%; display: block; }
   }, { threshold: 0.08 });
   reveals.forEach(function(el) { observer.observe(el); });
 
-  /* 导航高亮 */
+  /* Nav highlight */
   var sections = document.querySelectorAll('section[id]');
   var navLinks = document.querySelectorAll('.main-menu a');
   window.addEventListener('scroll', function() {
@@ -930,16 +973,6 @@ img { max-width: 100%; display: block; }
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 2200);
   };
-
-  /* 社交链接占位提示 */
-  document.querySelectorAll('.social-links a').forEach(function(a) {
-    if (a.getAttribute('href') === '#') {
-      a.addEventListener('click', function(e) {
-        e.preventDefault();
-        showToast('请在模板中替换为您的真实链接');
-      });
-    }
-  });
 
 })();
 </script>
