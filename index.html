@@ -3,37 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0f1117">
-<title>王凌云 · 物理学研究者</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232563eb'/%3E%3Ctext x='32' y='45' font-size='30' font-family='Georgia,serif' text-anchor='middle' fill='white'%3E%CF%86%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#F3EFFF">
+<title>王凌云 · Lingyun Wang</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%237139DA'/%3E%3Ctext x='32' y='45' font-size='28' font-family='Georgia,serif' text-anchor='middle' fill='white'%3E%CF%88%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
 <style>
-/* ========== Design Tokens ========== */
+/* ===== Design Tokens ===== */
 :root {
-  --bg: #0f1117;
-  --bg2: #161b27;
-  --card: #1a2033;
-  --card-hover: #1f2740;
-  --border: rgba(99,117,168,0.18);
-  --border-soft: rgba(99,117,168,0.10);
-  --text: #e8eaf6;
-  --text-soft: #9aa3c2;
-  --muted: #5a6490;
-  --accent: #4f80ff;
-  --accent-deep: #3366ee;
-  --accent-glow: rgba(79,128,255,0.15);
-  --accent-soft: rgba(79,128,255,0.08);
-  --green: #34d399;
-  --green-soft: rgba(52,211,153,0.10);
+  /* 主色 */
+  --bg:          #F3EFFF;   /* 浅雾紫底 */
+  --bg2:         #EDE8FF;   /* 稍深一档，用于卡片内次级区域 */
+  --card:        #FDFCFF;   /* 卡片白底（带紫调） */
+  --grad-purple: #D4B8FF;   /* 流体主紫 */
+  --grad-blue:   #E1E8FF;   /* 柔雾蓝 */
+
+  /* 辅助色 */
+  --accent:      #7139DA;   /* 暗调深紫 */
+  --accent-deep: #5921C2;   /* 深按压态 */
+  --accent-soft: rgba(113,57,218,0.08);
+  --pink:        #D786B9;   /* 柔灰粉 */
+  --pink-soft:   rgba(215,134,185,0.12);
+
+  /* 点缀色 */
+  --gold:        #FFCA4E;   /* 暖金 */
+  --gold-soft:   rgba(255,202,78,0.15);
+  --highlight:   #EDBEFF;   /* 粉紫高光 */
+
+  /* 文字 */
+  --text:        #141414;
+  --text-soft:   #4a4060;
+  --muted:       #8a7da8;
+
+  /* 边框 */
+  --border:      rgba(113,57,218,0.14);
+  --border-soft: rgba(113,57,218,0.08);
+
   --font-serif: "Noto Serif SC", Georgia, "Songti SC", serif;
-  --font-sans: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans:  "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --max-w: 1160px;
-  --sidebar-w: 280px;
-  --radius: 12px;
-  --radius-sm: 6px;
+  --sidebar-w: 272px;
+  --radius: 14px;
+  --radius-sm: 7px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,37 +55,39 @@ body {
   font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
-  line-height: 1.75;
+  line-height: 1.8;
   font-size: 15px;
-  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
 a { color: var(--accent); text-decoration: none; transition: color .2s; }
-a:hover { color: #7da0ff; }
+a:hover { color: var(--accent-deep); }
 img { max-width: 100%; display: block; }
 
-/* ========== Background Decoration ========== */
+/* ===== Global gradient mesh background ===== */
 body::before {
   content: "";
   position: fixed;
-  top: -200px; left: 50%; transform: translateX(-50%);
-  width: 900px; height: 600px;
-  background: radial-gradient(ellipse at center, rgba(79,128,255,0.07) 0%, transparent 70%);
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 10%, rgba(212,184,255,0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(225,232,255,0.40) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 60% 30%, rgba(237,190,255,0.20) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* ========== Top stripe ========== */
+/* ===== Top stripe ===== */
 .headband {
   height: 3px;
-  background: linear-gradient(90deg, #4f80ff, #34d399, #a78bfa);
+  background: linear-gradient(90deg, var(--accent), var(--grad-purple), var(--pink), var(--gold));
 }
 
-/* ========== Header ========== */
+/* ===== Header ===== */
 .header {
-  background: rgba(15,17,23,0.88);
-  backdrop-filter: blur(16px);
+  background: rgba(243,239,255,0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -85,23 +100,22 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 62px;
 }
 .brand {
   display: flex;
   align-items: baseline;
-  gap: 10px;
+  gap: 9px;
 }
 .brand-symbol {
   font-size: 20px;
   color: var(--accent);
   font-weight: 700;
-  letter-spacing: -1px;
 }
 .brand-name {
   font-family: var(--font-serif);
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text);
   letter-spacing: 1px;
 }
@@ -121,7 +135,7 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 14px;
+  padding: 6px 13px;
   font-size: 13.5px;
   color: var(--text-soft);
   border-radius: var(--radius-sm);
@@ -133,7 +147,7 @@ body::before {
   color: var(--accent);
   background: var(--accent-soft);
 }
-.main-menu a i { font-size: 12px; }
+.main-menu a i { font-size: 11.5px; }
 
 .nav-toggle {
   display: none;
@@ -144,18 +158,17 @@ body::before {
 }
 .nav-toggle span {
   display: block;
-  width: 20px;
-  height: 1.5px;
+  width: 20px; height: 1.5px;
   background: var(--text);
   margin: 5px 0;
   transition: .3s;
 }
 
-/* ========== Main Layout ========== */
+/* ===== Layout ===== */
 .main {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 44px 36px 72px;
+  padding: 44px 36px 80px;
   position: relative;
   z-index: 1;
 }
@@ -166,96 +179,70 @@ body::before {
   align-items: start;
 }
 
-/* ========== Sidebar ========== */
-.sidebar {
-  position: sticky;
-  top: 88px;
-}
+/* ===== Sidebar ===== */
+.sidebar { position: sticky; top: 84px; }
 .sidebar-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 32px 26px;
+  padding: 30px 24px;
   text-align: center;
+  box-shadow: 0 2px 24px rgba(113,57,218,0.07);
 }
 .author-avatar {
-  width: 96px;
-  height: 96px;
+  width: 90px; height: 90px;
   border-radius: 50%;
-  margin: 0 auto 20px;
-  border: 2px solid var(--border);
+  margin: 0 auto 18px;
   object-fit: cover;
-  background: var(--card-hover);
+  background: var(--bg2);
+  border: 3px solid var(--highlight);
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
 .author-name {
   font-family: var(--font-serif);
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 3px;
-  letter-spacing: 0.5px;
+  margin-bottom: 2px;
 }
 .author-name-en {
   font-size: 13px;
-  color: var(--text-soft);
-  margin-bottom: 8px;
+  color: var(--muted);
+  margin-bottom: 18px;
   font-weight: 400;
   letter-spacing: 0.5px;
 }
-.author-role {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--accent);
-  background: var(--accent-soft);
-  border: 1px solid rgba(79,128,255,0.2);
-  border-radius: 20px;
-  padding: 4px 12px;
-  margin-bottom: 18px;
-  letter-spacing: 0.5px;
-}
-.author-bio {
-  font-size: 13px;
-  color: var(--text-soft);
-  line-height: 1.75;
-  margin-bottom: 22px;
-  text-align: left;
-}
-.sidebar-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 18px 0;
-}
+.sidebar-divider { height: 1px; background: var(--border-soft); margin: 16px 0; }
+
 .research-tags {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 6px;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 .research-tag {
   font-size: 11.5px;
   padding: 3px 10px;
-  background: var(--bg2);
-  color: var(--text-soft);
-  border-radius: 4px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 20px;
   border: 1px solid var(--border);
+  font-weight: 500;
 }
+
 .social-links {
   display: flex;
   justify-content: center;
   gap: 8px;
 }
 .social-links a {
-  width: 36px;
-  height: 36px;
+  width: 36px; height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  background: var(--bg2);
+  border-radius: 9px;
+  background: var(--bg);
   color: var(--text-soft);
   font-size: 15px;
   transition: all .2s;
@@ -266,35 +253,35 @@ body::before {
   color: #fff;
   border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(79,128,255,0.3);
+  box-shadow: 0 6px 18px rgba(113,57,218,0.28);
 }
 
-/* ========== Content Area ========== */
+/* ===== Cards / Sections ===== */
 .content-wrap { min-width: 0; }
 
 .section {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 40px 44px;
-  margin-bottom: 28px;
-  transition: border-color .3s;
+  padding: 38px 42px;
+  margin-bottom: 26px;
+  box-shadow: 0 2px 20px rgba(113,57,218,0.05);
+  transition: box-shadow .25s, border-color .25s;
 }
 .section:last-child { margin-bottom: 0; }
-.section:hover { border-color: rgba(79,128,255,0.25); }
+.section:hover {
+  box-shadow: 0 4px 32px rgba(113,57,218,0.10);
+  border-color: rgba(113,57,218,0.22);
+}
 
 .section-header {
-  margin-bottom: 30px;
-  padding-bottom: 20px;
+  margin-bottom: 28px;
+  padding-bottom: 18px;
   border-bottom: 1px solid var(--border-soft);
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
 }
-.section-title-wrap {}
 .section-title {
   font-family: var(--font-serif);
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 700;
   color: var(--text);
   display: flex;
@@ -302,183 +289,171 @@ body::before {
   gap: 10px;
 }
 .section-title .title-num {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--accent);
   font-family: var(--font-sans);
   font-weight: 600;
   letter-spacing: 1.5px;
   background: var(--accent-soft);
-  border: 1px solid rgba(79,128,255,0.2);
+  border: 1px solid var(--border);
   padding: 2px 8px;
   border-radius: 4px;
 }
 .section-sub {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--muted);
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-top: 5px;
 }
 
-/* ========== Hero ========== */
+/* ===== Hero ===== */
 .hero {
-  background: var(--card);
+  background: linear-gradient(135deg, #ede6ff 0%, #f3efff 40%, #e8edff 100%);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 56px 52px;
-  margin-bottom: 28px;
+  padding: 54px 50px;
+  margin-bottom: 26px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 24px rgba(113,57,218,0.08);
 }
 .hero::before {
   content: "";
   position: absolute;
-  top: -60px; right: -60px;
-  width: 280px; height: 280px;
-  background: radial-gradient(circle, rgba(79,128,255,0.12) 0%, transparent 70%);
+  top: -80px; right: -80px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(212,184,255,0.5) 0%, transparent 65%);
   pointer-events: none;
 }
 .hero::after {
   content: "";
   position: absolute;
-  bottom: -40px; left: -40px;
+  bottom: -50px; left: 30px;
   width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(52,211,153,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(237,190,255,0.35) 0%, transparent 65%);
   pointer-events: none;
 }
-.hero-badge {
+
+.hero-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 11.5px;
-  color: var(--green);
-  background: var(--green-soft);
-  border: 1px solid rgba(52,211,153,0.2);
+  gap: 7px;
+  font-size: 12px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 4px 14px;
   margin-bottom: 22px;
+  font-weight: 500;
   letter-spacing: 0.5px;
-}
-.hero-badge::before {
-  content: "";
-  width: 6px; height: 6px;
-  background: var(--green);
-  border-radius: 50%;
+  position: relative;
 }
 .hero-title {
   font-family: var(--font-serif);
-  font-size: 38px;
+  font-size: 40px;
   font-weight: 700;
   color: var(--text);
-  line-height: 1.35;
-  margin-bottom: 20px;
+  line-height: 1.3;
+  margin-bottom: 18px;
   position: relative;
 }
 .hero-title em {
   font-style: normal;
-  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  background: linear-gradient(135deg, var(--accent), var(--pink));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .hero-text {
-  font-size: 15.5px;
+  font-size: 15px;
   color: var(--text-soft);
-  max-width: 580px;
+  max-width: 560px;
   line-height: 1.9;
   margin-bottom: 30px;
   position: relative;
 }
 .hero-cta {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
   position: relative;
 }
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   padding: 11px 22px;
   background: var(--accent);
   color: #fff;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-size: 13.5px;
   font-weight: 500;
   transition: all .2s;
-  letter-spacing: 0.3px;
 }
 .btn-primary:hover {
   background: var(--accent-deep);
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(79,128,255,0.35);
+  box-shadow: 0 8px 24px rgba(113,57,218,0.30);
 }
 .btn-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 11px 22px;
-  background: transparent;
+  gap: 7px;
+  padding: 11px 20px;
+  background: rgba(255,255,255,0.7);
   color: var(--text-soft);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-size: 13.5px;
-  font-weight: 400;
   transition: all .2s;
+  backdrop-filter: blur(8px);
 }
 .btn-secondary:hover {
-  color: var(--text);
+  color: var(--accent);
   border-color: var(--accent);
   background: var(--accent-soft);
 }
 
-/* ========== About ========== */
+/* ===== About ===== */
 .about-text p {
-  margin-bottom: 16px;
+  margin-bottom: 15px;
   color: var(--text-soft);
   font-size: 14.5px;
   line-height: 1.95;
 }
 .about-text p:last-child { margin-bottom: 0; }
-.about-text strong {
-  color: var(--text);
-  font-weight: 500;
-}
+.about-text strong { color: var(--text); font-weight: 600; }
 .about-quote {
-  margin-top: 24px;
-  padding: 18px 22px;
-  background: var(--bg2);
-  border-left: 3px solid var(--accent);
+  margin-top: 22px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(212,184,255,0.18), rgba(225,232,255,0.18));
+  border-left: 3px solid var(--grad-purple);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-family: var(--font-serif);
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--text-soft);
   font-style: italic;
   line-height: 1.85;
 }
 
-/* ========== Publications ========== */
-.pub-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
+/* ===== Publications ===== */
+.pub-list { display: flex; flex-direction: column; }
 .pub-item {
   padding: 24px 0;
   border-bottom: 1px solid var(--border-soft);
   display: flex;
-  gap: 20px;
+  gap: 18px;
   align-items: flex-start;
-  transition: all .2s;
 }
 .pub-item:last-child { border-bottom: none; padding-bottom: 0; }
 .pub-index {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+  width: 28px; height: 28px;
   background: var(--accent-soft);
-  border: 1px solid rgba(79,128,255,0.2);
+  border: 1px solid var(--border);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -490,117 +465,125 @@ body::before {
 }
 .pub-body { flex: 1; min-width: 0; }
 .pub-title {
-  font-size: 15.5px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text);
   margin-bottom: 6px;
   line-height: 1.5;
 }
+.pub-title a { color: var(--text); }
+.pub-title a:hover { color: var(--accent); }
 .pub-meta {
   font-size: 13px;
-  color: var(--text-soft);
-  margin-bottom: 8px;
+  color: var(--muted);
+  margin-bottom: 10px;
   line-height: 1.6;
 }
-.pub-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
+.pub-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .pub-tag {
   font-size: 11.5px;
   padding: 3px 10px;
-  border-radius: 4px;
+  border-radius: 20px;
   font-weight: 500;
 }
 .pub-tag.journal {
-  background: rgba(52,211,153,0.12);
-  color: var(--green);
-  border: 1px solid rgba(52,211,153,0.2);
+  background: rgba(215,134,185,0.12);
+  color: #a03a7a;
+  border: 1px solid rgba(215,134,185,0.3);
 }
 .pub-tag.arxiv {
   background: var(--accent-soft);
   color: var(--accent);
-  border: 1px solid rgba(79,128,255,0.2);
+  border: 1px solid var(--border);
 }
-.pub-tag.supervised {
-  background: rgba(167,139,250,0.10);
-  color: #a78bfa;
-  border: 1px solid rgba(167,139,250,0.2);
+.pub-tag.topic {
+  background: var(--gold-soft);
+  color: #7a5a00;
+  border: 1px solid rgba(255,202,78,0.3);
 }
 
-/* ========== Contact ========== */
+/* ===== Notes / Thoughts placeholder ===== */
+.section-empty {
+  padding: 36px 0;
+  text-align: center;
+  color: var(--muted);
+}
+.section-empty i {
+  font-size: 30px;
+  margin-bottom: 12px;
+  display: block;
+  opacity: 0.35;
+  color: var(--grad-purple);
+}
+.section-empty p { font-size: 13.5px; }
+
+/* ===== Contact ===== */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 .contact-card {
-  background: var(--bg2);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 20px;
+  padding: 18px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 13px;
   transition: all .2s;
   text-decoration: none;
   color: inherit;
 }
 .contact-card:hover {
   border-color: var(--accent);
-  background: var(--card-hover);
-  color: inherit;
+  background: var(--accent-soft);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 20px rgba(113,57,218,0.12);
 }
 .contact-icon {
-  width: 40px;
-  height: 40px;
+  width: 38px; height: 38px;
   background: var(--accent-soft);
-  border: 1px solid rgba(79,128,255,0.2);
+  border: 1px solid var(--border);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--accent);
   flex-shrink: 0;
 }
-.contact-info {}
 .contact-label {
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--muted);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   margin-bottom: 2px;
 }
 .contact-value {
-  font-size: 13.5px;
+  font-size: 13px;
   color: var(--text);
-  font-weight: 400;
+  font-weight: 500;
 }
 
-/* ========== Footer ========== */
+/* ===== Footer ===== */
 .footer {
   text-align: center;
-  padding: 32px 20px;
+  padding: 30px 20px;
   font-size: 12.5px;
   color: var(--muted);
   border-top: 1px solid var(--border);
-  margin-top: 20px;
+  margin-top: 16px;
   position: relative;
   z-index: 1;
 }
-.footer .sep { margin: 0 10px; color: var(--border); }
+.footer .sep { margin: 0 8px; color: var(--border); }
 
-/* ========== Back to top ========== */
+/* ===== Back to top ===== */
 .back-to-top {
   position: fixed;
-  right: 28px;
-  bottom: 32px;
-  width: 40px;
-  height: 40px;
+  right: 28px; bottom: 30px;
+  width: 40px; height: 40px;
   background: var(--card);
   color: var(--accent);
   border: 1px solid var(--border);
@@ -614,7 +597,7 @@ body::before {
   visibility: hidden;
   transition: all .3s;
   z-index: 90;
-  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+  box-shadow: 0 4px 14px rgba(113,57,218,0.15);
 }
 .back-to-top.visible { opacity: 1; visibility: visible; }
 .back-to-top:hover {
@@ -622,65 +605,63 @@ body::before {
   color: #fff;
   border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(79,128,255,0.4);
 }
 
-/* ========== Toast ========== */
+/* ===== Toast ===== */
 .toast {
   position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(16px);
   background: var(--card);
   color: var(--text);
   border: 1px solid var(--border);
-  padding: 11px 22px;
+  padding: 10px 20px;
   border-radius: 8px;
   font-size: 13px;
   opacity: 0;
   pointer-events: none;
   transition: all .3s;
   z-index: 999;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 24px rgba(113,57,218,0.15);
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ========== Scroll Reveal ========== */
+/* ===== Scroll reveal ===== */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity .7s ease, transform .7s ease;
+  transform: translateY(18px);
+  transition: opacity .65s ease, transform .65s ease;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ========== Responsive ========== */
+/* ===== Responsive ===== */
 @media (max-width: 920px) {
-  .main-inner { grid-template-columns: 1fr; gap: 28px; }
+  .main-inner { grid-template-columns: 1fr; gap: 26px; }
   .sidebar { position: static; }
   .nav-toggle { display: block; }
   .main-menu {
     display: none;
     position: absolute;
-    top: 64px; left: 0; right: 0;
-    background: var(--bg);
+    top: 62px; left: 0; right: 0;
+    background: rgba(243,239,255,0.97);
+    backdrop-filter: blur(12px);
     flex-direction: column;
-    padding: 12px 28px;
+    padding: 10px 28px;
     border-bottom: 1px solid var(--border);
     gap: 0;
   }
   .main-menu.open { display: flex; }
-  .main-menu a { padding: 12px 0; border-bottom: 1px solid var(--border-soft); }
+  .main-menu a { padding: 11px 0; border-bottom: 1px solid var(--border-soft); }
   .main-menu a:last-child { border-bottom: none; }
-  .hero { padding: 40px 32px; }
-  .hero-title { font-size: 28px; }
-  .section { padding: 30px 26px; }
+  .hero { padding: 40px 28px; }
+  .hero-title { font-size: 30px; }
+  .section { padding: 30px 24px; }
   .header-inner { padding: 0 20px; }
   .main { padding: 28px 20px 56px; }
 }
 @media (max-width: 540px) {
   .brand-tag { display: none; }
-  .hero-title { font-size: 24px; }
-  .hero { padding: 32px 22px; }
+  .hero-title { font-size: 26px; }
   .contact-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
@@ -689,13 +670,13 @@ body::before {
 
 <div class="headband"></div>
 
-<!-- ========== Header ========== -->
+<!-- Header -->
 <header class="header">
   <div class="header-inner">
     <a href="#top" class="brand">
-      <span class="brand-symbol">φ</span>
+      <span class="brand-symbol">ψ</span>
       <span class="brand-name">王凌云</span>
-      <span class="brand-tag">Physics &middot; Research</span>
+      <span class="brand-tag">Lingyun Wang</span>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="切换导航">
       <span></span><span></span><span></span>
@@ -713,7 +694,7 @@ body::before {
   </div>
 </header>
 
-<!-- ========== Main ========== -->
+<!-- Main -->
 <main class="main" id="top">
   <div class="main-inner">
 
@@ -723,14 +704,13 @@ body::before {
         <img src="assets/avatar.gif" alt="王凌云" class="author-avatar">
         <div class="author-name">王凌云</div>
         <div class="author-name-en">Lingyun Wang</div>
-        <div class="author-role"><i class="fa fa-atom"></i>物理学研究者</div>
-        <p class="author-bio">本科就读于武汉大学物理科学与技术学院，研究兴趣涵盖量子场论、轴子宇宙学与振幅方法。</p>
         <div class="sidebar-divider"></div>
         <div class="research-tags">
-          <span class="research-tag">量子场论</span>
-          <span class="research-tag">轴子宇宙学</span>
-          <span class="research-tag">振幅方法</span>
-          <span class="research-tag">高能理论</span>
+          <span class="research-tag">量子信息</span>
+          <span class="research-tag">量子计算</span>
+          <span class="research-tag">量子纠错</span>
+          <span class="research-tag">量子热力学</span>
+          <span class="research-tag">量子物理</span>
         </div>
         <div class="social-links">
           <a href="https://github.com/exp-e" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
@@ -746,44 +726,38 @@ body::before {
 
       <!-- Hero -->
       <section class="hero reveal" id="hero">
-        <div class="hero-badge">武汉大学 · 物理科学与技术学院</div>
-        <h1 class="hero-title">王凌云<br><em>物理学研究者</em></h1>
+        <div class="hero-eyebrow"><i class="fa fa-university"></i>武汉大学 · 物理科学与技术学院</div>
+        <h1 class="hero-title">王凌云<br><em>Lingyun Wang</em></h1>
         <p class="hero-text">
-          本科就读于武汉大学，专注于高能理论物理，研究方向包括轴子宇宙学的热场论机制以及量子场论中的振幅方法。在《物理快报 B》（Physics Letters B）发表研究论文，目前正参与多个前沿课题。
+          武汉大学物理学本科生，兴趣在量子信息、量子计算与量子纠错。在《物理快报 B》发表过一篇关于轴子宇宙学的文章。
         </p>
         <div class="hero-cta">
-          <a href="#publications" class="btn-primary"><i class="fa fa-book"></i>查看论文</a>
-          <a href="mailto:lyunwang@whu.edu.cn" class="btn-secondary"><i class="fa fa-envelope"></i>发送邮件</a>
-          <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" class="btn-secondary"><i class="fab fa-zhihu"></i>知乎主页</a>
+          <a href="#publications" class="btn-primary"><i class="fa fa-book"></i>论文</a>
+          <a href="mailto:lyunwang@whu.edu.cn" class="btn-secondary"><i class="fa fa-envelope"></i>联系我</a>
+          <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" class="btn-secondary"><i class="fab fa-zhihu"></i>知乎</a>
         </div>
       </section>
 
       <!-- About -->
       <section class="section reveal" id="about">
         <div class="section-header">
-          <div class="section-title-wrap">
-            <h2 class="section-title"><span class="title-num">01</span>关于我</h2>
-            <div class="section-sub">About Me</div>
-          </div>
+          <h2 class="section-title"><span class="title-num">01</span>关于</h2>
+          <div class="section-sub">About Me</div>
         </div>
         <div class="about-text">
-          <p>我是<strong>王凌云</strong>，2022 年入学于<strong>武汉大学物理科学与技术学院</strong>，攻读物理学本科学位（预计 2026 年毕业）。</p>
-          <p>研究方向以<strong>高能理论物理</strong>为核心，涉及量子场论的振幅计算方法与轴子宇宙学。2025 年，在<strong>上海交通大学李政道研究所</strong> Yuichiro Nakai 教授的指导下，完成了关于 Peccei-Quinn 对称性破缺与轴子宇宙学的研究，成果发表于《<strong>物理快报 B</strong>》（Physics Letters B）。</p>
-          <p>同时，我在武汉大学杜一剑教授课题组参与圈级离壳振幅积分被的递推方法研究，致力于发展量子场论振幅计算的新框架。</p>
-          <div class="about-quote">"自然界中存在着相互对应、相互关联的奇妙结构，而物理学家的工作，就是在公式与现象之间寻找这些联系。"</div>
+          <p>武汉大学物理学本科生（2022–2026），现在对<strong>量子信息、量子计算、量子纠错与量子热力学</strong>最感兴趣。</p>
+          <p>2025 年在上海交通大学李政道研究所参与了一项关于 Peccei-Quinn 对称性破缺与轴子宇宙学的研究，结果发表在 Physics Letters B 上。</p>
+          <div class="about-quote">"量子力学不只是一套计算规则——它改变了我们对信息、随机性和现实本身的理解方式。"</div>
         </div>
       </section>
 
       <!-- Publications -->
       <section class="section reveal" id="publications">
         <div class="section-header">
-          <div class="section-title-wrap">
-            <h2 class="section-title"><span class="title-num">02</span>论文发表</h2>
-            <div class="section-sub">Publications</div>
-          </div>
+          <h2 class="section-title"><span class="title-num">02</span>论文</h2>
+          <div class="section-sub">Publications</div>
         </div>
         <div class="pub-list">
-
           <div class="pub-item">
             <div class="pub-index">1</div>
             <div class="pub-body">
@@ -793,96 +767,73 @@ body::before {
                 </a>
               </div>
               <div class="pub-meta">
-                <strong style="color:var(--text)">王凌云（Lingyun Wang）</strong> 等 · 指导教授：Yuichiro Nakai（上海交通大学李政道研究所）· 2025年7月
+                Lingyun Wang 等 · 指导：Yuichiro Nakai，上海交通大学李政道研究所 · 2025年7月
               </div>
               <div class="pub-tags">
                 <span class="pub-tag journal"><i class="fa fa-check-circle"></i>&nbsp;Physics Letters B</span>
                 <a href="https://arxiv.org/abs/2509.24812" target="_blank" rel="noopener" class="pub-tag arxiv"><i class="fa fa-external-link-alt"></i>&nbsp;arXiv:2509.24812</a>
-                <span class="pub-tag supervised">轴子宇宙学 · 热场论</span>
+                <span class="pub-tag topic">轴子宇宙学</span>
               </div>
             </div>
           </div>
-
-          <div class="pub-item">
-            <div class="pub-index">2</div>
-            <div class="pub-body">
-              <div class="pub-title">
-                BG Current for One-loop Off-shell Amplitudes Integrand Recursion
-              </div>
-              <div class="pub-meta">
-                指导教授：杜一剑（武汉大学）· 2024年9月至今（进行中）
-              </div>
-              <div class="pub-tags">
-                <span class="pub-tag supervised">量子场论 · 振幅方法</span>
-                <span class="pub-tag arxiv" style="background:rgba(167,139,250,0.10);color:#a78bfa;border-color:rgba(167,139,250,0.2);">进行中</span>
-              </div>
-            </div>
-          </div>
-
         </div>
       </section>
 
       <!-- Notes -->
       <section class="section reveal" id="notes">
         <div class="section-header">
-          <div class="section-title-wrap">
-            <h2 class="section-title"><span class="title-num">03</span>笔记</h2>
-            <div class="section-sub">Reading Notes</div>
-          </div>
+          <h2 class="section-title"><span class="title-num">03</span>笔记</h2>
+          <div class="section-sub">Reading Notes</div>
         </div>
-        <div style="padding: 32px 0; text-align: center; color: var(--muted);">
-          <i class="fa fa-pencil-alt" style="font-size:28px; margin-bottom:12px; display:block; opacity:0.4;"></i>
-          <p style="font-size:14px;">笔记内容即将加入，敬请期待。</p>
+        <div class="section-empty">
+          <i class="fa fa-pencil-alt"></i>
+          <p>笔记内容即将加入，敬请期待。</p>
         </div>
       </section>
 
       <!-- Thoughts -->
       <section class="section reveal" id="thoughts">
         <div class="section-header">
-          <div class="section-title-wrap">
-            <h2 class="section-title"><span class="title-num">04</span>想法</h2>
-            <div class="section-sub">Fragmentary Thoughts</div>
-          </div>
+          <h2 class="section-title"><span class="title-num">04</span>想法</h2>
+          <div class="section-sub">Fragmentary Thoughts</div>
         </div>
-        <div style="padding: 32px 0; text-align: center; color: var(--muted);">
-          <i class="fa fa-lightbulb" style="font-size:28px; margin-bottom:12px; display:block; opacity:0.4;"></i>
-          <p style="font-size:14px;">随想陆续整理中，敬请期待。</p>
+        <div class="section-empty">
+          <i class="fa fa-lightbulb"></i>
+          <p>随想陆续整理中，敬请期待。</p>
         </div>
       </section>
 
       <!-- Contact -->
       <section class="section reveal" id="contact">
         <div class="section-header">
-          <div class="section-title-wrap">
-            <h2 class="section-title"><span class="title-num">05</span>联系方式</h2>
-            <div class="section-sub">Get in Touch</div>
-          </div>
+          <h2 class="section-title"><span class="title-num">05</span>联系</h2>
+          <div class="section-sub">Get in Touch</div>
         </div>
         <div class="contact-grid">
           <a href="mailto:lyunwang@whu.edu.cn" class="contact-card">
             <div class="contact-icon"><i class="fa fa-envelope"></i></div>
-            <div class="contact-info">
+            <div>
               <div class="contact-label">Email</div>
               <div class="contact-value">lyunwang@whu.edu.cn</div>
             </div>
           </a>
           <a href="https://github.com/exp-e" target="_blank" rel="noopener" class="contact-card">
             <div class="contact-icon"><i class="fab fa-github"></i></div>
-            <div class="contact-info">
+            <div>
               <div class="contact-label">GitHub</div>
               <div class="contact-value">exp-e</div>
             </div>
           </a>
           <a href="https://www.zhihu.com/people/expe-94" target="_blank" rel="noopener" class="contact-card">
-            <div class="contact-icon" style="background:rgba(0,101,255,0.12);border-color:rgba(0,101,255,0.2);color:#3385ff;"><i class="fab fa-zhihu"></i></div>
-            <div class="contact-info">
+            <div class="contact-icon" style="color:#2361e0;background:rgba(35,97,224,0.08);border-color:rgba(35,97,224,0.18);"><i class="fab fa-zhihu"></i></div>
+            <div>
               <div class="contact-label">知乎</div>
-              <div class="contact-value">@expe-94</div>
+              <div class="contact-value">expe-94</div>
             </div>
           </a>
           <a href="https://en.whu.edu.cn/" target="_blank" rel="noopener" class="contact-card">
-            <div class="contact-icon" style="background:rgba(52,211,153,0.10);border-color:rgba(52,211,153,0.2);color:var(--green);"><i class="fa fa-university"></i></div>
-            <div class="contact-info">
+            <div class="contact-icon" style="color:#7139DA;background:rgba(113,57,218,0.08);border-color:rgba(113,57,218,0.18);"><i class="fa fa-university"></i></div>
+            <div>
               <div class="contact-label">单位</div>
               <div class="contact-value">武汉大学</div>
             </div>
@@ -890,75 +841,59 @@ body::before {
         </div>
       </section>
 
-    </div>
-  </div>
+    </div><!-- /content-wrap -->
+  </div><!-- /main-inner -->
 </main>
 
 <!-- Footer -->
 <footer class="footer">
-  &copy; 2025 王凌云 (Lingyun Wang) <span class="sep">|</span> 武汉大学 · 物理科学与技术学院
+  &copy; 2025 王凌云 (Lingyun Wang)<span class="sep">|</span>武汉大学 · 物理科学与技术学院
 </footer>
 
-<!-- Back to top -->
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">
   <i class="fa fa-arrow-up"></i>
 </button>
-
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-(function() {
+(function () {
   'use strict';
 
   /* Mobile nav */
   var navToggle = document.getElementById('navToggle');
-  var mainMenu = document.getElementById('mainMenu');
-  navToggle.addEventListener('click', function() {
-    mainMenu.classList.toggle('open');
-  });
-  mainMenu.querySelectorAll('a').forEach(function(a) {
-    a.addEventListener('click', function() { mainMenu.classList.remove('open'); });
+  var mainMenu  = document.getElementById('mainMenu');
+  navToggle.addEventListener('click', function () { mainMenu.classList.toggle('open'); });
+  mainMenu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { mainMenu.classList.remove('open'); });
   });
 
   /* Back to top */
   var backToTop = document.getElementById('backToTop');
-  window.addEventListener('scroll', function() {
-    if (window.pageYOffset > 400) {
-      backToTop.classList.add('visible');
-    } else {
-      backToTop.classList.remove('visible');
-    }
+  window.addEventListener('scroll', function () {
+    backToTop.classList.toggle('visible', window.pageYOffset > 400);
   });
-  backToTop.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  backToTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
   /* Scroll reveal */
-  var reveals = document.querySelectorAll('.reveal');
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
     });
   }, { threshold: 0.08 });
-  reveals.forEach(function(el) { observer.observe(el); });
+  document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
 
   /* Nav highlight */
   var sections = document.querySelectorAll('section[id]');
-  var navLinks = document.querySelectorAll('.main-menu a');
-  window.addEventListener('scroll', function() {
+  var navLinks  = document.querySelectorAll('.main-menu a');
+  window.addEventListener('scroll', function () {
     var scrollY = window.pageYOffset;
-    sections.forEach(function(sec) {
-      var top = sec.offsetTop - 120;
-      var height = sec.offsetHeight;
-      var id = sec.getAttribute('id');
+    sections.forEach(function (sec) {
+      var top  = sec.offsetTop - 100;
+      var id   = sec.getAttribute('id');
       var link = document.querySelector('.main-menu a[href="#' + id + '"]');
       if (!link) return;
-      if (scrollY >= top && scrollY < top + height) {
-        navLinks.forEach(function(l) { l.classList.remove('active'); });
+      if (scrollY >= top && scrollY < top + sec.offsetHeight) {
+        navLinks.forEach(function (l) { l.classList.remove('active'); });
         link.classList.add('active');
       }
     });
@@ -967,14 +902,13 @@ body::before {
   /* Toast */
   var toast = document.getElementById('toast');
   var toastTimer;
-  window.showToast = function(msg) {
+  window.showToast = function (msg) {
     toast.textContent = msg;
     toast.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 2200);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2200);
   };
-
-})();
+}());
 </script>
 </body>
 </html>
