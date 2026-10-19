@@ -667,6 +667,13 @@ img { max-width:100%; display:block; }
   justify-content:center;
   gap:8px;
   margin-top:20px;
+  flex-wrap:wrap;
+}
+.photo-pager .pager-gap {
+  color:var(--muted);
+  font-size:13px;
+  padding:0 2px;
+  user-select:none;
 }
 .photo-pager button {
   min-width:32px;
@@ -1125,6 +1132,105 @@ img { max-width:100%; display:block; }
 }
 .memo-detail-like-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
 .memo-detail-like-btn.liked { color:#e0245e; border-color:rgba(224,36,94,0.3); background:rgba(224,36,94,0.08); font-weight:600; }
+
+.memo-comment-badge {
+  font-size:12px; color:var(--muted); display:inline-flex; align-items:center; gap:4px;
+  padding:3px 8px; border-radius:12px; background:rgba(255,255,255,0.55);
+  transition:all .15s; border:1px solid transparent;
+}
+.memo-card:hover .memo-comment-badge { border-color:var(--border-soft); }
+
+/* 随记评论区 Comments Styling */
+.memo-comments-section {
+  margin-top:22px; padding-top:18px; border-top:1px dashed var(--border-soft);
+}
+.memo-comments-header {
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;
+}
+.memo-comments-title {
+  font-size:14px; font-weight:700; color:var(--text); display:inline-flex; align-items:center;
+}
+.memo-comments-count {
+  font-size:12px; font-weight:600; color:var(--muted); margin-left:4px;
+}
+.memo-comments-list {
+  display:flex; flex-direction:column; gap:10px; margin-bottom:18px;
+  max-height:300px; overflow-y:auto; padding-right:4px;
+}
+.memo-comments-list::-webkit-scrollbar { width:4px; }
+.memo-comments-list::-webkit-scrollbar-thumb { background:var(--border-soft); border-radius:10px; }
+.memo-comment-item {
+  display:flex; align-items:flex-start; gap:10px; padding:10px 12px;
+  background:rgba(255,255,255,0.65); border:1px solid var(--border-soft);
+  border-radius:8px; transition:all .18s ease;
+}
+.memo-comment-item:hover {
+  background:rgba(255,255,255,0.92); border-color:var(--border);
+}
+.memo-comment-avatar {
+  width:32px; height:32px; border-radius:50%; object-fit:cover; flex-shrink:0;
+  border:1px solid var(--border-soft); background:rgba(243,239,255,0.9);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; color:var(--accent); overflow:hidden;
+}
+.memo-comment-avatar img { width:100%; height:100%; object-fit:cover; }
+.memo-comment-body { flex:1; min-width:0; }
+.memo-comment-top {
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;
+}
+.memo-comment-author { font-size:13px; font-weight:600; color:var(--text); }
+.memo-comment-time { font-size:11px; color:var(--muted); }
+.memo-comment-text {
+  font-size:13px; color:var(--text-soft); line-height:1.6;
+  white-space:pre-wrap; word-break:break-word;
+}
+.memo-comment-photo-wrap {
+  margin-top:8px; display:inline-block; border-radius:6px; overflow:hidden;
+  border:1px solid var(--border-soft); max-width:140px; max-height:140px; cursor:pointer;
+}
+.memo-comment-photo-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+.memo-comment-del-btn {
+  background:none; border:none; cursor:pointer; color:var(--muted);
+  font-size:11px; margin-left:6px; padding:2px; opacity:0.6; transition:all .2s;
+}
+.memo-comment-del-btn:hover { color:#e0245e; opacity:1; }
+.memo-comment-empty {
+  text-align:center; padding:18px 10px; color:var(--muted); font-size:12.5px;
+  background:rgba(255,255,255,0.3); border-radius:8px; border:1px dashed var(--border-soft);
+}
+
+/* 评论表单 */
+.memo-comment-form {
+  background:rgba(255,255,255,0.7); border:1px solid var(--border-soft);
+  border-radius:10px; padding:12px 14px; display:flex; flex-direction:column; gap:8px;
+}
+.memo-comment-form-top { display:flex; align-items:center; gap:10px; }
+.memo-comment-name-input {
+  flex:1; background:rgba(255,255,255,0.9); border:1px solid var(--border-soft);
+  border-radius:6px; height:30px; padding:0 10px; font-size:12.5px;
+  font-family:var(--font-sans); color:var(--text); outline:none; transition:border-color .2s;
+}
+.memo-comment-name-input:focus { border-color:var(--accent); }
+.memo-comment-textarea {
+  width:100%; min-height:54px; resize:vertical; background:rgba(255,255,255,0.9);
+  border:1px solid var(--border-soft); border-radius:6px; padding:8px 10px;
+  font-size:12.5px; font-family:var(--font-sans); color:var(--text); line-height:1.6;
+  outline:none; transition:border-color .2s;
+}
+.memo-comment-textarea:focus { border-color:var(--accent); }
+.memo-comment-img-preview-wrap {
+  position:relative; display:inline-block; border-radius:6px; overflow:hidden;
+  border:1px solid var(--border-soft); max-width:120px; max-height:90px;
+}
+.memo-comment-img-preview-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+.memo-comment-form-bottom { display:flex; align-items:center; justify-content:space-between; }
+.memo-comment-submit-btn {
+  background:var(--accent); color:#fff; border:none; border-radius:6px;
+  padding:5px 14px; font-size:12px; font-weight:500; cursor:pointer;
+  display:inline-flex; align-items:center; gap:5px; transition:all .2s;
+}
+.memo-comment-submit-btn:hover { background:var(--accent-deep); }
+.memo-comment-submit-btn:disabled { opacity:0.6; cursor:not-allowed; }
 
 @media (max-width:960px) {
   #page-3 { align-items:center; height:auto; }
@@ -2036,6 +2142,43 @@ img { max-width:100%; display:block; }
         <i class="far fa-heart"></i> <span id="memoDetailLikeCount">0</span>
       </button>
     </div>
+
+    <!-- 随记评论区 Comments Section -->
+    <div class="memo-comments-section" id="memoCommentsSection">
+      <div class="memo-comments-header">
+        <span class="memo-comments-title"><i class="far fa-comments" style="color:var(--accent); margin-right:6px;"></i> 评论 <span class="memo-comments-count" id="memoCommentsCount">(0)</span></span>
+      </div>
+
+      <!-- 评论列表 -->
+      <div class="memo-comments-list" id="memoCommentsList"></div>
+
+      <!-- 评论发布表单 -->
+      <div class="memo-comment-form" id="memoCommentForm">
+        <div class="memo-comment-form-top">
+          <div class="memo-comment-avatar" id="memoCommentUserAvatar"><i class="fa fa-user"></i></div>
+          <input type="text" id="memoCommentNickname" class="memo-comment-name-input" placeholder="输入称呼 / ID" maxlength="20">
+        </div>
+        <textarea id="memoCommentContent" class="memo-comment-textarea" placeholder="写下你的评论或想法..." rows="2"></textarea>
+        
+        <!-- 评论配图预览 -->
+        <div class="memo-comment-img-preview-wrap" id="memoCommentImgWrap" style="display:none;">
+          <img id="memoCommentImgPreview" src="" alt="评论配图">
+          <button type="button" class="memo-remove-img-btn" id="memoCommentRemoveImgBtn" title="移除配图"><i class="fa fa-times"></i></button>
+        </div>
+
+        <div class="memo-comment-form-bottom">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button type="button" class="memo-tool-btn" id="memoCommentAttachImgBtn" title="添加评论配图">
+              <i class="far fa-image"></i> <span>图片</span>
+            </button>
+            <input type="file" id="memoCommentImgInput" accept="image/*" style="display:none;">
+          </div>
+          <button type="button" class="memo-comment-submit-btn" id="memoCommentSubmitBtn">
+            <i class="fa fa-paper-plane"></i> <span>发表评论</span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2601,6 +2744,29 @@ img { max-width:100%; display:block; }
       pager.innerHTML = '';
       if (totalPages <= 1) return;
 
+      // Compact window of page numbers once there are many pages
+      var pageNums = (function () {
+        if (totalPages <= 9) {
+          var all = [];
+          for (var i = 0; i < totalPages; i++) all.push(i);
+          return all;
+        }
+        var set = [0, totalPages - 1];
+        for (var d = -1; d <= 1; d++) {
+          var v = page + d;
+          if (v >= 0 && v < totalPages) set.push(v);
+        }
+        set.sort(function (a, b) { return a - b; });
+        var uniq = [];
+        set.forEach(function (v) { if (uniq.indexOf(v) < 0) uniq.push(v); });
+        var out = [];
+        for (var k = 0; k < uniq.length; k++) {
+          if (k > 0 && uniq[k] - uniq[k - 1] > 1) out.push(-1);
+          out.push(uniq[k]);
+        }
+        return out;
+      })();
+
       var prev = document.createElement('button');
       prev.className = 'pager-arrow';
       prev.innerHTML = '<i class="fa fa-chevron-left"></i>';
@@ -2608,16 +2774,20 @@ img { max-width:100%; display:block; }
       prev.addEventListener('click', function () { page--; render(); });
       pager.appendChild(prev);
 
-      for (var p = 0; p < totalPages; p++) {
+      pageNums.forEach(function (p) {
+        if (p < 0) {
+          var gap = document.createElement('span');
+          gap.className = 'pager-gap';
+          gap.textContent = '…';
+          pager.appendChild(gap);
+          return;
+        }
         var btn = document.createElement('button');
         btn.textContent = p + 1;
         if (p === page) btn.classList.add('active');
-        (function (target) {
-          btn.addEventListener('click', function () { page = target; render(); });
-        })(p);
+        btn.addEventListener('click', function () { page = p; render(); });
         pager.appendChild(btn);
-      }
-
+      });
       var next = document.createElement('button');
       next.className = 'pager-arrow';
       next.innerHTML = '<i class="fa fa-chevron-right"></i>';
@@ -2904,10 +3074,24 @@ img { max-width:100%; display:block; }
   var memoDetailLikeCount  = document.getElementById('memoDetailLikeCount');
   var memoDetailImgWrap    = document.getElementById('memoDetailImgWrap');
   var memoDetailImg        = document.getElementById('memoDetailImg');
+  var memoCommentsSection      = document.getElementById('memoCommentsSection');
+  var memoCommentsList         = document.getElementById('memoCommentsList');
+  var memoCommentsCount        = document.getElementById('memoCommentsCount');
+  var memoCommentUserAvatar    = document.getElementById('memoCommentUserAvatar');
+  var memoCommentNickname      = document.getElementById('memoCommentNickname');
+  var memoCommentContent       = document.getElementById('memoCommentContent');
+  var memoCommentAttachImgBtn  = document.getElementById('memoCommentAttachImgBtn');
+  var memoCommentImgInput      = document.getElementById('memoCommentImgInput');
+  var memoCommentImgWrap       = document.getElementById('memoCommentImgWrap');
+  var memoCommentImgPreview    = document.getElementById('memoCommentImgPreview');
+  var memoCommentRemoveImgBtn  = document.getElementById('memoCommentRemoveImgBtn');
+  var memoCommentSubmitBtn     = document.getElementById('memoCommentSubmitBtn');
   var toastEl              = document.getElementById('toast');
 
   var currentSelectedAvatar = ''; // base64 string for visitor avatar
   var currentSelectedPhoto  = ''; // base64 string for memo attached image
+  var currentCommentPhoto   = ''; // base64 string for comment attached image
+  var memoCommentCountsMap  = {};
   var activeDetailMemo = null;
 
   var toastTimer;
@@ -3166,6 +3350,26 @@ img { max-width:100%; display:block; }
       memoDetailDelWrap.innerHTML = '';
     }
 
+    // 初始化评论区表单
+    if (memoCommentNickname) {
+      if (isAdmin) {
+        memoCommentNickname.value = 'expe';
+        memoCommentNickname.readOnly = true;
+        if (memoCommentUserAvatar) memoCommentUserAvatar.innerHTML = '<img src="profile.jpg" alt="expe">';
+      } else {
+        memoCommentNickname.value = localStorage.getItem('gb_saved_name') || '';
+        memoCommentNickname.readOnly = false;
+        if (memoCommentUserAvatar) memoCommentUserAvatar.innerHTML = '<i class="fa fa-user"></i>';
+      }
+    }
+    if (memoCommentContent) memoCommentContent.value = '';
+    currentCommentPhoto = '';
+    if (memoCommentImgInput) memoCommentImgInput.value = '';
+    if (memoCommentImgPreview) memoCommentImgPreview.src = '';
+    if (memoCommentImgWrap) memoCommentImgWrap.style.display = 'none';
+
+    renderCommentsForMemo(memo.id);
+
     memoDetailModal.classList.add('active');
   }
 
@@ -3188,6 +3392,301 @@ img { max-width:100%; display:block; }
         memoDetailLikeBtn.classList.add('liked');
         memoDetailLikeBtn.querySelector('i').className = 'fa fa-heart';
       });
+    });
+  }
+
+  // ===== 随记评论业务逻辑 (Comments Operations) =====
+  function getLocalComments(memoId) {
+    try {
+      return JSON.parse(localStorage.getItem('memo_comments_' + memoId) || '[]');
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveLocalComments(memoId, list) {
+    try {
+      localStorage.setItem('memo_comments_' + memoId, JSON.stringify(list));
+    } catch (e) {}
+  }
+
+  async function fetchAllCommentCounts() {
+    memoCommentCountsMap = {};
+    if (cleanSbUrl && cleanSbKey) {
+      try {
+        var r = await fetch(cleanSbUrl + '/rest/v1/memo_comments?select=memo_id', {
+          headers: {
+            'apikey': cleanSbKey,
+            'Authorization': 'Bearer ' + cleanSbKey
+          }
+        });
+        if (r.ok) {
+          var data = await r.json();
+          if (Array.isArray(data)) {
+            data.forEach(function (it) {
+              var mid = String(it.memo_id);
+              memoCommentCountsMap[mid] = (memoCommentCountsMap[mid] || 0) + 1;
+            });
+            return;
+          }
+        }
+      } catch (e) {}
+    }
+    for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i);
+      if (k && k.indexOf('memo_comments_') === 0) {
+        var mid = k.replace('memo_comments_', '');
+        try {
+          var arr = JSON.parse(localStorage.getItem(k) || '[]');
+          if (Array.isArray(arr)) memoCommentCountsMap[mid] = arr.length;
+        } catch (err) {}
+      }
+    }
+  }
+
+  async function fetchCommentsForMemo(memoId) {
+    if (cleanSbUrl && cleanSbKey) {
+      try {
+        var r = await fetch(cleanSbUrl + '/rest/v1/memo_comments?memo_id=eq.' + memoId + '&order=created_at.asc', {
+          headers: {
+            'apikey': cleanSbKey,
+            'Authorization': 'Bearer ' + cleanSbKey
+          }
+        });
+        if (r.ok) {
+          var list = await r.json();
+          if (Array.isArray(list)) return list;
+        }
+      } catch (e) {
+        console.warn('Comments fetch error:', e);
+      }
+    }
+    return getLocalComments(memoId);
+  }
+
+  async function insertCommentForMemo(newComment) {
+    if (cleanSbUrl && cleanSbKey) {
+      try {
+        var r = await fetch(cleanSbUrl + '/rest/v1/memo_comments', {
+          method: 'POST',
+          headers: {
+            'apikey': cleanSbKey,
+            'Authorization': 'Bearer ' + cleanSbKey,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+          body: JSON.stringify(newComment)
+        });
+        if (r.ok) return { success: true };
+        var errData = await r.json().catch(function () { return {}; });
+        var errMsg = (errData.message || '').toLowerCase();
+        if (errMsg.indexOf('photo') >= 0 && newComment.photo) {
+          delete newComment.photo;
+          var rRetry = await fetch(cleanSbUrl + '/rest/v1/memo_comments', {
+            method: 'POST',
+            headers: {
+              'apikey': cleanSbKey,
+              'Authorization': 'Bearer ' + cleanSbKey,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=representation'
+            },
+            body: JSON.stringify(newComment)
+          });
+          if (rRetry.ok) return { success: true, photoOmitted: true };
+        }
+      } catch (e) {
+        console.warn('Comment post error, fallback to local:', e);
+      }
+    }
+    var list = getLocalComments(newComment.memo_id);
+    newComment.id = Date.now();
+    newComment.created_at = new Date().toISOString();
+    list.push(newComment);
+    saveLocalComments(newComment.memo_id, list);
+    return { success: true, localOnly: true };
+  }
+
+  async function deleteComment(commentId, memoId) {
+    if (!confirm('确定要删除这条评论吗？')) return;
+    if (cleanSbUrl && cleanSbKey) {
+      try {
+        await fetch(cleanSbUrl + '/rest/v1/memo_comments?id=eq.' + commentId, {
+          method: 'DELETE',
+          headers: {
+            'apikey': cleanSbKey,
+            'Authorization': 'Bearer ' + cleanSbKey
+          }
+        });
+      } catch (e) {}
+    }
+    var list = getLocalComments(memoId).filter(function (it) { return String(it.id) !== String(commentId); });
+    saveLocalComments(memoId, list);
+    showToast('评论已删除');
+    await renderCommentsForMemo(memoId);
+    await fetchAllCommentCounts();
+    renderGuestbook();
+  }
+
+  async function renderCommentsForMemo(memoId) {
+    if (!memoCommentsList) return;
+    memoCommentsList.innerHTML = '<div style="text-align:center; padding:12px; font-size:12px; color:var(--muted);"><i class="fa fa-spinner fa-spin"></i> 加载评论中...</div>';
+    var comments = await fetchCommentsForMemo(memoId);
+    if (memoCommentsCount) {
+      memoCommentsCount.textContent = '(' + comments.length + ')';
+    }
+    if (!comments.length) {
+      memoCommentsList.innerHTML = '<div class="memo-comment-empty">暂无评论，快来写下第一条想法吧～</div>';
+      return;
+    }
+
+    memoCommentsList.innerHTML = comments.map(function (c) {
+      var isMe = (c.is_admin || c.nickname === 'expe');
+      var avatarHtml = isMe
+        ? '<img src="profile.jpg" alt="expe">'
+        : (c.avatar ? '<img src="' + escHtml(c.avatar) + '" alt="' + escHtml(c.nickname) + '">' : '<span>' + escHtml((c.nickname || '匿').charAt(0).toUpperCase()) + '</span>');
+      var photoHtml = c.photo
+        ? '<div class="memo-comment-photo-wrap" onclick="window.open(\'' + escHtml(c.photo) + '\', \'_blank\')"><img src="' + escHtml(c.photo) + '" alt="评论配图"></div>'
+        : '';
+      var delBtnHtml = isAdmin
+        ? '<button type="button" class="memo-comment-del-btn" title="删除评论" data-cid="' + c.id + '"><i class="fa fa-times"></i></button>'
+        : '';
+
+      return '<div class="memo-comment-item" data-cid="' + c.id + '">' +
+        '<div class="memo-comment-avatar">' + avatarHtml + '</div>' +
+        '<div class="memo-comment-body">' +
+          '<div class="memo-comment-top">' +
+            '<div>' +
+              '<span class="memo-comment-author">' + escHtml(c.nickname || '匿名访客') + (isMe ? ' <span style="font-size:11px; color:var(--accent); font-weight:600;">(博主)</span>' : '') + '</span>' +
+              delBtnHtml +
+            '</div>' +
+            '<span class="memo-comment-time">' + formatTime(c.created_at) + '</span>' +
+          '</div>' +
+          '<div class="memo-comment-text">' + escHtml(c.content) + '</div>' +
+          photoHtml +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    if (isAdmin) {
+      memoCommentsList.querySelectorAll('.memo-comment-del-btn').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var cid = this.getAttribute('data-cid');
+          deleteComment(cid, memoId);
+        });
+      });
+    }
+  }
+
+  // 评论配图上传与智能前端压缩（最大边 1000px，JPEG 质量 0.80）
+  if (memoCommentAttachImgBtn && memoCommentImgInput) {
+    memoCommentAttachImgBtn.addEventListener('click', function () {
+      memoCommentImgInput.click();
+    });
+
+    memoCommentImgInput.addEventListener('change', function (e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+      if (!file.type.match('image.*')) {
+        showToast('请选择图片文件');
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function (evt) {
+        var img = new Image();
+        img.onload = function () {
+          var maxDim = 1000;
+          var w = img.width;
+          var h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          var canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          currentCommentPhoto = canvas.toDataURL('image/jpeg', 0.80);
+          if (memoCommentImgPreview) memoCommentImgPreview.src = currentCommentPhoto;
+          if (memoCommentImgWrap) memoCommentImgWrap.style.display = 'inline-block';
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (memoCommentRemoveImgBtn) {
+    memoCommentRemoveImgBtn.addEventListener('click', function () {
+      currentCommentPhoto = '';
+      if (memoCommentImgInput) memoCommentImgInput.value = '';
+      if (memoCommentImgPreview) memoCommentImgPreview.src = '';
+      if (memoCommentImgWrap) memoCommentImgWrap.style.display = 'none';
+    });
+  }
+
+  // 提交评论
+  if (memoCommentSubmitBtn) {
+    memoCommentSubmitBtn.addEventListener('click', async function () {
+      if (!activeDetailMemo) return;
+      var nickname = isAdmin ? 'expe' : (memoCommentNickname.value || '').trim();
+      var content = (memoCommentContent.value || '').trim();
+      if (!nickname) {
+        showToast('请先输入你的称呼 / ID');
+        memoCommentNickname.focus();
+        return;
+      }
+      if (!content) {
+        showToast('评论内容不能为空哦');
+        memoCommentContent.focus();
+        return;
+      }
+
+      if (!isAdmin) {
+        localStorage.setItem('gb_saved_name', nickname);
+      }
+
+      memoCommentSubmitBtn.disabled = true;
+      memoCommentSubmitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> 发送中...';
+
+      var newComment = {
+        memo_id: activeDetailMemo.id,
+        nickname: nickname,
+        content: content,
+        is_admin: isAdmin
+      };
+      if (currentCommentPhoto) {
+        newComment.photo = currentCommentPhoto;
+      }
+
+      try {
+        var res = await insertCommentForMemo(newComment);
+        if (res && res.photoOmitted) {
+          showToast('评论发表成功！（提示：数据库暂无photo字段）');
+        } else {
+          showToast('评论发表成功！✨');
+        }
+        memoCommentContent.value = '';
+        currentCommentPhoto = '';
+        if (memoCommentImgInput) memoCommentImgInput.value = '';
+        if (memoCommentImgPreview) memoCommentImgPreview.src = '';
+        if (memoCommentImgWrap) memoCommentImgWrap.style.display = 'none';
+
+        await renderCommentsForMemo(activeDetailMemo.id);
+        await fetchAllCommentCounts();
+        renderGuestbook();
+      } catch (err) {
+        alert('发表失败：' + (err.message || '网络异常'));
+      } finally {
+        memoCommentSubmitBtn.disabled = false;
+        memoCommentSubmitBtn.innerHTML = '<i class="fa fa-paper-plane"></i> <span>发表评论</span>';
+      }
     });
   }
 
@@ -3299,6 +3798,7 @@ img { max-width:100%; display:block; }
 
   async function renderGuestbook() {
     if (!gbList) return;
+    await fetchAllCommentCounts();
     var messages = await fetchMessages();
     allMemosCache = messages;
     if (!messages.length) {
@@ -3321,6 +3821,8 @@ img { max-width:100%; display:block; }
       var isLiked = likedSet.has(String(m.id));
       var likesCount = m.likes || 0;
       var photoThumbHtml = m.photo ? '<img class="memo-card-thumb" src="' + escHtml(m.photo) + '" alt="随记配图">' : '';
+      var commentCount = memoCommentCountsMap[String(m.id)] || 0;
+      var commentBadgeHtml = '<span class="memo-comment-badge" title="评论数"><i class="far fa-comment-dots"></i> <span>' + commentCount + '</span></span>';
 
       return '<div class="memo-card" data-id="' + m.id + '">' +
         '<div class="memo-card-avatar">' + avatarHtml + '</div>' +
@@ -3336,6 +3838,7 @@ img { max-width:100%; display:block; }
           '<span class="memo-like-badge ' + (isLiked ? 'liked' : '') + '">' +
             '<i class="' + (isLiked ? 'fa' : 'far') + ' fa-heart"></i> <span>' + likesCount + '</span>' +
           '</span>' +
+          commentBadgeHtml +
         '</div>' +
       '</div>';
     }).join('');
