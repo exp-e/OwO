@@ -1045,6 +1045,44 @@ img { max-width:100%; display:block; }
 .memo-submit-btn:hover { background:var(--accent-deep); transform:translateY(-1px); box-shadow:0 6px 18px rgba(113,57,218,0.35); }
 .memo-submit-btn:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
 
+.memo-tool-btn {
+  background:rgba(255,255,255,0.75); border:1px solid var(--border-soft);
+  border-radius:6px; height:28px; padding:0 9px; font-size:12px;
+  color:var(--text-soft); cursor:pointer; display:inline-flex; align-items:center; gap:5px;
+  transition:all .2s; font-family:var(--font-sans);
+}
+.memo-tool-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
+
+.memo-attached-img-wrap {
+  position:relative; display:inline-block; margin-bottom:12px;
+  border-radius:8px; overflow:hidden; border:1px solid var(--border-soft);
+  box-shadow:0 4px 14px rgba(113,57,218,0.08); max-width:200px; max-height:140px;
+}
+.memo-attached-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; max-height:140px; }
+.memo-remove-img-btn {
+  position:absolute; top:6px; right:6px; width:22px; height:22px; border-radius:50%;
+  background:rgba(0,0,0,0.65); color:#fff; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; font-size:11px;
+  transition:background .2s;
+}
+.memo-remove-img-btn:hover { background:#e0245e; }
+
+.memo-card-thumb {
+  width:56px; height:56px; border-radius:8px; object-fit:cover;
+  border:1px solid var(--border-soft); flex-shrink:0; margin-left:6px;
+  transition:transform .2s;
+}
+.memo-card:hover .memo-card-thumb { transform:scale(1.04); }
+
+.memo-detail-img-wrap {
+  margin-bottom:16px; border-radius:12px; overflow:hidden;
+  border:1px solid var(--border-soft); box-shadow:0 6px 20px rgba(113,57,218,0.10);
+  background:rgba(0,0,0,0.03); max-height:420px; display:flex; align-items:center; justify-content:center;
+}
+.memo-detail-img-wrap img {
+  max-width:100%; max-height:420px; object-fit:contain; display:block; border-radius:12px;
+}
+
 /* 随记详情全文弹窗 Modal */
 .memo-detail-overlay {
   position:fixed; inset:0; background:rgba(20,10,40,0.55);
@@ -1710,15 +1748,27 @@ img { max-width:100%; display:block; }
 
     <textarea id="gbContent" class="memo-textarea" placeholder="写下你的想法、探讨或随笔碎碎念（支持换行）..." rows="5"></textarea>
 
+    <!-- 配图预览区 -->
+    <div class="memo-attached-img-wrap" id="memoAttachedImgWrap" style="display:none;">
+      <img id="memoAttachedImgPreview" src="" alt="配图预览">
+      <button type="button" class="memo-remove-img-btn" id="memoRemoveImgBtn" title="移除配图"><i class="fa fa-times"></i></button>
+    </div>
+
     <div class="memo-editor-bottom">
-      <div class="memo-emojis" id="gbEmojis">
-        <span class="memo-emoji-btn" data-emoji="✨" title="星光">✨</span>
-        <span class="memo-emoji-btn" data-emoji="💡" title="灵感">💡</span>
-        <span class="memo-emoji-btn" data-emoji="☕" title="咖啡">☕</span>
-        <span class="memo-emoji-btn" data-emoji="🪐" title="量子轨道">🪐</span>
-        <span class="memo-emoji-btn" data-emoji="📚" title="研读">📚</span>
-        <span class="memo-emoji-btn" data-emoji="❤️" title="爱心">❤️</span>
-        <span class="memo-emoji-btn" data-emoji="👏" title="鼓掌">👏</span>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div class="memo-emojis" id="gbEmojis">
+          <span class="memo-emoji-btn" data-emoji="✨" title="星光">✨</span>
+          <span class="memo-emoji-btn" data-emoji="💡" title="灵感">💡</span>
+          <span class="memo-emoji-btn" data-emoji="☕" title="咖啡">☕</span>
+          <span class="memo-emoji-btn" data-emoji="🪐" title="量子轨道">🪐</span>
+          <span class="memo-emoji-btn" data-emoji="📚" title="研读">📚</span>
+          <span class="memo-emoji-btn" data-emoji="❤️" title="爱心">❤️</span>
+          <span class="memo-emoji-btn" data-emoji="👏" title="鼓掌">👏</span>
+        </div>
+        <button type="button" class="memo-tool-btn" id="memoAttachImgBtn" title="添加随记配图（可选）">
+          <i class="far fa-image"></i> <span>图片</span>
+        </button>
+        <input type="file" id="memoImgInput" accept="image/*" style="display:none;">
       </div>
       <button type="button" class="memo-submit-btn" id="gbSubmitBtn">
         <i class="fa fa-paper-plane"></i> <span>发布随记</span>
@@ -1739,55 +1789,14 @@ img { max-width:100%; display:block; }
       </div>
     </div>
     <div class="memo-detail-content" id="memoDetailContent"></div>
+    <div class="memo-detail-img-wrap" id="memoDetailImgWrap" style="display:none; margin-bottom:18px;">
+      <img id="memoDetailImg" src="" alt="随记配图">
+    </div>
     <div class="memo-detail-footer">
       <div id="memoDetailDelWrap"></div>
       <button type="button" class="memo-detail-like-btn" id="memoDetailLikeBtn">
         <i class="far fa-heart"></i> <span id="memoDetailLikeCount">0</span>
       </button>
-    </div>
-  </div>
-</div>
-<!-- Supabase Config Guide Modal -->
-<div class="gb-modal-overlay" id="gbConfigModal">
-  <div class="gb-modal-box">
-    <button class="modal-close" id="gbConfigModalClose"><i class="fa fa-times"></i></button>
-    <div class="gb-modal-title"><i class="fa fa-database" style="color:var(--accent);"></i> Supabase 云数据库配置</div>
-    <div class="gb-modal-desc">
-      当前留言板支持<strong>直连 Supabase</strong>，无需自建服务器，数据直接安全保存在你的云端数据库中。<br>
-      若尚未配置，留言将暂存在当前浏览器的<strong>本地演示存储</strong>中。
-    </div>
-    
-    <div style="font-size:12.5px; font-weight:600; color:var(--text); margin-bottom:6px;">步骤 1：在 Supabase 控制台的 SQL Editor 执行建表语句</div>
-    <div class="gb-code-box">
-      <button class="gb-copy-btn" id="gbCopySqlBtn">复制 SQL</button>
-      <pre id="gbSqlCode" style="margin:0; white-space:pre-wrap; font-family:inherit;">create table guestbook (
-  id bigint generated by default as identity primary key,
-  created_at timestamp with time zone default timezone('utc'::text, now()) not null,
-  nickname text not null,
-  content text not null,
-  is_admin boolean default false,
-  likes int default 0
-);
-
-alter table guestbook enable row level security;
-create policy "allow_read" on guestbook for select using (true);
-create policy "allow_insert" on guestbook for insert with check (true);
-create policy "allow_update" on guestbook for update using (true);
-create policy "allow_delete" on guestbook for delete using (true);</pre>
-    </div>
-
-    <div style="font-size:12.5px; font-weight:600; color:var(--text); margin-bottom:6px;">步骤 2：填入 Project API 凭证（在 Project Settings &rarr; API 获取）</div>
-    <div class="gb-form-field">
-      <label class="gb-form-label">Project URL</label>
-      <input type="text" id="cfgSupabaseUrl" class="gb-form-input" placeholder="https://xxxxxxxxxxxx.supabase.co">
-    </div>
-    <div class="gb-form-field">
-      <label class="gb-form-label">Anon / Public Key</label>
-      <input type="password" id="cfgSupabaseKey" class="gb-form-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
-    </div>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
-      <span style="font-size:11px; color:var(--muted);">凭证亦可直接写入 index.html 代码中</span>
-      <button type="button" class="gb-submit-btn" id="cfgSaveBtn"><i class="fa fa-check"></i> 保存并连接</button>
     </div>
   </div>
 </div>
@@ -2611,6 +2620,11 @@ create policy "allow_delete" on guestbook for delete using (true);</pre>
   var memoAvatarInput      = document.getElementById('memoAvatarInput');
   var memoAvatarPreview    = document.getElementById('memoAvatarPreview');
   var memoAvatarPlaceholder= document.getElementById('memoAvatarPlaceholder');
+  var memoAttachImgBtn     = document.getElementById('memoAttachImgBtn');
+  var memoImgInput         = document.getElementById('memoImgInput');
+  var memoAttachedImgWrap  = document.getElementById('memoAttachedImgWrap');
+  var memoAttachedImgPreview = document.getElementById('memoAttachedImgPreview');
+  var memoRemoveImgBtn     = document.getElementById('memoRemoveImgBtn');
   var memoDetailModal      = document.getElementById('memoDetailModal');
   var memoDetailClose      = document.getElementById('memoDetailClose');
   var memoDetailAvatar     = document.getElementById('memoDetailAvatar');
@@ -2620,9 +2634,12 @@ create policy "allow_delete" on guestbook for delete using (true);</pre>
   var memoDetailDelWrap    = document.getElementById('memoDetailDelWrap');
   var memoDetailLikeBtn    = document.getElementById('memoDetailLikeBtn');
   var memoDetailLikeCount  = document.getElementById('memoDetailLikeCount');
+  var memoDetailImgWrap    = document.getElementById('memoDetailImgWrap');
+  var memoDetailImg        = document.getElementById('memoDetailImg');
   var toastEl              = document.getElementById('toast');
 
   var currentSelectedAvatar = ''; // base64 string for visitor avatar
+  var currentSelectedPhoto  = ''; // base64 string for memo attached image
   var activeDetailMemo = null;
 
   var toastTimer;
@@ -2670,21 +2687,46 @@ create policy "allow_delete" on guestbook for delete using (true);</pre>
     }
   }
 
+  async function checkAdminPwd(inputPwd) {
+    if (!inputPwd) return false;
+    var trimmed = inputPwd.trim();
+    var savedCustom = localStorage.getItem('gb_admin_pwd');
+    if (savedCustom) return trimmed === savedCustom;
+    // 内置口令单向哈希（SHA-256），避免在前端源码中暴露明文密码
+    var DEFAULT_PWD_HASH = 'aaabf178d614ce04b74b580b94d3a5e9e3c7c94c4540bc3ea32db23b8249dd8e';
+    if (window.crypto && crypto.subtle) {
+      try {
+        var buf = new TextEncoder().encode(trimmed);
+        var hashBuf = await crypto.subtle.digest('SHA-256', buf);
+        var hex = Array.from(new Uint8Array(hashBuf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+        return hex === DEFAULT_PWD_HASH;
+      } catch (e) {}
+    }
+    return false;
+  }
+
   if (gbAdminBtn) {
-    gbAdminBtn.addEventListener('click', function () {
+    gbAdminBtn.addEventListener('click', async function () {
       if (isAdmin) {
-        if (confirm('当前已是博主身份，是否切换为普通访客身份？')) {
+        var opt = confirm('当前已是博主身份。\n点击【确定】切换回普通访客，点击【取消】修改博主口令。');
+        if (opt) {
           isAdmin = false;
           localStorage.setItem('gb_is_admin', 'false');
           updateAdminUI();
           renderGuestbook();
           showToast('已切换为普通访客');
+        } else {
+          var newPwd = prompt('请输入新的博主管理口令：');
+          if (newPwd && newPwd.trim()) {
+            localStorage.setItem('gb_admin_pwd', newPwd.trim());
+            showToast('博主口令已更新！');
+          }
         }
       } else {
-        var pwd = prompt('请输入博主认证口令（初始口令：expe888）：');
+        var pwd = prompt('请输入博主管理口令：');
         if (pwd === null) return;
-        var validPwd = localStorage.getItem('gb_admin_pwd') || 'expe888';
-        if (pwd === validPwd) {
+        var isMatch = await checkAdminPwd(pwd);
+        if (isMatch) {
           isAdmin = true;
           localStorage.setItem('gb_is_admin', 'true');
           updateAdminUI();
@@ -2737,6 +2779,59 @@ create policy "allow_delete" on guestbook for delete using (true);</pre>
     });
   }
 
+  // 随记配图上传与智能前端压缩（最大边 1200px，JPEG 质量 0.82，体积轻量稳定）
+  if (memoAttachImgBtn && memoImgInput) {
+    memoAttachImgBtn.addEventListener('click', function () {
+      memoImgInput.click();
+    });
+
+    memoImgInput.addEventListener('change', function (e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+      if (!file.type.match('image.*')) {
+        showToast('请选择图片文件');
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function (evt) {
+        var img = new Image();
+        img.onload = function () {
+          var maxDim = 1200;
+          var w = img.width;
+          var h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          var canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          currentSelectedPhoto = canvas.toDataURL('image/jpeg', 0.82);
+          if (memoAttachedImgPreview) memoAttachedImgPreview.src = currentSelectedPhoto;
+          if (memoAttachedImgWrap) memoAttachedImgWrap.style.display = 'inline-block';
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (memoRemoveImgBtn) {
+    memoRemoveImgBtn.addEventListener('click', function () {
+      currentSelectedPhoto = '';
+      if (memoImgInput) memoImgInput.value = '';
+      if (memoAttachedImgPreview) memoAttachedImgPreview.src = '';
+      if (memoAttachedImgWrap) memoAttachedImgWrap.style.display = 'none';
+    });
+  }
+
   // 打开/关闭写随记弹窗
   if (memoOpenEditorBtn && memoEditorModal) {
     memoOpenEditorBtn.addEventListener('click', function () {
@@ -2773,6 +2868,15 @@ create policy "allow_delete" on guestbook for delete using (true);</pre>
     memoDetailAuthor.textContent = memo.nickname || '匿名访客';
     memoDetailTime.textContent = formatTime(memo.created_at, true);
     memoDetailContent.textContent = memo.content || '';
+
+    // 随记配图
+    if (memo.photo && memoDetailImg && memoDetailImgWrap) {
+      memoDetailImg.src = memo.photo;
+      memoDetailImgWrap.style.display = 'flex';
+    } else if (memoDetailImgWrap) {
+      memoDetailImgWrap.style.display = 'none';
+      if (memoDetailImg) memoDetailImg.src = '';
+    }
 
     // 点赞状态
     var isLiked = likedSet.has(String(memo.id));
@@ -2930,6 +3034,7 @@ create policy "allow_delete" on guestbook for delete using (true);</pre>
 
       var isLiked = likedSet.has(String(m.id));
       var likesCount = m.likes || 0;
+      var photoThumbHtml = m.photo ? '<img class="memo-card-thumb" src="' + escHtml(m.photo) + '" alt="随记配图">' : '';
 
       return '<div class="memo-card" data-id="' + m.id + '">' +
         '<div class="memo-card-avatar">' + avatarHtml + '</div>' +
@@ -2941,6 +3046,7 @@ create policy "allow_delete" on guestbook for delete using (true);</pre>
           '<div class="memo-card-excerpt">' + escHtml(m.content) + '</div>' +
         '</div>' +
         '<div class="memo-card-side">' +
+          photoThumbHtml +
           '<span class="memo-like-badge ' + (isLiked ? 'liked' : '') + '">' +
             '<i class="' + (isLiked ? 'fa' : 'far') + ' fa-heart"></i> <span>' + likesCount + '</span>' +
           '</span>' +
@@ -3043,19 +3149,33 @@ create policy "allow_delete" on guestbook for delete using (true);</pre>
         newMsg.avatar = currentSelectedAvatar;
       }
 
+      // 随记配图支持
+      if (currentSelectedPhoto) {
+        newMsg.photo = currentSelectedPhoto;
+      }
+
       try {
         if (sbClient) {
           // 插入数据库
           var insertRes = await sbClient.from('guestbook').insert([newMsg]);
           if (insertRes.error) {
-            // 如果是因为数据库还没有 avatar 字段，自动降级不带 avatar 重新提交
-            if (insertRes.error.message && insertRes.error.message.indexOf('avatar') >= 0) {
-              delete newMsg.avatar;
+            var errMsg = (insertRes.error.message || '').toLowerCase();
+            // 如果是因为数据库还没有 photo 字段，自动降级并重试
+            if (errMsg.indexOf('photo') >= 0) {
+              delete newMsg.photo;
               var retry = await sbClient.from('guestbook').insert([newMsg]);
               if (retry.error) throw retry.error;
+              showToast('随记发布成功！（提示：数据库尚未添加photo字段，图片未保存）');
+            } else if (errMsg.indexOf('avatar') >= 0) {
+              delete newMsg.avatar;
+              var retry2 = await sbClient.from('guestbook').insert([newMsg]);
+              if (retry2.error) throw retry2.error;
+              showToast('随记发布成功！');
             } else {
               throw insertRes.error;
             }
+          } else {
+            showToast('随记发布成功！🎉');
           }
         } else {
           var list = getDemoMessages();
@@ -3063,15 +3183,19 @@ create policy "allow_delete" on guestbook for delete using (true);</pre>
           newMsg.created_at = new Date().toISOString();
           list.unshift(newMsg);
           saveDemoMessages(list);
+          showToast('随记发布成功！🎉');
         }
 
         gbContentInput.value = '';
         currentSelectedAvatar = '';
+        currentSelectedPhoto = '';
+        if (memoImgInput) memoImgInput.value = '';
+        if (memoAttachedImgPreview) memoAttachedImgPreview.src = '';
+        if (memoAttachedImgWrap) memoAttachedImgWrap.style.display = 'none';
         if (memoAvatarPreview && !isAdmin) memoAvatarPreview.style.display = 'none';
         if (memoAvatarPlaceholder && !isAdmin) memoAvatarPlaceholder.style.display = 'block';
 
         if (memoEditorModal) memoEditorModal.classList.remove('active');
-        showToast('随记发布成功！🎉');
         await renderGuestbook();
       } catch (err) {
         console.error('Submit error:', err);
