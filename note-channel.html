@@ -16,7 +16,7 @@ window.MathJax = {
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
 <style>
 :root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -156,7 +156,7 @@ img{max-width:100%;display:block;}
 <p>Notice that</p>
 <p>$$(1-2^{(\beta-1)N})^{2^{\alpha N}}=1-2^{\alpha N}2^{(\beta-1)N}+O((2^{\alpha N}2^{(\beta-1)N})^2)$$</p>
 <ol>
-<li>$\alpha+\beta-1>0$</li>
+<li>$\alpha+\beta-1&gt;0$</li>
 </ol>
 <p>Then $2^{(\alpha+\beta-1)N}\to\infty$, take ln:</p>
 <p>$$\lim_{N\to\infty}(1-2^{(\beta-1)N})^{2^{\alpha N}}=\exp(\lim_{N\to\infty}2^{\alpha N}\ln(1-2^{(\beta-1)N}))=\exp(-\lim_{N\to\infty}2^{(\alpha+\beta-1)N})=e^{-\infty}=0$$</p>
@@ -169,16 +169,16 @@ img{max-width:100%;display:block;}
 </ol>
 <p>$$\lim_{N\to\infty}2^{(1-(\beta+\alpha))N}\left(1-(1-2^{(\beta-1)N})^{2^{\alpha N}}\right)=1-(1-\frac{1}{2^{\alpha N}})^{2^{\alpha N}}=1-\frac{1}{e}$$</p>
 <ol>
-<li>$\alpha+\beta-1<0$</li>
+<li>$\alpha+\beta-1&lt;0$</li>
 </ol>
 <p>$$\lim_{N\to\infty}2^{(1-(\beta+\alpha))N}\left(1-(1-2^{(\beta-1)N})^{2^{\alpha N}}\right)=\lim_{N\to\infty}2^{(1-(\beta+\alpha))N}2^{\alpha N}2^{(\beta-1)N}=1$$</p>
 <p>This means we have high probability to guess correctly.</p>
-<p>From the limit calculation, we can find that the critical $\beta$ is $\boxed{\beta_{cric}=1-\alpha}$. When $\beta>\beta_{cric}$, too many information been discarded, the success probability drops to 0 exponentially.</p>
+<p>From the limit calculation, we can find that the critical $\beta$ is $\boxed{\beta_{cric}=1-\alpha}$. When $\beta&gt;\beta_{cric}$, too many information been discarded, the success probability drops to 0 exponentially.</p>
 <h3 id="sec-3">Relation with Entropy</h3>
 <h4 id="sec-4">Intuition</h4>
 <p>If $\beta=0$ or $\alpha N=1$ (or $\alpha=0$ under TDL), we know the correct $x$ for sure. The smaller $\alpha$ and $\beta$ are, the more information we know.</p>
 <p>The information of this game contains two steps, one lies in $S$, and the other lies in the last $(1-\beta)N$ bits. So $\alpha$ describes the information loss in step one, and $\beta$ describes the information loss in step two.</p>
-<p>When the total information loss is small, that is $\alpha+\beta<1$, we can recover the original $x$. That's the meaning for $\beta_{cric}=1-\alpha$</p>
+<p>When the total information loss is small, that is $\alpha+\beta&lt;1$, we can recover the original $x$. That's the meaning for $\beta_{cric}=1-\alpha$</p>
 <h4 id="sec-5">Conditional Shannon Entropy</h4>
 <p>The posterior possibility is uniform,</p>
 <p>$$P(x=X|y=Y)=\frac{1}{K_y}$$</p>
@@ -205,7 +205,7 @@ img{max-width:100%;display:block;}
 <p>$$\bar{H}(X|Y)=\sum_{m=0}^\infty e^{-\lambda}\frac{\lambda^m}{m!}\log_2(m+1)$$</p>
 <p>Classical on $\lambda=2^{(\alpha+\beta-1)N}$</p>
 <ol>
-<li>$\alpha+\beta-1>0\Rightarrow\lambda\to\infty$</li>
+<li>$\alpha+\beta-1&gt;0\Rightarrow\lambda\to\infty$</li>
 </ol>
 <p>$$\bar{H}(X|Y)=\log_2(2^{(\alpha+\beta-1)N})+O(\frac{1}{\lambda})\to\infty$$</p>
 <p>So</p>
@@ -216,7 +216,7 @@ img{max-width:100%;display:block;}
 <p>$$\bar{H}(X|Y)=\sum_{m=0}^\infty e^{-1}\frac{\log_2(m+1)}{m!}$$</p>
 <p>Since $\frac{\log_2(m+1)}{m!}\le\frac{m}{m!}$, the series converge.</p>
 <ol>
-<li>$\alpha+\beta-1<0\Rightarrow\lambda\to0$</li>
+<li>$\alpha+\beta-1&lt;0\Rightarrow\lambda\to0$</li>
 </ol>
 <p>$$\bar{H}(X|Y)=0,\quad 2^{-\bar{H}(X|Y)}=1$$</p>
 <p>This agrees with $P_{suc}=1$.</p>
@@ -244,7 +244,7 @@ img{max-width:100%;display:block;}
 <p>$$|I||F|\sim 2^{(\alpha_0+\alpha_m)N}$$</p>
 <p>By Rényi-2 entropy, the number of effective collision pairs is</p>
 <p>$$2^{H_2}=2^{\sigma N}$$</p>
-<p>Now we compare $2^{(\alpha_0+\alpha_m)N}$ and $2^{\sigma N}$ , if the possible pairs of collision is restricted, that is $2^{(\alpha_0+\alpha_m)N}<2^{\sigma N}$, or $\alpha_0+\alpha_m<\sigma$, we can recover the original block, otherwise we can't do it under TDL.</p>
+<p>Now we compare $2^{(\alpha_0+\alpha_m)N}$ and $2^{\sigma N}$ , if the possible pairs of collision is restricted, that is $2^{(\alpha_0+\alpha_m)N}&lt;2^{\sigma N}$, or $\alpha_0+\alpha_m&lt;\sigma$, we can recover the original block, otherwise we can't do it under TDL.</p>
 <p>The critical point is</p>
 <p>$$\alpha_0+\alpha_m=\sigma$$</p>
 <p>This is similar to the critical point in the informational guessing game:</p>
@@ -261,7 +261,7 @@ img{max-width:100%;display:block;}
 <p>This is like 2-energy system, where $E_0=0$ and $E_1=1$. We can also regard this bit flip error as original bit $\oplus$ random error bit:</p>
 <p>$$z_i=s_i\oplus r_i,\quad P(r_i=0)=\frac{1}{1+e^{-\beta}},\quad P(r_i=1)=\frac{e^{-\beta}}{1+e^{-\beta}}$$</p>
 <p>$r_i$ obeys Boltzmann distribution under reversed temperature $\beta$. In zero temperature, $P(r_i=0)=1$, the channel is accurate (strong measurement); In infinite temperature, $P(r_i=0)=P(r_i=1)=\frac{1}{2}$, the channel is totally random, code word $z$ carries no information, we can't decide the answer unless $2^{\alpha N}=1$ (or $\alpha=0$)</p>
-<p>$\beta$ controls the error rate, $\beta<\infty$ it is called weak measurement since the code word $s$ we got is not always the original code word $z$</p>
+<p>$\beta$ controls the error rate, $\beta&lt;\infty$ it is called weak measurement since the code word $s$ we got is not always the original code word $z$</p>
 <p>This is the binary symmetric channel, with bit flip probability</p>
 <p>$$p=\frac{e^{-\beta}}{1+e^{-\beta}}$$</p>
 <h3 id="sec-10">Fano Inequality</h3>
@@ -285,8 +285,8 @@ img{max-width:100%;display:block;}
 <p>$$\min_{x\in S}d(x,y)=d(x',y)$$</p>
 <p>For N-bit code word $s$, after passing through BSC, how many distance will the BSC make? Recall $z=s\oplus r$, $d(z,s)=d(r)$, and</p>
 <p>$$d(r)\sim B(N,p)$$</p>
-<p>Big number theory tells us for arbitrary $\delta>0$, we have</p>
-<p>$$\lim_{N\to\infty}P\left(d(r)>(1+\delta)Np\right)=0$$</p>
+<p>Big number theory tells us for arbitrary $\delta&gt;0$, we have</p>
+<p>$$\lim_{N\to\infty}P\left(d(r)&gt;(1+\delta)Np\right)=0$$</p>
 <p>So if we can show that no other code word in radius $Np$ Hamming ball $B_H(Np)$, our maximum likelihood decoder is success.</p>
 <p>$$|B_H(Np)|=\sum_{i=1}^{Np}C_N^i$$</p>
 <blockquote>Need to get the upper bond of $|B_H(Np)|$, this process is pure calculation.<br>Binomial expansion gets its maximum in the 1-p side, so<br>$$p^i(1-p)^{N-i}\ge p^{Np}(1-p)^{N-Np},\quad1\le i\le Np\le N/2$$<br>So<br>$$1=\sum_{i=1}^N C_N^i p^i(1-p)^{N-i}\ge\sum_{i=1}^{Np} C_N^i p^i(1-p)^{N-i}\ge\sum_{i=1}^{Np} C_N^i p^{Np}(1-p)^{N-Np}$$<br>$$1\ge|B_H(Np)|p^{Np}(1-p)^{N-Np}$$<br>$$|B_H(Np)|\le[p^{-p}(1-p)^{-(1-p)}]^N=2^{NH(p)}$$</blockquote>
@@ -295,11 +295,11 @@ img{max-width:100%;display:block;}
 <p>Total code word $2^N$, one code word enters into this Hamming ball with probability $P_1=2^{(H(p)-1)N}$</p>
 <p>Possibility that code word in S enter in this Hamming ball is</p>
 <p>$$P_{err}\le2^{\alpha N}P_1=2^{(\alpha+H(p)-1)N}$$</p>
-<p>When $1-H(p)>\alpha~\Rightarrow~P_{err}=0$, decode success.</p>
+<p>When $1-H(p)&gt;\alpha~\Rightarrow~P_{err}=0$, decode success.</p>
 <h3 id="sec-12">Critical Point</h3>
 <p>We know:</p>
-<p>$$\alpha<1-H(p),\quad success$$</p>
-<p>$$\alpha>\frac{1}{N}(H(Y)-H(Y|X)),\quad failure$$</p>
+<p>$$\alpha&lt;1-H(p),\quad success$$</p>
+<p>$$\alpha&gt;\frac{1}{N}(H(Y)-H(Y|X)),\quad failure$$</p>
 <p>Are there any connection between these two bond? Answer is: they can be set to equal, and the value is capacity.</p>
 <p>For one bit,</p>
 <p>$$P(x_i\neq y_i)=p,\quad P(x_i= y_i)=1-p$$</p>
@@ -309,7 +309,7 @@ img{max-width:100%;display:block;}
 <p>$$H(y_i)_{P(x_i=0)=0.5}=H(\frac{1}{2}p+\frac{1}{2}(1-p))=H(\frac{1}{2})=1$$</p>
 <p>This step means we modify the original information probability when using this BSC to make higher efficiency. Since the channel is symmetric, the optimal probability is $P(x_i=1)=P(x_i=0)=\frac{1}{2}$.</p>
 <p>Then the failure condition becomes:</p>
-<p>$$\alpha>1-H(p),\quad failure$$</p>
+<p>$$\alpha&gt;1-H(p),\quad failure$$</p>
 <p>There's no gap between successful bond and failure bond, so we can ensure the transition happens in</p>
 <p>$$\boxed{H(p)_{cric}+\alpha=1}$$</p>
 <p>Substitute</p>
@@ -325,11 +325,11 @@ img{max-width:100%;display:block;}
 <p>If we discard first $\beta N$ bits, then n-copies raise n times of exactly same $z$, it will not let the system distinguishable.</p>
 <p>But in BSC, it do have a better effect.</p>
 <h4 id="sec-15">Majority Vote</h4>
-<p>For flip probability $p<\frac{1}{2}$, if we receive 0,0,1,0,0,0 (n=6) in one bit, then we want to guess this bit to be 0 naturally. This method can let success probability higher.</p>
+<p>For flip probability $p&lt;\frac{1}{2}$, if we receive 0,0,1,0,0,0 (n=6) in one bit, then we want to guess this bit to be 0 naturally. This method can let success probability higher.</p>
 <p>The information procedure in majority vote method is</p>
 <p>$$original~string~X\xrightarrow{BSC^n}Y_1,...,Y_n\xrightarrow{vote}\bar{Y}\xrightarrow{max~likelihood}X'$$</p>
 <p>From X to Y forms a new BSC, now we calculate the new flip probability $q_n$. Majority vote is wrong means there's more than $\frac{n}{2}$ bit flip happens in original BSC(p):</p>
-<p>$$q_n=\sum_{i=n/2}^nC_n^ip^i(1-p)^{n-i}<p$$</p>
+<p>$$q_n=\sum_{i=n/2}^nC_n^ip^i(1-p)^{n-i}&lt;p$$</p>
 <p>Using this decoding method, the critical point shift to</p>
 <p>$$\boxed{H(q_n)_{cric}+\alpha=1}$$</p>
 <h4 id="sec-16">Capacity</h4>
@@ -382,23 +382,23 @@ img{max-width:100%;display:block;}
 <p>How to encode quantum information, hide it, corrupt it, yet still recover it. This is quantum error correction ;)</p>
 <p>I learned something in part one of "Surviving as a Quantum Computer in a Classical World" wrote by Daniel Gottesman.</p>
 <p>For example, 9-qubits</p>
-<p>$$\begin{aligned} |0\rangle \mapsto |\overline{0}\rangle &= \frac{1}{2\sqrt{2}}(|000\rangle + |111\rangle)(|000\rangle + |111\rangle)(|000\rangle + |111\rangle) \\ |1\rangle \mapsto |\overline{1}\rangle &= \frac{1}{2\sqrt{2}}(|000\rangle - |111\rangle)(|000\rangle - |111\rangle)(|000\rangle - |111\rangle). \end{aligned}$$</p>
+<p>$$\begin{aligned} |0\rangle \mapsto |\overline{0}\rangle &amp;= \frac{1}{2\sqrt{2}}(|000\rangle + |111\rangle)(|000\rangle + |111\rangle)(|000\rangle + |111\rangle) \\ |1\rangle \mapsto |\overline{1}\rangle &amp;= \frac{1}{2\sqrt{2}}(|000\rangle - |111\rangle)(|000\rangle - |111\rangle)(|000\rangle - |111\rangle). \end{aligned}$$</p>
 <p>It can solve bit flip and phase flip errors.</p>
 <p>Stabilizer of nine-qubit code:</p>
-<p>$$\begin{equation*}</p>
-<p>\begin{array}{ccccccccc}</p>
-<p>Z & Z &   &   &   &   &   &   &   \\</p>
-<p>& Z & Z &   &   &   &   &   &   \\</p>
-<p>&   &   & Z & Z &   &   &   &   \\</p>
-<p>&   &   &   & Z & Z &   &   &   \\</p>
-<p>&   &   &   &   &   & Z & Z &   \\</p>
-<p>&   &   &   &   &   &   & Z & Z \\</p>
-<p>X & X & X & X & X & X &   &   &   \\</p>
-<p>&   &   & X & X & X & X & X & X</p>
-<p>\end{array}</p>
-<p>\end{equation*}$$</p>
+<p>$$\begin{equation*}
+\begin{array}{ccccccccc}
+Z &amp; Z &amp;   &amp;   &amp;   &amp;   &amp;   &amp;   &amp;   \\
+&amp; Z &amp; Z &amp;   &amp;   &amp;   &amp;   &amp;   &amp;   \\
+&amp;   &amp;   &amp; Z &amp; Z &amp;   &amp;   &amp;   &amp;   \\
+&amp;   &amp;   &amp;   &amp; Z &amp; Z &amp;   &amp;   &amp;   \\
+&amp;   &amp;   &amp;   &amp;   &amp;   &amp; Z &amp; Z &amp;   \\
+&amp;   &amp;   &amp;   &amp;   &amp;   &amp;   &amp; Z &amp; Z \\
+X &amp; X &amp; X &amp; X &amp; X &amp; X &amp;   &amp;   &amp;   \\
+&amp;   &amp;   &amp; X &amp; X &amp; X &amp; X &amp; X &amp; X
+\end{array}
+\end{equation*}$$</p>
 <p>Stabilizer of five-qubit code:</p>
-<p>$$\begin{matrix} X & Z & Z & X & I \\ I & X & Z & Z & X \\ X & I & X & Z & Z \\ Z & X & I & X & Z \end{matrix}$$</p>
+<p>$$\begin{matrix} X &amp; Z &amp; Z &amp; X &amp; I \\ I &amp; X &amp; Z &amp; Z &amp; X \\ X &amp; I &amp; X &amp; Z &amp; Z \\ Z &amp; X &amp; I &amp; X &amp; Z \end{matrix}$$</p>
 <p>We can use projector to obtain $\ket{\bar{0}}$ and $\ket{\bar{1}}$, they are long.</p>
 <p>Both 9-qubit code and 5-qubit code have one logical qubit. Define $N(S)$ as below:</p>
 <p>$$N(S)=\{N\in P_N|NM=MN\quad\forall M\in S\}$$</p>

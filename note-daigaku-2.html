@@ -16,7 +16,7 @@ window.MathJax = {
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
 <style>
 :root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -138,18 +138,18 @@ img{max-width:100%;display:block;}
 <h4 id="sec-1">看书</h4>
 <h5 id="sec-2">一 力学准备</h5>
 <p>球坐标基矢微分关系(画图，立体几何问题)</p>
-<p>$$\begin{aligned}</p>
-<p>\mathrm{d} \vec{\mathbf{e}}_r &= \mathrm{d} \theta \vec{\mathbf{e}}_\theta + \mathrm{d} \phi \sin \theta \vec{\mathbf{e}}_\phi \\</p>
-<p>\mathrm{d} \vec{\mathbf{e}}_\theta &= -\mathrm{d} \theta \vec{\mathbf{e}}_r + \mathrm{d} \phi \cos \theta \vec{\mathbf{e}}_\phi \\</p>
-<p>\mathrm{d} \vec{\mathbf{e}}_\phi &= -\mathrm{d} \phi \left( \sin \theta \vec{\mathbf{e}}_r + \cos \theta \vec{\mathbf{e}}_\theta \right)</p>
-<p>\end{aligned}$$</p>
+<p>$$\begin{aligned}
+\mathrm{d} \vec{\mathbf{e}}_r &amp;= \mathrm{d} \theta \vec{\mathbf{e}}_\theta + \mathrm{d} \phi \sin \theta \vec{\mathbf{e}}_\phi \\
+\mathrm{d} \vec{\mathbf{e}}_\theta &amp;= -\mathrm{d} \theta \vec{\mathbf{e}}_r + \mathrm{d} \phi \cos \theta \vec{\mathbf{e}}_\phi \\
+\mathrm{d} \vec{\mathbf{e}}_\phi &amp;= -\mathrm{d} \phi \left( \sin \theta \vec{\mathbf{e}}_r + \cos \theta \vec{\mathbf{e}}_\theta \right)
+\end{aligned}$$</p>
 <p>由此，将$r\vec{e}_r$对时间求导两次后得到</p>
-<p>$$\begin{align}</p>
-<p>\vec{a} &= \ddot{x} \vec{\mathbf{e}}_x + \ddot{y} \vec{\mathbf{e}}_y + \ddot{z} \vec{\mathbf{e}}_z \\</p>
-<p>\vec{a} &= \left( \ddot{r} - r(\dot{\theta})^2 - r(\dot{\phi})^2 \sin^2\theta \right) \vec{\mathbf{e}}_r + \left( r\ddot{\theta} + 2\dot{r}\dot{\theta} - r \sin\theta \cos\theta (\dot{\phi})^2 \right) \vec{\mathbf{e}}_\theta \nonumber \\</p>
-<p>&\quad + \left( r\ddot{\phi} \sin\theta + 2\dot{r}\dot{\phi} \sin\theta + 2r\dot{\theta}\dot{\phi} \cos\theta \right) \vec{\mathbf{e}}_\phi \\</p>
-<p>\vec{a} &= \left( \ddot{\rho} - \rho(\dot{\phi})^2 \right) \vec{\mathbf{e}}_\rho + \left( \rho\ddot{\phi} + 2\dot{\rho}\dot{\phi} \right) \vec{\mathbf{e}}_\phi + \ddot{z} \vec{\mathbf{e}}_z</p>
-<p>\end{align}$$</p>
+<p>$$\begin{align}
+\vec{a} &amp;= \ddot{x} \vec{\mathbf{e}}_x + \ddot{y} \vec{\mathbf{e}}_y + \ddot{z} \vec{\mathbf{e}}_z \\
+\vec{a} &amp;= \left( \ddot{r} - r(\dot{\theta})^2 - r(\dot{\phi})^2 \sin^2\theta \right) \vec{\mathbf{e}}_r + \left( r\ddot{\theta} + 2\dot{r}\dot{\theta} - r \sin\theta \cos\theta (\dot{\phi})^2 \right) \vec{\mathbf{e}}_\theta \nonumber \\
+&amp;\quad + \left( r\ddot{\phi} \sin\theta + 2\dot{r}\dot{\phi} \sin\theta + 2r\dot{\theta}\dot{\phi} \cos\theta \right) \vec{\mathbf{e}}_\phi \\
+\vec{a} &amp;= \left( \ddot{\rho} - \rho(\dot{\phi})^2 \right) \vec{\mathbf{e}}_\rho + \left( \rho\ddot{\phi} + 2\dot{\rho}\dot{\phi} \right) \vec{\mathbf{e}}_\phi + \ddot{z} \vec{\mathbf{e}}_z
+\end{align}$$</p>
 <h5 id="sec-3">二变分</h5>
 <h5 id="sec-4">三 假想仕事原理</h5>
 <h5 id="sec-5">四 拉格朗日力学</h5>

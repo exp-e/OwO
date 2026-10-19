@@ -16,7 +16,7 @@ window.MathJax = {
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
 <style>
 :root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -123,12 +123,12 @@ img{max-width:100%;display:block;}
 <h3 id="sec-4">分离</h3>
 <h4 id="sec-5">普通</h4>
 <p>E TVS  A,B$\subseteq$E凸子空间，<span style="background:rgba(240, 200, 0, 0.2)">A开</span>，$A\cap B=\emptyset$</p>
-<p>那么$\exists f\in E^*$以及$\alpha\in\mathbb{R}$使得$\forall a\in A,b\in B,\quad Ref(a)<a\le Ref(b)$</p>
+<p>那么$\exists f\in E^*$以及$\alpha\in\mathbb{R}$使得$\forall a\in A,b\in B,\quad Ref(a)&lt;a\le Ref(b)$</p>
 <blockquote>怎么记呢，首先两个都必须是凸集，要不然没法分离了，然后一边取等一边不取等，不取等的那一边要求是开集<br>TVS的条件是为了造出闵可夫斯基泛函，在证明过程中我们要把它延拓</blockquote>
 <h4 id="sec-6">严格</h4>
 <p>E<span style="background:rgba(240, 200, 0, 0.2)">豪斯多夫l.c.s.</span> $A,B\subseteq E$凸，<span style="background:rgba(240, 200, 0, 0.2)">A紧B闭</span>，$A\cap B=\emptyset$</p>
 <p>那么$\exists f\in E^*,\alpha,\beta\in\mathbb{R}$使得</p>
-<p>$$\sup Ref(A)<\alpha<\beta<\inf Ref(B)$$</p>
+<p>$$\sup Ref(A)&lt;\alpha&lt;\beta&lt;\inf Ref(B)$$</p>
 <blockquote>怎么记呢，一个紧一个闭，紧的在小的那一侧<br>lcs的条件是为了在紧集上找一簇凸开覆盖</blockquote>
 <h3 id="sec-7">注释</h3>
 <p>连续线性泛函能区分某个点是否在闭包中</p>

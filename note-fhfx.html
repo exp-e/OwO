@@ -16,7 +16,7 @@ window.MathJax = {
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
 <style>
 :root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -101,11 +101,11 @@ img{max-width:100%;display:block;}
     </div>
     <div class="article-content">
 <p>赠送</p>
-<p>定理：Banach-Steinhauss：E是<span style="background:rgba(173, 239, 239, 0.55)">Banach</span>空间，F是<span style="background:rgba(173, 239, 239, 0.55)">赋范</span>空间，其中映射的范数$||u||=\sup_{x\in B_E}||u(x)||$。令$(u_i)_{i\in I}\subseteq B(E,F)$，若$\forall x\in E,\quad M(x)=\sup_{i\in I}||u_i(x)||<\infty$，则$\sup_{i\in I}||u_i||<\infty$</p>
+<p>定理：Banach-Steinhauss：E是<span style="background:rgba(173, 239, 239, 0.55)">Banach</span>空间，F是<span style="background:rgba(173, 239, 239, 0.55)">赋范</span>空间，其中映射的范数$||u||=\sup_{x\in B_E}||u(x)||$。令$(u_i)_{i\in I}\subseteq B(E,F)$，若$\forall x\in E,\quad M(x)=\sup_{i\in I}||u_i(x)||&lt;\infty$，则$\sup_{i\in I}||u_i||&lt;\infty$</p>
 <h3 id="sec-0">7.拓扑向量空间</h3>
 <p>定义：拓扑向量空间：E是K上的向量空间，$\tau$是E上的拓扑，若该拓扑使得加法和数乘连续，则称E为<span style="background:rgba(173, 239, 239, 0.55)">拓扑向量空间</span></p>
 <p>定义：平衡：若对任意的$|\lambda|\le1$，任意的$x\in A$，有$\lambda x\in A$则称A是<span style="background:rgba(173, 239, 239, 0.55)">平衡</span>的</p>
-<p>定义：吸收：若对任意的$x\in E$，存在常数$\alpha>0$，当取$|\lambda|\le\alpha$时有$\lambda x\in A$那么称A是<span style="background:rgba(173, 239, 239, 0.55)">吸收</span>的</p>
+<p>定义：吸收：若对任意的$x\in E$，存在常数$\alpha&gt;0$，当取$|\lambda|\le\alpha$时有$\lambda x\in A$那么称A是<span style="background:rgba(173, 239, 239, 0.55)">吸收</span>的</p>
 <p>定理：A是凸集或平衡集则$\bar{A}$是凸集或平衡集</p>
 <p>定理：A凸集则$\mathring A$凸</p>
 <p>定理：A平衡集且0在A的内部，则$\mathring A$平衡集</p>
@@ -117,7 +117,7 @@ img{max-width:100%;display:block;}
 <hr>
 <p>定义：一个拓扑向量空间E的原点有一组<u>由凸集组成的邻域基</u>则称其为<span style="background:rgba(173, 239, 239, 0.55)">局部凸空间</span></p>
 <p>定理：局部凸空间原点有<span style="background:rgba(173, 239, 239, 0.55)">凸、平衡</span>的开或闭邻域基</p>
-<p>（⭐）定义：闵可夫斯基泛函：E拓扑向量空间，Ω是原点处<span style="background:rgba(173, 239, 239, 0.55)">凸平衡</span>开邻域，$p_\Omega(x)=\inf\{\lambda>0|\frac{x}{\lambda}\in\Omega\}$</p>
+<p>（⭐）定义：闵可夫斯基泛函：E拓扑向量空间，Ω是原点处<span style="background:rgba(173, 239, 239, 0.55)">凸平衡</span>开邻域，$p_\Omega(x)=\inf\{\lambda&gt;0|\frac{x}{\lambda}\in\Omega\}$</p>
 <p>定理：闵可夫斯基泛函是半范数</p>
 <p>定理：在局部凸空间中取遍原点<span style="background:rgba(173, 239, 239, 0.55)">凸平衡开邻域基</span>给出的闵可夫斯基泛函构成的半范数族可以诱导出原拓扑</p>
 <p>例子：$C^\infty[0,1]$配备半范数$p_i(f)=\sup|f^{(i)}(t)|$、$C^\infty[0,1]^d$配备半范数$p_\alpha(f)=\sup|D^\alpha f(t)|$</p>
@@ -136,9 +136,9 @@ img{max-width:100%;display:block;}
 <p>推论：赋范空间上的保范延拓：E是K上的<span style="background:rgba(173, 239, 239, 0.55)">赋范空间</span>，F是向量子空间且f是F到K的<span style="background:rgba(173, 239, 239, 0.55)">连续线性</span>泛函，那么存在<span style="background:rgba(173, 239, 239, 0.55)">连续且保范</span>的线性延拓</p>
 <blockquote>注：赋范空间上f自控制，且有保范的结论</blockquote>
 <hr>
-<p>（⭐）定理：Hahn-Banach分离：E是<span style="background:rgba(173, 239, 239, 0.55)">拓扑向量空间</span>，A、B是E中不相交的非空<span style="background:rgba(173, 239, 239, 0.55)">凸</span>子集，若<span style="background:rgba(173, 239, 239, 0.55)">A开</span>，则存在$f\in E^*$及常数$\alpha\in\mathbb{R}$使得$Ref(A)<\alpha\le Ref(B)$</p>
-<p>（⭐）定理：Hahn-Banach严格分离：E<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，A、B是E中不交<span style="background:rgba(173, 239, 239, 0.55)">凸</span>子集，若<span style="background:rgba(173, 239, 239, 0.55)">A紧B闭</span>，则存在$f\in E^*$，常数$\alpha,\beta\in\mathbb{R}$使得$\sup Ref(A)<\alpha<\beta<\inf Ref(B)$</p>
-<p>推论：闭集-点分离：E是<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，B是<span style="background:rgba(173, 239, 239, 0.55)">平衡闭凸</span>集，$x_0\in E- B$，那么存在$f\in E^*$使得$f(x_0)>1$且$\sup_{x\in B}|f(x)|\le1$</p>
+<p>（⭐）定理：Hahn-Banach分离：E是<span style="background:rgba(173, 239, 239, 0.55)">拓扑向量空间</span>，A、B是E中不相交的非空<span style="background:rgba(173, 239, 239, 0.55)">凸</span>子集，若<span style="background:rgba(173, 239, 239, 0.55)">A开</span>，则存在$f\in E^*$及常数$\alpha\in\mathbb{R}$使得$Ref(A)&lt;\alpha\le Ref(B)$</p>
+<p>（⭐）定理：Hahn-Banach严格分离：E<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，A、B是E中不交<span style="background:rgba(173, 239, 239, 0.55)">凸</span>子集，若<span style="background:rgba(173, 239, 239, 0.55)">A紧B闭</span>，则存在$f\in E^*$，常数$\alpha,\beta\in\mathbb{R}$使得$\sup Ref(A)&lt;\alpha&lt;\beta&lt;\inf Ref(B)$</p>
+<p>推论：闭集-点分离：E是<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，B是<span style="background:rgba(173, 239, 239, 0.55)">平衡闭凸</span>集，$x_0\in E- B$，那么存在$f\in E^*$使得$f(x_0)&gt;1$且$\sup_{x\in B}|f(x)|\le1$</p>
 <p>推论：对偶空间可区分闭包：E是<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，F是<span style="background:rgba(173, 239, 239, 0.55)">向量子空间</span>，$x_0\in E$，则$x_0\in\bar{F}$当且仅当对任意$f\in E^*$，若满足$f|_F=0$则必有$f(x_0)=0$</p>
 <p>推论：Mazur定理：$(E,\tau_1)$和$(E,\tau_2)$都是<span style="background:rgba(173, 239, 239, 0.55)">豪斯多夫局部凸</span>空间，如果他们的对偶空间相同，那么在两个拓扑下<span style="background:rgba(173, 239, 239, 0.55)">凸集</span>闭包相等</p>
 <hr>
@@ -163,7 +163,7 @@ img{max-width:100%;display:block;}
 <p>定理：自反与对偶自反关系：<span style="background:rgba(173, 239, 239, 0.55)">Banach空间</span>自反当且仅当他的对偶自反</p>
 <p>定理：自反空间商闭集：E自反，F是<span style="background:rgba(173, 239, 239, 0.55)">闭</span>子空间，则$F$和$E/F$自反</p>
 <hr>
-<p>定义：弱* 拓扑开球：$V(x_1,...,x_n,\varepsilon)=\{x^*\in E^*:\max|x^*(x_i)|<\varepsilon\}$</p>
+<p>定义：弱* 拓扑开球：$V(x_1,...,x_n,\varepsilon)=\{x^*\in E^*:\max|x^*(x_i)|&lt;\varepsilon\}$</p>
 <p>（⭐）定理：Banach-Alaoglu：E赋范空间，则$E^*$的闭单位球<span style="background:rgba(173, 239, 239, 0.55)">弱* 紧</span></p>
 <p>（⭐）定理：Goldstine：E赋范空间，则$B_E$在$\bar{B}_{E^**}$中<span style="background:rgba(173, 239, 239, 0.55)">弱* 稠密</span></p>
 <p>推论：赋范空间自反充要条件：E赋范空间，E自反当且仅当闭单位球弱紧</p>
@@ -174,15 +174,15 @@ img{max-width:100%;display:block;}
 <li>弱* 紧=总是</li>
 </ol>
 <hr>
-<p>定理：Lp空间对偶：$1\le p<\infty,\frac{1}{p}+\frac{1}{q}=1,L_p^*\simeq L_q$</p>
+<p>定理：Lp空间对偶：$1\le p&lt;\infty,\frac{1}{p}+\frac{1}{q}=1,L_p^*\simeq L_q$</p>
 <blockquote>后面那个大家都知道，记忆的重点是p的取值范围，可以取1不能取∞</blockquote>
-<p>注：$L_p(1<p<2)$一致凸，一致凸空间自反</p>
-<p>推论：Lp空间自反：$1< p<\infty$则Lp自反</p>
+<p>注：$L_p(1&lt;p&lt;2)$一致凸，一致凸空间自反</p>
+<p>推论：Lp空间自反：$1&lt; p&lt;\infty$则Lp自反</p>
 <h3 id="sec-3">10.正则Borel测度和Riesz表示定理</h3>
 <p>本章X总是局部紧豪斯多夫空间</p>
 <p>引理：介于紧集与开集之间的函数：<span style="background:rgba(173, 239, 239, 0.55)">K紧O开</span>，则存在$f\in C_c(X)$使得$K\prec f\prec O$</p>
 <p>引理：单位分解：K紧$O_1,...,O_n$开，且$K\subset O_1\cup...\cup O_n$，则存在$f_1,...,f_n\in C_c(X)$，使得$f_k\prec O_k,1\le k\le n$且在K上$f_1+...+f_n=1$</p>
-<p>定义：局部有限测度：局部紧豪斯多夫空间上的Borel σ-代数上的正测度，对任何紧集K都有$\mu(K)<\infty$</p>
+<p>定义：局部有限测度：局部紧豪斯多夫空间上的Borel σ-代数上的正测度，对任何紧集K都有$\mu(K)&lt;\infty$</p>
 <blockquote>注：等价于任何点均有一个测度有限的邻域</blockquote>
 <p>定义：正线性泛函：$\varphi: C_c(X)\to\mathbb{C}$对任意$f\ge0$都有$\varphi(f)\ge0$</p>
 <p>（⭐）定义：Riesz表示定理：$\varphi$是$C_c(X)$上的<span style="background:rgba(173, 239, 239, 0.55)">正线性泛函</span>，则存在X上的σ-代数A使得$B\subset A$且有A上唯一<span style="background:rgba(173, 239, 239, 0.55)">正测度</span>$\mu$使得</p>
@@ -197,14 +197,14 @@ img{max-width:100%;display:block;}
 <p>定义：外正则：$\mu$是B上正测度，对B中任意元素A有$\mu(A)=\inf\{\mu(O):A\subset O,O~open\}$</p>
 <p>定义：内正则：$\mu$是B上正测度，对B中任意元素A有$\mu(A)=\sup\{\mu(K):K\subset A,K~compact\}$</p>
 <p>定义：复正则：定义为$|\mu|$正则</p>
-<p>定理：X是局部紧豪斯多夫空间，$\mu$是X上局部有限正则Borel正测度，则对任意$0<p<\infty$，$C_c(X)$在$L_p(X,B,\mu)$中稠密，若$\mu$是σ-有限的，则$C_c(X)$在$L_\infty(X,B,\mu)$中弱* 稠密</p>
+<p>定理：X是局部紧豪斯多夫空间，$\mu$是X上局部有限正则Borel正测度，则对任意$0&lt;p&lt;\infty$，$C_c(X)$在$L_p(X,B,\mu)$中稠密，若$\mu$是σ-有限的，则$C_c(X)$在$L_\infty(X,B,\mu)$中弱* 稠密</p>
 <blockquote>注：σ-有限：这个测度空间可以表示为可数个有限测度集合的并</blockquote>
 <p>定义：σ-紧：拓扑空间X是其<span style="background:rgba(173, 239, 239, 0.55)">可数</span>多个<span style="background:rgba(173, 239, 239, 0.55)">紧</span>子集的并</p>
-<p>定理：Radon-Nikodym：$\mu,\nu$是两个σ-有限测度，如果$\nu<<\mu$，那么存在非负可测函数$f:X\to[0,\infty)$使得对于任意可测集$E\in\mathcal{A}$都有$\nu(E)=\int_E fd\mu$</p>
+<p>定理：Radon-Nikodym：$\mu,\nu$是两个σ-有限测度，如果$\nu&lt;&lt;\mu$，那么存在非负可测函数$f:X\to[0,\infty)$使得对于任意可测集$E\in\mathcal{A}$都有$\nu(E)=\int_E fd\mu$</p>
 <blockquote>注：对复测度，存在h满足$|h|=1$几乎处处成立且$d\mu=hd|\mu|$，也成为μ的极分解</blockquote>
 <p>（⭐）定理：C0对偶空间为测度空间：对$C_0(X)$上每一个<span style="background:rgba(173, 239, 239, 0.55)">连续线性</span>泛函$\varphi$都存在X上唯一<span style="background:rgba(173, 239, 239, 0.55)">正则复</span>Borel测度$\mu$使得$\varphi=\varphi_\mu$且$||\varphi||=||\mu||$进而在等距同构意义下$C_0(X)^*\simeq M(X)$</p>
 <h3 id="sec-4">11.紧算子</h3>
-<p>定义：有限秩$\mathcal{F}_r$：E、F是Banach空间，T:E→F是连续的且$dimT(E)<\infty$</p>
+<p>定义：有限秩$\mathcal{F}_r$：E、F是Banach空间，T:E→F是连续的且$dimT(E)&lt;\infty$</p>
 <p>定义：紧算子$\mathcal{K}$：$T(B_E)$相对紧</p>
 <p>定理：紧算子的充要条件：$T\in B(E,F)$，T紧当且仅当T* 紧</p>
 <p>定理：希尔伯特空间有限秩算子与紧算子关系：H是希尔伯特空间则$\overline{\mathcal{F}_r(H)}=\mathcal{K}(H)$</p>

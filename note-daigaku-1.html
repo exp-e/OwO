@@ -16,7 +16,7 @@ window.MathJax = {
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
 <style>
 :root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -131,11 +131,11 @@ img{max-width:100%;display:block;}
 <p>这是因为根据定义将完全平方展开后，交叉项为0，仅余二次项。同理，角动量也由质心角动量和相对质心角动量和两部分构成。</p>
 <p>刚体</p>
 <p>$$T=\frac{1}{2}\vec{w}^TI\vec{w}$$</p>
-<p>$$ I =\begin{pmatrix}</p>
-<p>m(y^2+z^2)&-mxy&-mxz\\</p>
-<p>-myx&m(x^2+z^2)&-myz\\</p>
-<p>-mzx&-mzy&m(x^2+y^2)</p>
-<p>\end{pmatrix}$$</p>
+<p>$$ I =\begin{pmatrix}
+m(y^2+z^2)&amp;-mxy&amp;-mxz\\
+-myx&amp;m(x^2+z^2)&amp;-myz\\
+-mzx&amp;-mzy&amp;m(x^2+y^2)
+\end{pmatrix}$$</p>
 <p>$$\frac{dL}{dt}=I_z\frac{dw}{dt}$$</p>
 <p>这玩意就是角牛二</p>
 <p>平行轴定理：一定是相对质心轴的移动！这样交叉项才能被消掉(从单调性也可以看出，直觉上来看确实是质心转动惯量最小)</p>

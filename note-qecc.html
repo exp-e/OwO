@@ -16,7 +16,7 @@ window.MathJax = {
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
 <style>
 :root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -112,12 +112,12 @@ img{max-width:100%;display:block;}
 <p>pdf下载： https://pan.baidu.com/s/1AVoIezjcrJfcwfovxBQ0bQ?pwd=3316 提取码: 3316</p>
 <p>这一张主要围绕对称群构造了另一种纠错方式，叫stabilizer codes</p>
 <h3 id="sec-0">9-Qubit</h3>
-<p>$$\begin{aligned} |0\rangle \mapsto |\overline{0}\rangle &= \frac{1}{2\sqrt{2}}(|000\rangle + |111\rangle)(|000\rangle + |111\rangle)(|000\rangle + |111\rangle) \\ |1\rangle \mapsto |\overline{1}\rangle &= \frac{1}{2\sqrt{2}}(|000\rangle - |111\rangle)(|000\rangle - |111\rangle)(|000\rangle - |111\rangle). \end{aligned}$$</p>
+<p>$$\begin{aligned} |0\rangle \mapsto |\overline{0}\rangle &amp;= \frac{1}{2\sqrt{2}}(|000\rangle + |111\rangle)(|000\rangle + |111\rangle)(|000\rangle + |111\rangle) \\ |1\rangle \mapsto |\overline{1}\rangle &amp;= \frac{1}{2\sqrt{2}}(|000\rangle - |111\rangle)(|000\rangle - |111\rangle)(|000\rangle - |111\rangle). \end{aligned}$$</p>
 <p>9-Qubit可以解决比特翻转错误和相位翻转错误同时发生的问题，<mark style="background:rgba(74, 82, 199, 0.2)">首先在3qubit中找出是否发生比特翻转错误，然后我们将这组3qubit在另外两组3qubit中对比以查看是否有相位翻转错误</mark>($\ket{0}+\ket{1}$与$\ket{0}-\ket{1}$)</p>
 <h4 id="sec-1">比特翻转</h4>
 <p>用Z矩阵(diag(1,-1))去测量</p>
 <p>在第一步检查比特翻转时，我们先检查前两个qubit是否一致，再检查后两个qubit是否一致，这一步可以视作在两个qubit上测量$Z\otimes Z$的特征值</p>
-<p>$$Z \otimes Z = \begin{pmatrix} +1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & +1 \end{pmatrix} \begin{matrix} 00 \text{ (even)} \\ 01 \text{ (odd)} \\ 10 \text{ (odd)} \\ 11 \text{ (even)} \end{matrix}$$</p>
+<p>$$Z \otimes Z = \begin{pmatrix} +1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; -1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; +1 \end{pmatrix} \begin{matrix} 00 \text{ (even)} \\ 01 \text{ (odd)} \\ 10 \text{ (odd)} \\ 11 \text{ (even)} \end{matrix}$$</p>
 <p>+1意味着偶宇称(parity)，-1意味着奇宇称，在三个qubit上我们总共测量的是$Z\otimes Z\otimes I$和$Z\otimes I\otimes Z$</p>
 <h4 id="sec-2">相位翻转</h4>
 <p>用X矩阵(0 1; 1 0)测量，这个矩阵可以翻转0与1</p>
@@ -173,7 +173,7 @@ img{max-width:100%;display:block;}
 <p>由stabilizer code定义code space时，当然可以用+1特征空间来定义，也可以用-1特征空间来定义，只需将$M_i$替换成$-M_i$即可，它仍在$P_n$内</p>
 <h3 id="sec-5">5-Qubit</h3>
 <p>这是5qubit的stabilizer生成元</p>
-<p>$$\begin{matrix} X & Z & Z & X & I \\ I & X & Z & Z & X \\ X & I & X & Z & Z \\ Z & X & I & X & Z \end{matrix}$$</p>
+<p>$$\begin{matrix} X &amp; Z &amp; Z &amp; X &amp; I \\ I &amp; X &amp; Z &amp; Z &amp; X \\ X &amp; I &amp; X &amp; Z &amp; Z \\ Z &amp; X &amp; I &amp; X &amp; Z \end{matrix}$$</p>
 <p>可以看出他是循环对称的，并且最后一个循环的结果ZZXIX不在表中但他仍然是个stabilizer，因为它可以通过上述四个生成元相乘得到。事实上这四个生成元可以从五种循环样式中任选四个来得到</p>
 <p>我们知道code words是stabilizer的不变子空间，现在希望找到这个子空间所对应的投影算符</p>
 <p>生成元$M_i$的+1本征空间投影算符是$(I+M_i)/2$，所以当有r个生成元时，S的投影算符为</p>
@@ -232,7 +232,7 @@ img{max-width:100%;display:block;}
 <p>命题：Stabilizer code S对于错误集$\mathcal{E}$是简并的当且仅当$\exists E_1,E_2\in\mathcal{E}$使得$E_1^\dagger E_2\in S$</p>
 <p>我们可以考虑距离来定义简并性，作为码空间属性，而不指代特定的错误集</p>
 <p>如果码用来检测错误而不是纠正错误，我们可以更明智的定义简并</p>
-<p>定义：Stabilizer code S具有距离d，是简并的当$\exists M\in S, M\neq I,~wt~M<d$</p>
+<p>定义：Stabilizer code S具有距离d，是简并的当$\exists M\in S, M\neq I,~wt~M&lt;d$</p>
 <p>这比一般的概念要略宽泛一些，一个距离为$2t+2$的stabilizer code，如果包含权重为2t+1的元素，就算作简并，但是在一般的non-stabilizer QECC中偶数距离没有定义简并性</p>
 <p>再回顾9比特码stabilizer，可以发现他也是简并的，因为它有许多权重为2的生成元但是码距为3.有的时候你不能单通过生成元来判定稳定器非退化，因为有可能乘积后的权重变小</p>
 <p>5比特码是非退化的，但是需要额外的证明</p>
@@ -302,14 +302,14 @@ img{max-width:100%;display:block;}
 <h3 id="sec-11">二元辛表示</h3>
 <p>$\hat{P}_n$的结构非常简单，它有$4^n$个元素，且是阿贝尔的，因此$\hat{P}_n\simeq \mathbb{Z}^{2n}_n$，后者的群运算通常写成加法。我们选择将$\hat{P}_n$的元素表示为两个n比特01向量，一个代表X分量一个代表Z分量</p>
 <p>定义：$\hat{P}_n$的二元辛表示是$\hat{P}_n$与$\mathbb{Z}_2^n\times\mathbb{Z}_2^n$之间的同构：$P\leftrightarrow v_P=(x_P|z_P)$，如果P作用在第i个qubit上是I或Z则对应的$x_P$为0，X或Y则为1；I或X $z_P$ 0，Y或Z $z_P$ 1，也就是</p>
-<p>$$</p>
-<p>\begin{aligned}</p>
-<p>I &\longleftrightarrow (0|0) \\</p>
-<p>X &\longleftrightarrow (1|0) \\</p>
-<p>Y &\longleftrightarrow (1|1) \\</p>
-<p>Z &\longleftrightarrow (0|1)</p>
-<p>\end{aligned}</p>
-<p>$$</p>
+<p>$$
+\begin{aligned}
+I &amp;\longleftrightarrow (0|0) \\
+X &amp;\longleftrightarrow (1|0) \\
+Y &amp;\longleftrightarrow (1|1) \\
+Z &amp;\longleftrightarrow (0|1)
+\end{aligned}
+$$</p>
 <p>$$X\otimes I\otimes Y\leftrightarrow (101|001)$$</p>
 <p>辛指的是对易性或反对易性</p>
 <p>定义：$\mathbb{Z}_2^n\times\mathbb{Z}_2^n$上的辛形式（或辛内积）定义为</p>
@@ -354,7 +354,7 @@ img{max-width:100%;display:block;}
 <p>如果 $M \in \mathsf{S}$，那么对于任何 $|\psi\rangle \in \mathcal{T}(\mathsf{S})$，显然有 $M|\psi\rangle = |\psi\rangle$，因此 $\mathsf{S} \subseteq \mathsf{S}(\mathcal{T}(\mathsf{S}))$。</p>
 <p>我们需要证明的是，如果 $N \notin \mathsf{S}$，那么 $N \notin \mathsf{S}(\mathcal{T}(\mathsf{S}))$。如果 $N \notin \mathsf{N}(\mathsf{S})$，那么$N|\psi\rangle$和某个 $M \in \mathsf{S}$具有不同的特征值，因此与码空间正交，这反过来意味着 $N \notin \mathsf{S}(\mathcal{T}(\mathsf{S}))$。</p>
 <p>如果 $\mathsf{S}$ 有 $n$ 个生成元，那么证明到此为止。</p>
-<p>否则，如果 $r < n$，我们仍需证明：若 $N \in \mathsf{N}(\mathsf{S}) \setminus \mathsf{S}$，则存在某个 $|\psi\rangle \in \mathcal{T}(\mathsf{S})$ 使得 $N|\psi\rangle \neq |\psi\rangle$。根据引理 3.15，我们可以选择一个 $M \in \mathsf{N}(\mathsf{S}) \setminus \mathsf{S}$ 使得 $\{M, N\} = 0$。</p>
+<p>否则，如果 $r &lt; n$，我们仍需证明：若 $N \in \mathsf{N}(\mathsf{S}) \setminus \mathsf{S}$，则存在某个 $|\psi\rangle \in \mathcal{T}(\mathsf{S})$ 使得 $N|\psi\rangle \neq |\psi\rangle$。根据引理 3.15，我们可以选择一个 $M \in \mathsf{N}(\mathsf{S}) \setminus \mathsf{S}$ 使得 $\{M, N\} = 0$。</p>
 <p>考虑由 $\mathsf{S}$ 加上 $M$ 作为新生成元所形成的修正稳定子 $\mathsf{S}'$。$\mathsf{S}'$ 拥有 $r + 1$ 个生成元，因此其码空间维数为 $2^{k-1}$。由于 $k \ge 1$，在 $\mathsf{S}'$ 中至少存在一个状态 $|\psi\rangle$（不考虑归一化）。$|\psi\rangle$ 被 $\mathsf{S}'$ 的所有元素固定，特别地，也被$\mathsf{S}\subset\mathsf{S}'$固定</p>
 <p>因此$|\psi\rangle \in \mathcal{T}(\mathsf{S})$，但是N与稳定子M反对称，说明$N\ket\psi$对M有-1特征值，垂直于$\ket{\psi}$，所以$N \notin \mathsf{S}(\mathcal{T}(\mathsf{S}))$，证毕。</p>
 <hr>

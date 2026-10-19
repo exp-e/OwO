@@ -16,7 +16,7 @@ window.MathJax = {
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
 <style>
 :root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -134,7 +134,7 @@ img{max-width:100%;display:block;}
 <p>定义磁化强度$M=\frac{1}{N}\sum s_i,\quad\braket{M}=\sum P(s) M(s)$，下面为了方便起见只使用后者（平均值），并且不写尖括号</p>
 <p>假设系统满足全自旋翻转的Z2对称性，并且假设V(M)光滑解析，那么可以写成偶展开式</p>
 <p>$$V(M)=v_0+v_2M^2+v_4M^4+...$$</p>
-<p>进一步假设最少个数的非零参数，记$v_2=a(T-T_c)$，为了保持势下有界，再来个$v_4=b>0$，其他的参数均为零，得到</p>
+<p>进一步假设最少个数的非零参数，记$v_2=a(T-T_c)$，为了保持势下有界，再来个$v_4=b&gt;0$，其他的参数均为零，得到</p>
 <p>$$V(M)=a(T-T_c)M^2+bM^4$$</p>
 <p>这个势表示当温度高于临界温度时，势能是一个向上的U形；当温度小于临界温度时，势能是一个墨西哥帽的截面，此时基态M二重简并，系统是有序相</p>
 <h4 id="sec-2">一维横场Ising模型(1D TFIM)</h4>
@@ -144,11 +144,11 @@ img{max-width:100%;display:block;}
 <p>平移操作更复杂，由多个局部两两swap构成。单个swap算符是这样</p>
 <p>$$P_{i,i+1}=\frac{1}{2}(I+X_iX_{i+1}+Y_iY_{i+1}+Z_iZ_{i+1})$$</p>
 <p>我们可以具体写出矩阵形式来看出这是SWAP</p>
-<p>$I = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$</p>
-<p>$\sigma^z \otimes \sigma^z = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$</p>
-<p>$\sigma^x \otimes \sigma^x = \begin{pmatrix} 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 \end{pmatrix}$</p>
-<p>$\sigma^y \otimes \sigma^y = \begin{pmatrix} 0 & 0 & 0 & -1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ -1 & 0 & 0 & 0 \end{pmatrix}$</p>
-<p>$$P_{1,2} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$$</p>
+<p>$I = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}$</p>
+<p>$\sigma^z \otimes \sigma^z = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; -1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}$</p>
+<p>$\sigma^x \otimes \sigma^x = \begin{pmatrix} 0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}$</p>
+<p>$\sigma^y \otimes \sigma^y = \begin{pmatrix} 0 &amp; 0 &amp; 0 &amp; -1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ -1 &amp; 0 &amp; 0 &amp; 0 \end{pmatrix}$</p>
+<p>$$P_{1,2} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}$$</p>
 <p>对角线上的元素是代表着两个自旋相同时维持原状，中间交错的1表示自旋不同时发生互换。</p>
 <p>最后，平移算符由这些SWAP乘积得到</p>
 <p>$$T=\prod_{i=1}^{N-1}P_{i,i+1}$$</p>
@@ -164,20 +164,20 @@ img{max-width:100%;display:block;}
 <p>下面考虑高阶扰动，我们知道二阶扰动能量变化是</p>
 <p>$$E_n^{(2)}=\sum_{m\neq n}\frac{\braket{\psi_n^0|H'|\psi_m^0}\braket{\psi_m^0|H'|\psi_n^0}}{E_n^0-E_m^0}$$</p>
 <p>这里由于涉及到二重简并，所以要用2x2矩阵来描述（有点像含时微扰那里的东西）</p>
-<p>$$I = \begin{pmatrix} a_{\uparrow\uparrow} & a_{\uparrow\downarrow} \\ a_{\downarrow\uparrow} & a_{\downarrow\downarrow} \end{pmatrix}$$</p>
+<p>$$I = \begin{pmatrix} a_{\uparrow\uparrow} &amp; a_{\uparrow\downarrow} \\ a_{\downarrow\uparrow} &amp; a_{\downarrow\downarrow} \end{pmatrix}$$</p>
 <p>不考虑组合系数时</p>
 <p>$$a_{\uparrow\uparrow}\sim\sum_{path}\frac{\braket{\uparrow...|V|e_l}...\braket{e_i|V|\uparrow...}}{(E_0-E_l)...(E_i=E_0)}$$</p>
 <p>代表着全上的状态经过V扰动跃迁多次后回到全上的终态。n阶扰动的贡献大致是$g^n$</p>
 <p>由于X方向上的外场与Z方向上的翻转可交换，也即</p>
 <p>$$G^\dagger VG=V$$</p>
 <p>用$G^\dagger VG$替换矩阵元中的V，夹层矢量不变，最外层发生翻转，因此$a_{\uparrow\uparrow}=a_{\downarrow\downarrow}$</p>
-<p>再考虑交叉项非对角元。V是由各个局域的X相加而成，也就是说m阶扰动最大包含了m个qubit翻转，所以最小非零阶为n阶。为了展现出指数下降的特征，我们记贡献$(g/J)^N=e^{-cN},c=\ln(J/g)>0$</p>
+<p>再考虑交叉项非对角元。V是由各个局域的X相加而成，也就是说m阶扰动最大包含了m个qubit翻转，所以最小非零阶为n阶。为了展现出指数下降的特征，我们记贡献$(g/J)^N=e^{-cN},c=\ln(J/g)&gt;0$</p>
 <p>忽略对角元上能量平移后，微扰矩阵写作</p>
-<p>$$\sim\begin{pmatrix} 0 & e^{-cN} \\ e^{-cN} & 0 \end{pmatrix}$$</p>
+<p>$$\sim\begin{pmatrix} 0 &amp; e^{-cN} \\ e^{-cN} &amp; 0 \end{pmatrix}$$</p>
 <p>得到good state也就是G的本征态</p>
 <p>$$\ket{\uparrow...}+\ket{\downarrow...}\quad\ket{\uparrow...}-\ket{\downarrow...}$$</p>
 <p>两个态被劈裂的能隙是$e^{-cN}$数量级，只要外场与自相互作用相比不大，在系统体积增长时完全可以比4J小，并且在TDL下回归到0，是一个自洽的理论</p>
-<p>研究同样在无限体积情况下外场g大小对系统形为的改变：当$g<J$时，能隙是指数压低的，基态为二重简并；反之，能隙是指数爆炸的，基态是非简并的。这其中就有个临界点$g_c$，跨过这个点发生的变化被称为quantum phase transition。</p>
+<p>研究同样在无限体积情况下外场g大小对系统形为的改变：当$g&lt;J$时，能隙是指数压低的，基态为二重简并；反之，能隙是指数爆炸的，基态是非简并的。这其中就有个临界点$g_c$，跨过这个点发生的变化被称为quantum phase transition。</p>
 <p>上述情况虽然是从$V=-g\sum_{i=1}^NX_i$出发的，但我们可以进一步把他推广到更一般的条件。对角元为0意味着V要满足G对称性，而指数压低体现在V必须作用很多次，也就是说V必须是local算符的和（例如$X_iX_{i+1}$）。一个反例是直接拿G做微扰，那么只需要作用一次G就可以达到全qubit翻转的作用，非对角元成分不再会随着系统体积增大而降低，上述讨论失效。这个例子说明了局域性在量子多体以及物质稳定性的重要性。考虑到自然界的作用大多是局域的，我们的例子是合理的</p>
 <p>对于不满足对称性G的微扰，能隙无法再被系统体积压低，这相当于是显式对称性破缺，类似于朗道函数中加上odd项$\epsilon_1 M$</p>
 <h4 id="sec-3">寻找序参数</h4>
@@ -196,14 +196,14 @@ img{max-width:100%;display:block;}
 <p>$$e^{-iHt}\ket{\uparrow}=\frac{1}{\sqrt{2}}(e^{-iE_+t}\ket{+}+e^{-iE_-t}\ket{-})=\frac{1}{\sqrt{2}}e^{-iE_+t}(\ket{+}+e^{i\Delta Et}\ket{-})$$</p>
 <p>$$\ket{\downarrow}=\frac{1}{\sqrt{2}}(e^{-iE_+t}\ket{+}-e^{-iE_-t}\ket{-})=\frac{1}{\sqrt{2}}e^{-iE_+t}(\ket{+}-e^{i\Delta Et}\ket{-})$$</p>
 <p>则</p>
-<p>$$\begin{align}</p>
-<p>\braket{\downarrow|e^{-iHt}|\uparrow}&=\frac{1}{2}e^{-iE_+t}(\bra{+}-\bra{-})(\ket{+}+e^{i\Delta Et}\ket{-})\\</p>
-<p>&=\frac{1}{2}e^{-iE_+t}(1-e^{i\Delta Et})</p>
-<p>\end{align}</p>
-<p>$$</p>
-<p>$$\begin{align}</p>
-<p>|\braket{\downarrow|e^{-iHt}|\uparrow}|^2&=\sin^2(\frac{\Delta E t}{2})</p>
-<p>\end{align}$$</p>
+<p>$$\begin{align}
+\braket{\downarrow|e^{-iHt}|\uparrow}&amp;=\frac{1}{2}e^{-iE_+t}(\bra{+}-\bra{-})(\ket{+}+e^{i\Delta Et}\ket{-})\\
+&amp;=\frac{1}{2}e^{-iE_+t}(1-e^{i\Delta Et})
+\end{align}
+$$</p>
+<p>$$\begin{align}
+|\braket{\downarrow|e^{-iHt}|\uparrow}|^2&amp;=\sin^2(\frac{\Delta E t}{2})
+\end{align}$$</p>
 <p>跃迁概率首次达到1的时间$t_1=\pi/\Delta E$，而根据前面的讨论可以知道，两个态被劈裂的能隙是$e^{-cN}$数量级，反过来也就是说$t_1$随着系统体积的增长而指数爆炸。</p>
 <h4 id="sec-4">模型的解</h4>
 <p>现在建立1D TFIM与一套费米子产生湮灭算符之间的联系</p>
@@ -234,7 +234,7 @@ img{max-width:100%;display:block;}
 <p>$$E_{0,APBC}=-\frac{1}{2}\sum_{k\neq N/2}\epsilon_k-(g+J)$$</p>
 <p>对于奇半区，k=0处有1个费米子时取得能量最小值</p>
 <p>$$E_{0,PBC}=-\frac{1}{2}\sum_{k\neq 0}\epsilon_k+(g-J)$$</p>
-<p>计算可得APBC基态是更小的能量。当$g<J$时，两者差很小，当$g>J$时，能隙一直增长无上界。$g/J=1$是转折点</p>
+<p>计算可得APBC基态是更小的能量。当$g&lt;J$时，两者差很小，当$g&gt;J$时，能隙一直增长无上界。$g/J=1$是转折点</p>
 <p>接下来研究TDL下不同g/J的极限能隙。g/J=0.5时，能隙快速接近0；g/J=1时，能隙正比于1/L（相变特征）；g/J=1.5时，能隙极限不为0.</p>
 <p>习题：计算基态磁化强度，分类有限温度和零温，找到临界指数（1/8）</p>
 <p>这个在上世纪的一篇论文The One-Dimensional Ising M·odel with a Transverse Field (PIERRE PFEUTY)里有写</p>
@@ -346,15 +346,15 @@ img{max-width:100%;display:block;}
 <p>这就是 **Density-Matrix Renormalization Group** 的由来：它依然是一个不断增大系统尺寸并进行截断的 RG 过程，只是**截断的依据从哈密顿量的能量本征值，变成了约化密度矩阵的本征值。**</p>
 <h4 id="sec-12">纠缠缩放法则</h4>
 <p>对于TFIM模型，自旋全向上或全向下当然是直积MPS态，且全$\ket{+}$态也是MPS，看看是怎么构造的</p>
-<p>$$\Lambda^0 = \frac{1}{\sqrt{2}^{1/N}} \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, \qquad \Lambda^1 = \frac{1}{\sqrt{2}^{1/N}} \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}.$$</p>
-<p>$$</p>
-<p>\begin{aligned}</p>
-<p>|\Psi\rangle &= \sum_{\sigma_1\sigma_2\cdots\sigma_N} \text{Tr}(\Lambda^{\sigma_1}\Lambda^{\sigma_2}\cdots\Lambda^{\sigma_N}) |\sigma_1\sigma_2\cdots\sigma_N\rangle \\</p>
-<p>&= \sum_{\sigma_1\sigma_2\cdots\sigma_N} \sum_{z=0,1} \langle z|\Lambda^{\sigma_1}\Lambda^{\sigma_2}\cdots\Lambda^{\sigma_N}|z\rangle |\sigma_1\sigma_2\cdots\sigma_N\rangle \\</p>
-<p>&= \langle 0|\Lambda^0\Lambda^0\cdots\Lambda^0|0\rangle |000\cdots\rangle + \langle 1|\Lambda^1\Lambda^1\cdots\Lambda^1|1\rangle |111\cdots\rangle \\</p>
-<p>&= (\frac{1}{\sqrt{2}^{1/N}})^N |000\cdots\rangle + (\frac{1}{\sqrt{2}^{1/N}})^N |111\cdots\rangle \\</p>
-<p>&= \frac{1}{\sqrt{2}} (|\uparrow\uparrow\uparrow\cdots\rangle + |\downarrow\downarrow\downarrow\cdots\rangle).</p>
-<p>\end{aligned}$$</p>
+<p>$$\Lambda^0 = \frac{1}{\sqrt{2}^{1/N}} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}, \qquad \Lambda^1 = \frac{1}{\sqrt{2}^{1/N}} \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}.$$</p>
+<p>$$
+\begin{aligned}
+|\Psi\rangle &amp;= \sum_{\sigma_1\sigma_2\cdots\sigma_N} \text{Tr}(\Lambda^{\sigma_1}\Lambda^{\sigma_2}\cdots\Lambda^{\sigma_N}) |\sigma_1\sigma_2\cdots\sigma_N\rangle \\
+&amp;= \sum_{\sigma_1\sigma_2\cdots\sigma_N} \sum_{z=0,1} \langle z|\Lambda^{\sigma_1}\Lambda^{\sigma_2}\cdots\Lambda^{\sigma_N}|z\rangle |\sigma_1\sigma_2\cdots\sigma_N\rangle \\
+&amp;= \langle 0|\Lambda^0\Lambda^0\cdots\Lambda^0|0\rangle |000\cdots\rangle + \langle 1|\Lambda^1\Lambda^1\cdots\Lambda^1|1\rangle |111\cdots\rangle \\
+&amp;= (\frac{1}{\sqrt{2}^{1/N}})^N |000\cdots\rangle + (\frac{1}{\sqrt{2}^{1/N}})^N |111\cdots\rangle \\
+&amp;= \frac{1}{\sqrt{2}} (|\uparrow\uparrow\uparrow\cdots\rangle + |\downarrow\downarrow\downarrow\cdots\rangle).
+\end{aligned}$$</p>
 <p>转移矩阵是</p>
 <p>$$T=\frac{1}{2^{1/N}}diag(1,0,0,1)$$</p>
 <p>且$\chi=2$，故$S\le\ln2$.实际上它的（二分后非空子系统的纠缠）熵就是ln2</p>
@@ -365,11 +365,11 @@ img{max-width:100%;display:block;}
 <blockquote>设平移不变 MPS 的局部张量为 $\{A^s\}_{s=1}^d$（物理维数 $d$，虚拟维数 $D$）。定义由长为 $L$ 的物理阻块到 $D \times D$ 虚拟矩阵空间的映射：<br>$$\Gamma_L : X \in \mathbb{C}^{D \times D} \longmapsto \sum_{s_1, \dots, s_L} \text{Tr}(X A^{s_1} \dots A^{s_L}) \vert{}s_1 \dots s_L\rangle$$<br>定义上，若存在有限长 $L_0$，对任意 $L \ge L_0$，映射 $\Gamma_L$ 均是单射（Injective）的，则该 MPS 为 **Injective MPS**。</blockquote>
 <p>单射性要求不同的虚拟矩阵 $X$ 必须映射到不同的物理态，这等价于：长为 $L$ 的张量乘积矩阵能够张满整个 $D \times D$ 算符空间。</p>
 <p>$$\text{dim}\left( \text{span}\{ A^{s_1} A^{s_2} \dots A^{s_L} \mid s_i \in \{1, \dots, d\} \} \right) = D^2 \quad (\text{对某个 } L \ge L_0)$$</p>
-<p>实例验证（GHZ 态）：对于前面 $g=0$ 的 GHZ 态，$A^0 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, A^1 = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$。</p>
-<p>对任意长度 $L$，乘积 $A^{s_1}\dots A^{s_L}$ 只能产生 $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$ 或 $\begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$，张成的子空间维度始终为 $2 < D^2 = 4$。因此它**不是** Injective MPS。</p>
+<p>实例验证（GHZ 态）：对于前面 $g=0$ 的 GHZ 态，$A^0 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}, A^1 = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$。</p>
+<p>对任意长度 $L$，乘积 $A^{s_1}\dots A^{s_L}$ 只能产生 $\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}$ 或 $\begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$，张成的子空间维度始终为 $2 &lt; D^2 = 4$。因此它**不是** Injective MPS。</p>
 <p>习题：寻找$\alpha\ket{\uparrow...}+\beta\ket{\downarrow...}$的MPS local tensor</p>
 <p>答：依葫芦画瓢，就是把上面的矩阵系数替换一下</p>
-<p>$$\Lambda^0 = \alpha^{1/N} \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, \qquad \Lambda^1 = \beta^{1/N} \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}.$$</p>
+<p>$$\Lambda^0 = \alpha^{1/N} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}, \qquad \Lambda^1 = \beta^{1/N} \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}.$$</p>
 <p>纠缠标度面积定律：二分纠缠熵和最小割息息相关，如果再模糊一些推广到多维系统，可以想到纠缠熵大致有这个被划分出的系统A的边界的两级，也即</p>
 <p>$$S = O(\vert{}\partial A\vert{}), \quad \text{“面积定律”}$$</p>
 <p>我们可以感受到能隙Δ在目前为止的学习中有很重要的作用，逆能隙代表着特征长度尺度，代表着关联的衰减，也和bond dimension有关</p>
@@ -442,53 +442,53 @@ img{max-width:100%;display:block;}
 <p>除了那些概率极小、可以忽略不计的“尾巴”状态外，所有可能出现的特征态实际上都具有几乎完全相同的概率：</p>
 <p>$$\lambda_i \approx e^{-S(\rho)}$$</p>
 <p>此时，系统不再是一个包含各种不同概率层级的复杂混合态，而是**等效于在一个有效维度为 $e^{S(\rho)}$ 的典型子空间内做“绝对均匀的随机分布”**。</p>
-<p>有限温度下的热化态 $g_\beta$ 各个能级的概率并不相同。但只要它具备“熵集中谱”，作者就可以把它当作一个**扁平的、均匀的概率分布**来处理。系统就如同在无穷大温度下一样，只是所在的希尔伯特空间维度被热熵密度 $s < 1$ “等比例压缩”了</p>
+<p>有限温度下的热化态 $g_\beta$ 各个能级的概率并不相同。但只要它具备“熵集中谱”，作者就可以把它当作一个**扁平的、均匀的概率分布**来处理。系统就如同在无穷大温度下一样，只是所在的希尔伯特空间维度被热熵密度 $s &lt; 1$ “等比例压缩”了</p>
 <p>设任意混合态 $\rho_A$ 的谱分解为</p>
-<p>$$</p>
-<p>\rho_A=\sum_i p_i|i\rangle_A\langle i|,</p>
-<p>\qquad p_i\ge 0,\quad \sum_i p_i=1.</p>
-<p>$$</p>
+<p>$$
+\rho_A=\sum_i p_i|i\rangle_A\langle i|,
+\qquad p_i\ge 0,\quad \sum_i p_i=1.
+$$</p>
 <p>引入一个辅助系统 $B$，取一组正交归一基 $\{|i\rangle_B\}$，构造复合系统的纯态</p>
-<p>$$</p>
-<p>|\phi\rangle_{AB}</p>
-<p>=</p>
-<p>\sum_i\sqrt{p_i}\,</p>
-<p>|i\rangle_A|i\rangle_B.</p>
-<p>$$</p>
+<p>$$
+|\phi\rangle_{AB}
+=
+\sum_i\sqrt{p_i}\,
+|i\rangle_A|i\rangle_B.
+$$</p>
 <p>显然</p>
-<p>$$</p>
-<p>\langle\phi|\phi\rangle</p>
-<p>=</p>
-<p>\sum_i p_i=1,</p>
-<p>$$</p>
+<p>$$
+\langle\phi|\phi\rangle
+=
+\sum_i p_i=1,
+$$</p>
 <p>因此 $|\phi\rangle_{AB}$ 是纯态。</p>
 <p>对辅助系统 $B$ 做偏迹：</p>
-<p>$$</p>
-<p>\begin{aligned}</p>
-<p>\operatorname{Tr}_B</p>
-<p>\left(|\phi\rangle_{AB}\langle\phi|\right)</p>
-<p>&=</p>
-<p>\sum_{i,j}\sqrt{p_i p_j}\,</p>
-<p>|i\rangle_A\langle j|</p>
-<p>\operatorname{Tr}\left(|i\rangle_B\langle j|\right)\\</p>
-<p>&=</p>
-<p>\sum_{i,j}\sqrt{p_i p_j}\,</p>
-<p>|i\rangle_A\langle j|\,\delta_{ij}\\</p>
-<p>&=</p>
-<p>\sum_i p_i|i\rangle_A\langle i|\\</p>
-<p>&=\rho_A.</p>
-<p>\end{aligned}</p>
-<p>$$</p>
+<p>$$
+\begin{aligned}
+\operatorname{Tr}_B
+\left(|\phi\rangle_{AB}\langle\phi|\right)
+&amp;=
+\sum_{i,j}\sqrt{p_i p_j}\,
+|i\rangle_A\langle j|
+\operatorname{Tr}\left(|i\rangle_B\langle j|\right)\\
+&amp;=
+\sum_{i,j}\sqrt{p_i p_j}\,
+|i\rangle_A\langle j|\,\delta_{ij}\\
+&amp;=
+\sum_i p_i|i\rangle_A\langle i|\\
+&amp;=\rho_A.
+\end{aligned}
+$$</p>
 <p>因此，任意混合态都可以表示为更大复合系统纯态的局部约化态：</p>
-<p>$$</p>
-<p>\boxed{</p>
-<p>\rho_A</p>
-<p>=</p>
-<p>\operatorname{Tr}_B</p>
-<p>\left(|\phi\rangle_{AB}\langle\phi|\right)</p>
-<p>}</p>
-<p>$$</p>
-<p>**（熵量子 Singleton 界（改编自 [13]））**。_设 $\mathcal{C}$ 为投影算符为 $P_{\mathcal{C}}$ 的 $[[N, k, d]]$ 量子纠错码，并设 $\bar{\rho}_S = \frac{1}{K} P_{\mathcal{C}}$ 为码上的最大混合态。设 $\vert{}\Omega_{RS}\rangle$ 为 $\bar{\rho}_S$ 的纯化，使得 $S(\Omega_R) = \log_2 K = k$。对于任意子系统 $A$，记 $S(A) := S(\Omega_A)$。假设 $\mathcal{C}$ 精确纠正每一个 $d - 1 < N/2$ 量子比特的擦除。则_</p>
+<p>$$
+\boxed{
+\rho_A
+=
+\operatorname{Tr}_B
+\left(|\phi\rangle_{AB}\langle\phi|\right)
+}
+$$</p>
+<p>**（熵量子 Singleton 界（改编自 [13]））**。_设 $\mathcal{C}$ 为投影算符为 $P_{\mathcal{C}}$ 的 $[[N, k, d]]$ 量子纠错码，并设 $\bar{\rho}_S = \frac{1}{K} P_{\mathcal{C}}$ 为码上的最大混合态。设 $\vert{}\Omega_{RS}\rangle$ 为 $\bar{\rho}_S$ 的纯化，使得 $S(\Omega_R) = \log_2 K = k$。对于任意子系统 $A$，记 $S(A) := S(\Omega_A)$。假设 $\mathcal{C}$ 精确纠正每一个 $d - 1 &lt; N/2$ 量子比特的擦除。则_</p>
 <p>$$\log_2 K \le \frac{N - 2(d - 1)}{d - 1} \bar{S}_{d-1}, \quad \bar{S}_{d-1} := \mathbb{E}_{\vert{}A\vert{}=d-1} S(A)$$</p>
 <p>其中平均是对所有大小为 $d - 1$ 的区域 $A$ 进行的。</p>
 <blockquote>这些代码是通过从编码约束的密度矩阵 $\rho$ 的 Scrooge 系综中随机抽取码字，然后将这些态正交化以形成有效的编码等距算符来构建的。Scrooge 系综是这种码构造的自然选择，因为在第一阶矩为 $\rho$ 的所有态系综中，它具有最小的可达信息（accessible information）。此外，对于最大混合的 $\rho$，Scrooge 系综就是 Haar 系综，众所周知，后者在无约束设定下给出了渐近最优的码构造<br>这是不是和random集合S可解码是对应的？random规则一定具有average最优的性质吗？</blockquote>

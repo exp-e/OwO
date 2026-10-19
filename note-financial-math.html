@@ -16,7 +16,7 @@ window.MathJax = {
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
 <style>
 :root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -494,11 +494,11 @@ img{max-width:100%;display:block;}
 <h4 id="sec-35">Net Present Value (NPV)</h4>
 <p>Discount the future cash flow at some interest rate and subtract off the initial investment.</p>
 <p>$$NPV=F_0+F_1(1+i)^{-1}+...+F_n(1+i)^{-n}$$</p>
-<p>Here $F_0<0$ means initial investment, $F_t$ means estimated net cash flow at the end of period t, i is called cost of capital</p>
-<p>$NPV>0$ means the project should be undertaken, otherwise it shouldn't.</p>
+<p>Here $F_0&lt;0$ means initial investment, $F_t$ means estimated net cash flow at the end of period t, i is called cost of capital</p>
+<p>$NPV&gt;0$ means the project should be undertaken, otherwise it shouldn't.</p>
 <h4 id="sec-36">Internal Rate of Return (IRR)</h4>
 <p>Suppose i in NPV fomula is unknown, and solve the equation $NPV(i)=0$, the solution $i^*$ can let NPV reaches the threshold 0. IRR do not depend on preset i, so it shows the internal attribute of this investment.</p>
-<p>If $IRR>$ cost of capital, then the project should be undertaken.</p>
+<p>If $IRR&gt;$ cost of capital, then the project should be undertaken.</p>
 <h4 id="sec-37">Dollar-Weighted Rates of interest</h4>
 <p>We wish to determine the yield rate earned by an investment fund over a period of time.</p>
 <p>A = initial fund balance. B = fund balance at the end of the period.</p>
@@ -523,7 +523,7 @@ img{max-width:100%;display:block;}
 <p>$$1+i_k=\frac{B_k}{B_{k-1}+C_{k-1}}$$</p>
 <p>The entire year can be calculated as</p>
 <p>$$(1+i)=(1+i_1)(1+i_2)...(1+i_m)$$</p>
-<blockquote>[!note] Quick Example<br>Suppose a fund has a value of ￥1 at the beginning of the year, and you own 1000, which worth ￥1000.<br>In June 1th, the fund drops to ￥0.5, now you have 1000 of them and worth ￥500. However, you believe the fund will rebound, so you buy another 1000 and cost ￥500.<br>Now you have 2000 of them. In the end of the year, the fund rebounds to ￥1, now what you owned worth ￥2000.<br><br>Dollar-weighted:<br>$$i_{dol}=\frac{500}{1000+\frac{500}{2}}=40\%$$<br>Time-weighted:<br>$$1+i_{time}=\frac{500}{1000}·\frac{2000}{1000}=1\Rightarrow i_{time}=0\%$$<br>From this example we can see, $i_{time}$ reflects ￥1→￥0.5→￥1, no gain. But operator can still earn money from the fluctuation, so $i_{dol}>0$</blockquote>
+<blockquote>[!note] Quick Example<br>Suppose a fund has a value of ￥1 at the beginning of the year, and you own 1000, which worth ￥1000.<br>In June 1th, the fund drops to ￥0.5, now you have 1000 of them and worth ￥500. However, you believe the fund will rebound, so you buy another 1000 and cost ￥500.<br>Now you have 2000 of them. In the end of the year, the fund rebounds to ￥1, now what you owned worth ￥2000.<br><br>Dollar-weighted:<br>$$i_{dol}=\frac{500}{1000+\frac{500}{2}}=40\%$$<br>Time-weighted:<br>$$1+i_{time}=\frac{500}{1000}·\frac{2000}{1000}=1\Rightarrow i_{time}=0\%$$<br>From this example we can see, $i_{time}$ reflects ￥1→￥0.5→￥1, no gain. But operator can still earn money from the fluctuation, so $i_{dol}&gt;0$</blockquote>
 <h4 id="sec-39">Dividend Discount Model (DDM)</h4>
 <p>Company shares the profits by paying out a dividend forever, hence it can be seen as perpentuity.</p>
 <p>The price per share can be wirtten as (if dividend is constant)</p>
@@ -575,8 +575,8 @@ img{max-width:100%;display:block;}
 <p>When the change is small, we can use first-order taylor expansion. If bigger, we start to use second-order, and so on.</p>
 <p>Butterfly spread (negative second-order difference)</p>
 <p>$$BS=-\Delta^2yield=2Mid-Short-Long$$</p>
-<p>$BS>0$, the most common case, means concave shape of the yield curve</p>
-<p>$BS<0$, saucer or convex shape</p>
+<p>$BS&gt;0$, the most common case, means concave shape of the yield curve</p>
+<p>$BS&lt;0$, saucer or convex shape</p>
 <p>BS also has dynamics:</p>
 <p>Negative butterfly: decrease in the butterfly spread, means yield curve from n to u</p>
 <p>Positive butterfly: increase in the butterfly spread, means yield curve from u to n</p>
@@ -648,7 +648,7 @@ img{max-width:100%;display:block;}
 <ol>
 <li>$PV_A(i_0)=PV_L(i_0)$ (0-order equivalent)</li>
 <li>$PV'_A(i_0)=PV_L'(i_0)$ (1-order equivalent)</li>
-<li>$PV''_A(i_0)>PV_L''(i_0)$ (2-order supress)</li>
+<li>$PV''_A(i_0)&gt;PV_L''(i_0)$ (2-order supress)</li>
 </ol>
 <p>**Fully Immunization:**</p>
 <ol>

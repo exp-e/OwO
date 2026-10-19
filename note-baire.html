@@ -16,7 +16,7 @@ window.MathJax = {
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
 <style>
 :root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -143,36 +143,36 @@ img{max-width:100%;display:block;}
 <p>由于E是Baire空间，$O_k=\bigcup_{N\ge 1}\mathring{F_{N,k}}$稠密开，且$O=\bigcap_{k\ge1}O_k=\bigcap_{k\ge1}\bigcup_{N\ge 1}\mathring{F_{N,k}}$稠密。</p>
 <p>接下来证明$O\subseteq cont(f)$(又到了常见的利用连续函数工具人搭桥证连续的时候了)</p>
 <p>取$\forall x\in O=\bigcap_{k\ge1}\bigcup_{N\ge 1}\mathring{F_{N,k}}$，那么$\forall k\ge1,\exists N_k\ge1$使得$x\in\mathring{F_{N_k k}}\subseteq F_{N_k k}$，也就是$\forall m,n\ge N_k,\delta(f_n(x),f_m(x))\le\frac{1}{k}$</p>
-<p>对于任意的$\varepsilon>0$，找到k使得$\frac{1}{k}\le\varepsilon$，与$U_x\in\mathcal{N}(x)$使得$\forall y\in U_x,\delta(f_{N_k}(y),f_{N_k}(x))\le\varepsilon$</p>
+<p>对于任意的$\varepsilon&gt;0$，找到k使得$\frac{1}{k}\le\varepsilon$，与$U_x\in\mathcal{N}(x)$使得$\forall y\in U_x,\delta(f_{N_k}(y),f_{N_k}(x))\le\varepsilon$</p>
 <p>对于任意$x\in U_x\cap\mathring{F_{N_k k}}$(使用传统搭桥法)</p>
 <p>$$\delta(f(x),f(y))\le\delta(f(x),f_{N_k}(x))+\delta(f_{N_k}(x),f_{N_k}(y))+\delta(f_{N_k}(y),f(y))\le3\varepsilon$$</p>
 <p>故$O\subseteq cont(f)$</p>
 <p>连续函数的逐点极限被称为第一Baire纲(class)</p>
 <h3 id="sec-4">一致有界性原理</h3>
-<blockquote>[!tip] 引理<br>E是豪斯多夫拓扑空间，$(F,\delta)$是度量空间，$F:E\to F$，则$cont(f)$是$G_\delta$集<br><br>证明：定义f的振荡函数，用来描述间断距离，连续iff振荡函数是0<br>$$w(f)(x)=\inf_{V\in\mathcal{N}(x)}\sup_{z,y\in V}\delta(f(z),f(y))$$<br>$$cont(f)=\bigcap_{k\ge1}\{x\in E|w(f)(x)<\frac{1}{k}\}:=\bigcap_{k\ge1}O_k$$<br>只需证$O_k$开。$\forall x\in O_k,\exists V\in\mathcal{N}(x)$是开集且使得$\sup_{x,y\in V}\delta(f(x),f(y))<\frac{1}{k}$。<br>$\forall x'\in V$，则$w(f)(x')\le\sup_{x,y\in V}\delta(f(x),f(y))<\frac{1}{k}$。故$x'\in O_k$，$cont(f)$是$G_\delta$集。</blockquote>
+<blockquote>[!tip] 引理<br>E是豪斯多夫拓扑空间，$(F,\delta)$是度量空间，$F:E\to F$，则$cont(f)$是$G_\delta$集<br><br>证明：定义f的振荡函数，用来描述间断距离，连续iff振荡函数是0<br>$$w(f)(x)=\inf_{V\in\mathcal{N}(x)}\sup_{z,y\in V}\delta(f(z),f(y))$$<br>$$cont(f)=\bigcap_{k\ge1}\{x\in E|w(f)(x)&lt;\frac{1}{k}\}:=\bigcap_{k\ge1}O_k$$<br>只需证$O_k$开。$\forall x\in O_k,\exists V\in\mathcal{N}(x)$是开集且使得$\sup_{x,y\in V}\delta(f(x),f(y))&lt;\frac{1}{k}$。<br>$\forall x'\in V$，则$w(f)(x')\le\sup_{x,y\in V}\delta(f(x),f(y))&lt;\frac{1}{k}$。故$x'\in O_k$，$cont(f)$是$G_\delta$集。</blockquote>
 <p>**一致有界性原理(Banach-Steinhauss Thm)**</p>
-<p>E是Banach空间，F是赋范空间，$B_E=\{x\in E;||x||<1\}$，$\overline{B_E}=\{x\in E;||x||\le1\}$，$B(E,F)$是从E到F的所有连续线性映射，其中映射的范数$||u||=\sup_{x\in B_E}||u(x)||$。</p>
-<p>令$(u_i)_{i\in I}\subseteq B(E,F)$，若$\forall x\in E,\quad M(x)=\sup_{i\in I}||u_i(x)||<\infty$，则$\sup_{i\in I}||u_i||<\infty$</p>
+<p>E是Banach空间，F是赋范空间，$B_E=\{x\in E;||x||&lt;1\}$，$\overline{B_E}=\{x\in E;||x||\le1\}$，$B(E,F)$是从E到F的所有连续线性映射，其中映射的范数$||u||=\sup_{x\in B_E}||u(x)||$。</p>
+<p>令$(u_i)_{i\in I}\subseteq B(E,F)$，若$\forall x\in E,\quad M(x)=\sup_{i\in I}||u_i(x)||&lt;\infty$，则$\sup_{i\in I}||u_i||&lt;\infty$</p>
 <p>证明：令</p>
 <p>$$F_n=\bigcap_{i\in I}\{x\in E ;||u_i(x)||\le n\}=\{x\in E; M(x)\le n\}$$</p>
 <p>由于$u_i$连续，所以$F_n$闭，由于$u_i(x)$有上界，所以$E=\bigcup_{n\ge1}F_n$。使用Baire空间的闭集并等价定义</p>
-<p>$\exists n_0$使得$\mathring{F_{n_0}}\neq\emptyset$，也即$\exists x_0\in E\quad r>0\quad B_E(x_0,r)\subseteq \mathring{F_{n_0}}$</p>
+<p>$\exists n_0$使得$\mathring{F_{n_0}}\neq\emptyset$，也即$\exists x_0\in E\quad r&gt;0\quad B_E(x_0,r)\subseteq \mathring{F_{n_0}}$</p>
 <p>则$\forall x\in B_E(o,r),\quad||u_i(x_0+x)||\le n_0(\forall i\in I)$</p>
 <p>$$\forall x\in B_E(0,r),\quad ||u_i(x)||\le||u_i(x_0)||+n_0\le M(x_0)+n_0$$</p>
-<p>$$\forall x\in B_E\quad||u_i(x)||\le\frac{1}{r}(M(x_0)+n_0)\Rightarrow\sup_{i\in I}\sup_{x\in B_E}||u_i(x)||<\infty$$</p>
+<p>$$\forall x\in B_E\quad||u_i(x)||\le\frac{1}{r}(M(x_0)+n_0)\Rightarrow\sup_{i\in I}\sup_{x\in B_E}||u_i(x)||&lt;\infty$$</p>
 <p>用这个定理可以证明一些非常bt的结论</p>
 <img class="note-img" src="assets/bounded.jpg" alt="bounded.jpg">
 <h4 id="sec-5">共鸣定理/奇性聚集原理</h4>
 <p>一致有界性原理的逆命题为共鸣定理，不过我们还可以将其进一步加强，称为**奇性聚集原理**</p>
 <p>E是Banach空间，F是赋范空间，$(u_i)_{i\in I}\subseteq B(E,F)$</p>
 <p>若$\sup_{i\in I}||u_i||=\infty$，那么$G=\{x\in E; M(x)=\infty\}$是E上的稠密$G_\delta$集</p>
-<p>证明：$F_n$定义如B-S定理所述，故$G=\bigcap_{n\ge1}F_n^c$，$G_\delta$易得。假设G不稠密，那么由于E是Baire的，$\exists n_0$使得$F_{n_0}^c$不稠密，也即$\exists O~open\quad B(x_0,r)\subseteq F_{n_0}$，此时重复B-S定理证明过程后半段，可得$\sup_{i\in I}||u_i||<\infty$，矛盾</p>
+<p>证明：$F_n$定义如B-S定理所述，故$G=\bigcap_{n\ge1}F_n^c$，$G_\delta$易得。假设G不稠密，那么由于E是Baire的，$\exists n_0$使得$F_{n_0}^c$不稠密，也即$\exists O~open\quad B(x_0,r)\subseteq F_{n_0}$，此时重复B-S定理证明过程后半段，可得$\sup_{i\in I}||u_i||&lt;\infty$，矛盾</p>
 <h4 id="sec-6">范数下半连续</h4>
 <p>一致有界性原理的实用推论</p>
 <p>$(u_i)_{i\in I}\subseteq B(E,F)$，E是Banach空间</p>
 <p>若$u_n$逐点收敛至$u$，则$u\in B(E,F)$且$||u||\le\liminf_{n\to\infty}||u_n||$</p>
-<p>证：由逐点收敛可知$\forall x,\{u_n(x)\}$有界，故$\forall x\in E\quad\sup_n||u_n(x)||<\infty$</p>
-<p>由一致有界性原理可知$\sup_n||u_n||<\infty$，故$c=\liminf_{n\to\infty}||u_n||<\infty$</p>
+<p>证：由逐点收敛可知$\forall x,\{u_n(x)\}$有界，故$\forall x\in E\quad\sup_n||u_n(x)||&lt;\infty$</p>
+<p>由一致有界性原理可知$\sup_n||u_n||&lt;\infty$，故$c=\liminf_{n\to\infty}||u_n||&lt;\infty$</p>
 <p>令$x\in B_E$，因为$u(x)=\lim_{n\to\infty} u_n(x)$，故有</p>
 <p>$$||u(x)||=\lim_{n\to\infty}||u_n(x)||=\liminf_{n\to\infty}||u_n(x)||\le(\liminf_{n\to\infty}||u_n||)||x||\le C||x||$$</p>
 <p>故$u\in B(E,F)$且$||u||\le\liminf_{n\to\infty}||u_n||$.</p>

@@ -16,7 +16,7 @@ window.MathJax = {
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
 <style>
 :root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -159,10 +159,10 @@ img{max-width:100%;display:block;}
 <p>接下来再粘上$-G_1G_2G_3G_4H_1$，此时将$G_2H_2$的环路段等效为传递函数为$G_2/(1-G_2H_2)$的单线段，传递函数变为</p>
 <p>$$T_{mid-2}=T_{mid-1}\times\frac{1}{1+G_1\frac{G_2}{1-G_2H_2}G_3G_4H_1}=\frac{G_1G_2G_3G_4}{1-G_2H_2+G_1G_2G_3G_4H_1}$$</p>
 <p>从这里我们也可以看出为什么相交的环路就不会贡献系统行列式的高次交叉项，这是因为交叉部分的等效处理会将一个环除掉，自然就无法产生高次交叉项。那么对于环$-G_1G_2G_4H_1$也是一样，前两个环的等效会使得他多除前两个环，也即</p>
-<p>$$\begin{align*}</p>
-<p>T_{mid}&=T_{mid-2}\times\frac{1}{1+G_1G_2G_4H_1/(1-G_2H_2+G_1G_2G_3G_4H_1)}</p>
-<p>\\&=\frac{G_1G_2G_3G_4}{1-G_2H_2+G_1G_2G_3G_4H_1+G_1G_2G_4H_1}</p>
-<p>\end{align*}$$</p>
+<p>$$\begin{align*}
+T_{mid}&amp;=T_{mid-2}\times\frac{1}{1+G_1G_2G_4H_1/(1-G_2H_2+G_1G_2G_3G_4H_1)}
+\\&amp;=\frac{G_1G_2G_3G_4}{1-G_2H_2+G_1G_2G_3G_4H_1+G_1G_2G_4H_1}
+\end{align*}$$</p>
 <p>其他前向通路也同理</p>
 <p class="footnote">[^1]: https://frp.imatever.com:7002/hexo/posts/2025-07-10-%E8%80%83%E7%A0%94%E6%8E%A7%E5%88%B6%EF%BC%88%E4%B8%80%EF%BC%89%E7%BA%BF%E6%80%A7%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1/#Mason-%E5%A2%9E%E7%9B%8A%E5%85%AC%E5%BC%8F</p>
     </div>

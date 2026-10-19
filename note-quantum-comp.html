@@ -16,7 +16,7 @@ window.MathJax = {
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
 <style>
 :root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -142,40 +142,46 @@ img{max-width:100%;display:block;}
 <h3 id="sec-1">量子门</h3>
 <h4 id="sec-2">XYZ</h4>
 <p>泡利矩阵</p>
-<p>$$</p>
-<p>I=\begin{pmatrix}</p>
-<p>1 & 0\\</p>
-<p>0 & 1</p>
-<p>\end{pmatrix},\quad</p>
-<p>X=\begin{pmatrix}</p>
-<p>0 & 1\\</p>
-<p>1 & 0</p>
-<p>\end{pmatrix},\quad</p>
-<p>Y=\begin{pmatrix}</p>
-<p>0 & -i\\</p>
-<p>i & 0</p>
-<p>\end{pmatrix},\quad</p>
-<p>Z=\begin{pmatrix}</p>
-<p>1 & 0\\</p>
-<p>0 & -1</p>
-<p>\end{pmatrix}.</p>
-<p>$$</p>
+<p>$$
+I=\begin{pmatrix}
+1 &amp; 0\\
+0 &amp; 1
+\end{pmatrix},\quad
+X=\begin{pmatrix}
+0 &amp; 1\\
+1 &amp; 0
+\end{pmatrix},\quad
+Y=\begin{pmatrix}
+0 &amp; -i\\
+i &amp; 0
+\end{pmatrix},\quad
+Z=\begin{pmatrix}
+1 &amp; 0\\
+0 &amp; -1
+\end{pmatrix}.
+$$</p>
 <p>X翻转01，Z给1加负号，Y=iXZ，i+翻转+符号</p>
 <h4 id="sec-3">CNOT</h4>
 <p>在第二个比特上$\oplus$第一个比特，也可以是当第一个比特为1时翻转第二个。矩阵表示</p>
-<p>$$CNOT = \begin{bmatrix} 1 & 0&0&0 \\ 0 & 1&0&0 \\0 & 0&0&1 \\0 & 0&1&0 \\ \end{bmatrix}$$</p>
+<p>$$CNOT = \begin{bmatrix} 1 &amp; 0&amp;0&amp;0 \\ 0 &amp; 1&amp;0&amp;0 \\0 &amp; 0&amp;0&amp;1 \\0 &amp; 0&amp;1&amp;0 \\ \end{bmatrix}$$</p>
 <h4 id="sec-4">Hadamard门</h4>
 <p>将z方向上自旋本征向量扭到x方向上本征向量。至于y方向？对不起，因为带了虚数，所以不认识你</p>
-<p>$$H = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}$$</p>
+<p>$$H = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}$$</p>
 <p>$$H\ket{0}=\frac{1}{\sqrt{2}}(\ket{0}+\ket{1})$$</p>
 <p>$$H\ket{1}=\frac{1}{\sqrt{2}}(\ket{0}-\ket{1})$$</p>
-<blockquote>[!tip] 性质<br>$$H^{\otimes n}\ket{i}=(H\ket{i_1})\otimes...\otimes(H\ket{i_n})=\frac{1}{\sqrt{2^n}}\sum_{j\in\{0,1\}^n}(-1)^{i·j}\ket{j}$$<br>证明：使用归纳法。n=1时由上面两个式子可以看出来成立。假设在n=N处成立，考虑N+1的情况<br>$$\begin{align*}<br>&H^{\otimes(N+1)}\ket{i_1...i_{N+1}}=(H^{\otimes N}\ket{i_1...i_{N}})\otimes(H\ket{i_{N+1}})<br>\\&= \left[ \frac{1}{\sqrt{2^k}} \sum_{j_1,\dots,j_k} (-1)^{\sum_{t=1}^k i_t j_t} |j_1 \dots j_k\rangle \right]<br>\otimes<br>\left[ \frac{1}{\sqrt{2}} \sum_{j_{k+1}=0}^1 (-1)^{i_{k+1} j_{k+1}} |j_{k+1}\rangle \right]<br>\\&= \frac{1}{\sqrt{2^{k+1}}} \sum_{j_1,\dots,j_{k+1}} (-1)^{\sum_{t=1}^{k+1} i_t j_t} |j_1 \dots j_{k+1}\rangle<br>\end{align*}$$<br>得证<br><br>看这个性质，把一个玩意变成另一个玩意的级数展开，原来的这个信息储存在系数上，这不就是离散傅里叶变换吗？事实确实如此，这就是二维的DFT矩阵</blockquote>
+<blockquote>[!tip] 性质<br>$$H^{\otimes n}\ket{i}=(H\ket{i_1})\otimes...\otimes(H\ket{i_n})=\frac{1}{\sqrt{2^n}}\sum_{j\in\{0,1\}^n}(-1)^{i·j}\ket{j}$$<br>证明：使用归纳法。n=1时由上面两个式子可以看出来成立。假设在n=N处成立，考虑N+1的情况<br>$$\begin{align*}
+&amp;H^{\otimes(N+1)}\ket{i_1...i_{N+1}}=(H^{\otimes N}\ket{i_1...i_{N}})\otimes(H\ket{i_{N+1}})
+\\&amp;= \left[ \frac{1}{\sqrt{2^k}} \sum_{j_1,\dots,j_k} (-1)^{\sum_{t=1}^k i_t j_t} |j_1 \dots j_k\rangle \right]
+\otimes
+\left[ \frac{1}{\sqrt{2}} \sum_{j_{k+1}=0}^1 (-1)^{i_{k+1} j_{k+1}} |j_{k+1}\rangle \right]
+\\&amp;= \frac{1}{\sqrt{2^{k+1}}} \sum_{j_1,\dots,j_{k+1}} (-1)^{\sum_{t=1}^{k+1} i_t j_t} |j_1 \dots j_{k+1}\rangle
+\end{align*}$$<br>得证<br><br>看这个性质，把一个玩意变成另一个玩意的级数展开，原来的这个信息储存在系数上，这不就是离散傅里叶变换吗？事实确实如此，这就是二维的DFT矩阵</blockquote>
 <h4 id="sec-5">Toffoli门</h4>
 <p>作用在3个比特上，当前两个比特均为1时，第三个比特作用反转门，否则什么都不做。其矩阵表示为</p>
-<p>$$|0\rangle\langle 0| \otimes |0\rangle\langle 0| \otimes I_2</p>
-<p>+ |0\rangle\langle 0| \otimes |1\rangle\langle 1| \otimes I_2</p>
-<p>+ |1\rangle\langle 1| \otimes |0\rangle\langle 0| \otimes I_2</p>
-<p>+ |1\rangle\langle 1| \otimes |1\rangle\langle 1| \otimes X$$</p>
+<p>$$|0\rangle\langle 0| \otimes |0\rangle\langle 0| \otimes I_2
++ |0\rangle\langle 0| \otimes |1\rangle\langle 1| \otimes I_2
++ |1\rangle\langle 1| \otimes |0\rangle\langle 0| \otimes I_2
++ |1\rangle\langle 1| \otimes |1\rangle\langle 1| \otimes X$$</p>
 <ul>
 <li>用Toffoli门实现AND门：第三个比特固定为0，前两个比特作为AND门输入，输出第三个比特即为前两个比特的AND</li>
 <li>用Toffoli门实现NOT门：前两个比特固定为一，第三个比特翻转</li>
@@ -204,7 +210,7 @@ img{max-width:100%;display:block;}
 <ol>
 <li>SWAP 矩阵：</li>
 </ol>
-<p>$$\text{SWAP} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$$</p>
+<p>$$\text{SWAP} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}$$</p>
 <ol>
 <li>CNOT 实现SWAP门：</li>
 </ol>
@@ -241,10 +247,10 @@ img{max-width:100%;display:block;}
 <h4 id="sec-11">picture</h4>
 <p>偶数或者素数幂次是容易分解的，下面展示奇数且非素数幂次的N的分解方式</p>
 <ol>
-<li>选取正整数$a\le a<N$，利用辗转相除法求$\gcd(a,N)$</li>
-<li>若$\gcd(a,N)>1$则已给出非平凡分解；否则aN互素，需要计算一个最小的正整数r满足$a^r\equiv 1\bmod~N$</li>
+<li>选取正整数$a\le a&lt;N$，利用辗转相除法求$\gcd(a,N)$</li>
+<li>若$\gcd(a,N)&gt;1$则已给出非平凡分解；否则aN互素，需要计算一个最小的正整数r满足$a^r\equiv 1\bmod~N$</li>
 <li>若r奇数，回到第一步重来；否则N整除$(a^{r/2}+ 1)(a^{r/2}- 1)$，由于上一步r是最小的，所以只用看+号</li>
-<li>计算$g=\gcd(a^{r/2}+1,N)$，若$g=N$说明$N|(a^{r/2}+ 1)$，否则$1<g<N$，找到了N的一个分解</li>
+<li>计算$g=\gcd(a^{r/2}+1,N)$，若$g=N$说明$N|(a^{r/2}+ 1)$，否则$1&lt;g&lt;N$，找到了N的一个分解</li>
 </ol>
 <blockquote>[!tip] 辗转相除法时间复杂度<br>引理：假设使用辗转相除法计算a与b(a>b>0)的最大公约数需要N步，那么满足这一条件的a和b最小值为斐波那契数$F_{N+2}$和$F_{N+1}$<br>证明：使用数学归纳法，N=1意味着b整除a，此时最小值为$a=2,b=1$，恰为$F_3$和$F_2$。<br>现在假设对M-1步有效，则M步辗转相除的第一步是$a=q_0b+r_0$，第二步是$b=q_1r_0+r_1$，也就是说需要M-1步算出$\gcd(b,r_0)$，那么b和$r_0$的最小值是$F_{M+1}$和$F_M$。<br>当$q_0=1$时a取最小值$F_{M+1}+F_M=F_{M+2}$，得证。<br><br>斐波那契数列<br>$$F_n = \frac{1}{\sqrt{5}} \left( \left( \frac{1 + \sqrt{5}}{2} \right)^n - \left( \frac{1 - \sqrt{5}}{2} \right)^n \right)$$<br><br>那么对于这个算法的时间复杂度，假设需要N步，那么b至少是$F_{N+1}$，也就至少是$\phi^{N+1}/\sqrt{5}$，其中$\phi=(1+\sqrt{5})/2$是较大的那个黄金分割数，反解出<br>$$N\ge\log_\phi(\sqrt{5}b)-1\Rightarrow N=O(\log b)$$<br>当然这些常数都不重要，最后复杂度是对数复杂度。</blockquote>
 <p>那么最重要的就是改善第二步的时间复杂度了，第二步等价于求$f(x)= a^x\bmod N$的周期，shor算法主要就是在干这个。</p>
@@ -260,11 +266,11 @@ img{max-width:100%;display:block;}
 <p>这个时候只关注前半部分，我们知道</p>
 <p>$$H^{\otimes n}\ket{i}=\frac{1}{\sqrt{2^n}}\sum_{j\in\{0,1\}^n}(-1)^{i·j}\ket{j}$$</p>
 <p>所以对前半部分作用$H^{\otimes n}$后得到</p>
-<p>$$\begin{align*}</p>
-<p>&\frac{1}{\sqrt{2}}(\frac{1}{\sqrt{2^n}}\sum_{j\in\{0,1\}^n}(-1)^{i·j}\ket{j}+\frac{1}{\sqrt{2^n}}\sum_{j\in\{0,1\}^n}(-1)^{(i\oplus s)·j}\ket{j})</p>
-<p>\\=&\frac{1}{\sqrt{2^{n+1}}}\sum_{j\in\{0,1\}^n}(-1)^{i·j}(1+(-1)^{s·j})\ket{j}=\frac{1}{\sqrt{2^{n-1}}}\sum_{j\in\{0,1\}^n,s·j=0}(-1)^{i·j}\ket{j}</p>
-<p>\end{align*}</p>
-<p>$$</p>
+<p>$$\begin{align*}
+&amp;\frac{1}{\sqrt{2}}(\frac{1}{\sqrt{2^n}}\sum_{j\in\{0,1\}^n}(-1)^{i·j}\ket{j}+\frac{1}{\sqrt{2^n}}\sum_{j\in\{0,1\}^n}(-1)^{(i\oplus s)·j}\ket{j})
+\\=&amp;\frac{1}{\sqrt{2^{n+1}}}\sum_{j\in\{0,1\}^n}(-1)^{i·j}(1+(-1)^{s·j})\ket{j}=\frac{1}{\sqrt{2^{n-1}}}\sum_{j\in\{0,1\}^n,s·j=0}(-1)^{i·j}\ket{j}
+\end{align*}
+$$</p>
 <p>此处求和项只包含与s垂直的j。反之，只要知道n-1个线性无关的j，就可以通过解线性方程组的方法求出s。接下来对j进行采样，在采第m个j的时候，只要采到某个与前m-1个线性无关的j即可。</p>
 <p>由于在$\mathbb{F}_2$中，每个系数只有2种可能的取值$\pm1$，总共有n-1个线性无关的j，故采到与前m-1个线性无关的j的概率为$(2^{n-1}-2^{m-1})/2^{n-1}$。由于m最大为n-1，所以这个概率不低于1/2，每次采样采个两次就差不多可以满足要求了，时间复杂度为$O(n)$</p>
 <p>最后解线性方程组即可得到s</p>
@@ -274,14 +280,14 @@ img{max-width:100%;display:block;}
 <p>直接计算需要花费$O(N^2)$的时间，快速傅里叶算法需要花费$O(NlogN)$的时间，而<span style="background:rgba(240, 107, 5, 0.2)">量子计算机仅需花费$O(logN)$的时间</span>。</p>
 <p>为了使用量子算法，先把下表jk给写成二进制$j_1...j_n$和$k_1...k_n$，那么$k/2^n=k_l 2^{-l}$（自动求和）。与此同时，由于规模从N变为$2^n$，单位根也变成$2^n$单位根$\exp(2\pi i/2^n)$。</p>
 <p>我们关注$F_N$作用在基$\ket{j}$上的效果(唉我都学物理了，不写求和号了)</p>
-<p>$$\begin{align*}</p>
-<p>F_N\ket{j}=\frac{1}{\sqrt{N}}e^{2\pi ikj/2^n}\ket{k}=\frac{1}{\sqrt{N}}e^{2\pi ijk_l 2^{-l}}\ket{k_1...k_n}=\frac{1}{\sqrt{N}}\bigoplus_l e^{2\pi ijk_l 2^{-l}}\ket{k_l}</p>
-<p>\end{align*}$$</p>
+<p>$$\begin{align*}
+F_N\ket{j}=\frac{1}{\sqrt{N}}e^{2\pi ikj/2^n}\ket{k}=\frac{1}{\sqrt{N}}e^{2\pi ijk_l 2^{-l}}\ket{k_1...k_n}=\frac{1}{\sqrt{N}}\bigoplus_l e^{2\pi ijk_l 2^{-l}}\ket{k_l}
+\end{align*}$$</p>
 <blockquote>也就是把被变换的向量存到单位根的幂次上，这个要有个直观的感受方便日后直接书写</blockquote>
 <p>由于单个位置上$k_l$只能为0或1，我们把$k_l$求和直接写出来</p>
-<p>$$\begin{align*}</p>
-<p>F_N\ket{j}=\frac{1}{\sqrt{2^n}}\bigoplus_{l=1}^n(\ket{0}+ e^{2\pi ij 2^{-l}}\ket{1})</p>
-<p>\end{align*}$$</p>
+<p>$$\begin{align*}
+F_N\ket{j}=\frac{1}{\sqrt{2^n}}\bigoplus_{l=1}^n(\ket{0}+ e^{2\pi ij 2^{-l}}\ket{1})
+\end{align*}$$</p>
 <p>也就是说当对第j个坐标基进行DFT时，我们只需要在每个比特上对$\ket{0}+\ket{1}$作用旋转门$R_Z(j/2^l)=diag(1,\exp(2\pi ij/2^l))$即可，单位形式为$R_l=diag(1,\exp(2\pi i/2^l))$</p>
 <p>注意到</p>
 <p>$$j/2^l=j_1 2^{n-1-l}+j_2 2^{n-2-l}+...+j_n 2^{-l}$$</p>
@@ -290,18 +296,18 @@ img{max-width:100%;display:block;}
 <blockquote>[!note] 特殊情况($R_1(j_k)$)<br>记$R_1(j_k)=diag(1,\exp(2\pi ij_k/2))$为受$j_k$控制的旋转门，那么$j_k=1$时第二个位置取-1，否则取+1，也就是<br>$$\frac{1}{\sqrt{2}}R_1(j_k)(\ket{0}+\ket{1})=\frac{1}{\sqrt{2}}(\ket{0}\pm\ket{1})=H\ket{j_k}$$<br>可以看见H的作用相当于将原基态变成了叠加态，并进行了第一次旋转，有点像是起偏。并且H可以和其他任何控制旋转交换，毕竟其他控制旋转是对角的。所以在下文中你会看见先进行其他旋转，最后作用H（起偏）</blockquote>
 <img class="note-img" src="assets/shor.png" alt="shor.png">
 <p>我们一个个来看每一个位置l，首先分母$2^l$最小的时候是最简单的情形，因为前面一大堆的非负幂次都不用管，恰好只有最后一个位置变成$j_n/2$了，这个时候l=1，第一位$j_1$的变化为</p>
-<p>$$\begin{align*}</p>
-<p>(F_N\ket{j})_1=\frac{1}{\sqrt{2}}(\ket{0}+ e^{2\pi ij_n/2}\ket{1})</p>
-<p>\end{align*}$$</p>
+<p>$$\begin{align*}
+(F_N\ket{j})_1=\frac{1}{\sqrt{2}}(\ket{0}+ e^{2\pi ij_n/2}\ket{1})
+\end{align*}$$</p>
 <p>这恰好就是$H\ket{j_n}$</p>
 <p>那么第二位呢，需要处理的是$j_{n-1}/2+j_n/2^2$</p>
-<p>$$\begin{align*}</p>
-<p>(F_N\ket{j})_2=\frac{1}{\sqrt{2}}(\ket{0}+ e^{2\pi ij_{n-1}/2}e^{2\pi ij_{n}/4}\ket{1})=H·R_2(j_{n})\ket{j_{n-1}}</p>
-<p>\end{align*}$$</p>
+<p>$$\begin{align*}
+(F_N\ket{j})_2=\frac{1}{\sqrt{2}}(\ket{0}+ e^{2\pi ij_{n-1}/2}e^{2\pi ij_{n}/4}\ket{1})=H·R_2(j_{n})\ket{j_{n-1}}
+\end{align*}$$</p>
 <p>第三位需要处理$j_{n-2}/2+j_{n-1}/2^2+j_n/2^3$</p>
-<p>$$\begin{align*}</p>
-<p>(F_N\ket{j})_3=\frac{1}{\sqrt{2}}(\ket{0}+ e^{2\pi ij_{n-2}/2}e^{2\pi ij_{n-1}/4}e^{2\pi ij_n/8}\ket{1})=HR_2(j_{n-1})R_3(j_{n})\ket{j_{n-2}}</p>
-<p>\end{align*}$$</p>
+<p>$$\begin{align*}
+(F_N\ket{j})_3=\frac{1}{\sqrt{2}}(\ket{0}+ e^{2\pi ij_{n-2}/2}e^{2\pi ij_{n-1}/4}e^{2\pi ij_n/8}\ket{1})=HR_2(j_{n-1})R_3(j_{n})\ket{j_{n-2}}
+\end{align*}$$</p>
 <p>然后你会发现每一位都是先从$j_n$开始控制旋转，一直到自己那一位了，做个H收尾</p>
 <p>$$(F_N\ket{j})_k=HR_2(j_{n-k+2})...R_k(j_n)\ket{j_{n-k+1}}$$</p>
 <p>最后第n位是</p>
@@ -345,7 +351,11 @@ img{max-width:100%;display:block;}
 <p>$$\frac{1}{\sqrt{r}}\sum_{k=0}^{r-1}e^{2\pi ix_0k/r}\ket{kq/r}$$</p>
 <p>如果对他做测量，可以以概率1/r得到kq/r(k=0,...,r-1)中的随机元素b。现在我们已知b和规模q，已知$b/q=k/r$，想确定k和r</p>
 <p>如果k与r互素，那么k就是唯一确定的。也就是我们以均匀概率去ran一个比r小的数（包括0），ran出来的数与r互素的概率是有个下界的$\Omega(1/\log\log r)$，那么重复测量$\log\log N$次，约分，取最大的那个r即可</p>
-<blockquote>[!note] 引理（Mertens第三定理[^1]）<br>k在所有小于r的自然数中均匀取值，则<br>$$Pr[gcd(k,r)=1]\ge\frac{e^{-\gamma}}{\log\log r}$$<br>证明：定义Mangoldt函数<br>$$\Lambda(n)=\log p~(n=p^k),\quad 0~(otherwise)$$<br>定义<br>$$T(x)=\log\lfloor x\rfloor!$$<br>由于$n=\Pi p^{a_p}$，所以<br>$$\sum_{d|n}\Lambda(d)=\sum_p\sum^{a_p}\Lambda(p)=\sum_p a_p\log p=\log n$$<br>所以<br>$$T(x)=\sum_{n\le x}\log n=\sum_{n\le x}\sum_{d|n}\Lambda(d)=\sum_{d\le x}\Lambda(d)\sum_{n\le x,d|n}1=\sum_{d\le x}\Lambda(d)\lfloor\frac{x}{d}\rfloor=x\sum_{n\le x}\frac{\Lambda(n)}{n}+O(x)$$<br>由斯大林公式，$T(x)=x\log x-x+O(\log x)$，对比可得<br>$$S_1(u)=\sum_{n\le x}\frac{\Lambda(n)}{n}=\log x+O(1)$$<br>设上式中的余项$R(x)=\sum_{n\le x}\frac{\Lambda(n)}{n}-\log x$，根据Riemann–Stieltjes积分可得<br>$$\begin{align*}<br>\sum_{p^k\le x}\frac{1}{kp^k}&=\sum_{n\le x}\frac{\Lambda(n)}{n\log n}=\int_{2^-}^x\frac{dS_1(u)}{\log u}<br>\\&=\int_2^x\frac{du}{u\log u}+\int_{2^-}^x\frac{dR(u)}{\log u}<br>\\&=\log\log x-\log\log 2+R(x)/\log x-R(2)/\log 2-\int_2^xR(u)d(\frac{1}{\log u})<br>\end{align*}$$<br>由于$R(x)=O(1)$，将素数高次幂的情况从求和中移至等式右侧后得<br>$$\sum_{p\le x}\frac{1}{p}=\log\log x+c-\sum_p\sum_{k\ge 2,p^k\le x}\frac{1}{kp^k}+O(\frac{1}{\log x})$$<br>其中<br>$$c=1-\log\log 2+\int_2^\infty R(u)d(\frac{1}{\log u})$$<br>由于常数值的具体计算不是本课程核心，所以给个结论$c=\gamma$<br>为了方便将定积分上限推至无穷，误差仍在$O(1/\log x)$范围内<br>下面计算右式的级数，为了方便，忽略求和上限$p^k\le x$，求和尾项被$O(1/x)$控制所以被合并至$O(1/\log x)$误差项。考虑到log函数的泰勒级数$-\log(1-y)=\sum_{k\ge1}y^k/k$，也即<br>$$-\log(1-\frac{1}{p})-\frac{1}{p}=\sum_{k\ge2}\frac{1}{kp^k}$$<br>带入到原等式中得<br>$$\sum_{p\le x}\frac{1}{p}=\log\log x+\gamma+\sum_p[\frac{1}{p}+\log(1-\frac{1}{p})]+O(\frac{1}{\log x})$$<br>移项整理得<br>$$\sum_{p\le x}\log(1-\frac{1}{p})=-\log\log x-\gamma+O(\frac{1}{\log x})$$<br>两侧取指数得<br>$$\prod_{p\le x}(1-\frac{1}{p})=\frac{e^{-\gamma}}{\log x}+O(\frac{1}{\log^2 x})$$<br>又因为$Pr[gcd(k,r)=1]=\phi(r)/r=\prod_{p|r}(1-\frac{1}{p})$，最差的情况r是连续素数积（因为此时$p\le x$成立时$p|n$自动成立，其他情况由于$p|n$限制会导致乘积项变少，乘积变大），满足$r=\prod_{p\le x}p\Rightarrow\log r=\sum_{p\le x}\log p$，由素数定理的等价描述，$\sum_{p\le x}\log p\sim x$，故$\log r\sim x$。那么对于任意r有<br>$$Pr[gcd(k,r)=1]\ge\frac{e^{-\gamma}}{\log\log r}$$</blockquote>
+<blockquote>[!note] 引理（Mertens第三定理[^1]）<br>k在所有小于r的自然数中均匀取值，则<br>$$Pr[gcd(k,r)=1]\ge\frac{e^{-\gamma}}{\log\log r}$$<br>证明：定义Mangoldt函数<br>$$\Lambda(n)=\log p~(n=p^k),\quad 0~(otherwise)$$<br>定义<br>$$T(x)=\log\lfloor x\rfloor!$$<br>由于$n=\Pi p^{a_p}$，所以<br>$$\sum_{d|n}\Lambda(d)=\sum_p\sum^{a_p}\Lambda(p)=\sum_p a_p\log p=\log n$$<br>所以<br>$$T(x)=\sum_{n\le x}\log n=\sum_{n\le x}\sum_{d|n}\Lambda(d)=\sum_{d\le x}\Lambda(d)\sum_{n\le x,d|n}1=\sum_{d\le x}\Lambda(d)\lfloor\frac{x}{d}\rfloor=x\sum_{n\le x}\frac{\Lambda(n)}{n}+O(x)$$<br>由斯大林公式，$T(x)=x\log x-x+O(\log x)$，对比可得<br>$$S_1(u)=\sum_{n\le x}\frac{\Lambda(n)}{n}=\log x+O(1)$$<br>设上式中的余项$R(x)=\sum_{n\le x}\frac{\Lambda(n)}{n}-\log x$，根据Riemann–Stieltjes积分可得<br>$$\begin{align*}
+\sum_{p^k\le x}\frac{1}{kp^k}&amp;=\sum_{n\le x}\frac{\Lambda(n)}{n\log n}=\int_{2^-}^x\frac{dS_1(u)}{\log u}
+\\&amp;=\int_2^x\frac{du}{u\log u}+\int_{2^-}^x\frac{dR(u)}{\log u}
+\\&amp;=\log\log x-\log\log 2+R(x)/\log x-R(2)/\log 2-\int_2^xR(u)d(\frac{1}{\log u})
+\end{align*}$$<br>由于$R(x)=O(1)$，将素数高次幂的情况从求和中移至等式右侧后得<br>$$\sum_{p\le x}\frac{1}{p}=\log\log x+c-\sum_p\sum_{k\ge 2,p^k\le x}\frac{1}{kp^k}+O(\frac{1}{\log x})$$<br>其中<br>$$c=1-\log\log 2+\int_2^\infty R(u)d(\frac{1}{\log u})$$<br>由于常数值的具体计算不是本课程核心，所以给个结论$c=\gamma$<br>为了方便将定积分上限推至无穷，误差仍在$O(1/\log x)$范围内<br>下面计算右式的级数，为了方便，忽略求和上限$p^k\le x$，求和尾项被$O(1/x)$控制所以被合并至$O(1/\log x)$误差项。考虑到log函数的泰勒级数$-\log(1-y)=\sum_{k\ge1}y^k/k$，也即<br>$$-\log(1-\frac{1}{p})-\frac{1}{p}=\sum_{k\ge2}\frac{1}{kp^k}$$<br>带入到原等式中得<br>$$\sum_{p\le x}\frac{1}{p}=\log\log x+\gamma+\sum_p[\frac{1}{p}+\log(1-\frac{1}{p})]+O(\frac{1}{\log x})$$<br>移项整理得<br>$$\sum_{p\le x}\log(1-\frac{1}{p})=-\log\log x-\gamma+O(\frac{1}{\log x})$$<br>两侧取指数得<br>$$\prod_{p\le x}(1-\frac{1}{p})=\frac{e^{-\gamma}}{\log x}+O(\frac{1}{\log^2 x})$$<br>又因为$Pr[gcd(k,r)=1]=\phi(r)/r=\prod_{p|r}(1-\frac{1}{p})$，最差的情况r是连续素数积（因为此时$p\le x$成立时$p|n$自动成立，其他情况由于$p|n$限制会导致乘积项变少，乘积变大），满足$r=\prod_{p\le x}p\Rightarrow\log r=\sum_{p\le x}\log p$，由素数定理的等价描述，$\sum_{p\le x}\log p\sim x$，故$\log r\sim x$。那么对于任意r有<br>$$Pr[gcd(k,r)=1]\ge\frac{e^{-\gamma}}{\log\log r}$$</blockquote>
 <p>复杂情形是r不是q的因数，此时范围内的周期数m可能为$\lfloor q/r \rfloor$或$\lceil q/r\rceil$，这时利用$|1-e^{i\theta}|=2|sin(\theta/2)|$(很简单的等腰三角形求底的几何问题)，将等比数列求和的模长写为</p>
 <p>$$\left|\frac{1-e^{2\pi imrb/q}}{1-e^{2\pi i rb/q}}\right|=\frac{sin(\pi mrb/q)}{sin(\pi rb/q)}$$</p>
 <p>这个振幅足够大的时候，分母足够小，也就是说$rb/q$靠近某个整数c，不难理解我们总是可以以较大的概率（下面详细说明）求得b满足</p>
@@ -359,8 +369,8 @@ img{max-width:100%;display:block;}
 <p>现在你知道上上个不等式的右侧是什么意思了——他保证$c/r$的唯一性。下面通过计算$b/q$的误差小于$1/2q$的有理数近似就可以通过分母得到r的取值</p>
 <blockquote>[!info] 连分数表示<br>给定一组正整数$[a_0,a_1,...]$(任意长度)，记其连分数为<br>$$a_0+\frac{1}{a_1+\frac{1}{a_2+...}}$$<br>计算给定数字x的连分数表达用到这个方法<br>$$a_0=\lfloor x \rfloor,x_1=1/(x-a_0)$$<br>$$a_1=\lfloor x_1 \rfloor,x_2=1/(x_1-a_1)$$<br>$$...$$<br>就是每一位$a_n$负责整数部分，小数部分给他倒一下进入下一个$a_{n+1}$<br>反过来用已知的连分数去计算x的分数逼近<br>$$p_0=a_0,p_1=a_1a_0+1,p_n=a_n p_{n-1}+p_{n-2}$$<br>$$q_0=1,q_1=a_1,q_n=a_nq_{n-1}+q_{n-2}$$<br>$$[a_0,...,a_n]=p_n/q_n$$<br>（证明上式：使用数学归纳法，先直接验证n=0和1的情况，然后假设k时正确去验证k+1，此时我们将后两项合并为一项$a_k+1/a_{k+1}$以缩短长度，然后再用k时的计算公式<br>$$\frac{p'_k}{q'_k} = \frac{(a_k + \frac{1}{a_{k+1}}) p_{k-1} + p_{k-2}}{(a_k + \frac{1}{a_{k+1}}) q_{k-1} + q_{k-2}}= \frac{a_{k+1}(a_k p_{k-1} + p_{k-2}) + p_{k-1}}{a_{k+1}(a_k q_{k-1} + q_{k-2}) + q_{k-1}}$$<br>根据原序列的递推定义，$a_k p_{k-1} + p_{k-2} = p_k$ 且 $a_k q_{k-1} + q_{k-2} = q_k$，代入上式：)</blockquote>
 <p>$$\frac{p'_k}{q'_k} = \frac{a_{k+1} p_k + p_{k-1}}{a_{k+1} q_k + q_{k-1}}=\frac{p_{k+1}}{q_{k+1}}$$</p>
-<blockquote>接下来证明渐近分数 $p_n/q_n$ 不可约，也即证明$p_n q_{n-1} - q_n p_{n-1} = (-1)^{n-1}$，还是使用数学归纳法，先直接验证n=1，然后由k推出k+1，用递推关系式带进式子里<br>$$p_{k+1} q_k - q_{k+1} p_k = (a_{k+1} p_k + p_{k-1}) q_k - (a_{k+1} q_k + q_{k-1}) p_k= -(p_k q_{k-1} - q_k p_{k-1})= (-1)^k$$<br>如果一个整数同时为pn和qn的因子，那么一定是他们线性组合结果(±1)的因数，只能是1<br>，故互素<br><br>连分数逼近定理：若$x=[a_0,a_1,...]$且$|x-c/r|\le1/2r^2$，则$c/r=p_k/q_k$对某个正整数k成立<br>注意到pn,qn都是单增的，存在唯一的n使得c/r处于n与n+1之间，换言之$q_n \le r < q_{n+1}$，我们把这个“处于两者之间”变成n与n-1线性叠加的方程，反正c/r原自由度是是两个，我给他叠加表示之后还是两个自由度，所以我想列就列<br>$$\begin{cases}u p_n + v p_{n-1} = c \\u q_n + v q_{n-1} = r\end{cases}$$<br>其系数行列式为 $p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}$。由于行列式值为 $\pm 1$，方程组必有整数解 $u, v$。如果uv中有一个为0，那么c/r恰好有连分数表示，就结束了，下面我们假设$uv\neq0$并想办法得出矛盾<br>第一种情况$uv<0$，定义 $\delta_k = q_k x - p_k$，注意到$\delta_n$ 与 $\delta_{n-1}$ 符号相反（渐近分数在 $x$ 左右交替），以及<br>$$r x - c = (u q_n + v q_{n-1})x - (u p_n + v p_{n-1}) = u(q_n x - p_n) + v(q_{n-1} x - p_{n-1}) = u \delta_n + v \delta_{n-1}$$<br>$u, v$ 异号，则 $u \delta_n$ 与 $v \delta_{n-1}$ 同号。此时<br>$$|r x - c| = |u||\delta_n| + |v||\delta_{n-1}| \ge |\delta_{n-1}|$$<br>pn/qn与pn+1/qn+1之间的距离为1/qnqn+1，由于pn/qn到x距离是单减的，所以上一项误差必须大于1/2的距离，也即$|\delta_{n-1}| > \frac{1}{2q_n}$。由题目条件 $|x - c/r| < \frac{1}{2r^2} \implies |rx - c| < \frac{1}{2r}$联立上述不等式：<br>$$\frac{1}{2r} > |rx - c| \ge |\delta_{n-1}| > \frac{1}{2q_n}$$<br>即 $\frac{1}{2r} > \frac{1}{2q_n} \implies r < q_n$，这与我们设定的 $r \ge q_n$ 矛盾。<br>第二种情况$uv>0$，不妨设$u, v \ge 1$。由于 $|c q_n-p_n r|\ge1$，<br>$$\left|\frac{c}{r}-\frac{p_n}{q_n}\right|\ge\frac{1}{r q_n}.$$<br>而收敛分数误差满足<br>$$\left|x-\frac{p_n}{q_n}\right|<\frac{1}{q_n q_{n+1}}\le\frac{1}{q_n(q_n+q_{n-1})}.$$<br>故<br>$$\left|x-\frac{c}{r}\right|>\frac{1}{r(q_n+q_{n-1})}>\frac{1}{r^2}$$<br>与题目中所给的逼近条件矛盾，证毕<br>另解：![[lianfenshu.png]]<br>练习三的证明n阶估算误差上界，上面算了，也就是计算两个连分数之间的距离；然后要证pn/qn是分母不超过qn时的最佳估计<br>我们考虑分子误差$|rx-c|=|u \delta_n + v \delta_{n-1}|$，由连分数逼近的性质可知$\delta_n$与$\delta_{n-1}$反号，又由于$r=uq_n+vq_{n-1}\le q_n$可以得出当$uv\neq0$时$uv<0$，故$|rx-c|=|u \delta_n| +| v \delta_{n-1}|\ge|\delta_n|$，故<br>$$|x-\frac{c}{r}|\ge\frac{1}{r}|q_nx-p_n|\ge\frac{1}{q_n}|q_nx-p_n|=|x-\frac{p_n}{1_n}|$$<br>其他边界情况$u=0~or~v=0$时恰为n阶估计（被条件排除）或n-1阶估计（不如n阶估计）</blockquote>
-<p>注意$q>N^2\ge r^2$，最后一个约束条件被满足(我们的量子傅里叶变换规模q取N方以上（而不是N）就是为了这个逼近精度)，连分数逼近能够取到$c/r$。也就是说我们把已知的$b/q$用连分数依次写开直到误差不超过$1/2q$，此时把这个连分数通分后分母计算出来就得到了r</p>
+<blockquote>接下来证明渐近分数 $p_n/q_n$ 不可约，也即证明$p_n q_{n-1} - q_n p_{n-1} = (-1)^{n-1}$，还是使用数学归纳法，先直接验证n=1，然后由k推出k+1，用递推关系式带进式子里<br>$$p_{k+1} q_k - q_{k+1} p_k = (a_{k+1} p_k + p_{k-1}) q_k - (a_{k+1} q_k + q_{k-1}) p_k= -(p_k q_{k-1} - q_k p_{k-1})= (-1)^k$$<br>如果一个整数同时为pn和qn的因子，那么一定是他们线性组合结果(±1)的因数，只能是1<br>，故互素<br><br>连分数逼近定理：若$x=[a_0,a_1,...]$且$|x-c/r|\le1/2r^2$，则$c/r=p_k/q_k$对某个正整数k成立<br>注意到pn,qn都是单增的，存在唯一的n使得c/r处于n与n+1之间，换言之$q_n \le r &lt; q_{n+1}$，我们把这个“处于两者之间”变成n与n-1线性叠加的方程，反正c/r原自由度是是两个，我给他叠加表示之后还是两个自由度，所以我想列就列<br>$$\begin{cases}u p_n + v p_{n-1} = c \\u q_n + v q_{n-1} = r\end{cases}$$<br>其系数行列式为 $p_n q_{n-1} - p_{n-1} q_n = (-1)^{n-1}$。由于行列式值为 $\pm 1$，方程组必有整数解 $u, v$。如果uv中有一个为0，那么c/r恰好有连分数表示，就结束了，下面我们假设$uv\neq0$并想办法得出矛盾<br>第一种情况$uv&lt;0$，定义 $\delta_k = q_k x - p_k$，注意到$\delta_n$ 与 $\delta_{n-1}$ 符号相反（渐近分数在 $x$ 左右交替），以及<br>$$r x - c = (u q_n + v q_{n-1})x - (u p_n + v p_{n-1}) = u(q_n x - p_n) + v(q_{n-1} x - p_{n-1}) = u \delta_n + v \delta_{n-1}$$<br>$u, v$ 异号，则 $u \delta_n$ 与 $v \delta_{n-1}$ 同号。此时<br>$$|r x - c| = |u||\delta_n| + |v||\delta_{n-1}| \ge |\delta_{n-1}|$$<br>pn/qn与pn+1/qn+1之间的距离为1/qnqn+1，由于pn/qn到x距离是单减的，所以上一项误差必须大于1/2的距离，也即$|\delta_{n-1}| &gt; \frac{1}{2q_n}$。由题目条件 $|x - c/r| &lt; \frac{1}{2r^2} \implies |rx - c| &lt; \frac{1}{2r}$联立上述不等式：<br>$$\frac{1}{2r} &gt; |rx - c| \ge |\delta_{n-1}| &gt; \frac{1}{2q_n}$$<br>即 $\frac{1}{2r} &gt; \frac{1}{2q_n} \implies r &lt; q_n$，这与我们设定的 $r \ge q_n$ 矛盾。<br>第二种情况$uv&gt;0$，不妨设$u, v \ge 1$。由于 $|c q_n-p_n r|\ge1$，<br>$$\left|\frac{c}{r}-\frac{p_n}{q_n}\right|\ge\frac{1}{r q_n}.$$<br>而收敛分数误差满足<br>$$\left|x-\frac{p_n}{q_n}\right|&lt;\frac{1}{q_n q_{n+1}}\le\frac{1}{q_n(q_n+q_{n-1})}.$$<br>故<br>$$\left|x-\frac{c}{r}\right|&gt;\frac{1}{r(q_n+q_{n-1})}&gt;\frac{1}{r^2}$$<br>与题目中所给的逼近条件矛盾，证毕<br>另解：![[lianfenshu.png]]<br>练习三的证明n阶估算误差上界，上面算了，也就是计算两个连分数之间的距离；然后要证pn/qn是分母不超过qn时的最佳估计<br>我们考虑分子误差$|rx-c|=|u \delta_n + v \delta_{n-1}|$，由连分数逼近的性质可知$\delta_n$与$\delta_{n-1}$反号，又由于$r=uq_n+vq_{n-1}\le q_n$可以得出当$uv\neq0$时$uv&lt;0$，故$|rx-c|=|u \delta_n| +| v \delta_{n-1}|\ge|\delta_n|$，故<br>$$|x-\frac{c}{r}|\ge\frac{1}{r}|q_nx-p_n|\ge\frac{1}{q_n}|q_nx-p_n|=|x-\frac{p_n}{1_n}|$$<br>其他边界情况$u=0~or~v=0$时恰为n阶估计（被条件排除）或n-1阶估计（不如n阶估计）</blockquote>
+<p>注意$q&gt;N^2\ge r^2$，最后一个约束条件被满足(我们的量子傅里叶变换规模q取N方以上（而不是N）就是为了这个逼近精度)，连分数逼近能够取到$c/r$。也就是说我们把已知的$b/q$用连分数依次写开直到误差不超过$1/2q$，此时把这个连分数通分后分母计算出来就得到了r</p>
 <p>至此完成了shor算法</p>
 <h5 id="sec-17">复杂度</h5>
 <p>时间复杂度$O((\log n)^2·\log\log n·\log\log\log n)$，其中量子DFT时间、经典后处理时间均为$O((\log n)^2)$，模指数运算时间接近$O((\log n)^3)$</p>
@@ -432,12 +442,12 @@ img{max-width:100%;display:block;}
 <p>用数学归纳法证明$D_k\le 4k^2$，显然$k=0$成立</p>
 <p>$$D_{k+1}=\sum_i||O_i\ket{\psi_k^i}-\ket{\psi_k}||^2=\sum_i||O_i(\ket{\psi_k^i}-\ket{\psi_k})-(O_i-I)\ket{\psi_k}||^2$$</p>
 <p>按照两个向量和的模方放出上界</p>
-<p>$$\begin{align*}</p>
-<p>D_{k+1}&\le\sum_i(||\ket{\psi_k^i}-\ket{\psi_k}||^2+4|\braket{i|\psi_k}|||\ket{\psi_k^i}-\ket{\psi_k}||+4|\braket{i|\psi_k}|^2)</p>
-<p>\\&=D_k+4\sum_i |\braket{i|\psi_k}|||\ket{\psi_k^i}-\ket{\psi_k}||+4</p>
-<p>\\&\le D_k+4\sqrt{\sum|\braket{i|\psi_k}|^2}\sqrt{\sum ||\ket{\psi_k^i}-\ket{\psi_k}||^2}+4</p>
-<p>\\&=D_k+4\sqrt{D_k}+4</p>
-<p>\end{align*}$$</p>
+<p>$$\begin{align*}
+D_{k+1}&amp;\le\sum_i(||\ket{\psi_k^i}-\ket{\psi_k}||^2+4|\braket{i|\psi_k}|||\ket{\psi_k^i}-\ket{\psi_k}||+4|\braket{i|\psi_k}|^2)
+\\&amp;=D_k+4\sum_i |\braket{i|\psi_k}|||\ket{\psi_k^i}-\ket{\psi_k}||+4
+\\&amp;\le D_k+4\sqrt{\sum|\braket{i|\psi_k}|^2}\sqrt{\sum ||\ket{\psi_k^i}-\ket{\psi_k}||^2}+4
+\\&amp;=D_k+4\sqrt{D_k}+4
+\end{align*}$$</p>
 <p>代入归纳假设后发现成立</p>
 <ol>
 <li>$D_k$的大小至少为$\Omega(N)$时，才能提取i的信息（测得i的概率至少为一半）</li>
@@ -446,11 +456,11 @@ img{max-width:100%;display:block;}
 <p>定义$F_k=\sum||\ket{\psi_k}-\ket{i}||^2$，把这个平方打开，用与$\vec{1}$内积的柯西洗袜子不等式就可以放大到模方了，就可以转化成长度算了</p>
 <p>$$F_k=2N-\sum(\braket{i|\psi_k}+\braket{\psi_k|i})\ge 2N-2\sqrt{N}$$</p>
 <p>最后计算$D_k$</p>
-<p>$$\begin{align*}</p>
-<p>D_k&=\sum||\ket{\psi_k^i}-\ket{i}+\ket{i}-\ket{\psi_k}||^2</p>
-<p>\\ &\ge\sum||\ket{\psi_k^i}-\ket{i}||^2+\sum||\ket{i}-\ket{\psi_k}||^2-2\sum||\ket{\psi_k^i}-\ket{i}||·||\ket{i}-\ket{\psi_k}||</p>
-<p>\\ &\ge E_k+F_k-2\sqrt{E_k}\sqrt{F_k}=(\sqrt{F_k}-\sqrt{E_k})^2=\Omega(N)</p>
-<p>\end{align*}$$</p>
+<p>$$\begin{align*}
+D_k&amp;=\sum||\ket{\psi_k^i}-\ket{i}+\ket{i}-\ket{\psi_k}||^2
+\\ &amp;\ge\sum||\ket{\psi_k^i}-\ket{i}||^2+\sum||\ket{i}-\ket{\psi_k}||^2-2\sum||\ket{\psi_k^i}-\ket{i}||·||\ket{i}-\ket{\psi_k}||
+\\ &amp;\ge E_k+F_k-2\sqrt{E_k}\sqrt{F_k}=(\sqrt{F_k}-\sqrt{E_k})^2=\Omega(N)
+\end{align*}$$</p>
 <p>从而证明了$O(\sqrt{N})$的最优性</p>
 <h3 id="sec-23">量子模拟</h3>
 <p>用量子计算去算量子系统，以其人之道还其人之身</p>
@@ -467,36 +477,36 @@ img{max-width:100%;display:block;}
 <p>$$||e^{i(H_1+H_2)\frac{t}{L}}-e^{i(H_1)\frac{t}{L}}e^{i(H_2)\frac{t}{L}}||=O(\frac{||H_1||||H_2||t^2}{L^2})$$</p>
 <p>$$||e^{i(H_1+H_2)\frac{t}{L}}-e^{i(H_1)\frac{t}{L}}e^{i(H_2)\frac{t}{L}}e^{i(H_1)\frac{t}{L}}||=O(\frac{||H_1||^2||H_2||t^3}{L^3})$$</p>
 <p>打算用连起来的$U=(U_1U_2)^L=(e^{i(H_1)\frac{t}{L}}e^{i(H_2)\frac{t}{L}})^L$去模拟$(e^{i(H_1+H_2)\frac{t}{L}})^L$，令$L=\Theta(t^2/\varepsilon)$</p>
-<p>$$\begin{align*}</p>
-<p>\left\|e^{i\left(H_{1}+H_{2}\right) t}-U\right\| & =\left\|\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L}-\left(U_{1} U_{2}\right)^{L}\right\| \\</p>
-<p>& =\left\|\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L}-\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L-1} U_{1} U_{2}+\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L-1} U_{1} U_{2}-\left(U_{1} U_{2}\right)^{L}\right\| \\</p>
-<p>& \leq\left\|e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}-U_{1} U_{2}\right\|+\left\|\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L-1}-\left(U_{1} U_{2}\right)^{L-1}\right\| \\</p>
-<p>& \leq O\left(\frac{t^{2}}{L^{2}}\right)+\left\|\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L-1}-\left(U_{1} U_{2}\right)^{L-1}\right\| \\</p>
-<p>& \leq \cdots \leq O\left(\frac{t^{2}}{L}\right) \leq \varepsilon</p>
-<p>\end{align*}$$</p>
+<p>$$\begin{align*}
+\left\|e^{i\left(H_{1}+H_{2}\right) t}-U\right\| &amp; =\left\|\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L}-\left(U_{1} U_{2}\right)^{L}\right\| \\
+&amp; =\left\|\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L}-\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L-1} U_{1} U_{2}+\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L-1} U_{1} U_{2}-\left(U_{1} U_{2}\right)^{L}\right\| \\
+&amp; \leq\left\|e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}-U_{1} U_{2}\right\|+\left\|\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L-1}-\left(U_{1} U_{2}\right)^{L-1}\right\| \\
+&amp; \leq O\left(\frac{t^{2}}{L^{2}}\right)+\left\|\left(e^{i\left(H_{1}+H_{2}\right) \frac{t}{L}}\right)^{L-1}-\left(U_{1} U_{2}\right)^{L-1}\right\| \\
+&amp; \leq \cdots \leq O\left(\frac{t^{2}}{L}\right) \leq \varepsilon
+\end{align*}$$</p>
 <p>逼近$e^{i(H_1)\frac{t}{L}},e^{i(H_2)\frac{t}{L}}$需要polylog(1/ε)个量子门。哈密顿量中有m个求和项时重复m次，电路深度为$O(mt^2/\varepsilon)$</p>
 <h4 id="sec-25">LCU</h4>
 <p>酉算子的线性组合</p>
 <p>考虑任意矩阵M，希望制备状态$M\ket{\psi}/||M\ket{\psi}||$。将M写成酉矩阵线性组合的形式</p>
-<p>$$M=\sum^m \alpha_j V_j,\quad\alpha_j>0,\quad||\alpha||_1=\sum\alpha_j$$</p>
+<p>$$M=\sum^m \alpha_j V_j,\quad\alpha_j&gt;0,\quad||\alpha||_1=\sum\alpha_j$$</p>
 <p>令$l=\lceil logm\rceil$，酉算子作用在0上得到</p>
 <p>$$W\ket{0^l}=\frac{1}{||\alpha||_1}\sum\sqrt{\alpha_j}\ket{j}$$</p>
-<p>$$</p>
-<p>W = \begin{bmatrix}</p>
-<p>\sqrt{\alpha_{1}} & * & \cdots & * \\</p>
-<p>\sqrt{\alpha_{2}} & * & \cdots & * \\</p>
-<p>\vdots & \vdots & \ddots & \vdots \\</p>
-<p>\sqrt{\alpha_{m}} & * & \cdots & *</p>
-<p>\end{bmatrix}.</p>
-<p>$$</p>
-<p>$$</p>
-<p>W^{\dagger} = \begin{bmatrix}</p>
-<p>\sqrt{\alpha_{1}} & * & \cdots & * \\</p>
-<p>\sqrt{\alpha_{2}} & * & \cdots & * \\</p>
-<p>\vdots & \vdots & \ddots & \vdots \\</p>
-<p>\sqrt{\alpha_{n}} & * & \cdots & *</p>
-<p>\end{bmatrix}.</p>
-<p>$$</p>
+<p>$$
+W = \begin{bmatrix}
+\sqrt{\alpha_{1}} &amp; * &amp; \cdots &amp; * \\
+\sqrt{\alpha_{2}} &amp; * &amp; \cdots &amp; * \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\sqrt{\alpha_{m}} &amp; * &amp; \cdots &amp; *
+\end{bmatrix}.
+$$</p>
+<p>$$
+W^{\dagger} = \begin{bmatrix}
+\sqrt{\alpha_{1}} &amp; * &amp; \cdots &amp; * \\
+\sqrt{\alpha_{2}} &amp; * &amp; \cdots &amp; * \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\sqrt{\alpha_{n}} &amp; * &amp; \cdots &amp; *
+\end{bmatrix}.
+$$</p>
 <p>接下来我们使用控制V门和W来实现想要的作用，从$\ket{0^l}\ket{\psi}$开始对前半部分作用W得到</p>
 <p>$$\frac{1}{||\alpha||_1}\sum\sqrt{\alpha_j}\ket{j}\otimes\ket{\psi}$$</p>
 <p>作用控制Vj门</p>
@@ -508,13 +518,13 @@ img{max-width:100%;display:block;}
 <p>$$e^{iHt}=\sum\frac{(it)^k}{k!}\sum\alpha_{j_1}...\alpha_{j_k}V_{j_1}...V_{j_k}$$</p>
 <p>有限项泰勒展开误差($||H||\le1$)</p>
 <p>$$||e^{iHt}-\sum\frac{(iHt)^k}{k!}||\le\varepsilon,\quad T=\Omega(t+\log(1/\varepsilon))$$</p>
-<blockquote>[!info] 证明：<br>误差项<br>$$||\sum_{k=T+1}^\infty\frac{(iHt)^k}{k!}||\le\sum_{k=T+1}^\infty\frac{t^k}{k!}$$<br>用比值判别法<br>$$(\frac{t^{k+1}}{(k+1)!})/(\frac{t^k}{k!})=\frac{t}{k+1}\le\frac{1}{2}\quad while~T>2t$$<br>所以可以用等比级数去控制<br>$$\sum_{k=T+1}^\infty\frac{t^k}{k!}\le\frac{t^{T+1}}{(T+1)!}(1+\frac{1}{2}+...)=\frac{2t^{T+1}}{(T+1)!}<\epsilon$$<br>两边取ln并使用$ln(k!)\approx k\ln k-k$，化简得<br>$$T(\ln(T/t)-1)>\ln(1/\varepsilon)$$<br>要使$\ln(T/t)-1>0$，T必须含有$\Omega(t)$；右侧有个$\ln(1/\varepsilon)$所以T必须含有$\Omega(\ln(1/\varepsilon))$<br>综上，$T=\Omega(t+\log(1/\varepsilon))$<br></blockquote>
+<blockquote>[!info] 证明：<br>误差项<br>$$||\sum_{k=T+1}^\infty\frac{(iHt)^k}{k!}||\le\sum_{k=T+1}^\infty\frac{t^k}{k!}$$<br>用比值判别法<br>$$(\frac{t^{k+1}}{(k+1)!})/(\frac{t^k}{k!})=\frac{t}{k+1}\le\frac{1}{2}\quad while~T&gt;2t$$<br>所以可以用等比级数去控制<br>$$\sum_{k=T+1}^\infty\frac{t^k}{k!}\le\frac{t^{T+1}}{(T+1)!}(1+\frac{1}{2}+...)=\frac{2t^{T+1}}{(T+1)!}&lt;\epsilon$$<br>两边取ln并使用$ln(k!)\approx k\ln k-k$，化简得<br>$$T(\ln(T/t)-1)&gt;\ln(1/\varepsilon)$$<br>要使$\ln(T/t)-1&gt;0$，T必须含有$\Omega(t)$；右侧有个$\ln(1/\varepsilon)$所以T必须含有$\Omega(\ln(1/\varepsilon))$<br>综上，$T=\Omega(t+\log(1/\varepsilon))$<br></blockquote>
 <p>令$\beta_{j_1...j_k}=t^k\alpha_{j_1}...\alpha_{j_k}/k!$，可以用LCU实现</p>
 <p>$$\sum_{k=0}^T\frac{(iHt)^k}{k!}=\sum_{k=0}^Ti^k\sum\beta_{j_1...j_k}V_{j_1}...V_{j_k}$$</p>
 <p>电路规模是β一范数</p>
-<p>$$</p>
-<p>\|\beta\|_{1}=\sum_{k=0}^{T} \frac{t^{k}}{k!} \sum_{j_{1}, \ldots, j_{m}=1}^{k} \alpha_{j_{1}} \cdots \alpha_{j_{k}} \leq \sum_{k=0}^{\infty} \frac{t^{k}}{k!} \sum_{j_{1}, \ldots, j_{m}=1}^{k} \alpha_{j_{1}} \cdots \alpha_{j_{k}}=e^{t\|\alpha\|_{1}}.</p>
-<p>$$</p>
+<p>$$
+\|\beta\|_{1}=\sum_{k=0}^{T} \frac{t^{k}}{k!} \sum_{j_{1}, \ldots, j_{m}=1}^{k} \alpha_{j_{1}} \cdots \alpha_{j_{k}} \leq \sum_{k=0}^{\infty} \frac{t^{k}}{k!} \sum_{j_{1}, \ldots, j_{m}=1}^{k} \alpha_{j_{1}} \cdots \alpha_{j_{k}}=e^{t\|\alpha\|_{1}}.
+$$</p>
 <p>为了克服LCU重复时间的指数增长，把整个演化拆分成$b=t||\alpha||_1$个演化，演化时间$1/||\alpha||_1$，演化精度$\varepsilon/b$，电路总规模$O(mt\log(mt/\varepsilon))$</p>
 <p>给定向量$v\in[-1,1]^N$，其中$N=2^n$，下标$i\in\{0,1\}^n$用p位二进制表示，给定查询v的Oracle</p>
 <p>$$O_v:\ket{i}\ket{0^p}\mapsto\ket{i}\ket{v_i}$$</p>
@@ -522,7 +532,7 @@ img{max-width:100%;display:block;}
 <ol>
 <li>初始状态$\ket{i}\ket{0^p}\ket{0}$</li>
 <li>作用Oracle得到$\ket{i}\ket{v_i}\ket{0}$</li>
-<li>由于p位二进制小数，所以在误差允许的范围内可以通过有限列举的方法去写出有限多个a-旋转门$V_a=\begin{bmatrix}a&-\sqrt{1-a^2}\\\sqrt{1-a^2} & a\end{bmatrix}$，这样的穷举（去试）可以用求和投影的方法表示出来，$V=\sum_{\hat{a}\in\{0,1\}^p}\ket{\hat{a}}\bra{\hat{a}}\otimes V_a$，作用在后半部分即可得到旋转效果$\ket{i}\ket{v_i}(v_i\ket{0}+\sqrt{1-v_i^2}\ket{1})$</li>
+<li>由于p位二进制小数，所以在误差允许的范围内可以通过有限列举的方法去写出有限多个a-旋转门$V_a=\begin{bmatrix}a&amp;-\sqrt{1-a^2}\\\sqrt{1-a^2} &amp; a\end{bmatrix}$，这样的穷举（去试）可以用求和投影的方法表示出来，$V=\sum_{\hat{a}\in\{0,1\}^p}\ket{\hat{a}}\bra{\hat{a}}\otimes V_a$，作用在后半部分即可得到旋转效果$\ket{i}\ket{v_i}(v_i\ket{0}+\sqrt{1-v_i^2}\ket{1})$</li>
 <li>最后对前半部分使用$O_v^\dagger$以清除寄存器中的$v_i$，即$\ket{i}\ket{0^p}(v_i\ket{0}+\sqrt{1-v_i^2}\ket{1})$</li>
 </ol>
 <p>所以前文中的序列映射振幅的算子W可以用上述方法走一遍之后对最后一位进行测量，测量结果为0时即可得到。</p>
@@ -534,13 +544,13 @@ img{max-width:100%;display:block;}
 <img class="note-img" src="assets/block.png" alt="block.png">
 <h4 id="sec-27">解线性方程组</h4>
 <p>Ax=b，直接设系数矩阵是可逆厄米的，否则令</p>
-<p>$$A' = \begin{pmatrix}</p>
-<p>0 & A \\</p>
-<p>A^\dagger & 0</p>
-<p>\end{pmatrix}, \quad b' = \begin{pmatrix}</p>
-<p>b \\</p>
-<p>0</p>
-<p>\end{pmatrix}$$</p>
+<p>$$A' = \begin{pmatrix}
+0 &amp; A \\
+A^\dagger &amp; 0
+\end{pmatrix}, \quad b' = \begin{pmatrix}
+b \\
+0
+\end{pmatrix}$$</p>
 <p>新线性方程组的解一定包含原解。这个问题也就是要求A的逆作用在b上，上两节中写了如何将存储的信息编码在振幅上，也就是</p>
 <p>$$\frac{1}{||\ket{x}||}\sum_{i=0}^{N-1}x_i\ket{i}$$</p>
 <p>虽然无法直接读出x，但是可以通过计算期望来估计x</p>
@@ -550,7 +560,10 @@ img{max-width:100%;display:block;}
 <p>$$\sum_{j=0}^{N-1}\beta_j\ket{\tilde{\lambda_j}}\ket{a_j}$$</p>
 <p>通过先前的控制旋转的方法将λ的信息放在振幅上，注意用κ将其映射到[-1,1]内</p>
 <p>$$\sum_{j=0}^{N-1} \beta_j (\frac{1}{\kappa \lambda_j} |0\rangle + \sqrt{1 - \frac{1}{(\kappa \lambda_j)^2}} |1\rangle) |a_j\rangle = \frac{1}{\kappa} \sum_{j=0}^{N-1} \frac{\beta_j}{\lambda_j} |0\rangle |a_j\rangle + \sum_{j=0}^{N-1} \beta_j \sqrt{1 - \frac{1}{(\kappa \lambda_j)^2}} |1\rangle |a_j\rangle.$$</p>
-<blockquote>[!note] 控制旋转<br>还是用二进制一项项凑的想法<br>$$U_{\theta} : |0\rangle |\theta\rangle \mapsto (\cos(\pi \theta) |0\rangle + \sin(\pi \theta) |1\rangle) |\theta\rangle$$<br>$$R_y(2\theta) = \begin{bmatrix}<br>\cos(\theta) & -\sin(\theta) \\<br>\sin(\theta) & \cos(\theta)<br>\end{bmatrix} = e^{-i\theta \sigma_Y},$$<br>那么在e指数上面就可以凑二进制了，最后弄出这样子普适的旋转酉门<br>$$U_{\theta} = \sum_{j \in \{0, 1\}^\ell} e^{-i\pi(j_1/2^2 + \dots + j_d/2^{-(d+1)})Y} \otimes |j\rangle \langle j|.$$<br>我们用经典电路计算$\frac{1}{\pi}\arccos(1/\kappa\tilde{\lambda_j})$再带入上式即可</blockquote>
+<blockquote>[!note] 控制旋转<br>还是用二进制一项项凑的想法<br>$$U_{\theta} : |0\rangle |\theta\rangle \mapsto (\cos(\pi \theta) |0\rangle + \sin(\pi \theta) |1\rangle) |\theta\rangle$$<br>$$R_y(2\theta) = \begin{bmatrix}
+\cos(\theta) &amp; -\sin(\theta) \\
+\sin(\theta) &amp; \cos(\theta)
+\end{bmatrix} = e^{-i\theta \sigma_Y},$$<br>那么在e指数上面就可以凑二进制了，最后弄出这样子普适的旋转酉门<br>$$U_{\theta} = \sum_{j \in \{0, 1\}^\ell} e^{-i\pi(j_1/2^2 + \dots + j_d/2^{-(d+1)})Y} \otimes |j\rangle \langle j|.$$<br>我们用经典电路计算$\frac{1}{\pi}\arccos(1/\kappa\tilde{\lambda_j})$再带入上式即可</blockquote>
 <p>记得β是b在系数矩阵表象下的坐标，所以测量出前半部分的概率至少为$\kappa^{-2}$，再用$O(\kappa)$次振幅放大即可保证概率足够大，坍缩后系统的后半部分为</p>
 <p>$$\sum_{j=0}^{N-1} \frac{\beta_j}{\tilde{\lambda}_j} |a_j\rangle$$</p>
 <h3 id="sec-28">量子纠缠</h3>
@@ -560,16 +573,16 @@ img{max-width:100%;display:block;}
 <blockquote>1Z1=-1 1X1=0 0Z0=1 0X0=0</blockquote>
 <p>习题</p>
 <p>$$\ket{\Phi} = \frac{|0\rangle \otimes |1\rangle - |1\rangle \otimes |0\rangle}{\sqrt{2}}$$</p>
-<p>$$Q = Z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}, \quad R = X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$$</p>
+<p>$$Q = Z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}, \quad R = X = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$$</p>
 <p>$$S = \frac{-Z - X}{\sqrt{2}}, \quad T = \frac{Z - X}{\sqrt{2}}$$</p>
 <p>计算</p>
 <p>$$\mathbb{E}(\mathcal{O}) = \mathbb{E}(QS) + \mathbb{E}(RS) + \mathbb{E}(RT) - \mathbb{E}(QT)$$</p>
-<p>$$</p>
-<p>\mathbb{E}(QS) = \frac{1}{2} (\langle 01|01\rangle - \langle 10|01\rangle + \langle 01|00\rangle - \langle 10|00\rangle + \langle 01|11\rangle - \langle 10|11\rangle)</p>
-<p>$$</p>
-<p>$$</p>
-<p>\mathbb{E}(QS) = \frac{1}{2} (1 \cdot 1 + 0 - 0 - 0 + 0 - 1 \cdot (-1)) = \frac{1}{2} (1 + 1) = 1</p>
-<p>$$</p>
+<p>$$
+\mathbb{E}(QS) = \frac{1}{2} (\langle 01|01\rangle - \langle 10|01\rangle + \langle 01|00\rangle - \langle 10|00\rangle + \langle 01|11\rangle - \langle 10|11\rangle)
+$$</p>
+<p>$$
+\mathbb{E}(QS) = \frac{1}{2} (1 \cdot 1 + 0 - 0 - 0 + 0 - 1 \cdot (-1)) = \frac{1}{2} (1 + 1) = 1
+$$</p>
 <p>$$\mathbb{E}(QT) = \frac{1}{2} (-1 - 1) = -1$$</p>
 <p>$$\mathbb{E}(RS) = \frac{1}{2} (0 + 0) = 0$$</p>
 <p>$$\mathbb{E}(RT) = \frac{1}{2} (0 + 0) = 0$$</p>
@@ -617,39 +630,39 @@ img{max-width:100%;display:block;}
 <p>直接算呗</p>
 <p>3.1对于任意2x2酉矩阵证明存在$\alpha,\beta,\gamma,\delta\in\mathbb{R}$ 使得$U = e^{i\alpha} R_z(\beta) R_y(\gamma) R_z(\delta).$</p>
 <p>任意 $2\times 2$ 酉矩阵可以写为</p>
-<p>$$U =</p>
-<p>\begin{pmatrix}</p>
-<p>e^{i(\alpha-\beta/2-\delta/2)} \cos\frac{\gamma}{2}</p>
-<p>&</p>
-<p>-\,e^{i(\alpha-\beta/2+\delta/2)} \sin\frac{\gamma}{2}</p>
-<p>\\</p>
-<p>e^{i(\alpha+\beta/2-\delta/2)} \sin\frac{\gamma}{2}</p>
-<p>&</p>
-<p>e^{i(\alpha+\beta/2+\delta/2)} \cos\frac{\gamma}{2}</p>
-<p>\end{pmatrix}.</p>
-<p>$$</p>
-<p>$$R_z(\theta)=</p>
-<p>\begin{pmatrix}</p>
-<p>e^{-i\theta/2} & 0\\</p>
-<p>0 & e^{i\theta/2}</p>
-<p>\end{pmatrix},\qquad</p>
-<p>R_y(\theta)=</p>
-<p>\begin{pmatrix}</p>
-<p>\cos\frac{\theta}{2} & -\sin\frac{\theta}{2}\\</p>
-<p>\sin\frac{\theta}{2} & \cos\frac{\theta}{2}</p>
-<p>\end{pmatrix}.$$</p>
+<p>$$U =
+\begin{pmatrix}
+e^{i(\alpha-\beta/2-\delta/2)} \cos\frac{\gamma}{2}
+&amp;
+-\,e^{i(\alpha-\beta/2+\delta/2)} \sin\frac{\gamma}{2}
+\\
+e^{i(\alpha+\beta/2-\delta/2)} \sin\frac{\gamma}{2}
+&amp;
+e^{i(\alpha+\beta/2+\delta/2)} \cos\frac{\gamma}{2}
+\end{pmatrix}.
+$$</p>
+<p>$$R_z(\theta)=
+\begin{pmatrix}
+e^{-i\theta/2} &amp; 0\\
+0 &amp; e^{i\theta/2}
+\end{pmatrix},\qquad
+R_y(\theta)=
+\begin{pmatrix}
+\cos\frac{\theta}{2} &amp; -\sin\frac{\theta}{2}\\
+\sin\frac{\theta}{2} &amp; \cos\frac{\theta}{2}
+\end{pmatrix}.$$</p>
 <p>直接相乘：</p>
-<p>$$</p>
-<p>R_z(\beta)R_y(\gamma)R_z(\delta)=</p>
-<p>\begin{pmatrix}</p>
-<p>e^{-i(\beta+\delta)/2}\cos\frac{\gamma}{2}</p>
-<p>&</p>
-<p>-e^{-i(\beta-\delta)/2}\sin\frac{\gamma}{2}</p>
-<p>\\</p>
-<p>e^{i(\beta-\delta)/2}\sin\frac{\gamma}{2}</p>
-<p>&</p>
-<p>e^{i(\beta+\delta)/2}\cos\frac{\gamma}{2}</p>
-<p>\end{pmatrix}$$</p>
+<p>$$
+R_z(\beta)R_y(\gamma)R_z(\delta)=
+\begin{pmatrix}
+e^{-i(\beta+\delta)/2}\cos\frac{\gamma}{2}
+&amp;
+-e^{-i(\beta-\delta)/2}\sin\frac{\gamma}{2}
+\\
+e^{i(\beta-\delta)/2}\sin\frac{\gamma}{2}
+&amp;
+e^{i(\beta+\delta)/2}\cos\frac{\gamma}{2}
+\end{pmatrix}$$</p>
 <p>（或者用U(2)=U(1)xSU(2)，前面的相位因子属于U(1)，上面拼出来的是SU(2)，而SU(2)你可以先把四个位置设出来,然后根据条件去参数化去凑）</p>
 <img class="note-img" src="assets/SU2change.png" alt="SU2change.png">
 <p><span style="background:rgba(173, 239, 239, 0.55)">新题</span>：写出SWAP矩阵再用CNOT实现，写在上面正文处了</p>
@@ -660,11 +673,11 @@ img{max-width:100%;display:block;}
 <p>控制SWAP之后长这样</p>
 <p>$$|\Psi_2\rangle = \frac{1}{\sqrt{2}} (|0\rangle|\psi\rangle|\phi\rangle + |1\rangle|\phi\rangle|\psi\rangle)$$</p>
 <p>第二个H之后</p>
-<p>$$\begin{aligned} |\Psi_3\rangle &= \frac{1}{\sqrt{2}} \left( \frac{|0\rangle+|1\rangle}{\sqrt{2}} |\psi\rangle|\phi\rangle + \frac{|0\rangle-|1\rangle}{\sqrt{2}} |\phi\rangle|\psi\rangle \right) \\ &= \frac{1}{2} \left[ |0\rangle(|\psi\rangle|\phi\rangle + |\phi\rangle|\psi\rangle) + |1\rangle(|\psi\rangle|\phi\rangle - |\phi\rangle|\psi\rangle) \right] \end{aligned}$$</p>
+<p>$$\begin{aligned} |\Psi_3\rangle &amp;= \frac{1}{\sqrt{2}} \left( \frac{|0\rangle+|1\rangle}{\sqrt{2}} |\psi\rangle|\phi\rangle + \frac{|0\rangle-|1\rangle}{\sqrt{2}} |\phi\rangle|\psi\rangle \right) \\ &amp;= \frac{1}{2} \left[ |0\rangle(|\psi\rangle|\phi\rangle + |\phi\rangle|\psi\rangle) + |1\rangle(|\psi\rangle|\phi\rangle - |\phi\rangle|\psi\rangle) \right] \end{aligned}$$</p>
 <p>计算模方</p>
-<p>$$\begin{aligned} P(0) &= \frac{1}{4} (\langle\psi|\langle\phi| + \langle\phi|\langle\psi|) (|\psi\rangle|\phi\rangle + |\phi\rangle|\psi\rangle)  \\ &= \frac{1}{4} (1 + |\langle\psi|\phi\rangle|^2 + |\langle\phi|\psi\rangle|^2 + 1)\\</p>
-<p>&= \frac{1}{2} + \frac{1}{2} |\langle \psi | \phi \rangle|^2</p>
-<p>\end{aligned}$$</p>
+<p>$$\begin{aligned} P(0) &amp;= \frac{1}{4} (\langle\psi|\langle\phi| + \langle\phi|\langle\psi|) (|\psi\rangle|\phi\rangle + |\phi\rangle|\psi\rangle)  \\ &amp;= \frac{1}{4} (1 + |\langle\psi|\phi\rangle|^2 + |\langle\phi|\psi\rangle|^2 + 1)\\
+&amp;= \frac{1}{2} + \frac{1}{2} |\langle \psi | \phi \rangle|^2
+\end{aligned}$$</p>
 <p>6.1 6.2做了</p>
 <p>8.1证明能够利用测量精确分辨两个混合态$\rho_1,\rho_2$的充要条件是$Tr(\rho_1\rho_2)=0$</p>
 <p>必要性：假设存在 POVM $\{E_1,E_2\}$满足$E_1,E_2 \ge 0, \qquad E_1+E_2 = I$ $\operatorname{Tr}(E_1\rho_1)=1, \quad\operatorname{Tr}(E_1\rho_2)=0.$</p>
@@ -675,11 +688,11 @@ img{max-width:100%;display:block;}
 <p>8.2证明偏迹不依赖于迹的那一部分的正交基选取</p>
 <p>也即证明$\rho^A=\sum_j(I_A\otimes\bra{j}_B)\rho^{AB}(I_A\otimes\ket{j}_B)=\sum_k(I_A\otimes\bra{k}_B)\rho^{AB}(I_A\otimes\ket{k}_B)$，直接给前面两个$\bra{j}\ket{j}$前面插k的完备性关系即可</p>
 <p>8.3计算EPR00+11关于第一个系统A的约化密度矩阵</p>
-<p>$$\begin{aligned}</p>
-<p>\rho^{AB} &= \left[ \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) \right] \left[ \frac{1}{\sqrt{2}}(\langle 00| + \langle 11|) \right] \\</p>
-<p>&= \frac{1}{2} \left( |00\rangle\langle 00| + |00\rangle\langle 11| + |11\rangle\langle 00| + |11\rangle\langle 11| \right)</p>
-<p>\end{aligned}$$</p>
-<p>$$\rho^A = \langle 0|_B \rho^{AB} |0\rangle_B + \langle 1|_B \rho^{AB} |1\rangle_B= \frac{1}{2} |0\rangle_A\langle 0|_A + \frac{1}{2} |1\rangle_A\langle 1|_A = \frac{1}{2} \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = \frac{I}{2}$$</p>
+<p>$$\begin{aligned}
+\rho^{AB} &amp;= \left[ \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) \right] \left[ \frac{1}{\sqrt{2}}(\langle 00| + \langle 11|) \right] \\
+&amp;= \frac{1}{2} \left( |00\rangle\langle 00| + |00\rangle\langle 11| + |11\rangle\langle 00| + |11\rangle\langle 11| \right)
+\end{aligned}$$</p>
+<p>$$\rho^A = \langle 0|_B \rho^{AB} |0\rangle_B + \langle 1|_B \rho^{AB} |1\rangle_B= \frac{1}{2} |0\rangle_A\langle 0|_A + \frac{1}{2} |1\rangle_A\langle 1|_A = \frac{1}{2} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \frac{I}{2}$$</p>
 <p>（最大混合态）</p>
 <p>8.4计算量子隐形传态Alice测量前的状态（一大坨）关于B的约化密度算子</p>
 <p>因为Alice那边就是00 01 10 11，直接被trace掉，只剩下B那边的矢量对起来求和就是B的约化密度算子了（传统求法）</p>
@@ -690,7 +703,7 @@ img{max-width:100%;display:block;}
 <p>还有图论冷饭的，那我也搬过来吧</p>
 <p>记$f(n)=\alpha(N^{\boxtimes n}),n\in Z_{\ge}$,则正函数f满足$f(a+b)\ge f(a)f(b)$</p>
 <p>对n进行带余除法(m>0)</p>
-<p>$$n=km+r;k=\lfloor \frac{n}{m}\rfloor, 0\le r<m$$</p>
+<p>$$n=km+r;k=\lfloor \frac{n}{m}\rfloor, 0\le r&lt;m$$</p>
 <p>则有不等式</p>
 <p>$$f(n)\ge f(m)^kf(r)$$</p>
 <p>同开n次根号，得</p>
@@ -707,7 +720,7 @@ img{max-width:100%;display:block;}
 <p>$$\lim_{n\to\infty}\sqrt[n]{\alpha(N^{\boxtimes n})}=\sup_n\sqrt[n]{\alpha(N^{\boxtimes n})}$$</p>
 <p>8.6是个关于$\alpha(G)\le \alpha_*(G)$的，还是图论冷饭，没讲，我也懒得看了</p>
 <p>8.7$E_1=I_2/\sqrt{2},E_2=Z/\sqrt{2},F_1=00,F_2=11$验证$E_1XE_1^\dagger+E_2XE_2^\dagger=F_1XF_1^\dagger+F_2XF_2^\dagger$</p>
-<p>$LHS= \frac{1}{2} \left[ \begin{pmatrix} a & b \\ c & d \end{pmatrix} + \begin{pmatrix} a & -b \\ -c & d \end{pmatrix} \right] = \begin{pmatrix} a & 0 \\ 0 & d \end{pmatrix}=RHS$</p>
+<p>$LHS= \frac{1}{2} \left[ \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix} + \begin{pmatrix} a &amp; -b \\ -c &amp; d \end{pmatrix} \right] = \begin{pmatrix} a &amp; 0 \\ 0 &amp; d \end{pmatrix}=RHS$</p>
 <p>证明若 $\sum_i E_i \rho E_i^\dagger = \sum_j F_j \rho F_j^\dagger$，证明存在酉矩阵 $U$ 使得 $E_i = \sum_j u_{ij} F_j$。</p>
 <p>$$|\Psi_E\rangle = \sum_i |i\rangle_R \otimes E_i |\psi\rangle_Q\quad |\Psi_F\rangle = \sum_j |j\rangle_R \otimes F_j |\psi\rangle_Q$$</p>
 <p>$$\Phi(\rho)_E = \Phi(\rho)_F\Rightarrow\text{Tr}_R(|\Psi_E\rangle\langle\Psi_E|) = \text{Tr}_R(|\Psi_F\rangle\langle\Psi_F|)$$</p>
@@ -732,65 +745,65 @@ img{max-width:100%;display:block;}
 <h3 id="sec-31">2023往年卷</h3>
 <p>1.$\frac{1}{\sqrt{N}}\sum_{i=0}^{N-1} |i\rangle |x_i\rangle\to\frac{1}{\sqrt{N}}\sum_{i=0}^{N-1} (-1)^{x_i} |i\rangle |1\rangle$，概率1/2:</p>
 <p>在第二个位置作用Hadmard门并测量，取1，概率恰为1/2</p>
-<p>$$</p>
-<p>\begin{aligned}</p>
-<p>|\psi_1\rangle</p>
-<p>&= \frac{1}{\sqrt{N}}\sum_{i=0}^{N-1} |i\rangle H|x_i\rangle \\</p>
-<p>&= \frac{1}{\sqrt{N}}\sum_{i=0}^{N-1} |i\rangle</p>
-<p>\frac{|0\rangle+(-1)^{x_i}|1\rangle}{\sqrt{2}} \\</p>
-<p>&= \frac{1}{\sqrt{2N}}\sum_{i=0}^{N-1} |i\rangle</p>
-<p>\bigl(|0\rangle+(-1)^{x_i}|1\rangle\bigr).</p>
-<p>\end{aligned}</p>
-<p>$$</p>
-<p>$$P(1)=\sum_{i=0}^{N-1}\left|\frac{(-1)^{x_i}}{\sqrt{2N}}\right|^2</p>
-<p>= N\cdot\frac{1}{2N}=\frac{1}{2}.$$</p>
+<p>$$
+\begin{aligned}
+|\psi_1\rangle
+&amp;= \frac{1}{\sqrt{N}}\sum_{i=0}^{N-1} |i\rangle H|x_i\rangle \\
+&amp;= \frac{1}{\sqrt{N}}\sum_{i=0}^{N-1} |i\rangle
+\frac{|0\rangle+(-1)^{x_i}|1\rangle}{\sqrt{2}} \\
+&amp;= \frac{1}{\sqrt{2N}}\sum_{i=0}^{N-1} |i\rangle
+\bigl(|0\rangle+(-1)^{x_i}|1\rangle\bigr).
+\end{aligned}
+$$</p>
+<p>$$P(1)=\sum_{i=0}^{N-1}\left|\frac{(-1)^{x_i}}{\sqrt{2N}}\right|^2
+= N\cdot\frac{1}{2N}=\frac{1}{2}.$$</p>
 <p>2.$|\Psi\rangle=\frac{1}{\sqrt{2}}\bigl(|0\rangle|\phi\rangle+|1\rangle|\psi\rangle\bigr)$对第一个量子比特作用 Hadamard 门 $H$，然后在计算基下测量该比特，求测量结果为 $1$ 的概率：</p>
-<p>$$\begin{aligned}</p>
-<p>(H\otimes I)|\Psi\rangle</p>
-<p>&= \frac{1}{\sqrt{2}}</p>
-<p>\left(</p>
-<p>H|0\rangle|\phi\rangle + H|1\rangle|\psi\rangle</p>
-<p>\right) \\</p>
-<p>&= \frac{1}{2}</p>
-<p>\Bigl[</p>
-<p>|0\rangle\bigl(|\phi\rangle+|\psi\rangle\bigr)</p>
-<p>+ |1\rangle\bigl(|\phi\rangle-|\psi\rangle\bigr)</p>
-<p>\Bigr].</p>
-<p>\end{aligned}$$</p>
+<p>$$\begin{aligned}
+(H\otimes I)|\Psi\rangle
+&amp;= \frac{1}{\sqrt{2}}
+\left(
+H|0\rangle|\phi\rangle + H|1\rangle|\psi\rangle
+\right) \\
+&amp;= \frac{1}{2}
+\Bigl[
+|0\rangle\bigl(|\phi\rangle+|\psi\rangle\bigr)
++ |1\rangle\bigl(|\phi\rangle-|\psi\rangle\bigr)
+\Bigr].
+\end{aligned}$$</p>
 <p>$$P(1)=\frac{1}{2}-\frac{1}{2}\operatorname{Re}\langle\phi|\psi\rangle.$$</p>
 <p>3.写出QFT矩阵、量子电路和作用在基上的结果</p>
-<p>$$(F_N)_{k j} = \frac{1}{\sqrt{N}} \, \omega_N^{\,k j}</p>
-<p>= \frac{1}{\sqrt{N}} e^{2\pi i k j / N},</p>
-<p>\qquad k,j = 0,1,\dots,N-1.$$</p>
+<p>$$(F_N)_{k j} = \frac{1}{\sqrt{N}} \, \omega_N^{\,k j}
+= \frac{1}{\sqrt{N}} e^{2\pi i k j / N},
+\qquad k,j = 0,1,\dots,N-1.$$</p>
 <p>量子电路</p>
 <ol>
 <li>对最高位量子比特施加 Hadamard 门；</li>
 <li>依次以其后的量子比特作为控制比特对该位比特进行旋转</li>
 </ol>
-<p>$$</p>
-<p>R_k =</p>
-<p>\begin{pmatrix}</p>
-<p>1 & 0 \\</p>
-<p>0 & e^{2\pi i / 2^k}</p>
-<p>\end{pmatrix};</p>
-<p>$$</p>
+<p>$$
+R_k =
+\begin{pmatrix}
+1 &amp; 0 \\
+0 &amp; e^{2\pi i / 2^k}
+\end{pmatrix};
+$$</p>
 <ol>
 <li>对剩余量子比特递归重复上述操作；</li>
 <li>最后对所有量子比特做比特顺序反转（SWAP 门）。</li>
 </ol>
-<p>$$\mathrm{QFT}_N |j\rangle</p>
-<p>= \frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} e^{2\pi i j k / N} |k\rangle,</p>
-<p>\qquad j=0,1,\dots,N-1.$$</p>
+<p>$$\mathrm{QFT}_N |j\rangle
+= \frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} e^{2\pi i j k / N} |k\rangle,
+\qquad j=0,1,\dots,N-1.$$</p>
 <p>附加题：证明做四次傅里叶等于不动(I)</p>
 <p>$$F_N^2 |k\rangle = \frac{1}{N} \sum_{j=0}^{N-1} \sum_{m=0}^{N-1} \omega^{j(k+m)} |m\rangle = \sum_{m=0}^{N-1} \left( \frac{1}{N} \sum_{j=0}^{N-1} \omega^{j(k+m)} \right) |m\rangle$$</p>
 <p>$$\frac{1}{N} \sum_{j=0}^{N-1} \omega^{j(k+m)} = \delta_{(k+m)\%N, 0}$$</p>
 <p>$$F_N^2 |k\rangle = |(-k) \pmod N\rangle$$</p>
 <p>$$F_N^4 |k\rangle = F_N^2 (F_N^2 |k\rangle) = |k\rangle$$</p>
 <p>4.给个态计算个偏迹</p>
-<p>$$\begin{aligned}</p>
-<p>\rho = & |\alpha|^2 |0\rangle_A\langle 0| \otimes |+\rangle_B\langle +| - \alpha \beta^* |0\rangle_A\langle 1| \otimes |+\rangle_B\langle -| \\</p>
-<p>& - \beta \alpha^* |1\rangle_A\langle 0| \otimes |-\rangle_B\langle +| + |\beta|^2 |1\rangle_A\langle 1| \otimes |-\rangle_B\langle -|</p>
-<p>\end{aligned}$$</p>
+<p>$$\begin{aligned}
+\rho = &amp; |\alpha|^2 |0\rangle_A\langle 0| \otimes |+\rangle_B\langle +| - \alpha \beta^* |0\rangle_A\langle 1| \otimes |+\rangle_B\langle -| \\
+&amp; - \beta \alpha^* |1\rangle_A\langle 0| \otimes |-\rangle_B\langle +| + |\beta|^2 |1\rangle_A\langle 1| \otimes |-\rangle_B\langle -|
+\end{aligned}$$</p>
 <p>学聪明点，用+-去求第二个位置的迹</p>
 <p>$$\rho_A = |\alpha|^2 |0\rangle\langle 0| + |\beta|^2 |1\rangle\langle 1|$$</p>
 <p>还有一问是计算量子隐形传态Alice约化密度算子，在习题里</p>
@@ -809,10 +822,10 @@ img{max-width:100%;display:block;}
 <p>获胜概率为：$P_{\text{win}} = \frac{1}{2} + \frac{\langle S \rangle}{8} = \frac{1}{2} + \frac{2\sqrt{2}}{8} = \frac{1}{2} + \frac{1}{2\sqrt{2}}$</p>
 <p>6.exp泰勒展开逼近误差估计，作业题</p>
 <p>7.$U\ket{0^n}=\sqrt{p}\ket{G}+\sqrt{1-p}\ket{B}$。1.证明ψ的反射（简单，打开算）2.计算Grover迭代算子在GB表象的矩阵和特征值特征向量 3.利用相位估计法计算p的ε乘性近似算法 4.上述算法需要调用U几次？</p>
-<p>$$G = \begin{pmatrix}</p>
-<p>-\cos 2\theta & \sin 2\theta \\</p>
-<p>-\sin 2\theta & -\cos 2\theta</p>
-<p>\end{pmatrix}$$</p>
+<p>$$G = \begin{pmatrix}
+-\cos 2\theta &amp; \sin 2\theta \\
+-\sin 2\theta &amp; -\cos 2\theta
+\end{pmatrix}$$</p>
 <p>$$\lambda_\pm = e^{i(\pi \mp 2\theta)}$$</p>
 <p>特征向量为 $\frac{1}{\sqrt{2}}(|G\rangle \pm i|B\rangle)$</p>
 <p>3，4问ai做的太不靠谱了，实际上就是套用Grover算法</p>
@@ -828,7 +841,9 @@ img{max-width:100%;display:block;}
 <p>如果k与r互素，那么k就是唯一确定的。也就是我们以均匀概率去ran一个比r小的数（包括0），ran出来的数与r互素的概率是有个下界的$\Omega(1/\log\log r)$，那么重复测量$\log\log N$次，约分，取最大的那个r即可</p>
 <p>4.我们数一数所有b that 存在小于r的正整数c使得上式被满足的数目。首先一个c至少对应一个b，c一共有r个，所以这样的b至少有r个。那么测量到符合要求的b的概率至少为</p>
 <p>$$P\ge\frac{4}{\pi^2}(1-\frac{r}{q})\ge\frac{4}{\pi^2}(1-\frac{1}{N})$$</p>
-<blockquote>[!note] 简述Shor算法<br>1. **输入**：合数 $N$。随机选取 $a\in\{2,\dots,N-1\}$。<br>   若 $\gcd(a,N)>1$，直接返回非平凡因子。<br>2. **归约为周期问题**：定义 $f(x)=a^x\bmod N$，寻找最小正整数周期 $r$ 使得 $a^r\equiv1\pmod N$。<br>3. **量子子例程（周期查找）**：<br>   - 准备第一寄存器为均匀叠加 $\frac{1}{\sqrt{Q}}\sum_{x=0}^{Q-1}|x\rangle$，取 $Q=2^t$ 且 $Q\ge N^2$，第二寄存器初始化为 $|1\rangle$。<br>   - 施加受控模幂，使得得到态 $\frac{1}{\sqrt{Q}}\sum_x|x\rangle|a^x\bmod N\rangle$。<br>   - （可选）测量第二寄存器；对第一寄存器做逆量子傅里叶变换（IQFT），测量得到整数 $y$，此时 $\frac{y}{Q}\approx\frac{s}{r}$ 对某整数 $s$。<br>4. **经典后处理（连分数）**：用连分数将 $\dfrac{y}{Q}$ 逼近为最简分数 $\dfrac{s}{r'}$，取候选周期 $r=r'$ 并检验 $a^r\equiv1\pmod N$。若不满足或不可靠，重复量子子例程。<br>5. **构造因子**：若找到偶数 $r$ 且 $a^{r/2}\not\equiv-1\pmod N$，则计算<br>   $$<br>   \gcd(a^{r/2}\pm1,N)<br>   $$<br>   可得到非平凡因子；否则选择新的 $a$ 重试。<br>6. **备注**：单次量子运行成功概率为常数，下述步骤（重复若干次）使成功概率趋近于 1；总体时间复杂度为多项式量级（关于 $\log N$）。</blockquote>
+<blockquote>[!note] 简述Shor算法<br>1. **输入**：合数 $N$。随机选取 $a\in\{2,\dots,N-1\}$。<br>   若 $\gcd(a,N)&gt;1$，直接返回非平凡因子。<br>2. **归约为周期问题**：定义 $f(x)=a^x\bmod N$，寻找最小正整数周期 $r$ 使得 $a^r\equiv1\pmod N$。<br>3. **量子子例程（周期查找）**：<br>   - 准备第一寄存器为均匀叠加 $\frac{1}{\sqrt{Q}}\sum_{x=0}^{Q-1}|x\rangle$，取 $Q=2^t$ 且 $Q\ge N^2$，第二寄存器初始化为 $|1\rangle$。<br>   - 施加受控模幂，使得得到态 $\frac{1}{\sqrt{Q}}\sum_x|x\rangle|a^x\bmod N\rangle$。<br>   - （可选）测量第二寄存器；对第一寄存器做逆量子傅里叶变换（IQFT），测量得到整数 $y$，此时 $\frac{y}{Q}\approx\frac{s}{r}$ 对某整数 $s$。<br>4. **经典后处理（连分数）**：用连分数将 $\dfrac{y}{Q}$ 逼近为最简分数 $\dfrac{s}{r'}$，取候选周期 $r=r'$ 并检验 $a^r\equiv1\pmod N$。若不满足或不可靠，重复量子子例程。<br>5. **构造因子**：若找到偶数 $r$ 且 $a^{r/2}\not\equiv-1\pmod N$，则计算<br>   $$
+   \gcd(a^{r/2}\pm1,N)
+   $$<br>   可得到非平凡因子；否则选择新的 $a$ 重试。<br>6. **备注**：单次量子运行成功概率为常数，下述步骤（重复若干次）使成功概率趋近于 1；总体时间复杂度为多项式量级（关于 $\log N$）。</blockquote>
 <hr>
 <p>End，最后一章量子纠缠度量太复杂了就没仔细看，这几天把习题都做上面</p>
 <p class="footnote">[^1]: Hardy, G. H.; Wright, E. M. (1946). An Introduction to the Theory of Numbers.</p>
