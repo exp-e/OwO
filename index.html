@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 /* ===== Tokens ===== */
 :root {
@@ -877,6 +878,216 @@ img { max-width:100%; display:block; }
   .photo-grid { grid-template-columns:repeat(3, 1fr); gap:6px; }
   .modal-body { padding:18px 20px 22px; }
 }
+/* ===== 随记 Memos Page (#page-3) ===== */
+#page-3 { align-items:stretch; height:calc(100vh - 61px); }
+#page-3 .page-card { display:flex; flex-direction:column; padding:26px 42px 20px; height:100%; max-height:calc(100vh - 90px); }
+.memo-page-header {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:14px; flex-shrink:0;
+}
+.memo-header-actions { display:flex; align-items:center; gap:10px; }
+
+/* "+" 加号圆形发布按钮 */
+.memo-add-btn {
+  background:linear-gradient(135deg, var(--accent), var(--accent-deep));
+  color:#fff; border:none; border-radius:22px;
+  padding:6px 16px 6px 12px; font-size:13px; font-weight:500; cursor:pointer;
+  display:inline-flex; align-items:center; gap:7px;
+  box-shadow:0 4px 14px rgba(113,57,218,0.28);
+  transition:all .22s ease; font-family:var(--font-sans);
+}
+.memo-add-btn i.fa-plus {
+  background:rgba(255,255,255,0.22); width:18px; height:18px;
+  border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
+  font-size:10px; transition:transform .2s;
+}
+.memo-add-btn:hover {
+  transform:translateY(-1.5px); box-shadow:0 6px 20px rgba(113,57,218,0.38);
+}
+.memo-add-btn:hover i.fa-plus { transform:rotate(90deg); }
+
+.memo-refresh-btn {
+  background:rgba(255,255,255,0.55); border:1px solid var(--border-soft); cursor:pointer;
+  color:var(--text-soft); width:32px; height:32px; border-radius:8px;
+  display:inline-flex; align-items:center; justify-content:center;
+  transition:all .2s; font-size:12px;
+}
+.memo-refresh-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
+
+/* 长条随记列表容器 */
+.memo-list-wrap {
+  flex:1; min-height:0; overflow-y:auto; padding-right:6px;
+  display:flex; flex-direction:column; gap:11px;
+  scrollbar-width:thin; scrollbar-color:var(--border-soft) transparent;
+}
+.memo-list-wrap::-webkit-scrollbar { width:5px; }
+.memo-list-wrap::-webkit-scrollbar-thumb { background:var(--border-soft); border-radius:10px; }
+
+/* 长条卡片预览 (类似笔记卡片) */
+.memo-card {
+  display:flex; align-items:flex-start; gap:16px;
+  background:rgba(255,255,255,0.60); border:1px solid var(--border-soft);
+  border-radius:var(--radius-sm); padding:13px 18px;
+  cursor:pointer; transition:all .22s ease; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  position:relative;
+}
+.memo-card:hover {
+  transform:translateX(5px);
+  background:rgba(255,255,255,0.90);
+  border-color:var(--border);
+  box-shadow:0 6px 22px rgba(113,57,218,0.12);
+}
+.memo-card-avatar {
+  width:44px; height:44px; border-radius:50%; flex-shrink:0;
+  object-fit:cover; border:2px solid var(--border-soft);
+  background:rgba(243,239,255,0.85);
+  display:flex; align-items:center; justify-content:center;
+  font-size:15px; font-weight:700; color:var(--accent);
+  box-shadow:0 2px 8px rgba(113,57,218,0.08); overflow:hidden;
+}
+.memo-card-avatar img { width:100%; height:100%; object-fit:cover; }
+.memo-card-body { flex:1; min-width:0; }
+.memo-card-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+.memo-card-author { font-size:14px; font-weight:600; color:var(--text); letter-spacing:0.2px; }
+.memo-card-time { font-size:11.5px; color:var(--muted); }
+.memo-card-excerpt {
+  font-size:13px; color:var(--text-soft); line-height:1.6;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  word-break:break-word;
+}
+.memo-card-side { display:flex; align-items:center; gap:8px; align-self:center; margin-left:8px; flex-shrink:0; }
+.memo-like-badge {
+  font-size:12px; color:var(--muted); display:inline-flex; align-items:center; gap:4px;
+  padding:3px 8px; border-radius:12px; background:rgba(255,255,255,0.55);
+  transition:all .15s; border:1px solid transparent;
+}
+.memo-card:hover .memo-like-badge { border-color:var(--border-soft); }
+.memo-like-badge.liked { color:#e0245e; font-weight:600; background:rgba(224,36,94,0.08); border-color:rgba(224,36,94,0.15); }
+
+.memo-empty { text-align:center; padding:45px 10px; color:var(--muted); font-size:13.5px; }
+.memo-empty i { font-size:30px; display:block; margin-bottom:10px; color:var(--grad-purple); opacity:0.6; }
+
+/* 写随记模态框 Modal */
+.memo-modal-overlay {
+  position:fixed; inset:0; background:rgba(20,10,40,0.55);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  z-index:750; display:none; align-items:center; justify-content:center; padding:20px;
+}
+.memo-modal-overlay.active { display:flex; }
+.memo-modal-box {
+  background:var(--card-solid); border-radius:var(--radius);
+  max-width:540px; width:100%; max-height:88vh; overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3); border:1.5px solid var(--border);
+  position:relative; animation:modalIn .25s ease; padding:26px 28px;
+}
+.memo-modal-title { font-family:var(--font-serif); font-size:18px; font-weight:700; color:var(--text); margin-bottom:14px; }
+.memo-editor-top { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+.memo-avatar-picker-wrap { position:relative; flex-shrink:0; }
+.memo-avatar-picker {
+  width:44px; height:44px; border-radius:50%;
+  border:2px dashed var(--border); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; background:rgba(243,239,255,0.6); overflow:hidden;
+  transition:all .2s;
+}
+.memo-avatar-picker:hover { border-color:var(--accent); background:var(--accent-soft); }
+.memo-avatar-picker img { width:100%; height:100%; object-fit:cover; }
+.memo-avatar-picker i { font-size:14px; color:var(--muted); }
+.memo-avatar-file-input { display:none; }
+.memo-id-row {
+  display:flex; align-items:center; background:rgba(255,255,255,0.85);
+  border:1px solid var(--border-soft); border-radius:8px; padding:0 10px; flex:1; height:38px;
+  transition:border-color .2s;
+}
+.memo-id-row:focus-within { border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-soft); }
+.memo-id-icon { color:var(--muted); font-size:12px; margin-right:8px; }
+.memo-id-input { border:none; background:transparent; outline:none; font-family:var(--font-sans); font-size:13.5px; color:var(--text); width:100%; }
+
+.memo-admin-btn {
+  background:rgba(255,255,255,0.75); border:1px solid var(--border-soft);
+  border-radius:8px; height:38px; padding:0 12px; font-size:12px;
+  color:var(--text-soft); cursor:pointer; display:inline-flex; align-items:center; gap:5px;
+  transition:all .2s; font-family:var(--font-sans); flex-shrink:0;
+}
+.memo-admin-btn:hover { border-color:var(--accent); color:var(--accent); }
+.memo-admin-btn.is-admin {
+  background:var(--accent-soft); border-color:var(--accent); color:var(--accent); font-weight:600;
+}
+
+.memo-textarea {
+  width:100%; min-height:120px; resize:none;
+  background:rgba(255,255,255,0.85); border:1px solid var(--border-soft);
+  border-radius:8px; padding:12px 14px; font-family:var(--font-sans);
+  font-size:13.5px; color:var(--text); line-height:1.7; outline:none;
+  transition:border-color .2s, box-shadow .2s; margin-bottom:12px;
+}
+.memo-textarea:focus { border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-soft); background:#fff; }
+
+.memo-editor-bottom { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.memo-emojis { display:flex; gap:4px; flex-wrap:wrap; }
+.memo-emoji-btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:6px; cursor:pointer;
+  transition:transform .15s, background .15s; font-size:14px; user-select:none;
+}
+.memo-emoji-btn:hover { background:var(--accent-soft); transform:scale(1.2); }
+.memo-submit-btn {
+  background:var(--accent); color:#fff; border:none; border-radius:8px;
+  padding:8px 18px; font-size:13px; font-weight:500; cursor:pointer;
+  display:inline-flex; align-items:center; gap:6px; transition:all .2s;
+  box-shadow:0 4px 14px rgba(113,57,218,0.25); font-family:var(--font-sans); flex-shrink:0;
+}
+.memo-submit-btn:hover { background:var(--accent-deep); transform:translateY(-1px); box-shadow:0 6px 18px rgba(113,57,218,0.35); }
+.memo-submit-btn:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+/* 随记详情全文弹窗 Modal */
+.memo-detail-overlay {
+  position:fixed; inset:0; background:rgba(20,10,40,0.55);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  z-index:760; display:none; align-items:center; justify-content:center; padding:20px;
+}
+.memo-detail-overlay.active { display:flex; }
+.memo-detail-box {
+  background:var(--card-solid); border-radius:var(--radius);
+  max-width:560px; width:100%; max-height:85vh; overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3); border:1.5px solid var(--border);
+  position:relative; animation:modalIn .25s ease; padding:28px 32px;
+}
+.memo-detail-head { display:flex; align-items:center; gap:14px; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid var(--border-soft); }
+.memo-detail-avatar {
+  width:50px; height:50px; border-radius:50%; object-fit:cover; flex-shrink:0;
+  border:2px solid var(--border-soft); background:rgba(243,239,255,0.85);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; font-weight:700; color:var(--accent); overflow:hidden;
+}
+.memo-detail-avatar img { width:100%; height:100%; object-fit:cover; }
+.memo-detail-meta { flex:1; min-width:0; }
+.memo-detail-author { font-size:16px; font-weight:700; color:var(--text); margin-bottom:2px; }
+.memo-detail-time { font-size:12px; color:var(--muted); }
+.memo-detail-content {
+  font-size:14.5px; color:var(--text-soft); line-height:1.85;
+  white-space:pre-wrap; word-break:break-word; margin-bottom:20px;
+}
+.memo-detail-footer { display:flex; align-items:center; justify-content:space-between; padding-top:14px; border-top:1px solid var(--border-soft); }
+.memo-detail-del-btn {
+  background:none; border:none; cursor:pointer; color:var(--muted);
+  font-size:12.5px; display:inline-flex; align-items:center; gap:5px;
+  padding:4px 10px; border-radius:6px; transition:all .2s;
+}
+.memo-detail-del-btn:hover { color:#e0245e; background:rgba(224,36,94,0.1); }
+.memo-detail-like-btn {
+  background:none; border:1px solid var(--border-soft); border-radius:18px;
+  padding:5px 14px; font-size:13px; color:var(--muted); cursor:pointer;
+  display:inline-flex; align-items:center; gap:6px; transition:all .2s;
+}
+.memo-detail-like-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
+.memo-detail-like-btn.liked { color:#e0245e; border-color:rgba(224,36,94,0.3); background:rgba(224,36,94,0.08); font-weight:600; }
+
+@media (max-width:960px) {
+  #page-3 { align-items:center; height:auto; }
+  #page-3 .page-card { padding:26px 20px; height:auto; max-height:none; }
+  .memo-card { padding:12px 14px; gap:12px; }
+  .memo-card-avatar { width:38px; height:38px; font-size:13px; }
+}
 </style>
 </head>
 <body>
@@ -916,7 +1127,8 @@ img { max-width:100%; display:block; }
           <li><a href="#" data-page="0" class="active"><i class="fa fa-home"></i>首页</a></li>
           <li><a href="#" data-page="1"><i class="fa fa-pencil-alt"></i>笔记</a></li>
           <li><a href="#" data-page="2"><i class="fa fa-mug-hot"></i>生活</a></li>
-          <li><a href="#" data-page="3"><i class="fa fa-envelope"></i>联系</a></li>
+          <li><a href="#" data-page="3"><i class="fa fa-pen-nib"></i>随记</a></li>
+          <li><a href="#" data-page="4"><i class="fa fa-envelope"></i>联系</a></li>
         </ul>
       </nav>
       <div class="search-box" id="searchBox">
@@ -937,7 +1149,8 @@ img { max-width:100%; display:block; }
   <button data-page="0" class="active" title="首页"></button>
   <button data-page="1" title="笔记"></button>
   <button data-page="2" title="生活"></button>
-  <button data-page="3" title="联系"></button>
+  <button data-page="3" title="随记"></button>
+  <button data-page="4" title="联系"></button>
 </nav>
 
 <!-- Pages container -->
@@ -1356,12 +1569,49 @@ img { max-width:100%; display:block; }
     </div>
   </div>
 
-  <!-- 3 · Contact -->
+  <!-- 3 · Memos / 随记 -->
   <div class="page" id="page-3">
+    <div class="page-card memo-page-card">
+      <div class="memo-page-header">
+        <div style="display:flex; align-items:baseline; gap:12px;">
+          <h2 class="sec-title">
+            <span class="sec-num">03</span>
+            <svg class="qubit-icon" style="color:var(--accent);"><use href="#qubit-orbit" xlink:href="#qubit-orbit"/></svg>
+            随记
+          </h2>
+          <span class="sec-sub">Memos & Thoughts</span>
+        </div>
+        <div class="memo-header-actions">
+          <button type="button" class="memo-add-btn" id="memoOpenEditorBtn" title="写一条随记">
+            <i class="fa fa-plus"></i>
+            <span>写随记</span>
+          </button>
+          <button class="memo-refresh-btn" id="gbRefreshBtn" title="刷新随记列表">
+            <i class="fa fa-sync-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 长条随记预览列表 -->
+      <div class="memo-list-wrap" id="gbList">
+        <div class="memo-empty">
+          <i class="fa fa-circle-notch fa-spin"></i>
+          <div>正在加载随记...</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint" data-page="4">
+      <span>继续</span>
+      <i class="fa fa-chevron-down"></i>
+    </div>
+  </div>
+
+  <!-- 4 · Contact -->
+  <div class="page" id="page-4">
     <div class="page-card">
       <div class="sec-header">
         <h2 class="sec-title">
-          <span class="sec-num">03</span>
+          <span class="sec-num">04</span>
           <svg class="qubit-icon" style="color:var(--accent);"><use href="#qubit-orbit" xlink:href="#qubit-orbit"/></svg>
           联系
         </h2>
@@ -1424,6 +1674,112 @@ img { max-width:100%; display:block; }
     <div class="modal-body">
       <div class="modal-title" id="matchModalTitle"></div>
       <div class="match-teams" id="matchModalTeams"></div>
+  </div>
+</div>
+
+<!-- 写随记弹窗 Modal -->
+<div class="memo-modal-overlay" id="memoEditorModal">
+  <div class="memo-modal-box">
+    <button class="modal-close" id="memoEditorClose"><i class="fa fa-times"></i></button>
+    <div class="memo-modal-title"><i class="fa fa-pen-nib" style="color:var(--accent); margin-right:6px;"></i> 写一条随记</div>
+    
+    <div class="memo-editor-top">
+      <div class="memo-avatar-picker-wrap">
+        <div class="memo-avatar-picker" id="memoAvatarPicker" title="点击上传头像（访客可选，默认留白）">
+          <img id="memoAvatarPreview" src="" alt="头像预览" style="display:none;">
+          <i class="fa fa-camera" id="memoAvatarPlaceholder"></i>
+        </div>
+        <input type="file" id="memoAvatarInput" class="memo-avatar-file-input" accept="image/*">
+      </div>
+      <div class="memo-id-row">
+        <span class="memo-id-icon"><i class="fa fa-user"></i></span>
+        <input type="text" id="gbNickname" class="memo-id-input" placeholder="输入你的 ID / 称呼" maxlength="20">
+      </div>
+      <button type="button" class="memo-admin-btn" id="gbAdminBtn" title="博主认证口令">
+        <i class="fa fa-key"></i> <span id="gbAdminLabel">博主认证</span>
+      </button>
+    </div>
+
+    <textarea id="gbContent" class="memo-textarea" placeholder="写下你的想法、探讨或随笔碎碎念（支持换行）..." rows="5"></textarea>
+
+    <div class="memo-editor-bottom">
+      <div class="memo-emojis" id="gbEmojis">
+        <span class="memo-emoji-btn" data-emoji="✨" title="星光">✨</span>
+        <span class="memo-emoji-btn" data-emoji="💡" title="灵感">💡</span>
+        <span class="memo-emoji-btn" data-emoji="☕" title="咖啡">☕</span>
+        <span class="memo-emoji-btn" data-emoji="🪐" title="量子轨道">🪐</span>
+        <span class="memo-emoji-btn" data-emoji="📚" title="研读">📚</span>
+        <span class="memo-emoji-btn" data-emoji="❤️" title="爱心">❤️</span>
+        <span class="memo-emoji-btn" data-emoji="👏" title="鼓掌">👏</span>
+      </div>
+      <button type="button" class="memo-submit-btn" id="gbSubmitBtn">
+        <i class="fa fa-paper-plane"></i> <span>发布随记</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 随记详情全文弹窗 Modal -->
+<div class="memo-detail-overlay" id="memoDetailModal">
+  <div class="memo-detail-box">
+    <button class="modal-close" id="memoDetailClose"><i class="fa fa-times"></i></button>
+    <div class="memo-detail-head">
+      <div class="memo-detail-avatar" id="memoDetailAvatar"></div>
+      <div class="memo-detail-meta">
+        <div class="memo-detail-author" id="memoDetailAuthor"></div>
+        <div class="memo-detail-time" id="memoDetailTime"></div>
+      </div>
+    </div>
+    <div class="memo-detail-content" id="memoDetailContent"></div>
+    <div class="memo-detail-footer">
+      <div id="memoDetailDelWrap"></div>
+      <button type="button" class="memo-detail-like-btn" id="memoDetailLikeBtn">
+        <i class="far fa-heart"></i> <span id="memoDetailLikeCount">0</span>
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Supabase Config Guide Modal -->
+<div class="gb-modal-overlay" id="gbConfigModal">
+  <div class="gb-modal-box">
+    <button class="modal-close" id="gbConfigModalClose"><i class="fa fa-times"></i></button>
+    <div class="gb-modal-title"><i class="fa fa-database" style="color:var(--accent);"></i> Supabase 云数据库配置</div>
+    <div class="gb-modal-desc">
+      当前留言板支持<strong>直连 Supabase</strong>，无需自建服务器，数据直接安全保存在你的云端数据库中。<br>
+      若尚未配置，留言将暂存在当前浏览器的<strong>本地演示存储</strong>中。
+    </div>
+    
+    <div style="font-size:12.5px; font-weight:600; color:var(--text); margin-bottom:6px;">步骤 1：在 Supabase 控制台的 SQL Editor 执行建表语句</div>
+    <div class="gb-code-box">
+      <button class="gb-copy-btn" id="gbCopySqlBtn">复制 SQL</button>
+      <pre id="gbSqlCode" style="margin:0; white-space:pre-wrap; font-family:inherit;">create table guestbook (
+  id bigint generated by default as identity primary key,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+  nickname text not null,
+  content text not null,
+  is_admin boolean default false,
+  likes int default 0
+);
+
+alter table guestbook enable row level security;
+create policy "allow_read" on guestbook for select using (true);
+create policy "allow_insert" on guestbook for insert with check (true);
+create policy "allow_update" on guestbook for update using (true);
+create policy "allow_delete" on guestbook for delete using (true);</pre>
+    </div>
+
+    <div style="font-size:12.5px; font-weight:600; color:var(--text); margin-bottom:6px;">步骤 2：填入 Project API 凭证（在 Project Settings &rarr; API 获取）</div>
+    <div class="gb-form-field">
+      <label class="gb-form-label">Project URL</label>
+      <input type="text" id="cfgSupabaseUrl" class="gb-form-input" placeholder="https://xxxxxxxxxxxx.supabase.co">
+    </div>
+    <div class="gb-form-field">
+      <label class="gb-form-label">Anon / Public Key</label>
+      <input type="password" id="cfgSupabaseKey" class="gb-form-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
+      <span style="font-size:11px; color:var(--muted);">凭证亦可直接写入 index.html 代码中</span>
+      <button type="button" class="gb-submit-btn" id="cfgSaveBtn"><i class="fa fa-check"></i> 保存并连接</button>
     </div>
   </div>
 </div>
@@ -1479,10 +1835,11 @@ img { max-width:100%; display:block; }
   // open directly on a section when linked with a hash (e.g. index.html#notes)
   function applyHash(instant) {
     var h = (location.hash || '').slice(1);
-    if (h === 'notes')         goTo(1, instant);
-    else if (h === 'life')     goTo(2, instant);
-    else if (h === 'contact')  goTo(3, instant);
-    else if (h === 'home')     goTo(0, instant);
+    if (h === 'notes')                                                    goTo(1, instant);
+    else if (h === 'life')                                                goTo(2, instant);
+    else if (h === 'memos' || h === 'memo' || h === 'suiji' || h === 'guestbook' || h === 'board') goTo(3, instant);
+    else if (h === 'contact')                                             goTo(4, instant);
+    else if (h === 'home')                                                goTo(0, instant);
   }
 
   function updateNav(idx) {
@@ -1511,6 +1868,13 @@ img { max-width:100%; display:block; }
 
   wrap.addEventListener('wheel', function (e) {
     if (isMobileLayout() || scrolling) return;
+    // 如果在留言列表内滚动，允许列表内部正常滚动，不要翻页
+    var insideGb = e.target && e.target.closest && e.target.closest('#gbList');
+    if (insideGb) {
+      var atTop = insideGb.scrollTop <= 0 && e.deltaY < 0;
+      var atBottom = (insideGb.scrollTop + insideGb.clientHeight >= insideGb.scrollHeight - 2) && e.deltaY > 0;
+      if (!atTop && !atBottom) return;
+    }
     scrolling = true;
     goTo(e.deltaY > 0 ? current + 1 : current - 1);
     setTimeout(function () { scrolling = false; }, 800);
@@ -2203,6 +2567,536 @@ img { max-width:100%; display:block; }
       if (!searchBox.contains(e.target)) closeSearch();
     });
   }
+
+  /* ===== 随记 Memos (Supabase & Local Demo) ===== */
+  var SUPABASE_URL = localStorage.getItem('cfg_sb_url') || 'https://lrfqonbglpudxswvnepd.supabase.co';
+  var SUPABASE_KEY = localStorage.getItem('cfg_sb_key') || 'sb_publishable_inNoR20jwxYt68Qm9lKIjQ_M4LlSB_y';
+  var sbClient = null;
+
+  function initSupabase() {
+    var cleanUrl = (SUPABASE_URL || '').trim().replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, '');
+    var cleanKey = (SUPABASE_KEY || '').trim();
+    if (cleanUrl && cleanKey && window.supabase && window.supabase.createClient) {
+      try {
+        sbClient = window.supabase.createClient(cleanUrl, cleanKey);
+      } catch (e) {
+        console.warn('Supabase init error:', e);
+        sbClient = null;
+      }
+    } else {
+      sbClient = null;
+    }
+  }
+
+  var gbNicknameInput      = document.getElementById('gbNickname');
+  var gbContentInput       = document.getElementById('gbContent');
+  var gbSubmitBtn          = document.getElementById('gbSubmitBtn');
+  var gbList               = document.getElementById('gbList');
+  var gbRefreshBtn         = document.getElementById('gbRefreshBtn');
+  var gbAdminBtn           = document.getElementById('gbAdminBtn');
+  var gbAdminLabel         = document.getElementById('gbAdminLabel');
+  var gbEmojis             = document.getElementById('gbEmojis');
+  var memoOpenEditorBtn    = document.getElementById('memoOpenEditorBtn');
+  var memoEditorModal      = document.getElementById('memoEditorModal');
+  var memoEditorClose      = document.getElementById('memoEditorClose');
+  var memoAvatarPicker     = document.getElementById('memoAvatarPicker');
+  var memoAvatarInput      = document.getElementById('memoAvatarInput');
+  var memoAvatarPreview    = document.getElementById('memoAvatarPreview');
+  var memoAvatarPlaceholder= document.getElementById('memoAvatarPlaceholder');
+  var memoDetailModal      = document.getElementById('memoDetailModal');
+  var memoDetailClose      = document.getElementById('memoDetailClose');
+  var memoDetailAvatar     = document.getElementById('memoDetailAvatar');
+  var memoDetailAuthor     = document.getElementById('memoDetailAuthor');
+  var memoDetailTime       = document.getElementById('memoDetailTime');
+  var memoDetailContent    = document.getElementById('memoDetailContent');
+  var memoDetailDelWrap    = document.getElementById('memoDetailDelWrap');
+  var memoDetailLikeBtn    = document.getElementById('memoDetailLikeBtn');
+  var memoDetailLikeCount  = document.getElementById('memoDetailLikeCount');
+  var toastEl              = document.getElementById('toast');
+
+  var currentSelectedAvatar = ''; // base64 string for visitor avatar
+  var activeDetailMemo = null;
+
+  var toastTimer;
+  function showToast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2600);
+  }
+
+  // Admin status management (博主为 expe，头像固定 profile.jpg，无金色徽章)
+  var isAdmin = localStorage.getItem('gb_is_admin') === 'true';
+  function updateAdminUI() {
+    if (isAdmin) {
+      if (gbAdminBtn) gbAdminBtn.classList.add('is-admin');
+      if (gbAdminLabel) gbAdminLabel.textContent = '博主认证成功';
+      if (gbNicknameInput) {
+        gbNicknameInput.value = 'expe';
+        gbNicknameInput.readOnly = true;
+      }
+      if (memoAvatarPreview) {
+        memoAvatarPreview.src = 'profile.jpg';
+        memoAvatarPreview.style.display = 'block';
+      }
+      if (memoAvatarPlaceholder) memoAvatarPlaceholder.style.display = 'none';
+      if (memoAvatarPicker) memoAvatarPicker.style.pointerEvents = 'none';
+    } else {
+      if (gbAdminBtn) gbAdminBtn.classList.remove('is-admin');
+      if (gbAdminLabel) gbAdminLabel.textContent = '博主认证';
+      if (gbNicknameInput) {
+        gbNicknameInput.readOnly = false;
+        var savedName = localStorage.getItem('gb_saved_name') || '';
+        gbNicknameInput.value = savedName;
+      }
+      if (memoAvatarPicker) memoAvatarPicker.style.pointerEvents = 'auto';
+      if (currentSelectedAvatar && memoAvatarPreview) {
+        memoAvatarPreview.src = currentSelectedAvatar;
+        memoAvatarPreview.style.display = 'block';
+        if (memoAvatarPlaceholder) memoAvatarPlaceholder.style.display = 'none';
+      } else {
+        if (memoAvatarPreview) memoAvatarPreview.style.display = 'none';
+        if (memoAvatarPlaceholder) memoAvatarPlaceholder.style.display = 'block';
+      }
+    }
+  }
+
+  if (gbAdminBtn) {
+    gbAdminBtn.addEventListener('click', function () {
+      if (isAdmin) {
+        if (confirm('当前已是博主身份，是否切换为普通访客身份？')) {
+          isAdmin = false;
+          localStorage.setItem('gb_is_admin', 'false');
+          updateAdminUI();
+          renderGuestbook();
+          showToast('已切换为普通访客');
+        }
+      } else {
+        var pwd = prompt('请输入博主认证口令（初始口令：expe888）：');
+        if (pwd === null) return;
+        var validPwd = localStorage.getItem('gb_admin_pwd') || 'expe888';
+        if (pwd === validPwd) {
+          isAdmin = true;
+          localStorage.setItem('gb_is_admin', 'true');
+          updateAdminUI();
+          renderGuestbook();
+          showToast('博主认证成功，ID已自动锁定为 expe');
+        } else {
+          showToast('口令错误，请重试');
+        }
+      }
+    });
+  }
+
+  // 访客头像上传与压缩为轻量 Base64
+  if (memoAvatarPicker && memoAvatarInput) {
+    memoAvatarPicker.addEventListener('click', function () {
+      if (isAdmin) return;
+      memoAvatarInput.click();
+    });
+
+    memoAvatarInput.addEventListener('change', function (e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+      if (!file.type.match('image.*')) {
+        showToast('请选择图片文件');
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function (evt) {
+        var img = new Image();
+        img.onload = function () {
+          var canvas = document.createElement('canvas');
+          var ctx = canvas.getContext('2d');
+          var size = 96;
+          canvas.width = size;
+          canvas.height = size;
+          var minSide = Math.min(img.width, img.height);
+          var sx = (img.width - minSide) / 2;
+          var sy = (img.height - minSide) / 2;
+          ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
+          currentSelectedAvatar = canvas.toDataURL('image/jpeg', 0.82);
+          if (memoAvatarPreview) {
+            memoAvatarPreview.src = currentSelectedAvatar;
+            memoAvatarPreview.style.display = 'block';
+          }
+          if (memoAvatarPlaceholder) memoAvatarPlaceholder.style.display = 'none';
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // 打开/关闭写随记弹窗
+  if (memoOpenEditorBtn && memoEditorModal) {
+    memoOpenEditorBtn.addEventListener('click', function () {
+      updateAdminUI();
+      memoEditorModal.classList.add('active');
+      setTimeout(function () {
+        if (!isAdmin && (!gbNicknameInput.value.trim())) gbNicknameInput.focus();
+        else gbContentInput.focus();
+      }, 100);
+    });
+  }
+  if (memoEditorClose && memoEditorModal) {
+    memoEditorClose.addEventListener('click', function () { memoEditorModal.classList.remove('active'); });
+  }
+  if (memoEditorModal) {
+    memoEditorModal.addEventListener('click', function (e) {
+      if (e.target === memoEditorModal) memoEditorModal.classList.remove('active');
+    });
+  }
+
+  // 打开/关闭全文详情弹窗
+  function openMemoDetail(memo) {
+    activeDetailMemo = memo;
+    if (!memoDetailModal) return;
+    var isMe = (memo.is_admin || memo.nickname === 'expe');
+    var avatarSrc = isMe ? 'profile.jpg' : (memo.avatar || '');
+    if (avatarSrc) {
+      memoDetailAvatar.innerHTML = '<img src="' + escHtml(avatarSrc) + '" alt="' + escHtml(memo.nickname) + '">';
+    } else {
+      var initial = (memo.nickname || '匿').charAt(0).toUpperCase();
+      memoDetailAvatar.textContent = initial;
+    }
+
+    memoDetailAuthor.textContent = memo.nickname || '匿名访客';
+    memoDetailTime.textContent = formatTime(memo.created_at, true);
+    memoDetailContent.textContent = memo.content || '';
+
+    // 点赞状态
+    var isLiked = likedSet.has(String(memo.id));
+    memoDetailLikeBtn.classList.toggle('liked', isLiked);
+    memoDetailLikeBtn.querySelector('i').className = isLiked ? 'fa fa-heart' : 'far fa-heart';
+    memoDetailLikeCount.textContent = memo.likes || 0;
+
+    // 删除按钮（仅博主认证后可见）
+    if (isAdmin) {
+      memoDetailDelWrap.innerHTML = '<button class="memo-detail-del-btn" id="memoDetailDelBtn"><i class="fa fa-trash-alt"></i> 删除随记</button>';
+      var delBtn = document.getElementById('memoDetailDelBtn');
+      if (delBtn) {
+        delBtn.onclick = function () {
+          deleteMemo(memo.id);
+          memoDetailModal.classList.remove('active');
+        };
+      }
+    } else {
+      memoDetailDelWrap.innerHTML = '';
+    }
+
+    memoDetailModal.classList.add('active');
+  }
+
+  if (memoDetailClose && memoDetailModal) {
+    memoDetailClose.addEventListener('click', function () { memoDetailModal.classList.remove('active'); });
+  }
+  if (memoDetailModal) {
+    memoDetailModal.addEventListener('click', function (e) {
+      if (e.target === memoDetailModal) memoDetailModal.classList.remove('active');
+    });
+  }
+
+  // 详情弹窗内的点赞处理
+  if (memoDetailLikeBtn) {
+    memoDetailLikeBtn.addEventListener('click', function () {
+      if (!activeDetailMemo) return;
+      likeMemo(activeDetailMemo.id, function (newCount) {
+        activeDetailMemo.likes = newCount;
+        memoDetailLikeCount.textContent = newCount;
+        memoDetailLikeBtn.classList.add('liked');
+        memoDetailLikeBtn.querySelector('i').className = 'fa fa-heart';
+      });
+    });
+  }
+
+  // Emoji 插入
+  if (gbEmojis && gbContentInput) {
+    gbEmojis.addEventListener('click', function (e) {
+      var btn = e.target.closest('.memo-emoji-btn');
+      if (!btn) return;
+      var emoji = btn.getAttribute('data-emoji') || btn.textContent.trim();
+      var start = gbContentInput.selectionStart || gbContentInput.value.length;
+      var end = gbContentInput.selectionEnd || gbContentInput.value.length;
+      var text = gbContentInput.value;
+      gbContentInput.value = text.slice(0, start) + emoji + text.slice(end);
+      gbContentInput.focus();
+      gbContentInput.selectionStart = gbContentInput.selectionEnd = start + emoji.length;
+    });
+  }
+
+  // 本地兜底数据
+  function getDemoMessages() {
+    var raw = localStorage.getItem('demo_memos_data');
+    if (raw) {
+      try { return JSON.parse(raw); } catch (e) {}
+    }
+    var initial = [
+      {
+        id: 1,
+        nickname: 'expe',
+        is_admin: true,
+        avatar: 'profile.jpg',
+        content: '在这里随手记录一些思考碎片、学术灵感、近期阅读或者琐碎日常。欢迎大家点开阅读并随心留言交流！✨',
+        created_at: new Date(Date.now() - 3600 * 1000 * 20).toISOString(),
+        likes: 5
+      },
+      {
+        id: 2,
+        nickname: 'QuantumStudent',
+        is_admin: false,
+        avatar: '',
+        content: '看了大学院入试和信道容量的笔记，排版非常优雅，推导也很清晰！特地来留个爪 🪐',
+        created_at: new Date(Date.now() - 3600 * 1000 * 4).toISOString(),
+        likes: 2
+      }
+    ];
+    localStorage.setItem('demo_memos_data', JSON.stringify(initial));
+    return initial;
+  }
+
+  function saveDemoMessages(list) {
+    localStorage.setItem('demo_memos_data', JSON.stringify(list));
+  }
+
+  function formatTime(isoStr, isDetailed) {
+    if (!isoStr) return '';
+    var d = new Date(isoStr);
+    if (isNaN(d.getTime())) return isoStr;
+    if (isDetailed) {
+      var y = d.getFullYear();
+      var m = String(d.getMonth() + 1).padStart(2, '0');
+      var day = String(d.getDate()).padStart(2, '0');
+      var h = String(d.getHours()).padStart(2, '0');
+      var min = String(d.getMinutes()).padStart(2, '0');
+      return y + '-' + m + '-' + day + ' ' + h + ':' + min;
+    }
+    var diffSec = Math.floor((Date.now() - d.getTime()) / 1000);
+    if (diffSec < 60) return '刚刚';
+    if (diffSec < 3600) return Math.floor(diffSec / 60) + ' 分钟前';
+    if (diffSec < 86400) return Math.floor(diffSec / 3600) + ' 小时前';
+    var mm = String(d.getMonth() + 1).padStart(2, '0');
+    var dd = String(d.getDate()).padStart(2, '0');
+    return mm + '-' + dd;
+  }
+
+  var likedSet = new Set(JSON.parse(localStorage.getItem('gb_liked_ids') || '[]'));
+  var allMemosCache = [];
+
+  async function fetchMessages() {
+    if (sbClient) {
+      try {
+        var res = await sbClient.from('guestbook').select('*').order('created_at', { ascending: false });
+        if (res.error) throw res.error;
+        return res.data || [];
+      } catch (err) {
+        console.warn('Supabase fetch error, fallback to demo:', err);
+        return getDemoMessages();
+      }
+    } else {
+      return getDemoMessages();
+    }
+  }
+
+  async function renderGuestbook() {
+    if (!gbList) return;
+    var messages = await fetchMessages();
+    allMemosCache = messages;
+    if (!messages.length) {
+      gbList.innerHTML = '<div class="memo-empty"><i class="fa fa-pencil-alt"></i><div>暂无随记，点击右上角 “+ 写随记” 记录第一条吧～</div></div>';
+      return;
+    }
+
+    gbList.innerHTML = messages.map(function (m) {
+      var isMe = (m.is_admin || m.nickname === 'expe');
+      var avatarHtml = '';
+      if (isMe) {
+        avatarHtml = '<img src="profile.jpg" alt="expe">';
+      } else if (m.avatar) {
+        avatarHtml = '<img src="' + escHtml(m.avatar) + '" alt="' + escHtml(m.nickname) + '">';
+      } else {
+        var initial = (m.nickname || '匿').charAt(0).toUpperCase();
+        avatarHtml = '<span>' + escHtml(initial) + '</span>';
+      }
+
+      var isLiked = likedSet.has(String(m.id));
+      var likesCount = m.likes || 0;
+
+      return '<div class="memo-card" data-id="' + m.id + '">' +
+        '<div class="memo-card-avatar">' + avatarHtml + '</div>' +
+        '<div class="memo-card-body">' +
+          '<div class="memo-card-head">' +
+            '<span class="memo-card-author">' + escHtml(m.nickname || '匿名访客') + '</span>' +
+            '<span class="memo-card-time">' + formatTime(m.created_at) + '</span>' +
+          '</div>' +
+          '<div class="memo-card-excerpt">' + escHtml(m.content) + '</div>' +
+        '</div>' +
+        '<div class="memo-card-side">' +
+          '<span class="memo-like-badge ' + (isLiked ? 'liked' : '') + '">' +
+            '<i class="' + (isLiked ? 'fa' : 'far') + ' fa-heart"></i> <span>' + likesCount + '</span>' +
+          '</span>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // 点击卡片打开详情全文
+  if (gbList) {
+    gbList.addEventListener('click', function (e) {
+      var card = e.target.closest('.memo-card');
+      if (!card) return;
+      var id = card.getAttribute('data-id');
+      var memo = allMemosCache.find(function (it) { return String(it.id) === String(id); });
+      if (memo) openMemoDetail(memo);
+    });
+  }
+
+  async function likeMemo(id, onSuccess) {
+    if (likedSet.has(String(id))) {
+      showToast('你已经点过赞啦 ❤️');
+      return;
+    }
+    likedSet.add(String(id));
+    localStorage.setItem('gb_liked_ids', JSON.stringify(Array.from(likedSet)));
+
+    var curLikes = 0;
+    var target = allMemosCache.find(function (it) { return String(it.id) === String(id); });
+    if (target) {
+      target.likes = (target.likes || 0) + 1;
+      curLikes = target.likes;
+    }
+
+    if (sbClient) {
+      try {
+        await sbClient.from('guestbook').update({ likes: curLikes }).eq('id', id);
+      } catch (err) { console.error('Like error:', err); }
+    } else {
+      var list = getDemoMessages();
+      var t = list.find(function (item) { return String(item.id) === String(id); });
+      if (t) { t.likes = (t.likes || 0) + 1; saveDemoMessages(list); }
+    }
+
+    if (onSuccess) onSuccess(curLikes);
+    renderGuestbook();
+  }
+
+  async function deleteMemo(delId) {
+    if (!confirm('确定要删除这条随记吗？此操作不可撤销。')) return;
+    if (sbClient) {
+      try {
+        var delRes = await sbClient.from('guestbook').delete().eq('id', delId);
+        if (delRes.error) throw delRes.error;
+        showToast('随记已删除');
+        renderGuestbook();
+      } catch (err) {
+        alert('删除失败：' + (err.message || '权限不足'));
+      }
+    } else {
+      var localList = getDemoMessages().filter(function (it) { return String(it.id) !== String(delId); });
+      saveDemoMessages(localList);
+      showToast('随记已删除');
+      renderGuestbook();
+    }
+  }
+
+  // 发布随记
+  if (gbSubmitBtn) {
+    gbSubmitBtn.addEventListener('click', async function () {
+      var nickname = isAdmin ? 'expe' : (gbNicknameInput.value || '').trim();
+      var content = (gbContentInput.value || '').trim();
+      if (!nickname) {
+        showToast('请先输入你的 ID / 称呼');
+        gbNicknameInput.focus();
+        return;
+      }
+      if (!content) {
+        showToast('随记内容不能为空哦');
+        gbContentInput.focus();
+        return;
+      }
+
+      if (!isAdmin) {
+        localStorage.setItem('gb_saved_name', nickname);
+      }
+
+      gbSubmitBtn.disabled = true;
+      gbSubmitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> 发送中...';
+
+      var newMsg = {
+        nickname: nickname,
+        content: content,
+        is_admin: isAdmin,
+        likes: 0
+      };
+
+      // 访客自定义头像支持（若未选则为空字符串，前端优雅留白）
+      if (!isAdmin && currentSelectedAvatar) {
+        newMsg.avatar = currentSelectedAvatar;
+      }
+
+      try {
+        if (sbClient) {
+          // 插入数据库
+          var insertRes = await sbClient.from('guestbook').insert([newMsg]);
+          if (insertRes.error) {
+            // 如果是因为数据库还没有 avatar 字段，自动降级不带 avatar 重新提交
+            if (insertRes.error.message && insertRes.error.message.indexOf('avatar') >= 0) {
+              delete newMsg.avatar;
+              var retry = await sbClient.from('guestbook').insert([newMsg]);
+              if (retry.error) throw retry.error;
+            } else {
+              throw insertRes.error;
+            }
+          }
+        } else {
+          var list = getDemoMessages();
+          newMsg.id = Date.now();
+          newMsg.created_at = new Date().toISOString();
+          list.unshift(newMsg);
+          saveDemoMessages(list);
+        }
+
+        gbContentInput.value = '';
+        currentSelectedAvatar = '';
+        if (memoAvatarPreview && !isAdmin) memoAvatarPreview.style.display = 'none';
+        if (memoAvatarPlaceholder && !isAdmin) memoAvatarPlaceholder.style.display = 'block';
+
+        if (memoEditorModal) memoEditorModal.classList.remove('active');
+        showToast('随记发布成功！🎉');
+        await renderGuestbook();
+      } catch (err) {
+        console.error('Submit error:', err);
+        alert('发布失败：' + (err.message || '请检查数据库连接'));
+      } finally {
+        gbSubmitBtn.disabled = false;
+        gbSubmitBtn.innerHTML = '<i class="fa fa-paper-plane"></i> <span>发布随记</span>';
+      }
+    });
+  }
+
+  if (gbRefreshBtn) {
+    gbRefreshBtn.addEventListener('click', function () {
+      var icon = gbRefreshBtn.querySelector('i');
+      if (icon) icon.classList.add('fa-spin');
+      renderGuestbook().finally(function () {
+        setTimeout(function () { if (icon) icon.classList.remove('fa-spin'); }, 500);
+      });
+    });
+  }
+
+  // ESC 键关闭随记相关弹窗
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (memoEditorModal) memoEditorModal.classList.remove('active');
+      if (memoDetailModal) memoDetailModal.classList.remove('active');
+    }
+  });
+
+  // 初始化随记系统
+  initSupabase();
+  updateAdminUI();
+  renderGuestbook();
 
   /* ===== Footer: 最后修改时间 ===== */
   var lmEl = document.getElementById('lastModified');
