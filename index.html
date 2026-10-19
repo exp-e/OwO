@@ -887,24 +887,30 @@ img { max-width:100%; display:block; }
 }
 .memo-header-actions { display:flex; align-items:center; gap:10px; }
 
-/* "+" 加号圆形发布按钮 */
-.memo-add-btn {
+/* 右下角大圆形加号发布按钮 */
+.memo-fab-btn {
+  position:absolute; right:36px; bottom:24px; z-index:25;
+  width:52px; height:52px; border-radius:50%;
   background:linear-gradient(135deg, var(--accent), var(--accent-deep));
-  color:#fff; border:none; border-radius:22px;
-  padding:6px 16px 6px 12px; font-size:13px; font-weight:500; cursor:pointer;
-  display:inline-flex; align-items:center; gap:7px;
-  box-shadow:0 4px 14px rgba(113,57,218,0.28);
-  transition:all .22s ease; font-family:var(--font-sans);
+  color:#fff; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 24px rgba(113,57,218,0.36);
+  transition:all .26s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.memo-add-btn i.fa-plus {
-  background:rgba(255,255,255,0.22); width:18px; height:18px;
-  border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
-  font-size:10px; transition:transform .2s;
+.memo-fab-btn i {
+  font-size:20px; transition:transform .22s ease;
 }
-.memo-add-btn:hover {
-  transform:translateY(-1.5px); box-shadow:0 6px 20px rgba(113,57,218,0.38);
+.memo-fab-btn:hover {
+  transform:scale(1.12);
+  box-shadow:0 12px 32px rgba(113,57,218,0.52);
 }
-.memo-add-btn:hover i.fa-plus { transform:rotate(90deg); }
+.memo-fab-btn:hover i {
+  transform:rotate(90deg);
+}
+@media (max-width:960px) {
+  .memo-fab-btn { right:20px; bottom:20px; width:48px; height:48px; }
+  .memo-fab-btn i { font-size:18px; }
+}
 
 .memo-refresh-btn {
   background:rgba(255,255,255,0.55); border:1px solid var(--border-soft); cursor:pointer;
@@ -1187,7 +1193,7 @@ img { max-width:100%; display:block; }
             </div>
             <div class="about-text">
               <p>本科毕业于武汉大学，现任武汉大学前沿交叉学科研究院科研助理，研究方向为量子计算。</p>
-              <p>爱喝无糖少冰轻咖啡因奶茶，喜欢看比赛和打游戏，偶尔涂鸦。白色三角梅爱好者。</p>
+              <p>爱喝无糖少冰轻因奶茶，喜欢FPS和看比赛，偶尔涂鸦。白色三角梅爱好者。</p>
               <div class="about-quote">
                 “允许一切发生。”
               </div>
@@ -1571,7 +1577,7 @@ img { max-width:100%; display:block; }
 
   <!-- 3 · Memos / 随记 -->
   <div class="page" id="page-3">
-    <div class="page-card memo-page-card">
+    <div class="page-card memo-page-card" style="position:relative;">
       <div class="memo-page-header">
         <div style="display:flex; align-items:baseline; gap:12px;">
           <h2 class="sec-title">
@@ -1582,10 +1588,6 @@ img { max-width:100%; display:block; }
           <span class="sec-sub">Memos & Thoughts</span>
         </div>
         <div class="memo-header-actions">
-          <button type="button" class="memo-add-btn" id="memoOpenEditorBtn" title="写一条随记">
-            <i class="fa fa-plus"></i>
-            <span>写随记</span>
-          </button>
           <button class="memo-refresh-btn" id="gbRefreshBtn" title="刷新随记列表">
             <i class="fa fa-sync-alt"></i>
           </button>
@@ -1599,6 +1601,11 @@ img { max-width:100%; display:block; }
           <div>正在加载随记...</div>
         </div>
       </div>
+
+      <!-- 右下角大圆形加号发布按钮 -->
+      <button type="button" class="memo-fab-btn" id="memoOpenEditorBtn" title="写一条随记" aria-label="写随记">
+        <i class="fa fa-plus"></i>
+      </button>
     </div>
     <div class="scroll-hint" data-page="4">
       <span>继续</span>
@@ -1674,6 +1681,7 @@ img { max-width:100%; display:block; }
     <div class="modal-body">
       <div class="modal-title" id="matchModalTitle"></div>
       <div class="match-teams" id="matchModalTeams"></div>
+    </div>
   </div>
 </div>
 
