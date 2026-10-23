@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#F3EFFF">
-<title>电动力学复习册 · 王凌云</title>
+<title>电动力学复习册</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
 <style>
@@ -23,6 +23,18 @@ body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72)
 .pdf-container{position:fixed;top:55px;left:0;right:0;bottom:0;z-index:1;}
 .pdf-container iframe{width:100%;height:100%;border:none;background:#fff;}
 @media (max-width:640px){.header-inner{padding:0 14px;}.article-header-meta .date-text{display:none;}}
+
+/* ===== Image lightbox (click to zoom) ===== */
+.article-content img{cursor:zoom-in;}
+.article-cover{cursor:zoom-in;}
+.lightbox-overlay{position:fixed;inset:0;background:rgba(10,8,25,0.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;}
+.lightbox-overlay.active{display:flex;}
+.lightbox-box{max-width:94vw;max-height:90vh;display:flex;align-items:center;justify-content:center;}
+.lightbox-box img{max-width:94vw;max-height:90vh;object-fit:contain;border-radius:10px;box-shadow:0 10px 60px rgba(0,0,0,0.5);background:rgba(255,255,255,0.04);}
+.lightbox-close{position:fixed;top:20px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1001;transition:background .2s;}
+.lightbox-close:hover{background:rgba(255,255,255,0.25);}
+.lightbox-cap{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.65);font-size:13px;text-align:center;max-width:80vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;z-index:1001;}
+@media (max-width:640px){.lightbox-overlay{padding:16px;}.lightbox-box img{max-width:96vw;max-height:84vh;}.lightbox-close{top:14px;right:14px;width:40px;height:40px;}}
 </style>
 </head>
 <body>
@@ -36,8 +48,14 @@ body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72)
     </div>
   </div>
 </header>
+<!-- Image lightbox -->
+<div class="lightbox-overlay" id="imgLightbox">
+  <button class="lightbox-close" id="imgLightboxClose" aria-label="关闭"><i class="fa fa-times"></i></button>
+  <div class="lightbox-box" id="imgLightboxBox"><img id="imgLightboxImg" src="" alt=""></div>
+  <div class="lightbox-cap" id="imgLightboxCap"></div>
+</div>
+
 <div class="pdf-container">
   <iframe src="Electrodynamics.pdf" title="电动力学复习册"></iframe>
-</div>
-</body>
+</div></body>
 </html>
