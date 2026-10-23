@@ -65,7 +65,19 @@ img{max-width:100%;display:block;}
 .article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
 .article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
 .article-content mark{padding:1px 3px;border-radius:2px;}
-@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+.mobile-toc-btn{display:none;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;border:1px solid var(--border-soft);background:var(--card-solid);color:var(--text-soft);font-size:13px;cursor:pointer;transition:all .2s;}
+.mobile-toc-btn:hover{border-color:var(--border);color:var(--accent);}
+.mobile-toc-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.mobile-toc-dropdown{display:none;position:fixed;top:59px;left:0;right:0;background:var(--card-solid);border-bottom:1px solid var(--border-soft);box-shadow:0 8px 24px rgba(113,57,218,0.12);z-index:99;max-height:60vh;overflow-y:auto;}
+.mobile-toc-dropdown.active{display:block;}
+.mobile-toc-title{padding:12px 20px 8px;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-weight:600;}
+.mobile-toc-list{padding:0 12px 16px;}
+.mobile-toc-list li{margin-bottom:2px;}
+.mobile-toc-list a{display:block;padding:8px 12px;font-size:14px;color:var(--text-soft);border-radius:6px;}
+.mobile-toc-list a:hover{background:var(--accent-soft);color:var(--accent);}
+.mobile-toc-list li.sub a{padding-left:24px;font-size:13px;}
+.mobile-toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:14.5px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.mobile-toc-btn{display:inline-flex;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
 </style>
 </head>
 <body>
@@ -76,9 +88,68 @@ img{max-width:100%;display:block;}
     <div class="article-header-meta">
       <span class="cat-tag">其他</span>
       <span><i class="far fa-calendar"></i> 2025-09-17</span>
-    </div>
+    <button class="mobile-toc-btn" id="mobileTocBtn"><i class="fa fa-list-ul"></i> 目录</button></div>
   </div>
 </header>
+<div class="mobile-toc-dropdown" id="mobileTocDropdown">
+  <div class="mobile-toc-title">目录</div>
+  <ul class="toc-list mobile-toc-list">
+      <li class="toc-main"><a href="#article-title">Notes to the basic of Financial Mathematics</a></li>
+      <li><a href="#sec-0">Concepts</a></li>
+      <li class="sub"><a href="#sec-1">Basic notation</a></li>
+      <li class="sub"><a href="#sec-2">Accumulation/Amount function</a></li>
+      <li class="sub"><a href="#sec-3">Interest</a></li>
+      <li class="sub2"><a href="#sec-4">Simple Interest</a></li>
+      <li class="sub2"><a href="#sec-5">Compound Internet</a></li>
+      <li class="sub2"><a href="#sec-6">Discount factor/rate</a></li>
+      <li class="sub2"><a href="#sec-7">Nominal rates of interest</a></li>
+      <li class="sub2"><a href="#sec-8">Force of interest (Effective Nominal Rates)</a></li>
+      <li><a href="#sec-9">Calculations</a></li>
+      <li class="sub"><a href="#sec-10">Equation of Value</a></li>
+      <li class="sub"><a href="#sec-11">Inflation</a></li>
+      <li class="sub"><a href="#sec-12">Duration</a></li>
+      <li class="sub2"><a href="#sec-13">Macaulay Duration (time center)</a></li>
+      <li class="sub2"><a href="#sec-14">Modified Duration (sensitivity)</a></li>
+      <li class="sub2"><a href="#sec-15">Effective Duration</a></li>
+      <li class="sub2"><a href="#sec-16">Yield curve risks</a></li>
+      <li><a href="#sec-17">Simple Annuities</a></li>
+      <li class="sub"><a href="#sec-18">Calculations of annuities</a></li>
+      <li class="sub"><a href="#sec-19">Annuity Due</a></li>
+      <li class="sub"><a href="#sec-20">Deferred Annuity</a></li>
+      <li class="sub"><a href="#sec-21">Approximating interest rate</a></li>
+      <li class="sub"><a href="#sec-22">General Annuities</a></li>
+      <li class="sub"><a href="#sec-23">Mortgages</a></li>
+      <li class="sub"><a href="#sec-24">Perpetuities</a></li>
+      <li><a href="#sec-25">Amortization Table</a></li>
+      <li class="sub"><a href="#sec-26">Refinance</a></li>
+      <li><a href="#sec-27">Sinking Fund Method</a></li>
+      <li><a href="#sec-28">Bonds</a></li>
+      <li class="sub"><a href="#sec-29">Bonds purchased at a premium</a></li>
+      <li class="sub"><a href="#sec-30">Bond purchased at a discount</a></li>
+      <li class="sub"><a href="#sec-31">Callable bonds</a></li>
+      <li class="sub"><a href="#sec-32">Price of a Bond Between Bond Intrest Dates</a></li>
+      <li class="sub"><a href="#sec-33">Estimate Yield Rate</a></li>
+      <li><a href="#sec-34">Rates of Return</a></li>
+      <li class="sub"><a href="#sec-35">Net Present Value (NPV)</a></li>
+      <li class="sub"><a href="#sec-36">Internal Rate of Return (IRR)</a></li>
+      <li class="sub"><a href="#sec-37">Dollar-Weighted Rates of interest</a></li>
+      <li class="sub"><a href="#sec-38">Time-Weighted Rates of Interest</a></li>
+      <li class="sub"><a href="#sec-39">Dividend Discount Model (DDM)</a></li>
+      <li><a href="#sec-40">Yield Curves</a></li>
+      <li class="sub"><a href="#sec-41">Zero-Coupon bond</a></li>
+      <li class="sub"><a href="#sec-42">Fixed Income Returns</a></li>
+      <li class="sub"><a href="#sec-43">Yield Curve Dynamics</a></li>
+      <li class="sub"><a href="#sec-44">Portfolio Duration and Convexity</a></li>
+      <li class="sub"><a href="#sec-45">Embedd Option and Strategy</a></li>
+      <li><a href="#sec-46">Duration and Convexity</a></li>
+      <li class="sub"><a href="#sec-47">Macaulay Duration (period)</a></li>
+      <li class="sub"><a href="#sec-48">Modified Duration (year)</a></li>
+      <li class="sub"><a href="#sec-49">Duration in Asset Portfolio</a></li>
+      <li class="sub"><a href="#sec-50">Convexity</a></li>
+      <li class="sub"><a href="#sec-51">Asset-Liability Management (ALM)</a></li>
+    </ul>
+</div>
+
 <div class="layout">
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
@@ -667,6 +738,28 @@ img{max-width:100%;display:block;}
   function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
   tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Mobile TOC dropdown
+  var mobileTocBtn=document.getElementById('mobileTocBtn');
+  var mobileTocDropdown=document.getElementById('mobileTocDropdown');
+  if(mobileTocBtn && mobileTocDropdown){
+    mobileTocBtn.addEventListener('click',function(){
+      mobileTocBtn.classList.toggle('active');
+      mobileTocDropdown.classList.toggle('active');
+    });
+    mobileTocDropdown.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click',function(){
+        mobileTocBtn.classList.remove('active');
+        mobileTocDropdown.classList.remove('active');
+      });
+    });
+    document.addEventListener('click',function(e){
+      if(!mobileTocBtn.contains(e.target) && !mobileTocDropdown.contains(e.target)){
+        mobileTocBtn.classList.remove('active');
+        mobileTocDropdown.classList.remove('active');
+      }
+    });
+  }
 })();
 </script>
 </body>

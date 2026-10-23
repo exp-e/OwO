@@ -65,7 +65,19 @@ img{max-width:100%;display:block;}
 .article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
 .article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
 .article-content mark{padding:1px 3px;border-radius:2px;}
-@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+.mobile-toc-btn{display:none;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;border:1px solid var(--border-soft);background:var(--card-solid);color:var(--text-soft);font-size:13px;cursor:pointer;transition:all .2s;}
+.mobile-toc-btn:hover{border-color:var(--border);color:var(--accent);}
+.mobile-toc-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.mobile-toc-dropdown{display:none;position:fixed;top:59px;left:0;right:0;background:var(--card-solid);border-bottom:1px solid var(--border-soft);box-shadow:0 8px 24px rgba(113,57,218,0.12);z-index:99;max-height:60vh;overflow-y:auto;}
+.mobile-toc-dropdown.active{display:block;}
+.mobile-toc-title{padding:12px 20px 8px;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-weight:600;}
+.mobile-toc-list{padding:0 12px 16px;}
+.mobile-toc-list li{margin-bottom:2px;}
+.mobile-toc-list a{display:block;padding:8px 12px;font-size:14px;color:var(--text-soft);border-radius:6px;}
+.mobile-toc-list a:hover{background:var(--accent-soft);color:var(--accent);}
+.mobile-toc-list li.sub a{padding-left:24px;font-size:13px;}
+.mobile-toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:14.5px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.mobile-toc-btn{display:inline-flex;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
 </style>
 </head>
 <body>
@@ -76,9 +88,50 @@ img{max-width:100%;display:block;}
     <div class="article-header-meta">
       <span class="cat-tag">数学</span>
       <span><i class="far fa-calendar"></i> 2026-03-17</span>
-    </div>
+    <button class="mobile-toc-btn" id="mobileTocBtn"><i class="fa fa-list-ul"></i> 目录</button></div>
   </div>
 </header>
+<div class="mobile-toc-dropdown" id="mobileTocDropdown">
+  <div class="mobile-toc-title">目录</div>
+  <ul class="toc-list mobile-toc-list">
+      <li class="toc-main"><a href="#article-title">随机过程</a></li>
+      <li><a href="#sec-0">离散时间马氏链</a></li>
+      <li class="sub"><a href="#sec-1">强马氏性</a></li>
+      <li class="sub"><a href="#sec-2">平稳分布</a></li>
+      <li class="sub"><a href="#sec-3">Cesaro极限</a></li>
+      <li class="sub"><a href="#sec-4">平均到达时间</a></li>
+      <li class="sub"><a href="#sec-5">细致平衡条件</a></li>
+      <li class="sub"><a href="#sec-6">马氏链极限定律</a></li>
+      <li class="sub"><a href="#sec-7">马氏链周期</a></li>
+      <li><a href="#sec-8">连续时间马尔科夫过程</a></li>
+      <li class="sub"><a href="#sec-9">CK方程</a></li>
+      <li class="sub"><a href="#sec-10">停时</a></li>
+      <li class="sub"><a href="#sec-11">Levy过程</a></li>
+      <li class="sub"><a href="#sec-12">Poisson过程</a></li>
+      <li class="sub2"><a href="#sec-13">定义一</a></li>
+      <li class="sub2"><a href="#sec-14">定义二</a></li>
+      <li class="sub2"><a href="#sec-15">定义三</a></li>
+      <li class="sub2"><a href="#sec-16">性质</a></li>
+      <li class="sub"><a href="#sec-17">向前向后方程</a></li>
+      <li class="sub2"><a href="#sec-18">转移半群导数</a></li>
+      <li class="sub2"><a href="#sec-19">Kolmogorov向后方程</a></li>
+      <li class="sub2"><a href="#sec-20">Kolmogorov向前方程（Fokker-Planck方程）</a></li>
+      <li class="sub2"><a href="#sec-21">转移矩阵展开</a></li>
+      <li class="sub2"><a href="#sec-22">生灭过程Q矩阵</a></li>
+      <li class="sub2"><a href="#sec-23">纯生过程Q矩阵</a></li>
+      <li class="sub"><a href="#sec-24">Q矩阵概率意义</a></li>
+      <li class="sub2"><a href="#sec-25">向前向后方程积分意义</a></li>
+      <li class="sub"><a href="#sec-26">Kolmogorov全局微分性质</a></li>
+      <li class="sub"><a href="#sec-27">连续时间常返与暂留</a></li>
+      <li class="sub"><a href="#sec-28">连续时间不变测度</a></li>
+      <li class="sub"><a href="#sec-29">马氏链习题</a></li>
+      <li class="sub2"><a href="#sec-30">1 Poisson过程首跳</a></li>
+      <li class="sub2"><a href="#sec-31">2 判断离散时间随机游走常返性</a></li>
+      <li class="sub2"><a href="#sec-32">3 递推求解返回概率</a></li>
+      <li class="sub2"><a href="#sec-33">4 非对称随机游走反射原理</a></li>
+    </ul>
+</div>
+
 <div class="layout">
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
@@ -1299,6 +1352,28 @@ $$</p>
   function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
   tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Mobile TOC dropdown
+  var mobileTocBtn=document.getElementById('mobileTocBtn');
+  var mobileTocDropdown=document.getElementById('mobileTocDropdown');
+  if(mobileTocBtn && mobileTocDropdown){
+    mobileTocBtn.addEventListener('click',function(){
+      mobileTocBtn.classList.toggle('active');
+      mobileTocDropdown.classList.toggle('active');
+    });
+    mobileTocDropdown.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click',function(){
+        mobileTocBtn.classList.remove('active');
+        mobileTocDropdown.classList.remove('active');
+      });
+    });
+    document.addEventListener('click',function(e){
+      if(!mobileTocBtn.contains(e.target) && !mobileTocDropdown.contains(e.target)){
+        mobileTocBtn.classList.remove('active');
+        mobileTocDropdown.classList.remove('active');
+      }
+    });
+  }
 })();
 </script>
 </body>

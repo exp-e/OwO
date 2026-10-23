@@ -65,7 +65,19 @@ img{max-width:100%;display:block;}
 .article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
 .article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
 .article-content mark{padding:1px 3px;border-radius:2px;}
-@media (max-width:900px){.toc-sidebar{display:none;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+.mobile-toc-btn{display:none;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;border:1px solid var(--border-soft);background:var(--card-solid);color:var(--text-soft);font-size:13px;cursor:pointer;transition:all .2s;}
+.mobile-toc-btn:hover{border-color:var(--border);color:var(--accent);}
+.mobile-toc-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.mobile-toc-dropdown{display:none;position:fixed;top:59px;left:0;right:0;background:var(--card-solid);border-bottom:1px solid var(--border-soft);box-shadow:0 8px 24px rgba(113,57,218,0.12);z-index:99;max-height:60vh;overflow-y:auto;}
+.mobile-toc-dropdown.active{display:block;}
+.mobile-toc-title{padding:12px 20px 8px;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-weight:600;}
+.mobile-toc-list{padding:0 12px 16px;}
+.mobile-toc-list li{margin-bottom:2px;}
+.mobile-toc-list a{display:block;padding:8px 12px;font-size:14px;color:var(--text-soft);border-radius:6px;}
+.mobile-toc-list a:hover{background:var(--accent-soft);color:var(--accent);}
+.mobile-toc-list li.sub a{padding-left:24px;font-size:13px;}
+.mobile-toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:14.5px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.mobile-toc-btn{display:inline-flex;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
 </style>
 </head>
 <body>
@@ -76,9 +88,32 @@ img{max-width:100%;display:block;}
     <div class="article-header-meta">
       <span class="cat-tag">物理</span>
       <span><i class="far fa-calendar"></i> 2025-10-19</span>
-    </div>
+    <button class="mobile-toc-btn" id="mobileTocBtn"><i class="fa fa-list-ul"></i> 目录</button></div>
   </div>
 </header>
+<div class="mobile-toc-dropdown" id="mobileTocDropdown">
+  <div class="mobile-toc-title">目录</div>
+  <ul class="toc-list mobile-toc-list">
+      <li class="toc-main"><a href="#article-title">量子信息讨论班预制菜</a></li>
+      <li><a href="#sec-0">1.构建量子力学</a></li>
+      <li class="sub"><a href="#sec-1">1.1 态和观测者</a></li>
+      <li class="sub2"><a href="#sec-2">作为密度矩阵的态</a></li>
+      <li class="sub2"><a href="#sec-3">观测</a></li>
+      <li class="sub"><a href="#sec-4">1.2 复合系统与纠缠</a></li>
+      <li class="sub2"><a href="#sec-5">Prop1.1 施密特分解</a></li>
+      <li class="sub"><a href="#sec-6">1.3 演化</a></li>
+      <li class="sub2"><a href="#sec-7">封闭演化和可逆系统</a></li>
+      <li class="sub2"><a href="#sec-8">Thm1.1 Wigner定理</a></li>
+      <li class="sub2"><a href="#sec-9">开放系统和不可逆动力学</a></li>
+      <li class="sub2"><a href="#sec-10">Prop1.2 完全正定性检验</a></li>
+      <li class="sub2"><a href="#sec-11">概率算符和仪器(存疑)</a></li>
+      <li class="sub2"><a href="#sec-12">Prop1.3 量子steering(存疑)</a></li>
+      <li class="sub2"><a href="#sec-13">Prop1.4 凸分解的最大权重</a></li>
+      <li class="sub"><a href="#sec-14">1.4 线性性和定域性</a></li>
+      <li class="sub2"><a href="#sec-15">非线性演化和混合态分析仪(存疑)</a></li>
+    </ul>
+</div>
+
 <div class="layout">
   <aside class="toc-sidebar">
     <div class="toc-title">目录</div>
@@ -396,6 +431,28 @@ I\otimes R^T\ket{\Omega}&amp;=\sum_{ijk}\ket{k}\otimes(\psi_{ij}\ket{j}\braket{i
   function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
   tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Mobile TOC dropdown
+  var mobileTocBtn=document.getElementById('mobileTocBtn');
+  var mobileTocDropdown=document.getElementById('mobileTocDropdown');
+  if(mobileTocBtn && mobileTocDropdown){
+    mobileTocBtn.addEventListener('click',function(){
+      mobileTocBtn.classList.toggle('active');
+      mobileTocDropdown.classList.toggle('active');
+    });
+    mobileTocDropdown.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click',function(){
+        mobileTocBtn.classList.remove('active');
+        mobileTocDropdown.classList.remove('active');
+      });
+    });
+    document.addEventListener('click',function(e){
+      if(!mobileTocBtn.contains(e.target) && !mobileTocDropdown.contains(e.target)){
+        mobileTocBtn.classList.remove('active');
+        mobileTocDropdown.classList.remove('active');
+      }
+    });
+  }
 })();
 </script>
 </body>
