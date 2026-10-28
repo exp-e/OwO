@@ -847,7 +847,7 @@ img { max-width:100%; display:block; }
 }
 .modal-img {
   width:100%;
-  aspect-ratio:16/10;
+  aspect-ratio:16/7;
   object-fit:cover;
   object-position:center;
 }
@@ -2867,6 +2867,8 @@ var CFG_TEXT = '// CS2 settings snapshot 2026-10-27. Existing custom aliases are
       matchModalTeams.innerHTML = m.paragraphs.map(function (p) {
         return '<p class="match-body-text">' + p + '</p>';
       }).join('') + (m.download ? '<p class="match-body-text"><a href="' + m.download.href + '" download>' + m.download.text + '</a></p>' : '');
+      var cfgFold = document.getElementById('cfgFold');
+      if (cfgFold) cfgFold.style.display = m.cfg ? '' : 'none';
       matchModal.classList.add('active');
     });
   });
