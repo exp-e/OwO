@@ -759,6 +759,65 @@ img { max-width:100%; display:block; }
 }
 .match-body-text:last-child { margin-bottom:0; }
 
+/* ===== FPS cfg fold box ===== */
+.cfg-fold {
+  margin-top:14px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:rgba(255,255,255,0.45);
+}
+.cfg-fold summary {
+  padding:10px 14px;
+  font-size:14px;
+  color:var(--text-soft);
+  cursor:pointer;
+  user-select:none;
+  list-style:none;
+}
+.cfg-fold summary::-webkit-details-marker { display:none; }
+.cfg-fold summary::before {
+  content:'\25B8';
+  display:inline-block;
+  margin-right:8px;
+  color:var(--accent);
+  transition:transform .2s;
+}
+.cfg-fold[open] summary::before { transform:rotate(90deg); }
+.cfg-box {
+  position:relative;
+  border-top:1px solid var(--border-soft);
+}
+.cfg-copy-btn {
+  position:absolute;
+  top:10px;
+  right:10px;
+  padding:5px 12px;
+  font-size:12px;
+  color:#fff;
+  background:var(--accent);
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  z-index:2;
+  opacity:.85;
+  transition:opacity .2s;
+}
+.cfg-copy-btn:hover { opacity:1; }
+.cfg-pre {
+  max-height:340px;
+  overflow:auto;
+  margin:0;
+  padding:14px 12px 14px 14px;
+  font-family:Consolas, Monaco, 'Courier New', monospace;
+  font-size:12px;
+  line-height:1.6;
+  color:#3a3350;
+  white-space:pre;
+}
+@media (max-width:640px) {
+  .cfg-pre { max-height:260px; font-size:11px; }
+}
+
 /* ===== Modal (recipe detail) ===== */
 .modal-overlay {
   position:fixed;
@@ -1974,6 +2033,13 @@ img { max-width:100%; display:block; }
     <div class="modal-body">
       <div class="modal-title" id="matchModalTitle"></div>
       <div class="match-teams" id="matchModalTeams"></div>
+      <details class="cfg-fold" id="cfgFold" style="display:none;">
+        <summary>autoexec.cfg 文字版</summary>
+        <div class="cfg-box">
+          <button type="button" class="cfg-copy-btn" id="cfgCopyBtn">复制</button>
+          <pre class="cfg-pre" id="cfgPre"></pre>
+        </div>
+      </details>
     </div>
   </div>
 </div>
@@ -2767,8 +2833,11 @@ img { max-width:100%; display:block; }
   var matchModalTeams = document.getElementById('matchModalTeams');
   var matchModalClose = document.getElementById('matchModalClose');
 
+var CFG_TEXT = '// CS2 settings snapshot 2026-10-27. Existing custom aliases are preserved below.\n\nalias +pwaswitchknife slot3\nalias -pwaswitchknife lastinv\nalias "+pwa_fn" "pwa_fn_down"\nalias "-pwa_fn" "pwa_fn_up"\nalias "refundall" "sellback 0;sellback 1;sellback 2;sellback 3;sellback 4;sellback 5;sellback 6;sellback 8;sellback 9;sellback 10;sellback 11;sellback 12;sellback 13;sellback 14;sellback 15;sellback 16;sellback 17;sellback 18;sellback 26;sellback 26;sellback 27;sellback 28;sellback 29;sellback 30;sellback 32;sellback 33;sellback 34;sellback 35;play ui\\panorama\\itemtile_click_02.vsnd_c"\n\n// Knife + Inspect: dynamic mouse-wheel bind\n\nalias "pwa_inspect_once" "+lookatweapon; -lookatweapon"\nalias "pwa_wheelup_inspect" "pwa_inspect_once"\n\nalias "pwa_wheelup_knife" "slot3; pwa_inspect_once; bind MWHEELUP pwa_wheelup_inspect"\nalias "pwa_reset_wheelup" "bind MWHEELUP pwa_wheelup_knife"\n\nalias "pwa_wheeldown_primary" "slot1; pwa_reset_wheelup"\nalias "pwa_q_pistol" "slot2; pwa_reset_wheelup"\n\nbind "MWHEELUP" "pwa_wheelup_knife"\nbind "MWHEELDOWN" "pwa_wheeldown_primary"\nbind "Q" "pwa_q_pistol"\nbind "Y" "+lookatweapon"\n\n// Current account settings\ncl_buymenu_ct_nextround_high "5000"\ncl_buymenu_ct_nextround_low "1400"\ncl_buymenu_t_nextround_high "5000"\ncl_buymenu_t_nextround_low "1400"\ncl_buywheel_donate_key "0"\ncl_buywheel_nonumberpurchasing "false"\ncl_crosshair_drawoutline "1"\ncl_crosshair_dynamic_maxdist_splitratio "1"\ncl_crosshair_dynamic_splitalpha_innermod "0"\ncl_crosshair_dynamic_splitalpha_outermod "1"\ncl_crosshair_dynamic_splitdist "4"\ncl_crosshair_dynamic_spread_limit "255"\ncl_crosshair_gap "0"\ncl_crosshair_length "6"\ncl_crosshair_recoil "false"\ncl_crosshair_screen_height "1440"\ncl_crosshair_sniper_width "1"\ncl_crosshair_t "false"\ncl_crosshair_thickness "1"\ncl_crosshairalpha "200"\ncl_crosshaircolor_a "255"\ncl_crosshaircolor_b "126"\ncl_crosshaircolor_g "255"\ncl_crosshaircolor_r "0"\ncl_crosshairdot "false"\ncl_crosshairoutline_a "255"\ncl_crosshairoutline_b "0"\ncl_crosshairoutline_g "0"\ncl_crosshairoutline_r "0"\ncl_crosshairsize "3.9"\ncl_crosshairstyle "4"\ncl_crosshairthickness "0.6"\ncl_debounce_zoom "true"\ncl_grenadecrosshair_decoy "true"\ncl_grenadecrosshair_explosive "true"\ncl_grenadecrosshair_fire "true"\ncl_grenadecrosshair_flash "true"\ncl_grenadecrosshair_keepusercrosshair "true"\ncl_grenadecrosshair_smoke "true"\ncl_grenadecrosshairdelay_decoy "2"\ncl_grenadecrosshairdelay_explosive "2"\ncl_grenadecrosshairdelay_fire "2"\ncl_grenadecrosshairdelay_flash "2"\ncl_grenadecrosshairdelay_smoke "2"\ncl_inventory_radial_immediate_select "true"\ncl_inventory_radial_tap_to_cycle "true"\ncl_ironsight_dot_scale "1"\ncl_ironsight_usecrosshaircolor "false"\ncl_prefer_lefthanded "false"\ncl_showloadout "true"\ncl_silencer_mode "0"\ncl_sniper_auto_rezoom "true"\ncl_use_opens_buy_menu "false"\nclosecaption "false"\ncon_enable "true"\ncrosshair "true"\nhud_showtargetid "true"\ninput_button_code_is_scan_code_scd "true"\njoy_axisr_deadzone "0.15"\njoy_axisr_relative "false"\njoy_axisu_deadzone "0.15"\njoy_axisu_relative "false"\njoy_axisv_deadzone "0.15"\njoy_axisv_relative "false"\njoy_axisx_deadzone "0.15"\njoy_axisx_relative "false"\njoy_axisy_deadzone "0.15"\njoy_axisy_relative "false"\njoy_axisz_deadzone "0.15"\njoy_axisz_relative "false"\njoy_circle_correct_mode "1"\njoy_circle_correct_mode_vehicle "2"\njoy_forward_sensitivity "1"\njoy_movement_stick "false"\njoy_pitch_sensitivity "3"\njoy_pitchsensitivity "1"\njoy_response_look "0"\njoy_response_move "9"\njoy_side_sensitivity "1"\njoy_yaw_sensitivity "3"\njoy_yawsensitivity "-1"\nm_pitch "0.022"\nm_yaw "0.022"\noption_duck_method "false"\noption_speed_method "false"\nsensitivity "0.8"\nsensitivity_y_scale "1"\nviewmodel_presetpos "2"\nviewmodel_fov "60"\nviewmodel_offset_x "1"\nviewmodel_offset_y "1"\nviewmodel_offset_z "-1"\nvoice_vox "0"\nzoom_sensitivity_ratio "0.67"\n// Machine preferences: HUD, radar, audio, network and display-related console settings\ncl_autohelp "false"\ncl_color "0"\ncl_crosshair_friendly_warning "1"\ncl_dm_buyrandomweapons "false"\ncl_hud_color "0"\ncl_hud_radar_background_alpha "0.627"\ncl_hud_radar_blur_background "true"\ncl_hud_radar_map_additive "true"\ncl_hud_radar_scale "1.3"\ncl_hud_telemetry_frametime_poor "100"\ncl_hud_telemetry_frametime_show "1"\ncl_hud_telemetry_net_detailed "0"\ncl_hud_telemetry_net_misdelivery_poor "5"\ncl_hud_telemetry_net_misdelivery_show "1"\ncl_hud_telemetry_net_quality_graph_show "0"\ncl_hud_telemetry_ping_poor "100"\ncl_hud_telemetry_ping_show "2"\ncl_hud_telemetry_serverrecvmargin_graph_show "0"\ncl_mute_all_but_friends_and_party "0"\ncl_mute_enemy_team "false"\ncl_net_buffer_ticks "0"\ncl_player_ping_mute "0"\ncl_predict_body_shot_fx "false"\ncl_predict_head_shot_fx "false"\ncl_predict_kill_ragdolls "true"\ncl_radar_always_centered "false"\ncl_radar_icon_scale_min "0.6"\ncl_radar_rotate "true"\ncl_radar_scale "0.404035"\ncl_radar_scale_alternate "1"\ncl_radar_scale_dynamic "false"\ncl_radar_show_all_players_when_spectating "true"\ncl_radar_square_always "false"\ncl_radar_square_when_spectating "true"\ncl_radar_square_with_scoreboard "true"\ncl_show_observer_crosshair "2"\ncl_sniper_delay_unscope "false"\ncl_sniper_show_inaccuracy "true"\ncl_teamcounter_playercount_instead_of_avatars "false"\ncl_teamid_overhead_colors_show "true"\ncl_teamid_overhead_fade_near_crosshair "0.5"\ncl_teamid_overhead_mode "2"\ncl_teammate_colors_show "1"\ncl_use_last_selected_weapon_slot_position "false"\ncl_versus_intro "true"\nfps_max "0"\nfps_max_ui "200"\nhud_scaling "1"\nmm_dedicated_search_maxping "150"\nmouse_inverty "false"\nr_drawtracers_firstperson "false"\nr_fullscreen_gamma "2.2"\nr_player_visibility_mode "1"\nr_show_build_info "false"\nrate "786432"\nsafezonex "1"\nsafezoney "1"\nsnd_autodetect_latency "true"\nsnd_deathcamera_volume "0.16"\nsnd_deathcamera_volume_armsrace "0.16"\nsnd_deathcamera_volume_casual "0.16"\nsnd_deathcamera_volume_deathmatch "0.16"\nsnd_deathcamera_volume_rush "0.16"\nsnd_duckerattacktime "0.5"\nsnd_duckerreleasetime "2.5"\nsnd_duckerthreshold "0.15"\nsnd_ducktovolume "0.55"\nsnd_gain "1"\nsnd_gamevoicevolume "1"\nsnd_gamevolume "1"\nsnd_headphone_eq "0"\nsnd_mapobjective_volume "0.04"\nsnd_mapobjective_volume_armsrace "0.01"\nsnd_mapobjective_volume_casual "0.01"\nsnd_mapobjective_volume_deathmatch "0.01"\nsnd_mapobjective_volume_rush "0.01"\nsnd_menumap_volume "1"\nsnd_menumusic_volume "0.04"\nsnd_menumusic_volume_armsrace "0.04"\nsnd_menumusic_volume_casual "0.04"\nsnd_menumusic_volume_deathmatch "0.04"\nsnd_menumusic_volume_rush "0.04"\nsnd_mixahead "0.001"\nsnd_music_settings_mode "0"\nsnd_musicvolume "1"\nsnd_mute_losefocus "true"\nsnd_mute_mvp_music_live_players "false"\nsnd_mvp_volume "0.16"\nsnd_mvp_volume_armsrace "0.16"\nsnd_mvp_volume_casual "0.16"\nsnd_mvp_volume_deathmatch "0.16"\nsnd_mvp_volume_rush "0.16"\nsnd_roundaction_volume "0"\nsnd_roundaction_volume_armsrace "0"\nsnd_roundaction_volume_casual "0"\nsnd_roundaction_volume_deathmatch "0"\nsnd_roundaction_volume_rush "0.0064"\nsnd_roundend_volume "0.16"\nsnd_roundend_volume_armsrace "0.16"\nsnd_roundend_volume_casual "0.16"\nsnd_roundend_volume_deathmatch "0.16"\nsnd_roundend_volume_rush "0.16"\nsnd_roundstart_volume "0"\nsnd_roundstart_volume_armsrace "0.0225"\nsnd_roundstart_volume_casual "0.0225"\nsnd_roundstart_volume_deathmatch "0.0225"\nsnd_roundstart_volume_rush "0.0225"\nsnd_spatialize_lerp "0"\nsnd_steamaudio_enable_perspective_correction "true"\nsnd_tensecondwarning_volume "0.04"\nsnd_tensecondwarning_volume_armsrace "0.01"\nsnd_tensecondwarning_volume_casual "0.01"\nsnd_tensecondwarning_volume_deathmatch "0.01"\nsnd_tensecondwarning_volume_rush "0.01"\nsnd_toolvolume "1"\nsnd_voipvolume "1"\nspeaker_config "-1"\nvoice_always_sample_mic "false"\nvoice_modenable "true"\nvoice_threshold "-120"\nvoice_webrtc_aec "true"\nvoice_webrtc_agc "true"\nvoice_webrtc_apm "false"\nvoice_webrtc_fixed_gain_db "0"\nvoice_webrtc_hpf "true"\nvoice_webrtc_ns "true"\nvoice_webrtc_ns_level "2"\nvolume "1"\n// Saved keyboard and mouse bindings\nunbind "0"\nbind "1" "slot10"\nbind "2" "slot8"\nbind "3" "slot7"\nbind "4" "slot6"\nbind "5" "slot5"\nunbind "6"\nunbind "7"\nunbind "8"\nbind "9" "slot9"\nbind "a" "+left"\nbind "b" "buymenu"\nunbind "c"\nbind "d" "+right"\nbind "e" "+use"\nbind "f" "slot4"\nbind "g" "drop"\nbind "h" "switchhands"\nbind "i" "show_loadout_toggle"\nbind "m" "teammenu"\nbind "q" "pwa_q_pistol"\nbind "r" "+reload"\nbind "s" "+back"\nbind "t" "+spray_menu"\nbind "u" "messagemode"\nbind "v" "+voicerecord"\nbind "w" "+forward"\nbind "x" "slot12"\nbind "y" "+lookatweapon"\nbind "z" "player_ping"\nbind "`" "toggleconsole"\nbind "," "buyammo1"\nbind "." "buyammo2"\nbind "SPACE" "+jump"\nbind "TAB" "+showscores"\nbind "ESCAPE" "cancelselect"\nbind "DEL" "sellbackall"\nunbind "SHIFT"\nunbind "CTRL"\nbind "F3" "autobuy"\nbind "F4" "rebuy"\nbind "F5" "jpeg"\nbind "F6" "save quick"\nbind "F7" "load quick"\nbind "F10" "cs_quit_prompt"\nbind "MOUSE1" "+attack"\nbind "MOUSE2" "+attack2"\nunbind "MOUSE3"\nbind "MOUSE4" "+duck"\nbind "MWHEELUP" "pwa_wheelup_knife"\nbind "MWHEELDOWN" "pwa_wheeldown_primary"\nbind "MOUSE5" "+sprint"\nbind "ENTER" "messagemode2"\necho "AUTOEXEC SETTINGS SNAPSHOT LOADED"\n';
+
   var MATCH_DATA = {
     cs2: {
+      cfg: true,
       title: 'FPS',
       img: 'assets/cs2-preview.jpg',
       paragraphs: [
@@ -2801,6 +2870,39 @@ img { max-width:100%; display:block; }
       matchModal.classList.add('active');
     });
   });
+
+  var cfgPre = document.getElementById('cfgPre');
+  var cfgCopyBtn = document.getElementById('cfgCopyBtn');
+  if (cfgPre) cfgPre.textContent = CFG_TEXT;
+  if (cfgCopyBtn) {
+    cfgCopyBtn.addEventListener('click', function () {
+      function done() {
+        cfgCopyBtn.textContent = '已复制';
+        setTimeout(function () { cfgCopyBtn.textContent = '复制'; }, 1500);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(CFG_TEXT).then(done).catch(function () {
+          var ta = document.createElement('textarea');
+          ta.value = CFG_TEXT;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); done(); } catch (e) {}
+          document.body.removeChild(ta);
+        });
+      } else {
+        var ta2 = document.createElement('textarea');
+        ta2.value = CFG_TEXT;
+        ta2.style.position = 'fixed';
+        ta2.style.opacity = '0';
+        document.body.appendChild(ta2);
+        ta2.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta2);
+      }
+    });
+  }
 
   function closeMatchModal() { matchModal.classList.remove('active'); }
   matchModalClose.addEventListener('click', closeMatchModal);
