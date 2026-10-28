@@ -2774,8 +2774,11 @@ img { max-width:100%; display:block; }
       paragraphs: [
         '玩点CS、瓦、apex、R6等游戏，都玩的很菜。完美金C+小人机',
         '看比赛，CS2主队Team Spirit，副队Betboom Team和Falcons，其他游戏无主队',
-        '白月光是GPW5（白色款）和CHERRY双魔8.2 PRO TMR'
-      ]
+        '白月光是GPW5（白色款）和CHERRY双魔8.2 PRO TMR',
+        'CS2启动项：+fps_max 0 -high -novid -nojoy +cl_forcepreload 1 -perfectworld +exec autoexec',
+        'Apex启动项：+miles_language english'
+      ],
+      download: { text: 'CS2设置（包含切刀绑检视）下载', href: 'assets/autoexec.cfg' }
     },
     f1: {
       title: 'Formula 1',
@@ -2794,7 +2797,7 @@ img { max-width:100%; display:block; }
       matchModalTitle.textContent = m.title;
       matchModalTeams.innerHTML = m.paragraphs.map(function (p) {
         return '<p class="match-body-text">' + p + '</p>';
-      }).join('');
+      }).join('') + (m.download ? '<p class="match-body-text"><a href="' + m.download.href + '" download>' + m.download.text + '</a></p>' : '');
       matchModal.classList.add('active');
     });
   });
