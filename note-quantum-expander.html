@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>Quantum Expander笔记</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] } },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+.mobile-toc-btn{display:none;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;border:1px solid var(--border-soft);background:var(--card-solid);color:var(--text-soft);font-size:13px;cursor:pointer;transition:all .2s;}
+.mobile-toc-btn:hover{border-color:var(--border);color:var(--accent);}
+.mobile-toc-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.mobile-toc-dropdown{display:none;position:fixed;top:59px;left:0;right:0;background:var(--card-solid);border-bottom:1px solid var(--border-soft);box-shadow:0 8px 24px rgba(113,57,218,0.12);z-index:99;max-height:60vh;overflow-y:auto;}
+.mobile-toc-dropdown.active{display:block;}
+.mobile-toc-title{padding:12px 20px 8px;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-weight:600;}
+.mobile-toc-list{padding:0 12px 16px;}
+.mobile-toc-list li{margin-bottom:2px;}
+.mobile-toc-list a{display:block;padding:8px 12px;font-size:14px;color:var(--text-soft);border-radius:6px;}
+.mobile-toc-list a:hover{background:var(--accent-soft);color:var(--accent);}
+.mobile-toc-list li.sub a{padding-left:24px;font-size:13px;}
+.mobile-toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:14.5px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.mobile-toc-btn{display:inline-flex;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+
+/* ===== Image lightbox (click to zoom) ===== */
+.article-content img{cursor:zoom-in;}
+.article-cover{cursor:zoom-in;}
+.lightbox-overlay{position:fixed;inset:0;background:rgba(10,8,25,0.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;}
+.lightbox-overlay.active{display:flex;}
+.lightbox-box{max-width:94vw;max-height:90vh;display:flex;align-items:center;justify-content:center;overflow:auto;}
+.lightbox-box.zoomed{display:block;}
+.lightbox-box.zoomed img{max-width:none;max-height:none;width:auto;height:auto;object-fit:contain;}
+.lightbox-box img{max-width:94vw;max-height:90vh;object-fit:contain;border-radius:10px;box-shadow:0 10px 60px rgba(0,0,0,0.5);background:rgba(255,255,255,0.04);}
+.lightbox-zoom{position:fixed;top:20px;right:78px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1001;transition:background .2s;}
+.lightbox-zoom:hover{background:rgba(255,255,255,0.25);}
+.lightbox-close{position:fixed;top:20px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1001;transition:background .2s;}
+.lightbox-close:hover{background:rgba(255,255,255,0.25);}
+.lightbox-cap{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.65);font-size:13px;text-align:center;max-width:80vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;z-index:1001;}
+@media (max-width:640px){.lightbox-overlay{padding:16px;}.lightbox-box img{max-width:96vw;max-height:84vh;}.lightbox-close{top:14px;right:14px;width:40px;height:40px;}.lightbox-zoom{top:14px;right:62px;width:40px;height:40px;}}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html#notes" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">数学</span>
+      <span><i class="far fa-calendar"></i> 2026-11-06</span>
+    <button class="mobile-toc-btn" id="mobileTocBtn"><i class="fa fa-list-ul"></i> 目录</button></div>
+  </div>
+</header>
+<!-- Image lightbox -->
+<div class="lightbox-overlay" id="imgLightbox">
+  <button class="lightbox-close" id="imgLightboxClose" aria-label="关闭"><i class="fa fa-times"></i></button>
+  <button class="lightbox-zoom" id="imgLbZoom" aria-label="放大"><i class="fa fa-search-plus"></i></button>
+  <div class="lightbox-box" id="imgLightboxBox"><img id="imgLightboxImg" src="" alt=""></div>
+  <div class="lightbox-cap" id="imgLightboxCap"></div>
+</div>
+
+<div class="mobile-toc-dropdown" id="mobileTocDropdown">
+  <div class="mobile-toc-title">目录</div>
+  <ul class="toc-list mobile-toc-list">
+      <li class="toc-main"><a href="#article-title">Quantum Expander笔记</a></li>
+      <li><a href="#sec-0">quantum expander背景</a></li>
+      <li class="sub"><a href="#sec-1">定义</a></li>
+      <li class="sub"><a href="#sec-2">用途</a></li>
+      <li class="sub"><a href="#sec-3">随机游走</a></li>
+      <li class="sub"><a href="#sec-4">物理意义</a></li>
+      <li class="sub"><a href="#sec-5">面积定律与体积定律</a></li>
+      <li><a href="#sec-6">16酉矩阵完整构造</a></li>
+      <li><a href="#sec-7">应用</a></li>
+      <li class="sub"><a href="#sec-8">SU(2^n)上的深度1-expander</a></li>
+      <li class="sub2"><a href="#sec-9">酉群一致有界谱隙具体构造</a></li>
+      <li class="sub"><a href="#sec-10">体积纠缠下的平方反比谱隙构造</a></li>
+      <li class="sub2"><a href="#sec-11">类Feynman时钟证明</a></li>
+      <li class="sub"><a href="#sec-12">流式检测纠缠态</a></li>
+      <li class="sub"><a href="#sec-13">特殊条件下改进Hastings谱隙结论</a></li>
+      <li><a href="#sec-14">还能再做什么</a></li>
+    </ul>
+</div>
+
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+      <li class="toc-main"><a href="#article-title">Quantum Expander笔记</a></li>
+      <li><a href="#sec-0">quantum expander背景</a></li>
+      <li class="sub"><a href="#sec-1">定义</a></li>
+      <li class="sub"><a href="#sec-2">用途</a></li>
+      <li class="sub"><a href="#sec-3">随机游走</a></li>
+      <li class="sub"><a href="#sec-4">物理意义</a></li>
+      <li class="sub"><a href="#sec-5">面积定律与体积定律</a></li>
+      <li><a href="#sec-6">16酉矩阵完整构造</a></li>
+      <li><a href="#sec-7">应用</a></li>
+      <li class="sub"><a href="#sec-8">SU(2^n)上的深度1-expander</a></li>
+      <li class="sub2"><a href="#sec-9">酉群一致有界谱隙具体构造</a></li>
+      <li class="sub"><a href="#sec-10">体积纠缠下的平方反比谱隙构造</a></li>
+      <li class="sub2"><a href="#sec-11">类Feynman时钟证明</a></li>
+      <li class="sub"><a href="#sec-12">流式检测纠缠态</a></li>
+      <li class="sub"><a href="#sec-13">特殊条件下改进Hastings谱隙结论</a></li>
+      <li><a href="#sec-14">还能再做什么</a></li>
+    </ul>
+  </aside>
+  <article class="article-body">
+    <img class="article-cover" src="assets/aixyx.jpg" alt="Quantum Expander笔记">
+    <h1 class="article-title" id="article-title">Quantum Expander笔记</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2026-11-06</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">数学</span>
+    </div>
+    <div class="article-content">
+<p>《Depth-1 expanders on the unitary group and applications》2609.01605v1</p>
+<h3 id="sec-0">quantum expander背景</h3>
+<h4 id="sec-1">定义</h4>
+<p>**定义**（量子扩展器）。若有限酉算子集合 $\{U_1,\dots,U_m\} \subset U(d)$ 对所有满足 $\operatorname{Tr} X = 0$ 的 $X$ 均满足：</p>
+<p>$$\left\Vert{} \frac{1}{m} \sum_i U_i X U_i^\dagger \right\Vert{}_2 \leqslant (1 - \Delta) \Vert{}X\Vert{}_2$$</p>
+<p>则称其为能隙（gap）为 $\Delta > 0$ 的**量子扩展器**（quantum expander）。</p>
+<blockquote>如果取X=I会得到平凡的特征值上界1，其他特征值应当小于1.<br>衡量这些衰减量与平稳量之间差异的gap就是Δ。反复作用该信道后衰减速度近似于指数衰减，此时gap代表着指数衰减的速度，这一点有点像有能隙多体物理中物理信息随着距离依照能隙指数衰减的性质。<br>与最大纠缠态正交的向量，恰好对应于一个无迹矩阵。无迹这个条件出现在最核心的量子扩展器定义当中。<br>下面给出上一句话的简要证明<br>$$|\Gamma\rangle=\frac{1}{\sqrt d}\sum_{i=1}^{d}|i\rangle\otimes|i\rangle.$$<br>对于两个 d 维系统组成的复合 Hilbert 空间，任意一个向量都可以表示为<br>$$|\psi\rangle=\frac{1}{\sqrt d}\sum_{i,j=1}^{d}A_{ij}|i\rangle\otimes|j\rangle=(A\otimes I)|\Gamma\rangle$$<br>其中 $A$ 是一个 $d\times d$ 矩阵。这个对应关系是双射，即每一个复合系统中的向量都唯一对应一个矩阵 $A$。<br>接下来，计算 $|\psi\rangle$ 与最大纠缠态 $|\Gamma\rangle$ 的内积：<br>$$\begin{aligned}\langle\Gamma|\psi\rangle&=\frac{1}{d}\sum_{k=1}^{d}\sum_{i,j=1}^{d}A_{ij}\langle k|i\rangle\langle k|j\rangle\\&=\frac{1}{d}\sum_{i=1}^{d}A_{ii}\\&=\frac{1}{d}\operatorname{Tr}(A).\end{aligned}$$<br>$$\langle\Gamma|\psi\rangle=0<br>\quad\Longleftrightarrow\quad<br>\operatorname{Tr}(A)=0.$$</blockquote>
+<p>**度**（degree）是指酉算子的个数 $m$。**扩展器族**（expander family）是一系列表现出相同 $m$ 和 $\Delta$、但维数递增 $d_1, d_2, \dots$ 的量子扩展器；即具有常数能隙和常数度。</p>
+<p>量子设计（Quantum $k$-design） 是指用有限个量子操作（或状态）组成的集合，去代替对整个连续/庞大群（如 Haar 随机或整个 Clifford 群）进行积分或平均。</p>
+<p>本文的设计有以下两个特点：</p>
+<p>2-设计：每次群作用同时作用在两个副本上（形如$U\otimes\bar{U}$），并不是完整的unitary 2-design moment operator，因为后者形如$U^{\otimes 2}$，关注的是算符的二阶矩</p>
+<p>常数大小：酉门的个数永远是常数，不会增加。</p>
+<p>$\Vert X \Vert_2$ 表示 **Hilbert-Schmidt 范数**（也称 Frobenius 范数），定义为：</p>
+<p>$$\Vert{}X\Vert{}_2 = \sqrt{\operatorname{Tr}(X^\dagger X)} = \sqrt{\sum_{i,j} \vert{}X_{ij}\vert{}^2}$$</p>
+<h4 id="sec-2">用途</h4>
+<blockquote>[!info]<br>如果我们按照 Haar measure 从整个d维 Hilbert space 的单位球面上均匀随机抽取一个纯态，就得到 Haar-random state。Haar随机态是不偏向 Hilbert space 中的任何特殊方向，也就是拥有旋转不变性（酉群）。<br><br>从Haar随机矩阵到Haar随机态：<br>固定一个初态$\ket{\psi_0}=\ket{0}^{\otimes n}$，施加一个Haar随机酉矩阵<br>$$\ket{\psi}=U\ket{\psi_0},\quad U\sim Haar(U(d))$$<br>得到的$\ket{\psi}$就服从Haar随机态分布<br>这是因为Haar测度具有左不变性，也即左作用任意一个固定的酉矩阵V，其分布仍不变$VU\sim Haar(U(d))$，因此$V\ket{\psi}=VU\ket{\psi_0}$与原来的$\ket{\psi}$具有相同的概率分布，Haar随机态的分布对任意酉变换不变。</blockquote>
+<p>Quantum expander 与 Haar average 的关系</p>
+<p>一个理想的Haar随机酉平均信道</p>
+<p>$$\mathcal{E}_{Haar}(\rho)=\int U\rho U^\dagger d\mu(U)$$</p>
+<p>对于任意密度矩阵，作用后都变成最大混合态</p>
+<p>$$\mathcal{E}_{haar}(\rho)=I/d$$</p>
+<p>这是因为对积分式整体进行一个酉共轭变换，由于haar测度的左不变性，共轭后的结果仍然不变，这意味着计算结果与任意一个酉矩阵可交换，那么这个结果一定是标量，在密度矩阵的归一限制下一定是I/d。</p>
+<p>这个作用类似于随机数生成器，完全扰乱了初始态的信息，使熵达到最大值。</p>
+<blockquote>在量子多体物理和黑洞物理中，一个系统如果能快速削弱 $V_{\text{inv}}^\perp$，就说明它是一个极佳的混淆器（Scrambler）。<br>初始时，信息可能是局部可读的（由 $v_{\perp}$ 编码）；连续作用几次后，$v_{\perp} \to 0$，局部信息被完全抹平并扩散到整个系统的全局纠缠中，使得任何局部的测量都再也无法提取出初始信息。</blockquote>
+<p>在一些量子线路设计中需要用到这一点，但是要真正实现理想化的Haar随机酉平均信道是非常耗费资源的。一个自然的问题是，我们能否通过几个有限已知的酉矩阵，去近似这个随机信道？这正是quantum expander的意义之一。如果quantum expander的谱隙为Δ，那么</p>
+<p>$$||\mathcal{E}(X)||_2\le(1-\Delta)||X||_2$$</p>
+<p>这表示每执行一次 quantum expander channel，偏离最大混合态的部分就会被收缩。quantum expander 可以让量子态逐渐趋近最大混合态。</p>
+<p>具体在本文中，设计的想法是类似的，但是目标的态有些不同。文中作者使用了16个具体的酉矩阵，构造了$\mathcal{T}=\frac{1}{16}\sum_{i=1}^{16}U_i\otimes\bar{U_i}$，他的地位相当于上一段描述的随机信道的近似，但是它作用的空间是双系统态，不动点是高维EPR态（最大纠缠态）</p>
+<p>$$\mathcal{T}\ket{\Gamma_n}=\ket{\Gamma_n},\quad\ket{\Gamma_n}=\frac{1}{2^{n/2}}\sum_{x\in\{0,1\}^n}\ket{x}\otimes\ket{x}$$</p>
+<p>并在正交子空间上具有常数级（谱）收缩</p>
+<h4 id="sec-3">随机游走</h4>
+<p>文中给出的14个由CNOT门组成的酉算符生成元集合，在群上定义了一个具有常数谱隙的随机游走，这个随机游走对应的Cayley图就是一个expander graph，下面解释概念</p>
+<p>把所有可能的CNOT电路对应的酉矩阵收集起来，形成一个群</p>
+<p>$$G_n=\braket{CNOT_{i,j}:i\neq j}$$</p>
+<p>论文证明</p>
+<p>$$G_n\simeq SL(n,\mathbb{F})$$</p>
+<p>Caylay图：把群中每一个元素看成图上的一个顶点，如果两个元素相差一个群作用，那么这两个元素之间就有边，这样构造出的图叫做Caylay graph</p>
+<p>$$Cay(G_n,S)$$</p>
+<blockquote>每个顶点都可以通过m个群元到达m个邻居，所以这是m-regular graph</blockquote>
+<p>如果这张图具有良好的扩展性，那么不论初始顶点在哪里，经过有限步随机游走（随机选取一个群元对其作用），分布都会快速趋向整个群上的均匀分布</p>
+<p>对m个群元，随机游走的平均算符为$A=\frac{1}{m}\sum_{i=1}^mL_{P_i}$，也就是对所有群元素做了算数平均，$L_{P_i}$表示左作用$P_i$</p>
+<p>对联通的正则图，均匀分布对应的特征向量$\frac{1}{\sqrt{|G_n|}}\sum\ket{g}$，对应特征值1，谱隙代表第二大特征值比1小了多少，也即$\lambda_2=1-\Delta$。就像上文所说的一样，谱隙越大，随机游走的混合越快。</p>
+<p>这其实就是用图的方法解释了expander的名称来由以及他的混合功能</p>
+<p>在文中2.2小节讲了CNOT群上的expander，下文会详细介绍他的构造和证明</p>
+<h4 id="sec-4">物理意义</h4>
+<p>根据薛定谔方程，能隙的物理意义是基态与第一激发态之间演化震荡的特征时间，也和关联长度有关，可以通过相对论型色散模型看出：</p>
+<p>$$E(k)=\sqrt{\Delta^2+(\hbar ck)^2}$$</p>
+<p>其中c是传播速度，Δ是零动量处的能隙</p>
+<p>计算标量场在基态的t=0关联函数</p>
+<p>$$C(r)=\braket{\phi(r,0)\phi(0,0)}$$</p>
+<p>利用</p>
+<p>$$\phi(x,t)=\int\frac{dk}{2\pi}\frac{1}{\sqrt{2w_k}}(a_k e^{ikx-iw_kt}+a_k^\dagger e^{-ikx+iw_kt})$$</p>
+<p>得到</p>
+<p>$$C(r)=\int_{-\infty}^\infty\frac{dk}{2\pi}\frac{e^{ikr}}{2\sqrt{\Delta^2+c^2k^2}}=\frac{1}{2\pi c}K_0(\frac{\Delta|r|}{c})$$</p>
+<p>这个积分没有解析解，我们分析r很大时候的衰减特征</p>
+<p>$$C(r)\sim e^{-\Delta r/c}/\sqrt{r}$$</p>
+<p>取$\hbar=1,c=1$后，关联长度写作$\xi=1/\Delta$，关联进行指数衰减</p>
+<h4 id="sec-5">面积定律与体积定律</h4>
+<p>纠缠标度面积定律：二分纠缠熵和MPS最小割息息相关，如果再模糊一些推广到多维系统，可以想到纠缠熵大致有这个被划分出的系统A的边界的两级，也即</p>
+<p>$$S = O(\vert{}\partial A\vert{}), \quad \text{“面积定律”}$$</p>
+<p>能隙与面积定律的关系，一维情况被Hastings严格证明：</p>
+<p>对于一维局域量子自旋系统，如果 Hamiltonian 有唯一基态，并且基态与激发态之间存在非零能隙，那么基态跨越任意空间切割的纠缠熵有一个与系统总长度无关的上界（也即O(1)）。</p>
+<p>也就是说，即使链长N趋于无穷，基态的纠缠熵也不会随N线性增长，而是保持为常数阶。这就是一维面积定律的含义。</p>
+<p>高维只是猜想，但有很多数据支撑。</p>
+<p>如果有一片参数空间基态满足面积定律，那么他们可以被归为同一个量子phase.能隙闭合时，穿过量子相变点。量子临界点出现的对数纠缠熵修正意味着长程关联。</p>
+<p>最后，还有具有体积定律（volume-law）纠缠熵的状态：</p>
+<p>$$S = O(\vert{}A\vert{}) = O(N^d), \quad \text{“体积定律”}$$</p>
+<p>这类状态表现于高度纠缠的状态中，例如随机量子态，或者量子多体哈密顿量的高度激发本征态，它们是我们以后研究量子热化时需要考虑的重要对象。</p>
+<p>本文研究的对象就是一维体积定律量子系统</p>
+<h3 id="sec-6">16酉矩阵完整构造</h3>
+<p>16个酉矩阵，在3s个qubit上，形成的谱隙至少为$1/(2·10^8)$，每一个酉矩阵都可以写作深度-1的线路</p>
+<p>$U_1,...,U_6$只在前三个qubit上有非平凡作用</p>
+<p>$$
+\begin{aligned}
+U_1 &= X \otimes I_{2^{3s-1}}, & U_2 &= Z \otimes I_{2^{3s-1}}, \\
+U_3 &= \text{CNOT}_{1,2} \otimes I_{2^{3s-2}}, & U_4 &= \text{CNOT}_{2,1} \otimes I_{2^{3s-2}}, \\
+U_5 &= I_2 \otimes \text{CNOT}_{2,3} \otimes I_{2^{3s-3}}, & U_6 &= I_2 \otimes \text{CNOT}_{3,2} \otimes I_{2^{3s-3}}.
+\end{aligned}
+$$</p>
+<p>7到16个酉矩阵是以3个qubit为周期的平移不变矩阵（积）</p>
+<p>$$
+\begin{aligned}
+U_7,\dots,U_{12} &= (\text{CNOT}_{a,b})^{\otimes s} = \prod_{i=0}^{s-1} \text{CNOT}_{3i+a,3i+b}, \quad \text{for } 1\le a\ne b\le 3, \\
+U_{13} &= \prod_{i=0}^{s-1} \text{CNOT}_{3i+4,3i+2}, & U_{14} &= \prod_{i=0}^{s-1} \text{CNOT}_{3i+5,3i+1}, \\
+U_{15} &= \prod_{i=0}^{s-1} \text{CNOT}_{3i+5,3i+3}, & U_{16} &= \prod_{i=0}^{s-1} \text{CNOT}_{3i+6,3i+2}.
+\end{aligned}
+$$</p>
+<p>下面这张图展示了$U_{13}$的作用效果</p>
+<img class="note-img" src="assets/expander.png" alt="expander.png">
+<p>文章中构造的这16个酉门的作用类似于把最大纠缠态重新排列了</p>
+<h3 id="sec-7">应用</h3>
+<h4 id="sec-8">SU(2^n)上的深度1-expander</h4>
+<p>这一节可以用扩展图来理解，在前文已经阐述</p>
+<p>那么还是一样的，$G_n$代表n个qubit上的CNOT群。只使用上述16个酉矩阵中的$U_3,...,U_{16}$这14个，最终达到的效果是对于任意$G_{3s}$的有限维酉表示，都有常数谱隙</p>
+<p>$$||\frac{1}{14}\sum_{i=3}^{16}\rho(U_i)-\mathbb{E}_{P\sim\mu(G_{3s})}\rho(P)||\le1-\frac{1}{48·10^5}$$</p>
+<p>根据同构关系将这14个CNOT群元对应到$SL(3s;\mathbb{F}_2)$上，构成SL群的子集$\Sigma_{3s}$。首先证明他们的Kazhdan常数下界</p>
+<p>$$\mathcal{K}(SL(3s;\mathbb{F}_2);\Sigma_{3s})>\frac{1}{400}$$</p>
+<p>Kazhdan常数是用来控制谱隙的，他们的关系为</p>
+<p>$$
+\lambda_{\max}\left( \frac{1}{|S|}\sum_{g\in S} \rho(g) - \mathbb{E}_{g\sim \mu(G)} \rho(g) \right) \le 1 - \frac{\mathcal{K}(G;S)^2}{2|S|}.
+$$</p>
+<p>其中$|S|=14$，最后带回去就得到了最终结论，证明了常数谱隙下界</p>
+<p>我们证明了这14个CNOT元素有很好的谱隙。但是还有一个缺陷需要改善——这14个CNOT元素的不变子空间是兼并的，除了最大混合态以外，还有其他元素，即</p>
+<p>$$C(G_n)=Span\{I,\ket{+^n}\bra{+^n},\ket{0^n}\bra{0^n},\ket{0^n}\bra{+^n},\ket{+^n}\bra{0^n}\}$$</p>
+<p>验证这个不变子空间也是简单的，可以把CNOT作用在$\ket{00}$和$\ket{++}$上即可得到。我们考虑酉算子的共轭作用所以I自然是不变矩阵。</p>
+<p>但是完整的酉群只有单位阵才能与任意元素对易，所以通过添加X和Z这两个元素限制不变子空间，接下来作者证明新的平均算符在额外的四维空间上具有收缩作用。先把不变子空间写成投影的形式</p>
+<p>$$\mathcal{P}_G=\sum_{i=1}^5\ket{b_i}\bra{b_i}$$</p>
+<p>其中编号为1的代表最大纠缠态的投影，额外四维的投影记作</p>
+<p>$$\Pi=\mathcal{P}_G-\mathcal{P}_{Haar}=\sum_{i=2}^5\ket{b_i}\bra{b_i}$$</p>
+<p>引入一个代表原压缩方案（在额外四维子空间上保持不变）的算符A：</p>
+<p>$$A=\frac{1}{m}\sum_{i=1}^mP_i\otimes P_i-\ket{b_i}\bra{b_i}$$</p>
+<p>他的特点有两点：在四维额外空间上保持不变，且在正交补上有谱隙</p>
+<p>$$\Pi A=A\Pi=\Pi,\quad||(I-\Pi)A(I-\Pi)||\le1-\epsilon$$</p>
+<p>再引入一个代表新增Pauli门的算符B：</p>
+<p>$$B=\frac{1}{2}(X_1\otimes X_1+Z_1\otimes Z_1)-\ket{b_1}\bra{b_1}$$</p>
+<p>论文通过证明$||\Pi(X_1\otimes X_1+Z_1\otimes Z_1)\Pi||=\frac{N-2}{N-1}$，得到B算符在额外四维上的压缩作用</p>
+<p>$$||\Pi B\Pi||=\frac{1}{2}\frac{N-2}{N-1}\le\frac{1}{2}$$</p>
+<p>可以看出加入的X和Z已经有常数级收缩功能</p>
+<p>利用Lemma 2.16最后得到</p>
+<p>$$\left\Vert\frac{1}{m+2}\sum_{i=1}^{m+2}P_i\otimes P_i-\ket{b_1}\bra{b_1}\right\Vert$$</p>
+<h5 id="sec-9">酉群一致有界谱隙具体构造</h5>
+<p>当$n=3s,s\in \mathbb{N}$时</p>
+<p>$$V^{(n)}=\{V_1,...,V_{25}\}\subset SU(2^n)$$</p>
+<p>其中$V_1=T\otimes I_{n-1},~V_2=T^\dagger\otimes I_{n-1}$,$T=e^{-i\pi Z/8}$,其他$V_i$是深度1的具有一致有界谱隙的一维Clifford线路（Δ=$\Theta(1)$）它由之前的 14 个 CNOT 生成元，以及额外选取的 Hadamard 门和S门的特定组合构成。</p>
+<p>这25 个门则进一步实现了整个特殊酉群上的 uniform spectral gap，是比expander更强的结果，之前的expander是针对量子信道，作用在密度矩阵上。这里是对于k分copy的每一份都使用随机酉矩阵</p>
+<p>$$\mathcal{T}^{(k)}_{25}(X)=\frac{1}{25}\sum_{i=1}^{25}V_i^{\otimes k}X(V_i^\dagger)^{\otimes k}$$</p>
+<p>反复进行t次游走。随着t增大，信道的k阶矩逐渐接近Haar随机酉矩阵的k阶矩</p>
+<p>$$ \left( \frac{1}{25}\sum_{i=1}^{25} V_i^{\otimes k} \otimes \overline{V_i}^{\otimes k} \right)^t = M_k^t\to  M_k^{\text{Haar}} = \int_{\mathrm{SU}(2^n)} U^{\otimes k} \otimes \overline{U}^{\otimes k} d\mu(U)$$</p>
+<p>重复t次后可以实现ε-approximate unitary k-design，其中t的增长速度为</p>
+<p>$$t=O(nk+\log\frac{1}{\epsilon})$$</p>
+<p>先前的expander只对表示$U\otimes\bar{U}$满足谱隙条件，现在需要加强到k阶的$U^{\otimes k}\otimes\bar{U}^{\otimes k}$，所以加了一些额外的门，能够在k阶矩意义上（也就是上面那个k-copy的期望）模拟Haar随机酉矩阵。</p>
+<p>论文的推论给出如果要将这个结果推广到任意维度的$SU(d)$，那么生成元上界会变为5400而不是25</p>
+<h4 id="sec-10">体积纠缠下的平方反比谱隙构造</h4>
+<h5 id="sec-11">类Feynman时钟证明</h5>
+<p>文章通过构造证明了$H_{check}+H_{prop}+H_{M}$具有唯一基态，这个基态的二分纠缠熵是$\Theta(n)$（体积纠缠），同时谱隙$\Delta=\Theta(n^{-2})$</p>
+<p>前文给出的十六个酉算符虽然深度是1，但是他们是乘算的，不满足local哈密顿量的要求。作者为了把一个作用于整个数据系统的全局酉变换，转化为一系列局域相互作用，让 Hamiltonian 可以在一维链上实现，使用了时钟结构。在 clock 移动的每一步，同时对数据系统施加一个局域门。这样就拆成加法了。</p>
+<p>clock 的传播 Hamiltonian 本质上类似一维离散 Laplacian。</p>
+<p>一条长度为 \(L\) 的路径，其最低非零能隙一般满足$1/L^2$</p>
+<p>对于这篇论文的具体构造，clock 是实现这个$n^{-2}$能隙标度的核心机制</p>
+<h4 id="sec-12">流式检测纠缠态</h4>
+<p>流式检验是否$\ket{\Gamma_n}$：文章中显式给出的16个酉门，最大跨度是跨四个距离（比如1（234）5），所以我们在内存中保存最近的4个qubit和最开头的4个qubit，其余作用结束的qubit我们给他取偏迹释放内存</p>
+<p>而$\ket{\Gamma_n}$（扩展后的EPR态，最大纠缠态）是这16个酉门叠加作用的不变向量，其余的向量会不断被压缩（因为次大谱是1-Δ）对于与目标态正交的任意状态$\ket{\psi^\perp}$，有</p>
+<p>$$||\Phi\ket{\psi^\perp}||\le(1-\Delta)||\psi^\perp||$$</p>
+<p>每应用一次expander，对目标态正交子空间的分量都会产生至少一个1-Δ的收缩因子</p>
+<p>在$(1-\Delta)^r\le\epsilon$的要求下，反解得到作用次数为$O(\Delta^{-1}\log(1/\epsilon))$，而每次作用的流式传输存储为常数个，所以空间复杂度也为$O(\Delta^{-1}\log(1/\epsilon))$（每一层门的作用范围是l，总共r层，因此需要保存的局域窗口大小变为$O(rl)$）</p>
+<p>提高测试精度并不需要增加数据流的遍数。增加的是局域电路深度和量子存储空间，而不是数据流的遍数。</p>
+<h4 id="sec-13">特殊条件下改进Hastings谱隙结论</h4>
+<p>Hastings 与 Koma 的经典结论：如果一个局域 Hamiltonian 存在非零 spectral gap，那么它的基态中，空间距离较远的两个局域区域之间的关联会指数衰减。</p>
+<p>$$\braket{A,B}-\braket{A}\braket{B}\le C||A||~||B||\exp(-\frac{d(A,B)}{\xi})$$</p>
+<p>其中d代表支撑区域的图距离，AB是两个局域可观测量，C是一个与系统参数有关的常数，$\xi$是关联长度$\xi=O(\Delta^{-1})$</p>
+<ul>
+<li>Gap 越大，关联长度越短</li>
+<li>Gap 越小，关联长度越长</li>
+</ul>
+<p>对于一维无阻挫哈密顿量，文中提出了更强的关联衰减结论</p>
+<p>$$corr(A_i,B_j)\lesssim e^{-\Theta(d\sqrt{\Delta})}$$</p>
+<blockquote>在凝聚态物理和量子多体系统中，具有阻挫（Frustrated）的哈密顿量指的是系统内的各个局部相互作用存在相互冲突，导致系统无法同时让所有局部相互作用都处于最低能量状态的哈密顿量。有阻挫的哈密顿量的计算问题通常是复杂且消耗时间的。</blockquote>
+<p>Section 3 是从构造角度出发：作者找到了一个具体的 frustration-free Hamiltonian，展示基态纠缠熵可以达到 $\Theta(\Delta_{\mathrm{gbl}}^{-1/2})$。</p>
+<p>Section 5 则从理论界的角度出发：对于一般的 frustration-free 一维 Hamiltonian，作者证明了一个更紧的纠缠熵上界 $\widetilde O(\Delta_{\mathrm{loc}}^{-3/4})$。</p>
+<p>作者证明了如果系统在A上的约化态接近CAT态($\frac{1}{\sqrt{2}}(\ket{00...0}+\ket{11...1})$)，并且哈密顿量满足k-local，那么谱隙$\Delta=O(k^2/n)$</p>
+<p>猫态的特殊之处在于使用观测量Z自旋算符，任何两处的关联均为1</p>
+<p>在一般的长程关联系统中，谱系数量级是图距离的倒数（而图距离可能只和规模有logn的关系，例如树状图）</p>
+<h3 id="sec-14">还能再做什么</h3>
+<p>关于添加酉门，使其成为真正的expander的问题：给定 CNOT 群的五维 commutant，能否系统地分类单比特酉门W，使得加入一个$W_1$就足以把 CNOT expander 提升为 quantum expander？其中哪个W能够最大化额外不变空间上的收缩？</p>
+<p>一个自然的想法是将文中的X和Z合并为Y，扩展来看，是否有其他更强收缩的方案？</p>
+<p>关于2-copy上的谱隙证明问题：作者利用Kassabov的结果证明了 14 个生成元对于 CNOT 群的所有有限维酉表示都有统一谱隙。但是真正需要的不是任意表示，而是特殊表示（双系统）$\rho(P)=P\otimes P$</p>
+<p>作者在 Remark 2.14 中明确说，他们不知道能否针对这个特定表示给出更简单的谱隙证明。所以，不使用对所有酉表示都成立的Kazhdan constant，能否直接证明$P\otimes P$表示上的常数谱隙？</p>
+<p>优化原文设计方案中的谱隙，酉门个数：文中由Kazhdan得出的常数谱隙比较保守。实际谱隙随系统尺寸如何变化，能否删除某些生成元，能否优化随机选门的概率（文中直接上的随机分布）（可以借助数值方法）</p>
+<p>具体研究quantum expander的熵增速度：虽然 quantum expander 的谱隙是常数，但从纯态出发，要达到最大混合态仍然需要O(n)次信道迭代。我们从密度矩阵的秩来看，假设从纯态（秩为1）出发，作用一次混合信道后，秩最多是16，t次作用后，至多是$16^t$。而最大混合态的秩为$2^n$，两侧均为指数级，所以t关于n是线性速度增长.作者由此指出：这个量子扩张器虽然具有常数谱隙，但其熵衰减常数并不一定是常数。</p>
+<p>一个比较具体的问题是针对这篇文章的 16 门量子信道，确定其modified logarithmic Sobolev constant的渐近标度，也就是研究相对熵经过一次信道作用后能下降多少</p>
+<p>$$D(\rho||\frac{I}{2^n})=n\log 2-S(\rho)$$</p>
+<p>可以尝试先对稳定子态研究增长，再推广到一般纯态。</p>
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Mobile TOC dropdown
+  var mobileTocBtn=document.getElementById('mobileTocBtn');
+  var mobileTocDropdown=document.getElementById('mobileTocDropdown');
+  if(mobileTocBtn && mobileTocDropdown){
+    mobileTocBtn.addEventListener('click',function(){
+      mobileTocBtn.classList.toggle('active');
+      mobileTocDropdown.classList.toggle('active');
+    });
+    mobileTocDropdown.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click',function(){
+        mobileTocBtn.classList.remove('active');
+        mobileTocDropdown.classList.remove('active');
+      });
+    });
+    document.addEventListener('click',function(e){
+      if(!mobileTocBtn.contains(e.target) && !mobileTocDropdown.contains(e.target)){
+        mobileTocBtn.classList.remove('active');
+        mobileTocDropdown.classList.remove('active');
+      }
+    });
+  }
+
+  // Image lightbox
+  var imgLb=document.getElementById('imgLightbox');
+  var imgLbImg=document.getElementById('imgLightboxImg');
+  var imgLbCap=document.getElementById('imgLightboxCap');
+  var imgLbClose=document.getElementById('imgLightboxClose');
+  function openLightbox(img){
+    if(!imgLb||!img.src)return;
+    imgLbImg.src=img.src;
+    imgLbImg.alt=img.alt||'';
+    imgLbCap.textContent=img.alt||'';
+    imgLb.classList.add('active');
+    document.body.style.overflow='hidden';
+  }
+  function closeLightbox(){
+    if(!imgLb)return;
+    imgLb.classList.remove('active');
+    var lbBox=document.getElementById('imgLightboxBox');
+    var lbZoom=document.getElementById('imgLbZoom');
+    if(lbBox)lbBox.classList.remove('zoomed');
+    if(lbZoom)lbZoom.innerHTML='<i class="fa fa-search-plus"></i>';
+    document.body.style.overflow='';
+  }
+  function bindLightbox(el){
+    if(!el)return;
+    if(el.tagName==='IMG'){el.style.cursor='zoom-in';el.addEventListener('click',function(e){e.stopPropagation();openLightbox(el);});}
+  }
+  if(imgLb){
+    document.querySelectorAll('.article-content img, .article-cover').forEach(bindLightbox);
+    var lbBox=document.getElementById('imgLightboxBox');
+    var lbZoom=document.getElementById('imgLbZoom');
+    function toggleZoom(){
+      if(!lbBox)return;
+      var zoomed=lbBox.classList.toggle('zoomed');
+      if(lbZoom)lbZoom.innerHTML=zoomed?'<i class="fa fa-search-minus"></i>':'<i class="fa fa-search-plus"></i>';
+      if(zoomed){lbBox.scrollTop=0;lbBox.scrollLeft=0;}
+    }
+    if(lbZoom)lbZoom.addEventListener('click',toggleZoom);
+    imgLbClose.addEventListener('click',closeLightbox);
+    imgLb.addEventListener('click',function(e){if(e.target===imgLb||e.target===imgLbBox)closeLightbox();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Esc')closeLightbox();});
+  }
+})();
+</script></body>
+</html>
