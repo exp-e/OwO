@@ -30,6 +30,22 @@ EXCERPT = ('Quantum Expander 读书笔记：量子扩展器定义与谱隙、16 
 # ---------------------------------------------------------------- md -> html
 headings = []  # (id, level, title)
 
+# ---- inline formatting: **bold**, *italic*, math kept verbatim ----
+_mtokens = []
+
+def format_inline(s):
+    if '*' not in s:
+        return s
+    # protect inline math spans so * inside formulas is untouched
+    def repl(m):
+        _mtokens.append(m.group(0))
+        return '\x00%d\x00' % (len(_mtokens) - 1)
+    s = re.sub(r'\$\$.*?\$\$|\$[^$\n]+?\$', repl, s, flags=re.S)
+    s = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', s, flags=re.S)
+    s = re.sub(r'(?<![\w*$_])\*(?!\s)(.+?)(?<![\s$_])\*(?!\*)', r'<em>\1</em>', s, flags=re.S)
+    s = re.sub(r'\x00(\d+)\x00', lambda m: _mtokens[int(m.group(1))], s)
+    return s
+
 def md_to_html(text):
     lines = text.split('\n')
     html = []
@@ -62,7 +78,7 @@ def md_to_html(text):
             close_list()
             in_list = False
             level = len(m.group(1))
-            ttl = m.group(2).strip()
+            ttl = format_inline(m.group(2).strip())
             sec_id = 'sec-' + str(len(headings))
             headings.append((sec_id, level, ttl))
             html.append('<h{0} id="{1}">{2}</h{0}>'.format(level + 2, sec_id, ttl))
@@ -81,11 +97,11 @@ def md_to_html(text):
                 if s.startswith('>'):
                     content = re.sub(r'^>\s?', '', s)
                     balance += content.count('$$')
-                    bq_lines.append(content)
+                    bq_lines.append(format_inline(content))
                     i += 1
                 elif balance % 2 == 1:
                     balance += s.count('$$')
-                    bq_lines.append(s)
+                    bq_lines.append(format_inline(s))
                     i += 1
                 else:
                     break
@@ -130,7 +146,8 @@ def md_to_html(text):
                 html.append('<ol>')
                 in_list = True
                 list_tag = 'ol'
-            html.append('<li>' + m.group(2) + '</li>')
+            # <li value> keeps the numbering exactly as written
+            html.append('<li value="' + m.group(1) + '">' + format_inline(m.group(2)) + '</li>')
             i += 1
             continue
 
@@ -141,7 +158,7 @@ def md_to_html(text):
                 html.append('<ul>')
                 in_list = True
                 list_tag = 'ul'
-            html.append('<li>' + m.group(1) + '</li>')
+            html.append('<li>' + format_inline(m.group(1)) + '</li>')
             i += 1
             continue
 
@@ -156,7 +173,7 @@ def md_to_html(text):
             nxt = lines[i].strip()
             parity += nxt.count('$$')
             parts.append(nxt)
-        html.append('<p>' + '\n'.join(parts) + '</p>')
+        html.append('<p>' + '\n'.join(format_inline(p) for p in parts) + '</p>')
         i += 1
 
     if in_list:
