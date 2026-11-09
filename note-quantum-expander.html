@@ -453,7 +453,37 @@ H_0 = \begin{pmatrix}
 <p>在k=0片区中，存在零能基态，第一激发态的能量满足$gap(H_0)\approx\frac{\pi^2}{\alpha^2 n^2}$。$k&gt;0$时，最低能量比$H_0$的基态能量高出了$\frac{\pi^2}{4\alpha^2n^2}$，所以整体的谱隙取后者，可以看出它是$\Theta(n^{-2})$</p>
 <p>作者后面选择$\alpha=2$，并利用更精确的本征值表达式$\Delta(H-H_M)=2-2\cos(\frac{\pi}{4n+1})$得到谱隙下界</p>
 <p>$$\Delta(H-H_M)\ge\frac{4}{25n^2}$$</p>
-<p>对于这篇论文的具体构造，clock 是实现这个$n^{-2}$能隙标度的核心机制</p>
+<blockquote>物理直觉：对于这篇论文的具体构造，clock 是实现这个$n^{-2}$能隙标度的核心机制。因为这个能隙不是由quantum expander的谱隙决定的，而是由clock的一维传播决定的。</blockquote>
+<p>最后一步，把$H_M$加回来并证明原本的$1/n^2$谱隙不会变的更小。Lemma3.4和3.5就是来证明这件事的。</p>
+<p>Lemma 3.4：A和B都是半正定算符，P是ker A上的投影，假设投影$P_0\subset ker~B\cap ker~A$投到一维子空间，使得</p>
+<p>$$A\ge b(1-P),\quad PBP\ge c(P-P_0)$$</p>
+<p>其中$||B||\le1$，$b&lt;c/2$</p>
+<p>那么A+B有基态投影算符$P_0$并且谱隙不小于$\eta b$，其中$\eta$只依赖于c（与系统尺寸n无关）</p>
+<blockquote>理解：第一个条件说明离开原来的ground space至少需要付出能量b<br>第二个条件说明在原来的ground space内，只要不是共同基态，就至少有能量c<br>这个定理保证了在满足这个条件下，算符的和的谱隙随着尺度n的变化速度不会改变</blockquote>
+<p>证明：设 $\vert{}\psi\rangle$ 为满足 $P_0 \vert{}\psi\rangle = 0$ 的态。记 $\vert{}\psi\rangle = P \vert{}\psi\rangle + (I - P) \vert{}\psi\rangle \equiv \vert{}x\rangle + \vert{}y\rangle$。则有：</p>
+<p>$$\begin{aligned} \langle\psi\vert{}A + B\vert{}\psi\rangle &amp;\geqslant b\Vert{}y\Vert{}^2 + \langle\psi\vert{}B\vert{}\psi\rangle &amp; \\ &amp;\geqslant b\Vert{}y\Vert{}^2 + \langle x\vert{}B\vert{}x\rangle - 2\Vert{}B\Vert{}\Vert{}x\Vert{}\Vert{}y\Vert{} &amp; \\ &amp;\geqslant b\Vert{}y\Vert{}^2 + c\langle\psi\vert{}P\vert{}\psi\rangle - c\langle\psi\vert{}P_0\vert{}\psi\rangle - 2\Vert{}x\Vert{}\Vert{}y\Vert{} &amp; \\ &amp;\geqslant b\Vert{}y\Vert{}^2 + c\Vert{}x\Vert{}^2 - 2\Vert{}x\Vert{}\Vert{}y\Vert{} &amp; \end{aligned}$$</p>
+<p>或者，我们也可以写成：</p>
+<p>$$\langle\psi\vert{}A + B\vert{}\psi\rangle = \langle\psi\vert{}A\vert{}\psi\rangle + \langle\psi\vert{}B\vert{}\psi\rangle \geqslant \langle\psi\vert{}A\vert{}\psi\rangle \geqslant b\Vert{}y\Vert{}^2. \tag{3.32}$$</p>
+<p>假设 $\Vert{}y\Vert{} \leqslant c\Vert{}x\Vert{}/4$。利用第一个不等式可得 $\langle\psi\vert{}A + B\vert{}\psi\rangle \geqslant \min(b, c/2)(\Vert{}x\Vert{}^2 + \Vert{}y\Vert{}^2) = b$。假设 $\Vert{}y\Vert{} \geqslant c\Vert{}x\Vert{}/4$。则利用第二个不等式可得 $\langle\psi\vert{}A + B\vert{}\psi\rangle \geqslant b\Vert{}y\Vert{}^2 \geqslant b/2(\Vert{}y\Vert{}^2 + c^2\Vert{}x\Vert{}^2/16) \geqslant b\min(1/2, c^2/32)$。 $\square$</p>
+<p>Lemma 3.5 使用3.4中定义的A和B，令$A=H-H_M$，$B=H_M$，H经过平移使得基态能量为0.可以证明$c=\Delta(m-1)/4m^2$，其中Δ是quantum expander的谱隙</p>
+<p>证明：我们已经知道$b=4/25n^2$，接下来只需要证明有和n无关的常数$c&gt;0$使得</p>
+<p>$$PH_MP\ge c(P-P_0)$$</p>
+<p>考虑A的基态中与最终基态正交的态$\ket{\psi}\in supp(P-P_0)$，它可以由一个满足$\braket{\phi|\Gamma_n}=0$的数据态φ构造出来</p>
+<p>然后用算符-态对应，$\ket{\phi}\leftrightarrow\Phi$，于是$||\Phi||_2=1,\quad Tr\Phi=0$。经过计算，作者得到</p>
+<p>$$\begin{aligned}
+\langle \psi | H_M | \psi \rangle &amp;= \frac{(n+1)^2}{8m^2n^2} \sum_{i=2}^{m} \|U_i \Phi - \Phi U_i\|^2 \\
+&amp;\ge \frac{1}{8m^2} \sum_{i=2}^{m} \|U_i \Phi U_i^\dagger - \Phi\|^2 \\
+&amp;\ge \frac{\Delta(m-1)}{4m^2}.
+\end{aligned}$$</p>
+<p>最后一步使用了quantum expander的谱隙性质</p>
+<p>所以证明了与最大纠缠态正交的数据态受到$H_M$的常数级惩罚</p>
+<p>到这里证明了谱隙下界是$n^{-2}$级别，接下来需要说明上界同样也是$n^{-2}$级别</p>
+<p>构造一个试探激发态</p>
+<p>$$\lvert e \rangle = (U_L \otimes U_R)^\dagger |E\rangle_L \otimes |\Omega\rangle_R \otimes |\Gamma_n\rangle$$</p>
+<p>其中$\ket{E}_L$是左侧时钟哈密顿量在k=0扇区中第一激发态，$\ket{\Omega}_R$是右侧时钟哈密顿量的基态。这个态与真正的基态正交，且能量比基态高</p>
+<p>作者直接计算发现这个态在$H_M$下的平均能量为0，所以总能量只有$\Theta(n^{-2})$，这样就给出了谱隙的上界，结合起来得到结论</p>
+<p>$$\Delta(H)=\Theta(n^{-2}),\quad S=\Theta(\frac{1}{\sqrt{\varDelta}})$$</p>
+<p>这正是文章引言中提到的 frustration-free 1D systems 的预期最优标度，构造时使用了体积定律的一维系统。</p>
 <h4 id="sec-17">流式检测纠缠态</h4>
 <p>流式检验是否$\ket{\Gamma_n}$：文章中显式给出的16个酉门，最大跨度是跨四个距离（比如1（234）5），所以我们在内存中保存最近的4个qubit和最开头的4个qubit，其余作用结束的qubit我们给他取偏迹释放内存</p>
 <p>而$\ket{\Gamma_n}$（扩展后的EPR态，最大纠缠态）是这16个酉门叠加作用的不变向量，其余的向量会不断被压缩（因为次大谱是1-Δ）对于与目标态正交的任意状态$\ket{\psi^\perp}$，有</p>
