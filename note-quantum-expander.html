@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
 <script>
 window.MathJax = {
-  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$']], processEscapes: true,
     macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] } },
   svg: { fontCache: 'global' },
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
@@ -130,10 +130,15 @@ img{max-width:100%;display:block;}
       <li class="sub"><a href="#sec-8">SU(2^n)上的深度1-expander</a></li>
       <li class="sub2"><a href="#sec-9">酉群一致有界谱隙具体构造</a></li>
       <li class="sub"><a href="#sec-10">体积纠缠下的平方反比谱隙构造</a></li>
-      <li class="sub2"><a href="#sec-11">=类Feynman时钟证明</a></li>
-      <li class="sub"><a href="#sec-12">流式检测纠缠态</a></li>
-      <li class="sub"><a href="#sec-13">特殊条件下改进Hastings谱隙结论</a></li>
-      <li><a href="#sec-14">还能再做什么</a></li>
+      <li class="sub2"><a href="#sec-11">类Feynman时钟证明</a></li>
+      <li class="sub2"><a href="#sec-12">H_check的构造</a></li>
+      <li class="sub2"><a href="#sec-13">H_prop的构造</a></li>
+      <li class="sub2"><a href="#sec-14">H_M的构造</a></li>
+      <li class="sub2"><a href="#sec-15">证明纠缠熵为O(n)</a></li>
+      <li class="sub2"><a href="#sec-16">证明谱隙是O(n^-2)</a></li>
+      <li class="sub"><a href="#sec-17">流式检测纠缠态</a></li>
+      <li class="sub"><a href="#sec-18">特殊条件下改进Hastings谱隙结论</a></li>
+      <li><a href="#sec-19">还能再做什么</a></li>
     </ul>
 </div>
 
@@ -153,10 +158,15 @@ img{max-width:100%;display:block;}
       <li class="sub"><a href="#sec-8">SU(2^n)上的深度1-expander</a></li>
       <li class="sub2"><a href="#sec-9">酉群一致有界谱隙具体构造</a></li>
       <li class="sub"><a href="#sec-10">体积纠缠下的平方反比谱隙构造</a></li>
-      <li class="sub2"><a href="#sec-11">=类Feynman时钟证明</a></li>
-      <li class="sub"><a href="#sec-12">流式检测纠缠态</a></li>
-      <li class="sub"><a href="#sec-13">特殊条件下改进Hastings谱隙结论</a></li>
-      <li><a href="#sec-14">还能再做什么</a></li>
+      <li class="sub2"><a href="#sec-11">类Feynman时钟证明</a></li>
+      <li class="sub2"><a href="#sec-12">H_check的构造</a></li>
+      <li class="sub2"><a href="#sec-13">H_prop的构造</a></li>
+      <li class="sub2"><a href="#sec-14">H_M的构造</a></li>
+      <li class="sub2"><a href="#sec-15">证明纠缠熵为O(n)</a></li>
+      <li class="sub2"><a href="#sec-16">证明谱隙是O(n^-2)</a></li>
+      <li class="sub"><a href="#sec-17">流式检测纠缠态</a></li>
+      <li class="sub"><a href="#sec-18">特殊条件下改进Hastings谱隙结论</a></li>
+      <li><a href="#sec-19">还能再做什么</a></li>
     </ul>
   </aside>
   <article class="article-body">
@@ -172,8 +182,8 @@ img{max-width:100%;display:block;}
 <h4 id="sec-1">定义</h4>
 <p><strong>定义</strong>（量子扩展器）。若有限酉算子集合 $\{U_1,\dots,U_m\} \subset U(d)$ 对所有满足 $\operatorname{Tr} X = 0$ 的 $X$ 均满足：</p>
 <p>$$\left\Vert{} \frac{1}{m} \sum_i U_i X U_i^\dagger \right\Vert{}_2 \leqslant (1 - \Delta) \Vert{}X\Vert{}_2$$</p>
-<p>则称其为能隙（gap）为 $\Delta > 0$ 的<strong>量子扩展器</strong>（quantum expander）。</p>
-<blockquote>如果取X=I会得到平凡的特征值上界1，其他特征值应当小于1.<br>衡量这些衰减量与平稳量之间差异的gap就是Δ。反复作用该信道后衰减速度近似于指数衰减，此时gap代表着指数衰减的速度，这一点有点像有能隙多体物理中物理信息随着距离依照能隙指数衰减的性质。<br>与最大纠缠态正交的向量，恰好对应于一个无迹矩阵。无迹这个条件出现在最核心的量子扩展器定义当中。<br>下面给出上一句话的简要证明<br>$$|\Gamma\rangle=\frac{1}{\sqrt d}\sum_{i=1}^{d}|i\rangle\otimes|i\rangle.$$<br>对于两个 d 维系统组成的复合 Hilbert 空间，任意一个向量都可以表示为<br>$$|\psi\rangle=\frac{1}{\sqrt d}\sum_{i,j=1}^{d}A_{ij}|i\rangle\otimes|j\rangle=(A\otimes I)|\Gamma\rangle$$<br>其中 $A$ 是一个 $d\times d$ 矩阵。这个对应关系是双射，即每一个复合系统中的向量都唯一对应一个矩阵 $A$。<br>接下来，计算 $|\psi\rangle$ 与最大纠缠态 $|\Gamma\rangle$ 的内积：<br>$$\begin{aligned}\langle\Gamma|\psi\rangle&=\frac{1}{d}\sum_{k=1}^{d}\sum_{i,j=1}^{d}A_{ij}\langle k|i\rangle\langle k|j\rangle\\&=\frac{1}{d}\sum_{i=1}^{d}A_{ii}\\&=\frac{1}{d}\operatorname{Tr}(A).\end{aligned}$$<br>$$\langle\Gamma|\psi\rangle=0<br>\quad\Longleftrightarrow\quad<br>\operatorname{Tr}(A)=0.$$</blockquote>
+<p>则称其为能隙（gap）为 $\Delta &gt; 0$ 的<strong>量子扩展器</strong>（quantum expander）。</p>
+<blockquote>如果取X=I会得到平凡的特征值上界1，其他特征值应当小于1.<br>衡量这些衰减量与平稳量之间差异的gap就是Δ。反复作用该信道后衰减速度近似于指数衰减，此时gap代表着指数衰减的速度，这一点有点像有能隙多体物理中物理信息随着距离依照能隙指数衰减的性质。<br>与最大纠缠态正交的向量，恰好对应于一个无迹矩阵。无迹这个条件出现在最核心的量子扩展器定义当中。<br>下面给出上一句话的简要证明<br>$$|\Gamma\rangle=\frac{1}{\sqrt d}\sum_{i=1}^{d}|i\rangle\otimes|i\rangle.$$<br>对于两个 d 维系统组成的复合 Hilbert 空间，任意一个向量都可以表示为<br>$$|\psi\rangle=\frac{1}{\sqrt d}\sum_{i,j=1}^{d}A_{ij}|i\rangle\otimes|j\rangle=(A\otimes I)|\Gamma\rangle$$<br>其中 $A$ 是一个 $d\times d$ 矩阵。这个对应关系是双射，即每一个复合系统中的向量都唯一对应一个矩阵 $A$。<br>接下来，计算 $|\psi\rangle$ 与最大纠缠态 $|\Gamma\rangle$ 的内积：<br>$$\begin{aligned}\langle\Gamma|\psi\rangle&amp;=\frac{1}{d}\sum_{k=1}^{d}\sum_{i,j=1}^{d}A_{ij}\langle k|i\rangle\langle k|j\rangle\\&amp;=\frac{1}{d}\sum_{i=1}^{d}A_{ii}\\&amp;=\frac{1}{d}\operatorname{Tr}(A).\end{aligned}$$<br>$$\langle\Gamma|\psi\rangle=0<br>\quad\Longleftrightarrow\quad<br>\operatorname{Tr}(A)=0.$$</blockquote>
 <p><strong>度</strong>（degree）是指酉算子的个数 $m$。<strong>扩展器族</strong>（expander family）是一系列表现出相同 $m$ 和 $\Delta$、但维数递增 $d_1, d_2, \dots$ 的量子扩展器；即具有常数能隙和常数度。</p>
 <p>量子设计（Quantum $k$-design） 是指用有限个量子操作（或状态）组成的集合，去代替对整个连续/庞大群（如 Haar 随机或整个 Clifford 群）进行积分或平均。</p>
 <p>本文的设计有以下两个特点：</p>
@@ -241,17 +251,17 @@ img{max-width:100%;display:block;}
 <p>$U_1,...,U_6$只在前三个qubit上有非平凡作用</p>
 <p>$$
 \begin{aligned}
-U_1 &= X \otimes I_{2^{3s-1}}, & U_2 &= Z \otimes I_{2^{3s-1}}, \\
-U_3 &= \text{CNOT}_{1,2} \otimes I_{2^{3s-2}}, & U_4 &= \text{CNOT}_{2,1} \otimes I_{2^{3s-2}}, \\
-U_5 &= I_2 \otimes \text{CNOT}_{2,3} \otimes I_{2^{3s-3}}, & U_6 &= I_2 \otimes \text{CNOT}_{3,2} \otimes I_{2^{3s-3}}.
+U_1 &amp;= X \otimes I_{2^{3s-1}}, &amp; U_2 &amp;= Z \otimes I_{2^{3s-1}}, \\
+U_3 &amp;= \text{CNOT}_{1,2} \otimes I_{2^{3s-2}}, &amp; U_4 &amp;= \text{CNOT}_{2,1} \otimes I_{2^{3s-2}}, \\
+U_5 &amp;= I_2 \otimes \text{CNOT}_{2,3} \otimes I_{2^{3s-3}}, &amp; U_6 &amp;= I_2 \otimes \text{CNOT}_{3,2} \otimes I_{2^{3s-3}}.
 \end{aligned}
 $$</p>
 <p>7到16个酉矩阵是以3个qubit为周期的平移不变矩阵（积）</p>
 <p>$$
 \begin{aligned}
-U_7,\dots,U_{12} &= (\text{CNOT}_{a,b})^{\otimes s} = \prod_{i=0}^{s-1} \text{CNOT}_{3i+a,3i+b}, \quad \text{for } 1\le a\ne b\le 3, \\
-U_{13} &= \prod_{i=0}^{s-1} \text{CNOT}_{3i+4,3i+2}, & U_{14} &= \prod_{i=0}^{s-1} \text{CNOT}_{3i+5,3i+1}, \\
-U_{15} &= \prod_{i=0}^{s-1} \text{CNOT}_{3i+5,3i+3}, & U_{16} &= \prod_{i=0}^{s-1} \text{CNOT}_{3i+6,3i+2}.
+U_7,\dots,U_{12} &amp;= (\text{CNOT}_{a,b})^{\otimes s} = \prod_{i=0}^{s-1} \text{CNOT}_{3i+a,3i+b}, \quad \text{for } 1\le a\ne b\le 3, \\
+U_{13} &amp;= \prod_{i=0}^{s-1} \text{CNOT}_{3i+4,3i+2}, &amp; U_{14} &amp;= \prod_{i=0}^{s-1} \text{CNOT}_{3i+5,3i+1}, \\
+U_{15} &amp;= \prod_{i=0}^{s-1} \text{CNOT}_{3i+5,3i+3}, &amp; U_{16} &amp;= \prod_{i=0}^{s-1} \text{CNOT}_{3i+6,3i+2}.
 \end{aligned}
 $$</p>
 <p>下面这张图展示了$U_{13}$的作用效果</p>
@@ -263,7 +273,7 @@ $$</p>
 <p>那么还是一样的，$G_n$代表n个qubit上的CNOT群。只使用上述16个酉矩阵中的$U_3,...,U_{16}$这14个，最终达到的效果是对于任意$G_{3s}$的有限维酉表示，都有常数谱隙</p>
 <p>$$||\frac{1}{14}\sum_{i=3}^{16}\rho(U_i)-\mathbb{E}_{P\sim\mu(G_{3s})}\rho(P)||\le1-\frac{1}{48·10^5}$$</p>
 <p>根据同构关系将这14个CNOT群元对应到$SL(3s;\mathbb{F}_2)$上，构成SL群的子集$\Sigma_{3s}$。首先证明他们的Kazhdan常数下界</p>
-<p>$$\mathcal{K}(SL(3s;\mathbb{F}_2);\Sigma_{3s})>\frac{1}{400}$$</p>
+<p>$$\mathcal{K}(SL(3s;\mathbb{F}_2);\Sigma_{3s})&gt;\frac{1}{400}$$</p>
 <p>Kazhdan常数是用来控制谱隙的，他们的关系为</p>
 <p>$$
 \lambda_{\max}\left( \frac{1}{|S|}\sum_{g\in S} \rho(g) - \mathbb{E}_{g\sim \mu(G)} \rho(g) \right) \le 1 - \frac{\mathcal{K}(G;S)^2}{2|S|}.
@@ -291,7 +301,7 @@ $$</p>
 <p>当$n=3s,s\in \mathbb{N}$时</p>
 <p>$$V^{(n)}=\{V_1,...,V_{25}\}\subset SU(2^n)$$</p>
 <p>其中$V_1=T\otimes I_{n-1},~V_2=T^\dagger\otimes I_{n-1}$,$T=e^{-i\pi Z/8}$,其他$V_i$是深度1的具有一致有界谱隙的一维Clifford线路（Δ=$\Theta(1)$）它由之前的 14 个 CNOT 生成元，以及额外选取的 Hadamard 门和S门的特定组合构成。</p>
-<p>构造过程大致是：14个CNOT->23个Clifford门->25个SU expander生成元</p>
+<p>构造过程大致是：14个CNOT-&gt;23个Clifford门-&gt;25个SU expander生成元</p>
 <ol>
 <li value="1">生成Clifford group expander：</li>
 </ol>
@@ -299,17 +309,17 @@ $$</p>
 <p>记</p>
 <p>$$
 \begin{aligned}
-H_1 &= H \otimes I_{2^{n-1}}, \\
-H_{n/2} &= H^{\otimes n/2} \otimes I_{2^{n/2}}, \\
-S_1 &= S \otimes I_{2^{n-1}}, \\
-S_{n/2} &= S^{\otimes n/2} \otimes I_{2^{n/2}}.
+H_1 &amp;= H \otimes I_{2^{n-1}}, \\
+H_{n/2} &amp;= H^{\otimes n/2} \otimes I_{2^{n/2}}, \\
+S_1 &amp;= S \otimes I_{2^{n-1}}, \\
+S_{n/2} &amp;= S^{\otimes n/2} \otimes I_{2^{n/2}}.
 \end{aligned}
 $$</p>
 <p>以这些元素为生成元生成的循环群</p>
 <p>$$
 \begin{aligned}
-K_{H,1} &= \langle H_1 \rangle, & K_{H,n/2} &= \langle H_{n/2} \rangle, \\
-K_{S,1} &= \langle S_1 \rangle, & K_{S,n/2} &= \langle S_{n/2} \rangle.
+K_{H,1} &amp;= \langle H_1 \rangle, &amp; K_{H,n/2} &amp;= \langle H_{n/2} \rangle, \\
+K_{S,1} &amp;= \langle S_1 \rangle, &amp; K_{S,n/2} &amp;= \langle S_{n/2} \rangle.
 \end{aligned}
 $$</p>
 <p>注意到$H^2=I,S^2=Z,S^4=I$，这四个群合起来的元素一共有2+2+4-3=9（扣除重复的单位阵）个。和先前定义的14个CNOT相结合就得到了23个门组成的Clifford group expander。</p>
@@ -323,17 +333,17 @@ $$</p>
 <p>引入非Clifford门</p>
 <p>$$
 \begin{aligned}
-T &= e^{-i\pi Z/8} = \begin{pmatrix}
-e^{-i\pi/8} & 0 \\
-0 & e^{i\pi/8}
+T &amp;= e^{-i\pi Z/8} = \begin{pmatrix}
+e^{-i\pi/8} &amp; 0 \\
+0 &amp; e^{i\pi/8}
 \end{pmatrix}, \\
-T_1 &= T \otimes I_{2^{n-1}}, \\
-T_1^\dagger &= T^\dagger \otimes I_{2^{n-1}}.
+T_1 &amp;= T \otimes I_{2^{n-1}}, \\
+T_1^\dagger &amp;= T^\dagger \otimes I_{2^{n-1}}.
 \end{aligned}
 $$</p>
 <p>构成最终SU群上的25个expander生成元</p>
 <p>$$\boxed{V^{(n)} = W^{(n)} \cup \{T_1, T_1^\dagger\}.}$$</p>
-<blockquote>加这两个元素就够了的原因：近期关于random Pauli rotation是的结论<br>从Clifford群中均匀选取一个C，从$[-\pi,\pi)$均匀选取角度$\phi$，构造酉矩阵$U=Ce^{i\phi Z_1}C^\dagger$，这就是random Pauli rotation<br>最近的结论是，在所有非平凡表示中，随机Pauli rotation都能提供至少1/16的收缩<br>$$g(\nu) = \sup_{\rho:\operatorname{Inv}(\rho)=\{0\}} \bigl\|\mathbb{E}_{U\sim \nu}\rho(U)\bigr\|$$<br>$$g(\nu_{\mathrm{PR}}) \leq \frac{15}{16}$$<br>考虑随机过程：随机Clifford -> Haar酉 -> 随机Clifford，其中Haar酉在$K_2=\{U\otimes I_{2^{n-1}}:U\in SU(2)\}$，对应的概率分布具有谱隙<br>$$g(\mu(Cl(n))*\mu(K_2)*\mu(Cl(n)))\le\frac{15}{16}$$<br>前面的随机 Clifford 门随机化旋转轴，中间的局部$SU(2)$操作提供连续的旋转自由度，后面的随机 Clifford 门进一步混合。这三部分结合起来，就能在整个$SU(2^n)$的所有非平凡表示中实现统一收缩。<br>作者采用的方法是：用有限步随机游走去逼近 Clifford group 和单 qubit $SU(2)$的Haar平均。<br>Clifford上的随机游走：从23个门中均匀选择<br>$$Q_C=\frac{1}{23}\sum_{W\in W^{(n)}}\rho(W)$$<br>把标准的随机用$P_c=\mathbb{E}_{C\sim\mu(Cl(n))}(C)$表示，衡量两者之间的误差<br>$$||Q_C^{l_C}-P_C||\le q_C^{l_C},\quad q_C<1$$<br>单qubit上的SU(2)随机游走<br>$$Q_2=M_\rho(\mu(\{I,iH_1,T_1\})),\quad P_2=M_\rho(\mu(K_2))$$<br>$$||Q_2^{l_2}-P_2||\le q_2^{l_2}$$<br>把这两个随机游走连接起来，定义$\mu(W_n)^{*{lc}} * \mu({I, iH_1, T_1})^{*{lc}}*\mu(W_n)^{*{lc}}$，利用<br>$$ \lVert M_\rho(\nu) - P_C P_2 P_C \rVert \le 2 q_C^{\ell_C} + q_2^{\ell_2}. $$<br>取足够大的常数$l_C,l_2$就可以做到$g(\nu)\le32/33$<br>由于$iH_1=(H_1S_1)^6H_1$，而$H_1,S_1$在前面构造的23个Clifford门中，所以$iH_1$不用补充到门集中</blockquote>
+<blockquote>加这两个元素就够了的原因：近期关于random Pauli rotation是的结论<br>从Clifford群中均匀选取一个C，从$[-\pi,\pi)$均匀选取角度$\phi$，构造酉矩阵$U=Ce^{i\phi Z_1}C^\dagger$，这就是random Pauli rotation<br>最近的结论是，在所有非平凡表示中，随机Pauli rotation都能提供至少1/16的收缩<br>$$g(\nu) = \sup_{\rho:\operatorname{Inv}(\rho)=\{0\}} \bigl\|\mathbb{E}_{U\sim \nu}\rho(U)\bigr\|$$<br>$$g(\nu_{\mathrm{PR}}) \leq \frac{15}{16}$$<br>考虑随机过程：随机Clifford -&gt; Haar酉 -&gt; 随机Clifford，其中Haar酉在$K_2=\{U\otimes I_{2^{n-1}}:U\in SU(2)\}$，对应的概率分布具有谱隙<br>$$g(\mu(Cl(n))*\mu(K_2)*\mu(Cl(n)))\le\frac{15}{16}$$<br>前面的随机 Clifford 门随机化旋转轴，中间的局部$SU(2)$操作提供连续的旋转自由度，后面的随机 Clifford 门进一步混合。这三部分结合起来，就能在整个$SU(2^n)$的所有非平凡表示中实现统一收缩。<br>作者采用的方法是：用有限步随机游走去逼近 Clifford group 和单 qubit $SU(2)$的Haar平均。<br>Clifford上的随机游走：从23个门中均匀选择<br>$$Q_C=\frac{1}{23}\sum_{W\in W^{(n)}}\rho(W)$$<br>把标准的随机用$P_c=\mathbb{E}_{C\sim\mu(Cl(n))}(C)$表示，衡量两者之间的误差<br>$$||Q_C^{l_C}-P_C||\le q_C^{l_C},\quad q_C&lt;1$$<br>单qubit上的SU(2)随机游走<br>$$Q_2=M_\rho(\mu(\{I,iH_1,T_1\})),\quad P_2=M_\rho(\mu(K_2))$$<br>$$||Q_2^{l_2}-P_2||\le q_2^{l_2}$$<br>把这两个随机游走连接起来，定义$\mu(W_n)^{*{lc}} * \mu({I, iH_1, T_1})^{*{lc}}*\mu(W_n)^{*{lc}}$，利用<br>$$ \lVert M_\rho(\nu) - P_C P_2 P_C \rVert \le 2 q_C^{\ell_C} + q_2^{\ell_2}. $$<br>取足够大的常数$l_C,l_2$就可以做到$g(\nu)\le32/33$<br>由于$iH_1=(H_1S_1)^6H_1$，而$H_1,S_1$在前面构造的23个Clifford门中，所以$iH_1$不用补充到门集中</blockquote>
 <p>这25 个门则进一步实现了整个特殊酉群上的 uniform spectral gap，是比expander更强的结果，之前的expander是针对量子信道，作用在密度矩阵上。这里是对于k分copy的每一份都使用随机酉矩阵</p>
 <p>$$\mathcal{T}^{(k)}_{25}(X)=\frac{1}{25}\sum_{i=1}^{25}V_i^{\otimes k}X(V_i^\dagger)^{\otimes k}$$</p>
 <p>反复进行t次游走。随着t增大，信道的k阶矩逐渐接近Haar随机酉矩阵的k阶矩</p>
@@ -343,20 +353,115 @@ $$</p>
 <p>先前的expander只对表示$U\otimes\bar{U}$满足谱隙条件，现在需要加强到k阶的$U^{\otimes k}\otimes\bar{U}^{\otimes k}$，所以加了一些额外的门，能够在k阶矩意义上（也就是上面那个k-copy的期望）模拟Haar随机酉矩阵。</p>
 <p>论文的推论给出如果要将这个结果推广到任意维度的$SU(d)$，那么生成元上界会变为5400而不是25</p>
 <h4 id="sec-10">体积纠缠下的平方反比谱隙构造</h4>
-<h5 id="sec-11">=类Feynman时钟证明</h5>
+<h5 id="sec-11">类Feynman时钟证明</h5>
+<p>定义19维qudit，局部Hilbert空间为$\mathcal{H}\simeq span\{\ket{*},\ket{0},\ket{1},...,\ket{m-1},\ket{m}\}$,其中m=17，包含了16个酉门和$\ket{1}$表示单位元，使用如下的几何结构</p>
+<img class="note-img" src="assets/quditclock.png" alt="quditclock.png">
+<p>上面黑色的是clock qudit，下面蓝色的是用于制造大基态纠缠的data qudit，红色是用于连接左右clock qudit的特殊相互作用。clock qudit形成了蛇形状，蛇的左右总长度是$\alpha n,\alpha&gt;1$，哈密顿量定义在2n个qudit上，是local的</p>
 <p>文章通过构造证明了$H_{check}+H_{prop}+H_{M}$具有唯一基态，这个基态的二分纠缠熵是$\Theta(n)$（体积纠缠），同时谱隙$\Delta=\Theta(n^{-2})$</p>
+<h5 id="sec-12">H_check的构造</h5>
+<p>这个哈密顿量是用来限制clock qudits的合法构型的。字符串长度为$\alpha n$，每个位置从</p>
+<p>上述局域字母表中选择一个符号，合法的字符串具有以下形式：</p>
+<p>$$ w = \begin{cases} *^{k}\, i\, 0^{\alpha n -k -1}, &amp; 0\le k\le n-2, \\ *^{n-1}\, i\, *^{k-n+1}\, 0^{\alpha n -k -1}, &amp; k\ge n-1. \end{cases} $$</p>
+<p>第一阶段：携带门标签i的位置可以逐渐向右移动，移动后从0变成星号</p>
+<p>$$**i0000$$</p>
+<p>第二阶段：只有星号继续往右推，i不动</p>
+<p>$$****i**00$$</p>
+<p>具体来说用四个哈密顿量来禁止违法字符串的发生。</p>
+<p>$H_1$：禁止第$n$个位置之后出现门标签。$H_2$：强制前$n$个位置形成$\ast^a i0^b$。$H_3$：排除全星和全0的情况。$H_4$：约束第$n$个位置之后的 domain wall</p>
+<h5 id="sec-13">H_prop的构造</h5>
+<p>propagator，字面意思传播子，让合法 clock 构型之间发生相干传播，同时根据 clock 的位置，在 data qubits 上逐步执行 quantum expander 的酉门。</p>
+<p>clock向右移动一步，原来的位置由i变成星号，右边的0则变成i，使用这样的哈密顿量进行限制</p>
+<p>$$ \begin{aligned} H_{\mathrm{prop},L,1} &amp;= - |+\rangle\langle +|_1 - |*\rangle\langle *|_1 \\ &amp;\quad + \sum_{i=1}^m \sum_{k&lt;n} \bigl(|i\rangle_k |0\rangle_{k+1} - |*\rangle_k |i\rangle_{k+1}\bigr) \\ &amp;\quad\quad \times \bigl(\langle i|_k \langle 0|_{k+1} - \langle *|_k \langle i|_{k+1}\bigr). \end{aligned} $$</p>
+<p>其中，前两项是约束一个特殊的初始clock态，并保证这个态可以沿着clock链传播</p>
+<p>clock-only的Hamiltonian零能约束给出</p>
+<p>是clock在所有合法位置上形成等振幅叠加，而且门标签始终处于均匀叠加态$\ket{+}$</p>
+<p>下一阶段是在n以后的site上传播</p>
+<p>$$ h_{\mathrm{start},2} = \sum_{i=1}^{m} \left( |i\rangle_n |0\rangle_{n+1} |0\rangle_{n+2} - |i\rangle_n |*\rangle_{n+1} |0\rangle_{n+2} \right) (\text{h.c.}) $$</p>
+<p>先检查n的位置是不是，然后把后面的一个0换成星号</p>
+<p>$$
+h_{j,2} = \left( |<em>\rangle_{n+j}|00\rangle - |</em>\rangle_{n+j}|*0\rangle \right) \text{(h.c.)},
+$$</p>
+<p>$$
+h_{\text{end},2} = \left( |<em>\rangle_{\alpha n-1}|0\rangle_{\alpha n} - |</em>\rangle_{\alpha n-1}|*\rangle_{\alpha n} \right) \text{(h.c.)}.
+$$</p>
+<p>$$ H_{\mathrm{prop},L,2} = h_{\mathrm{start},2} + \sum_{j=1}^{(\alpha-1)n-2} h_{j,2} + h_{\mathrm{end},2}. $$</p>
+<p>这样就完成了n以后site上的传播过程</p>
+<p>除了传播以外，每传播一步要求在data qubit上执行酉门，这是Feynman–Kitaev history state 的基本机制，所以现在把酉门加进去。</p>
+<p>$$ \begin{aligned} H'_{\mathrm{prop},L,1} &amp;= - |+\rangle\langle +|_1 - |*\rangle\langle *|_1 \\ &amp;\quad + \sum_{i=1}^{m} \sum_{k&lt;n} \left( |i\rangle_k |0\rangle_{k+1} \otimes I - |*\rangle_k |i\rangle_{k+1} \otimes U_{i,k} \right) \\ &amp;\quad\quad \times \left( \langle i|_k \langle 0|_{k+1} \otimes I - \langle *|_k \langle i|_{k+1} \otimes U_{i,k}^\dagger \right). \end{aligned} $$</p>
+<p>这个过程把电路执行过程和 clock 位置相干地编码进了一个 Hamiltonian 的基态。</p>
+<h5 id="sec-14">H_M的构造</h5>
+<p>把左右两条 clock 链耦合起来，要求它们的 data qubits 满足特定的兼容条件。这个条件消除了基态简并，最终选出左右两半之间的最大纠缠态。</p>
+<p>$$ H_M = \frac{1}{2}\sum_{i=2}^{m} \left( |1\rangle_{n,L}|i\rangle_{n,R} - |i\rangle_{n,L}|1\rangle_{n,R} \right) \ \times \left( \langle 1|_{n,L}\langle i|_{n,R} - \langle i|_{n,L}\langle 1|_{n,R} \right) $$</p>
+<p>是在核对比较左侧 clock 选择了单位操作，右侧 clock 选择$U_i$，反之亦然。n处非零代表此时已经是quantum expander执行完毕后的阶段。在Hcheck和Hprop执行完之后，Hm会把左右单侧分支执行酉门，这样使得总哈密顿量最低的态满足</p>
+<p>$$(I\otimes\bar{U}_b)\ket{\phi}=(U_b\otimes I)\ket{\phi}$$</p>
+<p>左右两侧的data要满足这样的约束</p>
 <p>前文给出的十六个酉算符虽然深度是1，但是他们是乘算的，不满足local哈密顿量的要求。作者为了把一个作用于整个数据系统的全局酉变换，转化为一系列局域相互作用，让 Hamiltonian 可以在一维链上实现，使用了时钟结构。在 clock 移动的每一步，同时对数据系统施加一个局域门。这样就拆成加法了。</p>
-<p>clock 的传播 Hamiltonian 本质上类似一维离散 Laplacian。</p>
-<p>一条长度为L的路径，其最低非零能隙一般满足$1/L^2$</p>
+<p>最后我们来说明EPR态是哈密顿量唯一的基态，注意到</p>
+<p>$$ (A \otimes I) |\Gamma\rangle = (I \otimes A^T) |\Gamma\rangle. $$</p>
+<p>本文使用的16个酉门都是实对称的，所以$(U_b \otimes I) |\Gamma\rangle = (I \otimes \overline{U_b}) |\Gamma\rangle.$</p>
+<p>再证明它是唯一的解，根据酉的性质，$U_b$下的基态φ满足</p>
+<p>$$ (U_b \otimes U_b) |\phi\rangle = |\phi\rangle. $$</p>
+<p>将双系统写成基下的矩阵形式</p>
+<p>$$ |X\rangle\rangle = \sum_{ij} X_{ij} |i\rangle |j\rangle. $$</p>
+<p>所以X在任意$U_b$的相似变换下不变，满足这一条件的X只可能正比于单位矩阵，对应的态即为EPR态</p>
+<h5 id="sec-15">证明纠缠熵为O(n)</h5>
+<p>引入两个受控酉变换$U_L,U_R$，分别作用在左侧和右侧系统上，他的物理意义是当clock处于某一个特定状态时，对应的把之前施加在data上的酉变换撤销</p>
+<p>$$U_L = \sum_{a=1}^{m} \sum_{k_L \le n-2} |\alpha_{a,k_L}\rangle\langle\alpha_{a,k_L}| \otimes W_{a,k_L}^+ + \cdots
+$$</p>
+<p>经过这两个酉变换之后</p>
+<p>$$(U_L \otimes U_R)|GS\rangle = |\xi\rangle_L \otimes |\xi\rangle_R \otimes |\Gamma_n\rangle$$</p>
+<p>注意到$U_L$和$U_R$各自作用在左右侧系统内，是关于二分系统的局域酉变换，不会改变二分纠缠熵，也就等于n对Bell pairs的纠缠熵</p>
+<p>$$Tr_R\ket{\Gamma_n}\bra{\Gamma_n}=\frac{I}{2^n}$$</p>
+<p>$$S(\rho_L)=-Tr(\frac{I}{2^n}\log_2\frac{I}{2^n})=n$$</p>
+<p>也就说明了纠缠熵为$S=\Theta(n)$</p>
+<h5 id="sec-16">证明谱隙是O(n^-2)</h5>
+<p>研究$A=H-H_M$，这个哈密顿量的基态高度简并</p>
+<p>对于不合法构型，$H_{check}$会带来额外能量，所以决定低能谱隙的是合法构型空间，其中我们可以通过局域酉变换把受控酉操作撤回，所以我们只用研究单侧传播子哈密顿量</p>
+<p>$$H_{\text{prop},L,1} + H_{\text{prop},L,2}$$</p>
+<p>接下来将合法clock构型空间傅里叶变换</p>
+<p>$$\begin{equation}
+|i, k\rangle = \begin{cases}
+\frac{1}{\sqrt{m}} \sum_{j=1}^{m} \omega^{jk}|\alpha_{j,i}\rangle, &amp; i \le n-2 \\
+\frac{1}{\sqrt{m}} \sum_{j=1}^{m} \omega^{jk}|\beta_{j,i}\rangle, &amp; i &gt; n-2
+\end{cases}
+\end{equation}$$</p>
+<p>其中i表示clock在链上的位置，k是傅里叶模式，并且满足正交归一关系$\langle i, k | i', k' \rangle = \delta_{i,i'} \delta_{k,k'}$，借助傅里叶变换我们可以研究合法clock构型上的每一个傅里叶片区</p>
+<p>Clock 每向前移动一步，Hamiltonian 就产生一个相邻位置之间的 hopping 项，矩阵的非对角元因此是$-1$。</p>
+<p>Hamiltonian 中的两个特殊边界项$-|+\rangle\langle+|$和$-|*\rangle\langle*|$，决定了矩阵的对角元，以及k=0和-k&gt;0两种情况的区别。</p>
+<p>$$H_k = \begin{pmatrix}
+1 &amp; -1 &amp; 0 &amp; 0 &amp; \cdots \\
+-1 &amp; 1 &amp; -1 &amp; 0 &amp; \cdots \\
+0 &amp; -1 &amp; 1 &amp; -1 &amp; \cdots \\
+\vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \ddots
+\end{pmatrix}
+\quad
+H_0 = \begin{pmatrix}
+0 &amp; -1 &amp; 0 &amp; 0 &amp; \cdots \\
+-1 &amp; 1 &amp; -1 &amp; 0 &amp; \cdots \\
+0 &amp; -1 &amp; 1 &amp; -1 &amp; \cdots \\
+\vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \ddots
+\end{pmatrix}$$</p>
+<p>这是因为Hamiltonian 在相邻两个 clock configuration 之间产生矩阵元</p>
+<p>$$\langle \gamma_{a,i} | H_{\text{prop}} | \gamma_{a,i+1} \rangle = -1.$$</p>
+<p>而且 clock 前进时标签 \(a\) 不会改变，因此：</p>
+<p>$$\langle \gamma_{a,i} | H_{\text{prop}} | \gamma_{b,i+1} \rangle = -\delta_{ab}.$$</p>
+<p>矩阵的对角元受投影项和初始项的影响，为1</p>
+<p>这样的矩阵其实就在相差常数个I的意义下和长一维谐振子链的久期方程一致，谐振子的解由不同角速度的三角函数描述，注意到相差I不影响谱隙，所以直接用谐振子的结论（以$H_0$为例）</p>
+<p>$$\lambda_j = 2 - 2 \cos\left(\frac{j\pi}{L}\right), \quad j = 0, \ldots, L-1.$$</p>
+<p>其中L是节点数，最后得到谱隙</p>
+<p>$$\Delta(H_0) = 2 - 2 \cos\left(\frac{\pi}{L}\right) \sim \frac{\pi^2}{L^2}.$$</p>
+<p>在k=0片区中，存在零能基态，第一激发态的能量满足$gap(H_0)\approx\frac{\pi^2}{\alpha^2 n^2}$。$k&gt;0$时，最低能量比$H_0$的基态能量高出了$\frac{\pi^2}{4\alpha^2n^2}$，所以整体的谱隙取后者，可以看出它是$\Theta(n^{-2})$</p>
+<p>作者后面选择$\alpha=2$，并利用更精确的本征值表达式$\Delta(H-H_M)=2-2\cos(\frac{\pi}{4n+1})$得到谱隙下界</p>
+<p>$$\Delta(H-H_M)\ge\frac{4}{25n^2}$$</p>
 <p>对于这篇论文的具体构造，clock 是实现这个$n^{-2}$能隙标度的核心机制</p>
-<h4 id="sec-12">流式检测纠缠态</h4>
+<h4 id="sec-17">流式检测纠缠态</h4>
 <p>流式检验是否$\ket{\Gamma_n}$：文章中显式给出的16个酉门，最大跨度是跨四个距离（比如1（234）5），所以我们在内存中保存最近的4个qubit和最开头的4个qubit，其余作用结束的qubit我们给他取偏迹释放内存</p>
 <p>而$\ket{\Gamma_n}$（扩展后的EPR态，最大纠缠态）是这16个酉门叠加作用的不变向量，其余的向量会不断被压缩（因为次大谱是1-Δ）对于与目标态正交的任意状态$\ket{\psi^\perp}$，有</p>
 <p>$$||\Phi\ket{\psi^\perp}||\le(1-\Delta)||\psi^\perp||$$</p>
 <p>每应用一次expander，对目标态正交子空间的分量都会产生至少一个1-Δ的收缩因子</p>
 <p>在$(1-\Delta)^r\le\epsilon$的要求下，反解得到作用次数为$O(\Delta^{-1}\log(1/\epsilon))$，而每次作用的流式传输存储为常数个，所以空间复杂度也为$O(\Delta^{-1}\log(1/\epsilon))$（每一层门的作用范围是l，总共r层，因此需要保存的局域窗口大小变为$O(rl)$）</p>
 <p>提高测试精度并不需要增加数据流的遍数。增加的是局域电路深度和量子存储空间，而不是数据流的遍数。</p>
-<h4 id="sec-13">特殊条件下改进Hastings谱隙结论</h4>
+<h4 id="sec-18">特殊条件下改进Hastings谱隙结论</h4>
 <p>Hastings 与 Koma 的经典结论：如果一个局域 Hamiltonian 存在非零 spectral gap，那么它的基态中，空间距离较远的两个局域区域之间的关联会指数衰减。</p>
 <p>$$\braket{A,B}-\braket{A}\braket{B}\le C||A||~||B||\exp(-\frac{d(A,B)}{\xi})$$</p>
 <p>其中d代表支撑区域的图距离，AB是两个局域可观测量，C是一个与系统参数有关的常数，$\xi$是关联长度$\xi=O(\Delta^{-1})$</p>
@@ -372,7 +477,7 @@ $$</p>
 <p>作者证明了如果系统在A上的约化态接近CAT态($\frac{1}{\sqrt{2}}(\ket{00...0}+\ket{11...1})$)，并且哈密顿量满足k-local，那么谱隙$\Delta=O(k^2/n)$</p>
 <p>猫态的特殊之处在于使用观测量Z自旋算符，任何两处的关联均为1</p>
 <p>在一般的长程关联系统中，谱系数量级是图距离的倒数（而图距离可能只和规模有logn的关系，例如树状图）</p>
-<h3 id="sec-14">还能再做什么</h3>
+<h3 id="sec-19">还能再做什么</h3>
 <p>关于添加酉门，使其成为真正的expander的问题：给定 CNOT 群的五维 commutant，能否系统地分类单比特酉门W，使得加入一个$W_1$就足以把 CNOT expander 提升为 quantum expander？其中哪个W能够最大化额外不变空间上的收缩？</p>
 <p>一个自然的想法是将文中的X和Z合并为Y，扩展来看，是否有其他更强收缩的方案？</p>
 <p>关于2-copy上的谱隙证明问题：作者利用Kassabov的结果证明了 14 个生成元对于 CNOT 群的所有有限维酉表示都有统一谱隙。但是真正需要的不是任意表示，而是特殊表示（双系统）$\rho(P)=P\otimes P$</p>

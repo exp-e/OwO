@@ -28,6 +28,9 @@ EXCERPT = ('Quantum Expander 读书笔记：量子扩展器定义与谱隙、16 
            'SU(2^n) 上的 k-design 及其在多体物理中的关联与纠缠熵应用。')
 
 # ---------------------------------------------------------------- md -> html
+def esc_html(s):
+    return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
 headings = []  # (id, level, title)
 
 # ---- inline formatting: **bold**, *italic*, math kept verbatim ----
@@ -73,15 +76,16 @@ def md_to_html(text):
             i += 1
             continue
 
-        m = re.match(r'^(#{1,3})\s+(.*)', stripped)
+        m = re.match(r'^(#{1,6})\s+(.*)', stripped)
         if m:
             close_list()
             in_list = False
             level = len(m.group(1))
-            ttl = format_inline(m.group(2).strip())
+            ttl = format_inline(esc_html(m.group(2).strip()))
             sec_id = 'sec-' + str(len(headings))
             headings.append((sec_id, level, ttl))
-            html.append('<h{0} id="{1}">{2}</h{0}>'.format(level + 2, sec_id, ttl))
+            html_h = 2 + min(level, 3)  # md ####+ renders as <h5>
+            html.append('<h{0} id="{1}">{2}</h{0}>'.format(html_h, sec_id, ttl))
             i += 1
             continue
 
@@ -97,11 +101,11 @@ def md_to_html(text):
                 if s.startswith('>'):
                     content = re.sub(r'^>\s?', '', s)
                     balance += content.count('$$')
-                    bq_lines.append(format_inline(content))
+                    bq_lines.append(format_inline(esc_html(content)))
                     i += 1
                 elif balance % 2 == 1:
                     balance += s.count('$$')
-                    bq_lines.append(format_inline(s))
+                    bq_lines.append(format_inline(esc_html(s)))
                     i += 1
                 else:
                     break
@@ -147,7 +151,7 @@ def md_to_html(text):
                 in_list = True
                 list_tag = 'ol'
             # <li value> keeps the numbering exactly as written
-            html.append('<li value="' + m.group(1) + '">' + format_inline(m.group(2)) + '</li>')
+            html.append('<li value="' + m.group(1) + '">' + format_inline(esc_html(m.group(2))) + '</li>')
             i += 1
             continue
 
@@ -158,7 +162,7 @@ def md_to_html(text):
                 html.append('<ul>')
                 in_list = True
                 list_tag = 'ul'
-            html.append('<li>' + format_inline(m.group(1)) + '</li>')
+            html.append('<li>' + format_inline(esc_html(m.group(1))) + '</li>')
             i += 1
             continue
 
@@ -173,7 +177,7 @@ def md_to_html(text):
             nxt = lines[i].strip()
             parity += nxt.count('$$')
             parts.append(nxt)
-        html.append('<p>' + '\n'.join(format_inline(p) for p in parts) + '</p>')
+        html.append('<p>' + '\n'.join(format_inline(esc_html(p)) for p in parts) + '</p>')
         i += 1
 
     if in_list:
@@ -193,6 +197,9 @@ with io.open(TEMPLATE, 'r', encoding='utf-8') as f:
 tpl = tpl.replace('<title>' + wick + '</title>', '<title>' + TITLE + '</title>', 1)
 tpl = tpl.replace('<title>' + wick + ' · 王凌潇</title>', '<title>' + TITLE + '</title>', 1)
 
+# 1b. accept Obsidian-style \( \) inline math delimiters
+tpl = tpl.replace("[['$','$']], displayMath", "[['$','$'],['\\\\(','\\\\)']], displayMath", 1)
+
 # 2. dates (header meta + article meta)
 tpl = tpl.replace('2026-04-15', DATE)
 
@@ -200,7 +207,7 @@ tpl = tpl.replace('2026-04-15', DATE)
 toc_items = []
 toc_items.append('<li class="toc-main"><a href="#article-title">' + TITLE + '</a></li>')
 for sec_id, level, ttl in headings:
-    cls = {1: '', 2: 'sub', 3: 'sub2'}[level]
+    cls = {1: '', 2: 'sub', 3: 'sub2', 4: 'sub2', 5: 'sub2', 6: 'sub2'}[level]
     cls_attr = ' class="' + cls + '"' if cls else ''
     toc_items.append('<li{0}><a href="#{1}">{2}</a></li>'.format(cls_attr, sec_id, ttl))
 toc_html = '\n'.join('      ' + x for x in toc_items)
