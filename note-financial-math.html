@@ -261,11 +261,11 @@ img{max-width:100%;display:block;}
 <h4 id="sec-2">Accumulation/Amount function</h4>
 <p>Accumulation function $a(t)$ can be regarded as the normalization of amount function $A(t)$.</p>
 <ul>
-<li>$a(t)$ = accumulated value at time $t\ge 0$ of an original investment of **one dollar**</li>
+<li>$a(t)$ = accumulated value at time $t\ge 0$ of an original investment of <strong>one dollar</strong></li>
 <li>$a(0)=1$, while $a(t)$ is an increasing and continuous function</li>
 </ul>
 <ul>
-<li>$A(t)$ = accumulated value at time $t\ge 0$ of an original investment of original principles **P**.</li>
+<li>$A(t)$ = accumulated value at time $t\ge 0$ of an original investment of original principles <strong>P</strong>.</li>
 <li>$A(t)=P·a(t)$, where $a(t)$ holds the features above.</li>
 </ul>
 <h4 id="sec-3">Interest</h4>
@@ -372,7 +372,7 @@ img{max-width:100%;display:block;}
 <p>Let i = effective annual rate of interest, r = annual rate of inflation. After you earn 1+i rate one year later, the value of this amount of money also drops to $\frac{1}{1+r}$ due to inflation, so your real interest $i_{real}$ would be</p>
 <p>$$(1+i_{real})=\frac{1+i}{1+r}$$Treasury bills(国债) are popular short-term and low-risk securities issued by governments as a way to meet short-term financing needs. In calculation of daily coupon, we divide it by 360 (in China and USA).</p>
 <h4 id="sec-12">Duration</h4>
-<p>In [finance](https://en.wikipedia.org/wiki/Finance "Finance"), the **duration** of a financial [asset](https://en.wikipedia.org/wiki/Asset "Asset") that consists of fixed [cash flows](https://en.wikipedia.org/wiki/Cash_flows "Cash flows"), such as a [bond](https://en.wikipedia.org/wiki/Bond_\(finance\) "Bond (finance)"), is the [weighted average](https://en.wikipedia.org/wiki/Weighted_average "Weighted average") of the times until those fixed cash flows are received.</p>
+<p>In [finance](https://en.wikipedia.org/wiki/Finance "Finance"), the <strong>duration</strong> of a financial [asset](https://en.wikipedia.org/wiki/Asset "Asset") that consists of fixed [cash flows](https://en.wikipedia.org/wiki/Cash_flows "Cash flows"), such as a [bond](https://en.wikipedia.org/wiki/Bond_\(finance\) "Bond (finance)"), is the [weighted average](https://en.wikipedia.org/wiki/Weighted_average "Weighted average") of the times until those fixed cash flows are received.</p>
 <h5 id="sec-13">Macaulay Duration (time center)</h5>
 <p>The [weighted average](https://en.wikipedia.org/wiki/Weighted_average "Weighted average") maturity of [cash flows](https://en.wikipedia.org/wiki/Cash_flows "Cash flows"), in which the time of receipt of each payment is weighted by the present value of that payment.</p>
 <p>$${\rm MacD} =\frac{\sum_{i=1}^n t_iPV_i}{\sum_{i=1}^nPV_i}$$</p>
@@ -382,13 +382,13 @@ img{max-width:100%;display:block;}
 <p>In contrast to Macaulay duration, modified duration (sometimes abbreviated MD) is a price sensitivity measure, defined as the percentage derivative of price with respect to yield (the logarithmic derivative of bond price with respect to yield).</p>
 <p>$$Mod D(y)=-\frac{1}{V}·\frac{\partial V}{\partial y}=-\frac{\partial\ln (V)}{\partial y}$$</p>
 <p>In calculation, y (yield) is "i" (interest) we defined above. Just think: while interest increases, the present value $B_p=\sum C_i/(1+i)^t$ decreases, so the derivative is negative, that's why we take an extra minus in front of it; the $1/V$ just reflects the "relative" changes.</p>
-<p>When the yield is expressed **continuously** compounded,</p>
+<p>When the yield is expressed <strong>continuously</strong> compounded,</p>
 <p>$$V=\sum_{i=1}^n CF_i·e^{-yt_i}$$</p>
 <p>where $CF_i$ means the [cash flow](https://en.wikipedia.org/wiki/Cash_flow "Cash flow") of the $i$th payment from an asset. We take the derivative of price with respect to yield and calculate the Modified Duration.</p>
 <p>$$Mod D(y)=\frac{\sum_{i=1}^n t_iCF_i·e^{-yt_i}}{\sum_{i=1}^n CF_i·e^{-yt_i}}=MacD$$</p>
 <p>which means Macaulay duration and modified duration are numerically equal.</p>
 <blockquote>This is similar to the partition function in statistic physics.<br>$$Z=\sum e^{-\beta E}$$<br>$$\braket{E}=-\frac{\partial\ln Z}{\partial\beta}$$</blockquote>
-<p>When the yield is expressed **discrete** compounded,</p>
+<p>When the yield is expressed <strong>discrete</strong> compounded,</p>
 <p>$$PV=\sum_{j=1}^n\frac{c_j}{(1+y)^j}+\frac{FV}{(1+y)^n}$$</p>
 <p>$$\frac{dPV}{PVdy}=-\frac{1}{1+y}[\sum_{j=1}^n\frac{jc_j}{(1+y)^j}+\frac{nFV}{(1+y)^n}]\frac{1}{PV}$$</p>
 <p>where the last two terms are the definition of Macaulay Duration. So in this case we can write</p>
@@ -402,7 +402,7 @@ img{max-width:100%;display:block;}
 </ul>
 <p>For bonds that have embedded options, such as putable and callable bonds, modified duration will not correctly approximate the price move for a change in [yield to maturity](https://en.wikipedia.org/wiki/Yield_to_maturity "Yield to maturity").</p>
 <p>Consider a bond with an embedded put option. As an example, a 1,000 bond that can be redeemed(赎回) by the holder at par at any time before the bond's maturity (i.e. an American put option). No matter how high interest rates become, the price of the bond will never go below 1,000 (ignoring [counterparty risk](https://en.wikipedia.org/wiki/Counterparty_credit_risk "Counterparty credit risk")). This bond's price sensitivity to interest rate changes is different from a non-puttable bond with otherwise identical cash flows.</p>
-<p>To price such bonds, one must use [option pricing](https://en.wikipedia.org/wiki/Option_pricing "Option pricing") to determine the value of the bond, and then one can compute its [delta](https://en.wikipedia.org/wiki/Greeks_\(finance\) "Greeks (finance)") (and hence its lambda), which is the duration. The **effective duration** is a **discrete approximation** to this latter, and will require an [option pricing model](https://en.wikipedia.org/wiki/Valuation_of_options#Pricing_models "Valuation of options").</p>
+<p>To price such bonds, one must use [option pricing](https://en.wikipedia.org/wiki/Option_pricing "Option pricing") to determine the value of the bond, and then one can compute its [delta](https://en.wikipedia.org/wiki/Greeks_\(finance\) "Greeks (finance)") (and hence its lambda), which is the duration. The <strong>effective duration</strong> is a <strong>discrete approximation</strong> to this latter, and will require an [option pricing model](https://en.wikipedia.org/wiki/Valuation_of_options#Pricing_models "Valuation of options").</p>
 <p>$${\rm Effective~Duration}=\frac{V_{-\Delta y}-V_{+\Delta y}}{2(V_0)\Delta y}$$</p>
 <p>where $V_{\pm\Delta y}$ represents the price of the bonds after increasing/decreasing $\Delta y$. $V_0$ is the current price. This is just a discrete version of modified duration.</p>
 <p>Bonds that have embedded options are often cheaper for buyer, because the seller would have to pay extra money to the embedded options. The duration for bonds that have embedded options are lower, because the redeem of the bond prevents the $V_{-\Delta y}$ to be too large.</p>
@@ -739,13 +739,13 @@ img{max-width:100%;display:block;}
 <p>$$P(i+\Delta i^{(m)})=P(i)[1-\bar{v}\Delta i^{(m)}+\frac{1}{2}\bar{c}(\Delta i^{(m)})^2]$$</p>
 <h4 id="sec-51">Asset-Liability Management (ALM)</h4>
 <p>Try to match in (asset) and out (liability) in a potentially variant interest, immune to the risk of interest rate changes.</p>
-<p>**Reddington Immunization:**</p>
+<p><strong>Reddington Immunization:</strong></p>
 <ol>
 <li>$PV_A(i_0)=PV_L(i_0)$ (0-order equivalent)</li>
 <li>$PV'_A(i_0)=PV_L'(i_0)$ (1-order equivalent)</li>
 <li>$PV''_A(i_0)&gt;PV_L''(i_0)$ (2-order supress)</li>
 </ol>
-<p>**Fully Immunization:**</p>
+<p><strong>Fully Immunization:</strong></p>
 <ol>
 <li>Asset cash flows occur both before and after the liability cash flow.</li>
 </ol>

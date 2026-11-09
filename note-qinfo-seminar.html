@@ -186,8 +186,8 @@ img{max-width:100%;display:block;}
 <blockquote>Supplementary1 狄拉克括号[^2]：<br><br>形如$\ket{\psi}$的向量构成右矢空间(C上的向量空间)，形如$\bra{\psi}$的向量构成左矢空间(C上的向量空间)，左矢空间和右矢空间互为对偶空间<br><br>规定：一个左矢和一个右矢的内积$\braket{\psi|\phi}$对应单一空间中$\psi$与$\phi$的内积，用分量形式写作<br>$$\braket{\psi|\phi}=\sum_i\bar{\psi}_i\phi_i\in\mathbb{C}$$<br>矢量模长写作<br>$$|\psi|=\sqrt{\braket{\psi|\psi}}$$<br>在右矢空间中，可以定义作用在矢量上的算符A，记作$A\ket{\psi}:=\ket{A\psi}$。而右矢空间中的算符与左矢空间中的一一对应，记作$A^\dagger$，称为伴算符，$\bra{\psi}A=\bra{A^\dagger\psi}$。<br><br>将右矢写成分量的形式，对应列向量，相应的左矢是每个分量加上共轭的行向量。<br>此时算符对应方矩阵，此时伴算符$A^\dagger$对应着算符A的共轭转置。</blockquote>
 <h5 id="sec-2">作为密度矩阵的态</h5>
 <p>物理实验分为制备态与观测两部分，这两部分也体现在量子力学的数学结构上。</p>
-<p>记代数$\mathcal{A}$为可观测代数（observable algebra）（乘法加法和数乘封闭，除了这三条代数的基本要求以外我们还要求每个元素有伴随，也即添加了厄米共轭操作）。这些代数通常用希尔伯特空间$\mathcal{H}$上的**有界线性**算符$\mathcal{B}(\mathcal{H})$来描述。如果原空间与像空间不同，记作$\mathcal{B}(\mathcal{H_1},\mathcal{H_2})$</p>
-<p>**可观测量**是$\mathcal{A}$中的自伴算符。**态**对应着将可观测量中的元素A映射至实数上的线性泛函，记作$\braket{·}\in\mathcal{A}^*$。态需要满足以下条件</p>
+<p>记代数$\mathcal{A}$为可观测代数（observable algebra）（乘法加法和数乘封闭，除了这三条代数的基本要求以外我们还要求每个元素有伴随，也即添加了厄米共轭操作）。这些代数通常用希尔伯特空间$\mathcal{H}$上的<strong>有界线性</strong>算符$\mathcal{B}(\mathcal{H})$来描述。如果原空间与像空间不同，记作$\mathcal{B}(\mathcal{H_1},\mathcal{H_2})$</p>
+<p><strong>可观测量</strong>是$\mathcal{A}$中的自伴算符。<strong>态</strong>对应着将可观测量中的元素A映射至实数上的线性泛函，记作$\braket{·}\in\mathcal{A}^*$。态需要满足以下条件</p>
 <ol>
 <li>归一化：$\braket{\mathbb{1}}=1$，换言之$\mathcal{A}$中含有幺元</li>
 <li>正定：$\forall A\in\mathcal{A}:~\braket{A^\dagger A}\ge 0$，其中$\dagger$是伴随算符</li>
@@ -198,7 +198,7 @@ img{max-width:100%;display:block;}
 <p>密度矩阵具有凸性，也即知道了一系列概率为$\lambda_i$的密度矩阵$\rho_i$，那么他们的线性组合</p>
 <p>$$\rho=\sum_i\lambda_i\rho_i$$</p>
 <p>也是密度矩阵</p>
-<blockquote>增补：从量子力学角度思考纯态与混合态[^3]<br>在初等量子力学中，我们最开始接触到的是纯态，例如<br>$$\ket{\psi}=c_1\ket{\psi_1}+c_2\ket{\psi_2}$$<br>其中$\ket{\psi_{1,2}}$可以是本征态也可以不是。能用希尔伯特空间中的一个矢量描写的状态都是纯态。如果$\ket{\psi_{1,2}}$是本征态，在知道系数$c_{1,2}$之后，我们也**确定**了测量坍缩的概率分布。纯态的平均值写作<br>$$\braket{A}=\braket{\psi|A|\psi}$$<br>插入一组完备性关系$\sum\ket{n}\bra{n}=1$后<br>$$\braket{A}=\sum_n\braket{\psi|n}\braket{n|A|\psi}=\sum_n\braket{n|A|\psi}\braket{\psi|n}$$<br>记$\rho=\ket{\psi}\bra{\psi}$后，可以写作<br>$$\braket{A}=tr[A\rho]$$<br>与表达式(1)一致<br>**混合态**指的是系统不处在一个确定的态中，而是以概率$p_1,p_2,...$处于各个态上，无法用某个态矢量表示。<br>密度矩阵的意义在于它可以更好地表示混合态的期望值<br>$$\braket{A}=\sum_{n,i}p_i\braket{\psi_i|n}\braket{n|A|\psi_i}=\sum_n\bra{n}A\left(\sum_i\ket{\psi_i}p_i\bra{\psi_i}\right)\ket{n}=tr[A\rho]$$<br>其中<br>$$\rho=\sum_i\ket{\psi_i}p_i\bra{\psi_i}\tag{2}$$<br>与表达式(1)一致<br>两个态形成纯态是相干叠加，而混合态代表了不相干叠加（具体请看[^3]）<br>从表达式(1)出发，还可以将零温量子场论推广至有限温的情形（具体请看[^4]）</blockquote>
+<blockquote>增补：从量子力学角度思考纯态与混合态[^3]<br>在初等量子力学中，我们最开始接触到的是纯态，例如<br>$$\ket{\psi}=c_1\ket{\psi_1}+c_2\ket{\psi_2}$$<br>其中$\ket{\psi_{1,2}}$可以是本征态也可以不是。能用希尔伯特空间中的一个矢量描写的状态都是纯态。如果$\ket{\psi_{1,2}}$是本征态，在知道系数$c_{1,2}$之后，我们也<strong>确定</strong>了测量坍缩的概率分布。纯态的平均值写作<br>$$\braket{A}=\braket{\psi|A|\psi}$$<br>插入一组完备性关系$\sum\ket{n}\bra{n}=1$后<br>$$\braket{A}=\sum_n\braket{\psi|n}\braket{n|A|\psi}=\sum_n\braket{n|A|\psi}\braket{\psi|n}$$<br>记$\rho=\ket{\psi}\bra{\psi}$后，可以写作<br>$$\braket{A}=tr[A\rho]$$<br>与表达式(1)一致<br><strong>混合态</strong>指的是系统不处在一个确定的态中，而是以概率$p_1,p_2,...$处于各个态上，无法用某个态矢量表示。<br>密度矩阵的意义在于它可以更好地表示混合态的期望值<br>$$\braket{A}=\sum_{n,i}p_i\braket{\psi_i|n}\braket{n|A|\psi_i}=\sum_n\bra{n}A\left(\sum_i\ket{\psi_i}p_i\bra{\psi_i}\right)\ket{n}=tr[A\rho]$$<br>其中<br>$$\rho=\sum_i\ket{\psi_i}p_i\bra{\psi_i}\tag{2}$$<br>与表达式(1)一致<br>两个态形成纯态是相干叠加，而混合态代表了不相干叠加（具体请看[^3]）<br>从表达式(1)出发，还可以将零温量子场论推广至有限温的情形（具体请看[^4]）</blockquote>
 <p>我们可以通过$tr(\rho^2)$来判断是否纯态。最大混合态$\rho=\mathbb{1}/d$能够取到最小值$tr(\rho^2)=1/d$，而只有纯态能够取到最大值$tr(\rho^2)=1$。</p>
 <p>每个混合态都可以通过凸分解写成(2)的形式，最简单的方法是在正交特征向量上的谱分解。但是每个混合态都有无限种分解方式，反映了通过多个不同纯态来制备它的无限多种可能性。</p>
 <blockquote>例：Bloch sphere<br>在两阶量子系统中，任意一个2x2的复厄米矩阵M有四个自由度，可以被分解到这四个基上（后三个称作泡利矩阵），其分解的系数为实数；而非厄米的M一般情况下也可以分解，只不过系数是复数<br></blockquote>
@@ -220,13 +220,13 @@ i &amp; 0
 <h5 id="sec-3">观测</h5>
 <p>用下标$\alpha$标记可观测量A的不同观测结果，并用$a_\alpha$和$p_\alpha$表示他们的值和概率，故期望值可写作</p>
 <p>$$\braket{A}=\sum_\alpha a_\alpha p_\alpha\tag{3}$$</p>
-<p>而概率$p_\alpha$可以通过正算符，**有效算符**$0\le P_\alpha\le 1$来计算，既</p>
+<p>而概率$p_\alpha$可以通过正算符，<strong>有效算符</strong>$0\le P_\alpha\le 1$来计算，既</p>
 <p>$$p_\alpha=tr[\rho P_\alpha]$$</p>
 <p>有效算符还必须满足归一化条件$\sum_\alpha P_\alpha=1$.满足该归一条件的一组正算符集合被称为正算符值测度（Positive Operator-Valued Measure, POVM）</p>
 <p>谱分解$A=\sum_\alpha a_\alpha P_\alpha$中的正交投影算符$P_\alpha$将A投影到$a_\alpha$对应的特征子空间上，这样的谱投影算符构成了一个POVM。</p>
 <p>若将特征值视作观测结果，which量子力学基本上就是这么做的，那么谱分解构成的POVM和(3)式的均值计算公式是一致的。</p>
 <p>谱投影算符构成的观测称为冯诺依曼观测，其他算符给出的观测称为广义观测。</p>
-<p>**联合可测**：两个分别具有POVMs$\{P_\alpha\},\{Q_\beta\}$的算符被称为联合可测的当且仅当存在一个更精细的POVM$\{R_{\alpha\beta}\}$，可以将其恢复为边缘分布；一组冯诺依曼测量是联合可测的，当且仅当对应的厄米算符两两对易（因此可以同时被对角化）。</p>
+<p><strong>联合可测</strong>：两个分别具有POVMs$\{P_\alpha\},\{Q_\beta\}$的算符被称为联合可测的当且仅当存在一个更精细的POVM$\{R_{\alpha\beta}\}$，可以将其恢复为边缘分布；一组冯诺依曼测量是联合可测的，当且仅当对应的厄米算符两两对易（因此可以同时被对角化）。</p>
 <blockquote>思考题：试给出联合可测存在唯一的充分或必要或充分必要条件</blockquote>
 <h4 id="sec-4">1.2 复合系统与纠缠</h4>
 <p>复合系统(比如说氦原子的两个电子)的可观测量代数由他们各自的可观测量代数A和B的张量积$A\otimes B$给出，希尔伯特空间也因此成为一个张量积$\mathcal{H}=\mathcal{H}_A\otimes\mathcal{H}_B$，其离散DoF(Degree of Freedom)为$\dim\mathcal{H}=\dim\mathcal{H}_A\times\dim\mathcal{H}_B$</p>
@@ -234,15 +234,15 @@ i &amp; 0
 <p>复合系统或二分系统总是指张量积，复合系统的最简单情况是乘积态，也即各个态的张量积。</p>
 <p>不能被分解的态表现出关联，因为对于一些可观测量$\braket{A\otimes B}\neq\braket{A\otimes\mathbb{1}}\braket{\mathbb{1}\otimes B}$.引入约化密度算符$tr[\rho_A A]=tr[\rho(A\otimes\mathbb{1})](\forall~A\in\mathcal{A})$</p>
 <p>偏迹$tr_B:\rho\mapsto\sum_b\braket{b|\rho|b}=\rho_A$，其中$\{\ket{b}\}$是$\mathcal{H}_B$中的一组正交基，由此得到的$\rho_A$被称为$\rho$的边缘。这一步相当于先对其中一个子系统取迹，在高等量子力学[^3] 中亦有记载。</p>
-<p>**经典关联态**：有一些态可以由乘积态的凸组合给出</p>
+<p><strong>经典关联态</strong>：有一些态可以由乘积态的凸组合给出</p>
 <p>$$\rho=\sum_x p_x~\rho_x^{(A)}\otimes\rho_x^{(B)}\tag{4}$$</p>
 <p>那么制备$\rho$的一种方法是从概率分布$p_x$中抽取一个经典随机变量$x$并根据$x$的条件制备一个乘积态$\rho_x^{(A)}\otimes\rho_x^{(B)}$，因此称满足上式的态为经典关联，或可分离或非纠缠。</p>
-<p>经典关联态的等效操作定义为可以通过**任意局域操作和经典通信**产生的关联。</p>
+<p>经典关联态的等效操作定义为可以通过<strong>任意局域操作和经典通信</strong>产生的关联。</p>
 <blockquote>[!info] 纯态是可分离的，当且仅当他们是乘积态。<br>这意味着任何形式的关联都是由纠缠产生的，因此是非经典的。纠缠态的性质与选取的局域基无关，因此我们可以将纯态写作更简单的正规形式。</blockquote>
 <h5 id="sec-5">Prop1.1 施密特分解</h5>
 <p>对任意的向量$\ket{\psi}\in\mathcal{H}_A\otimes\mathcal{H}_B$，记$d=\min\{\dim(\mathcal{H}_A),\dim(\mathcal{H}_B)\}$，存在两组正交基$\{e_j\in\mathcal{H}_A\},\{f_j\in\mathcal{H}_B\}$，满足</p>
 <p>$$\ket{\psi}=\sum_{j=1}^d\sqrt{\lambda_j}\ket{e_j}\otimes\ket{f_j},\quad with~\lambda_j\ge0,\quad\sum_i\lambda_i=||\psi||^2$$</p>
-<p>系数$\{\sqrt{\lambda_j}\}$被称作**施密特系数**(下面还要用到)，非零$\lambda_j$的数量被称为$\psi$的施密特秩。</p>
+<p>系数$\{\sqrt{\lambda_j}\}$被称作<strong>施密特系数</strong>(下面还要用到)，非零$\lambda_j$的数量被称为$\psi$的施密特秩。</p>
 <p>简要证明：一般分解形式$\ket{\psi}=\sum_{a,b}C_{ab}\ket{a}\otimes\ket{b}$，对矩阵$C_{ab}$作奇异值分解$C_{ab}=U\Sigma V^\dagger$，将左右两个酉矩阵UV操作到基$\ket{a},\ket{b}$上，可以得到施密特系数即为矩阵C的奇异值</p>
 <p>还有另外一种证明方法[^6]，要求B(较低维)的约化密度算符$\rho_B$的本征方程为$\rho_B\ket{b_j}=\lambda_j\ket{b_j}$(也就是说b已经接受上文的V酉处理过了)；记$\ket{e_j'}=\sum_a C_{aj}\ket{a},\ket{\psi}=\sum_j\ket{e_j'}\ket{b_j}$，注意到$C_{ab}=\bra{a}\braket{b|\psi}$，故可以计算$$\begin{align*}
 \braket{e_i'|e_j'}&amp;=\sum_{a,b}C_{ai}^*C_{bj}\braket{a|b}=\sum_a C_{ai}^*C_{aj}=\sum_a \braket{\psi|a}\ket{i}\bra{a}\braket{j|\psi}\\
@@ -273,10 +273,10 @@ i &amp; 0
 <p>物理上的可逆也应当由数学上的可逆变换表示（反之不成立）。演化应该是可结合的，且保持代数$\mathcal{A}$的结构，以及</p>
 <p>$$u(AB)=u(A)u(B),\quad u(A^\dagger)=u(A)^\dagger,\quad||u(A)||=||A||$$</p>
 <p>也就是说可逆演化的集合等同于$\mathcal{A}$的线性自同构群$aut(\mathcal{A})$</p>
-<p>自同构群$aut(\mathcal{A})$的一个子群，**内自同构**，由酉元素$U\in \mathcal{A}$通过$\rho\mapsto U\rho U^\dagger$形成。</p>
+<p>自同构群$aut(\mathcal{A})$的一个子群，<strong>内自同构</strong>，由酉元素$U\in \mathcal{A}$通过$\rho\mapsto U\rho U^\dagger$形成。</p>
 <p>如果$\mathcal{A}$中的两个酉元素仅相差一个相位因子，则他们产生相同的自同构。（这个条件可以被推广至两个酉元素相差一个中心中的元素）</p>
 <p>下文中我们关注$\mathcal{A}=M_d$，其中所有自同构都是内的。[^9]</p>
-<p>我们称一个可逆演化是**齐次**的，如果n步之后的演化由单步演化U的n次方描述。在连续时间间隔情形下由一组含参酉群$U_tU_r=U_{t+r}$描述，其中t与r是实数，并且满足$(U_t-U_0)\ket{\psi}\to0(t\to0)$对于任意的$\psi\in\mathcal{H}$均成立。</p>
+<p>我们称一个可逆演化是<strong>齐次</strong>的，如果n步之后的演化由单步演化U的n次方描述。在连续时间间隔情形下由一组含参酉群$U_tU_r=U_{t+r}$描述，其中t与r是实数，并且满足$(U_t-U_0)\ket{\psi}\to0(t\to0)$对于任意的$\psi\in\mathcal{H}$均成立。</p>
 <p>Stone定理：存在唯一的自伴随算符H（在物理上对应着哈密顿量或无穷小生成元），满足</p>
 <p>$$U_t=exp(iHt)$$</p>
 <blockquote>关于“可逆演化与酉算符相关联”的另一种论证：<br>考虑从归一化纯态集合$S:=\{\psi:=\ket{\psi}\bra{\psi}\subset B(H)\}$到其自身的可逆映射。<br>这种映射有两种类型，一是$\psi\mapsto U\psi U^\dagger$，其中U是酉算符；二是在某个基下的转置$\psi\mapsto\psi^T$<br>而下面的定理说明，这些其实是仅有的保证内积范数的形式</blockquote>
@@ -291,7 +291,7 @@ i &amp; 0
 <p>$$spec(A)=\{\lambda_1,...,\lambda_d\},\quad A=\sum_i\lambda_i\ket{i}\bra{i}$$</p>
 <p>这里我们将所有的d个本征值都写出来了，可能会有两两相等的本征值，这没有关系。现在我们对每个本征值进行不同的扰动，使得扰动后的特征值两两不同</p>
 <p>$$spec(A+\sum_i\varepsilon_i\ket{i}\bra{i})=\{\lambda_1+\varepsilon_1,...,\lambda_d+\varepsilon_d\},\quad\lambda_i+\varepsilon_i\neq\lambda_j+\varepsilon_j ,\forall i\neq j$$</p>
-<p>对于这个两两不同的谱集合，映射T可以保证映射前后**一一对应**，此时再令所有的$\epsilon\to0$，利用连续性，即可得到A在映射前后的谱一一对应。</p>
+<p>对于这个两两不同的谱集合，映射T可以保证映射前后<strong>一一对应</strong>，此时再令所有的$\epsilon\to0$，利用连续性，即可得到A在映射前后的谱一一对应。</p>
 <p>$$spec(A)=spec(T(A))=\{\lambda_1,...,\lambda_d\}$$</p>
 <p>考虑两个厄米秩为1的投影算符$\phi,\psi\in M_d(\mathbb{C})$，设矩阵$M:=\phi+\psi$</p>
 <p>下面计算M的谱。由于$\phi,\psi$都是秩1的投影算符，所以M的像空间至多为二维，我们就在这个二维的子空间上计算。</p>
@@ -385,7 +385,7 @@ I\otimes R^T\ket{\Omega}&amp;=\sum_{ijk}\ket{k}\otimes(\psi_{ij}\ket{j}\braket{i
 <p>保迹性反映了概率的归一化，但是涉及测量时可以放宽该条件，只考虑非增迹条件</p>
 <p>$$tr[T(A)]\le tr[A]\quad or\quad T^*(\mathbb{1})\le\mathbb{1}$$</p>
 <p>他的意思是对于输入态ρ仅以$tr[T(\rho)]$概率成功。这类映射被称为概率性或随机性映射或滤波算符，给出了仪器的概念。</p>
-<p>在薛定谔绘景中，一个**仪器**是指一组完全正定的线性映射$\{T_i\}$，其和**保迹**。</p>
+<p>在薛定谔绘景中，一个<strong>仪器</strong>是指一组完全正定的线性映射$\{T_i\}$，其和<strong>保迹</strong>。</p>
 <p>下标i可以解释为一次测量的结果，该结果以$p_i=tr[T_i(\rho)]$概率出现，密度矩阵变为$T_i(\rho)/p_i$</p>
 <p><span style="color: #888; font-size: 0.9em; font-style: italic;">仪器的概念包含了量子信道（考虑和算符）和POVM（考虑输入为单位阵的有效算符集）的概念</span></p>
 <p><span style="color: #888; font-size: 0.9em; font-style: italic;">POVM对应着仪器等价类，而不能决定单一的仪器，这意味着POVM不能确定测量后状态。</span></p>
@@ -408,7 +408,7 @@ I\otimes R^T\ket{\Omega}&amp;=\sum_{ijk}\ket{k}\otimes(\psi_{ij}\ket{j}\braket{i
 <p>存在凸分解$\rho=\sum_i\lambda_i\rho_i(\lambda_1&gt;0)$当且仅当$supp(\rho_1)\subset supp(\rho)$，以及</p>
 <p>$$\lambda_1\le||\rho^{-1/2}\rho_1\rho^{-1/2}||_\infty^{-1}$$</p>
 <p>在ρ的值域上取逆</p>
-<p>**证明**：关于支集条件的必要性是显然的，因为添加正定算子绝不会减小支集。分解的存在性等价于$\rho - \lambda_i \rho_i \geq 0$，这可以改写为$1 \geq \lambda_i \rho^{-1/2} \rho_i \rho^{-1/2}$，由此即得结论。</p>
+<p><strong>证明</strong>：关于支集条件的必要性是显然的，因为添加正定算子绝不会减小支集。分解的存在性等价于$\rho - \lambda_i \rho_i \geq 0$，这可以改写为$1 \geq \lambda_i \rho^{-1/2} \rho_i \rho^{-1/2}$，由此即得结论。</p>
 <h4 id="sec-14">1.4 线性性和定域性</h4>
 <p>定域性（Locality），也称作Einstein locality或no-signaling condition或Bell telephone不存在性，意思是一个确定位置发生的动作不会马上地影响遥远的部分。定域性在量子力学的构造中可以体现，例如两体系统$\rho\in\mathcal{B}(\mathcal{H}_A\otimes\mathcal{H}_B)$的偏迹</p>
 <p>$$\rho_A=tr_B[(id\otimes T)(\rho)]=tr_B[\rho]$$</p>
@@ -416,13 +416,13 @@ I\otimes R^T\ket{\Omega}&amp;=\sum_{ijk}\ket{k}\otimes(\psi_{ij}\ket{j}\braket{i
 <p>事实上量子力学展现出一种更强的定域性，称作Schlieder property:不仅第二个系统无法通过T给第一个系统传递任何信息，第一个系统也无法获得关于第二个系统的任何信息。这是因为每个约化密度矩阵$\rho_A$和$\rho_B$都相容。</p>
 <p>定域性与量子力学的线性性密切相关</p>
 <ul>
-<li>利用量子力学体系可以证明，任何**非线性**都会导致定域性破坏。</li>
-<li>量子力学预测某些可观测关联的存在，使得特定的**非线性装置**被排除</li>
+<li>利用量子力学体系可以证明，任何<strong>非线性</strong>都会导致定域性破坏。</li>
+<li>量子力学预测某些可观测关联的存在，使得特定的<strong>非线性装置</strong>被排除</li>
 </ul>
 <h5 id="sec-15">非线性演化和混合态分析仪(存疑)</h5>
-<blockquote>[!info] 存疑叙述<br>假设一种物理装置的特性由密度算子的**非线性映射**N所描述，即存在密度算子$\rho=\sum_i\lambda_i\rho_i$的一个凸分解，使得<br>$$\sum_i\lambda_i N(\rho_i)\neq N(\sum_i\lambda_i\rho_i)$$<br>这类装置可用于破坏无信号条件，结合先前量子steering的结果(?)，第二个系统应用一个专门设计的仪器$\{T_i\}$，以概率$\lambda_i$在第一个系统制备出$\rho_i$，那么第一个系统的态是$\sum_i\lambda_i N(\rho_i)$<br><br>由于这个态不同于$N(\rho)$，因此能以严格大于1/2的概率区分仪器$\{T_i\}$是否被作用，从而获取了另一个系统的信息，这与无信号条件相矛盾。</blockquote>
+<blockquote>[!info] 存疑叙述<br>假设一种物理装置的特性由密度算子的<strong>非线性映射</strong>N所描述，即存在密度算子$\rho=\sum_i\lambda_i\rho_i$的一个凸分解，使得<br>$$\sum_i\lambda_i N(\rho_i)\neq N(\sum_i\lambda_i\rho_i)$$<br>这类装置可用于破坏无信号条件，结合先前量子steering的结果(?)，第二个系统应用一个专门设计的仪器$\{T_i\}$，以概率$\lambda_i$在第一个系统制备出$\rho_i$，那么第一个系统的态是$\sum_i\lambda_i N(\rho_i)$<br><br>由于这个态不同于$N(\rho)$，因此能以严格大于1/2的概率区分仪器$\{T_i\}$是否被作用，从而获取了另一个系统的信息，这与无信号条件相矛盾。</blockquote>
 <p><span style="background:rgba(74, 82, 199, 0.2)">↑引入此类过程会与定域性产生冲突。</span></p>
-<p>Classical teleportation:将未知系统转化为经典信息，随后在制备过程重新构造该系统，使得任何统计测试都**无法区分原始系统与再制备系统**。他由测量装置与再制备装置构成。</p>
+<p>Classical teleportation:将未知系统转化为经典信息，随后在制备过程重新构造该系统，使得任何统计测试都<strong>无法区分原始系统与再制备系统</strong>。他由测量装置与再制备装置构成。</p>
 <blockquote>[!example] 量子克隆和线性性无法共存<br>假设有克隆算符V，使得<br>$$V\ket{0}=\ket{00},\quad V\ket{1}=\ket{11}$$<br>则<br>$$V\ket{+}=V(\frac{\ket{0}+\ket{1}}{\sqrt{2}})=\frac{\ket{00}+\ket{11}}{\sqrt{2}}\neq\ket{+}\otimes\ket{+}$$</blockquote>
 <p>如果第一个系统具有两个可观测量，$A_1,A_2$，以概率$p(a_1,a_2)$给出结果。如果远处的第二个系统的可观测量$B_1$给出结果$b_1$，那么会有概率等式</p>
 <p>$$p(a_1,a_2)=\sum_{b_1}p(a_1,a_2,b_1|B_1)$$</p>

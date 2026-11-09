@@ -208,7 +208,7 @@ img{max-width:100%;display:block;}
 <p>Hence,</p>
 <p>$$P_{suc}=\frac{number~of~different~y}{2^{\alpha N}}:=\frac{B}{2^{\alpha N}}$$</p>
 <p>We also want to talk about $B$ in a average meaning. Since we chose $S$ from $A$ randomly, there's no preference on what $y$ should be. Total number that a $(1-\beta)N$ bits string, $y$, should be $2^{(1-\beta)N}$. $2^{\alpha N}$ strings will choose them randomly.</p>
-<p>It's something like **geometric distribution**. Each of the strings in $S$ chose one types of "last $(1-\beta)N$ bits" in a probability of $1/2^{(1-\beta)N}$, so after all strings chosen their last bits, the possibility of one types of "last $(1-\beta)N$ bits" that doesn't appear in $S$ is</p>
+<p>It's something like <strong>geometric distribution</strong>. Each of the strings in $S$ chose one types of "last $(1-\beta)N$ bits" in a probability of $1/2^{(1-\beta)N}$, so after all strings chosen their last bits, the possibility of one types of "last $(1-\beta)N$ bits" that doesn't appear in $S$ is</p>
 <p>$$P(doesn't~ ~appear)=(1-\frac{1}{2^{(1-\beta)N}})^{2^{\alpha N}}$$</p>
 <p>Conversely, one type appear in $S$,</p>
 <p>$$P(appear)=1-(1-\frac{1}{2^{(1-\beta)N}})^{2^{\alpha N}}$$</p>

@@ -156,14 +156,14 @@ img{max-width:100%;display:block;}
 <p>我觉得这个定理非常的NB，这一节的证明还很拓扑，能忍住不学的也是神人了。</p>
 <blockquote>封面图：利兹与青鸟 剧场版</blockquote>
 <h3 id="sec-0">Baire定理(开集交)</h3>
-<p>设$(E,d)$是完备度量空间，$(O_n)_{n\ge1}$是E中的一列开稠密子集，**那么$O=\bigcap_{n\ge 1} O_n$在E中稠密**。</p>
+<p>设$(E,d)$是完备度量空间，$(O_n)_{n\ge1}$是E中的一列开稠密子集，<strong>那么$O=\bigcap_{n\ge 1} O_n$在E中稠密</strong>。</p>
 <p>证明：(利用归纳构造，造出一系列有内点的递减闭集，最后在完备空间E中使用闭集套)</p>
 <p>即证$\forall U\subseteq O,\quad U\cap O\neq\emptyset$.</p>
 <p>因为$O_1$开稠密，所以$U\cap O_1$非空且为开集，那么$\exists B(x_1,r_1)\subseteq U\cap O_1$. 取交中的闭子集$F_1=\overline{B(x_1,\tilde{r_1})},\quad \tilde{r_1}=\min\{\frac{r_1}{2},\frac{1}{2}\}$，则$diam~F\le1$.</p>
 <p>由于$O_2$开稠密，$\mathring{F_1}\cap O_2\neq\emptyset$且开，继续找出$B(x_2,r_2)\subseteq\mathring{F_1}\cap O_2$. 取闭子集$F_2=\overline{B(x_2,\tilde{r_2})}\subseteq\mathring{F_1}\cap O_2\subseteq U\cap O_1\cap O_2$, $\tilde{r_2}=\min\{\frac{r_2}{2},\frac{1}{2^2}\}$, $diam~F_2\le\frac{1}{2}$</p>
 <p>重复以上的操作，我们获得了一序列递减的闭集$F_n$，$diam F_n\le\frac{2}{2^n}$，且内部非空，$F_n\subseteq U\cap\bigcap_{k\ge1}O_k$.</p>
 <p>使用闭集套定理：完备空间E中，$\bigcap_{n\ge1}F_n=\{x\}$，故$U\cap O\neq\emptyset$，O在E中稠密。</p>
-<p>我们把开稠密子集可数交仍然稠密的拓扑空间称作**Baire空间**。</p>
+<p>我们把开稠密子集可数交仍然稠密的拓扑空间称作<strong>Baire空间</strong>。</p>
 <p>类似的，局部紧豪斯多夫空间也是Baire空间，证明过程类似</p>
 <img class="note-img" src="assets/baire.jpg" alt="baire.jpg">
 <p>Baire定理：完备度量空间是Baire空间</p>
@@ -200,7 +200,7 @@ img{max-width:100%;display:block;}
 <p>连续函数的逐点极限被称为第一Baire纲(class)</p>
 <h3 id="sec-4">一致有界性原理</h3>
 <blockquote>[!tip] 引理<br>E是豪斯多夫拓扑空间，$(F,\delta)$是度量空间，$F:E\to F$，则$cont(f)$是$G_\delta$集<br><br>证明：定义f的振荡函数，用来描述间断距离，连续iff振荡函数是0<br>$$w(f)(x)=\inf_{V\in\mathcal{N}(x)}\sup_{z,y\in V}\delta(f(z),f(y))$$<br>$$cont(f)=\bigcap_{k\ge1}\{x\in E|w(f)(x)&lt;\frac{1}{k}\}:=\bigcap_{k\ge1}O_k$$<br>只需证$O_k$开。$\forall x\in O_k,\exists V\in\mathcal{N}(x)$是开集且使得$\sup_{x,y\in V}\delta(f(x),f(y))&lt;\frac{1}{k}$。<br>$\forall x'\in V$，则$w(f)(x')\le\sup_{x,y\in V}\delta(f(x),f(y))&lt;\frac{1}{k}$。故$x'\in O_k$，$cont(f)$是$G_\delta$集。</blockquote>
-<p>**一致有界性原理(Banach-Steinhauss Thm)**</p>
+<p><strong>一致有界性原理(Banach-Steinhauss Thm)</strong></p>
 <p>E是Banach空间，F是赋范空间，$B_E=\{x\in E;||x||&lt;1\}$，$\overline{B_E}=\{x\in E;||x||\le1\}$，$B(E,F)$是从E到F的所有连续线性映射，其中映射的范数$||u||=\sup_{x\in B_E}||u(x)||$。</p>
 <p>令$(u_i)_{i\in I}\subseteq B(E,F)$，若$\forall x\in E,\quad M(x)=\sup_{i\in I}||u_i(x)||&lt;\infty$，则$\sup_{i\in I}||u_i||&lt;\infty$</p>
 <p>证明：令</p>
@@ -213,7 +213,7 @@ img{max-width:100%;display:block;}
 <p>用这个定理可以证明一些非常bt的结论</p>
 <img class="note-img" src="assets/bounded.jpg" alt="bounded.jpg">
 <h4 id="sec-5">共鸣定理/奇性聚集原理</h4>
-<p>一致有界性原理的逆命题为共鸣定理，不过我们还可以将其进一步加强，称为**奇性聚集原理**</p>
+<p>一致有界性原理的逆命题为共鸣定理，不过我们还可以将其进一步加强，称为<strong>奇性聚集原理</strong></p>
 <p>E是Banach空间，F是赋范空间，$(u_i)_{i\in I}\subseteq B(E,F)$</p>
 <p>若$\sup_{i\in I}||u_i||=\infty$，那么$G=\{x\in E; M(x)=\infty\}$是E上的稠密$G_\delta$集</p>
 <p>证明：$F_n$定义如B-S定理所述，故$G=\bigcap_{n\ge1}F_n^c$，$G_\delta$易得。假设G不稠密，那么由于E是Baire的，$\exists n_0$使得$F_{n_0}^c$不稠密，也即$\exists O~open\quad B(x_0,r)\subseteq F_{n_0}$，此时重复B-S定理证明过程后半段，可得$\sup_{i\in I}||u_i||&lt;\infty$，矛盾</p>

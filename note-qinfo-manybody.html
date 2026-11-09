@@ -394,17 +394,17 @@ $$</p>
 <p>对于MPS，我们将2-local的单个算符作用在相邻的两个张量上，合成一个大张量，接下来对他再做SVD分解成为两个张量，但是这会增加键维数。所以我们只保留$\chi$个奇异值，就不会让键维爆炸。</p>
 <p>这样重复很多次M（但不要太大，否则误差$(\delta\beta)^2M$会很大）投影误差与总演化时间相关，为$\delta \beta M$</p>
 <p>随着虚时 $\tau$ 的增加（离散化后对应步数 $M$），系统的高能激发态成分会以 $e^{-(E_n-E_0)\tau}$ 的形式指数衰减。你需要观察能量期望值 $\langle\Psi\vert{}H\vert{}\Psi\rangle$ 随 $M$ 的变化，直到它“平坦化”，说明演化已经把态投影到了当前的近似基态上。</p>
-<p>TEBD （时间演化块抽取）算法背后的关键原理是**纠缠截断（truncation of entanglement）**。具体来说，这是一种丢弃无关自由度的方法，这些自由度是由量子态中施密特值（Schmidt values）的相对权重决定的，算法只保留占主导地位的贡献。这是“粗粒化（coarse graining）”的一个实例。其次，我们观察到 TEBD 的性能和收敛速度与系统的能隙 $\Delta = E_1 - E_0$ 密切相关。在上一节中我们已经看到，$\Delta$ 在量子物相的稳定性中起着极其重要的作用，因此这向我们暗示，在更普遍和概念性的层面上，我们应该能够利用能隙的有限性或闭合状态，来作为**分类/区分**不同量子相的一种方法。</p>
+<p>TEBD （时间演化块抽取）算法背后的关键原理是<strong>纠缠截断（truncation of entanglement）</strong>。具体来说，这是一种丢弃无关自由度的方法，这些自由度是由量子态中施密特值（Schmidt values）的相对权重决定的，算法只保留占主导地位的贡献。这是“粗粒化（coarse graining）”的一个实例。其次，我们观察到 TEBD 的性能和收敛速度与系统的能隙 $\Delta = E_1 - E_0$ 密切相关。在上一节中我们已经看到，$\Delta$ 在量子物相的稳定性中起着极其重要的作用，因此这向我们暗示，在更普遍和概念性的层面上，我们应该能够利用能隙的有限性或闭合状态，来作为<strong>分类/区分</strong>不同量子相的一种方法。</p>
 <h5 id="sec-11">密度矩阵重整化群</h5>
 <p>同样解决的是在MPS下寻找基态的问题</p>
 <p>在处理i到i+1个格点时，先将左侧1~i-1个格点化为左正则表示，再将右侧i+2~N个格点化为右正则表示，以便求内积时相互抵消。随后对i到i+1个格点寻找2-local的本征态。然后SVD，把小的本征值截断，把奇异值矩阵往右边丢，接下来就可以迭代处理i+1到i+2个格点了。</p>
 <p>正交中心从左移动到右，再从右移动到左称为一个sweep。</p>
 <p>每次 Sweep 都会使整个系统的能量单调下降（或不变）。当相邻两次 Sweep 的基态能量差值 $\Delta E$ 或张量元素的改变小于设定的收敛精度时，算法结束。此时留下的 MPS 就是该 1D Spin Model 极其精确的基态近似。</p>
-<p>把环境块的自由度积掉 (Trace out)，得到系统块的**约化密度矩阵 (Reduced Density Matrix)**：</p>
+<p>把环境块的自由度积掉 (Trace out)，得到系统块的<strong>约化密度矩阵 (Reduced Density Matrix)</strong>：</p>
 <p>$$\rho_{\text{sys}} = \text{Tr}_{\text{env}} (\vert{}\Psi_{\text{super}}\rangle \langle \Psi_{\text{super}}\vert{})$$</p>
-<p>对角化 $\rho_{\text{sys}}$。它的本征值代表了每个本征态在构成整个超块基态时的**权重（概率）**。</p>
+<p>对角化 $\rho_{\text{sys}}$。它的本征值代表了每个本征态在构成整个超块基态时的<strong>权重（概率）</strong>。</p>
 <p>新的重整化规则： 截断时，不再按照能量的高低，而是保留 $\rho_{\text{sys}}$ 中本征值（权重）最大的前 $\chi$ 个态。</p>
-<p>这就是 **Density-Matrix Renormalization Group** 的由来：它依然是一个不断增大系统尺寸并进行截断的 RG 过程，只是**截断的依据从哈密顿量的能量本征值，变成了约化密度矩阵的本征值。**</p>
+<p>这就是 <strong>Density-Matrix Renormalization Group</strong> 的由来：它依然是一个不断增大系统尺寸并进行截断的 RG 过程，只是<strong>截断的依据从哈密顿量的能量本征值，变成了约化密度矩阵的本征值。</strong></p>
 <h4 id="sec-12">纠缠缩放法则</h4>
 <p>对于TFIM模型，自旋全向上或全向下当然是直积MPS态，且全$\ket{+}$态也是MPS，看看是怎么构造的</p>
 <p>$$\Lambda^0 = \frac{1}{\sqrt{2}^{1/N}} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}, \qquad \Lambda^1 = \frac{1}{\sqrt{2}^{1/N}} \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}.$$</p>
@@ -423,11 +423,11 @@ $$</p>
 <p>密度矩阵：上上 上上+上下 上下+下上 下上+下下 下下</p>
 <p>取第二个系统的偏迹后，交叉项消失：上上+下下</p>
 <p>已经是对角化矩阵且有两个1/2的特征值，故纠缠熵为ln2</p>
-<blockquote>设平移不变 MPS 的局部张量为 $\{A^s\}_{s=1}^d$（物理维数 $d$，虚拟维数 $D$）。定义由长为 $L$ 的物理阻块到 $D \times D$ 虚拟矩阵空间的映射：<br>$$\Gamma_L : X \in \mathbb{C}^{D \times D} \longmapsto \sum_{s_1, \dots, s_L} \text{Tr}(X A^{s_1} \dots A^{s_L}) \vert{}s_1 \dots s_L\rangle$$<br>定义上，若存在有限长 $L_0$，对任意 $L \ge L_0$，映射 $\Gamma_L$ 均是单射（Injective）的，则该 MPS 为 **Injective MPS**。</blockquote>
+<blockquote>设平移不变 MPS 的局部张量为 $\{A^s\}_{s=1}^d$（物理维数 $d$，虚拟维数 $D$）。定义由长为 $L$ 的物理阻块到 $D \times D$ 虚拟矩阵空间的映射：<br>$$\Gamma_L : X \in \mathbb{C}^{D \times D} \longmapsto \sum_{s_1, \dots, s_L} \text{Tr}(X A^{s_1} \dots A^{s_L}) \vert{}s_1 \dots s_L\rangle$$<br>定义上，若存在有限长 $L_0$，对任意 $L \ge L_0$，映射 $\Gamma_L$ 均是单射（Injective）的，则该 MPS 为 <strong>Injective MPS</strong>。</blockquote>
 <p>单射性要求不同的虚拟矩阵 $X$ 必须映射到不同的物理态，这等价于：长为 $L$ 的张量乘积矩阵能够张满整个 $D \times D$ 算符空间。</p>
 <p>$$\text{dim}\left( \text{span}\{ A^{s_1} A^{s_2} \dots A^{s_L} \mid s_i \in \{1, \dots, d\} \} \right) = D^2 \quad (\text{对某个 } L \ge L_0)$$</p>
 <p>实例验证（GHZ 态）：对于前面 $g=0$ 的 GHZ 态，$A^0 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}, A^1 = \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$。</p>
-<p>对任意长度 $L$，乘积 $A^{s_1}\dots A^{s_L}$ 只能产生 $\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}$ 或 $\begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$，张成的子空间维度始终为 $2 &lt; D^2 = 4$。因此它**不是** Injective MPS。</p>
+<p>对任意长度 $L$，乘积 $A^{s_1}\dots A^{s_L}$ 只能产生 $\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}$ 或 $\begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}$，张成的子空间维度始终为 $2 &lt; D^2 = 4$。因此它<strong>不是</strong> Injective MPS。</p>
 <p>习题：寻找$\alpha\ket{\uparrow...}+\beta\ket{\downarrow...}$的MPS local tensor</p>
 <p>答：依葫芦画瓢，就是把上面的矩阵系数替换一下</p>
 <p>$$\Lambda^0 = \alpha^{1/N} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}, \qquad \Lambda^1 = \beta^{1/N} \begin{pmatrix} 0 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}.$$</p>
@@ -482,28 +482,28 @@ $$</p>
 <p>$$U^\dagger X_i U = K_i \implies K_i U = U X_i$$</p>
 <p>将此关系带入作用到 $\vert{}{+}\rangle^{\otimes N}$ 上：</p>
 <p>$$K_i \vert{}\Psi_{\text{cluster}}\rangle = K_i U \vert{}{+}\rangle^{\otimes N} = U X_i \vert{}{+}\rangle^{\otimes N} = U \vert{}{+}\rangle^{\otimes N} = \vert{}\Psi_{\text{cluster}}\rangle$$</p>
-<p>由此证明，$\vert{}\Psi_{\text{cluster}}\rangle$ 是所有 $K_i$ 共同的 $+1$ 本征态，因此它正是哈密顿量 $H$ 的**唯一基态**。</p>
+<p>由此证明，$\vert{}\Psi_{\text{cluster}}\rangle$ 是所有 $K_i$ 共同的 $+1$ 本征态，因此它正是哈密顿量 $H$ 的<strong>唯一基态</strong>。</p>
 <p>一维团簇态（1D Cluster State）是凝聚态物理中对称保护拓扑相（SPT Phase，Symmetry-Protected Topological Phase）最经典的范例之一。团簇哈密顿量 $H = -J \sum_i Z_{i-1}X_iZ_{i+1}$ 具有一个内禀的离散对称性，即分别作用于奇数格点和偶数格点的自旋翻转群。可以验证这两个对称操作与哈密顿量是对易的（$[H, U_{\text{odd}}] = [H, U_{\text{even}}] = 0$）。这一 $\mathbb{Z}_2 \times \mathbb{Z}_2$ 对称性是保护该拓扑相的核心。只要外部微扰（例如杂质或外场）不破坏这一对称性，系统就无法在不闭合体能隙的情况下，发生绝热演化相变到平庸态。</p>
 <p>从量子信息的视角切入，如果对团簇态进行空间二分（Bipartition），并计算子系统的约化密度矩阵，会发现其纠缠谱（Entanglement Spectrum）的每一个本征值都是精确二重简并的。这种纠缠谱的简并性与边界处存在零能模在数学上是同源的，且同样受底层对称性的严格保护。（？）</p>
 <h3 id="sec-17">一些G指导备忘录</h3>
-<p>在大系统维数下，从中随机抽取的 Haar 随机态通常包含**极高的纠缠**。若将系统分为 $A$ 和 $B$ 两部分（假设 $d_A \le d_B$），其子系统 $A$ 的平均纠缠熵极度接近理论最大值（即著名的 **Page 曲线/Page 熵**）：</p>
+<p>在大系统维数下，从中随机抽取的 Haar 随机态通常包含<strong>极高的纠缠</strong>。若将系统分为 $A$ 和 $B$ 两部分（假设 $d_A \le d_B$），其子系统 $A$ 的平均纠缠熵极度接近理论最大值（即著名的 <strong>Page 曲线/Page 熵</strong>）：</p>
 <p>$$S(A) \approx \ln d_A - \frac{d_A}{2 d_B}$$</p>
 <p>Haar 随机子空间或随机态构成的编码在理论上被证明能达到最优的纠错容忍极限（如达到量子 Singleton 界），常作为衡量一般纠错码性能的理论天花板。</p>
 <p>随着量子比特数 $N$ 的增加，精确生成一个完整的 Haar 随机态所需的量子门线路复杂度呈指数级增长（$O(2^{2N})$）。</p>
 <p>对于一个将 $k$ 个逻辑量子比特编码到 $n$ 个物理量子比特、且码距（能够被检测或纠正的最小算符权重）为 $d$ 的量子纠错码 $[[n, k, d]]$，量子 Singleton 界满足：</p>
 <p>$$k \le n - 2d + 2$$</p>
-<p>经典纠错码的 Singleton 界为 $k \le n - d + 1$。量子版本中多出的系数 $2$ 源于量子信息的**不可克隆定理（No-Cloning Theorem）**。</p>
-<p>**饱和码（量子 MDS 码）**</p>
+<p>经典纠错码的 Singleton 界为 $k \le n - d + 1$。量子版本中多出的系数 $2$ 源于量子信息的<strong>不可克隆定理（No-Cloning Theorem）</strong>。</p>
+<p><strong>饱和码（量子 MDS 码）</strong></p>
 <ul>
-<li>**量子 MDS 码**：严格达到量子 Singleton 界等式（$k = n - 2d + 2$）的纠错码被称为量子最大距离可分码（Maximum Distance Separable Code）。</li>
-<li>**典型实例**：完美的 $[[5, 1, 3]]$ 码（能够纠正任意单量子比特错误的最小量子码），满足 $1 = 5 - 2(3) + 2$。</li>
-<li>**Haar 随机码**：在大系统极限（$n \to \infty$）下，从希尔伯特空间均匀采样的 Haar 随机子空间也能够饱和该界限。</li>
+<li><strong>量子 MDS 码</strong>：严格达到量子 Singleton 界等式（$k = n - 2d + 2$）的纠错码被称为量子最大距离可分码（Maximum Distance Separable Code）。</li>
+<li><strong>典型实例</strong>：完美的 $[[5, 1, 3]]$ 码（能够纠正任意单量子比特错误的最小量子码），满足 $1 = 5 - 2(3) + 2$。</li>
+<li><strong>Haar 随机码</strong>：在大系统极限（$n \to \infty$）下，从希尔伯特空间均匀采样的 Haar 随机子空间也能够饱和该界限。</li>
 </ul>
-<p>如果对于几乎所有的谱权重，都位于特征值 $\lambda_i$ 满足 $-\log \lambda_i = S(\rho) + o(N)$ 的特征向量上，我们就说 $\rho$ 具有**熵集中谱**（entropy-concentrated spectrum）。</p>
+<p>如果对于几乎所有的谱权重，都位于特征值 $\lambda_i$ 满足 $-\log \lambda_i = S(\rho) + o(N)$ 的特征向量上，我们就说 $\rho$ 具有<strong>熵集中谱</strong>（entropy-concentrated spectrum）。</p>
 <p>除了那些概率极小、可以忽略不计的“尾巴”状态外，所有可能出现的特征态实际上都具有几乎完全相同的概率：</p>
 <p>$$\lambda_i \approx e^{-S(\rho)}$$</p>
-<p>此时，系统不再是一个包含各种不同概率层级的复杂混合态，而是**等效于在一个有效维度为 $e^{S(\rho)}$ 的典型子空间内做“绝对均匀的随机分布”**。</p>
-<p>有限温度下的热化态 $g_\beta$ 各个能级的概率并不相同。但只要它具备“熵集中谱”，作者就可以把它当作一个**扁平的、均匀的概率分布**来处理。系统就如同在无穷大温度下一样，只是所在的希尔伯特空间维度被热熵密度 $s &lt; 1$ “等比例压缩”了</p>
+<p>此时，系统不再是一个包含各种不同概率层级的复杂混合态，而是<strong>等效于在一个有效维度为 $e^{S(\rho)}$ 的典型子空间内做“绝对均匀的随机分布”</strong>。</p>
+<p>有限温度下的热化态 $g_\beta$ 各个能级的概率并不相同。但只要它具备“熵集中谱”，作者就可以把它当作一个<strong>扁平的、均匀的概率分布</strong>来处理。系统就如同在无穷大温度下一样，只是所在的希尔伯特空间维度被热熵密度 $s &lt; 1$ “等比例压缩”了</p>
 <p>设任意混合态 $\rho_A$ 的谱分解为</p>
 <p>$$
 \rho_A=\sum_i p_i|i\rangle_A\langle i|,
@@ -549,42 +549,42 @@ $$</p>
 \left(|\phi\rangle_{AB}\langle\phi|\right)
 }
 $$</p>
-<p>**（熵量子 Singleton 界（改编自 [13]））**。_设 $\mathcal{C}$ 为投影算符为 $P_{\mathcal{C}}$ 的 $[[N, k, d]]$ 量子纠错码，并设 $\bar{\rho}_S = \frac{1}{K} P_{\mathcal{C}}$ 为码上的最大混合态。设 $\vert{}\Omega_{RS}\rangle$ 为 $\bar{\rho}_S$ 的纯化，使得 $S(\Omega_R) = \log_2 K = k$。对于任意子系统 $A$，记 $S(A) := S(\Omega_A)$。假设 $\mathcal{C}$ 精确纠正每一个 $d - 1 &lt; N/2$ 量子比特的擦除。则_</p>
+<p><strong>（熵量子 Singleton 界（改编自 [13]））</strong>。_设 $\mathcal{C}$ 为投影算符为 $P_{\mathcal{C}}$ 的 $[[N, k, d]]$ 量子纠错码，并设 $\bar{\rho}_S = \frac{1}{K} P_{\mathcal{C}}$ 为码上的最大混合态。设 $\vert{}\Omega_{RS}\rangle$ 为 $\bar{\rho}_S$ 的纯化，使得 $S(\Omega_R) = \log_2 K = k$。对于任意子系统 $A$，记 $S(A) := S(\Omega_A)$。假设 $\mathcal{C}$ 精确纠正每一个 $d - 1 &lt; N/2$ 量子比特的擦除。则_</p>
 <p>$$\log_2 K \le \frac{N - 2(d - 1)}{d - 1} \bar{S}_{d-1}, \quad \bar{S}_{d-1} := \mathbb{E}_{\vert{}A\vert{}=d-1} S(A)$$</p>
 <p>其中平均是对所有大小为 $d - 1$ 的区域 $A$ 进行的。</p>
 <blockquote>这些代码是通过从编码约束的密度矩阵 $\rho$ 的 Scrooge 系综中随机抽取码字，然后将这些态正交化以形成有效的编码等距算符来构建的。Scrooge 系综是这种码构造的自然选择，因为在第一阶矩为 $\rho$ 的所有态系综中，它具有最小的可达信息（accessible information）。此外，对于最大混合的 $\rho$，Scrooge 系综就是 Haar 系综，众所周知，后者在无约束设定下给出了渐近最优的码构造<br>这是不是和random集合S可解码是对应的？random规则一定具有average最优的性质吗？</blockquote>
-<p>**定义 S4（熵集中谱）**。设 $\tau = \sum_j \lambda_j \vert{}j\rangle\langle j\vert{}$ 为 $m$ 个量子比特上的一个态。对于 $w \ge 0$，定义</p>
+<p><strong>定义 S4（熵集中谱）</strong>。设 $\tau = \sum_j \lambda_j \vert{}j\rangle\langle j\vert{}$ 为 $m$ 个量子比特上的一个态。对于 $w \ge 0$，定义</p>
 <p>$$\Pi_\tau(w) = \sum_{j : \, \vert{}-\log_2 \lambda_j - S(\tau)\vert{} \le mw} \vert{}j\rangle\langle j\vert{}. \tag{S112}$$</p>
-<p>若满足下式，我们就说 $\tau$ 具有 $(w, \epsilon)$-**熵集中谱**：</p>
+<p>若满足下式，我们就说 $\tau$ 具有 $(w, \epsilon)$-<strong>熵集中谱</strong>：</p>
 <p>$$\text{tr}(\Pi_\tau(w) \tau) \ge 1 - \epsilon. \tag{S113}$$</p>
 <p>我们注意到熵集中投影算符 $\Pi_\tau(w)$ 满足</p>
 <p>$$\text{rank}\,\Pi_\tau(w) \le 2^{S(\tau) + mw}, \quad \Pi_\tau(w) \tau \Pi_\tau(w) \le 2^{-S(\tau) + mw} \Pi_\tau(w). \tag{S114}$$</p>
 <p>$$\max_{\vert{}E\vert{} \le \lfloor pN \rfloor} \left\Vert{} \Omega_{RE}(V_N) - \frac{\mathbb{I}_R}{K_N} \otimes \Omega_E(V_N) \right\Vert{}_1 \to 0. \tag{S176}$$</p>
 <p>迹范数（$\Vert{} \cdot \Vert{}_1$）趋于零，意味着系统 $R$ 和 $E$ 的联合密度矩阵 $\Omega_{RE}$ 在热力学极限下，完全退化为直积态 $\frac{\mathbb{I}_R}{K_N} \otimes \Omega_E$。</p>
-<p>这意味着环境 $E$ 处于完全混合状态，且与逻辑信息 $R$ **没有任何关联**。从物理直觉上讲，这意味着无论环境截获了哪 $pN$ 个量子比特，它都只能看到纯粹的热噪声，无法提取出哪怕 1 比特的逻辑信息。</p>
+<p>这意味着环境 $E$ 处于完全混合状态，且与逻辑信息 $R$ <strong>没有任何关联</strong>。从物理直觉上讲，这意味着无论环境截获了哪 $pN$ 个量子比特，它都只能看到纯粹的热噪声，无法提取出哪怕 1 比特的逻辑信息。</p>
 <p>热过滤映射（Thermal Filtering Map）：</p>
 <p>$$\vert{}\psi\rangle \mapsto \frac{\sqrt{g_\beta}\vert{}\psi\rangle}{\sqrt{\langle\psi\vert{}g_\beta\vert{}\psi\rangle}} \quad (\text{S215})$$</p>
 <p>但 cTPQ 态将 initial 态 $\vert{}\psi\rangle$ 选为 Haar 随机态，而 Scrooge 系综则在此基础上额外使用因子 $d\langle\psi\vert{}g_\beta\vert{}\psi\rangle$ 对 Haar 测度进行了重新加权。</p>
 <p>DPI 的数学表达为：</p>
 <p>$$I(X; Z) \le I(X; Y)$$</p>
-<p>**局域能量退相干信道（Local Energy Dephasing Channel）** 是一种作用于特定局域子系统（如环境 $E$）的量子信道。它的物理效果是**抹去该子系统在局域能量基底下的量子叠加性（相干性），同时完全保留各能级上的概率分布**。</p>
+<p><strong>局域能量退相干信道（Local Energy Dephasing Channel）</strong> 是一种作用于特定局域子系统（如环境 $E$）的量子信道。它的物理效果是<strong>抹去该子系统在局域能量基底下的量子叠加性（相干性），同时完全保留各能级上的概率分布</strong>。</p>
 <p>若子系统 $E$ 的局域哈密顿量为 $H_E = \sum_e e \vert{}e\rangle\langle e\vert{}$（其中 $\vert{}e\rangle$ 为能量本征态，$\Pi_e = \vert{}e\rangle\langle e\vert{}$ 为投影算符），该信道 $\mathcal{D}_E$ 的数学表达为：</p>
 <p>$$\mathcal{D}_E(\rho_E) = \sum_e \Pi_e \rho_E \Pi_e = \sum_e \langle e\vert{}\rho_E\vert{}e\rangle \vert{}e\rangle\langle e\vert{}$$</p>
 <ul>
-<li>**本质是非选择性测量**：它在物理上等价于“对子系统 $E$ 的局域能量进行了投影测量，但测量者并没有记录或查看具体的测量结果”。这种测量过程会导致系统状态发生坍缩。</li>
-<li>**只销毁相干性，不改变能级分布**：</li>
-<li>**对角项（概率）**：$\langle e\vert{} \mathcal{D}_E(\rho_E) \vert{}e\rangle = \langle e\vert{} \rho_E \vert{}e\rangle$，系统处于各个能量本征态上的概率保持不变，不发生能级跃迁或能量交换。</li>
-<li>**非对角项（相干性）**：当 $e \neq e'$ 时，$\langle e\vert{} \mathcal{D}_E(\rho_E) \vert{}e'\rangle = 0$，不同能量本征态之间的相位关联与量子叠加被彻底破坏。</li>
+<li><strong>本质是非选择性测量</strong>：它在物理上等价于“对子系统 $E$ 的局域能量进行了投影测量，但测量者并没有记录或查看具体的测量结果”。这种测量过程会导致系统状态发生坍缩。</li>
+<li><strong>只销毁相干性，不改变能级分布</strong>：</li>
+<li><strong>对角项（概率）</strong>：$\langle e\vert{} \mathcal{D}_E(\rho_E) \vert{}e\rangle = \langle e\vert{} \rho_E \vert{}e\rangle$，系统处于各个能量本征态上的概率保持不变，不发生能级跃迁或能量交换。</li>
+<li><strong>非对角项（相干性）</strong>：当 $e \neq e'$ 时，$\langle e\vert{} \mathcal{D}_E(\rho_E) \vert{}e'\rangle = 0$，不同能量本征态之间的相位关联与量子叠加被彻底破坏。</li>
 </ul>
 <p>将原本包含量子相干性的量子态 $\rho_E$ 转化为关于能量本征态的经典概率分布，从而将复杂的量子相关性简化为可被经典测量提取的信息泄露。</p>
-<p>**Holevo 信息 $\chi(\mathcal{E})$** 的定义紧紧依赖于冯·诺依曼熵（von Neumann Entropy）$S(\rho) = -\text{Tr}(\rho \log_2 \rho)$，其公式为：</p>
+<p><strong>Holevo 信息 $\chi(\mathcal{E})$</strong> 的定义紧紧依赖于冯·诺依曼熵（von Neumann Entropy）$S(\rho) = -\text{Tr}(\rho \log_2 \rho)$，其公式为：</p>
 <p>$$\chi(\mathcal{E}) = S(\rho) - \sum_x p_x S(\rho_x)$$</p>
-<p>Holevo 信息可以被理解为**量子互信息**的一种形式。Holevo 定理指出，无论 Bob 使用多么巧妙的测量方法，他能提取的经典可及信息永远不会超过 Holevo 信息。**非正交量子态是无法被完美区分的**。即便 Bob 知道 Alice 要么发了 $\vert{}0\rangle$ 要么发了 $\vert{}+\rangle$，他也绝对不可能通过任何单次测量手段 100% 猜对。</p>
+<p>Holevo 信息可以被理解为<strong>量子互信息</strong>的一种形式。Holevo 定理指出，无论 Bob 使用多么巧妙的测量方法，他能提取的经典可及信息永远不会超过 Holevo 信息。<strong>非正交量子态是无法被完美区分的</strong>。即便 Bob 知道 Alice 要么发了 $\vert{}0\rangle$ 要么发了 $\vert{}+\rangle$，他也绝对不可能通过任何单次测量手段 100% 猜对。</p>
 <p>环境所获得的观察信息受子系统能量分布的经典可区分性所支配。</p>
-<p>（假设环境仅仅通过**局域能量退相干信道 $\mathcal{D}_E$**（即环境“窥探”了子系统 $E$ 的能量）来影响系统。）码字之间的“能量差（或荷差）与热涨落的比值”越大，可区分度越好。</p>
+<p>（假设环境仅仅通过<strong>局域能量退相干信道 $\mathcal{D}_E$</strong>（即环境“窥探”了子系统 $E$ 的能量）来影响系统。）码字之间的“能量差（或荷差）与热涨落的比值”越大，可区分度越好。</p>
 <ul>
-<li>**信号（Signal）**：两个码字之间的能量差（或荷差）在子系统上的投影量 $\delta \mu_N \propto \Delta E_N$。</li>
-<li>**噪声（Noise）**：子系统内部由高温热化引发的热涨落宽度 $\sqrt{\alpha_p N} \propto \sqrt{N}$。</li>
+<li><strong>信号（Signal）</strong>：两个码字之间的能量差（或荷差）在子系统上的投影量 $\delta \mu_N \propto \Delta E_N$。</li>
+<li><strong>噪声（Noise）</strong>：子系统内部由高温热化引发的热涨落宽度 $\sqrt{\alpha_p N} \propto \sqrt{N}$。</li>
 </ul>
 <p>信噪比即为两者的比值：$\lambda_N \propto \frac{\Delta E_N}{\sqrt{N}}$。可区分度（JSD）完全由这个信噪比决定</p>
 <p>如果由环境实现的信道——即噪声信道的补信道（complementary channel）——对守恒量不敏感，那么环境将无法从中了解任何信息，此时无论码字荷差的大小如何，该码都将保持纠错能力。</p>

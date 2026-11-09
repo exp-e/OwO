@@ -278,7 +278,7 @@ img{max-width:100%;display:block;}
 <p>z是定义在态上的一个函数。P是转移矩阵。以下向量不等式指的是分量之间全部满足该不等关系。</p>
 <p>过份函数：$Pz\le z$，也即走一步之后z的函数期望变小了</p>
 <p>调和函数：$Pz=z$，可以看出P-I对应拉普拉斯算符</p>
-<p>**不可约马氏链常反等价条件**</p>
+<p><strong>不可约马氏链常反等价条件</strong></p>
 <p>当且仅当存在一个状态j使得线性方程组$z_i=(Pz)_i\quad i\neq j$有界解为常数（所有分量全部一样）</p>
 <p>注：下标j是否仍成立不要求</p>
 <p>例：不对称反射壁随机游走</p>
@@ -440,7 +440,7 @@ i+1 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 1-p &amp; 0 &amp; \cdots \\
 <h4 id="sec-3">Cesaro极限</h4>
 <p>你永远打不过Kscerato</p>
 <p>起因：不是所有马氏链都有极限$P^\infty$存在，例如两点之间以1的概率横跳，他就没有极限，所以我们引入了一种较弱的极限</p>
-<p>**马氏链弱遍历定理**：P是马氏链转移矩阵，令</p>
+<p><strong>马氏链弱遍历定理</strong>：P是马氏链转移矩阵，令</p>
 <p>$$L^{(n)}=\frac{1}{n}\sum_{k=0}^{n-1}P^k$$</p>
 <p>则下述极限存在</p>
 <p>$$\lim_{n\to\infty}L^{(n)}=L$$</p>
@@ -884,7 +884,7 @@ $$</p>
 <p>$$= n! \prod_{i=1}^n \delta_i / t^n.$$</p>
 <p>由此即得两个随机向量的联合分布函数相同，得证。</p>
 <h4 id="sec-17">向前向后方程</h4>
-<p>定义：称齐次马氏半群（转移概率）是**标准**的，如果对任意的状态i，j</p>
+<p>定义：称齐次马氏半群（转移概率）是<strong>标准</strong>的，如果对任意的状态i，j</p>
 <p>$$\lim_{t\to0}P_{ij}(t)=\delta_{ij}$$</p>
 <p>即$t\to 0$时$P(t)\to I$</p>
 <p>引理 对任意的 $i,j \in \mathscr{S}$，及任意的 $t,h \geqslant 0$ 有不等式</p>
@@ -913,13 +913,13 @@ $$</p>
 q = \lim_{h \to 0+} \frac{H(h)}{h} = \lim_{h \to 0+} \frac{-\ln\left(1 - (1 - P_{ii}(h))\right)}{h} = \lim_{h \to 0+} \frac{1 - P_{ii}(h)}{h}.
 $$</p>
 <blockquote>$q=\infty$的情况省略，因为证明过程太长了</blockquote>
-<p>**定义：Q 矩阵** 称如上得到的 $\mathscr{S}$ 上矩阵 $Q$ 为齐次马氏链的无穷小矩阵（生成元）。矩阵 $Q = (q_{ij}: i,j \in \mathscr{S})$ 满足如下条件：</p>
+<p><strong>定义：Q 矩阵</strong> 称如上得到的 $\mathscr{S}$ 上矩阵 $Q$ 为齐次马氏链的无穷小矩阵（生成元）。矩阵 $Q = (q_{ij}: i,j \in \mathscr{S})$ 满足如下条件：</p>
 <p>(i) $0 \leqslant -q_{ii} \leqslant \infty$, 对所有的 $i \in \mathscr{S}$;</p>
 <p>(ii) $q_{ij} \geqslant 0$ 对所有的 $i \neq j$;</p>
 <p>进一步如果还有</p>
 <p>(iii) (马氏链保守) $\sum_{j \in \mathscr{S}} q_{ij} = 0$ 对所有的 $i \in \mathscr{S}$. 令 $\infty &gt; q_i = \sum_{j \neq i} q_{ij} = -q_{ii}$.</p>
 <blockquote>这个其实就像是群论里的生成元，比如说二维平面旋转的生成元是(0,-1 ; 1,0)，但是这个东西不保守</blockquote>
-<p>**例** Poisson 过程的转移概率</p>
+<p><strong>例</strong> Poisson 过程的转移概率</p>
 <p>$$P_{ij}=\frac{e^{-\lambda t}(\lambda t)^{j-i}}{(j-i)!}$$</p>
 <p>要求在 $0$ 点的导数，可以看见只有当t的幂次为0或1时才会有非0导数，也就是说j-i要么取0要么取i，然后带进去分类讨论一下就算出来了 $P'_{ii}(0) = -\lambda$; $P'_{i,i+1}(0) = \lambda$,</p>
 <p>因而相应的无穷小生成元为</p>
@@ -1090,7 +1090,7 @@ $$</p>
 <p>$$
 \mu'_i(t) = -\mu_i(t)q_i + \sum_{j \neq i} \mu_j(t)q_{ji}, \quad i \in \mathscr{S}, t \geqslant 0.
 $$</p>
-<p>**证明：** 直接对μ求导，过程中把转移矩阵提出来</p>
+<p><strong>证明：</strong> 直接对μ求导，过程中把转移矩阵提出来</p>
 <p>因为</p>
 <p>$$
 \begin{aligned}
@@ -1115,7 +1115,7 @@ $$</p>
 <p>$$
 \bar{P}_{ii} = 0, \quad \bar{P}_{ij} = \frac{q_{ij}}{q_i}, \quad \text{for} \quad i \ne j.
 $$</p>
-<p>称 $Y$ 为**嵌入马氏链**。</p>
+<p>称 $Y$ 为<strong>嵌入马氏链</strong>。</p>
 <p>于是就可以把连续时间常返的定义（名词）用离散时间的嵌入链去定义（动词）</p>
 <p>如果嵌入马氏链<mark style="background:rgba(173, 239, 239, 0.55)">常返</mark>，则连续时间马氏链<mark style="background:rgba(173, 239, 239, 0.55)">常返</mark>。否则暂留。</p>
 <blockquote>常返是$P(\tau &lt;\infty)=1$，正常返是$E(\tau)&lt;\infty$<br>重点：这里只能判断常返，嵌入马氏链正常返不能推出连续时间马氏链正常返！下面会给出反例</blockquote>
@@ -1131,7 +1131,7 @@ $$</p>
 <p>$$
 P_i\{R_i &lt; \infty\} &lt; 1 \quad \text{以及} \quad P_i\left\{\int_0^\infty 1_{\{X(s)=i\}} ds = \infty\right\} = 0.
 $$</p>
-<p>**证明：** 因为</p>
+<p><strong>证明：</strong> 因为</p>
 <p>$$
 R_i =
 \begin{cases}
@@ -1151,7 +1151,7 @@ $$</p>
 <h4 id="sec-28">连续时间不变测度</h4>
 <p>设 $X$ 不可约常返，则 $X$ 有唯一（不计常数因子）不变测度 $\pi$. 进一步 $\pi_i = \eta_i/q_i, \forall i \in \mathscr{S}$，其中 $\eta$ 为嵌入马氏链的不变测度.</p>
 <blockquote>注：这里的$q_i=-q_{ii}=\sum_{j\neq i}q_{ij}$是从i点向外在无穷小时间内的流出概率，也代表着停留在此处的意向时间。嵌入马氏链丢弃了所有停留的信息，所以可以看见原马氏链的不变测度是嵌入马氏链的跳跃概率除掉停留意愿</blockquote>
-<p>**证明：** 设 $\bar{P}$ 为嵌入马氏链的转移矩阵，由不可约性知其不变测度 $\eta$ 存在。因为 $q_{jk}=q_j\bar{P}_{jk},j\neq k, q_{jj}=-q_j$. 故由 $\pi$ 的定义知</p>
+<p><strong>证明：</strong> 设 $\bar{P}$ 为嵌入马氏链的转移矩阵，由不可约性知其不变测度 $\eta$ 存在。因为 $q_{jk}=q_j\bar{P}_{jk},j\neq k, q_{jj}=-q_j$. 故由 $\pi$ 的定义知</p>
 <p>$$
 \pi Q = 0 \iff \sum_{j} \pi_j q_{jk} = 0, \quad \forall k \in \mathscr{S} \iff \sum_{j \neq k} \pi_j q_j \bar{P}_{jk} - \pi_k q_k = 0.
 $$</p>
@@ -1161,14 +1161,14 @@ $$</p>
 $$</p>
 <p>下面我们正式给出连续时间马氏链的正常返定义</p>
 <p>称状态i正常返，如果$E_i(R_i)&lt;\infty$；否则称之为零常返态</p>
-<p>**定理** 设 $X$ 为不可约连续时间马氏链，则以下等价</p>
+<p><strong>定理</strong> 设 $X$ 为不可约连续时间马氏链，则以下等价</p>
 <ol>
 <li>所有态正常返；</li>
 <li>某些态正常返；</li>
 <li>$X$ <u>非爆炸</u>且有一个不变分布。</li>
 </ol>
 <blockquote>在下下个随机游走的例子里面会给出爆炸的定义，这个词有意思吧</blockquote>
-<p>**定义** 称连续时间<u>非爆炸</u>马氏链时遍历的 (ergodicity)，如果不可约常返且有不变分布。</p>
+<p><strong>定义</strong> 称连续时间<u>非爆炸</u>马氏链时遍历的 (ergodicity)，如果不可约常返且有不变分布。</p>
 <p>下面给出嵌入马氏链 $X_{\tau_n}$ 的正常返不一定保证 $X_t$ 的正常返的反例（其实就是因为随便给个嵌入链转移矩阵之后，停留时间参数$q_i$是可以再人为规定的）</p>
 <p>$$
 \bar{P} =

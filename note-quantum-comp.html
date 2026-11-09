@@ -264,21 +264,21 @@ $$</p>
 </ul>
 <blockquote>验算一下，10->01->0->1 ; 00->11->1->0 ; 11->00->0->1</blockquote>
 <p>使用 CNOT、H 和 T 门（以及$T^\dagger$门）实现 Toffoli 门的标准分解方案</p>
-<p>**控制位：** $q_0, q_1$</p>
-<p>**目标位：** $q_2$</p>
+<p><strong>控制位：</strong> $q_0, q_1$</p>
+<p><strong>目标位：</strong> $q_2$</p>
 <ol>
-<li>在目标位 $q_2$ 上施加 **H** 门。</li>
-<li>施加 **CNOT($q_1, q_2$)**。</li>
-<li>在 $q_2$ 上施加 **$T^\dagger$** 门。</li>
-<li>施加 **CNOT($q_0, q_2$)**。</li>
-<li>在 $q_2$ 上施加 **T** 门。</li>
-<li>施加 **CNOT($q_1, q_2$)**。</li>
-<li>在 $q_2$ 上施加 **$T^\dagger$** 门。</li>
-<li>施加 **CNOT($q_0, q_2$)**。</li>
-<li>在 $q_2$ 施加 **T** 门，在 $q_1$ 施加 **$T^\dagger$** 门，随后在 $q_2$ 施加 **H** 门。</li>
-<li>施加 **CNOT($q_0, q_1$)**。</li>
-<li>在 $q_0$ 施加 **T** 门，在 $q_1$ 施加 **$T^\dagger$** 门。</li>
-<li>施加 **CNOT($q_0, q_1$)**。</li>
+<li>在目标位 $q_2$ 上施加 <strong>H</strong> 门。</li>
+<li>施加 <strong>CNOT($q_1, q_2$)</strong>。</li>
+<li>在 $q_2$ 上施加 <strong>$T^\dagger$</strong> 门。</li>
+<li>施加 <strong>CNOT($q_0, q_2$)</strong>。</li>
+<li>在 $q_2$ 上施加 <strong>T</strong> 门。</li>
+<li>施加 <strong>CNOT($q_1, q_2$)</strong>。</li>
+<li>在 $q_2$ 上施加 <strong>$T^\dagger$</strong> 门。</li>
+<li>施加 <strong>CNOT($q_0, q_2$)</strong>。</li>
+<li>在 $q_2$ 施加 <strong>T</strong> 门，在 $q_1$ 施加 <strong>$T^\dagger$</strong> 门，随后在 $q_2$ 施加 <strong>H</strong> 门。</li>
+<li>施加 <strong>CNOT($q_0, q_1$)</strong>。</li>
+<li>在 $q_0$ 施加 <strong>T</strong> 门，在 $q_1$ 施加 <strong>$T^\dagger$</strong> 门。</li>
+<li>施加 <strong>CNOT($q_0, q_1$)</strong>。</li>
 </ol>
 <h4 id="sec-6">SWAP门</h4>
 <p>交换两个量子比特的顺序</p>
@@ -674,7 +674,7 @@ $$</p>
 <p>施密特分解不想写了</p>
 <p>LOCC：允许局部量子操作和两个系统之间的无噪经典通信</p>
 <p>优超</p>
-<p>记$x^{\downarrow}$为坐标从大到小排列后的向量，令 $x, y \in \mathbb{R}_{\ge 0}^d$。我们称 $y$ **优超** $x$，记为 $x \prec y$，如果：</p>
+<p>记$x^{\downarrow}$为坐标从大到小排列后的向量，令 $x, y \in \mathbb{R}_{\ge 0}^d$。我们称 $y$ <strong>优超</strong> $x$，记为 $x \prec y$，如果：</p>
 <p>$$\sum_{i=1}^{k} x_i^{\downarrow} \le \sum_{j=1}^{k} y_j^{\downarrow}, \forall k \in [d-1] \quad \text{且} \quad \sum_{i=1}^{d} x_i^{\downarrow} = \sum_{j=1}^{d} y_j^{\downarrow}$$</p>
 <p>优超大的向量意味着分布更不均匀。算子之间的优超由特征向量间的优超定义。被优超的算符意味着更大的熵，可以被优超大算符线性表出（一个非常模糊的说法）</p>
 <p>A态可以被LOCC转化到B态当且仅当A被B优超（也就是说LOCC是降低熵的），因此拥有最大熵的EPR态可以LOCC制备其他任何态</p>
@@ -916,9 +916,9 @@ $$</p>
 <p>如果k与r互素，那么k就是唯一确定的。也就是我们以均匀概率去ran一个比r小的数（包括0），ran出来的数与r互素的概率是有个下界的$\Omega(1/\log\log r)$，那么重复测量$\log\log N$次，约分，取最大的那个r即可</p>
 <p>4.我们数一数所有b that 存在小于r的正整数c使得上式被满足的数目。首先一个c至少对应一个b，c一共有r个，所以这样的b至少有r个。那么测量到符合要求的b的概率至少为</p>
 <p>$$P\ge\frac{4}{\pi^2}(1-\frac{r}{q})\ge\frac{4}{\pi^2}(1-\frac{1}{N})$$</p>
-<blockquote>[!note] 简述Shor算法<br>1. **输入**：合数 $N$。随机选取 $a\in\{2,\dots,N-1\}$。<br>   若 $\gcd(a,N)&gt;1$，直接返回非平凡因子。<br>2. **归约为周期问题**：定义 $f(x)=a^x\bmod N$，寻找最小正整数周期 $r$ 使得 $a^r\equiv1\pmod N$。<br>3. **量子子例程（周期查找）**：<br>   - 准备第一寄存器为均匀叠加 $\frac{1}{\sqrt{Q}}\sum_{x=0}^{Q-1}|x\rangle$，取 $Q=2^t$ 且 $Q\ge N^2$，第二寄存器初始化为 $|1\rangle$。<br>   - 施加受控模幂，使得得到态 $\frac{1}{\sqrt{Q}}\sum_x|x\rangle|a^x\bmod N\rangle$。<br>   - （可选）测量第二寄存器；对第一寄存器做逆量子傅里叶变换（IQFT），测量得到整数 $y$，此时 $\frac{y}{Q}\approx\frac{s}{r}$ 对某整数 $s$。<br>4. **经典后处理（连分数）**：用连分数将 $\dfrac{y}{Q}$ 逼近为最简分数 $\dfrac{s}{r'}$，取候选周期 $r=r'$ 并检验 $a^r\equiv1\pmod N$。若不满足或不可靠，重复量子子例程。<br>5. **构造因子**：若找到偶数 $r$ 且 $a^{r/2}\not\equiv-1\pmod N$，则计算<br>   $$
+<blockquote>[!note] 简述Shor算法<br>1. <strong>输入</strong>：合数 $N$。随机选取 $a\in\{2,\dots,N-1\}$。<br>   若 $\gcd(a,N)&gt;1$，直接返回非平凡因子。<br>2. <strong>归约为周期问题</strong>：定义 $f(x)=a^x\bmod N$，寻找最小正整数周期 $r$ 使得 $a^r\equiv1\pmod N$。<br>3. <strong>量子子例程（周期查找）</strong>：<br>   - 准备第一寄存器为均匀叠加 $\frac{1}{\sqrt{Q}}\sum_{x=0}^{Q-1}|x\rangle$，取 $Q=2^t$ 且 $Q\ge N^2$，第二寄存器初始化为 $|1\rangle$。<br>   - 施加受控模幂，使得得到态 $\frac{1}{\sqrt{Q}}\sum_x|x\rangle|a^x\bmod N\rangle$。<br>   - （可选）测量第二寄存器；对第一寄存器做逆量子傅里叶变换（IQFT），测量得到整数 $y$，此时 $\frac{y}{Q}\approx\frac{s}{r}$ 对某整数 $s$。<br>4. <strong>经典后处理（连分数）</strong>：用连分数将 $\dfrac{y}{Q}$ 逼近为最简分数 $\dfrac{s}{r'}$，取候选周期 $r=r'$ 并检验 $a^r\equiv1\pmod N$。若不满足或不可靠，重复量子子例程。<br>5. <strong>构造因子</strong>：若找到偶数 $r$ 且 $a^{r/2}\not\equiv-1\pmod N$，则计算<br>   $$
    \gcd(a^{r/2}\pm1,N)
-   $$<br>   可得到非平凡因子；否则选择新的 $a$ 重试。<br>6. **备注**：单次量子运行成功概率为常数，下述步骤（重复若干次）使成功概率趋近于 1；总体时间复杂度为多项式量级（关于 $\log N$）。</blockquote>
+   $$<br>   可得到非平凡因子；否则选择新的 $a$ 重试。<br>6. <strong>备注</strong>：单次量子运行成功概率为常数，下述步骤（重复若干次）使成功概率趋近于 1；总体时间复杂度为多项式量级（关于 $\log N$）。</blockquote>
 <hr>
 <p>End，最后一章量子纠缠度量太复杂了就没仔细看，这几天把习题都做上面</p>
 <p class="footnote">[^1]: Hardy, G. H.; Wright, E. M. (1946). An Introduction to the Theory of Numbers.</p>

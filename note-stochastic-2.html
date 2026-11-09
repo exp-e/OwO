@@ -422,7 +422,7 @@ $$</p>
 <h5 id="sec-12">定理</h5>
 <p>（可选停止定理）设 $\tau$ 为有限停时，$X_n$ 为鞅，满足：</p>
 <p>(i) $\mathbb{E}|X_\tau| &lt; \infty$；</p>
-<p>**(ii)** $\lim_{n\to\infty} \mathbb{E}(X_n 1_{\tau&gt;n}) = 0$，</p>
+<p><strong>(ii)</strong> $\lim_{n\to\infty} \mathbb{E}(X_n 1_{\tau&gt;n}) = 0$，</p>
 <p>则 $\mathbb{E}(X_\tau) = \mathbb{E}(X_0)$。</p>
 <p>证明：</p>
 <p>$$
@@ -778,11 +778,11 @@ $$</p>
 <p>$$
 T_a = \inf\{t\ge 0,\, B_t=a\} = \inf\{t\ge 0,\, B_t\ge a\} = \inf\{t\ge 0,\, S_t\ge a\}.
 $$</p>
-<p>**(布朗运动的反射原理)** 所有的假设如前，则</p>
+<p><strong>(布朗运动的反射原理)</strong> 所有的假设如前，则</p>
 <p>$$
 \mathbb{P}(S_t\ge a) = \mathbb{P}(T_a\le t) = 2\mathbb{P}(B_t\ge a) = \mathbb{P}(|B_t|\ge a).
 $$</p>
-<p>**证明：**</p>
+<p><strong>证明：</strong></p>
 <p>$$
 \begin{aligned}
 \mathbb{P}(S_t\ge a) &amp;= \mathbb{P}(S_t\ge a,\, B_t\ge a) + \mathbb{P}(S_t\ge a,\, B_t\le a) \\
@@ -800,7 +800,7 @@ $$</p>
 <p>$$
 \mathbb{P}(T_a\le t) = 2\int_a^\infty \frac{1}{\sqrt{2\pi t}} \mathrm e^{-\frac{x^2}{2t}} \mathrm{d}x.
 $$</p>
-<p>两边微分及分布积分公式得 **$T_a$ 的密度函数**</p>
+<p>两边微分及分布积分公式得 <strong>$T_a$ 的密度函数</strong></p>
 <p>$$\boxed{f_a(t) = \frac{a}{\sqrt{2\pi t^3}} \mathrm e^{-\frac{a^2}{2t}}}$$</p>
 <p>进一步可证 $\mathbb{P}(T_a&lt;\infty)=1$ 及 $\mathbb{E}(T_a)=\infty$。</p>
 <p>命题 过程 $\{T_a, a \in \mathbb{R}\}$ 是左连续增过程，具有平稳独立增量，对几乎所有轨道，映射 $a \mapsto T_a$ 不连续。</p>
