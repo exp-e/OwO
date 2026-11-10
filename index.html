@@ -1466,17 +1466,18 @@ img { max-width:100%; display:block; }
         <span class="sec-sub">Reading Notes</span>
       </div>
       <div class="note-cats" id="noteCats">
-        <button class="note-cat active" data-cat="all">全部<span class="count">20</span></button>
-        <button class="note-cat" data-cat="math">数学<span class="count">9</span></button>
+        <button class="note-cat active" data-cat="all">全部<span class="count">19</span></button>
+        <button class="note-cat" data-cat="math">数学<span class="count">8</span></button>
         <button class="note-cat" data-cat="physics">物理<span class="count">7</span></button>
         <button class="note-cat" data-cat="other">其他<span class="count">4</span></button>
+        <button class="note-cat" data-cat="locked">锁定<span class="count">1</span></button>
       </div>
       <div class="note-list" id="noteList">
-        <a class="note-card" data-cat="math" href="note-quantum-expander.html">
+        <a class="note-card" data-cat="locked" href="note-quantum-expander.html" style="display:none">
           <img class="note-card-cover" src="assets/aixyx.jpg" alt="Quantum Expander笔记">
           <div class="note-card-body">
             <div class="note-card-title">Quantum Expander笔记</div>
-            <div class="note-card-meta"><span class="cat-tag">数学</span><span><i class="far fa-calendar"></i> 2026-11-06</span></div>
+            <div class="note-card-meta"><span class="cat-tag">锁定</span><span><i class="far fa-calendar"></i> 2026-11-06</span></div>
             <div class="note-card-excerpt">Quantum Expander 读书笔记：量子扩展器定义与谱隙、16 个酉矩阵的深度-1 构造、SU(2^n) 上的 k-design 及其在多体物理中的关联与纠缠熵应用。</div>
           </div>
         </a>
@@ -2168,6 +2169,7 @@ img { max-width:100%; display:block; }
 </div>
 
 <script src="search-index.js"></script>
+<script src="assets/site-auth.js"></script>
 <script>
 (function () {
   'use strict';
@@ -2330,7 +2332,8 @@ img { max-width:100%; display:block; }
 
   function filteredCards() {
     return noteCards.filter(function (c) {
-      return curCat === 'all' || c.getAttribute('data-cat') === curCat;
+      var category = c.getAttribute('data-cat');
+      return curCat === 'all' ? category !== 'locked' : category === curCat;
     });
   }
 
@@ -3051,24 +3054,9 @@ var CFG_TEXT = '// CS2 settings snapshot 2026-10-27. Existing custom aliases are
   }
 
   /* ===== 随记 Memos (Supabase & Local Demo) ===== */
-  var SUPABASE_URL = localStorage.getItem('cfg_sb_url') || 'https://lrfqonbglpudxswvnepd.supabase.co';
-  var SUPABASE_KEY = localStorage.getItem('cfg_sb_key') || 'sb_publishable_inNoR20jwxYt68Qm9lKIjQ_M4LlSB_y';
-  var cleanSbUrl = (SUPABASE_URL || '').trim().replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, '');
-  var cleanSbKey = (SUPABASE_KEY || '').trim();
-  var sbClient = null;
-
-  function initSupabase() {
-    if (cleanSbUrl && cleanSbKey && window.supabase && window.supabase.createClient) {
-      try {
-        sbClient = window.supabase.createClient(cleanSbUrl, cleanSbKey);
-      } catch (e) {
-        console.warn('Supabase init error:', e);
-        sbClient = null;
-      }
-    } else {
-      sbClient = null;
-    }
-  }
+  var cleanSbUrl = siteAuth.url;
+  var cleanSbKey = siteAuth.key;
+  var sbClient = siteAuth.client;
 
   var gbNicknameInput      = document.getElementById('gbNickname');
   var gbContentInput       = document.getElementById('gbContent');
@@ -3131,7 +3119,7 @@ var CFG_TEXT = '// CS2 settings snapshot 2026-10-27. Existing custom aliases are
   }
 
   // Admin status management (博主为 expe，头像固定 profile.jpg，无金色徽章)
-  var isAdmin = localStorage.getItem('gb_is_admin') === 'true';
+  var isAdmin = false;
   function updateAdminUI() {
     if (isAdmin) {
       if (gbAdminBtn) gbAdminBtn.classList.add('is-admin');
@@ -3166,54 +3154,21 @@ var CFG_TEXT = '// CS2 settings snapshot 2026-10-27. Existing custom aliases are
     }
   }
 
-  async function checkAdminPwd(inputPwd) {
-    if (!inputPwd) return false;
-    var trimmed = inputPwd.trim();
-    var savedCustom = localStorage.getItem('gb_admin_pwd');
-    if (savedCustom) return trimmed === savedCustom;
-    // 内置口令单向哈希（SHA-256），避免在前端源码中暴露明文密码
-    var DEFAULT_PWD_HASH = 'aaabf178d614ce04b74b580b94d3a5e9e3c7c94c4540bc3ea32db23b8249dd8e';
-    if (window.crypto && crypto.subtle) {
-      try {
-        var buf = new TextEncoder().encode(trimmed);
-        var hashBuf = await crypto.subtle.digest('SHA-256', buf);
-        var hex = Array.from(new Uint8Array(hashBuf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
-        return hex === DEFAULT_PWD_HASH;
-      } catch (e) {}
-    }
-    return false;
+  async function syncOwner() {
+    isAdmin = await siteAuth.isOwner().catch(function () { return false; });
+    updateAdminUI();
+    renderGuestbook();
   }
 
   if (gbAdminBtn) {
     gbAdminBtn.addEventListener('click', async function () {
       if (isAdmin) {
-        var opt = confirm('当前已是博主身份。\n点击【确定】切换回普通访客，点击【取消】修改博主口令。');
-        if (opt) {
-          isAdmin = false;
-          localStorage.setItem('gb_is_admin', 'false');
-          updateAdminUI();
-          renderGuestbook();
-          showToast('已切换为普通访客');
-        } else {
-          var newPwd = prompt('请输入新的博主管理口令：');
-          if (newPwd && newPwd.trim()) {
-            localStorage.setItem('gb_admin_pwd', newPwd.trim());
-            showToast('博主口令已更新！');
-          }
-        }
+        if (!confirm('退出博主账号？')) return;
+        var result = await sbClient.auth.signOut();
+        if (result.error) { showToast('退出失败，请重试'); return; }
+        await syncOwner();
       } else {
-        var pwd = prompt('请输入博主管理口令：');
-        if (pwd === null) return;
-        var isMatch = await checkAdminPwd(pwd);
-        if (isMatch) {
-          isAdmin = true;
-          localStorage.setItem('gb_is_admin', 'true');
-          updateAdminUI();
-          renderGuestbook();
-          showToast('博主认证成功，ID已自动锁定为 expe');
-        } else {
-          showToast('口令错误，请重试');
-        }
+        siteAuth.promptOwnerLogin(syncOwner);
       }
     });
   }
@@ -3930,18 +3885,7 @@ var CFG_TEXT = '// CS2 settings snapshot 2026-10-27. Existing custom aliases are
   async function deleteMemo(delId) {
     if (!confirm('确定要删除这条随记吗？此操作不可撤销。')) return;
     var deleted = false;
-    if (cleanSbUrl && cleanSbKey) {
-      try {
-        var delRes = await fetch(cleanSbUrl + '/rest/v1/guestbook?id=eq.' + delId, {
-          method: 'DELETE',
-          headers: {
-            'apikey': cleanSbKey,
-            'Authorization': 'Bearer ' + cleanSbKey
-          }
-        });
-        if (delRes.ok) deleted = true;
-      } catch (err) {}
-    }
+    if (!isAdmin || !sbClient) return;
     if (!deleted && sbClient) {
       try {
         var sDel = await sbClient.from('guestbook').delete().eq('id', delId);
@@ -4001,7 +3945,7 @@ var CFG_TEXT = '// CS2 settings snapshot 2026-10-27. Existing custom aliases are
       }
 
       var sent = false;
-      if (cleanSbUrl && cleanSbKey) {
+      if (!isAdmin && cleanSbUrl && cleanSbKey) {
         try {
           var postRes = await fetch(cleanSbUrl + '/rest/v1/guestbook', {
             method: 'POST',
@@ -4133,9 +4077,11 @@ var CFG_TEXT = '// CS2 settings snapshot 2026-10-27. Existing custom aliases are
   });
 
   // 初始化随记系统
-  initSupabase();
+  localStorage.removeItem('gb_is_admin');
+  localStorage.removeItem('gb_admin_pwd');
   updateAdminUI();
-  renderGuestbook();
+  syncOwner();
+  if (sbClient) sbClient.auth.onAuthStateChange(function () { setTimeout(syncOwner, 0); });
 
   /* ===== Footer: 最后修改时间 ===== */
   var lmEl = document.getElementById('lastModified');

@@ -17,6 +17,8 @@ assets_dir = os.path.join(out_dir, 'assets')
 SRC_MD = os.path.join(folder, 'Quantum Expander笔记.md')
 TEMPLATE = os.path.join(out_dir, 'note-qecc.html')
 OUT_PAGE = os.path.join(out_dir, 'note-quantum-expander.html')
+if os.path.exists(os.path.join(assets_dir, 'locked-expander.json')):
+    raise SystemExit('Locked note: do not overwrite the public gate with plaintext.')
 INDEX_HTML = os.path.join(out_dir, 'index.html')
 
 TITLE = 'Quantum Expander笔记'
