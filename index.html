@@ -3447,66 +3447,42 @@ var CFG_TEXT = '// CS2 settings snapshot 2026-10-27. Existing custom aliases are
   }
 
   async function insertCommentForMemo(newComment) {
-    if (cleanSbUrl && cleanSbKey) {
-      try {
-        var r = await fetch(cleanSbUrl + '/rest/v1/memo_comments', {
-          method: 'POST',
-          headers: {
-            'apikey': cleanSbKey,
-            'Authorization': 'Bearer ' + cleanSbKey,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=representation'
-          },
-          body: JSON.stringify(newComment)
-        });
-        if (r.ok) return { success: true };
-        var errData = await r.json().catch(function () { return {}; });
-        var errMsg = (errData.message || '').toLowerCase();
-        if (errMsg.indexOf('photo') >= 0 && newComment.photo) {
-          delete newComment.photo;
-          var rRetry = await fetch(cleanSbUrl + '/rest/v1/memo_comments', {
-            method: 'POST',
-            headers: {
-              'apikey': cleanSbKey,
-              'Authorization': 'Bearer ' + cleanSbKey,
-              'Content-Type': 'application/json',
-              'Prefer': 'return=representation'
-            },
-            body: JSON.stringify(newComment)
-          });
-          if (rRetry.ok) return { success: true, photoOmitted: true };
-        }
-      } catch (e) {
-        console.warn('Comment post error, fallback to local:', e);
-      }
+    if (!sbClient) throw new Error('评论服务暂不可用，请稍后重试');
+    var result = await sbClient.from('memo_comments').insert(newComment);
+    if (!result.error) return { success: true };
+
+    if (newComment.photo && ['PGRST204', '42703'].indexOf(result.error.code) >= 0 &&
+        /\bphoto\b/i.test(result.error.message || '')) {
+      var withoutPhoto = Object.assign({}, newComment);
+      delete withoutPhoto.photo;
+      var retry = await sbClient.from('memo_comments').insert(withoutPhoto);
+      if (!retry.error) return { success: true, photoOmitted: true };
+      throw retry.error;
     }
-    var list = getLocalComments(newComment.memo_id);
-    newComment.id = Date.now();
-    newComment.created_at = new Date().toISOString();
-    list.push(newComment);
-    saveLocalComments(newComment.memo_id, list);
-    return { success: true, localOnly: true };
+    throw result.error;
   }
 
   async function deleteComment(commentId, memoId) {
-    if (!confirm('确定要删除这条评论吗？')) return;
-    if (cleanSbUrl && cleanSbKey) {
-      try {
-        await fetch(cleanSbUrl + '/rest/v1/memo_comments?id=eq.' + commentId, {
-          method: 'DELETE',
-          headers: {
-            'apikey': cleanSbKey,
-            'Authorization': 'Bearer ' + cleanSbKey
-          }
-        });
-      } catch (e) {}
+    if (!isAdmin || !sbClient || !confirm('确定要删除这条评论吗？')) return;
+    try {
+      var result = await sbClient.from('memo_comments')
+        .delete().eq('id', commentId).eq('memo_id', memoId).select('id');
+      if (result.error) throw result.error;
+
+      var local = getLocalComments(memoId);
+      var remaining = local.filter(function (it) { return String(it.id) !== String(commentId); });
+      if ((!result.data || !result.data.length) && remaining.length === local.length) {
+        showToast('未删除评论：评论不存在或没有权限');
+        return;
+      }
+      if (remaining.length !== local.length) saveLocalComments(memoId, remaining);
+      showToast('评论已删除');
+      await renderCommentsForMemo(memoId);
+      await fetchAllCommentCounts();
+      renderGuestbook();
+    } catch (err) {
+      showToast('删除评论失败：' + (err.message || '请稍后重试'));
     }
-    var list = getLocalComments(memoId).filter(function (it) { return String(it.id) !== String(commentId); });
-    saveLocalComments(memoId, list);
-    showToast('评论已删除');
-    await renderCommentsForMemo(memoId);
-    await fetchAllCommentCounts();
-    renderGuestbook();
   }
 
   async function renderCommentsForMemo(memoId) {
