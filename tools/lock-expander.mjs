@@ -15,7 +15,7 @@ for (const path of [source, privateSql]) {
 }
 const html = readFileSync(source, 'utf8');
 if (!html.includes('class="article-content"')) throw new Error('Expected a rendered note.');
-const password = randomBytes(18).toString('base64url');
+const password = randomBytes(9).toString('base64url');
 const key = randomBytes(32);
 const iterations = 600000;
 function seal(data, secret) {
