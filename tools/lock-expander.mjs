@@ -1,13 +1,13 @@
 // Pass rendered HTML and the private SQL output path outside the website.
 import {readFileSync, writeFileSync} from 'node:fs';
-import {createCipheriv, pbkdf2Sync, randomBytes} from 'node:crypto';
+import {createCipheriv, createDecipheriv, pbkdf2Sync, randomBytes} from 'node:crypto';
 import {relative, resolve, isAbsolute, sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const [source, privateSql] = process.argv.slice(2);
-if (!source || !privateSql) throw new Error('Usage: node tools/lock-expander.mjs <private-html> <private-sql>');
+if (!source || !privateSql) throw new Error('Usage: node tools/lock-expander.mjs <private-html> <private-sql|--refresh>');
 const root = fileURLToPath(new URL('../', import.meta.url));
-for (const path of [source, privateSql]) {
+for (const path of (privateSql === '--refresh' ? [source] : [source, privateSql])) {
   const location = relative(root, resolve(path));
   if (!isAbsolute(location) && !location.startsWith('..' + sep)) {
     throw new Error('Use paths outside the public website.');
@@ -15,6 +15,21 @@ for (const path of [source, privateSql]) {
 }
 const html = readFileSync(source, 'utf8');
 if (!html.includes('class="article-content"')) throw new Error('Expected a rendered note.');
+const bundleUrl = new URL('../assets/locked-expander.json', import.meta.url);
+
+// Refresh the article only; read its current password from stdin.
+if (privateSql === '--refresh') {
+  const bundle = JSON.parse(readFileSync(bundleUrl, 'utf8'));
+  const password = readFileSync(0, 'utf8').trim();
+  const wrapped = Buffer.from(bundle.password.data, 'base64');
+  const derived = pbkdf2Sync(password, Buffer.from(bundle.password.salt, 'base64'), bundle.iterations, 32, 'sha256');
+  const decipher = createDecipheriv('aes-256-gcm', derived, Buffer.from(bundle.password.iv, 'base64'));
+  decipher.setAuthTag(wrapped.subarray(-16));
+  const articleKey = Buffer.concat([decipher.update(wrapped.subarray(0, -16)), decipher.final()]);
+  bundle.article = seal(html, articleKey);
+  writeFileSync(bundleUrl, JSON.stringify(bundle) + '\n');
+  process.exit(0);
+}
 const password = randomBytes(9).toString('base64url');
 const key = randomBytes(32);
 const iterations = 600000;
@@ -37,5 +52,5 @@ values ('quantum-expander', '${key.toString('base64')}')
 on conflict (slug) do update set key_b64 = excluded.key_b64;
 commit;\n`);
 writeFileSync(privateSql, sql, {flag: 'wx', mode: 0o600});
-writeFileSync(new URL('../assets/locked-expander.json', import.meta.url), JSON.stringify(bundle) + '\n');
+writeFileSync(bundleUrl, JSON.stringify(bundle) + '\n');
 console.log(password);

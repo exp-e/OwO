@@ -6,8 +6,10 @@
 - Also inserts the note card into index.html (top of #noteList) and updates
   the category filter counts.
 Run _build_search_index.py afterwards to refresh search-index.js.
+For the locked note, use --private-export <path outside the site>, then
+tools/lock-expander.mjs <path> --refresh with the current password on stdin.
 """
-import io, os, re, shutil
+import io, os, re, shutil, sys
 
 folder = r'X:\md4obsd'
 pics = os.path.join(folder, 'pics')
@@ -17,7 +19,14 @@ assets_dir = os.path.join(out_dir, 'assets')
 SRC_MD = os.path.join(folder, 'Quantum Expander笔记.md')
 TEMPLATE = os.path.join(out_dir, 'note-qecc.html')
 OUT_PAGE = os.path.join(out_dir, 'note-quantum-expander.html')
-if os.path.exists(os.path.join(assets_dir, 'locked-expander.json')):
+private_export = len(sys.argv) == 3 and sys.argv[1] == '--private-export'
+if private_export:
+    OUT_PAGE = os.path.realpath(sys.argv[2])
+    public_root = os.path.normcase(os.path.realpath(out_dir))
+    target = os.path.normcase(OUT_PAGE)
+    if target == public_root or target.startswith(public_root + os.sep):
+        raise SystemExit('Private export must be outside the public website.')
+elif os.path.exists(os.path.join(assets_dir, 'locked-expander.json')):
     raise SystemExit('Locked note: do not overwrite the public gate with plaintext.')
 INDEX_HTML = os.path.join(out_dir, 'index.html')
 
@@ -246,6 +255,9 @@ print('wrote', SLUG + '.html', '| toc items:', len(toc_items) - 1)
 dst_cover = os.path.join(assets_dir, COVER)
 if not os.path.exists(dst_cover):
     shutil.copy2(os.path.join(pics, COVER), dst_cover)
+
+if private_export:
+    sys.exit(0)
     print('copied cover -> assets/' + COVER)
 
 # ---------------------------------------------------------------- index.html card
