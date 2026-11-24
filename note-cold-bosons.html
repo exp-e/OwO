@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3EFFF">
+<title>玻色冷原子笔记</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F3EFFF'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%237139DA' stroke-width='2.5' transform='rotate(-30 32 32)' opacity='0.85'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='9' fill='none' stroke='%23D4B8FF' stroke-width='2' transform='rotate(30 32 32)' opacity='0.85'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%237139DA'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true,
+    macros: { braket: ['\\langle #1\\rangle', 1], ket: ['\\lvert #1\\rangle', 1] } },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script src="assets/vendor/mathjax/tex-svg-full-3.2.2.js" defer></script>
+<style>
+:root{--bg:#F3EFFF;--card-solid:#FDFCFF;--accent:#7139DA;--accent-deep:#5921C2;--accent-soft:rgba(113,57,218,0.09);--text:#141414;--text-soft:#4a4060;--muted:#8a7da8;--border:rgba(113,57,218,0.35);--border-soft:rgba(113,57,218,0.15);--font-serif:"Noto Serif SC",Georgia,"Songti SC",serif;--font-sans:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--radius:16px;--radius-sm:8px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);color:var(--text);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;background:var(--bg) url('background.jpg') center center / cover fixed;}
+body::before{content:"";position:fixed;inset:0;background:rgba(243,239,255,0.72);z-index:0;pointer-events:none;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-deep);}
+img{max-width:100%;display:block;}
+.headband{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#D4B8FF,#D786B9,#FFCA4E);z-index:200;}
+.header{position:fixed;top:3px;left:0;right:0;background:rgba(243,239,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft);z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--text-soft);font-weight:500;}
+.back-link:hover{color:var(--accent);}
+.article-header-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);}
+.article-header-meta .cat-tag{padding:2px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:500;font-size:11.5px;}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:80px 32px 60px;position:relative;z-index:1;}
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding-right:16px;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.toc-title{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{margin-bottom:2px;}
+.toc-list a{display:block;padding:6px 12px;font-size:13px;color:var(--text-soft);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:all .15s;line-height:1.5;}
+.toc-list a:hover{color:var(--accent);background:var(--accent-soft);}
+.toc-list a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:500;}
+.toc-list li.sub a{padding-left:22px;font-size:12.5px;}
+.toc-list li.sub2 a{padding-left:32px;font-size:12px;color:var(--muted);}
+.toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:13.5px;}
+.toc-list li.toc-main a.active{color:var(--accent);}
+.article-body{flex:1;min-width:0;background:var(--card-solid);border-radius:var(--radius);border:1px solid var(--border-soft);padding:40px 48px 56px;box-shadow:0 8px 40px rgba(113,57,218,0.08);}
+.article-cover{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:top left;border-radius:var(--radius-sm);margin-bottom:28px;}
+.article-title{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:12px;}
+.article-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:20px;border-bottom:1px solid var(--border-soft);margin-bottom:28px;}
+.article-meta a{display:inline-flex;align-items:center;gap:5px;}
+.article-content{font-size:14.5px;line-height:2;color:var(--text-soft);}
+.article-content h3{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);margin:36px 0 18px;padding-left:12px;border-left:3px solid var(--accent);scroll-margin-top:80px;}
+.article-content h4{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--text);margin:24px 0 12px;scroll-margin-top:80px;}
+.article-content h5{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--text);margin:20px 0 10px;scroll-margin-top:80px;}
+.article-content p{margin-bottom:14px;}
+.article-content blockquote{margin:14px 0;padding:12px 18px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.5px;color:var(--text-soft);line-height:1.9;}
+.article-content hr{border:none;border-top:1px dashed var(--border);margin:24px 0;}
+.article-content ol,.article-content ul{margin:12px 0 12px 24px;}
+.article-content li{margin-bottom:6px;}
+.article-content mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%!important;}
+.article-content .note-img{margin:18px auto;max-width:520px;border-radius:var(--radius-sm);border:1px solid var(--border-soft);}
+.article-content .footnote{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.article-content mark{padding:1px 3px;border-radius:2px;}
+.mobile-toc-btn{display:none;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;border:1px solid var(--border-soft);background:var(--card-solid);color:var(--text-soft);font-size:13px;cursor:pointer;transition:all .2s;}
+.mobile-toc-btn:hover{border-color:var(--border);color:var(--accent);}
+.mobile-toc-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.mobile-toc-dropdown{display:none;position:fixed;top:59px;left:0;right:0;background:var(--card-solid);border-bottom:1px solid var(--border-soft);box-shadow:0 8px 24px rgba(113,57,218,0.12);z-index:99;max-height:60vh;overflow-y:auto;}
+.mobile-toc-dropdown.active{display:block;}
+.mobile-toc-title{padding:12px 20px 8px;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-weight:600;}
+.mobile-toc-list{padding:0 12px 16px;}
+.mobile-toc-list li{margin-bottom:2px;}
+.mobile-toc-list a{display:block;padding:8px 12px;font-size:14px;color:var(--text-soft);border-radius:6px;}
+.mobile-toc-list a:hover{background:var(--accent-soft);color:var(--accent);}
+.mobile-toc-list li.sub a{padding-left:24px;font-size:13px;}
+.mobile-toc-list li.toc-main a{font-weight:600;color:var(--text);font-size:14.5px;}
+@media (max-width:900px){.toc-sidebar{display:none;}.mobile-toc-btn{display:inline-flex;}.article-body{padding:28px 22px 40px;}.article-title{font-size:21px;}.article-cover{max-height:320px;}.layout{padding:72px 16px 40px;}.header-inner{padding:0 16px;}}
+
+/* ===== Image lightbox (click to zoom) ===== */
+.article-content img{cursor:zoom-in;}
+.article-cover{cursor:zoom-in;}
+.lightbox-overlay{position:fixed;inset:0;background:rgba(10,8,25,0.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;}
+.lightbox-overlay.active{display:flex;}
+.lightbox-box{max-width:94vw;max-height:90vh;display:flex;align-items:center;justify-content:center;overflow:auto;}
+.lightbox-box.zoomed{display:block;}
+.lightbox-box.zoomed img{max-width:none;max-height:none;width:auto;height:auto;object-fit:contain;}
+.lightbox-box img{max-width:94vw;max-height:90vh;object-fit:contain;border-radius:10px;box-shadow:0 10px 60px rgba(0,0,0,0.5);background:rgba(255,255,255,0.04);}
+.lightbox-zoom{position:fixed;top:20px;right:78px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1001;transition:background .2s;}
+.lightbox-zoom:hover{background:rgba(255,255,255,0.25);}
+.lightbox-close{position:fixed;top:20px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1001;transition:background .2s;}
+.lightbox-close:hover{background:rgba(255,255,255,0.25);}
+.lightbox-cap{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.65);font-size:13px;text-align:center;max-width:80vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;z-index:1001;}
+@media (max-width:640px){.lightbox-overlay{padding:16px;}.lightbox-box img{max-width:96vw;max-height:84vh;}.lightbox-close{top:14px;right:14px;width:40px;height:40px;}.lightbox-zoom{top:14px;right:62px;width:40px;height:40px;}}
+.table-scroll{overflow-x:auto;margin:18px 0} .article-content table{border-collapse:collapse;width:100%;min-width:480px} .article-content th,.article-content td{border:1px solid var(--border-soft);padding:8px;text-align:left}
+</style>
+</head>
+<body>
+<div class="headband"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html#notes" class="back-link"><i class="fa fa-arrow-left"></i>返回笔记</a>
+    <div class="article-header-meta">
+      <span class="cat-tag">物理</span>
+      <span><i class="far fa-calendar"></i> 2026-11-24</span>
+    <button class="mobile-toc-btn" id="mobileTocBtn"><i class="fa fa-list-ul"></i> 目录</button></div>
+  </div>
+</header>
+<!-- Image lightbox -->
+<div class="lightbox-overlay" id="imgLightbox">
+  <button class="lightbox-close" id="imgLightboxClose" aria-label="关闭"><i class="fa fa-times"></i></button>
+  <button class="lightbox-zoom" id="imgLbZoom" aria-label="放大"><i class="fa fa-search-plus"></i></button>
+  <div class="lightbox-box" id="imgLightboxBox"><img id="imgLightboxImg" src="" alt=""></div>
+  <div class="lightbox-cap" id="imgLightboxCap"></div>
+</div>
+
+<div class="mobile-toc-dropdown" id="mobileTocDropdown">
+  <div class="mobile-toc-title">目录</div>
+  <ul class="toc-list mobile-toc-list">
+<li class="toc-main"><a href="#article-title">玻色冷原子笔记</a></li>
+<li><a href="#sec-0">物理模型</a></li>
+<li class="sub"><a href="#sec-1">代入推导过程</a></li>
+<li><a href="#sec-2">数值计算跃迁耦合强度（图1）</a></li>
+<li class="sub"><a href="#sec-3">数值解薛定谔方程求基态能带</a></li>
+<li class="sub"><a href="#sec-4">理论能带表达式</a></li>
+<li class="sub"><a href="#sec-5">数值拟合求耦合J</a></li>
+<li class="sub"><a href="#sec-6">数值计算格点间相互作用强度U</a></li>
+<li class="sub"><a href="#sec-7">图1的信息</a></li>
+<li><a href="#sec-8">近似与可行性讨论</a></li>
+<li class="sub"><a href="#sec-9">势阱底部谐振子近似</a></li>
+<li class="sub"><a href="#sec-10">微扰条件及可行性</a></li>
+<li><a href="#sec-11">平均场计算相的空间分布（图2）</a></li>
+<li class="sub"><a href="#sec-12">计算方法</a></li>
+<li class="sub"><a href="#sec-13">图2的信息</a></li>
+<li><a href="#sec-14">精确解小系统（图3）</a></li>
+<li class="sub"><a href="#sec-15">图3的信息</a></li>
+<li><a href="#sec-16">失谐拉曼跃迁独立调节参数（图4）</a></li>
+<li class="sub"><a href="#sec-17">拉曼过程</a></li>
+<li class="sub"><a href="#sec-18">计算方法</a></li>
+<li class="sub"><a href="#sec-19">图4的信息</a></li>
+</ul>
+</div>
+
+<div class="layout">
+  <aside class="toc-sidebar">
+    <div class="toc-title">目录</div>
+    <ul class="toc-list">
+<li class="toc-main"><a href="#article-title">玻色冷原子笔记</a></li>
+<li><a href="#sec-0">物理模型</a></li>
+<li class="sub"><a href="#sec-1">代入推导过程</a></li>
+<li><a href="#sec-2">数值计算跃迁耦合强度（图1）</a></li>
+<li class="sub"><a href="#sec-3">数值解薛定谔方程求基态能带</a></li>
+<li class="sub"><a href="#sec-4">理论能带表达式</a></li>
+<li class="sub"><a href="#sec-5">数值拟合求耦合J</a></li>
+<li class="sub"><a href="#sec-6">数值计算格点间相互作用强度U</a></li>
+<li class="sub"><a href="#sec-7">图1的信息</a></li>
+<li><a href="#sec-8">近似与可行性讨论</a></li>
+<li class="sub"><a href="#sec-9">势阱底部谐振子近似</a></li>
+<li class="sub"><a href="#sec-10">微扰条件及可行性</a></li>
+<li><a href="#sec-11">平均场计算相的空间分布（图2）</a></li>
+<li class="sub"><a href="#sec-12">计算方法</a></li>
+<li class="sub"><a href="#sec-13">图2的信息</a></li>
+<li><a href="#sec-14">精确解小系统（图3）</a></li>
+<li class="sub"><a href="#sec-15">图3的信息</a></li>
+<li><a href="#sec-16">失谐拉曼跃迁独立调节参数（图4）</a></li>
+<li class="sub"><a href="#sec-17">拉曼过程</a></li>
+<li class="sub"><a href="#sec-18">计算方法</a></li>
+<li class="sub"><a href="#sec-19">图4的信息</a></li>
+</ul>
+  </aside>
+  <article class="article-body">
+    <img class="article-cover" src="assets/figure_2.png" alt="玻色冷原子笔记">
+    <h1 class="article-title" id="article-title">玻色冷原子笔记</h1>
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> 2026-11-24</span>
+      <span class="cat-tag" style="padding:2px 10px;border-radius:10px;font-size:11.5px;background:var(--accent-soft);color:var(--accent);">数学</span>
+    </div>
+    <div class="article-content">
+<p>《Cold bosonic atoms in optical lattices》</p>
+<p>把超冷原子装进光学晶格，用激光调节玻色–哈伯德模型的参数，从而实现和研究超流到莫特绝缘体的量子相变。</p>
+<h3 id="sec-0">物理模型</h3>
+<p>场波函数形式</p>
+<p>$$ \begin{aligned} H &amp;= \int d^3 x\psi^\dagger(\mathbf{x}) \left( -\frac{\hbar^2}{2m}\nabla^2 + V_0(\mathbf{x}) + V_T(\mathbf{x}) \right) \psi(\mathbf{x}) \\ &amp;\quad + \frac{1}{2}\frac{4\pi a_s \hbar^2}{m} \int d^3 x,\psi^\dagger(\mathbf{x})\psi^\dagger(\mathbf{x})\psi(\mathbf{x})\psi(\mathbf{x}) \end{aligned} $$</p>
+<p>其中第一项是单粒子能量，包含动能，光学格点势$V_0$（小碗）、外部束缚势$V_T$（大碗）</p>
+<p>第二项是两体相互作用，$g=\frac{4\pi a_s\hbar^2}{m}$可以看作耦合常数，前面的1/2是为了双粒子防止重复计算</p>
+<p>当原子主要处于最低能带时，可以用各格点附近的局域波函数展开场算符</p>
+<p>$$\psi(x)\approx\sum_i w_i(x)b_i$$</p>
+<blockquote>w描述局域模式在空间中的形状，b表示从这个模式中湮灭一个原子</blockquote>
+<blockquote>关于Wannier函数的来源（固体物理）<br>解单粒子哈密顿量$h = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V(x)$得到布洛赫态，再把同一条能带中不同准动量的布洛赫态组合起来，才能得到 Wannier 函数<br>$$ w_{n,R}(x) = \frac{1}{\sqrt{N}} \sum_q e^{-iqR} \psi_{nq}(x)$$<br>深晶格使用二阶近似，最低能带的 Wannier 函数主要集中在势阱底部，形如谐振子势<br>$$ w(x) \approx \frac{1}{\pi^{1/4}\sqrt{\ell}} \exp\left( -\frac{x^2}{2\ell^2} \right), \quad \ell = \sqrt{\frac{\hbar}{m\omega}}. $$<br>只考虑基态的时候获得了高斯型函数。但是这只是大致形状，实际上对于周期性晶格，真实 Wannier 函数也会偏离纯高斯。<br>外场势由两束反向传播的激光形成驻波提供。<br>$$I(x) \propto |E(x)|^2 \propto \cos^2(kx)$$<br>更换光场空间分布，就能得到其他形状的势。</blockquote>
+<p>代入原式后，单粒子哈密顿量（动能+光学周期势）变为隧穿项，系数为J。第二项相互作用项变为系数U的格点内相互作用。外部束缚势变为格点能量偏移</p>
+<h4 id="sec-1">代入推导过程</h4>
+<p>把动能和光晶格势记为$h_{lat}=-\frac{\hbar^2}{2m}\nabla^2+V_0(x)$，然后把wannier函数代入到哈密顿第一行中，把双重求和以及粒子数算符提出来</p>
+<p>$$ \begin{aligned} H_1 &amp;= \int d^3 x \left[ \sum_i w_i^* b_i^\dagger \right] (h_{\text{lat}} + V_T) \left[ \sum_j w_j b_j \right] \\ &amp;= \sum_{i,j} \left[ \int d^3 x w_i^*(\mathbf{x})(h_{\text{lat}} + V_T) w_j(\mathbf{x}) \right] b_i^\dagger b_j. \end{aligned} $$</p>
+<p>接下来按求和模式去分类，首先看单格点，$i=j$</p>
+<p>俘获势在格点附近的变化很缓慢，视作常数</p>
+<p>$$ \epsilon_i = \int d^3 x~V_T(\mathbf{x}) \left| w_i(\mathbf{x}) \right|^2 \approx V_T(\mathbf{x}_i). $$</p>
+<p>单粒子哈密顿量$h_{lat}$由于对称性，在每个格点处都相同，总粒子数固定时，只会给出常数的能量平移，可以不管他</p>
+<p>然后看格点间，由于使用了wannier函数，所以只考虑最近邻的overlap。定义</p>
+<p>$$-J=\int d^3x~w_i^*(x)h_{lat}w_j(x)$$</p>
+<p>同一条键的两个方向都来自原来的双重求和。比如格点1,2之间有$b_1^\dagger b_2$和$b_2^\dagger b_1$两项。因此，约定$\braket{i,j}$中每对最近邻只数一次，第一行就整理成</p>
+<p>$$ H_1 \approx -J \sum_{\langle i,j \rangle} \left( b_i^\dagger b_j + b_j^\dagger b_i \right) + \sum_i \epsilon_i \hat{n}_i$$</p>
+<p>下面处理包含<u>四重求和项</u>的相互作用项：</p>
+<p>$$H_{int}=\frac{g}{2}\sum_{i,j,k,l}\left[\int d^3x~w_i^*w_j^*w_kw_l\right]b_i^\dagger b_j^\dagger b_k b_l$$</p>
+<p>Wannier 函数高度局域时，同格点的项占主导，只保留同格点的积分</p>
+<p>$$H_{int}\approx\frac{U}{2}\sum_i b_i^\dagger b_i^\dagger b_i b_i,\quad U=g\int d^3x|w_i(x)|^4$$</p>
+<p>对一个具有n个玻色子的格点$\ket{n}$，先作用两次下降算符，再作用两次上升算符，最后得到了系数$n(n-1)$，所以我们在粒子数表象下直接把这$H_{int}$记作$U\frac{n(n-1)}{2}$，最后就得到了如下的模型：</p>
+<p><strong>玻色–哈伯德模型</strong></p>
+<p>$$H = -J \sum_{\langle i,j\rangle}
+\left(b_i^\dagger b_j + b_j^\dagger b_i\right)
++ \frac{U}{2}\sum_i n_i(n_i-1)
++ \sum_i \epsilon_i n_i$$</p>
+<p>$$\hat{n}_i=b_i^\dagger b_i,\quad [b_i,b_j^\dagger]=\delta_{ij}$$</p>
+<p>J使原子在格点间运动，促使粒子离域并建立相位相干。排斥相互作用$U&gt;0$使同一格点上的多原子占据付出能量，使得粒子趋于均匀排布，抑制粒子数涨落（这是因为当总粒子数固定时，第二项平均值和粒子数方差正相关）。</p>
+<div class="table-scroll"><table><thead><tr><th>性质</th><th>超流态</th><th>莫特绝缘态</th></tr></thead><tbody><tr><td>格点之间的相干性</td><td>存在长距离相干；具体形式依维度等条件而异</td><td>长距离相干受抑制</td></tr><tr><td>单个格点的粒子数</td><td>有涨落</td><td>接近固定整数，涨落较小</td></tr><tr><td>对化学势微小变化的密度响应</td><td>可压缩</td><td>理想均匀体系在莫特区内不可压缩</td></tr><tr><td>低能激发</td><td>存在无隙集体激发</td><td>存在粒子、空穴相关能隙</td></tr></tbody></table></div>
+<p>个人感觉可以把他类比为谐振子中的相干态和粒子数态。</p>
+<p>量子相变：超流态与莫特绝缘态之间的转化</p>
+<p>把温度保持在接近零的水平，通过改变U/J，使系统的<strong>基态</strong>从一种性质转变成另一种性质。</p>
+<p>通过调节激光，控制原子“在格点间离域”与“避免同格点占据”的竞争，从而制备不同的多体量子态。</p>
+<p>玻色–哈伯德模型预言：在低温下，随着格点内相互作用U（源于原子之间的排斥）与隧穿矩阵元J的比值增大，系统会从超流（SF）相转变为莫特绝缘（MI）相。在光晶格中，可以通过改变激光强度来调节这一比值</p>
+<h3 id="sec-2">数值计算跃迁耦合强度（图1）</h3>
+<blockquote>这一部分（主要结果是图1b）建立了<strong>激光参数与多体模型参数之间的定量联系</strong>。</blockquote>
+<h4 id="sec-3">数值解薛定谔方程求基态能带</h4>
+<blockquote>计算了哈密顿量的最低本征值以及其对应的态傅里叶系数</blockquote>
+<p>下文中$v$或$V_0$的意义是光学势能强度，在图1b中充当自变量的角色</p>
+<p>分离变量</p>
+<p>$$w(\vec x)=w(x)w(y)w(z)$$</p>
+<p>记反冲能量$E_R=\hbar^2 k^2/2m$。把单格点、单方向的哈密顿量写出来，注意到周期势在x方向上表现为$V_0\sin^2(kx)$</p>
+<p>$$h_{1d}=-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+V_0\sin^2(kx)$$</p>
+<p>令$s=x/a$、$v=V_0/E_R$，其中$a=\pi/k$，整理后得到</p>
+<p>$$\frac{h_{1d}}{E_R}=-\frac{1}{\pi^2}\frac{d^2}{ds^2}+v\sin^2(\pi s)$$</p>
+<p>（相当于把物理距离按照倒格子缩放了）根据布洛赫定理把波函数写成一组平面波的叠加，设无量纲准动量$t=qs/2\pi\in[-1/2,1/2]$写作</p>
+<p>$$\phi_t(s) = \sum_{n=-M}^{M} c_n(t)e^{2\pi i (n+t)s}$$</p>
+<p>（其中t表示准动量，n表示模式或者编号。t取值在第一布里渊区内。n取值从-M到M是对无穷级数的人工截断，方便数值计算）这是来源于布洛赫定理</p>
+<p>$$\psi_q(x)=e^{iqx}u_q(x),\quad u_q(x+a)=u_q(x)$$</p>
+<p>然后对周期函数$u_q$使用复数形式傅里叶级数展开后得到的</p>
+<blockquote>布里渊区这里的细节：准动量相差一个倒格矢G时，可以用同一个准动量标签来表示<br>$$\psi_q(x+a)=e^{iqa}\psi_q(x)$$<br>如果把q换成q+G，这个平移因子仍然一样<br>$$e^{i(q+G)a}=e^{iqa}$$<br>所以可以把准动量取值限制在第一布里渊区</blockquote>
+<p>在这个波函数基础上，动能中的二阶导变为$4(n+t)^2$，势能用e指数的形式可以写作</p>
+<p>$$v\sin^2(\pi s)=\frac{v}{2}-\frac{v}{4}e^{2\pi is}-\frac{v}{4}e^{-2\pi is}$$</p>
+<p>后面两项e指数相当于对n的平移。考察薛定谔方程（级数形式）中编号为n的项构成的方程</p>
+<p>$$\left[ 4(n+t)^2 + \frac{v}{2} \right] c_n - \frac{v}{4} c_{n-1} - \frac{v}{4} c_{n+1} = e(t) c_n, \quad e(t) = \frac{E(t)}{E_R}$$</p>
+<p>每一个无量纲准动量t都代表着一个矩阵的本征值问题（维度是2M+1），这里就可以交给程序去做。我们把第一布里渊区的t都扫描一遍，对每个t都找出最低的能量本征值$e_0(t)$和对应的本征向量$c_n(t)$，这个代表波函数傅里叶系数，进而得到了最低能带及布洛赫态。</p>
+<p>注意到这个矩阵是实对称矩阵，所以可以选择一组实本征向量。对于这里v&gt;0的正弦平方势，矩阵相邻的非对角元素是-v/4&lt;0，最低本征向量的分量可以取成全部同号。因此，用$c_0(t)&gt;0$就能选出一致的实本征向量。</p>
+<blockquote>这里来写一下为什么最低本征向量的分量可以取成全部同号，观察归一化本征态的能量表达式<br>$$E[c] = \sum_n \left[ 4(n+t)^2 + \frac{v}{2} \right] c_n^2 - \frac{v}{2} \sum_n c_n c_{n+1}$$<br>后一项的系数是负的，它意味着在系数绝对值保持不变情况下，同号能降低能量，异号会提升能量。我们反证最低能量对应的本征态$\ket{c}$系数有正有负，这样可以取各项系数绝对值后构成新的态$\ket{d}$，这会使得$\braket{d|H|d}&lt;\braket{c|H|c}=e_0$，其中$e_0$是矩阵的最小特征值<br>另一方面对任意的归一化矢量$\ket{a}$，对应的算符平均值$\braket{a|H|a}$都不可能小于最小本征值，产生矛盾。所以最小能量对应的本征值一定没有异号分量，那么就可以取全非负系数。</blockquote>
+<h4 id="sec-4">理论能带表达式</h4>
+<p>当我们使用wannier函数进行近似时，只考虑格点内以及近邻格点之间的相互作用，那么J就是近邻格点相互作用系数</p>
+<p>$$ -J = \langle j+1 \mid h_{\text{lat}} \mid j \rangle = \int dx, w_{j+1}^*(x) \left[ -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V_0 \sin^2(kx) \right] w_j(x). $$</p>
+<p>$$ E A_j = E_{\text{loc}} A_j - J A_{j-1} - J A_{j+1}. $$</p>
+<p>对准动量为q的布洛赫态，格点振幅满足$A_j\propto e^{iqja}$所以格点的平移会多出$e^{\pm iqj}$的系数。带回去约掉$A_j$后得到</p>
+<p>$$ E(q) = E_{\text{loc}} - J e^{-iqa} - J e^{iqa} = E_{\text{loc}} - 2J\cos(qa)$$</p>
+<p>在最近邻近似下，最低能带的带宽就是4J。</p>
+<p>接下来要做的事情就是从数值计算得出的最低能带中“读取”J的值。我们把理想模型（最近邻跃迁）变量代换一下$t=qa/2\pi$，写成更接近数值解的形式，那么理论表达式就是</p>
+<p>$$ e_0(t) = \frac{E_0(q)}{E_R} = \frac{E_{\text{loc}}}{E_R} - 2\frac{J}{E_R}\cos(2\pi t)$$</p>
+<h4 id="sec-5">数值拟合求耦合J</h4>
+<blockquote>通过对数值能带求三角函数内积的方式提取系数</blockquote>
+<p>那么现在我们有一条数值计算出的能带，如何提取三角函数前的系数？答案类似于傅里叶变换，也就是做内积。数值能带只是一系列离散的数据点，所以逐点求和代替连续积分</p>
+<p>$$ \frac{J}{E_R} = -\int_{-1/2}^{1/2} e_0(t)\cos(2\pi t)dt \approx -\frac{1}{N_q}\sum_{m=1}^{N_q} e_0(t_m)\cos(2\pi t_m). $$</p>
+<p>其中$e_0$是指定能量v之后数值解出的能带，所以J对v的依赖蕴含在$e_0$中，可以根据这个式子算出J关于v的曲线</p>
+<p>图 1b 则用整条数值能带的第一余弦分量提取J，这样即使能带还有一点更远邻跃迁带来的修正，也能单独读出最近邻的贡献。</p>
+<h4 id="sec-6">数值计算格点间相互作用强度U</h4>
+<blockquote>通过对基态波函数的数值解逆傅里叶变换，然后进行积分</blockquote>
+<p>波函数是由wannier函数进行类似傅里叶级数的方式叠加产生的，所以我们对wannier函数逆傅里叶变换就得到了波函数。具体而言可以把所有的波函数等幅相加就得到了原点处的wannier函数</p>
+<p>$$ \widetilde{w}(s) \approx \frac{1}{N_q} \sum_{m=1}^{N_q} \sum_{n=-M}^{M} c_n(t_m) e^{2\pi i (n+t_m)s}. $$</p>
+<p>这里使用的是先前数值解的本征向量(归一化)，选取实且非负的本征向量。物理坐标下的一维函数为$w_{\text{1D}}(x) = a^{-1/2}\widetilde{w}(x/a)$</p>
+<p>文中使用的是三个方向对称的三维可分离晶格，所以前面推到的相互作用积分可以写作</p>
+<p>$$U =g\int d^3x|w_i(x)|^4= \frac{4\pi\hbar^2 a_s}{m} \left[ \int dx|w_{\text{1D}}(x)|^4 \right]^3$$</p>
+<p>设$I=\int ds|\tilde{w}(s)|^4$，则一维物理坐标下的积分为$I/a$，再用$E_R=\hbar^2\pi^2/2ma^2$得到左纵轴的量</p>
+<p>$$\frac{U}{E_R}\frac{a}{a_s} = \frac{8}{\pi} I^3$$</p>
+<p>使用先前推出的$\tilde{w}(s)$即可算出I的数值解，进而得到U的变化曲线</p>
+<h4 id="sec-7">图1的信息</h4>
+<p>代码放在读论文文件夹里，最后利用python可以复现1b原图</p>
+<img class="note-img" src="assets/figure_1b.png" alt="figure_1b.png">
+<p>把晶格加深，会同时改变两个参数（参考图1b）：</p>
+<p>$$V_0\uparrow \quad\Longrightarrow\quad J\downarrow,\qquad U\uparrow.$$</p>
+<p>后面我们根据平均场理论知道n=1的莫特绝缘相，相变发生在$\frac{U}{zJ}\approx 5.8$，可以反找出对应的外场幅度</p>
+<img class="note-img" src="assets/figure_1a.png" alt="figure_1a.png">
+<p>对于1a这张图，光晶格势是三角函数，局域模式采用高斯包络（对应谐振子近似势），只是一个示意图</p>
+<h3 id="sec-8">近似与可行性讨论</h3>
+<h4 id="sec-9">势阱底部谐振子近似</h4>
+<p>光晶格势由三角函数给出</p>
+<p>$$ V_0(\mathbf{x}) = \sum_{j=x,y,z} V_{j0} \sin^2(k x_j)$$</p>
+<p>原点底部附近利用线性近似去近似三角函数，最终得到了二次谐振子势</p>
+<p>$$ V_0(\mathbf{x}) \approx \sum_{j} V_{j0} k^2 x_j^2$$</p>
+<p>与标准的谐振子模型相比较就可以得出第j个方向的频率</p>
+<p>$$ \nu_j = \sqrt{\frac{2 V_{j0} k^2}{m}} = \frac{\sqrt{4 E_R V_{j0}}}{\hbar}$$</p>
+<p>在谐振子势下，只考虑基态，那么wannier函数每个方向都是高斯型的。对高斯函数做积分可以得到结果</p>
+<p>$$ w_j(x_j) = \frac{1}{\pi^{1/4}\sqrt{a_{j0}}} \exp\left( -\frac{x_j^2}{2 a_{j0}^2} \right), \quad a_{j0} = \sqrt{\frac{\hbar}{m \nu_j}}. $$</p>
+<p>$$U =g\int d^3x|w_i(x)|^4=\sqrt{\frac{2}{\pi}} \frac{\hbar^2 a_s}{m a_{x0} a_{y0} a_{z0}}$$定义几何平均</p>
+<p>$$ \bar{a}_0 = (a_{x0} a_{y0} a_{z0})^{1/3}, \quad \bar{\nu} = (\nu_x \nu_y \nu_z)^{1/3}. $$</p>
+<p>可以把耦合强度写为更简洁的形式</p>
+<p>$$ U =\sqrt{\frac{2}{\pi}}\hbar \bar{\nu}\frac{a_s}{\bar{a}_0}. $$</p>
+<h4 id="sec-10">微扰条件及可行性</h4>
+<p>散射强度$a_s$描述散射后波的变化尺度，或者粒子宽度（比如刚性原子散射的散射强度就等于原子半径，它在模型中体现在跃迁强度系数g中。我们要求散射强度$a_s$远小于基态波函数特征宽度$a_{j0}$，并且单个势阱波包宽度远小于势阱间距$a$.格点i上存在$n_i$个粒子时产生的格点内相互作用能，必须远小于激发到下一能带所需的能量.</p>
+<p>$$ a_s \ll a_{j0} \ll \frac{\lambda}{2},, \quad \Delta E_i = \frac{1}{2} U n_i (n_i - 1) \ll \hbar \nu_j$$</p>
+<p>满足这些条件之后就可以使用微扰理论计算</p>
+<p>对于n=1的莫特绝缘相，绝缘态与超流态之间的相变临界点在</p>
+<p>$$\frac{U}{zJ}\approx 5.8$$</p>
+<p>不同维度的晶格会改变配位数z，然后参考我们先前给出的1b图，关注U与J也就是两条线的比值，恰好在临界点时，可以读出$v$的大小。这里作者估算了一些常见的临界晶格深度大小，接着议论了原子寿命，来说明实验确实可以做到（可行性检验）。</p>
+<p>作者接下来主要研究的是光晶格中莫特绝缘态的基态结构，以及怎样用激光控制、识别这些结构。</p>
+<h3 id="sec-11">平均场计算相的空间分布（图2）</h3>
+<blockquote>计算了Fock基下的系数，便于可视化粒子数与相干性在空间中的分布</blockquote>
+<h4 id="sec-12">计算方法</h4>
+<blockquote>在假定临近场的情况下最小化单个格点，然后不断迭代收敛</blockquote>
+<p>作者对二维构型进行了平均场计算，并对一维玻色–哈伯德哈密顿量进行了精确对角化，以展示光晶格中莫特绝缘相的形成，尤其是非均匀情况下的形成过程。</p>
+<p>平均场计算采用基态波函数的Gutzwiller假设</p>
+<p>$$ |\Psi_{\text{MF}}\rangle = \prod_i |\phi_i\rangle, \quad |\phi_i\rangle = \sum_{n=0}^{\infty} f_n^{(i)} |n\rangle_i $$</p>
+<p>其中$\ket{n}$表示格点i上有n个原子的Fock态。总粒子数的平均值为</p>
+<p>$$\braket{\hat{N}}=\sum_i\sum_n n|f_n^{(i)}|^2$$</p>
+<p>接下来使用拉格朗日乘数法，在平均粒子数不变的情况下寻找能量的最小值，也即通过调节系数$f_n^{(i)}$使下列表达式最小化</p>
+<p>$$ \langle \Psi_{\text{MF}} \mid H \mid \Psi_{\text{MF}} \rangle - \mu \left\langle \Psi_{\text{MF}} \middle| \sum_{i} \hat{n}_i \middle| \Psi_{\text{MF}} \right\rangle $$</p>
+<p>这相当于在温度T=0、化学势为$\mu$的巨正则系综中进行计算。当解在每个格点上都趋于单一 Fock 态时，表明体系处于莫特绝缘相。</p>
+<p>莫特绝缘相的一个特征是，每个格点的占据数（密度）$\rho_i=\braket{\hat{n}_i}$取整数值，同时粒子数涨落满足$\sigma_i^2=\frac{\braket{\hat{n}_i^2}-\braket{\hat{n}_i}^2}{\braket{\hat{n}_i}}\to0$。</p>
+<p>超流态的特征是由Fock态叠加构成的解可以产生非零的平均场$\phi_i=\braket{b_i}\neq0$</p>
+<blockquote>注：对于单个Fock态，湮灭算符b的平均值为0，因为不同的粒子数态相互正交。类似于谐振子的相干态，不同的Fock态相干叠加后可以产生非零的平均场<br>那么它和超流有什么联系呢？注意到在乘积态近似中，不同格点乘积的期望可以拆分为期望的乘积<br>$$ \langle b_i^\dagger b_j \rangle = \langle b_i^\dagger \rangle \langle b_j \rangle = \phi_i^* \phi_j, \quad i \neq j $$<br>接下来将平均场写成带辐角的形式$\phi_i = |\phi_i| e^{i\theta_i}$然后代入隧穿<br>$$ -J \langle b_i^\dagger b_j + b_j^\dagger b_i \rangle = -2J |\phi_i| |\phi_j| \cos(\theta_j - \theta_i). $$<br>因此，非零平均场允许格点之间建立相位相干，作者用它作为这套平均场理论中的<strong>超流序参量</strong>。</blockquote>
+<p>为了计算格点态在Fock表象下的系数，我们要对$K=H-\mu\hat{N}$最小化，其中H取玻色–哈伯德哈密顿量，那么也就是</p>
+<p>$$ K = -J \sum_{\langle i,j \rangle} \left( b_i^\dagger b_j + b_j^\dagger b_i \right) + \sum_i \left[ \frac{U}{2} \hat{n}_i (\hat{n}_i - 1) - \mu_i \hat{n}_i \right], \quad \mu_i = \mu - \epsilon_i,. $$</p>
+<p>不同格点会根据外部势的不同具有不同的局域化学势$\mu_i$。原化学势$\mu$对系统的影响相当于降低了粒子数门槛</p>
+<p>通过拉格朗日乘数法求出格点态在Fock表象下的系数后，自然可以接着算密度$\rho_i$、粒子数涨落$\sigma$，超流序参量$\phi_i=\braket{b_i}$</p>
+<p>$$ \rho_i = \langle \hat{n}_i \rangle = \sum_n n |f_n^{(i)}|^2 \quad \sigma_i^2 = \frac{\langle \hat{n}_i^2 \rangle - \rho_i^2}{\rho_i} \quad \phi_i = \langle b_i \rangle = \sum_{n=1}^{\infty} \sqrt{n}, f_{n-1}^{(i)*} f_n^{(i)} $$</p>
+<p>然后按照空间分布作图。整数密度平台、较小的涨落和接近零的序参量，会共同标示莫特区域。</p>
+<p>K在Fock表象取平均意义下用系数$f_n^{(i)}$写作</p>
+<p>$$ \mathcal{E}[f] = -J \sum_{\langle i,j \rangle} \left( \phi_i^* \phi_j + \phi_j^* \phi_i \right) \\
+- \sum_{i} \sum_{n} \left[ \frac{U}{2} n(n-1) - \mu_i n \right] |f_n^{(i)}|^2 $$</p>
+<p>接下来使用平均场方法求解最小值。先固定临近平均场$\eta_i = \sum_{j \in \text{nn}(i)} \phi_j.$然后再求单格点最小值</p>
+<p>$$ K_i^{\text{loc}} = \frac{U}{2} \hat{n}_i (\hat{n}_i - 1) - \mu_i \hat{n}_i - J \left( \eta_i b_i^\dagger + \eta_i^* b_i \right) $$</p>
+<p>可以在Fock本征态上展开为二次型格式，进而转化为求矩阵最小本征值问题</p>
+<p>$$ K_i^{\text{loc}} = \begin{pmatrix} 0 &amp; -J\eta_i^* &amp; 0 &amp; \cdots \\ -J\eta_i &amp; -\mu_i &amp; -\sqrt{2} J\eta_i^* &amp; \cdots \\ 0 &amp; -\sqrt{2} J\eta_i &amp; U - 2\mu_i &amp; \cdots \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots \end{pmatrix} $$</p>
+<p>接下来就是数值方法。最开始固定一组初始平均场值$\phi_i$，据此计算最小化时的系数$f_n^{(i)}$，根据新系数重新计算$\phi_i$，重复到收敛</p>
+<h4 id="sec-13">图2的信息</h4>
+<img class="note-img" src="assets/figure_2.png" alt="figure_2.png">
+<p>图2a使用谐振子势画了密度和超流密度，俘获势中心存在每个格点有两个原子的莫特绝缘相（$\rho=2$），其外围被每个格点有一个原子的莫特相（$\rho=1$）包围，而不同莫特绝缘区域之间存在超流环。</p>
+<p>图2b使用了三角函数外部势画了密度和涨落。它在原有细晶格上叠加了周期为11a的较慢调制，形成较大的超晶格势阱。</p>
+<p>图2c在2b的基础上加大了化学势，使更多位置能够容纳原子，原本分开的区域向外扩展，并在超晶格势阱之间形成连接。对应的涨落图用于辨认其中粒子数较稳定的莫特区域。随着化学势$\mu$增大，首先在超晶格势阱底部形成莫特结构。继续增大$\mu$，原子便不再局限于某个特定的超晶格势阱，而会形成连接不同超晶格势阱的桥状区域。</p>
+<p>实验上，探测莫特态的一种标志是观察到密度–密度涨落受到抑制，这可以通过光散射直接监测。</p>
+<h3 id="sec-14">精确解小系统（图3）</h3>
+<blockquote>N=5的玻色-哈伯德精确对角化薛定谔方程解</blockquote>
+<p>图 3 中一共有 <strong>5 个原子、7 个格点</strong>。精确对角化之所以可行，是因为这个系统的多体态空间比较小。合法占据态是将5个相同玻色子分配到7个格点，总共有462个基，矩阵维度462×462，直接计算机求解本征值和本征态，有基态在占据态下叠加表达式就可以算粒子数密度和涨落。</p>
+<p>合法占据态形如</p>
+<p>$$\ket{0,0,2,1,2,0,0},\quad\ket{5,0,0,0,0,0,0}$$</p>
+<p>下面计算哈密顿量分量。相互作用和俘获势给出对角元素：</p>
+<p>$$ \langle \mathbf{n} | H | \mathbf{n} \rangle = \sum_i \left[ \frac{U}{2} n_i(n_i - 1) + \epsilon_i n_i \right]. $$</p>
+<p>跃迁项$b_i^\dagger b_j \left| \dots, n_i, \dots, n_j, \dots \right\rangle = \sqrt{(n_i+1)n_j} \left| \dots, n_i+1, \dots, n_j-1, \dots \right\rangle$给出非对角元：</p>
+<p>$$-J\sqrt{(n_i + 1)n_j}.$$求出矩阵的最低本征值和本征向量，就得到基态：</p>
+<p>$$ |\Psi_0\rangle = \sum_{\alpha=1}^{462} C_\alpha |\mathbf{n}_\alpha\rangle $$</p>
+<p>有了基态后，粒子数密度和波动都是容易得到的</p>
+<p>$$ \rho_i = \langle \hat{n}_i \rangle = \sum_\alpha |C_\alpha|^2 n_i^{(\alpha)}\quad\Delta n=\sqrt{\braket{n_i^2}-\rho_i^2} $$</p>
+<h4 id="sec-15">图3的信息</h4>
+<img class="note-img" src="assets/figure_3_unscaled.png" alt="figure_3_unscaled.png">
+<p>自变量是格点位置和格点势深度（右图看两侧应该是没有除粒子密度的标准差）</p>
+<p>随着$V_{x0}$增大，密度清楚地表现出向$\rho=1$的莫特绝缘（MI）相的转变（阱变深了，就有格点束缚主导了粒子对称分布+小波动）</p>
+<p>平均场理论表示相变预计发生在$V_0=7.4 E_R$时，这张图是精确对角化计算的结果，表明平均场计算方法和精确计算方法吻合很好。</p>
+<h3 id="sec-16">失谐拉曼跃迁独立调节参数（图4）</h3>
+<blockquote>引入新的跃迁机制，用拉曼耦合单独调节跃迁参数J。同时拉曼失谐会导致部分格点的能量平移，最后形成棋盘状分布。</blockquote>
+<p>前面只有一个主要调节量$V_0$。把晶格加深，会同时改变两个参数（参考图1b）：</p>
+<p>$$V_0\uparrow \quad\Longrightarrow\quad J\downarrow,\qquad U\uparrow.$$</p>
+<p>作者想让两者能够更独立地控制。</p>
+<h4 id="sec-17">拉曼过程</h4>
+<p>记两个内部态为$\ket{a}=\ket{g_1},\quad\ket{b}=\ket{g_2}$，令能量差为$\hbar w_{ba}$。把这两个态在势阱内交替排布</p>
+<p>一次拉曼过程原子净获得的能量为$\hbar w_L$，共振时能量匹配内部态间隔。能量单位的双光子失谐为</p>
+<p>$$\delta=\hbar(w_L-w_{ba})$$</p>
+<p>失谐就是激光频率与原子跃迁所需的共振频率之间的差。拉曼实验可以让每束光都远离各自的单光子共振，同时让两束光的频率差满足双光子共振。</p>
+<p>先忽略空间运动，把$E_a$选作零点。实验室参考系中的内部态哈密顿量可以写成</p>
+<p>$$ H_{\text{lab}} = \begin{pmatrix} 0 &amp; -\dfrac{\hbar\Omega_{\text{eff}}}{2} e^{i\omega_L t} \\[8pt] -\dfrac{\hbar\Omega_{\text{eff}}^*}{2} e^{-i\omega_L t} &amp; \hbar\omega_{ba} \end{pmatrix} $$</p>
+<p>其中非对角项的相位因子来自于复交流电场的相位差，$\frac{\hbar\Omega_{eff}}{2}$是人为定义的有效跃迁振幅</p>
+<p>接下来做一个变量代换，换到旋转参考系，关注激光旋转以外的振幅</p>
+<p>$$ |\Psi(t)\rangle = \alpha(t)|a\rangle + e^{-i\omega_L t} \tilde{\beta}(t)|b\rangle. $$</p>
+<p>旋转坐标系下的哈密顿量矩阵写作</p>
+<p>$$ H_{\text{rot}} = \begin{pmatrix} 0 &amp; -\hbar\Omega_{\text{eff}}/2 \\ -\hbar\Omega_{\text{eff}}^*/2 &amp; -\delta \end{pmatrix} $$</p>
+<p>从中提取出非对角的有效耦合</p>
+<p>$$ H_R = -\frac{\hbar}{2} \left( \Omega_{\text{eff}} |a\rangle\langle b| + \Omega_{\text{eff}}^* |b\rangle\langle a| \right) $$</p>
+<p>用场的语言写作</p>
+<p>$$ H_R = -\frac{\hbar}{2} \int d^3 x \left[ \Omega_{\text{eff}}(\mathbf{x}) \psi_a^\dagger(\mathbf{x}) \psi_b(\mathbf{x}) + \text{h.c.} \right] $$</p>
+<p>本文的J主要由这一项产生。而对角项$-\delta$则进入了单粒子能量的哈密顿量部分</p>
+<p>$$ \begin{aligned} H_{\text{sp}} &amp;= \int d^3 x\psi_a^\dagger \left[ -\frac{\hbar^2 \nabla^2}{2m} + V_a + V_T \right] \psi_a \\ &amp;\quad + \int d^3 x \psi_b^\dagger \left[ -\frac{\hbar^2 \nabla^2}{2m} + V_b + V_T - \delta \right] \psi_b. \end{aligned} $$</p>
+<p>相互作用项也是定义好的耦合常数直接写出来</p>
+<p>$$ \begin{aligned} H_{\text{int}} &amp;= \frac{g_{aa}}{2} \int d^3 x(\psi_a^\dagger)^2 \psi_a^2 \\
+&amp;+ \frac{g_{bb}}{2} \int d^3 x (\psi_b^\dagger)^2 \psi_b^2 \\
+&amp;+ g_{ab} \int d^3 x \psi_a^\dagger \psi_b^\dagger \psi_b \psi_a. \end{aligned} $$</p>
+<p>总哈密顿量（已消去中间态$\ket{e}$并在合适的旋转坐标系下）写为上面三个部分的和</p>
+<p>$$ H = H_{\text{sp}} + H_R + H_{\text{int}}. $$</p>
+<p>展开两个场算符</p>
+<p>$$ \psi_a(\mathbf{x}) \approx \sum_i w_{a,i}(\mathbf{x}) a_i \quad \psi_b(\mathbf{x}) \approx \sum_j w_{b,j}(\mathbf{x}) b_j. $$</p>
+<p>拉曼耦合项：只保留相邻势阱之间的耦合，由对称性取为一致$J_{ij}=J$</p>
+<p>$$ \begin{aligned} H_R &amp;= -\frac{\hbar}{2} \int d^3 x\Omega_{\text{eff}}(\mathbf{x}) \left[ \sum_i w_{a,i}^* a_i^\dagger \right] \left[ \sum_j w_{b,j} b_j \right] + \text{h.c.} \\ &amp;= - \sum_{i,j} \underbrace{\left[ \frac{\hbar}{2} \int d^3 x w_{a,i}^* \Omega_{\text{eff}} w_{b,j} \right]}_{J_{ij}} a_i^\dagger b_j + \text{h.c.}\\
+&amp;\approx - \left( J \sum_{\langle i,j \rangle} a_i^\dagger b_j + \text{h.c.} \right) \end{aligned} $$</p>
+<p>单粒子项的能量不展开，合起来用场写就得到</p>
+<p>$$ H_{\text{sp}} \approx \sum_i \epsilon_i a_i^\dagger a_i + \sum_j (\epsilon_j - \delta) b_j^\dagger b_j. $$</p>
+<p>其中失谐的代入使用到了wannier函数的正交归一性质。这里还采用了论文明确使用的近似，忽略同一内部态势阱之间的直接隧穿，让相邻a,b格点间的拉曼辅助跃迁成为主要耦合。</p>
+<p>同组分的高阶相互作用给出U</p>
+<p>$$ U_{aa} = g_{aa} \int |w_{a,i}|^4 d^3 x, \quad U_{bb} = g_{bb} \int |w_{b,j}|^4 d^3 x. $$</p>
+<p>双势阱交叉项</p>
+<p>$$ H_{ab} \approx \sum_{i,j} \underbrace{\left[ g_{ab} \int d^3 x|w_{a,i}|^2 |w_{b,j}|^2 \right]}_{U_{ab}^{ij}} a_i^\dagger a_i b_j^\dagger b_j. $$</p>
+<p>只保留最近邻项，并取相同的耦合强度</p>
+<p>$$ H_{ab} \approx U_{ab} \sum_{\langle i,j \rangle} a_i^\dagger a_i b_j^\dagger b_j. $$</p>
+<p>总哈密顿量在场算符下写作</p>
+<p>$$ \begin{aligned} H &amp;= -\left( J \sum_{\langle i,j \rangle} a_i^\dagger b_j + \text{h.c.} \right) + \sum_i \epsilon_i a_i^\dagger a_i + \sum_j (\epsilon_j - \delta) b_j^\dagger b_j \\ &amp;\quad + \frac{U_{aa}}{2} \sum_i (a_i^\dagger)^2 a_i^2 + U_{ab} \sum_{\langle i,j \rangle} a_i^\dagger a_i b_j^\dagger b_j + \frac{U_{bb}}{2} \sum_j (b_j^\dagger)^2 b_j^2. \end{aligned} $$</p>
+<p>哈密顿量的第一项描述拉曼过程诱导的相邻晶格单元之间的跃迁，其耦合强度为</p>
+<p>$$ J = \frac{1}{2} \int d^3 x w_a(\mathbf{x})^* \Omega_{\text{eff}}(\mathbf{x}) w_b(\mathbf{x} - \lambda/4) $$</p>
+<p>后面的$\lambda/4$代表势阱最低部的空间位移。文中把$\hbar$内置在频率$\Omega_{eff}$中了，所以现在的$\Omega_{eff}$是能量量纲</p>
+<p>一次拉曼过程会同时改变原子的内部态和所在位置，对应哈密顿量中的$a_i^\dagger b_j$，强度由J描述，所以<u>借助拉曼光的调节能够更灵活地控制跃迁与相互作用的比例</u></p>
+<h4 id="sec-18">计算方法</h4>
+<p>使用先前的平均场方法，分别对a、b这两类格点迭代计算Fock表象下的系数。</p>
+<p>先将基态写作</p>
+<p>$$ |\Psi_{\text{MF}}\rangle = \prod_{i\in A} |\phi_a\rangle_i \prod_{j\in B} |\phi_b\rangle_j $$</p>
+<p>其中</p>
+<p>$$ |\phi_a\rangle = \sum_{n=0}^{n_{\text{max}}} f_n^{(a)} |n\rangle \quad |\phi_b\rangle = \sum_{n=0}^{n_{\text{max}}} f_n^{(b)} |n\rangle. $$</p>
+<p>接着把相邻格点的跃迁做平均场分解，写出哈密顿量的矩阵形式</p>
+<p>定义序参量$\phi_a = \langle a \rangle, \quad \phi_b = \langle b \rangle$后，每个格点只与相邻的四个同类耦合，跃迁项近似为</p>
+<p>$$ a_i^\dagger b_j \approx a_i^\dagger \phi_b + \phi_a^* b_j - \phi_a^* \phi_b. $$</p>
+<p>给定$U_{ab}=0,\epsilon_i=0$后两类局域哈密顿量为(省略常数能量平移)</p>
+<p>$$ \begin{aligned} h_a &amp;= \frac{U_{aa}}{2} n_a(n_a - 1) - \mu n_a - zJ\left( \phi_b a^\dagger + \phi_b^* a \right), \\ h_b &amp;= \frac{U_{bb}}{2} n_b(n_b - 1) - (\mu + \delta) n_b - zJ\left( \phi_a b^\dagger + \phi_a^* b \right). \end{aligned} $$</p>
+<p>作者使用的参数是</p>
+<p>$$ \mu = 25J, \quad U_{aa} = U_{bb} = 45J, \quad U_{ab} = 0, \quad \delta = -25J, \quad \epsilon_i = 0. $$</p>
+<p>接下来就像之前一样给定平均场，对角化求解极小值，反复迭代的过程</p>
+<p>有了基态后即可计算粒子数密度，然后按空间分布画图</p>
+<h4 id="sec-19">图4的信息</h4>
+<img class="note-img" src="assets/figure_4.png" alt="figure_4.png">
+<p>拉曼失谐$\delta$会使组分$b$的化学势相对于组分$a$发生偏移。通过调节这一失谐，可以产生棋盘格状的分布。$|g_1\rangle$组分形成 MI 相，$|g_2\rangle$组分含有 SF 成分。它的特殊之处在于，两套交错格点具有不同的量子性质。</p>
+<ul>
+<li>在莫特子晶格上，原子数接近固定整数，粒子数涨落受到抑制，平均场序参量为零。</li>
+<li>在超流子晶格上，局域态包含不同粒子数的叠加，粒子数有涨落，并具有非零的超流序参量。</li>
+</ul>
+<p>在作者实现的玻色–哈伯德模型中，晶格和系统参数都可以调控。这为凝聚态物理带来了一个新的研究方向，即利用量子光学的实验技术，对理论模型及其简化假设进行系统性的检验。</p>
+    </div>
+  </article>
+</div>
+<script>
+(function(){
+  var tocLinks=document.querySelectorAll('.toc-list a');
+  var sections=[];
+  tocLinks.forEach(function(a){var id=a.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({id:id,el:el,link:a});});
+  function onScroll(){var scrollY=window.scrollY+100;var current=sections[0];for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY)current=sections[i];}
+  tocLinks.forEach(function(a){a.classList.remove('active');});if(current)current.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Mobile TOC dropdown
+  var mobileTocBtn=document.getElementById('mobileTocBtn');
+  var mobileTocDropdown=document.getElementById('mobileTocDropdown');
+  if(mobileTocBtn && mobileTocDropdown){
+    mobileTocBtn.addEventListener('click',function(){
+      mobileTocBtn.classList.toggle('active');
+      mobileTocDropdown.classList.toggle('active');
+    });
+    mobileTocDropdown.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click',function(){
+        mobileTocBtn.classList.remove('active');
+        mobileTocDropdown.classList.remove('active');
+      });
+    });
+    document.addEventListener('click',function(e){
+      if(!mobileTocBtn.contains(e.target) && !mobileTocDropdown.contains(e.target)){
+        mobileTocBtn.classList.remove('active');
+        mobileTocDropdown.classList.remove('active');
+      }
+    });
+  }
+
+  // Image lightbox
+  var imgLb=document.getElementById('imgLightbox');
+  var imgLbImg=document.getElementById('imgLightboxImg');
+  var imgLbCap=document.getElementById('imgLightboxCap');
+  var imgLbClose=document.getElementById('imgLightboxClose');
+  function openLightbox(img){
+    if(!imgLb||!img.src)return;
+    imgLbImg.src=img.src;
+    imgLbImg.alt=img.alt||'';
+    imgLbCap.textContent=img.alt||'';
+    imgLb.classList.add('active');
+    document.body.style.overflow='hidden';
+  }
+  function closeLightbox(){
+    if(!imgLb)return;
+    imgLb.classList.remove('active');
+    var lbBox=document.getElementById('imgLightboxBox');
+    var lbZoom=document.getElementById('imgLbZoom');
+    if(lbBox)lbBox.classList.remove('zoomed');
+    if(lbZoom)lbZoom.innerHTML='<i class="fa fa-search-plus"></i>';
+    document.body.style.overflow='';
+  }
+  function bindLightbox(el){
+    if(!el)return;
+    if(el.tagName==='IMG'){el.style.cursor='zoom-in';el.addEventListener('click',function(e){e.stopPropagation();openLightbox(el);});}
+  }
+  if(imgLb){
+    document.querySelectorAll('.article-content img, .article-cover').forEach(bindLightbox);
+    var lbBox=document.getElementById('imgLightboxBox');
+    var lbZoom=document.getElementById('imgLbZoom');
+    function toggleZoom(){
+      if(!lbBox)return;
+      var zoomed=lbBox.classList.toggle('zoomed');
+      if(lbZoom)lbZoom.innerHTML=zoomed?'<i class="fa fa-search-minus"></i>':'<i class="fa fa-search-plus"></i>';
+      if(zoomed){lbBox.scrollTop=0;lbBox.scrollLeft=0;}
+    }
+    if(lbZoom)lbZoom.addEventListener('click',toggleZoom);
+    imgLbClose.addEventListener('click',closeLightbox);
+    imgLb.addEventListener('click',function(e){if(e.target===imgLb||e.target===imgLbBox)closeLightbox();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Esc')closeLightbox();});
+  }
+})();
+</script></body>
+</html>
